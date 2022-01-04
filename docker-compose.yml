@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  vue-app:
+    build:
+      context: .
+      dockerfile: "vue.Dockerfile"
+    command: npm run serve
+    volumes:
+      - './src/frontend:/app'
+      - '/app/node_modules'
+    ports:
+      - '8081:8080'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=development
+
+  api:
+    build:
+      context: .
+      dockerfile: "api-server.Dockerfile"
+    command: npm run dev
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src/backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+
+  db:
+    image: mariadb:10.5.13
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - /db:/var/lib/mysql
+    expose:
+      - '3306'
+    environment:
+      MYSQL_DATABASE: lineage_builder
+      MYSQL_USER: builder
+      MYSQL_PASSWORD: DmTlI2AfnvmKJlIs
+      MYSQL_ROOT_PASSWORD: secret
+
+  adminer:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - 8082:8080
+
+volumes:
+  db:

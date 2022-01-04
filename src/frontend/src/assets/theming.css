@@ -1,0 +1,119 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');*/
+
+@font-face {
+  font-family: "fq";
+  font-display: auto;
+  src:
+    local("fq"),
+    url(fonts/fq.woff2) format("woff2");
+  font-style:normal;
+}
+
+@font-face {
+  font-family:"din";
+  font-display: auto;
+  src:
+    local("din"),
+    url(fonts/din.woff2) format("woff2");
+  font-style:normal;
+}
+
+.skin-default{
+  --colourBG: #ebdbba;
+  --colourFG: #44300b;
+  --lineageLineStyle: 1px solid rgba(123,94,40,0.5);
+  --lineageFont: "fq";
+  --lineageGenColour: rgba(123,94,40,0.5);
+  --dragonPortraitStyle: 1px solid rgba(123,94,40,0.5);
+  --builderBG: #ebdbba url(backgrounds/default-bg.png) repeat fixed;
+  --builderControlBG: #44300b;
+  --builderControlFG: #fff;
+  --linkColour: #44300b;
+  --headerBG: #000;
+  --lineageToolColour: rgba(68,48,11,0.5);
+  --breedDropDownColourFG: #44300b;
+  --modalBG: #fff;
+  --modalFG: #44300b;
+  --modalHeaderBG: #44300b;
+  --modalHeaderFG: #fff;
+  --modalFooterBtnBG: #44300b;
+  --modalFooterBtnFG: #fff;
+}
+
+.skin-portal2{
+  --colourBG: #000;
+  --colourFG: #DDD;
+  --lineageLineStyle: 1px dotted rgba(192,192,192,0.5);
+  --lineageFont: "din";
+  --lineageGenColour: rgba(192,192,192,0.5);
+  --dragonPortraitStyle: 1px solid rgba(192,192,192,0.5);
+  --builderBG: #000 url(backgrounds/portal2-contentbg2.png) repeat-x fixed;
+  --builderControlBG: #DDD;
+  --builderControlFG: #000;
+  --linkColour:#2db2e6;
+  --headerBG: transparent;
+  --lineageToolColour: rgba(221,221,221,0.5);
+  --breedDropDownColourFG: #000;
+  --modalBG: #fff;
+  --modalFG: #000;
+  --modalHeaderBG: #DDD;
+  --modalHeaderFG: #000;
+  --modalFooterBtnBG: #000;
+  --modalFooterBtnFG: #fff;
+}
+
+.skin-portal2-light{
+  --colourBG: #DDD;
+  --colourFG: #000;
+  --lineageLineStyle: 2px dotted #52A5C6;
+  --lineageFont: "din";
+  --lineageGenColour: #52A5C6;
+  --dragonPortraitStyle: 1px solid #2db2e6;
+  --builderBG: #dcdedf url(backgrounds/portal2-light-wt.png) repeat fixed;
+  --builderControlBG: #000;
+  --builderControlFG: #fff;
+  --linkColour:#2db2e6;
+  --headerBG: #2e2e2d;
+  --lineageToolColour: rgba(0,0,0,0.5);
+  --breedDropDownColourFG: #000;
+  --modalBG: #fff;
+  --modalFG: #000;
+  --modalHeaderBG: #DDD;
+  --modalHeaderFG: #000;
+  --modalFooterBtnBG: #000;
+  --modalFooterBtnFG: #fff;
+}
+
+.skin-mobile-dark{
+  --colourBG: rgba(19, 21, 26, 1);
+  --colourFG: rgb(169, 184, 203);
+  --lineageLineStyle: 1px solid rgba(68, 78, 94, 1);
+  --lineageFont: sans-serif;
+  --lineageGenColour: rgba(68, 78, 94, 1);
+  --dragonPortraitStyle: 1px solid rgba(68, 78, 94, 1);
+  --builderBG: rgba(19, 21, 26, 1);
+  --builderControlBG: #5f9aff;
+  --builderControlFG: #fff;
+  --linkColour:#5f9aff;
+  --headerBG: #21252d;
+  --lineageToolColour: rgba(169,184,203,0.5);
+  --breedDropDownColourFG: #13151a;
+  --modalBG: #fff;
+  --modalFG: rgba(19, 21, 26, 1);
+  --modalHeaderBG: rgba(19, 21, 26, 1);
+  --modalHeaderFG: rgb(169, 184, 203);
+  --modalFooterBtnBG: rgba(19, 21, 26, 1);
+  --modalFooterBtnFG: rgb(169, 184, 203);
+}
+
+/* Fixes. Mobile dark skin needs some adjustments
+and I can't be arsed to change things properly with the variables. */
+.skin-mobile-dark .tile-portrait{
+  background: rgba(43,48,58,1);
+}
+.skin-mobile-dark .generation{
+  color: rgb(147, 161, 179) !important;
+}
+.skin-mobile-dark .dragon-label label{
+  margin-top: -3px !important;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "dc-lineage-builder-server",
+  "version": "0.2.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --experimental-json-modules server.js"
+  },
+  "keywords": [],
+  "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/router": "^10.1.1",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "mysql2": "^2.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

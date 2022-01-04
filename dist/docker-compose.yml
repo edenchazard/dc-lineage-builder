@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  nodejsapi-prod:
+    build: './api-server/'
+    command: node --experimental-json-modules server.js
+    depends_on:
+      - mariadb-prod
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    environment:
+      - NODE_ENV=production
+
+  apache-prod:
+    build: './apache/'
+    depends_on:
+      - nodejsapi
+      - mariadb-prod
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend/:/var/www/html/
+
+  mariadb-prod:
+    image: mariadb:10.5.13
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: chazza_lineage_builder
+      MYSQL_USER: chazza_builder
+      MYSQL_PASSWORD: r9gG*N~7s#4X
+      MYSQL_ROOT_PASSWORD: secret
