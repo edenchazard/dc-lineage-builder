@@ -1,7 +1,7 @@
 # Dragcave Lineage Builder
 Dragcave lineage builder is a third-party tool for the online game [Dragcave.net](https://dragcave.net/). It enables users to preview dragon lineages, a core function of the game.
 
-Created with VueJS.
+VueJS frontend on Apache with a nodeJS API backend.
 
 ## Features
 - Looks nearly the same as DC! This tool aims to replicate how a lineage is displayed on DC right down to the very last pixel. ;) 
@@ -14,3 +14,6 @@ Created with VueJS.
 - A super cool breed dropdown when you click a dragon. Trust me, it's seriously super cool.
 - Generation counter. Yep, it's there.
 - Skin switcher - Switch between the different DragCave skins on the fly, for example the default or portal 2 skins, to preview how your lineage appears on different skins.
+
+## Usage
+To start, simply create your own config.js file modelled after config.example.js in src/backend

@@ -5,10 +5,10 @@
     It creates a developer-friendly json file with processed breed
     definitions
 */
-import files from 'fs';
+const files = require('fs');
 const fs = files.promises;
-import local_breeds from './local-breeds.js';
-import fallback_breeds from './fallback-breeds.js';
+const local_breeds = require('./local-breeds.js');
+const fallback_breeds =  require('./fallback-breeds.js');
 
 function entireBreedTable_FromLocals(){
     let entries = [];
@@ -118,8 +118,8 @@ async function processJSON(fileName){
 
         // copy
         await Promise.all([
-            fs.writeFile('../frontend/'+fileName, json, 'utf8'),
-            fs.writeFile('../backend/'+fileName, json, 'utf8')
+            fs.writeFile('./src/frontend/src/'+fileName, json, 'utf8'),
+            fs.writeFile('./src/backend/'+fileName, json, 'utf8')
         ]);
 
         console.log('... copied JSON to SPA and Server.');
@@ -140,8 +140,7 @@ async function processCSS(src, output){
                 .replace(/background/g, 'background-position')
                 .replace(/\{(\r\n|\n|\r)/gm, '{');
                 //.replace(/(\r\n|\n|\r)/gm, '');
-        
-        await fs.writeFile('../src/frontend/assets/'+output, data, 'utf8');
+        await fs.writeFile('./src/frontend/src/assets/'+output, data, 'utf8');
 
         console.log("... processed CSS file.");
     }
@@ -152,7 +151,7 @@ async function processCSS(src, output){
 
 async function copyTiles(src){
     try{
-        const target = `../src/frontend/src/assets/breed-tiles.png`;
+        const target = `./src/frontend/src/assets/breed-tiles.png`;
         await fs.copyFile(src, target);
         console.log("... copied tiles png to frontend.");
     }
@@ -163,9 +162,8 @@ async function copyTiles(src){
 
 // process everything
 (function(){
-    console.log(__dirname)
     processJSON("breed-definitions.json");
-    processCSS("./breeds.txt", "sprites.css");
-    copyTiles("/tiles.png");
+    processCSS("./src/process-breeds/breeds.txt", "sprites.css");
+    copyTiles("./src/process-breeds/tiles.png");
 })();
 

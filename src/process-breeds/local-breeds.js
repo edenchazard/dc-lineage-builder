@@ -1,4 +1,4 @@
-const local_breeds = {
+module.exports = {
     "Mint": {
         genderOnly: false,
         dimorphism: false,
@@ -329,5 +329,3 @@ const local_breeds = {
         sprites: ['EtPd', '29AL']
     }
 };
-
-export default local_breeds;

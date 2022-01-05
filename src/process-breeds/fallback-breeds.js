@@ -1,5 +1,4 @@
-
-const fallback_breeds = {
+module.exports = {
     "Aeon Wyvern": {
         genderOnly: false,
         category: "dragon",
@@ -1302,5 +1301,3 @@ const fallback_breeds = {
         sprites: ['Gingr', '-10', '-1', '48']
     }
 };
-
-export default fallback_breeds;
