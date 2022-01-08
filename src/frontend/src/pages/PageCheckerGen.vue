@@ -1,0 +1,163 @@
+<template>
+    <div>
+        <DialogExport :show="showExportDialog" :tree="tree" @close="showExportDialog = false" />
+        <div class='central-block'>
+            <section>
+                <h2>Checker Generator</h2>
+                <p>On this page you can build checkers quickly. Simply select the male breed (top), the female breed (bottom) and how many generations you want it to be. You can then export it and import it for use with the editor.</p>
+            </section>
+            <section id='controls'>
+                <div class='left'>
+                    <div>
+                        <label for="filter">Filter: </label>
+                        <input
+                            id='filter'
+                            type='text'
+                            v-model="query"
+                            placeholder="Search breeds" />
+                    </div>
+                    <div>
+                        <label for="generations">Generations: </label>
+                        <select
+                            id='generations'
+                            title="Generations"
+                            v-model="genCount"
+                            @change="updateTree">
+                            <option
+                                v-for="index in 6"
+                                :value="(index+1)"
+                                :key='index'>{{(index + 1)}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class='right'>
+                    <button @click="showExportDialog = true">
+                        <font-awesome-icon icon="save" /> Export
+                    </button>
+                </div>
+            </section>
+            <section id='breeds'>
+                <div>
+                    <label>Male breed</label>
+                    <BreedDropdownResults
+                        :search="query"
+                        :breeds="maleBreeds"
+                        @selected="selectMale" />
+                </div>
+                <div class='gender'>
+                    <label>Female breed</label>
+                    <BreedDropdownResults
+                        :search="query"
+                        :breeds="femaleBreeds"
+                        @selected="selectFemale" />
+                </div>
+            </section>
+        </div>
+        <section>
+            <Lineage
+                v-if="tree !== null"
+                :tree.sync="tree"
+                :config="config" />
+        </section>
+    </div>
+</template>
+
+<script>
+import { dragonBuilder, GLOBALS } from '@/app/bundle';
+import Lineage from '@/components/Lineage';
+import BreedDropdownResults from '@/components/BreedDropdownResults';
+import DialogExport from '@/components/DialogExport';
+
+export default {
+    name: 'PageCheckerGen',
+    components: { Lineage, BreedDropdownResults, DialogExport },
+
+    data() {
+        return {
+            tree: dragonBuilder.createDragonProperties(),
+            config:{
+                showInterface: false,
+                showLabels: true,
+                disabled: true
+            },
+            maleBreed: "Placeholder",
+            maleBreeds: GLOBALS.breeds.males,
+            femaleBreed: "Placeholder",
+            femaleBreeds: GLOBALS.breeds.females,
+            genCount: 2,
+            query: "",
+            showExportDialog: false,
+        }
+    },
+    methods: {
+        selectMale(breed){
+            this.maleBreed = breed.name;
+            this.updateTree();
+        },
+
+        selectFemale(breed){
+            this.femaleBreed = breed.name;
+            this.updateTree();
+        },
+
+        updateTree(){
+            let createParents = (n) => {
+                let branch ={
+                    m: dragonBuilder.createDragonProperties({
+                        gender: 'm',
+                        breed: this.maleBreed
+                    }),
+                    f: dragonBuilder.createDragonProperties({
+                        gender: 'f',
+                        breed: this.femaleBreed
+                    })
+                };
+
+                if(n < this.genCount){
+                    branch.m.parents = createParents(n + 1);
+                    branch.f.parents = createParents(n + 1);
+                }
+                return branch;
+            };
+            let base = dragonBuilder.createDragonProperties({
+                gender: 'm',
+                breed: this.maleBreed
+            });
+            base.parents = createParents(2);
+            this.tree = base;
+        }
+    }
+}
+</script>
+<style scoped>
+#controls{
+    display:flex;
+}
+#controls .left > div{
+    margin-bottom:5px;
+}
+#controls .right > button{
+    margin:2px;
+    cursor: pointer;
+    padding: 8px;
+    color:var(--builderControlFG);
+    background: var(--builderControlBG);
+    border:none;
+}
+#breeds{
+    display: flex;
+    margin-bottom:10px;
+}
+#breeds > div{
+    width:100%;
+    text-align:center;
+}
+.breed-list{
+    overflow:auto;
+    height:300px;
+}
+label{
+    font-weight:bold;
+}
+</style>

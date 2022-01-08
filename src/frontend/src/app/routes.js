@@ -3,6 +3,7 @@ import PageBuilder from '@/pages/PageBuilder';
 import PageError from '@/pages/PageError';
 import PageHowTo from '@/pages/PageHowTo';
 import PageDisclaimer from '@/pages/PageDisclaimer';
+import PageCheckerGen from '@/pages/PageCheckerGen';
 
 export default [
     { 
@@ -24,6 +25,11 @@ export default [
         path: '/disclaimer',
         name: "Disclaimer",
         component: PageDisclaimer
+    },
+    {
+        path: '/checkers',
+        name: "Checker Generator",
+        component: PageCheckerGen
     },
     {
         path: '*',

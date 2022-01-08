@@ -9,6 +9,7 @@
         <div id='header-right'>
           <nav id="menu">
             <router-link to="/">Build</router-link>
+            <router-link to="/checkers">Checker Generator</router-link>
             <router-link to="/how-to">How To Use</router-link>
             <router-link to="/disclaimer">Disclaimer</router-link>
             <a href="https://dragcave.net/">DragCave</a>
