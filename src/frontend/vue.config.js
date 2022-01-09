@@ -1,6 +1,3 @@
-var require = require('esm')(module);
-//const { routes } = require('./src/app/routes.js');
-
 var config = {
     devServer: {
         proxy: {
