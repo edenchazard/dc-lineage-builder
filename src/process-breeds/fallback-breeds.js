@@ -305,7 +305,7 @@ module.exports = {
         sprites: ["TXoK5", "0", "-1", "48", "b3mHb", "0", "-1", "48"]
     },
     "Erador Lindwyrm": {
-        genderOnly: false,
+        genderOnly: 'm',
         category: "dragon",
         sprites: ["yummy", "-14", "-1", "48"]
     },
