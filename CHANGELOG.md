@@ -2,6 +2,8 @@
 ## 2.2.0
 - **Uploaded to github.**
 - Added "checker generator" page.
+- Added "disclaimer" page.
+- Minor styling updates.
 
 ## 2.1.0
 Mainly a few tidbits.

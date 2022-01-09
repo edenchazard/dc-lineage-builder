@@ -14,6 +14,3 @@ VueJS frontend on Apache with a nodeJS API backend.
 - A super cool breed dropdown when you click a dragon. Trust me, it's seriously super cool.
 - Generation counter. Yep, it's there.
 - Skin switcher - Switch between the different DragCave skins on the fly, for example the default or portal 2 skins, to preview how your lineage appears on different skins.
-
-## Usage
-To start, simply create your own config.js file modelled after config.example.js in src/backend
