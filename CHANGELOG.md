@@ -1,4 +1,7 @@
 # Changelog
+## 2.3.0
+- Fixed process breeds script bug where genderonly would still add data for male and female.
+
 ## 2.2.0
 - **Uploaded to github.**
 - Added "checker generator" page.
@@ -29,7 +32,6 @@ Minor changes:
 - Some code changes to make the code more modular.
 
 ## 1.0.0
-
 - Versioning changed to reflect this is public now.
 - 2 new skins added: mobile dark and portal 2 light.
 - Background for default skin now matches DC's.
@@ -39,7 +41,6 @@ Local images are now handled differently. Instead of loading a separate image fo
 - The super cool breed dropdown is now even cooler. The styling is improved, but the biggest change appears when your search query is narrowed to 5 or less results, at which point it'll display the dragons as a list with names.
 
 ## 0.4.1:
-
 Just some minor things.
 
 - Names are now considered illegal if they start or end with whitespace.
