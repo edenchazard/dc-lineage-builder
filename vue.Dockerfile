@@ -1,4 +1,4 @@
-FROM node:current-slim
+FROM node:14.18.1-alpine3.14
 EXPOSE 8080
 WORKDIR /app
 COPY ./src/frontend/package.json /app/package.json
