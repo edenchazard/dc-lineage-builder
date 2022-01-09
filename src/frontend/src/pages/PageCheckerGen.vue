@@ -12,7 +12,7 @@
                         <label for="filter">Filter: </label>
                         <input
                             id='filter'
-                            type='text'
+                            type='search'
                             v-model="query"
                             placeholder="Search breeds" />
                     </div>
@@ -58,7 +58,7 @@
             <Lineage
                 v-if="tree !== null"
                 :tree.sync="tree"
-                :config="config" />
+                :config="{showInterface: false, showLabels: true, disabled: true}" />
         </section>
     </div>
 </template>
@@ -76,11 +76,6 @@ export default {
     data() {
         return {
             tree: dragonBuilder.createDragonProperties(),
-            config:{
-                showInterface: false,
-                showLabels: true,
-                disabled: true
-            },
             maleBreed: "Placeholder",
             maleBreeds: GLOBALS.breeds.males,
             femaleBreed: "Placeholder",
@@ -93,15 +88,15 @@ export default {
     methods: {
         selectMale(breed){
             this.maleBreed = breed.name;
-            this.updateTree();
+            this.updateTree('m');
         },
 
         selectFemale(breed){
             this.femaleBreed = breed.name;
-            this.updateTree();
+            this.updateTree('f');
         },
 
-        updateTree(){
+        updateTree(finalGenGender){
             let createParents = (n) => {
                 let branch ={
                     m: dragonBuilder.createDragonProperties({
@@ -120,12 +115,20 @@ export default {
                 }
                 return branch;
             };
-            let base = dragonBuilder.createDragonProperties({
-                gender: 'm',
-                breed: this.maleBreed
+
+            // The breed and gender of the final dragon (meaning) the highest gen
+            // should always be the last selected
+            let options = { gender: 'm', breed: this.maleBreed };
+            if(finalGenGender === 'f'){
+                options = { gender: 'f', breed: this.femaleBreed };
+            }
+            let final = dragonBuilder.createDragonProperties({
+                ...options,
+                parents: createParents(2)
             });
-            base.parents = createParents(2);
-            this.tree = base;
+
+            // update our tree
+            this.tree = final;
         }
     }
 }

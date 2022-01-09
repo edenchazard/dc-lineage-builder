@@ -1,6 +1,9 @@
 # Changelog
 ## 2.3.0
 - Fixed process breeds script bug where genderonly would still add data for male and female.
+- Checker generator page:
+    - When selecting a breed, the final dragon will now respect the gender and breed instead of it strictly always being the male.
+    - Changed the filter box to a search type.
 
 ## 2.2.0
 - **Uploaded to github.**
