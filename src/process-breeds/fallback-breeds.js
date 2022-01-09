@@ -1298,6 +1298,6 @@ module.exports = {
     "Pryanost Lindwyrm":{
         genderOnly: 'f',
         category: 'dragon',
-        sprites: ['Gingr', '-10', '-1', '48']
+        sprites: ['Bread', '-10', '-1', '48']
     }
 };
