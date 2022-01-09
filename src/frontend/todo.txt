@@ -5,6 +5,5 @@
 -- templates
 -- zombies!
 -- optimize popper from triggering on document click
--- fix process breeds where genderonly still creates both male/female attributes (e.g. snow)
 -- meta tags
 -- artist breeds

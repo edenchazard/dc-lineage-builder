@@ -25,7 +25,13 @@ function entireBreedTable_FromLocals(){
             entry.female = spritedata[1];
         }
         else{
-            entry.male = entry.female = spritedata;
+            if(!breed.genderOnly){
+                entry.male = entry.female = spritedata;
+            }
+            else{
+                const gender = breed.genderOnly == 'm' ? 'male' : 'female';
+                entry[gender] = spritedata;
+            }
         }
 
         return entry;
@@ -73,7 +79,13 @@ function entireBreedTable_FromFallbacks(){
             // if it has no dimorphism data, just duplicate the male
             // values for the female
             const d = getImageData(sprite, 'm');
-            entry = { male: d, female: d };
+            if(!genderOnly){
+                entry = { male: d, female: d };
+            }
+            else{
+                const gender = genderOnly == 'm' ? 'male' : 'female';
+                entry[gender] = d;
+            }
         }
 
         entry.name = name;
@@ -129,6 +141,7 @@ async function processJSON(fileName){
     }
 }
 
+// sprite generator: https://www.toptal.com/developers/css/sprite-generator/
 async function processCSS(src, output){
     try{
         let data = await fs.readFile(src, {encoding: 'utf8'});
