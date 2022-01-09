@@ -3,10 +3,8 @@
 -- breed drop down
 	filters for salts, category etc
 -- templates
--- strict mode: hybrids
 -- zombies!
 -- optimize popper from triggering on document click
--- auto generate checkers
 -- fix process breeds where genderonly still creates both male/female attributes (e.g. snow)
 -- meta tags
 -- artist breeds
