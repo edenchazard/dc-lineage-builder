@@ -334,7 +334,7 @@ module.exports = {
         sprites: ["hGua", "-15", "-1", "48", "7hsk", "-6", "-1", "48"]
     },
     "Floral-Crowned": {
-        genderOnly: false,
+        genderOnly: 'm',
         category: "dragon",
         sprites: ["roll4", "-13", "-1", "47"]
     },

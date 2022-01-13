@@ -1,6 +1,6 @@
 {
   "name": "dc-lineage-builder-frontend",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "private": true,
   "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
   "scripts": {
