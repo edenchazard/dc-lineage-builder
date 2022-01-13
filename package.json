@@ -1,6 +1,6 @@
 {
     "name": "dc-lineage-builder",
-    "version": "2.2.1",
+    "version": "2.3.0",
     "description": "",
     "scripts": {
         "process-breeds": "node ./src/process-breeds/process-breeds.js",

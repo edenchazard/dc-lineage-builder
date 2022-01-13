@@ -4,6 +4,7 @@
 - Checker generator page:
     - When selecting a breed, the final dragon will now respect the gender and breed instead of it strictly always being the male.
     - Changed the filter box to a search type.
+- Fix bug with floral crowned dragons being female.
 
 ## 2.2.0
 - **Uploaded to github.**
