@@ -8,11 +8,13 @@
         </div>
         <div id='header-right'>
           <nav id="menu">
-            <router-link to="/">Build</router-link>
-            <router-link to="/checkers">Checker Generator</router-link>
-            <router-link to="/how-to">How To Use</router-link>
-            <router-link to="/disclaimer">Disclaimer</router-link>
-            <a href="https://dragcave.net/">DragCave</a>
+            <ul>
+              <li><router-link to="/">Build</router-link></li>
+              <li><router-link to="/checkers">Checker Generator</router-link></li>
+              <li><router-link to="/how-to">How To Use</router-link></li>
+              <li><router-link to="/disclaimer">Disclaimer</router-link></li>
+              <li><a href="https://dragcave.net/">DragCave</a></li>
+            </ul>
           </nav>
           Skin: 
           <select
@@ -78,134 +80,141 @@ export default {
 
 <style>
 #app{
-  margin:0;
-  line-height: 1.2;
-  color:var(--colourFG);
-  background:var(--builderBG);
-  min-height: 100vh;
+    margin:0;
+    line-height: 1.2;
+    color:var(--colourFG);
+    background:var(--builderBG);
+    min-height: 100vh;
 }
 #top{
-  color:#fff;
-  background: var(--headerBG);
-  margin-bottom: 5px;
+    color:#fff;
+    background: var(--headerBG);
+    margin-bottom: 5px;
 }
 #header{
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 #header-title{
-  text-align: center;
+    text-align: center;
 }
 #header-right{
-  text-align: center;
+    text-align: center;
 }
 #logo{
-  text-decoration: none;
-  color:#fff;
-  display: inline-block;
+    text-decoration: none;
+    color:#fff;
+    display: inline-block;
 }
 #menu{
-  margin:5px 0px;
+    margin:5px 0px;
+}
+#menu ul{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
 }
 #menu a{
-  color:#fff;
-  font-size: 15px;
-  text-decoration: none;
+    color:#fff;
+    font-size: 15px;
+    text-decoration: none;
 }
-#menu a:after{
-  color: #fff;
-  content: "\00B7";
-  margin: 0 4px;
+#menu li:after{
+    color: #fff;
+    content: "\00B7";
+    margin: 0 4px;
 }
-#menu a:last-child:after {
-  content: '';
+#menu li:last-child:after {
+    content: ''; 
 }
 #content{
-  padding:5px;
+    padding:5px;
 }
 
 /* global css */
 :root {
-  --maxwidth: 1000px;
+    --maxwidth: 1000px;
 }
 html{
-  height: 100%;
-  /* fixes bug with the layout not stretching for big lineages */
-  min-width: -webkit-fill-available;
-  min-width: fit-content;
+    height: 100%;
+    /* fixes bug with the layout not stretching for big lineages */
+    min-width: -webkit-fill-available;
+    min-width: fit-content;
 }
 body{
-  font: 14px/19.6px "PT Serif", "Times New Roman", "Times", serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 19.6px;
+    font: 14px/19.6px "PT Serif", "Times New Roman", "Times", serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 19.6px;
 }
 h1, h2, h3 {
-  margin: 5px 0px;
+    margin: 5px 0px;
 }
 h1{
-  font-size: 50px;
+    font-size: 50px;
 }
 h2{
-  font-size: 40px;
+    font-size: 40px;
 }
 h3 {
-  font-size: 30px;
+    font-size: 30px;
 }
 h4 {
-  font-size: 25px;
+    font-size: 25px;
 }
 #content a{
-  color:var(--linkColour);
+    color:var(--linkColour);
 }
 .central-block{
-  max-width: var(--maxwidth);
-  margin:0px auto;
+    max-width: var(--maxwidth);
+    margin:0px auto;
 }
 .list{
-  list-style-type: disc;
-  padding-left: 15px;
+    list-style-type: disc;
+    padding-left: 15px;
 }
 
 /* modal properties get overriden by the import of modal
 in LineageBuilder.vue, that's why these are !importanted.*/
 .modal{
-  background: var(--modalBG) !important;
+    background: var(--modalBG) !important;
 }
 .modal .modal-footer button{
-  background: var(--modalFooterBtnBG) !important;
-  color: var(--modalFooterBtnFG) !important;
-  border: none !important;
-  border-radius: 2px;
-  padding:5px;
+    background: var(--modalFooterBtnBG) !important;
+    color: var(--modalFooterBtnFG) !important;
+    border: none !important;
+    border-radius: 2px;
+    padding:5px;
 }
 .modal .modal-body{
-  color:var(--modalFG) !important;
+    color:var(--modalFG) !important;
 }
 .modal .modal-header{
-  background:var(--modalHeaderBG) !important;
-  color:var(--modalHeaderFG) !important;
+    background:var(--modalHeaderBG) !important;
+    color:var(--modalHeaderFG) !important;
 }
 .modal .btn-close{
-  color:var(--modalHeaderFG) !important;
+    color:var(--modalHeaderFG) !important;
 }
 
 @media only screen and (min-width: 768px){
   #top{
-    height: 165px;
+        height: 165px;
   }
   #header{
-    flex-direction: row;
+        flex-direction: row;
+  }
+  #menu ul{
+        justify-content: flex-end;
   }
   #header-right{
-    flex:1;
-    margin-top: 17px;
-    text-align: right;
+        flex:1;
+        margin-top: 17px;
+        text-align: right;
   }
-
   #header-title{
-    text-align: left;
+        text-align: left;
   }
 }
 </style>
