@@ -1,9 +1,0 @@
-- editable name/code
-	-- style input italic when code
--- breed drop down
-	filters for salts, category etc
--- templates
--- zombies!
--- optimize popper from triggering on document click
--- meta tags
--- artist breeds

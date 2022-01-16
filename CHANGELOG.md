@@ -1,4 +1,8 @@
 # Changelog
+## 2.3.1
+- Changed some styling for the header menu.
+- Merged TODO lists.
+
 ## 2.3.0
 - Fixed process breeds script bug where genderonly would still add data for male and female.
 - Checker generator page:

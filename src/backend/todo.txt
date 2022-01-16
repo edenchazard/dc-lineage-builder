@@ -1,2 +1,0 @@
-
--- fix bug with saved lineages not deleting after 2 months
