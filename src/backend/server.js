@@ -30,13 +30,8 @@ app
     .use(apirouter.allowedMethods());
 
 GLOBALS.pool = mysql.createPool({
-    port: config.db.port,
-    host: config.db.host,
-    user: config.db.user,
-    password: config.db.password,
-    database: config.db.database,
-    waitForConnections: true,
-    connectionLimit: config.db.connectionLimit
+    ...config.db,
+    waitForConnections: true
 });
 
 app.listen(config.port);

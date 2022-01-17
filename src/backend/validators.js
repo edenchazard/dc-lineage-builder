@@ -1,7 +1,7 @@
 const utils = require("./utils.js");
 const GLOBALS = require("./globals.js");
 
-const validators ={
+module.exports ={
     fitsBreed(obj) {
         const breed = GLOBALS.breeds.entire.find((v) => v.name === obj.breed);
 
@@ -141,4 +141,3 @@ const validators ={
         return pass;
     }
 }
-module.exports = validators;

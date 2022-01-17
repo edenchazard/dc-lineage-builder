@@ -29,7 +29,8 @@ router.get('/lineage/:hash', async (ctx) => {
             LIMIT 1`,
             [hashCode]);
 
-        if(row[0]){
+        const lineageExists = row[0];
+        if(lineageExists){
             // update access time to reset it
             await con.execute(
                 `UPDATE saved_lineages
@@ -77,7 +78,8 @@ router.post('/lineage/create', async (ctx) => {
             "SELECT 1 FROM `saved_lineages` WHERE `hash`= ? LIMIT 1",
             [hashCode]);
 
-        if(!row[0]){
+        const lineageExists = row[0];
+        if(!lineageExists){
             // hash not in db, which means this lineage is unique. insert it
             await con.execute(
                 "INSERT INTO `saved_lineages` (`hash`, `last_view`, `content`) VALUES (?, CURDATE(), ?)",

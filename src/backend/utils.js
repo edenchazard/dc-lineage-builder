@@ -1,6 +1,6 @@
 const GLOBALS = require('./globals.js');
 
-let utils = {
+module.exports = {
     getBreedData(breedName){
         return GLOBALS.breeds.entire.find((v) => v.name === breedName) || false;
     },
@@ -24,5 +24,3 @@ let utils = {
         root;
     }
 };
-
-module.exports = utils;
