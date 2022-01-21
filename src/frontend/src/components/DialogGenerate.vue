@@ -72,7 +72,7 @@ export default {
             this.status = { level: 1, message: "Generating link..." };
             axios.post(`./api/lineage/create`, lineage)
                 .then((response) => {
-                    this.viewLink = `${window.location.origin}${process.env.BASE_URL}view/${response.data.hash}`;
+                    this.viewLink = `${window.location.origin}${process.env.VUE_APP_URL}view/${response.data.hash}`;
                     this.status = { level: 0, message: "" };
                 })
                 .catch((err) => {

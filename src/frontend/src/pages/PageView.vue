@@ -59,7 +59,7 @@ export default {
     */
     axios.get(`./api/lineage/${this.hash}`)
       .then((response) => {
-        this.shareLink = `${window.location.origin}${process.env.BASE_URL}view/${this.hash}`;
+        this.shareLink = `${window.location.origin}${process.env.VUE_APP_URL}view/${this.hash}`;
         this.tree = JSON.parse(response.data.dragon);
         this.status = { level: 0, message: "",  title: "" };
       })

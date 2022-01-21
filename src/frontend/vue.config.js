@@ -7,17 +7,8 @@ var config = {
             }
         }
     },
-    transpileDependencies: ['unique-names-generator']/*,
-    pluginOptions: {
-        sitemap: {
-            baseURL: 'https://chazza.me/dc/',
-            routes,
-        }
-    }*/
+    transpileDependencies: ['unique-names-generator'],
+    publicPath: process.env.VUE_APP_URL
 };
-
-if(process.env.NODE_ENV === 'production'){
-    config.publicPath = '/dc/lineage-builder/';
-}
 
 module.exports = config;

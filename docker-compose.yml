@@ -1,10 +1,8 @@
-version: "3.8"
-
 services:
   vue-app:
     build:
       context: .
-      dockerfile: "vue.Dockerfile"
+      dockerfile: "./docker/vue.Dockerfile"
     command: npm run serve
     volumes:
       - './src/frontend:/app'
@@ -18,7 +16,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: "api-server.Dockerfile"
+      dockerfile: "./docker/api-server.Dockerfile"
     command: npm run dev
     depends_on:
       - db
@@ -37,9 +35,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /db:/var/lib/mysql
-    expose:
-      - '3306'
+      - ./docker:/docker-entrypoint-initdb.d
+      - dbdata:/var/lib/mysql
     environment:
       MYSQL_DATABASE: lineage_builder
       MYSQL_USER: builder
@@ -49,9 +46,9 @@ services:
   adminer:
     image: adminer:latest
     environment:
-      ADMINER_DEFAULT_SERVER: db
+      ADMINER_DEFAULT_SERVER: lineage_builder
     ports:
       - 8082:8080
 
 volumes:
-  db:
+  dbdata:
