@@ -4,7 +4,8 @@
       <header id='header' class='central-block'>
         <div id='header-title'>
           <router-link to="/" id="logo"><h1>Lineage Builder</h1></router-link>
-          <div class='subtitle'>v{{appVersion}} by eden chazard &copy;</div>
+          <div class='part-of'>Part of <a href='/dc/tools'>Chazza's DC Tools</a></div>
+          <div class='subtitle'>v{{appVersion}} &copy; eden chazard</div>
         </div>
         <div id='header-right'>
           <nav id="menu">
@@ -39,7 +40,6 @@
 <script>
 import 'reset-css';
 import '@/assets/theming.css';
-import { version } from '/package.json';
 import * as ls from "local-storage";
 
 export default {
@@ -48,7 +48,7 @@ export default {
 
   data() {
     return {
-      appVersion: version,
+      appVersion: process.env.VUE_APP_VERSION,
       skin: '',
       availableSkins: [
         { cssName: 'skin-default', prettyName: 'Default' },
@@ -98,6 +98,9 @@ export default {
 }
 #header-title{
     text-align: center;
+}
+#header .part-of a{
+  color:#fff;
 }
 #header-right{
     text-align: center;
