@@ -1,0 +1,57 @@
+services:
+  prod_frontend:
+    build:
+      context: .
+      dockerfile: ./docker/prod-frontend.Dockerfile
+      args:
+        - VUE_APP_URL=/dc/lineage-builder/
+        - VUE_APP_VERSION=${VERSION}
+    ports:
+      - 90:8080
+    depends_on:
+      - prod_api
+      - prod_db
+    restart: always
+    networks:
+      - dc
+      - internal
+
+  prod_api:
+    build:
+      context: .
+      dockerfile: ./docker/prod-api.Dockerfile
+    depends_on:
+      - prod_db
+    restart: always
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - APP_VERSION=${VERSION}
+    networks:
+      - internal
+
+  prod_db:
+    image: mariadb:10.6
+    restart: always
+    tty: true
+    volumes:
+      - ./docker/prod-db:/docker-entrypoint-initdb.d
+      - builder_db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - internal
+
+volumes:
+  builder_db:
+
+networks:
+  internal:
+  dc:
+    external: true
