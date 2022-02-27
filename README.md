@@ -14,3 +14,14 @@ VueJS frontend on Apache with a nodeJS API backend.
 - A super cool breed dropdown when you click a dragon. Trust me, it's seriously super cool.
 - Generation counter. Yep, it's there.
 - Skin switcher - Switch between the different DragCave skins on the fly, for example the default or portal 2 skins, to preview how your lineage appears on different skins.
+
+## Running the project
+Download docker.
+
+### Development
+```docker-compose --env-file .env.dev up```
+
+### Production
+Change VUE_APP_URL in `docker-compose.prod.yml` to the deployment url.
+
+```docker-compose --env-file .env.prod -f docker-compose.prod.yml up -d --build```

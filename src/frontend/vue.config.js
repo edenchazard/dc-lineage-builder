@@ -2,7 +2,7 @@ var config = {
     devServer: {
         proxy: {
             '^/api': {
-                target: 'http://api:8080',
+                target: 'http://dc-lineage-builder-api-1:80',
                 changeOrigin: true
             }
         }

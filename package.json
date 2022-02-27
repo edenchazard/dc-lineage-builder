@@ -1,16 +1,14 @@
 {
     "name": "dc-lineage-builder",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "description": "",
     "scripts": {
-        "process-breeds": "node ./src/process-breeds/process-breeds.js",
-        "build": ""
+        "process-breeds": "node ./src/process-breeds/process-breeds.js"
     },
     "keywords": [],
     "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
     "license": "MIT",
     "dependencies": {},
     "devDependencies": {
-        "concurrently": "^6.3.0"
     }
 }

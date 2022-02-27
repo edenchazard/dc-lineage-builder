@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --experimental-json-modules server.js",
-    "start": "node --experimental-json-modules server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",

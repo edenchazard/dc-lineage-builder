@@ -1299,5 +1299,10 @@ module.exports = {
         genderOnly: 'f',
         category: 'dragon',
         sprites: ['Bread', '-10', '-1', '48']
+    },
+    "Vermeil":{
+        genderOnly: 'm',
+        category: 'dragon',
+        sprites: ['Messy', '0', '-1', '48']
     }
 };

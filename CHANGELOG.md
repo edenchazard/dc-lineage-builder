@@ -1,7 +1,10 @@
 # Changelog
+## 3.0.0
+- Development tidy up.
 ## 2.3.1
 - Changed some styling for the header menu.
 - Merged TODO lists.
+- Added Vermeil dragon.
 
 ## 2.3.0
 - Fixed process breeds script bug where genderonly would still add data for male and female.
