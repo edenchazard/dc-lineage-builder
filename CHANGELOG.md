@@ -1,6 +1,7 @@
 # Changelog
 ## 3.0.0
 - Development tidy up.
+- Versioning moved from package.json
 ## 2.3.1
 - Changed some styling for the header menu.
 - Merged TODO lists.
