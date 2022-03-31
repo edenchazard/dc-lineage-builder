@@ -28,19 +28,21 @@ const Utils = {
 
     countGenerations(root){
         // find the furthest gen back by scanning the tree
-        let g = [];
-        const depth = (o, x) => {
+        let max = 1;
+        const scan = (o, x) => {
             if('f' in o.parents){
-                depth(o.parents.m, x+1);
-                depth(o.parents.f, x+1);
+                scan(o.parents.m, x+1);
+                scan(o.parents.f, x+1);
             }
             // end of branch
             else{
-                g.push(x);
+                if(x > max){
+                    max = x;
+                }
             }
         }
-        depth(root, 1);
-        return g.reduce((a, b) => Math.max(a, b), 0) || 1;
+        scan(root, 1);
+        return max;
     },
 
     countDragons(root){
