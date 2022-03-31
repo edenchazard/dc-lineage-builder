@@ -96,7 +96,11 @@ const Utils = {
     addBreed(breedObj){
         const breedTable = GLOBALS.breeds.entire;
 
-        // check name is unique
+        // check stuff
+        if(breedObj.name.trim() === ""){
+            return false;
+        }
+
         if(breedTable.findIndex(breed => breed.name === breedObj.name) > -1){
             return false;
         }

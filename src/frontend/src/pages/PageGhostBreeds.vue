@@ -161,7 +161,6 @@ export default {
           limitations and try again.`
         };
       }
-      console.log(breed);
     }
   }
 }
