@@ -327,5 +327,17 @@ module.exports = {
         dimorphism: true,
         category: "dragon",
         sprites: ['EtPd', '29AL']
+    },
+    "Wisteria":{
+        genderOnly: false,
+        dimorphism: false,
+        category: "dragon",
+        sprites: 'OIk8'
+    },
+    "Avin Pygmy":{
+        genderOnly: false,
+        dimorphism: true,
+        category: "dragon",
+        sprites: ['pzfg', 'YxaA']
     }
 };

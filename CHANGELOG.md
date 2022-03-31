@@ -1,4 +1,8 @@
 # Changelog
+## 3.1.0
+- New feature: Ghost breeds.
+- Optimized css and image cache loading.
+- Optimized generation counter function.
 ## 3.0.0
 - Development tidy up.
 - Versioning moved from package.json
