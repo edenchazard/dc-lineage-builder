@@ -1,5 +1,5 @@
 services:
-  prod_frontend:
+  frontend:
     container_name: dc-lb-frontend
     build:
       context: .
@@ -10,20 +10,20 @@ services:
     ports:
       - 90:8080
     depends_on:
-      - prod_api
-      - prod_db
+      - api
+      - db
     restart: always
     networks:
       - dc
       - internal
 
-  prod_api:
+  api:
     container_name: dc-lb-api
     build:
       context: .
       dockerfile: ./docker/prod-api.Dockerfile
     depends_on:
-      - prod_db
+      - db
     restart: always
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -35,7 +35,7 @@ services:
     networks:
       - internal
 
-  prod_db:
+  db:
     container_name: dc-lb-db
     image: mariadb:10.6
     restart: always

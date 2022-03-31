@@ -59,6 +59,11 @@ const validators ={
 
     //assumes verify integrity has been run first.
     meetsSaveRequirements(obj){
+        // fetch ghosties
+        const ghosts = GLOBALS.breeds.entire
+            .filter(breed => breed.metaData.ghost === true)
+            .map(breed => breed.name);
+        
         // our requirements are no placeholders in the lineage and
         // between 1 and 9 generations
         const gens = utils.countGenerations(obj);
@@ -75,10 +80,10 @@ const validators ={
                 pass = false;
             }
             // reject ghosties
-            else if(dragon.metaData.ghost){
+            if(ghosts.indexOf(dragon.breed) > -1){
                 pass = false;
             }
-            else if(validators.hasBothParents(dragon.parents)){
+            if(validators.hasBothParents(dragon.parents)){
                 analyseDragon(dragon.parents.m);
                 analyseDragon(dragon.parents.f);
             }
