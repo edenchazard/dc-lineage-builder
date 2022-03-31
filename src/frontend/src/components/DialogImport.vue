@@ -54,7 +54,11 @@ export default {
 
   methods:{
     importLineage(){
-      const errMsg = {level: 3, message: "Error reading export code. This export code could be corrupt."};
+      const errMsg = {
+        level: 3,
+        message: `Error reading export code. This export code could be corrupt or
+        include a ghost breed that hasn't been re-uploaded.`
+      };
       try{
         const importedTree = JSON.parse(this.file.trim());
         if(!validators.verifyIntegrity(importedTree)){
