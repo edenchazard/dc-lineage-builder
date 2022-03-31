@@ -4,6 +4,7 @@ import PageError from '@/pages/PageError';
 import PageHowTo from '@/pages/PageHowTo';
 import PageDisclaimer from '@/pages/PageDisclaimer';
 import PageCheckerGen from '@/pages/PageCheckerGen';
+import PageGhostBreeds from '@/pages/PageGhostBreeds';
 
 export default [
     { 
@@ -30,6 +31,11 @@ export default [
         path: '/checkers',
         name: "Checker Generator",
         component: PageCheckerGen
+    },
+    {
+        path: '/ghost-breeds',
+        name: "Ghost Breeds",
+        component: PageGhostBreeds
     },
     {
         path: '*',

@@ -74,6 +74,10 @@ const validators ={
             if(dragon.breed == GLOBALS.placeholder_breed.name){
                 pass = false;
             }
+            // reject ghosties
+            else if(dragon.metaData.ghost){
+                pass = false;
+            }
             else if(validators.hasBothParents(dragon.parents)){
                 analyseDragon(dragon.parents.m);
                 analyseDragon(dragon.parents.f);

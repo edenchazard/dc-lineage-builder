@@ -24,4 +24,4 @@ Download docker.
 ### Production
 Change VUE_APP_URL in `docker-compose.prod.yml` to the deployment url.
 
-```docker-compose --env-file .env.prod -p dc-lb_dev -f docker-compose.prod.yml up -d --build```
+```docker-compose --env-file .env.prod -p dc-lb -f docker-compose.prod.yml up -d --build```

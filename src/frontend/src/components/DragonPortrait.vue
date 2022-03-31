@@ -4,7 +4,7 @@
         class="imgbox imgbox-fullsize"
         @click="$emit('click')">
         <img
-            v-if="data.image.x != undefined"
+            v-if="data.image.x !== undefined"
             :src="data.image.link"
             :style="{
                 left: data.image.x+'px',
@@ -12,7 +12,8 @@
                 height: (data.image.h == '' ? 'initial' : data.image.h+'px')
             }"
             class='fallback' />
-        <span v-else class='local' :class="'bg-'+data.image" />
+        <span v-else-if="data.metaData.ghost === false" class='local' :class="'bg-'+data.image" />
+        <img v-else-if="data.metaData.ghost === true" class='ghost' :src="data.image" />
     </span>
 </template>
 <script>
@@ -75,5 +76,8 @@ export default {
     margin:-1px -1px;
     display: inline-block;
     background-image: url(../assets/breed-tiles.png);
+}
+.ghost{
+    margin:-1px -1px;
 }
 </style>

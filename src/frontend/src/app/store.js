@@ -134,7 +134,4 @@ const store = new Vuex.Store({
     }
 });
 
-export {
-    store as store,
-    Vuex as Vuex
-};
+export { store, Vuex };
