@@ -64,7 +64,7 @@ export default {
             if(!validators.verifyIntegrity(lineage) || !validators.meetsSaveRequirements(lineage)){
                 this.status = {
                     level: 3,
-                    message: "At least one of these dragons does not meet the save requirements. Lineages must be between 1 and 9 generations large and contain no placeholders. Codes and names must be valid."
+                    message: "At least one of these dragons does not meet the save requirements. Lineages must be between 1 and 9 generations large, contain no placeholders or have any ghost breeds. Codes and names must be valid."
                 };
                 return;
             }

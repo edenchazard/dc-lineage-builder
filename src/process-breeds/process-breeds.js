@@ -17,7 +17,9 @@ function entireBreedTable_FromLocals(){
         let entry = {
             name: name,
             genderOnly: breed.genderOnly,
-            category: breed.category
+            metaData: {
+                category: breed.category
+            }
         };
 
         if(breed.dimorphism){
@@ -68,7 +70,7 @@ function entireBreedTable_FromFallbacks(){
         };
     };
 
-    let createEntry = (sprite, name, genderOnly, category) => {
+    let createEntry = (sprite, name, genderOnly, metaData) => {
         // determines dimorphism
         const has_dimorphism = sprite.length > 4;
         let entry = { };
@@ -90,7 +92,7 @@ function entireBreedTable_FromFallbacks(){
 
         entry.name = name;
         entry.genderOnly = genderOnly;
-        entry.category = category;
+        entry.metaData = metaData;
         return entry;
     };
 
@@ -106,12 +108,18 @@ function entireBreedTable_FromFallbacks(){
 
         if(has_alts){
             for(let alt in spritedata){
-                let entry = createEntry(spritedata[alt], name + " " + alt, fallback_breeds[breed].genderOnly, fallback_breeds[breed].category);
+                let entry = createEntry(spritedata[alt], name + " " + alt, fallback_breeds[breed].genderOnly,
+                {
+                    category: fallback_breeds[breed].category
+                });
                 breeds.push(entry);
             }
         }
         else {
-            let entry = createEntry(spritedata, name, fallback_breeds[breed].genderOnly, fallback_breeds[breed].category);
+            let entry = createEntry(spritedata, name, fallback_breeds[breed].genderOnly, 
+            {
+                category: fallback_breeds[breed].category
+            });
             breeds.push(entry);
         }
     }
