@@ -1,6 +1,7 @@
 FROM node:lts-alpine3.14
+RUN npm install --global nodemon
 WORKDIR /app
 ENV NODE_ENV=development
-COPY package*.json ./
+COPY ./src/backend/package*.json ./
 RUN npm install
-ENTRYPOINT ["npm", "run", "dev"]
+CMD ["npm", "run", "dev"]

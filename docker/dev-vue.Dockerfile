@@ -1,8 +1,8 @@
 FROM node:lts-alpine3.14
+RUN npm install --global @vue/cli
 WORKDIR /app
 ENV NODE_ENV=development
 ENV CHOKIDAR_USEPOLLING=true
-COPY package*.json ./
+COPY ./src/frontend/package*.json ./
 RUN npm install
-RUN npm install -g @vue/cli
-ENTRYPOINT ["npm", "run", "serve"]
+CMD ["npm", "run", "serve"]

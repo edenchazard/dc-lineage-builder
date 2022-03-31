@@ -19,9 +19,9 @@ VueJS frontend on Apache with a nodeJS API backend.
 Download docker.
 
 ### Development
-```docker-compose --env-file .env.dev up```
+```docker-compose --env-file .env.dev -p dc-lb_dev up```
 
 ### Production
 Change VUE_APP_URL in `docker-compose.prod.yml` to the deployment url.
 
-```docker-compose --env-file .env.prod -f docker-compose.prod.yml up -d --build```
+```docker-compose --env-file .env.prod -p dc-lb_dev -f docker-compose.prod.yml up -d --build```

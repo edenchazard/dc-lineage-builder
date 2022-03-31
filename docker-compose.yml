@@ -1,7 +1,8 @@
 services:
   vue:
+    container_name: dc-lb-dev-vue
     build:
-      context: ./src/frontend
+      context: .
       dockerfile: ./docker/dev-vue.Dockerfile
     volumes:
       - ./src/frontend:/app
@@ -18,8 +19,9 @@ services:
       - internal
 
   api:
+    container_name: dc-lb-dev-api
     build:
-      context: ./src/backend
+      context: .
       dockerfile: ./docker/dev-api.Dockerfile
     depends_on:
       - db
@@ -37,6 +39,7 @@ services:
       - internal
 
   db:
+    container_name: dc-lb-dev-db
     image: mariadb:10.6
     restart: unless-stopped
     tty: true
@@ -53,6 +56,7 @@ services:
 
   # only for development
   adminer:
+    container_name: dc-lb-dev-adminer
     image: adminer:latest
     environment:
       ADMINER_DEFAULT_SERVER: lineage_builder

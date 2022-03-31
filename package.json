@@ -8,7 +8,7 @@
     "keywords": [],
     "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
     "license": "MIT",
-    "dependencies": {},
-    "devDependencies": {
+    "dependencies": {
+        "koa-bodyparser": "^4.3.0"
     }
 }
