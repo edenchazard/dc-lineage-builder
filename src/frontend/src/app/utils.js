@@ -1,6 +1,6 @@
 import { GLOBALS } from "@/app/bundle";
 
-export default {
+const Utils = {
     getBreedData(breedName){
         return GLOBALS.breeds.entire.find((v) => v.name === breedName) || false;
     },
@@ -15,12 +15,11 @@ export default {
             // and will be specified in the value
     
             if(breed.genderOnly === false || breed.genderOnly === gender){
-                let entry = {
+                dragons.push({
                     name: breed.name,
                     image: breed[g],
-                    category: breed.category
-                };
-                dragons.push(entry);
+                    metaData: breed.metaData
+                });
             }
         }
     
@@ -92,6 +91,24 @@ export default {
         return str.toLowerCase() === "placeholder";
     },
 
+    addBreed(breedObj){
+        const breedTable = GLOBALS.breeds.entire;
+
+        // check name is unique
+        if(breedTable.findIndex(breed => breed.name === breedObj.name) > -1){
+            return false;
+        }
+
+        breedTable.push(breedObj);
+
+        // retain our alphabetical sort
+        breedTable.sort((breed1, breed2) => breed1.name.localeCompare(breed2.name));
+
+        // update gender tables
+        GLOBALS.breeds.males = Utils.filterBreedTableByGender(breedTable, 'm');
+        GLOBALS.breeds.females = Utils.filterBreedTableByGender(breedTable, 'f');
+        return true;
+    }
     /*mergeBreedCounts(arr){
         let breeds = [];
         for(const obj of arr){
@@ -102,3 +119,5 @@ export default {
         return breeds;
     }*/
 };
+
+export default Utils;

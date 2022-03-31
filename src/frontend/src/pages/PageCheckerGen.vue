@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class='right'>
-                    <button @click="showExportDialog = true">
+                    <button class='themed-button' @click="showExportDialog = true">
                         <font-awesome-icon icon="save" /> Export
                     </button>
                 </div>
@@ -139,14 +139,6 @@ export default {
 }
 #controls .left > div{
     margin-bottom:5px;
-}
-#controls .right > button{
-    margin:2px;
-    cursor: pointer;
-    padding: 8px;
-    color:var(--builderControlFG);
-    background: var(--builderControlBG);
-    border:none;
 }
 #breeds{
     display: flex;

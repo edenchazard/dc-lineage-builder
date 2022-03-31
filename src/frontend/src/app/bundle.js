@@ -5,8 +5,8 @@ import utils from '@/app/utils';
 import GLOBALS from '@/app/globals';
 
 export {
-    dragonBuilder as dragonBuilder,
-    validators as validators,
-    utils as utils,
-    GLOBALS as GLOBALS
+    dragonBuilder,
+    validators,
+    utils,
+    GLOBALS
 }

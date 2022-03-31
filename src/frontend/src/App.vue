@@ -12,6 +12,7 @@
             <ul>
               <li><router-link to="/">Build</router-link></li>
               <li><router-link to="/checkers">Checker Generator</router-link></li>
+              <li><router-link to="/ghost-breeds">Ghost Breeds</router-link></li>
               <li><router-link to="/how-to">How To Use</router-link></li>
               <li><router-link to="/disclaimer">Disclaimer</router-link></li>
               <li><a href="https://dragcave.net/">DragCave</a></li>
@@ -178,6 +179,14 @@ h4 {
     padding-left: 15px;
 }
 
+.themed-button{
+  margin:2px;
+  cursor: pointer;
+  padding: 8px;
+  color:var(--builderControlFG);
+  background: var(--builderControlBG);
+  border:none;
+}
 /* modal properties get overriden by the import of modal
 in LineageBuilder.vue, that's why these are !importanted.*/
 .modal{
