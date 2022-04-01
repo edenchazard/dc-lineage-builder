@@ -19,8 +19,7 @@
     </Dialog>
 </template>
 <script>
-import { validators } from '@/app/bundle.js';
-import axios from "axios";
+import { validators, backend } from '@/app/bundle.js';
 import Dialog from '@/components/Dialog';
 import Information from '@/components/ui/Information';
 import TextCopy from '@/components/ui/TextCopy';
@@ -61,27 +60,35 @@ export default {
             const lineage = JSON.parse(JSON.stringify(this.tree));
             // this could happen, we need to make sure the lineage fits
             // our requirements for saving
-            if(!validators.verifyIntegrity(lineage) || !validators.meetsSaveRequirements(lineage)){
+            if(!validators.verifyIntegrity(lineage)
+            || !validators.meetsSaveRequirements(lineage)){
                 this.status = {
                     level: 3,
-                    message: "At least one of these dragons does not meet the save requirements. Lineages must be between 1 and 9 generations large, contain no placeholders or have any ghost breeds. Codes and names must be valid."
+                    message: `At least one of these dragons does not meet the save
+                    requirements. Lineages must be between 1 and 9 
+                    generations large, contain no placeholders or have any
+                    ghost breeds. Codes and names must be valid.`
                 };
                 return;
             }
-
-            this.status = { level: 1, message: "Generating link..." };
-            axios.post(`./api/lineage/create`, lineage)
-                .then((response) => {
+            (async() =>{
+                try {
+                    this.status = { level: 1, message: "Generating link..." };
+                    const response = await backend.generateUrl(lineage);
                     this.viewLink = `${window.location.origin}${process.env.VUE_APP_URL}view/${response.data.hash}`;
                     this.status = { level: 0, message: "" };
-                })
-                .catch((err) => {
-                    err = err.response;
+                }
+                catch (error) {
+                    const { response } = error;
                     this.status = {
                         level: 3,
-                        message: (err.status >= 500 ? "Sorry, an error has occurred while saving the lineage. You may want to try again or export it instead." : err.data)
+                        message: `Sorry, an error has occurred while
+                        saving the lineage. You may want to try again
+                        or export it instead.
+                        The error is: ${response.status} ${response.data}`
                     };
-                });
+                }
+            })();
         }
     }
 };
