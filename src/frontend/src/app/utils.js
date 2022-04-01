@@ -1,5 +1,7 @@
 import { GLOBALS } from "@/app/bundle";
 
+const isGender = (gender, breed) => breed === false || breed === gender;
+
 const Utils = {
     getBreedData(breedName){
         return GLOBALS.breeds.entire.find((v) => v.name === breedName) || false;
@@ -7,17 +9,17 @@ const Utils = {
 
     filterBreedTableByGender(breeds, gender){
         let dragons = [];
-        const g = gender === 'm' ? 'male' : 'female';
+        const breedGender = gender === 'm' ? 'male' : 'female';
     
         for(const breed of breeds){
             // if the genderonly attribute is active,
             // it means the breed is male only or female only
             // and will be specified in the value
     
-            if(breed.genderOnly === false || breed.genderOnly === gender){
+            if(isGender(gender, breed.genderOnly)){
                 dragons.push({
                     name: breed.name,
-                    image: breed[g],
+                    image: breed[breedGender],
                     metaData: breed.metaData
                 });
             }
@@ -35,10 +37,8 @@ const Utils = {
                 scan(o.parents.f, x+1);
             }
             // end of branch
-            else{
-                if(x > max){
-                    max = x;
-                }
+            else if(x > max){
+                max = x;
             }
         }
         scan(root, 1);
@@ -47,9 +47,7 @@ const Utils = {
 
     countDragons(root){
         let count = 0;
-        this.forEveryDragon(root, () =>{
-            count++;
-        });
+        Utils.forEveryDragon(root, () => count++);
 
         return count;
     },
@@ -72,7 +70,7 @@ const Utils = {
         let breeds = [];
 
         const f = (tree) =>{
-            this.forEveryDragon(tree, (dragon) => {
+            Utils.forEveryDragon(tree, (dragon) => {
                 breeds[dragon.breed] = breeds[dragon.breed] + 1 || 1;
             });
         }
@@ -93,6 +91,17 @@ const Utils = {
         return str.toLowerCase() === "placeholder";
     },
 
+    breedInList(list, breedName){
+        if(typeof breedName === 'string'){
+            return list.indexOf(breedName) > -1;
+        }
+        else if (typeof breedName === 'object'){
+            return list.findIndex(breed => breedName === breed.name > -1);
+        }
+    
+        throw new Error("not string or object of breeds, type "+typeof breedName);
+    },
+
     addBreed(breedObj){
         const breedTable = GLOBALS.breeds.entire;
 
@@ -101,7 +110,7 @@ const Utils = {
             return false;
         }
 
-        if(breedTable.findIndex(breed => breed.name === breedObj.name) > -1){
+        if(Utils.breedInList(breedTable, breedObj.name)){
             return false;
         }
 
@@ -115,15 +124,6 @@ const Utils = {
         GLOBALS.breeds.females = Utils.filterBreedTableByGender(breedTable, 'f');
         return true;
     }
-    /*mergeBreedCounts(arr){
-        let breeds = [];
-        for(const obj of arr){
-            for(const name in obj){
-                breeds[name] = breeds[name] + obj[name] || obj[name];
-            }
-        }
-        return breeds;
-    }*/
 };
 
 export default Utils;

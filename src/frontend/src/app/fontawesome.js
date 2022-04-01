@@ -8,6 +8,6 @@ library.add(faMinus, faVenusMars, faSave, faFileCode, faArrowLeft, faArrowRight,
             faLink, faCopy);
 
 export {
-    library as library,
-    FontAwesomeIcon as FontAwesomeIcon
+    library,
+    FontAwesomeIcon
 };

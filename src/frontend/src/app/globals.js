@@ -22,7 +22,7 @@ let GLOBALS ={
         females: utils.filterBreedTableByGender(breedtable, 'f')
     }
 }
-console.log(GLOBALS)
+//console.log(GLOBALS)
 // Prevent modification
 //Object.freeze(GLOBALS);
 
