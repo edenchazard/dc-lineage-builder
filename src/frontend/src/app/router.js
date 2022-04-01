@@ -11,6 +11,6 @@ const router = new VueRouter({
 Vue.use(VueRouter);
 
 export {
-    router as router,
-    VueRouter as VueRouter
+    router,
+    VueRouter
 };

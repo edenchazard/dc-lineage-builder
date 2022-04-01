@@ -1,6 +1,14 @@
 import utils from "./utils";
 import GLOBALS from "./globals";
 
+// returns a list of ghost breed names
+const findGhosts = () => {
+    return GLOBALS.breeds.entire
+        .filter(breed => breed.metaData.ghost === true)
+        .map(breed => breed.name);
+}
+
+
 const validators ={
     fitsBreed(obj) {
         const breed = GLOBALS.breeds.entire.find((v) => v.name === obj.breed);
@@ -56,13 +64,11 @@ const validators ={
     isLineageHash(str){
         return /^[a-z0-9]{40}$/.test(str);
     },
-
+    
     //assumes verify integrity has been run first.
     meetsSaveRequirements(obj){
         // fetch ghosties
-        const ghosts = GLOBALS.breeds.entire
-            .filter(breed => breed.metaData.ghost === true)
-            .map(breed => breed.name);
+        const ghosts = findGhosts();
         
         // our requirements are no placeholders in the lineage and
         // between 1 and 9 generations
@@ -76,11 +82,11 @@ const validators ={
             if(!pass){  // check failed, don't even bother
                 return;
             }
-            if(dragon.breed == GLOBALS.placeholder_breed.name){
+            if(dragon.breed === GLOBALS.placeholder_breed.name){
                 pass = false;
             }
             // reject ghosties
-            if(ghosts.indexOf(dragon.breed) > -1){
+            if(utils.breedInList(ghosts, dragon.breed)){
                 pass = false;
             }
             if(validators.hasBothParents(dragon.parents)){

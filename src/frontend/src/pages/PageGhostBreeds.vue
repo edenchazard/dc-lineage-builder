@@ -27,13 +27,13 @@
           <span class='field-label'>Tile</span>
           <div v-if="genderAvailability == 'both'" id='tile-upload'>
             <div>
-              <GhostBreedSelector
+              <GhostBreedUpload
                 @tileChosen = "(base64) => portraitSelected('male', base64)"
                 @uploadError = "uploadError" />
               <span class='field-label'>Male</span>
             </div>
             <div>
-              <GhostBreedSelector
+              <GhostBreedUpload
                 @tileChosen = "(base64) => portraitSelected('female', base64)"
                 @uploadError = "uploadError" />
               <span class='field-label'>Female</span>
@@ -41,7 +41,7 @@
           </div>
           <div v-if="genderAvailability == 'male'">
             <div>
-              <GhostBreedSelector
+              <GhostBreedUpload
                 @tileChosen = "(base64) => portraitSelected('male', base64)"
                 @uploadError = "uploadError" />
               <span class='field-label'>Male</span>
@@ -49,7 +49,7 @@
           </div>
           <div v-if="genderAvailability == 'female'">
             <div>
-              <GhostBreedSelector
+              <GhostBreedUpload
                 @tileChosen = "(base64) => portraitSelected('female', base64)"
                 @uploadError = "uploadError" />
               <span class='field-label'>Female</span>
@@ -63,13 +63,13 @@
 </template>
   
 <script>
-import GhostBreedSelector from "@/components/GhostBreed.vue";
+import GhostBreedUpload from "@/components/GhostBreedUpload.vue";
 import { utils } from '@/app/bundle.js';
 import Information from '@/components/ui/Information';
 
 export default {
   name: 'PageGhostBreeds',
-  components: { Information, GhostBreedSelector },
+  components: { Information, GhostBreedUpload },
 
   data() {
     return {
