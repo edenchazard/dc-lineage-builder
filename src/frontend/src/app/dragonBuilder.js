@@ -35,7 +35,14 @@ const dragonBuilder = {
     },
 
     copyTreeFromComponent(dragon){
-        return { ...dragon }
+        return {
+            code: dragon.code,
+            gender: dragon.gender,
+            breed: dragon.breed,
+            name: dragon.name,
+            parents: dragon.parents,
+            display: dragon.display
+        }
     }
 };
 
