@@ -22,8 +22,7 @@
   
 <script>
 import Lineage from '@/components/Lineage';
-//import validators from "@/validators.js";
-import axios from "axios";
+import { backend } from '@/app/bundle.js';
 import TextCopy from '@/components/ui/TextCopy';
 
 export default {
@@ -57,20 +56,29 @@ export default {
       return;
     }
     */
-    axios.get(`./api/lineage/${this.hash}`)
-      .then((response) => {
+    (async() => {
+      try {
+        this.status ={
+          level: 1,
+          message: `Loading lineage... For big lineages, this can sometimes
+          take a moment to load.`
+        };
+        
+        const response = await backend.getLineageData(this.hash);
         this.shareLink = `${window.location.origin}${process.env.VUE_APP_URL}view/${this.hash}`;
         this.tree = JSON.parse(response.data.dragon);
-        this.status = { level: 0, message: "",  title: "" };
-      })
-      .catch((err) => {
-          err = err.response;
-          this.status = {
-            level: 2,
-            title: `${err.status} ${err.statusText}`,
-            message: (err.status >= 500 ? "Sorry, an error has occurred." : err.data)
-          };
-      });
+        this.status = { level: 0, message: "" };
+      }
+      catch (error) {
+        const { response } = error;
+        this.status = {
+          level: 3,
+          title: `${response.status} ${response.statusText}`,
+          message: `Sorry, an error has occurred while loading the lineage.
+          The error is: ${response.status} ${response.data}`
+        };
+      }
+    })();
   }
 }
 </script>

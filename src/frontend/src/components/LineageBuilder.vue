@@ -39,8 +39,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import { dragonBuilder, utils } from '@/app/bundle.js';
+import { dragonBuilder, utils, backend } from '@/app/bundle.js';
 import { ToggleButton } from 'vue-js-toggle-button';
 import Lineage from '@/components/Lineage';
 import DialogExport from '@/components/DialogExport';
@@ -87,25 +86,28 @@ export default {
     }
     // the user has requested we import from an already built lineage.
     else{
-      this.status ={
-        level: 1,
-        message: "Loading lineage... For big lineages, this can sometimes take a moment to load."
-      };
-
-      axios.get(`./api/lineage/${hash}`)
-        .then((response) => {
+      (async() => {
+        try {
+          this.status ={
+            level: 1,
+            message: `Loading lineage... For big lineages, this can sometimes
+            take a moment to load.`
+          };
+          const response = await backend.getLineageData(hash);
           this.tree = JSON.parse(response.data.dragon);
           this.status = { level: 0, message: "" };
           this.$store.dispatch('setUsedBreeds', utils.countBreeds(this.tree));
-        })
-        .catch((err) => {
-            err = err.response;
-            this.status = {
-              level: 3,
-              title: `${err.status} ${err.statusText}`,
-              message: (err.status >= 500 ? "Sorry, an error has occurred." : err.data)
-            };
-        });
+        }
+        catch (error) {
+          const { response } = error;
+          this.status = {
+            level: 3,
+            title: `${response.status} ${response.statusText}`,
+            message: `Sorry, an error has occurred while loading the lineage.
+            The error is: ${response.status} ${response.data}`
+          };
+        }
+      })();
     }
   },
 
@@ -141,7 +143,7 @@ export default {
     },
 
     replaceRoot(node){
-      this.$store.commit('setUsedBreeds', utils.countBreeds(node));
+      this.$store.dispatch('setUsedBreeds', utils.countBreeds(node));
       this.tree = node;
     }
   }
