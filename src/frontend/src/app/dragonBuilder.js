@@ -4,20 +4,19 @@ import GLOBALS from './globals';
 const dragonBuilder = {
     generateCode(){
         const characters = "1234567890ABCDEFGHIJKLMNOPQRTUVWXYZabcdefghijklmnopqrstuvwyz";
-    
-        let arr = [];
+        let str = "";
         for(let i = 0; i < 5; ++i){
-            arr.push(characters[Math.floor(Math.random() * characters.length)]);
+            str += characters[~~(Math.random() * characters.length)];
         }
-    
-        return arr.join("");
+        return str;
     },
 
     generateName(){
         return uniqueNamesGenerator({
             dictionaries: [names, colors, animals],
             length: 2,
-            separator: ' '
+            separator: ' ',
+            style: 'capital'
         });
     },
 
@@ -36,14 +35,7 @@ const dragonBuilder = {
     },
 
     copyTreeFromComponent(dragon){
-        return {
-            code: dragon.code,
-            gender: dragon.gender,
-            breed: dragon.breed,
-            name: dragon.name,
-            parents: dragon.parents,
-            display: dragon.display
-        }
+        return { ...dragon }
     }
 };
 

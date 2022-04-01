@@ -15,7 +15,7 @@
 <script>
 import DragonPortrait from "@/components/DragonPortrait";
 export default {
-    name: 'GhostBreedSelector',
+    name: 'GhostBreedUpload',
     components: { DragonPortrait },
     props: { },
 
