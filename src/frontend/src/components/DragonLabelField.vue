@@ -46,32 +46,6 @@ export default {
     },*/
 
     methods:{
-        /*
-        clicked(){
-            // single click: switches name and code
-            // double click: edits the currently active name or code
-            this.clicks++;
-
-            if (this.clicks === 1) {
-                this.timer = setTimeout(() => {
-                    this.clicks = 0;
-                    this.$refs.inputel.value = this.display == 1 ? this.code : this.name
-                    this.$emit('changed', {
-                        display: (this.display == 1 ? 0 : 1),
-                        value: (this.display == 1 ? this.name : this.code)
-                    });
-                }, this.delay);
-            }
-            else {
-                clearTimeout(this.timer);
-                this.clicks = 0;
-                this.editing = true;
-
-                // focus the input so users can type immediately
-                this.$nextTick(() => this.$refs.inputel.focus());
-            }
-        },*/
-
         clicked(){
             if(this.disabled){
                 return;
