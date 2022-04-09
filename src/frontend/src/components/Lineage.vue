@@ -1,4 +1,5 @@
 <template>
+<div class="lineage-container">
   <div
     class='lineage-view'
     :class="{
@@ -13,6 +14,7 @@
         :disabled="config.disabled" />
     </ul>
   </div>
+</div>
 </template>
 <script>
 import Dragon from '@/components/Dragon';
@@ -40,17 +42,22 @@ export default {
 </script>
 
 <style scoped>
+.lineage-container{
+  overflow:auto;
+}
 .lineage-view{
   margin:0px auto;
   font-family: var(--lineageFont);
-  padding: 1px;
   background:inherit;
   line-height: 19.6px;
-  overflow-x:auto;
   display: table;
 }
 .lineage-root{
   padding: 1px;
   background:inherit;
+}
+@media only screen and (min-width: 768px){
+  .lineage-container{
+  }
 }
 </style>

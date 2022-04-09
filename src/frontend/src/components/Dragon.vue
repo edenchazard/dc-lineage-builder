@@ -8,30 +8,17 @@
                 <button class='left' title='Remove descendants'
                     v-if="nodesFromRoot > 0"
                     @click="removeDescendants"><font-awesome-icon icon="times" /></button>
-                <popper v-if="!disabled"
-                    trigger="clickToOpen"
-                    :options="{placement: 'auto-end', modifiers: { } }"
-                    @hide="showBreedSelector=false">
-                    <div class="popper">
-                        <BreedDropdown
-                            v-if="showBreedSelector === true"
-                            :breeds="availableBreeds"
-                            :dragon="{gender, breed}"
-                            @selected="changeBreed" />
-                    </div>
-                    <DragonPortrait
-                        class="tile-portrait active"
-                        slot="reference"
-                        :data="getBreedFromData"
-                        :gen="nodesFromRoot"
-                        @click="showBreedSelector=true" />
-                </popper>
+                <BreedDropdownv2
+                    v-if="!disabled && showBreedSelector===true"
+                    :breeds="availableBreeds"
+                    :dragon="{gender, breed}"
+                    @selected="changeBreed"
+                    @close="showBreedSelector=false" />
                 <DragonPortrait
-                    v-else
-                    class="tile-portrait disabled"
+                    class="tile-portrait"
+                    :class="{ 'active': !disabled, 'disabled': disabled }"
                     :data="getBreedFromData"
-                    :gen="nodesFromRoot" />
-                    
+                    @click="showBreedSelector=true" />
                 <button class='right' title='Remove ancestors'
                     v-if="hasParents"
                     @click="deleteAncestors"><font-awesome-icon icon="minus" /></button>
@@ -84,11 +71,10 @@ notes for meself
 label warning is a bit hacky and needs improving
 */
 import DragonLabelField from '@/components/DragonLabelField';
-import BreedDropdown from '@/components/BreedDropdown';
+import BreedDropdownv2 from '@/components/BreedDropdownv2'
 import DragonPortrait from "@/components/DragonPortrait";
 import { GLOBALS, utils, validators, dragonBuilder } from '@/app/bundle';
 import * as ls from "local-storage";
-import Popper from 'vue-popperjs';
 
 export default {
     name: 'Dragon',
@@ -112,7 +98,7 @@ export default {
         nodesFromRoot: Number
     },
 
-    components: { DragonLabelField, BreedDropdown, DragonPortrait, Popper },
+    components: { DragonLabelField, BreedDropdownv2, DragonPortrait },
     computed:{
         hasParents(){
             return 'f' in this.parents;
