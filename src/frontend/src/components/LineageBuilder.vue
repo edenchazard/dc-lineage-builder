@@ -30,6 +30,7 @@
         </div>
       </div>
       <Lineage
+        class="builder"
         v-if="tree !== null"
         :tree.sync="tree"
         :config="config" 
@@ -151,6 +152,9 @@ export default {
 </script>
 
 <style scoped>
+.builder{
+  width: calc(100% - 19px);
+}
 .toolbar{
   margin:20px auto;
   max-width: 800px;
@@ -166,7 +170,7 @@ export default {
   margin: 5px;
 }
 .toolbar-item button{
-  margin:2px;
+  margin:2px 0px;
   cursor: pointer;
   padding: 8px;
   color:var(--builderControlFG);
