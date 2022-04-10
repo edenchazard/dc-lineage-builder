@@ -41,7 +41,6 @@ services:
   db:
     container_name: dc-lb-dev-db
     image: mariadb:10.6
-    restart: unless-stopped
     tty: true
     volumes:
       - ./docker/db:/docker-entrypoint-initdb.d
