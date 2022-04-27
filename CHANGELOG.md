@@ -1,4 +1,6 @@
 # Changelog
+## 3.1.1
+- Add new breeds: Lotaan and Ghanser.
 ## 3.1.0
 - New feature: Ghost breeds.
 - Optimized css and image cache loading.
