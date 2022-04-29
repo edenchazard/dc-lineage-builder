@@ -339,5 +339,10 @@ module.exports = {
         dimorphism: true,
         category: "dragon",
         sprites: ['pzfg', 'YxaA']
+    },
+    "Lotaan":{
+        genderOnly: false,
+        category: "dragon",
+        sprites: '3iLp'
     }
 };
