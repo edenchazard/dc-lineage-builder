@@ -1304,5 +1304,10 @@ module.exports = {
         genderOnly: 'm',
         category: 'dragon',
         sprites: ['Messy', '0', '-1', '48']
-    }
+    },
+    "Ghanser": {
+        genderOnly: false,
+        category: 'two-head',
+        sprites: ['bZeHE', '0', '-1', '48']
+    },
 };
