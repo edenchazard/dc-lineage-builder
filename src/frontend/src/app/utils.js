@@ -2,7 +2,7 @@ import { GLOBALS } from "@/app/bundle";
 
 const isGender = (gender, breed) => breed === false || breed === gender;
 
-const Utils = {
+const utils = {
     getBreedData(breedName){
         return GLOBALS.breeds.entire.find((v) => v.name === breedName) || false;
     },
@@ -47,7 +47,7 @@ const Utils = {
 
     countDragons(root){
         let count = 0;
-        Utils.forEveryDragon(root, () => count++);
+        utils.forEveryDragon(root, () => count++);
 
         return count;
     },
@@ -70,7 +70,7 @@ const Utils = {
         let breeds = [];
 
         const f = (tree) =>{
-            Utils.forEveryDragon(tree, (dragon) => {
+            utils.forEveryDragon(tree, (dragon) => {
                 breeds[dragon.breed] = breeds[dragon.breed] + 1 || 1;
             });
         }
@@ -110,7 +110,7 @@ const Utils = {
             return false;
         }
 
-        if(Utils.breedInList(breedTable, breedObj.name)){
+        if(utils.breedInList(breedTable, breedObj.name)){
             return false;
         }
 
@@ -120,10 +120,14 @@ const Utils = {
         breedTable.sort((breed1, breed2) => breed1.name.localeCompare(breed2.name));
 
         // update gender tables
-        GLOBALS.breeds.males = Utils.filterBreedTableByGender(breedTable, 'm');
-        GLOBALS.breeds.females = Utils.filterBreedTableByGender(breedTable, 'f');
+        GLOBALS.breeds.males = utils.filterBreedTableByGender(breedTable, 'm');
+        GLOBALS.breeds.females = utils.filterBreedTableByGender(breedTable, 'f');
         return true;
+    },
+
+    getDCTime() {
+       return new Date(new Date().toLocaleString('en-US', { timeZone: "America/New_York" }));
     }
 };
 
-export default Utils;
+export default utils;
