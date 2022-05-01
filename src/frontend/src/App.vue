@@ -26,7 +26,6 @@ export default {
   methods:{
     updateSkin(newSkin){
       this.skin = newSkin;
-      console.log(newSkin)
     }
   }
 }

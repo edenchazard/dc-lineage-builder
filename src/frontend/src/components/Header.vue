@@ -61,7 +61,6 @@ export default {
 
   methods:{
     setSkin(to){
-      console.log(to)
       // ensure valid skin in case it's been edited by user
       // in localstorage
       if(!this.availableSkins.find((skin) => skin.cssName === to)){
