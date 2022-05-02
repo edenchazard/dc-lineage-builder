@@ -44,20 +44,20 @@ export default {
 <style scoped>
 .lineage-container{
   overflow:auto;
+  margin: 0px 3px;
 }
 .lineage-view{
   margin:0px auto;
   font-family: var(--lineageFont);
   background:inherit;
   line-height: 19.6px;
-  display: table;
+  display: flex;
+  flex-direction: column;
 }
 .lineage-root{
   padding: 1px;
   background:inherit;
-}
-@media only screen and (min-width: 768px){
-  .lineage-container{
-  }
+  display: flex;
+  margin:0px auto;
 }
 </style>

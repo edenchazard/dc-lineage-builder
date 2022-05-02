@@ -40,7 +40,6 @@ export default {
     grid-template-columns: repeat(auto-fill, 36px);
     grid-auto-rows: 1fr;
     grid-gap: 2px;
-    justify-content: center;
 }
 .mates-compact li{
     height: 48px;

@@ -17,7 +17,7 @@ export default {
 <style scoped>
 .generation-counter{
   position: relative;
-  display: inline-flex;
+  display: flex;
   left: 2px;
   height: 16px;
   line-height: 16px;

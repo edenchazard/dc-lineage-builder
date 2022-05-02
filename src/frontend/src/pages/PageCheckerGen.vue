@@ -43,14 +43,16 @@
                     <BreedDropdownResults
                         :search="query"
                         :breeds="maleBreeds"
-                        @selected="selectMale" />
+                        @selected="selectMale"
+                        class='results' />
                 </div>
-                <div class='gender'>
+                <div>
                     <label>Female breed</label>
                     <BreedDropdownResults
                         :search="query"
                         :breeds="femaleBreeds"
-                        @selected="selectFemale" />
+                        @selected="selectFemale"
+                        class='results' />
                 </div>
             </section>
         </div>
@@ -154,5 +156,8 @@ export default {
 }
 label{
     font-weight:bold;
+}
+.results{
+    height:30vh;
 }
 </style>

@@ -1,21 +1,23 @@
 <template>
-    <div class='central-block'>
-      <div id='status' v-if='status.level > 0'>
-          <h2  v-if='status.level == 2'>{{status.title}}</h2>
-          <p>{{status.message}}</p>
-      </div>
-      <div v-if="tree != null">
-        <Lineage
-          :tree="tree"
-          :config="config" />
+    <div>
+      <div class='central-block'>
+        <div id='status' v-if='status.level > 0'>
+            <h2 v-if='status.level == 2'>{{status.title}}</h2>
+            <p>{{status.message}}</p>
+        </div>
         <div id='options'>
           <span class='option'>
             <router-link :to="{ path: '/', query: { template: hash }}">Import into editor</router-link>
           </span>
           <span class='option'>
-          Share link: <TextCopy v-model="shareLink" type='input' />
+            Share link: <TextCopy v-model="shareLink" type='input' />
           </span>
         </div>
+      </div>
+      <div v-if="tree != null">
+        <Lineage
+          :tree="tree"
+          :config="config" />
       </div>
     </div>
 </template>
