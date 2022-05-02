@@ -152,9 +152,6 @@ export default {
 </script>
 
 <style scoped>
-.builder{
-  width: calc(100% - 19px);
-}
 .toolbar{
   margin:20px auto;
   max-width: 800px;
