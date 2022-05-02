@@ -119,8 +119,4 @@ in LineageBuilder.vue, that's why these are !importanted.*/
 .modal .btn-close{
     color:var(--modalHeaderFG) !important;
 }
-
-.delete-children{
-    transform: rotateY(180deg);
-}
 </style>
