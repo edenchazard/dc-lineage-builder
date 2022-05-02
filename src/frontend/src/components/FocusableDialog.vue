@@ -21,8 +21,6 @@
 <script>
 // I know this is hacky but this is the easiest and most optimal solution
 // I could think of
-//import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
-
 export default {
     name: 'FocusableDialog',
 
@@ -31,30 +29,15 @@ export default {
     },
 
     mounted(){
-        const $this = this;
-        const properties = {
-            outsideEvent(e){
-                //console.log('b', this.$el)
-                //console.log('t', e.target)
-                if ($this.$el.parentNode && !$this.$el.parentNode.contains(e.target)) {
-                    $this.close();
-                }
-            },
-            touchstart(e){
-                e.preventDefault();
-                e.stopPropagation();
-            },
-            touchmove(e){
-                e.preventDefault();
-                e.stopPropagation();
+        this.$el.outsideEvent = (e) => {
+            //console.log('b', this.$el)
+            //console.log('t', e.target)
+            if (this.$el.parentNode && !this.$el.parentNode.contains(e.target)) {
+                this.close();
             }
         };
 
-        this.$el.dialogProperties = properties;
-
-        //document.addEventListener('touchstart', properties.touchstart, { passive: false });
-        //document.addEventListener('touchmove', properties.touchmove, { passive: false });
-        document.addEventListener('click', properties.outsideEvent);
+        document.addEventListener('click', this.$el.outsideEvent);
         document.body.style.overflow = "hidden";
         document.documentElement.style.overflow = "hidden";
 
@@ -69,13 +52,7 @@ export default {
         cleanUp(){
             document.body.style.overflow = "";
             document.documentElement.style.overflow = "";
-
-            //enableBodyScroll(this.$el);
-            console.log(this.$el)
-            //clearAllBodyScrollLocks();
-            document.removeEventListener('click', this.$el.dialogProperties.outsideEvent);
-            //document.addEventListener('touchstart', this.$el.dialogProperties.touchstart);
-            //document.addEventListener('touchmove', this.$el.dialogProperties.touchmove);
+            document.removeEventListener('click', this.$el.outsideEvent);
         },
 
         selected(breed){
