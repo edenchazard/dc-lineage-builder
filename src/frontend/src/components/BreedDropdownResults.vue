@@ -70,11 +70,7 @@ export default {
 <style scoped>
 .results{
     padding:0px;
-    /* automatically size the results as appropriate
-    but max out at 300px 
-    max-height:300px;*/
     overflow-y: auto;
-    margin: 10px 0px 0px 0px;
     scrollbar-gutter: stable;
 }
 .no-results{
