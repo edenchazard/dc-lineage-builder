@@ -24,23 +24,17 @@
 export default {
     name: 'FocusableDialog',
 
-    data() {
-        return {}
-    },
-
     mounted(){
         this.$el.outsideEvent = (e) => {
             //console.log('b', this.$el)
             //console.log('t', e.target)
-            if (this.$el.parentNode && !this.$el.parentNode.contains(e.target)) {
+            if (!this?.$el?.parentNode?.contains(e.target)) {
                 this.close();
             }
         };
 
+        this.hideBodyScrollbar();
         document.addEventListener('click', this.$el.outsideEvent);
-        document.body.style.overflow = "hidden";
-        document.documentElement.style.overflow = "hidden";
-
     },
 
     // clean up
@@ -49,9 +43,17 @@ export default {
     },
 
     methods: {
-        cleanUp(){
+        hideBodyScrollbar(){
+            document.body.style.overflow = "hidden";
+            document.documentElement.style.overflow = "hidden";
+        },
+
+        unhideBodyScrollbar(){
             document.body.style.overflow = "";
             document.documentElement.style.overflow = "";
+        },
+    
+        cleanUp(){
             document.removeEventListener('click', this.$el.outsideEvent);
         },
 
@@ -59,7 +61,9 @@ export default {
             this.close();
             this.$emit('selected', breed);
         },
+
         close(){
+            this.unhideBodyScrollbar();
             this.cleanUp();
             this.$emit('close');
         }

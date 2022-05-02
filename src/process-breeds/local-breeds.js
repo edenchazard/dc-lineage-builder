@@ -337,7 +337,7 @@ module.exports = {
     "Avin Pygmy":{
         genderOnly: false,
         dimorphism: true,
-        category: "dragon",
+        category: "pygmy",
         sprites: ['pzfg', 'YxaA']
     },
     "Lotaan":{
