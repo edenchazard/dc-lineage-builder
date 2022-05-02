@@ -7,7 +7,7 @@
                     @click="addDescendant"><font-awesome-icon icon="arrow-left" /></button>
                 <button class='left' title='Remove descendants'
                     v-if="nodesFromRoot > 0"
-                    @click="removeDescendants"><font-awesome-icon icon="times" /></button>
+                    @click="removeDescendants"><font-awesome-icon class='delete-children' icon="cut" /></button>
                 <BreedDropdownv2
                     v-if="!disabled && showBreedSelector===true"
                     :breeds="availableBreeds"

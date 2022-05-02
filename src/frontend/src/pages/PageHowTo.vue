@@ -20,7 +20,7 @@
           <li><font-awesome-icon icon="sync-alt" /> Switch the parent's genders. If one of the breeds is only available in one gender, the breed will be reset to the placeholder.</li>
           <li><font-awesome-icon icon="clone" /> Clone the parent nodes and any further ancestors. This button can even be used to clone parts of unrelated lineages such as from a different tab.</li>
           <li><font-awesome-icon icon="paste" /> Paste the most recently cloned item. If this node already has parents, it will replace them.</li>
-          <li><font-awesome-icon icon="times" /> Remove all descendants and make this dragon the new root.</li>
+          <li><font-awesome-icon icon="cut" class='delete-children' /> Remove all descendants and make this dragon the new root.</li>
           <li><font-awesome-icon icon="font" /> Switch between the code or name.</li>
           <li><font-awesome-icon icon="exclamation-triangle" /> This name or code does not pass dragcave's validation. Names and codes are not checked for availability.</li>
         </ul>
