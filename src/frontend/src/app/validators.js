@@ -73,7 +73,7 @@ const validators ={
         // our requirements are no placeholders in the lineage and
         // between 1 and 9 generations
         const gens = utils.countGenerations(obj);
-        if(gens === 1 || gens > 9){
+        if(gens === 1 || gens > 12){
             return false;
         }
 
