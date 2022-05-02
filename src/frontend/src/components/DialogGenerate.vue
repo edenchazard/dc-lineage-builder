@@ -65,7 +65,7 @@ export default {
                 this.status = {
                     level: 3,
                     message: `At least one of these dragons does not meet the save
-                    requirements. Lineages must be between 1 and 9 
+                    requirements. Lineages must be between 1 and 13 
                     generations large, contain no placeholders or have any
                     ghost breeds. Codes and names must be valid.`
                 };

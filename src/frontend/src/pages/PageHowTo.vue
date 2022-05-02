@@ -32,7 +32,7 @@
           <h4>Online</h4>
           <p>You can save lineages online with Lineage Builder and share them with others but this does come with some limitations. These are:</p>
           <ul class='list'>
-            <li>Must be between 1 and 9 generations.</li>
+            <li>Must be between 1 and 12 generations.</li>
             <li>Must contain no placeholders.</li>
             <li>Names and codes must fit DC's requirements.</li>
           </ul> 
@@ -40,7 +40,7 @@
         </section>
         <section>
           <h4>Export/Import</h4>
-          <p>If your lineage is longer than 9 generations, you can save the tree to a text file by using the export button and importing it that way.</p>
+          <p>If your lineage is longer than 12 generations, you can save the tree to a text file by using the export button and importing it that way.</p>
         </section>
       </section>
       <section>
