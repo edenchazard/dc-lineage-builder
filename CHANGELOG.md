@@ -1,4 +1,16 @@
 # Changelog
+## 3.2.0
+- Added gzip to nginx conf.
+- Modified nginx conf to prevent :8080 redirections.
+- Better mobile support: page should no longer stretch and the breed drop down adapts to the screen size.
+- View page: Link moved to top.
+- Bugfix: Daytime Nocturnes display correctly.
+- Checker generator: breed selectors don't resize anymore.
+- Generated names capitalize both names.
+- Save generation limit changed to 12.
+- Delete children icon change to a pair of scissors.
+- Fix long-standing memory leak with breed selector (another nice benefit.)
+
 ## 3.1.1
 - Add new breeds: Lotaan and Ghanser.
 ## 3.1.0
