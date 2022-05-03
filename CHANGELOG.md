@@ -1,4 +1,6 @@
 # Changelog
+## 3.2.1
+- Patch scrollbar staying hidden after selecting dragon in breed selector.
 ## 3.2.0
 - Added gzip to nginx conf.
 - Modified nginx conf to prevent :8080 redirections.
