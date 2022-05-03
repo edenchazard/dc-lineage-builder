@@ -1,4 +1,5 @@
 module.exports = {
+    /*
     "Aeon Wyvern": {
         genderOnly: false,
         category: "dragon",
@@ -1309,5 +1310,5 @@ module.exports = {
         genderOnly: false,
         category: 'two-head',
         sprites: ['bZeHE', '0', '-1', '48']
-    },
+    },*/
 };

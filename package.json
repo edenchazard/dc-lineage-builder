@@ -3,12 +3,14 @@
     "version": "2.3.1",
     "description": "",
     "scripts": {
-        "process-breeds": "node ./src/process-breeds/process-breeds.js"
+        "process-breeds": "node ./src/process-breeds/process-breeds.js",
+        "process2": "node ./src/process-breeds/process2.js"
     },
     "keywords": [],
     "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
     "license": "MIT",
     "dependencies": {
+        "images": "^3.2.4",
         "koa-bodyparser": "^4.3.0"
     }
 }

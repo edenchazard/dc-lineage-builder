@@ -156,7 +156,7 @@ async function processCSS(src, output){
         // do replacements
         data = data
                 .replace(/\nx/gm, '')
-                .replace(/    width: 36px; height: 48px;/g, '')
+                .replace(/    width: 72px; height: 96px;/g, '')
                 .replace(/url\('css_sprites.png'\) /g, '')
                 .replace(/background/g, 'background-position')
                 .replace(/\{(\r\n|\n|\r)/gm, '{');
