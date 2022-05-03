@@ -160,8 +160,8 @@ function makeCSS(tiles, width){
     for(let image of tiles){
         const fileWithoutPNG = image.slice(0, -4);
 
-        css += `.bg-${fileWithoutPNG}{background-position: ${x}px 0px }`;
-        x += width;
+        css += `.d-${fileWithoutPNG}{background-position: ${x}px 0px } `;
+        x -= width;
     }
 
     return css;
@@ -180,6 +180,10 @@ async function main(){
 
             tiles = await getListOfTiles(locTiles),
             sizing = { width: 36, height: 48 };
+
+        tiles.sort();
+
+        console.log(tiles);
 
         // make and save sprite sheet
         makeSpriteSheet(tiles, sizing, locTiles)

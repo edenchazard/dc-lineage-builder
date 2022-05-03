@@ -1,5 +1,5 @@
 module.exports = {
-    /*"Mint": {
+    "Mint": {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
@@ -321,28 +321,29 @@ module.exports = {
             "Jungle": 'Kg6v',
             "Volcano": 't0kR'
         }
-    },*/
+    },
     "Pink":{
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
-        sprites: ['Uqbx', 'y89t']
+        sprites: ['EtPd', '29AL'] //['Uqbx', 'y89t']
     },
     "Wisteria":{
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: '5rcm'
+        sprites: 'OIk8' //'5rcm'
     },
     "Avin Pygmy":{
         genderOnly: false,
         dimorphism: true,
         category: "pygmy",
-        sprites: ['1BNG', 'TCnM']
+        sprites: ['pzfg', 'YxaA'] //['1BNG', 'TCnM']
     },
     "Lotaan":{
         genderOnly: false,
+        dimorphism: false,
         category: "dragon",
-        sprites: 'L0y1'
+        sprites: '3iLp'//'L0y1'
     }
 };
