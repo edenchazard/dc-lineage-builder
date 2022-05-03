@@ -36,7 +36,7 @@ breedtable.forEach((breed, index) => {
 let GLOBALS ={
     placeholder_breed: {
         name: "Placeholder",
-        image: "unknown",
+        image: "aabb",
         metaData:{
             category: "dragon",
             ghost: false
