@@ -71,6 +71,7 @@ export default {
     position: relative;
 }
 .local{
+    background-size:cover;
     width: 36px;
     height: 48px;
     margin:-1px -1px;
