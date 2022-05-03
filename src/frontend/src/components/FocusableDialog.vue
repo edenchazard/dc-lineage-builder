@@ -54,6 +54,7 @@ export default {
         },
     
         cleanUp(){
+            this.unhideBodyScrollbar();
             document.removeEventListener('click', this.$el.outsideEvent);
         },
 
@@ -63,7 +64,6 @@ export default {
         },
 
         close(){
-            this.unhideBodyScrollbar();
             this.cleanUp();
             this.$emit('close');
         }
