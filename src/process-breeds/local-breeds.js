@@ -3,44 +3,44 @@ module.exports = {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: 'M2HD'
+        sprites: '3KzT'
     },
     "Caligene": {
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
-        sprites: ['VMTW', 'ZCqf']
+        sprites: ['eyFH', 'UROi']
     },
     "Khusa": {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: 'ctyK'
+        sprites: 't4gH'
     },
     "Blazeback": {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: 'TdNT'
+        sprites: 'QlvR'
     },
     "White": {
         genderOnly: false,
         category: "dragon",
-        sprites: 'U9Ei'
+        sprites: 'FVYv'
     },
     "Aether Wyvern": {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: "qiAc"
+        sprites: "YSKU"
     },
     "Witchlight": {
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
         sprites: {
-            'Regular' : ['TCBL', '7h6J'],
-            'Salt Odeen': ['CyAX', 'dohy']
+            'Regular' : ['X36R', 'HcVs'],
+            'Salt Odeen': ['rDCT', 'RXT2']
         }
     },
     "Undead": {
@@ -64,37 +64,37 @@ module.exports = {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: '4KIJ'
+        sprites: 'M90y'
     },
     "Mariner Pygmy": {
         genderOnly: false,
         dimorphism: false,
         category: "pygmy",
-        sprites: '45Fo'
+        sprites: '9IM3'
     },
     "Monarch": {
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
-        sprites: ['98Wv', '5mNH']
+        sprites: ['G0OH', 'G3q8']
     },    
     "Mutamore": {
         genderOnly: 'm',
         dimorphism: false,
         category: "dragon",
-        sprites: 'NQ8h'
+        sprites: 'gJzP'
     },
     "Morphodrake": {
         genderOnly: false,
         dimorphism: false,
         category: "drake",
-        sprites: 'RCsQ'
+        sprites: 'L6Yk'
     },
     "Diamondwing":{
         genderOnly: false,
         dimorphism: false,
         category: 'dragon',
-        sprites: 'IFFm'
+        sprites: 'FSB9'
     },
     
     "Solstice": {
@@ -102,9 +102,9 @@ module.exports = {
         category: "dragon",
         dimorphism: false,
         sprites: {
-            "Day": 'bSHb',
-            "Night": 'oOjh',
-            "Salt Odeen": 'AeLM'
+            "Day": 'fjXK',
+            "Night": 'D02L',
+            "Salt Odeen": 'yRlB'
         }
     },
     "Aegis": {
@@ -112,10 +112,10 @@ module.exports = {
         category: "dragon",
         dimorphism: false,
         sprites: {
-            "Enraged": 'b3Wv',
-            "Neutral": '7OnK',
-            "Enraged Salt Odeen": '8OE8',
-            "Neutral Salt Odeen": 'ILGA'
+            "Enraged": 'BXfr',
+            "Neutral": 'm4m9',
+            "Enraged Salt Odeen": '2gPh',
+            "Neutral Salt Odeen": '5lKd'
         }
     },
     "Garland": {
@@ -123,93 +123,93 @@ module.exports = {
         category: "dragon",
         dimorphism: false,
         sprites: {
-            "Regular": 'I32Y',
-            "Salt Odeen": 'M8Bg'
+            "Regular": 'kfSv',
+            "Salt Odeen": 'kvjh'
         }
     },
     "Tatterdrake": {
         genderOnly: false,
         dimorphism: false,
         category: "drake",
-        sprites: 'fv6s'
+        sprites: '8tBK'
     },
     "Tarantula Hawk Drake": {
         genderOnly: false,
         dimorphism: false,
         category: "drake",
-        sprites: 'AdC9'
+        sprites: 'olE7'
     },
     "Spotted Teal Drake": {
         genderOnly: false,
         dimorphism: false,
         category: "drake",
-        sprites: 'bQqT'
+        sprites: 'XITZ'
     },
     "Snow": {
         genderOnly: 'm',
         dimorphism: false,
         category: "dragon",
-        sprites: 'affj'
+        sprites: 'LEKo'
     },
     "Sandwaste": {
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
-        sprites: ['5pQQ', 'LUZd']
+        sprites: ['oeng', 'WvNI']
     },  
     "Honey Drake": {
         genderOnly: false,
         dimorphism: true,
         category: "drake",
-        sprites: ['VOj6', 'xXLU']
+        sprites: ['qgLL', 'Cj7p']
     },
     "Shumoga": {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
         sprites: {
-            Pale: 'ZGkr',
-            Wild: 'WQxQ'
+            Pale: 'sEsC',
+            Wild: 'otAr'
         }
     },
     "Scymrian Pygmy": {
         genderOnly: false,
         dimorphism: false,
         category: "pygmy",
-        sprites: 'S2JQ'
+        sprites: 'dNrN'
     },
     "Baikala": {
         genderOnly: false,
         dimorphism: true,
         category: "two-head",
         sprites: {
-            "Blue": ['fsAn', 'Lpgn'],
-            "Green": ['NhAv', 'H55p']
+            "Blue": ['H26N', '1h4b'],
+            "Green": ['KLck', 'Daqg']
         }
     },
     "Celestial": {
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
-        sprites: ['AtMD', 'Vp7a']
+        sprites: ['AUjl', 'Oy2k']
     },
     "Fell": {
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
-        sprites: ['TZAh', '637U']
+        sprites: ['bSaE', 'd9XV']
     },
     "Gemshard": {
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
         sprites: {
-            "Sapphire": ['gj3u', 'aCZ4'],
-            "Jade": ['bYEt', 'bajV'],
-            "Ruby": ['ZbvU', '5tXO'],
-            "Amethyst": ['MT8I', '9viU'],
-            "Aqua": ['ln5C', 'F5BT'],
-            "Citrine": ['yZyJ', 'vkSB']
+            "Sapphire": ['wbLD', 'RMeX'],
+            "Jade": ['Evhl', 'XV4A'],
+            "Ruby": ['hc9S', 'KVEm'],
+            "Amethyst": ['e97e', '7qlc'],
+            "Aqua": ['tcrl', '1FJy'],
+            "Citrine":  ['TDk8', 'nmc8']
         }
     },
     "Pyropellis Wyvern": {
@@ -217,133 +217,119 @@ module.exports = {
         dimorphism: false,
         category: "dragon",
         sprites: {
-            Orange: 'ZkP4',
-            Flameless: 'xkRJ',
-            Green: 'BIFB',
-            Aqua: 'zIrJ',
-            Blue: '2Rui',
-            Purple: '7ECf',
+            Orange: 'R4h7',
+            Flameless: 'OJ1Z',
+            Green: 'eDt0',
+            Aqua: 'Bf0N',
+            Blue: 'JfWj',
+            Purple: 'tSmK'
         }
     },
     "Gilded Bloodscale": {
         genderOnly: false,
         dimorphism: true,
         category: "two-head",
-        sprites: ['WeV9', 'U0k3']
+        sprites: ['J4NN', 'JlHA']
     },
     "Howler Drake": {
         genderOnly: false,
         dimorphism: true,
         category: "drake",
-        sprites: ['q5Jd', '37eC']
+        sprites: ['TzqY', 'mv69']
     },
     "Hooktalon": {
         genderOnly: false,
         dimorphism: true,
         category: "two-head",
-        sprites: ['Al9Z', 'cVSL']
+        sprites: ['nv0m', '5F1Y']
     },
     "Nexus": {
         genderOnly: false,
         dimorphism: true,
         category: "two-head",
-        sprites: ['8a71', 'xnrH']
+        sprites: ['Wiov', 'GS46']
     },
     "Tinsel": {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
         sprites: {
-            "Gold": 'zuoM',
-            "Silver": 'UKq2',
-            "Bronze": 'gx1a',
-            "Salt Marrionetta": 'ejMu'
+            "Gold": 'mcux',
+            "Silver": '4gb0',
+            "Bronze":  '6Y80',
+            "Salt Marrionetta": 'OiZa'
         }
     },
     "Wrapping-Wing": {
         genderOnly: 'm',
         dimorphism: false,
         category: "dragon",
-        sprites: "Asu2"
+        sprites: 'WNOu'
     },
     "Grave": {
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
-        sprites: ['VBjr', 'hFv9']
+        sprites: ['Qck1', 'HPH4']
     },
     "Heartstealing": {
         genderOnly: 'f',
         dimorphism: false,
         category: "dragon",
-        sprites: 'Z7dr'
+        sprites: 'pu0s'
     },
     "Aranoa": {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: "0f5s"
+        sprites: 'ixU5'
     },
     "Equinox": {
         genderOnly: false,
         dimorphism: false,
         category: 'dragon',
-        sprites: 'kcIM'
+        sprites: 'Rl8q'
     },
     "Kohraki": {
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
-        sprites: ['nLWz', 'NBkc']
+        sprites: ['puKB', 'TYsV']
     },
     "Sawtooth": {
         genderOnly: false,
         category: 'dragon',
         dimorphism: true,
-        sprites: ['BD1v', '17dz']
+        sprites: ['iQ4U', 'tFwi']
     },
     "Stratos": {
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: 'I86J'
-    },
-    "Tombstone": {
-        genderOnly: false,
-        dimorphism: false,
-        category: "dragon",
-        sprites: {
-            "Generic": 'zNZn',
-            "Alpine": 'S9gW',
-            "Coast": 'UYY0',
-            "Desert": 'Csbc',
-            "Forest": 'hVTE',
-            "Jungle": 'Kg6v',
-            "Volcano": 't0kR'
-        }
+        sprites: '6gX0'
     },
     "Pink":{
         genderOnly: false,
         dimorphism: true,
         category: "dragon",
-        sprites: ['EtPd', '29AL'] //['Uqbx', 'y89t']
+        sprites: ['Uqbx', 'y89t']
     },
     "Wisteria":{
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: 'OIk8' //'5rcm'
+        sprites: '5rcm'
     },
     "Avin Pygmy":{
         genderOnly: false,
         dimorphism: true,
         category: "pygmy",
-        sprites: ['pzfg', 'YxaA'] //['1BNG', 'TCnM']
+        sprites: ['1BNG', 'TCnM']
     },
     "Lotaan":{
         genderOnly: false,
         dimorphism: false,
         category: "dragon",
-        sprites: '3iLp'//'L0y1'
+        sprites: 'L0y1'
     }
 };
