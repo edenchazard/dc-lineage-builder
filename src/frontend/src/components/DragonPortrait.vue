@@ -12,7 +12,7 @@
                 height: (data.image.h == '' ? 'initial' : data.image.h+'px')
             }"
             class='fallback' />
-        <span v-else-if="data.metaData.ghost === false" class='local' :class="'bg-'+data.image" />
+        <span v-else-if="data.metaData.ghost === false" class='local' :class="'d-'+data.image" />
         <img v-else-if="data.metaData.ghost === true" class='ghost' :src="data.image" />
     </span>
 </template>

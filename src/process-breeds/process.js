@@ -152,7 +152,19 @@ function makeSpriteSheet(tiles, sizing, dir){
     return spritesheet;
 }
 
+function CSSMods(mods){
+    const
+        classes = mods.map(mod => '.d-'+mod[0]).join(','),
+        css = mods.map(mod => mod[1]()).join();
+
+    return `${classes}{${css}}`;
+}
+
 function makeCSS(tiles, width){
+    const mods = [
+        ['9IM3', () => "image-rendering: pixelated"]
+    ];
+
     let
         css = '',
         x = 0; // positioning x-axis
@@ -160,10 +172,11 @@ function makeCSS(tiles, width){
     for(let image of tiles){
         const fileWithoutPNG = image.slice(0, -4);
 
-        css += `.d-${fileWithoutPNG}{background-position: ${x}px 0px } `;
+        css += `.d-${fileWithoutPNG}{background-position-x:${x}px}`;
         x -= width;
     }
 
+    //css += CSSMods(mods);
     return css;
 }
 
@@ -171,19 +184,21 @@ async function main(){
     try{
         const
             // where to find the sprites
-            locTiles = __dirname + '/sprites/',
+            locTiles = __dirname + '/sprites72/',
             // where to save the finished spritesheet
             locSpriteSheet = "./src/frontend/src/assets/breed-tiles.png",
             // where to save the css file
             locCSSFile = './src/frontend/src/assets/sprites.css',
             definitionsJSON = "breed-definitions.json",
-
             tiles = await getListOfTiles(locTiles),
-            sizing = { width: 36, height: 48 };
+            sizing = { width: 72, height: 96 },
+            breeds = getBreedsTable();
 
         tiles.sort();
 
-        console.log(tiles);
+        console.log(`${breeds.length} breeds.`);
+        console.log(`${tiles.length} sprites.`);
+        console.log(`Using size: ${sizing.width}w x ${sizing.height}h.`)
 
         // make and save sprite sheet
         makeSpriteSheet(tiles, sizing, locTiles)
@@ -192,12 +207,12 @@ async function main(){
         console.log("... saved sprite sheet.");
 
         // make and save CSS file
-        await fs.writeFile(locCSSFile, makeCSS(tiles, sizing.width), 'utf8');
+        await fs.writeFile(locCSSFile, makeCSS(tiles, sizing.width / 2), 'utf8');
 
         console.log("... saved css stylesheet.");
 
         // make and save the definition file to frontend and backend
-        const json = JSON.stringify(getBreedsTable());
+        const json = JSON.stringify(breeds);
         await Promise.all([
             fs.writeFile('./src/frontend/src/'+definitionsJSON, json, 'utf8'),
             fs.writeFile('./src/backend/'+definitionsJSON, json, 'utf8')
