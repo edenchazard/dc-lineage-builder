@@ -40,7 +40,7 @@ module.exports = {
         category: "dragon",
         sprites: {
             'Regular' : ['X36R', 'HcVs'],
-            'Salt Odeen': ['rDCT', 'RXT2']
+            'Salt Odeen': ['rDCT', 'FaaC']
         }
     },
     "Undead": {
@@ -48,16 +48,17 @@ module.exports = {
         dimorphism: false,
         category: 'dragon',
         sprites: {
-            'Western': 'h9nD',
-            'Eastern': 'Dk1f',
-            'Wyvern': '7fMM',
-            'Lindwyrm': 'PPpj',
-            'Pygmy Western': 'Es3g',
-            'Pygmy Wyvern': 'jr9H',
-            'Drake': '0BLZ',
-            'Two-headed Western': 'BGPP',
-            'Two-headed Sea Serpent': 'Cu1R',
-            'Two-headed Lindwyrm': 'hOAc'
+            'Western': 'Jh2A',
+            //'Wingless': 'fffs',
+            //'Eastern': 'Y6wL',
+            'Wyvern': 'AIzW',
+            'Lindwyrm': 'V9lE',
+            'Pygmy Western': '4zZu',
+            'Pygmy Wyvern': 'GMEu',
+            'Drake': 'g0ZM',
+            'Two-headed Western': 'eQM2',
+            'Two-headed Sea Serpent': 'Dtq9',
+            //'Two-headed Lindwyrm': 'hOAc'
         }
     },
     "Leodon": {
@@ -307,6 +308,20 @@ module.exports = {
         dimorphism: false,
         category: "dragon",
         sprites: '6gX0'
+    },
+    "Tombstone": {
+        genderOnly: false,
+        dimorphism: false,
+        category: "dragon",
+        sprites: {
+            "Generic": 'MCVW',
+            "Alpine": 'kaI8',
+            "Coast": 'YAL4',
+            "Desert": 'lxfa',
+            "Forest": 'ujyA',
+            "Jungle": '0wFy',
+            "Volcano": 'FZ97'
+        }
     },
     "Pink":{
         genderOnly: false,
