@@ -17,7 +17,6 @@
     </span>
 </template>
 <script>
-import '@/assets/sprites.css';
 export default {
     name: 'DragonPortrait',
     props: {
@@ -53,6 +52,17 @@ export default {
 };
 </script>
 <style scoped>
+@import url("../assets/sprites-36x48.css") (-webkit-device-pixel-ratio: 1);
+@import url("../assets/sprites-72x96.css") (-webkit-min-device-pixel-ratio: 1.05);
+
+.local{
+    width: 36px;
+    height: 48px;
+    margin:-1px -1px;
+    display: inline-block;
+    background-size: cover;
+}
+
 .imgbox {
     margin: 0px;
     border: var(--dragonPortraitStyle);
@@ -69,14 +79,6 @@ export default {
 }
 .fallback{
     position: relative;
-}
-.local{
-    background-size:cover;
-    width: 36px;
-    height: 48px;
-    margin:-1px -1px;
-    display: inline-block;
-    background-image: url(../assets/breed-tiles.png);
 }
 .ghost{
     margin:-1px -1px;
