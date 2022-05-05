@@ -129,9 +129,8 @@ function getBreedsTable(){
     return table;
 }
 
-async function getListOfTiles(dir){
-    const files = await fs.readdir(dir);
-    return files;
+async function getTilesInFolder(dir){
+    return fs.readdir(dir);
 }
 
 // combines multiple tiles into a single spritesheet to be used by CSS
@@ -152,19 +151,19 @@ function makeSpriteSheet(tiles, sizing, dir){
     return spritesheet;
 }
 
-function CSSMods(mods){
+/*function CSSMods(mods){
     const
         classes = mods.map(mod => '.d-'+mod[0]).join(','),
         css = mods.map(mod => mod[1]()).join();
 
     return `${classes}{${css}}`;
-}
+}*/
 
-function makeCSS(tiles, width){
-    const mods = [
+function makeCSSSprites(tiles, width){
+/*    const mods = [
         ['9IM3', () => "image-rendering: pixelated"]
     ];
-
+*/
     let
         css = '',
         x = 0; // positioning x-axis
@@ -180,46 +179,117 @@ function makeCSS(tiles, width){
     return css;
 }
 
+async function createResolutionSet({CSSStep, locTiles, locSpriteSheet, locCSSFile, sizing}){
+    const
+        tiles = await getTilesInFolder(locTiles),
+        { width, height } = sizing;
+    tiles.sort();
+
+    console.log(`Creating with sizes: ${width}w x ${height}h.`);
+    console.log(`Found ${tiles.length} sprites in folder ${locTiles}`);
+
+    // make and save sprite sheet
+    makeSpriteSheet(tiles, sizing, locTiles)
+        .save(locSpriteSheet, { quality: 100 });
+    console.log("... saved sprite sheet.");
+
+    // make and save CSS file
+    let css = makeCSSSprites(tiles, CSSStep);
+    css += `.local{background-image: url(../assets/breed-tiles-${width}x${height}.png);}`;
+
+    await fs.writeFile(locCSSFile, css, 'utf8');
+    console.log("... saved css stylesheet.");
+    console.log("Done.")
+}
+
+async function missingSprites(folderA, folderB){
+    const
+        [ spritesA, spritesB ] = await Promise.all([
+            getTilesInFolder(folderA),
+            getTilesInFolder(folderB)
+        ]);
+
+    const missing = (src, target) => {
+        const sprites = [];
+
+        for(let file of src){
+            if(target.indexOf(file) === -1){
+                sprites.push(file);
+            }
+        }
+
+        return sprites;
+    }
+
+    console.log("Checking folders for missing sprites.");
+
+    // sprites missing
+    // check both folders for the missing sprites
+    const
+        a = missing(spritesA, spritesB),
+        b = missing(spritesB, spritesA);
+    let fail = false;
+
+    if(a.length > 0){
+        console.log(`Missing sprites in ${folderA}`);
+        console.log(a.join(', '));
+        fail = true;
+    }
+    if(b.length > 0){
+        console.log(`Missing sprites in ${folderB}`);
+        console.log(b.join(', '));
+        fail = true;
+    }
+
+    return fail;
+}
+
 async function main(){
     try{
-        const
-            // where to find the sprites
-            locTiles = __dirname + '/sprites72/',
-            // where to save the finished spritesheet
-            locSpriteSheet = "./src/frontend/src/assets/breed-tiles.png",
-            // where to save the css file
-            locCSSFile = './src/frontend/src/assets/sprites.css',
+        const            
             definitionsJSON = "breed-definitions.json",
-            tiles = await getListOfTiles(locTiles),
-            sizing = { width: 72, height: 96 },
-            breeds = getBreedsTable();
-
-        tiles.sort();
+            breeds = getBreedsTable(),
+            json = JSON.stringify(breeds),
+            sprites72 = __dirname + '/sprites72/',
+            sprites36 = __dirname + '/sprites36/';
 
         console.log(`${breeds.length} breeds.`);
-        console.log(`${tiles.length} sprites.`);
-        console.log(`Using size: ${sizing.width}w x ${sizing.height}h.`)
 
-        // make and save sprite sheet
-        makeSpriteSheet(tiles, sizing, locTiles)
-            .save(locSpriteSheet, { quality: 100 });
+        const spritesMissing = await missingSprites(sprites72, sprites36);
 
-        console.log("... saved sprite sheet.");
+        if(spritesMissing){
+            console.log("Script cancelled: sprites missing.");
+            process.exit(1);
+        }
+        // 72 x 96 high dpi
+        await createResolutionSet({
+            // where to find the sprites
+            locTiles: sprites72,
+            // where to save the finished spritesheet
+            locSpriteSheet: "./src/frontend/src/assets/breed-tiles-72x96.png",
+            // where to save the css file
+            locCSSFile: './src/frontend/src/assets/sprites-72x96.css',
+            sizing: { width: 72, height: 96 },
+            CSSStep: 36
+        });
 
-        // make and save CSS file
-        await fs.writeFile(locCSSFile, makeCSS(tiles, sizing.width / 2), 'utf8');
-
-        console.log("... saved css stylesheet.");
+        // 36 x 48 
+        await createResolutionSet({
+            locTiles: sprites36,
+            locSpriteSheet: "./src/frontend/src/assets/breed-tiles-36x48.png",
+            locCSSFile: './src/frontend/src/assets/sprites-36x48.css',
+            sizing: { width: 36, height: 48 },
+            CSSStep: 36
+        });
 
         // make and save the definition file to frontend and backend
-        const json = JSON.stringify(breeds);
         await Promise.all([
             fs.writeFile('./src/frontend/src/'+definitionsJSON, json, 'utf8'),
             fs.writeFile('./src/backend/'+definitionsJSON, json, 'utf8')
         ]);
 
         console.log("... copied breed definitions to SPA and Server.");
-        console.log("DONE");
+        console.log("SCRIPT COMPLETE");
     }
     catch(err){
         console.log(err);
