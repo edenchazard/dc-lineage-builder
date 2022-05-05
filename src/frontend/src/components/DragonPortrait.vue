@@ -52,8 +52,18 @@ export default {
 };
 </script>
 <style scoped>
-@import url("../assets/sprites-36x48.css") (-webkit-device-pixel-ratio: 1);
-@import url("../assets/sprites-72x96.css") (-webkit-min-device-pixel-ratio: 1.05);
+/* apply the correct spritesheet depending on pixel ratio */
+@import url("../assets/sprites-36x48.css")
+    (-webkit-device-pixel-ratio: 1),
+    (-moz-device-pixel-ratio: 1),
+    (-o-device-pixel-ratio: 1),
+    (device-pixel-ratio: 1);
+
+@import url("../assets/sprites-72x96.css")
+    (-webkit-min-device-pixel-ratio: 1.05),
+    (-moz-min-device-pixel-ratio: 1.05),
+    (-o-min-device-pixel-ratio: 21/20),
+    (min-device-pixel-ratio: 1.05);
 
 .local{
     width: 36px;
@@ -79,6 +89,7 @@ export default {
 }
 .fallback{
     position: relative;
+    image-rendering:-webkit-optimize-contrast;
 }
 .ghost{
     margin:-1px -1px;
