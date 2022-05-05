@@ -9,7 +9,6 @@
     "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
     "license": "MIT",
     "dependencies": {
-        "images": "^3.2.4",
-        "koa-bodyparser": "^4.3.0"
+        "images": "^3.2.4"
     }
 }
