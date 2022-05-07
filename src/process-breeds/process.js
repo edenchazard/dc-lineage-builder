@@ -136,7 +136,7 @@ async function getTilesInFolder(dir){
 // combines multiple tiles into a single spritesheet to be used by CSS
 function makeSpriteSheet(tiles, sizing, dir){
     const
-        { width, height } = sizing,
+        { width, height, spacing } = sizing,
         sheetWidth = width * tiles.length;
 
     const spritesheet = imagesLib(sheetWidth, height);
@@ -145,7 +145,7 @@ function makeSpriteSheet(tiles, sizing, dir){
 
     for(let image of tiles){
         spritesheet.draw(imagesLib(dir + image), x, 0);
-        x += width;
+        x += width + spacing;
     }
 
     return spritesheet;
@@ -159,7 +159,7 @@ function makeSpriteSheet(tiles, sizing, dir){
     return `${classes}{${css}}`;
 }*/
 
-function makeCSSSprites(tiles, width){
+function makeCSSSprites(tiles, width, spacing){
 /*    const mods = [
         ['9IM3', () => "image-rendering: pixelated"]
     ];
@@ -172,7 +172,7 @@ function makeCSSSprites(tiles, width){
         const fileWithoutPNG = image.slice(0, -4);
 
         css += `.d-${fileWithoutPNG}{background-position-x:${x}px}`;
-        x -= width;
+        x -= width - spacing;
     }
 
     //css += CSSMods(mods);
@@ -182,7 +182,7 @@ function makeCSSSprites(tiles, width){
 async function createResolutionSet({CSSStep, locTiles, locSpriteSheet, locCSSFile, sizing}){
     const
         tiles = await getTilesInFolder(locTiles),
-        { width, height } = sizing;
+        { width, height, spacing } = sizing;
     tiles.sort();
 
     console.log(`Creating with sizes: ${width}w x ${height}h.`);
@@ -194,7 +194,7 @@ async function createResolutionSet({CSSStep, locTiles, locSpriteSheet, locCSSFil
     console.log("... saved sprite sheet.");
 
     // make and save CSS file
-    let css = makeCSSSprites(tiles, CSSStep);
+    let css = makeCSSSprites(tiles, CSSStep, spacing);
     css += `.local{background-image: url(../assets/breed-tiles-${width}x${height}.png);}`;
 
     await fs.writeFile(locCSSFile, css, 'utf8');
@@ -269,7 +269,7 @@ async function main(){
             locSpriteSheet: "./src/frontend/src/assets/breed-tiles-72x96.png",
             // where to save the css file
             locCSSFile: './src/frontend/src/assets/sprites-72x96.css',
-            sizing: { width: 72, height: 96 },
+            sizing: { width: 72, height: 96, spacing: 0},
             CSSStep: 36
         });
 
@@ -278,7 +278,7 @@ async function main(){
             locTiles: sprites36,
             locSpriteSheet: "./src/frontend/src/assets/breed-tiles-36x48.png",
             locCSSFile: './src/frontend/src/assets/sprites-36x48.css',
-            sizing: { width: 36, height: 48 },
+            sizing: { width: 36, height: 48, spacing: 0 },
             CSSStep: 36
         });
 
