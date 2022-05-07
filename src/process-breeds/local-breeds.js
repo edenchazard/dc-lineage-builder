@@ -49,16 +49,21 @@ module.exports = {
         category: 'dragon',
         sprites: {
             'Western': 'Jh2A',
-            //'Wingless': 'fffs',
-            //'Eastern': 'Y6wL',
+            'Wingless': 'Tfzh',
+            //'Eastern': 'NamH',
+            //'Wyrm': 'JZDi',
+            //'Amphiptere': 'CuMU',
             'Wyvern': 'AIzW',
             'Lindwyrm': 'V9lE',
             'Pygmy Western': '4zZu',
             'Pygmy Wyvern': 'GMEu',
+            'Pygmy Eastern': 'dNFf',
+            'Pygmy Lindwyrm': 'fh3p',
             'Drake': 'g0ZM',
             'Two-headed Western': 'eQM2',
             'Two-headed Sea Serpent': 'Dtq9',
-            //'Two-headed Lindwyrm': 'hOAc'
+            'Two-headed Lindwyrm': 'zISF',
+            'Two-headed wyrm': 'J6T6'
         }
     },
     "Leodon": {
