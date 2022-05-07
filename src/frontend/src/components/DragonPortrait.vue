@@ -54,10 +54,10 @@ export default {
 <style scoped>
 /* apply the correct spritesheet depending on pixel ratio */
 @import url("../assets/sprites-36x48.css")
-    (-webkit-device-pixel-ratio: 1),
-    (-moz-device-pixel-ratio: 1),
-    (-o-device-pixel-ratio: 1),
-    (device-pixel-ratio: 1);
+    (-webkit-min-device-pixel-ratio: 0),
+    (-moz-min-device-pixel-ratio: 0),
+    (-o-min-device-pixel-ratio: 0),
+    (min-device-pixel-ratio: 0);
 
 @import url("../assets/sprites-72x96.css")
     (-webkit-min-device-pixel-ratio: 1.05),
@@ -71,6 +71,7 @@ export default {
     margin:-1px -1px;
     display: inline-block;
     background-size: cover;
+    image-rendering: -webkit-optimize-contrast;
 }
 
 .imgbox {

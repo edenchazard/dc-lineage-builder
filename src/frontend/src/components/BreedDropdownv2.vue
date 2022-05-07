@@ -4,7 +4,7 @@
         aria-description="Select a breed."
         @close="close">
         <template v-slot:title>
-            Choose a breed
+            <h2>Choose a breed</h2>
         </template>
         <template v-slot:content>
             <section class='recently-used'>
@@ -15,6 +15,12 @@
             </section>
             <section class='breeds'>
                 <h3>Breeds</h3>
+                <div class='applied-tags'>
+                    <label>Showing:</label>
+                    <TagList
+                        :value="tagStates"
+                        @updated="tagStates = [...$event]" />
+                </div>
                 <div class='search'>
                     <label for='mates-search'><font-awesome-icon icon="search" /> Filter:</label>
                     <input
@@ -26,6 +32,7 @@
                 <BreedDropdownResults
                     :search="searchString"
                     :breeds="breeds"
+                    :tags="enabledTags"
                     @selected="selected" />
             </section>
         </template>
@@ -35,15 +42,17 @@
 import BreedDropdownResults from '@/components/BreedDropdownResults';
 import BreedDropdownReuse from '@/components/BreedDropdownReuse';
 import FocusableDialog from '@/components/FocusableDialog';
+import TagList from '@/components/ui/TagList';
 
-// I know this is hacky but this is the easiest and most optimal solution
-// I could think of
+const SESSION_KEY = 'session';
+
 export default {
     name: 'BreedDropdownv2',
     components: {
         BreedDropdownResults,
         BreedDropdownReuse,
-        FocusableDialog
+        FocusableDialog,
+        TagList
     },
     props: {
         breeds: Array,
@@ -51,8 +60,16 @@ export default {
     },
 
     data() {
+        // if we have an already stored set of tags,
+        // use that instead
+        const
+            availableTags = ['dragon', 'drake', 'pygmy', 'two-head'],
+            defaultTags = availableTags.map(tag => ({ name: tag, active: true })),
+            tagStates = this.getSessionTagStates() || defaultTags;
+
         return {
-            searchString: ""
+            searchString: "",
+            tagStates
         }
     },
 
@@ -61,13 +78,34 @@ export default {
         this.$refs.matesSearch.focus();
     },
 
+    // save the enabled tags for duration of session
+    watch: {
+        tagStates(tags){
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify(tags));
+        }
+    },
+
+    computed: {
+        enabledTags(){
+            return this.tagStates
+                .filter(tag => tag.active)
+                .map(tag => tag.name);
+        }
+    },
+
     methods: {
         selected(breed){
             this.$emit('selected', breed);
             this.close();
         },
+
         close(){
             this.$emit('close');
+        },
+
+        getSessionTagStates(){
+            const session = sessionStorage.getItem(SESSION_KEY);
+            return session ? JSON.parse(session) : null;
         }
     }
 };
@@ -86,6 +124,12 @@ export default {
     display: flex;
     flex-direction: column;
 }
+.applied-tags{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+}
 .search{
     display: flex;
     align-items: flex-start;
@@ -95,6 +139,9 @@ export default {
     flex:1;
     margin-left: 5px;
     width: 100%;
+}
+h2{
+    font-size: 16px;
 }
 h3{
     margin:0px;

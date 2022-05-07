@@ -21,7 +21,8 @@ export default {
     components: { BreedGrid },
     props: {
         breeds: Array,
-        search: String
+        search: String,
+        tags: Array
     },
 
     data() {
@@ -29,7 +30,7 @@ export default {
     },
 
     watch:{
-        'search'(){
+        search(){
             // scrolls the results back to the top to prevent
             // the view port being stuck further down
            this.$nextTick(() => this.$el.scrollTop = 0);
@@ -40,20 +41,30 @@ export default {
         filteredBreeds() {
             // if the search string is empty, return the whole 
             // list
-            let search = this.search.toLowerCase().trim();
+            const search = this.search.toLowerCase().trim();
+
+            // if we have tags, make sure to filter them
+            const breeds = !this.tags ? this.breeds : this.breeds.filter(breed =>
+                this.tags.indexOf(breed.metaData.category) > -1
+            );
+    
             if(search == ""){
-                return this.breeds;
+                return breeds;
             }
             else{
                 // we make two arrays, one for primary results (the search matches
                 // the beginning of the breed name, and secondary results, where
                 // the breed name includes the search term somewhere.
-                let primaryResults = [];
-                let secondaryResults = [];
-                for(let breed of this.breeds){
-                    let prettyName = breed.name.toLowerCase().trim();
-                    let position = prettyName.indexOf(search);
-                    if(position == 0){
+                let
+                    primaryResults = [],
+                    secondaryResults = [];
+
+                for(let breed of breeds){
+                    const
+                        prettyName = breed.name.toLowerCase().trim(),
+                        position = prettyName.indexOf(search);
+
+                    if(position === 0){
                         primaryResults.push(breed);
                     }
                     else if(position > -1){
