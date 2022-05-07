@@ -1,4 +1,9 @@
 # Changelog
+## 3.3.0
+- Added 72x96 tile local breed support for high density displays.
+- New breed tag filter.
+- Updates to breed definitions.
+- Added image-rendering: -webkit-optimised
 ## 3.2.1
 - Patch scrollbar staying hidden after selecting dragon in breed selector.
 ## 3.2.0
