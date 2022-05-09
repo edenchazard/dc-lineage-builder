@@ -1,4 +1,7 @@
 # Changelog
+## 3.3.1
+- Performance improvements - removed unnecessary DOM elements.
+- Fix bug with view page showing the import link and copy when lineage not available.
 ## 3.3.0
 - Added 72x96 tile local breed support for high density displays.
 - New breed tag filter.
