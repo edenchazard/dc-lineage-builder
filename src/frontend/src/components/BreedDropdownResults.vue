@@ -9,7 +9,7 @@
         <div
             v-else
             class="no-results">
-            There are no breeds that match this search.
+            {{noResultsText}}
         </div>
     </div>
 </template>
@@ -22,7 +22,8 @@ export default {
     props: {
         breeds: Array,
         search: String,
-        tags: Array
+        tags: Array,
+        noResultsText: String
     },
 
     data() {
