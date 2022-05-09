@@ -1,56 +1,62 @@
 <template>
     <li>
         <div class='tile'>
-            <div class='top'>
-                <button class='left' title='Add descendant'
-                    v-if="nodesFromRoot === 0"
-                    @click="addDescendant"><font-awesome-icon icon="arrow-left" /></button>
-                <button class='left' title='Remove descendants'
-                    v-if="nodesFromRoot > 0"
-                    @click="removeDescendants"><font-awesome-icon class='delete-children' icon="cut" /></button>
+            <div>
                 <BreedDropdownv2
                     v-if="!disabled && showBreedSelector===true"
                     :breeds="availableBreeds"
                     :dragon="{gender, breed}"
                     @selected="changeBreed"
                     @close="showBreedSelector=false" />
+                <button class='left control' title='Add descendant'
+                    v-if="nodesFromRoot === 0"
+                    @click="addDescendant"><font-awesome-icon icon="arrow-left" /></button>
+                <button class='left control' title='Remove descendants'
+                    v-if="nodesFromRoot > 0"
+                    @click="removeDescendants"><font-awesome-icon class='delete-children' icon="cut" /></button>
                 <DragonPortrait
                     class="tile-portrait"
                     :class="{ 'active': !disabled, 'disabled': disabled }"
                     :data="getBreedFromData"
                     @click="showBreedSelector=true" />
-                <button class='right' title='Remove ancestors'
+                <button class='right control' title='Remove ancestors'
                     v-if="hasParents"
                     @click="deleteAncestors"><font-awesome-icon icon="minus" /></button>
                 <button
-                    class='right2' title='Switch parents'
+                    class='right2 control' title='Switch parents'
                     v-if="hasParents"
                     @click="switchParents"><font-awesome-icon icon="sync-alt" /></button>
-                <button class='right' title='Add ancestors'
+                <button class='right control' title='Add ancestors'
                     v-if="!hasParents" 
                     @click="addAncestors"><font-awesome-icon icon="arrow-right" /></button>
             </div>
+            <span class='labelWarning'
+                v-if='labelWarning'
+                title="Warning: Label does not meet DC requirements"><font-awesome-icon icon="exclamation-triangle" />
+            </span>
             <DragonLabelField
                 :value="(display === 1 ? code : name)"
                 :display="display"
                 @changed="labelChanged"
                 :disabled="disabled" />
-            <span class='labelWarning'
-                v-show='labelWarning'
-                title="Warning: Label does not meet DC requirements"><font-awesome-icon icon="exclamation-triangle" /></span>
-            <span class='spacer'></span>
-            <div class='toolbar'>
-                <button title="Switch gender"
-                    v-if="nodesFromRoot === 0"
-                    @click="switchGender"><font-awesome-icon icon="venus-mars" /></button>
-                <button class='switchLabelButton' title='Switch name or code'
-                    @click="switchLabel"><font-awesome-icon icon="font" /></button>
-                <button title='Copy ancestors'
-                    v-if="hasParents"
-                    @click="copyBranch"><font-awesome-icon icon="clone" /></button>
-                <button title="Paste ancestors"
-                    @click="pasteBranch"><font-awesome-icon icon="paste" /></button>
-            </div>
+            <button
+                class='control'
+                title="Switch gender"
+                v-if="nodesFromRoot === 0"
+                @click="switchGender"><font-awesome-icon icon="venus-mars" /></button>
+            <button
+                class='control switchLabel'
+                title='Switch name or code'
+                @click="switchLabel"><font-awesome-icon icon="font" /></button>
+            <button
+                class='control'
+                title='Copy ancestors'
+                v-if="hasParents"
+                @click="copyBranch"><font-awesome-icon icon="clone" /></button>
+            <button
+                class='control'
+                title="Paste ancestors"
+                @click="pasteBranch"><font-awesome-icon icon="paste" /></button>
         </div>
         <ul v-if="hasParents">
             <Dragon
@@ -353,31 +359,14 @@ button {
 button svg{
     padding:0px;
 }
-.popper{
-    z-index: 40;
-    width: fit-content;
-}
 .active{
     cursor: pointer;
 }
 </style>
 <style>
-.tile .spacer{
+.hideEdit .labelWarning, .hideEdit .control,
+.hideLabels .dragon-label, .hideLabels .switchLabel,
+.hideLabels .labelWarning {
   display: none;
-}
-.hideLabels .dragon-label, .hideEdit .toolbar, .hideEdit .labelWarning,
-.hideLabels .switchLabelButton, .hideLabels .labelWarning,
-.hideEdit .left, .hideEdit .right, .hideEdit .right2{
-  display: none;
-}
-/* spacer fixes a UI problem when labels are disabled
-  and prevents the tree from collapsing because there's
-  no width elements */
-.hideLabels .spacer{
-    width: 120px;
-    box-sizing: border-box;
-    position: relative;
-    display: block;
-    height: 1px;
 }
 </style>
