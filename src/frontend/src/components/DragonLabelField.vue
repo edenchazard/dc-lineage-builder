@@ -1,6 +1,6 @@
 <template>
     <span class='dragon-label'>
-        <label v-show="!editing">
+        <label v-if="!editing">
             <span
                 v-if="display == 1"
                 @click="clicked"
@@ -10,7 +10,7 @@
                 @click="clicked"
                 class="name">{{value}}</span>
         </label>
-        <span v-show="editing" >
+        <span v-else>
             <input ref="inputel"
                 :value="value"
                 @keydown.enter="finishedEditing"
