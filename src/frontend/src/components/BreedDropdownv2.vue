@@ -33,6 +33,7 @@
                     :search="searchString"
                     :breeds="breeds"
                     :tags="enabledTags"
+                    noResultsText="There are no breeds that match this criteria."
                     @selected="selected" />
             </section>
         </template>
