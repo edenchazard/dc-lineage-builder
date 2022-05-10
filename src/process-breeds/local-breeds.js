@@ -57,10 +57,12 @@ module.exports = {
             'Lindwyrm': 'V9lE',
             'Pygmy Western': '4zZu',
             'Pygmy Wyvern': 'GMEu',
+            'Pygmy Wyrm': 'pwzx',
             'Pygmy Eastern': 'dNFf',
             'Pygmy Lindwyrm': 'fh3p',
             'Drake': 'g0ZM',
             'Two-headed Western': 'eQM2',
+            'Two-headed Eastern': 'eszx',
             'Two-headed Sea Serpent': 'Dtq9',
             'Two-headed Lindwyrm': 'zISF',
             'Two-headed wyrm': 'J6T6'
