@@ -27,7 +27,8 @@ const dragonBuilder = {
             parents: { },
             breed: GLOBALS.placeholder_breed.name,
             gender: "m",
-            display: 1
+            display: 1,
+            selected: false
         };
     
         Object.assign(defaults, changes);
@@ -41,7 +42,8 @@ const dragonBuilder = {
             breed: dragon.breed,
             name: dragon.name,
             parents: dragon.parents,
-            display: dragon.display
+            display: dragon.display,
+            selected: false
         }
     }
 };
