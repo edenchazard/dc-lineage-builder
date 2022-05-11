@@ -16,9 +16,14 @@
                     @click="removeDescendants"><font-awesome-icon class='delete-children' icon="cut" /></button>
                 <DragonPortrait
                     class="tile-portrait"
-                    :class="{ 'active': !disabled, 'disabled': disabled }"
+                    :class="{
+                        'active': !disabled,
+                        'disabled': disabled,
+                        'selected': selected
+                    }"
                     :data="getBreedFromData"
-                    @click="showBreedSelector=true" />
+                    @longpress="longpress"
+                    @click="click" />
                 <button class='right control' title='Remove ancestors'
                     v-if="hasParents"
                     @click="deleteAncestors"><font-awesome-icon icon="minus" /></button>
@@ -87,7 +92,7 @@ export default {
     name: 'Dragon',
     data(){
         return {
-            showBreedSelector: false
+            showBreedSelector: false,
         }
     },
 
@@ -102,7 +107,11 @@ export default {
             default: 1, //1: code 0: name
             type: Number
         },
-        nodesFromRoot: Number
+        nodesFromRoot: Number,
+        selected: {
+            default: false,
+            type: Boolean
+        }
     },
 
     components: { DragonLabelField, BreedDropdownv2, DragonPortrait },
@@ -161,7 +170,7 @@ export default {
             const invertedGender = this.gender === 'f' ? 'm' : 'f';
 
             // Handle placeholder
-            if(this.breed == "Placeholder"){
+            if(this.breed === "Placeholder"){
                 this.$emit("update:gender", invertedGender);
                 this.$emit("update:breed", GLOBALS.placeholder_breed.name);
                 //await this.$store.dispatch('removeFromUsedBreeds', this.breed);
@@ -261,6 +270,27 @@ export default {
 
         switchLabel(){
             this.$emit('update:display', this.display == 1 ? 0 : 1);
+        },
+
+        longpress(){
+            if(!this.$store.state.longPressing){
+                this.$store.commit('beginLongPressing');
+            }
+
+            this.$emit('update:selected', !this.selected);
+        },
+
+        click(){
+            console.log('click')
+            console.log('yo', this.$store.state.longPressing)
+            if(this.$store.state.longPressing){
+                this.$store.commit('beginLongPressing');
+                this.$emit('updated:selected', true);
+            }
+            
+            else{
+                this.showBreedSelector = true;
+            }
         }
     }
 }
@@ -362,6 +392,9 @@ button svg{
 }
 .active{
     cursor: pointer;
+}
+.selected{
+    background:red;
 }
 </style>
 <style>

@@ -29,6 +29,9 @@
           </button>
         </div>
       </div>
+      <div v-show="tree !== null && hasSelected">
+        With selected:
+      </div>
       <Lineage
         class="builder"
         v-if="tree !== null"
@@ -117,6 +120,31 @@ export default {
   beforeDestroy(){
     this.tree = null;
     this.$store.dispatch('setUsedBreeds', []);
+  },
+
+  computed: {
+    hasSelected(){
+      /*let selected = false;
+
+      const f = (dragon) => {
+        if(dragon.selected){
+          selected = true;
+          return;
+        }
+        else{
+          if(dragon.parents.m){
+            f(dragon.parents.f);
+            f(dragon.parents.m);
+          }
+        }
+      }
+
+      f(this.tree);
+      return selected;*/
+      console.log(this.$store.state.longPressing)
+      return this.$store.state.longPressing > 0;
+    }
+    
   },
 
   methods: {

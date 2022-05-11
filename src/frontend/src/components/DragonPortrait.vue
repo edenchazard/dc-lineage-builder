@@ -2,7 +2,10 @@
     <span
         :title="data.name"
         class="imgbox imgbox-fullsize"
-        @click="$emit('click')">
+        @mousedown="press"
+        @mouseup="click"
+        @touchstart="press"
+        @touchend="click">
         <img
             v-if="data.image.x !== undefined"
             :src="data.image.link"
@@ -22,7 +25,85 @@ export default {
     props: {
         data: Object,
         gen: Number
-    }/*,
+    },
+
+    data(){
+        return {
+            longPressActivated: false
+        }
+    },
+    
+    methods: {
+        
+        press(){
+            console.log('press')
+            const pressTrigger = 300;
+            
+            this.longPress = setTimeout(() => {
+                this.$emit('longpress');
+                this.longPressed = true;
+
+                console.log('longpress end')
+            }, pressTrigger);
+        },
+
+        click(){
+            clearTimeout(this.longPress);
+
+            if(!this.longPressed){
+                this.$emit('click');
+            }
+            
+            this.longPressed = false;
+        }
+        /*press(){
+            console.log('press')
+            const pressTrigger = 300;
+
+            if(!this.$store.state.longPressing){
+                this.longPress = setTimeout(() => {
+                    this.$store.commit('beginLongPressing');
+                    this.longPressActivated = true;
+                    console.log('longpress')
+                    this.$emit('longpress');
+                }, pressTrigger);
+            }
+            else{
+                this.$emit('longpress');
+            }
+        },
+
+        // ignore clicks when in selecting mode
+        click(){
+            const inSelectionMode = this.$store.state.longPressing;
+
+            if(inSelectionMode){
+                if(this.longPressActivated){
+                    this.$store.commit('endLongPressing');
+                    this.$emit('unselected');
+                }
+                else{
+                    this.$store.commit('beginLongPressing');
+                    this.$emit('selected');
+                }
+    
+                return;
+            }
+
+            else if(this.selected){
+                this.$emit('unselected');
+                console.log("longpress end");
+            }
+
+            else{
+                this.$emit('click');
+            }
+
+            clearTimeout(this.longPress);
+        }*/
+    }
+    
+    /*,
     computed:{
         // determines whether to provide a full size image or a small image
         calculated: function(){
