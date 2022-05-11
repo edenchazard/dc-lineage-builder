@@ -29,8 +29,11 @@
           </button>
         </div>
       </div>
-      <div v-show="tree !== null && hasSelected">
-        With selected:
+      <div
+        v-show="tree !== null && itemsSelected"
+        class="with-select">
+        With selected ({{itemsSelected}}):
+        <button @click="unselectAll">Unselect all</button>
       </div>
       <Lineage
         class="builder"
@@ -123,26 +126,9 @@ export default {
   },
 
   computed: {
-    hasSelected(){
-      /*let selected = false;
-
-      const f = (dragon) => {
-        if(dragon.selected){
-          selected = true;
-          return;
-        }
-        else{
-          if(dragon.parents.m){
-            f(dragon.parents.f);
-            f(dragon.parents.m);
-          }
-        }
-      }
-
-      f(this.tree);
-      return selected;*/
-      console.log(this.$store.state.longPressing)
-      return this.$store.state.longPressing > 0;
+    itemsSelected(){
+      console.log('count', this.$store.state.selectionCount)
+      return this.$store.state.selectionCount;
     }
     
   },
@@ -174,6 +160,11 @@ export default {
     replaceRoot(node){
       this.$store.dispatch('setUsedBreeds', utils.countBreeds(node));
       this.tree = node;
+    },
+  
+    unselectAll(){
+      utils.forEveryDragon(this.tree, (dragon) => dragon.selected = false);
+      this.$store.commit('resetSelectionCount');
     }
   }
 }
@@ -203,7 +194,10 @@ export default {
   border:none;
   width:100%;
 }
-
+.with-select{
+  margin:20px auto;
+  max-width: 800px;
+}
 @media only screen and (min-width: 768px) {
   .toolbar {
     padding: 0px;

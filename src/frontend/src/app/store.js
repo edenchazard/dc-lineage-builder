@@ -9,9 +9,8 @@ const store = new Vuex.Store({
         stats:{
             usedBreeds: []
         },
-        selectedID: null,
         lastID: 0,
-        longPressing: false
+        selectionCount: 0
     },
 
     actions:{
@@ -82,12 +81,16 @@ const store = new Vuex.Store({
     },
 
     mutations: {
-        beginLongPressing(state){
-            state.longPressing += 1;
+        resetSelectionCount(state){
+            state.selectionCount = 0;
         },
 
-        endLongPressing(state){
-            state.longPressing -= 1;
+        upSelectionCount(state){
+            state.selectionCount++;
+        },
+
+        downSelectionCount(state){
+            state.selectionCount--;
         },
     
         acquireID(state){

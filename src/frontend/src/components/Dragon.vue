@@ -273,21 +273,23 @@ export default {
         },
 
         longpress(){
-            if(!this.$store.state.longPressing){
-                this.$store.commit('beginLongPressing');
+            if(!this.$store.state.selectionCount){
+                this.$store.commit('upSelectionCount');
+                this.$emit('update:selected', true);
             }
-
-            this.$emit('update:selected', !this.selected);
         },
 
         click(){
-            console.log('click')
-            console.log('yo', this.$store.state.longPressing)
-            if(this.$store.state.longPressing){
-                this.$store.commit('beginLongPressing');
-                this.$emit('updated:selected', true);
+            if(this.$store.state.selectionCount){
+                if(!this.selected){
+                    this.$store.commit('upSelectionCount');
+                    this.$emit('update:selected', true);
+                }
+                else{
+                    this.$store.commit('downSelectionCount');
+                    this.$emit('update:selected', false);
+                }
             }
-            
             else{
                 this.showBreedSelector = true;
             }
@@ -394,7 +396,8 @@ button svg{
     cursor: pointer;
 }
 .selected{
-    background:red;
+    background:#89CFF0;
+    border:1px dashed #246BCE;
 }
 </style>
 <style>
