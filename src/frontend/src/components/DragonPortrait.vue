@@ -26,35 +26,27 @@ export default {
         data: Object,
         gen: Number
     },
-
-    data(){
-        return {
-            longPressActivated: false
-        }
-    },
     
     methods: {
-        
         press(){
             console.log('press')
             const pressTrigger = 300;
             
             this.longPress = setTimeout(() => {
                 this.$emit('longpress');
-                this.longPressed = true;
 
                 console.log('longpress end')
+                clearTimeout(this.longPress);
+                this.longPress = null;
             }, pressTrigger);
         },
 
         click(){
-            clearTimeout(this.longPress);
-
-            if(!this.longPressed){
-                this.$emit('click');
+            if(this.longPress){
+                clearTimeout(this.longPress);
+                this.longPress = null;
             }
-            
-            this.longPressed = false;
+            this.$emit('click');
         }
         /*press(){
             console.log('press')
