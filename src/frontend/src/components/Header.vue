@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import * as ls from "local-storage";
+const ls = localStorage;
 
 export default {
     props: {
@@ -56,7 +56,7 @@ export default {
   
   mounted(){
     // set default skin if no skin set
-    this.setSkin(ls.get('skin') || 'skin-default');
+    this.setSkin(ls.getItem('skin') || 'skin-default');
   },
 
   methods:{
@@ -68,7 +68,7 @@ export default {
         return;
       }
 
-      ls.set('skin', to);
+      ls.setItem('skin', to);
       this.$emit('skinChanged', to);
     }
   }

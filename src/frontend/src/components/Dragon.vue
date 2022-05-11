@@ -80,7 +80,8 @@ import DragonLabelField from '@/components/DragonLabelField';
 import BreedDropdownv2 from '@/components/BreedDropdownv2'
 import DragonPortrait from "@/components/DragonPortrait";
 import { GLOBALS, utils, validators, dragonBuilder } from '@/app/bundle';
-import * as ls from "local-storage";
+
+const ls = localStorage;
 
 export default {
     name: 'Dragon',
@@ -117,12 +118,12 @@ export default {
 
         getBreedFromData(){
             // todo refactor
-            let o = (this.gender == 'm' ? GLOBALS.breeds.males : GLOBALS.breeds.females);
+            const o = (this.gender == 'm' ? GLOBALS.breeds.males : GLOBALS.breeds.females);
             // return the breed data for this breed name or if no match, the placeholder
             return o.find((v) => v.name === this.breed) || GLOBALS.placeholder_breed;
         },
         labelWarning(){
-           let a = (this.display == 1 ? validators.code(this.code) : validators.name(this.name));
+           const a = (this.display == 1 ? validators.code(this.code) : validators.name(this.name));
            return !a;
         }
     },
@@ -130,7 +131,7 @@ export default {
     methods: {
         async switchParents(){
             // make a new branch
-            let newParents = {
+            const newParents = {
                 m: {...this.parents.f, gender: 'm'},
                 f: {...this.parents.m, gender: 'f'}
             };
@@ -169,7 +170,7 @@ export default {
             // Handling a non-placeholder
             else{
                 // First, check that the current breed can be gender flipped
-                let breedData = utils.getBreedData(this.breed);
+                const breedData = utils.getBreedData(this.breed);
 
                 if(!breedData.genderOnly){
                     // This breed has both male and female genders, so flipping isn't an issue.
@@ -194,7 +195,7 @@ export default {
         },
 
         async pasteBranch(){
-            let paste = ls.get('clipboard');
+            const paste = JSON.parse(ls.getItem('clipboard')) || null;
 
             // check there's data available
             // todo add an integrity check
@@ -219,7 +220,7 @@ export default {
 
         copyBranch(){
             if(this.hasParents){
-                ls.set('clipboard',this.parents );
+                ls.setItem('clipboard', JSON.stringify(this.parents));
             }
         },
 
