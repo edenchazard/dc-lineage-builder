@@ -2,10 +2,8 @@
     <span
         :title="data.name"
         class="imgbox imgbox-fullsize"
-        @mousedown="press"
-        @mouseup="click"
-        @touchstart="press"
-        @touchend="click">
+        @mousedown.left="press"
+        @mouseup.left="click">
         <img
             v-if="data.image.x !== undefined"
             :src="data.image.link"
@@ -20,6 +18,7 @@
     </span>
 </template>
 <script>
+let timeout = null;
 export default {
     name: 'DragonPortrait',
     props: {
@@ -29,70 +28,21 @@ export default {
     
     methods: {
         press(){
-            console.log('press')
             const pressTrigger = 300;
-            
-            this.longPress = setTimeout(() => {
+            timeout = setTimeout(() => {
+                console.log('longpress click')
+                timeout = null;
                 this.$emit('longpress');
-
-                console.log('longpress end')
-                clearTimeout(this.longPress);
-                this.longPress = null;
             }, pressTrigger);
         },
 
         click(){
-            if(this.longPress){
-                clearTimeout(this.longPress);
-                this.longPress = null;
-            }
-            this.$emit('click');
-        }
-        /*press(){
-            console.log('press')
-            const pressTrigger = 300;
-
-            if(!this.$store.state.longPressing){
-                this.longPress = setTimeout(() => {
-                    this.$store.commit('beginLongPressing');
-                    this.longPressActivated = true;
-                    console.log('longpress')
-                    this.$emit('longpress');
-                }, pressTrigger);
-            }
-            else{
-                this.$emit('longpress');
-            }
-        },
-
-        // ignore clicks when in selecting mode
-        click(){
-            const inSelectionMode = this.$store.state.longPressing;
-
-            if(inSelectionMode){
-                if(this.longPressActivated){
-                    this.$store.commit('endLongPressing');
-                    this.$emit('unselected');
-                }
-                else{
-                    this.$store.commit('beginLongPressing');
-                    this.$emit('selected');
-                }
-    
-                return;
-            }
-
-            else if(this.selected){
-                this.$emit('unselected');
-                console.log("longpress end");
-            }
-
-            else{
+            if(timeout){
                 this.$emit('click');
             }
-
-            clearTimeout(this.longPress);
-        }*/
+            clearTimeout(timeout);
+            timeout = null;
+        }
     }
     
     /*,
@@ -152,6 +102,7 @@ export default {
     border: var(--dragonPortraitStyle);
     overflow: hidden;
     display: inline-block;
+    user-select: none;
 }
 .imgbox-fullsize{
     width: 34px;
