@@ -213,23 +213,33 @@ export default {
 
                 // remove what we had
                 if(this.hasParents){
-                    await this.$store.dispatch('removeFromUsedBreeds', utils.countBreeds([this.parents.m, this.parents.f]));
+                    await this.$store.dispatch('removeFromUsedBreeds', utils.countBreeds([
+                        this.parents.m,
+                        this.parents.f
+                    ]));
                 }
 
                 // update breed counts added thru paste
-                await this.$store.dispatch('addToUsedBreeds', utils.countBreeds([paste.m, paste.f]));
+                await this.$store.dispatch('addToUsedBreeds', utils.countBreeds([
+                    paste.m,
+                    paste.f
+                ]));
             }
-            /*
-            for(const dragonProp in paste){
-                const value = paste[dragonProp];
-                this.$emit(`update:${dragonProp}`, value);
-            }
-            */
         },
 
         copyBranch(){
             if(this.hasParents){
-                ls.setItem('clipboard', JSON.stringify(this.parents));
+                // I could change how utils.fED works but this is easier
+                const noSelect = {
+                    parents: {
+                        m: { ...this.parents.m },
+                        f: { ...this.parents.f }
+                    }
+                };
+        
+                utils.forEveryDragon(noSelect, (dragon) => dragon.selected = false);
+
+                ls.setItem('clipboard', JSON.stringify({ ... noSelect.parents }));
             }
         },
 
@@ -260,7 +270,10 @@ export default {
         // deletes this node and ancestors
         async deleteAncestors(){
             this.$emit('update:parents', {});
-            await this.$store.dispatch('removeFromUsedBreeds', utils.countBreeds([this.parents.m, this.parents.f]));
+            await this.$store.dispatch('removeFromUsedBreeds', utils.countBreeds([
+                this.parents.m,
+                this.parents.f
+            ]));
         },
 
         labelChanged(value){
@@ -274,12 +287,16 @@ export default {
 
         longpress(){
             if(!this.$store.state.selectionCount){
-                this.$store.commit('upSelectionCount');
-                this.$emit('update:selected', true);
+                console.log('yes2')
+                if(!this.selected){
+                    this.$emit('update:selected', true);
+                    this.$store.commit('upSelectionCount');
+                }
             }
         },
 
         click(){
+            //alert('dragon click')
             if(this.$store.state.selectionCount){
                 if(!this.selected){
                     this.$store.commit('upSelectionCount');
@@ -293,6 +310,7 @@ export default {
             else{
                 this.showBreedSelector = true;
             }
+            console.log('cleek', this.$store.state.selectionCount)
         }
     }
 }
