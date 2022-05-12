@@ -21,29 +21,30 @@ const store = new Vuex.Store({
             });
         },
 
-        addToUsedBreeds({commit, state}, b){
+        addToUsedBreeds({commit, state}, breedNameOrObj, quantity){
             return new Promise((resolve, reject) => {
-                const type = typeof b;
+                const type = typeof breedNameOrObj;
 
                 if(type === 'string'){
                     // a single breed name
-                    const name = b;
+                    const breedName = breedNameOrObj;
+                    const amount = quantity || 1; //default 1
                     // ignore placeholder
-                    commit('addBreed', {name});
+                    commit('addBreed', {breedName, amount});
                     resolve();
                 }
                 else if(type === 'object'){
                     // merging (e.g. from pasting)
-                    const breedsToAdd = b;
+                    const breedsToAdd = breedNameOrObj;
                     if(Object.keys(state.stats.usedBreeds).length === 0){
                         commit('setUsedBreeds', breedsToAdd);
                         resolve();
                     }
                     else{
                         // merge existing keys with new keys and values
-                        for(const name in breedsToAdd){
-                            const amount = breedsToAdd[name];
-                            commit('addBreed', {name, amount});
+                        for(const breedName in breedsToAdd){
+                            const amount = breedsToAdd[breedName];
+                            commit('addBreed', {breedName, amount});
                         }
                         resolve();
                     }
@@ -54,22 +55,23 @@ const store = new Vuex.Store({
             });
         },
 
-        removeFromUsedBreeds({commit}, b){
+        removeFromUsedBreeds({commit}, breedNameOrObj, quantity){
             return new Promise((resolve, reject) => {
-                const type = typeof b;
+                const type = typeof breedNameOrObj;
+
                 if(type === 'string'){
-                    // a single breed
-                    const name = b;
-                    commit('removeBreed', {name});
+                    const breedName = breedNameOrObj;
+                    const amount = quantity || 1; //default 1
+                    commit('removeBreed', {breedName, amount});
                     resolve();
                 }
                 else if(type === 'object'){
-                    const breedsToRemove = b;
+                    const breedsToRemove = breedNameOrObj;
 
                     // do a removal for each breed in array
-                    for(const name in breedsToRemove){
-                        const amount = breedsToRemove[name];
-                        commit('removeBreed', {name, amount});
+                    for(const breedName in breedsToRemove){
+                        const amount = breedsToRemove[breedName];
+                        commit('removeBreed', {breedName, amount});
                     }
                     resolve();
                 }
@@ -92,57 +94,40 @@ const store = new Vuex.Store({
         downSelectionCount(state){
             state.selectionCount--;
         },
-    
-        acquireID(state){
-            return state.lastID++;
-        },
 
         setUsedBreeds(state, breeds){
+            const a = Date.now();
             state.stats.usedBreeds = breeds;
+            console.log(Date.now() - a, 'time')
         },
 
-        addBreed(state, { name, amount }){
-            if(utils.isPlaceholder(name)){
+        addBreed(state, { breedName, amount }){
+            if(utils.isPlaceholder(breedName)){
                 return;
             }
-            if(!amount){
-                amount = 1;
-            }
+
+            amount = amount || 1;
             
-            const instancesOfBreed = state.stats.usedBreeds[name] || 0;
-            state.stats.usedBreeds[name] = instancesOfBreed + amount;
+            const instancesOfBreed = state.stats.usedBreeds[breedName] || 0;
+            state.stats.usedBreeds[breedName] = instancesOfBreed + amount;
         },
 
-        removeBreed(state, { name, amount }){
-            if(utils.isPlaceholder(name)){
+        removeBreed(state, { breedName, amount }){
+            if(utils.isPlaceholder(breedName)){
                 return;
             }
 
-            if(!amount){
-                amount = 1;
-            }
+            amount = amount || 1;
         
             // if the breed doesn't exist in our stats, default to 0
-            const instancesOfBreed = state.stats.usedBreeds[name] || 0;
+            const instancesOfBreed = state.stats.usedBreeds[breedName] || 0;
             if(instancesOfBreed - amount === 0){
-                delete state.stats.usedBreeds[name];
+                delete state.stats.usedBreeds[breedName];
             }
             else{
-                state.stats.usedBreeds[name] = (instancesOfBreed - amount);
+                state.stats.usedBreeds[breedName] = (instancesOfBreed - amount);
             }
         }
-        /*addToUsedBreeds(state, breed){
-            let recent = state.recentlyUsedBreeds;
-            // create a 'queuing' effect by removing earlier instances
-            // of this breed and adding it to the front of the queue (most recent)
-            recent = recent.filter(rBreed => rBreed.name !== breed.name);
-            recent.unshift(breed);
-            if(recent.length > 4){
-                recent.pop();
-            }
-
-            state.recentlyUsedBreeds = recent;
-        }*/
     }
 });
 

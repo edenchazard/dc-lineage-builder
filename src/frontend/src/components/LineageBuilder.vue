@@ -29,15 +29,9 @@
           </button>
         </div>
       </div>
-      <div
-        v-show="tree !== null && itemsSelected"
-        class="with-select">
-        With selected ({{itemsSelected}}):
-        <button @click="unselectAll">Unselect all</button>
-      </div>
       <Lineage
-        class="builder"
         v-if="tree !== null"
+        class="builder"
         :tree.sync="tree"
         :config="config" 
         @requestRemoveDescendants="replaceRoot"
@@ -160,6 +154,19 @@ export default {
     replaceRoot(node){
       this.$store.dispatch('setUsedBreeds', utils.countBreeds(node));
       this.tree = node;
+    },
+
+    async selectedChangeBreed(breedName){
+      utils.forEveryDragon(this.tree, async (dragon) => {
+        if(dragon.selected){
+          dragon.breed = breedName;
+        }
+      });
+
+      // update used breeds count with new count
+      this.$store.dispatch('setUsedBreeds', utils.countBreeds(this.tree));
+  
+      ///await this.$store.dispatch('addToUsedBreeds', breedName, this.$store.state.selectionCount);
     },
   
     unselectAll(){
