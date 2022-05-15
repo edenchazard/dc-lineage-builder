@@ -127,6 +127,10 @@ const utils = {
 
     getDCTime() {
        return new Date(new Date().toLocaleString('en-US', { timeZone: "America/New_York" }));
+    },
+
+    cloneObj(obj){
+        return JSON.parse(JSON.stringify(obj));
     }
 };
 
