@@ -5,7 +5,7 @@
                 <BreedDropdownv2
                     v-if="!disabled && showBreedSelector===true"
                     :breeds="availableBreeds"
-                    :dragon="{gender, breed}"
+                    :genderFilter="gender"
                     @selected="changeBreed"
                     @close="showBreedSelector=false" />
                 <button class='left control' title='Add descendant'
@@ -15,15 +15,17 @@
                     v-if="nodesFromRoot > 0"
                     @click="removeDescendants"><font-awesome-icon class='delete-children' icon="cut" /></button>
                 <DragonPortrait
+                    v-long-press="{
+                        click: click,
+                        longPress: longPress
+                    }"
                     class="tile-portrait"
                     :class="{
                         'active': !disabled,
                         'disabled': disabled,
                         'selected': selected
                     }"
-                    :data="getBreedFromData"
-                    @longpress="longpress"
-                    @click="click" />
+                    :data="getBreedFromData" />
                 <button class='right control' title='Remove ancestors'
                     v-if="hasParents"
                     @click="deleteAncestors"><font-awesome-icon icon="minus" /></button>
@@ -85,11 +87,16 @@ import DragonLabelField from '@/components/DragonLabelField';
 import BreedDropdownv2 from '@/components/BreedDropdownv2'
 import DragonPortrait from "@/components/DragonPortrait";
 import { GLOBALS, utils, validators, dragonBuilder } from '@/app/bundle';
+import longPressDirective from "@/directives/long-press/long-press";
 
 const ls = localStorage;
 
 export default {
     name: 'Dragon',
+    directives: {
+        "long-press": longPressDirective
+    },
+
     data(){
         return {
             showBreedSelector: false,
@@ -230,12 +237,7 @@ export default {
         copyBranch(){
             if(this.hasParents){
                 // I could change how utils.fED works but this is easier
-                const noSelect = {
-                    parents: {
-                        m: { ...this.parents.m },
-                        f: { ...this.parents.f }
-                    }
-                };
+                const noSelect = utils.cloneObj({ parents: this.parents });
         
                 utils.forEveryDragon(noSelect, (dragon) => dragon.selected = false);
 
@@ -285,26 +287,27 @@ export default {
             this.$emit('update:display', this.display == 1 ? 0 : 1);
         },
 
-        longpress(){
+        longPress(){
             if(!this.$store.state.selectionCount){
-                console.log('yes2')
                 if(!this.selected){
                     this.$emit('update:selected', true);
                     this.$store.commit('upSelectionCount');
                 }
             }
+            else{
+                this.click();
+            }
         },
 
         click(){
-            //alert('dragon click')
             if(this.$store.state.selectionCount){
-                if(!this.selected){
-                    this.$store.commit('upSelectionCount');
-                    this.$emit('update:selected', true);
-                }
-                else{
+                if(this.selected){
                     this.$store.commit('downSelectionCount');
                     this.$emit('update:selected', false);
+                }
+                else{
+                    this.$store.commit('upSelectionCount');
+                    this.$emit('update:selected', true);
                 }
             }
             else{
