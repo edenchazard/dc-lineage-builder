@@ -29,13 +29,26 @@
           </button>
         </div>
       </div>
+      <div
+        v-show="tree !== null && itemsSelected"
+        class="with-select">
+        With selected ({{itemsSelected}}):
+        <button @click="unselectAll">Unselect all</button>
+        <button @click="showSelectBreedSelector = true">change breed</button>
+        <BreedDropdownv2
+          v-if="showSelectBreedSelector === true"
+          :breeds="availableBreeds"
+          @selected="changeBreed"
+          @close="showBreedSelector=false" />
+      </div>
       <Lineage
         v-if="tree !== null"
         class="builder"
         :tree.sync="tree"
         :config="config" 
         @requestRemoveDescendants="replaceRoot"
-        @requestAddDescendant="addDescendant" />
+        @requestAddDescendant="addDescendant"
+        @contextmenu.prevent />
     </div>
 </template>
 
@@ -46,12 +59,13 @@ import Lineage from '@/components/Lineage';
 import DialogExport from '@/components/DialogExport';
 import DialogImport from '@/components/DialogImport';
 import DialogGenerate from '@/components/DialogGenerate';
+import BreedDropdownv2 from '@/components/BreedDropdownv2';
 import Information from '@/components/ui/Information';
 
 export default {
   name: 'LineageBuilder',
   components: { ToggleButton,Lineage, DialogExport, DialogImport, DialogGenerate,
-                Information },
+                Information, BreedDropdownv2 },
 
   data() {
     return {
@@ -65,6 +79,7 @@ export default {
       showImportDialog: false,
       showExportDialog: false,
       showGenerateDialog: false,
+      showSelectBreedSelector: false,
       viewLink: "",
       categories: [
         {id: 1, name: "Dragon"},
@@ -170,7 +185,7 @@ export default {
     },
   
     unselectAll(){
-      utils.forEveryDragon(this.tree, (dragon) => dragon.selected = false);
+      utils.forEveryDragon(this.tree, dragon => dragon.selected = false);
       this.$store.commit('resetSelectionCount');
     }
   }
@@ -178,6 +193,15 @@ export default {
 </script>
 
 <style scoped>
+.lineage-builder{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
 .toolbar{
   margin:20px auto;
   max-width: 800px;
