@@ -2,8 +2,7 @@
     <span
         :title="data.name"
         class="imgbox imgbox-fullsize"
-        @mousedown.left="press"
-        @mouseup.left="click">
+        v-on="$listeners">
         <img
             v-if="data.image.x !== undefined"
             :src="data.image.link"
@@ -18,31 +17,11 @@
     </span>
 </template>
 <script>
-let timeout = null;
 export default {
     name: 'DragonPortrait',
     props: {
         data: Object,
         gen: Number
-    },
-    
-    methods: {
-        press(){
-            const pressTrigger = 300;
-            timeout = setTimeout(() => {
-                console.log('longpress click')
-                timeout = null;
-                this.$emit('longpress');
-            }, pressTrigger);
-        },
-
-        click(){
-            if(timeout){
-                this.$emit('click');
-            }
-            clearTimeout(timeout);
-            timeout = null;
-        }
     }
     
     /*,
