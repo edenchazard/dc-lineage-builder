@@ -10,7 +10,7 @@
             <section class='recently-used'>
                 <h3>Breeds already in lineage</h3>
                 <BreedDropdownReuse
-                    :filterByGender="dragon.gender"
+                    :filterByGender="genderFilter"
                     @selected="selected" />
             </section>
             <section class='breeds'>
@@ -57,7 +57,7 @@ export default {
     },
     props: {
         breeds: Array,
-        dragon: Object
+        genderFilter: String
     },
 
     data() {
@@ -75,8 +75,12 @@ export default {
     },
 
     mounted(){
-        // automatically focus the search bar
-        this.$refs.matesSearch.focus();
+        // automatically focus the search bar if desktop
+        // on mobile I personally find it annoying for the 
+        // keyboard to immediately pop up
+        if('ontouchstart' in document.documentElement === false){
+            this.$refs.matesSearch.focus();
+        }
     },
 
     // save the enabled tags for duration of session
