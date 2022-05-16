@@ -1,71 +1,43 @@
 <template>
     <div class="lineage-builder">
       <Information :info="status" />
-      <DialogExport :show="showExportDialog" :tree="tree" @close="showExportDialog = false" />
-      <DialogImport :show="showImportDialog" @close="showImportDialog = false" @onImport="importLineage" />
-      <DialogGenerate :show="showGenerateDialog" :tree='tree' @close="showGenerateDialog = false" />
-
-      <div class='toolbar'>
-        <div class='toolbar-item'>
-          <toggle-button v-model="config.showInterface" color="var(--builderControlBG)" />
-          <span>Show interface</span>
-        </div>
-        <div class='toolbar-item'>
-          <toggle-button v-model="config.showLabels" color="var(--builderControlBG)" />
-          <span>Show labels</span>
-        </div>
-        <div class='toolbar-item'>
-          <button @click="showExportDialog = true">
-            <font-awesome-icon icon="save" /> Export
-          </button>
-          <br />
-          <button @click="showImportDialog = true">
-            <font-awesome-icon icon="file-code" /> Import
-          </button>
-        </div>
-        <div class='toolbar-item'>
-          <button @click="showGenerateDialog = true">
-            <font-awesome-icon icon="link" /> Get Link
-          </button>
-        </div>
-      </div>
-      <div
-        v-show="tree !== null && itemsSelected"
-        class="with-select">
-        With selected ({{itemsSelected}}):
-        <button @click="unselectAll">Unselect all</button>
-        <button @click="showSelectBreedSelector = true">change breed</button>
-        <BreedDropdownv2
-          v-if="showSelectBreedSelector === true"
-          :breeds="availableBreeds"
-          @selected="changeBreed"
-          @close="showBreedSelector=false" />
-      </div>
+      <Toolbar
+        :config="config"
+        :tree="tree"
+        @importTree="(newTree) => tree = newTree"
+        @unselectAll="unselectAll"
+        @changeBreed="selectionChangeBreeds"
+        @displayNames="selectionSwitchLabel(0)"
+        @displayCodes="selectionSwitchLabel(1)"
+        @selectCriteria="selectionCriteria"
+        @randomizeLabels="selectionRandomizeLabels"
+      />
       <Lineage
         v-if="tree !== null"
-        class="builder"
-        :tree.sync="tree"
-        :config="config" 
-        @requestRemoveDescendants="replaceRoot"
-        @requestAddDescendant="addDescendant"
-        @contextmenu.prevent />
+          class="builder"
+          :tree.sync="tree"
+          :config="config" 
+          @requestRemoveDescendants="replaceRoot"
+          @requestAddDescendant="addDescendant"
+          @contextmenu.prevent />
     </div>
 </template>
 
 <script>
 import { dragonBuilder, utils, backend } from '@/app/bundle.js';
-import { ToggleButton } from 'vue-js-toggle-button';
+
+import Toolbar from './Toolbar/Toolbar.vue';
+
 import Lineage from '@/components/Lineage';
-import DialogExport from '@/components/DialogExport';
-import DialogImport from '@/components/DialogImport';
-import DialogGenerate from '@/components/DialogGenerate';
-import BreedDropdownv2 from '@/components/BreedDropdownv2';
 import Information from '@/components/ui/Information';
 
 export default {
   name: 'LineageBuilder',
-  components: { ToggleButton,Lineage, DialogExport, DialogImport, DialogGenerate,
-                Information, BreedDropdownv2 },
+  components: {
+    Lineage,
+    Information,
+    Toolbar
+  },
 
   data() {
     return {
@@ -76,10 +48,6 @@ export default {
         showLabels: true,
         disabled: false
       },
-      showImportDialog: false,
-      showExportDialog: false,
-      showGenerateDialog: false,
-      showSelectBreedSelector: false,
       viewLink: "",
       categories: [
         {id: 1, name: "Dragon"},
@@ -134,21 +102,8 @@ export default {
     this.$store.dispatch('setUsedBreeds', []);
   },
 
-  computed: {
-    itemsSelected(){
-      console.log('count', this.$store.state.selectionCount)
-      return this.$store.state.selectionCount;
-    }
-    
-  },
-
   methods: {
-    importLineage(tree){
-      this.tree = tree;
-      this.$store.dispatch('setUsedBreeds', utils.countBreeds(tree));
-    },
-
-    
+  
     addDescendant(){
       let newTree = dragonBuilder.createDragonProperties();
 
@@ -171,7 +126,62 @@ export default {
       this.tree = node;
     },
 
-    async selectedChangeBreed(breedName){
+    selectBy(condition){
+      const a = performance.now();
+      let count = 0;
+      utils.forEveryDragon(this.tree, async (dragon) => {
+        if(!dragon.selected && condition(dragon)){
+          dragon.selected = true;
+          count++;
+        }
+      });
+      
+      this.$store.commit('upSelectionCount', count);
+      console.log('time2', a - performance.now())
+    },
+
+    // Accepts a callback
+    // Or a key and the value to change it to
+    applyToSelected(prop, value){
+      const a = performance.now();
+
+      const isAttribute = typeof prop === "string";
+    
+      utils.forEveryDragon(this.tree, async (dragon) => {
+        if(dragon.selected){
+          if(isAttribute){
+            dragon[prop] = value;
+          }
+          else{
+            prop(dragon);
+          }
+        }
+      });
+  
+      console.log('time2', a - performance.now())
+    },
+
+    selectionCriteria(criteria){
+      switch(criteria){
+        case 'male':
+          this.selectBy((dragon) => dragon.gender === 'm');
+          break;
+        case 'female':
+          this.selectBy((dragon) => dragon.gender === 'f');
+          break;
+        case 'name':
+          this.selectBy((dragon) => dragon.display === 0);
+          break;
+        case 'code':
+          this.selectBy((dragon) => dragon.display === 1);
+          break;
+        case 'placeholder':
+          this.selectBy((dragon) => dragon.breed === "Placeholder");
+          break;
+      }
+    },
+
+    async selectionChangeBreeds(breedName){
       utils.forEveryDragon(this.tree, async (dragon) => {
         if(dragon.selected){
           dragon.breed = breedName;
@@ -183,6 +193,22 @@ export default {
   
       ///await this.$store.dispatch('addToUsedBreeds', breedName, this.$store.state.selectionCount);
     },
+    selectionRandomizeLabels(){
+      this.applyToSelected((dragon) => {
+        // randomize name
+        if(dragon.display === 0){
+          dragon.name = dragonBuilder.generateName();
+        }
+        // randomize code
+        else{
+          dragon.code = dragonBuilder.generateCode();
+        }
+      })
+    },
+  
+    selectionSwitchLabel(display){
+      this.applyToSelected('display', display);
+    },
   
     unselectAll(){
       utils.forEveryDragon(this.tree, dragon => dragon.selected = false);
@@ -193,7 +219,7 @@ export default {
 </script>
 
 <style scoped>
-.lineage-builder{
+.builder{
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -201,38 +227,5 @@ export default {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
     supported by Chrome, Edge, Opera and Firefox */
-}
-.toolbar{
-  margin:20px auto;
-  max-width: 800px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-}
-.toolbar-item{
-  margin: 5px;
-  text-align: center;
-}
-.toolbar-item span{
-  margin: 5px;
-}
-.toolbar-item button{
-  margin:2px 0px;
-  cursor: pointer;
-  padding: 8px;
-  color:var(--builderControlFG);
-  background: var(--builderControlBG);
-  border:none;
-  width:100%;
-}
-.with-select{
-  margin:20px auto;
-  max-width: 800px;
-}
-@media only screen and (min-width: 768px) {
-  .toolbar {
-    padding: 0px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
 }
 </style>

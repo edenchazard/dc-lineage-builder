@@ -1,8 +1,7 @@
 <template>
     <span
         :title="data.name"
-        class="imgbox imgbox-fullsize"
-        v-on="$listeners">
+        class="imgbox imgbox-fullsize">
         <img
             v-if="data.image.x !== undefined"
             :src="data.image.link"
