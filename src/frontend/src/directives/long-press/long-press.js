@@ -2,14 +2,21 @@ import "./style.css";
 
 const noSelectClass = 'long-press-no-select';
 
-const clear = () => clearTimeout(timeout);
-const prevent = (event) => event.preventDefault(); 
-
 let timeout = null;
+
+const clear = () => {
+    clearTimeout(timeout);
+    timeout = null;
+}
+
+const prevent = (event) => event.preventDefault(); 
 
 export default {
     bind(el, binding) {
-        const { longPress, wait, click, disableRightClickMenu } = binding.value;
+        const {
+            longPress, click, press, // callbacks
+            wait, disableRightClickMenu // options
+        } = binding.value;
 
         const onPress = (event) => {
             event.stopPropagation();
@@ -20,14 +27,17 @@ export default {
             }
             
             timeout = setTimeout(() => {
-                longPress();
                 timeout = null;
+
+                longPress && longPress();
             }, wait || 300); // default 300ms
+
+            press && press();
         };
 
         const onClick = () => {
             if(timeout){
-                click();
+                click && click();
             }
 
             clear();
@@ -43,8 +53,9 @@ export default {
                 touch = event.targetTouches[0],
                 elementAtPoint = document.elementFromPoint(touch.pageX, touch.pageY);
 
+            // check if the element under the pointer is the binded element
+            // or a descendent
             if (!el.isSameNode(elementAtPoint) && !el.contains(elementAtPoint)) {
-                console.log('out of bands')
                 clear();
             }
         };
@@ -60,14 +71,12 @@ export default {
         }
 
         // mousey browser
-        else{
+        if('onmousedown' in document.documentElement){
             el.addEventListener('mousedown', onPress);
             el.addEventListener('mouseleave', clear);
         }
 
-        if(disableRightClickMenu){
-            el.addEventListener('contextmenu', prevent);
-        }
+        disableRightClickMenu && el.addEventListener('contextmenu', prevent);
 
         el.addEventListener('click', onClick);
         el.classList.add(noSelectClass);

@@ -87,12 +87,12 @@ const store = new Vuex.Store({
             state.selectionCount = 0;
         },
 
-        upSelectionCount(state){
-            state.selectionCount++;
+        upSelectionCount(state, count = 1){
+            state.selectionCount+= count;
         },
 
-        downSelectionCount(state){
-            state.selectionCount--;
+        downSelectionCount(state, count = 1){
+            state.selectionCount-= count;
         },
 
         setUsedBreeds(state, breeds){
