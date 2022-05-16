@@ -313,7 +313,6 @@ export default {
             else{
                 this.showBreedSelector = true;
             }
-            console.log('cleek', this.$store.state.selectionCount)
         }
     }
 }
