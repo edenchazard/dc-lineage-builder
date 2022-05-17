@@ -8,12 +8,18 @@
                     :genderFilter="gender"
                     @selected="changeBreed"
                     @close="showBreedSelector=false" />
-                <button class='left control' title='Add descendant'
+                <DragonButton 
                     v-if="nodesFromRoot === 0"
-                    @click="addDescendant"><font-awesome-icon icon="arrow-left" /></button>
-                <button class='left control' title='Remove descendants'
+                    class='left'
+                    title='Add descendant'
+                    icon="arrow-left"
+                    @click="addDescendant" />
+                <DragonButton 
                     v-if="nodesFromRoot > 0"
-                    @click="removeDescendants"><font-awesome-icon class='delete-children' icon="cut" /></button>
+                    class='left'
+                    title='Remove descendants'
+                    icon="cut"
+                    @click="removeDescendants" />
                 <DragonPortrait
                     v-long-press="{
                         click: click,
@@ -26,16 +32,24 @@
                         'selected': selected
                     }"
                     :data="getBreedFromData" />
-                <button class='right control' title='Remove ancestors'
+                <DragonButton 
                     v-if="hasParents"
-                    @click="deleteAncestors"><font-awesome-icon icon="minus" /></button>
-                <button
-                    class='right2 control' title='Switch parents'
+                    class='right'
+                    title='Remove ancestors'
+                    icon="minus"
+                    @click="deleteAncestors" />
+                <DragonButton 
                     v-if="hasParents"
-                    @click="switchParents"><font-awesome-icon icon="sync-alt" /></button>
-                <button class='right control' title='Add ancestors'
-                    v-if="!hasParents" 
-                    @click="addAncestors"><font-awesome-icon icon="arrow-right" /></button>
+                    class='right2'
+                    title='Switch parents'
+                    icon="sync-alt"
+                    @click="switchParents" />
+                <DragonButton 
+                    v-if="!hasParents"
+                    class='right'
+                    title='Add ancestors'
+                    icon="arrow-right"
+                    @click="addAncestors" />
             </div>
             <span class='labelWarning'
                 v-if='labelWarning'
@@ -46,24 +60,25 @@
                 :display="display"
                 @changed="labelChanged"
                 :disabled="disabled" />
-            <button
-                class='control'
-                title="Switch gender"
+            <DragonButton 
                 v-if="nodesFromRoot === 0"
-                @click="switchGender"><font-awesome-icon icon="venus-mars" /></button>
-            <button
-                class='control switchLabel'
-                title='Switch name or code'
-                @click="switchLabel"><font-awesome-icon icon="font" /></button>
-            <button
-                class='control'
-                title='Copy ancestors'
+                title='Switch gender'
+                icon="venus-mars"
+                @click="switchGender" />
+            <DragonButton 
+                class='switchLabel'
+                title='Switch label'
+                icon="font"
+                @click="switchLabel" />
+            <DragonButton 
                 v-if="hasParents"
-                @click="copyBranch"><font-awesome-icon icon="clone" /></button>
-            <button
-                class='control'
-                title="Paste ancestors"
-                @click="pasteBranch"><font-awesome-icon icon="paste" /></button>
+                title='Copy ancestors'
+                icon="clone"
+                @click="copyBranch" />
+            <DragonButton 
+                title='Paste ancestors'
+                icon="paste"
+                @click="pasteBranch" />
         </div>
         <ul v-if="hasParents">
             <Dragon
@@ -86,6 +101,7 @@ label warning is a bit hacky and needs improving
 import DragonLabelField from '@/components/DragonLabelField';
 import BreedDropdownv2 from '@/components/BreedDropdownv2'
 import DragonPortrait from "@/components/DragonPortrait";
+import DragonButton from "@/components/DragonButton";
 import { GLOBALS, utils, validators, dragonBuilder } from '@/app/bundle';
 import longPressDirective from "@/directives/long-press/long-press";
 
@@ -121,7 +137,12 @@ export default {
         }
     },
 
-    components: { DragonLabelField, BreedDropdownv2, DragonPortrait },
+    components: {
+        DragonLabelField,
+        BreedDropdownv2,
+        DragonPortrait,
+        DragonButton
+    },
     computed:{
         hasParents(){
             return 'f' in this.parents;
@@ -319,22 +340,6 @@ export default {
 </script>
 
 <style scoped>
-.right, .left, .right2{
-    position:absolute;
-    z-index: 5;
-}
-.left{
-    left:0px;
-    top:0px;
-}
-.right{
-    right:0px;
-    top:0px;
-}
-.right2{
-    right:0px;
-    top:21px;
-}
 .hideEdit li .tile::after{
     content: "";
     position: absolute;
@@ -395,23 +400,6 @@ li::after {
     border-top: var(--lineageLineStyle);
 }
 /* end of dc styling */
-button {
-    border: 0px none;
-    color: var(--lineageToolColour);
-    background:transparent;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 3px;
-    padding: 0px;
-    width:30px;
-    height: 29.38px;
-}
-button svg{
-    padding:0px;
-}
 .active{
     cursor: pointer;
 }
@@ -421,6 +409,22 @@ button svg{
 }
 </style>
 <style>
+.right, .left, .right2{
+    position:absolute;
+    z-index: 5;
+}
+.left{
+    left:0px;
+    top:0px;
+}
+.right{
+    right:0px;
+    top:0px;
+}
+.right2{
+    right:0px;
+    top:21px;
+}
 .hideEdit .labelWarning, .hideEdit .control,
 .hideLabels .dragon-label, .hideLabels .switchLabel,
 .hideLabels .labelWarning {
