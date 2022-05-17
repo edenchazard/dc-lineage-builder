@@ -17,8 +17,8 @@
 </div>
 </template>
 <script>
-import Dragon from '@/components/Dragon';
-import LineageGenerationCounter from '@/components/LineageGenerationCounter';
+import Dragon from './Dragon';
+import LineageGenerationCounter from './LineageGenerationCounter';
 import { utils } from '@/app/bundle';
 
 export default {
