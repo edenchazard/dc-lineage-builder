@@ -28,7 +28,7 @@ import { dragonBuilder, utils, backend } from '@/app/bundle.js';
 
 import Toolbar from './Toolbar/Toolbar.vue';
 
-import Lineage from '@/components/Lineage';
+import Lineage from '@/components/Lineage/Lineage';
 import Information from '@/components/ui/Information';
 
 export default {

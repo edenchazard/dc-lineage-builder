@@ -23,7 +23,7 @@
 </template>
   
 <script>
-import Lineage from '@/components/Lineage';
+import Lineage from '@/components/Lineage/Lineage';
 import { backend } from '@/app/bundle.js';
 import TextCopy from '@/components/ui/TextCopy';
 

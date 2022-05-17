@@ -98,10 +98,10 @@
 notes for meself
 label warning is a bit hacky and needs improving
 */
-import DragonLabelField from '@/components/DragonLabelField';
+import DragonLabelField from './DragonLabelField';
 import BreedDropdownv2 from '@/components/BreedDropdownv2'
 import DragonPortrait from "@/components/DragonPortrait";
-import DragonButton from "@/components/DragonButton";
+import DragonButton from "./DragonButton";
 import { GLOBALS, utils, validators, dragonBuilder } from '@/app/bundle';
 import longPressDirective from "@/directives/long-press/long-press";
 

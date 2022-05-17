@@ -67,7 +67,7 @@
 
 <script>
 import { dragonBuilder, GLOBALS } from '@/app/bundle';
-import Lineage from '@/components/Lineage';
+import Lineage from '@/components/Lineage/Lineage';
 import BreedDropdownResults from '@/components/BreedDropdownResults';
 import DialogExport from '@/components/DialogExport';
 
