@@ -1,15 +1,24 @@
 <template>
 <div>
-    <div class='toolbar'>
-        <DialogExport :show="showExportDialog" :tree="tree" @close="showExportDialog = false" />
-        <DialogImport :show="showImportDialog" @close="showImportDialog = false" @onImport="importLineage" />
-        <DialogGenerate :show="showGenerateDialog" :tree='tree' @close="showGenerateDialog = false" />
-        <BreedDropdownv2
-            v-if="showSelectBreedSelector === true"
-            :breeds="availableBreeds"
-            @selected="(breed) => $emit('changeBreed', breed)"
-            @close="showBreedSelector=false" />
+    <DialogExport
+        v-if="showExportDialog"
+        :tree="tree"
+        @close="showExportDialog = false" />
+    <DialogImport
+        v-if="showImportDialog"
+        @close="showImportDialog = false" 
+        @onImport="importLineage" />
+    <DialogGenerate
+        v-if="showGenerateDialog"
+        :tree='tree'
+        @close="showGenerateDialog = false" />
+    <BreedDropdownv2
+        v-if="showSelectBreedSelector === true"
+        :breeds="availableBreeds"
+        @selected="(breed) => $emit('changeBreed', breed)"
+        @close="showBreedSelector=false" />
 
+    <div class='toolbar'>
         <div class='toolbar-item'>
             <toggle-button v-model="config.showInterface" color="var(--builderControlBG)" />
             <span>Show interface</span>
@@ -71,9 +80,9 @@ import { utils } from '@/app/bundle.js';
 
 import { ToggleButton } from "vue-js-toggle-button";
 
-import DialogExport from '@/components/DialogExport';
-import DialogImport from '@/components/DialogImport';
-import DialogGenerate from '@/components/DialogGenerate';
+import DialogExport from './DialogExport';
+import DialogImport from './DialogImport';
+import DialogGenerate from './DialogGenerate';
 
 import ToolbarButton from './ToolbarButton';
 

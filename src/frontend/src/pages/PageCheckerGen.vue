@@ -69,7 +69,7 @@
 import { dragonBuilder, GLOBALS } from '@/app/bundle';
 import Lineage from '@/components/Lineage/Lineage';
 import BreedDropdownResults from '@/components/BreedDropdownResults';
-import DialogExport from '@/components/DialogExport';
+import DialogExport from '@/components/Toolbar/DialogExport';
 
 export default {
     name: 'PageCheckerGen',
