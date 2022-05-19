@@ -4,13 +4,34 @@ import utils from "@/app/utils";
 
 Vue.use(Vuex);
 
+const SESSION_KEY = 'session';
+
+// returns tags in session if set, or defaults
+function getTags(){
+    //'holiday', 'valentines', 'halloween'
+    const
+        availableTags = ['dragon', 'drake', 'pygmy', 'two-head'],
+        defaultTags = availableTags.map(tag => ({ name: tag, active: true }));
+
+    const session = sessionStorage.getItem(SESSION_KEY);
+    return session ? JSON.parse(session) : defaultTags;
+}
+
 const store = new Vuex.Store({
     state: {
+        tags: getTags(),
         stats:{
             usedBreeds: []
         },
         lastID: 0,
         selectionCount: 0
+    },
+
+    getters: {
+        // save the enabled tags for duration of session
+        enabledTags: state => state.tags
+            .filter(tag => tag.active)
+            .map(tag => tag.name)
     },
 
     actions:{
@@ -83,8 +104,8 @@ const store = new Vuex.Store({
     },
 
     mutations: {
-        resetSelectionCount(state){
-            state.selectionCount = 0;
+        resetSelectionCount(state, to = 0){
+            state.selectionCount = to;
         },
 
         upSelectionCount(state, count = 1){
@@ -127,6 +148,11 @@ const store = new Vuex.Store({
             else{
                 state.stats.usedBreeds[breedName] = (instancesOfBreed - amount);
             }
+        },
+
+        setTags(state, tags){
+            state.tags = tags;
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify(tags));
         }
     }
 });

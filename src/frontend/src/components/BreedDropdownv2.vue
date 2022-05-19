@@ -17,9 +17,7 @@
                 <h3>Breeds</h3>
                 <div class='applied-tags'>
                     <label>Showing:</label>
-                    <TagList
-                        :value="tagStates"
-                        @updated="tagStates = [...$event]" />
+                    <BreedTags />
                 </div>
                 <div class='search'>
                     <label for='mates-search'><font-awesome-icon icon="search" /> Filter:</label>
@@ -32,7 +30,7 @@
                 <BreedDropdownResults
                     :search="searchString"
                     :breeds="breeds"
-                    :tags="enabledTags"
+                    :tags="$store.getters.enabledTags"
                     noResultsText="There are no breeds that match this criteria."
                     @selected="selected" />
             </section>
@@ -43,9 +41,7 @@
 import BreedDropdownResults from '@/components/BreedDropdownResults';
 import BreedDropdownReuse from '@/components/BreedDropdownReuse';
 import FocusableDialog from '@/components/FocusableDialog';
-import TagList from '@/components/ui/TagList';
-
-const SESSION_KEY = 'session';
+import BreedTags from '@/components/BreedTags';
 
 export default {
     name: 'BreedDropdownv2',
@@ -53,24 +49,17 @@ export default {
         BreedDropdownResults,
         BreedDropdownReuse,
         FocusableDialog,
-        TagList
+        BreedTags
     },
+
     props: {
         breeds: Array,
         genderFilter: String
     },
 
     data() {
-        // if we have an already stored set of tags,
-        // use that instead
-        const
-            availableTags = ['dragon', 'drake', 'pygmy', 'two-head'],
-            defaultTags = availableTags.map(tag => ({ name: tag, active: true })),
-            tagStates = this.getSessionTagStates() || defaultTags;
-
         return {
-            searchString: "",
-            tagStates
+            searchString: ""
         }
     },
 
@@ -83,21 +72,6 @@ export default {
         }
     },
 
-    // save the enabled tags for duration of session
-    watch: {
-        tagStates(tags){
-            sessionStorage.setItem(SESSION_KEY, JSON.stringify(tags));
-        }
-    },
-
-    computed: {
-        enabledTags(){
-            return this.tagStates
-                .filter(tag => tag.active)
-                .map(tag => tag.name);
-        }
-    },
-
     methods: {
         selected(breed){
             this.$emit('selected', breed);
@@ -106,11 +80,6 @@ export default {
 
         close(){
             this.$emit('close');
-        },
-
-        getSessionTagStates(){
-            const session = sessionStorage.getItem(SESSION_KEY);
-            return session ? JSON.parse(session) : null;
         }
     }
 };
