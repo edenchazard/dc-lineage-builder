@@ -1,11 +1,10 @@
-<template functional>
+<template>
 <button
     class='control'
-    :class="data.staticClass || ''"
     type="button"
-    :title="props.title"
-    @click="listeners['click']()">
-    <font-awesome-icon :icon="props.icon" /></button>
+    :title="title"
+    @click="$emit('click')">
+    <font-awesome-icon :icon="icon" /></button>
 </template>
 
 <script>
