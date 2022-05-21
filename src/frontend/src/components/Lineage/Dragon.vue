@@ -53,7 +53,8 @@
             </div>
             <span class='labelWarning'
                 v-if='labelWarning'
-                title="Warning: Label does not meet DC requirements"><font-awesome-icon icon="exclamation-triangle" />
+                title="Warning: Label does not meet DC requirements">
+                <font-awesome-icon icon="exclamation-triangle" />
             </span>
             <DragonLabelField
                 :value="(display === 1 ? code : name)"
@@ -105,7 +106,9 @@ import DragonButton from "./DragonButton";
 import { GLOBALS, utils, validators, dragonBuilder } from '@/app/bundle';
 import longPressDirective from "@/directives/long-press/long-press";
 
-const ls = localStorage;
+const
+    ls = localStorage,
+    { countSelected, countBreeds } = utils;
 
 export default {
     name: 'Dragon',
@@ -236,23 +239,30 @@ export default {
 
             // check there's data available
             // todo add an integrity check
-            if(paste !== null){
-                this.$emit('update:parents', paste);
-
-                // remove what we had
-                if(this.hasParents){
-                    await this.$store.dispatch('removeFromUsedBreeds', utils.countBreeds([
-                        this.parents.m,
-                        this.parents.f
-                    ]));
-                }
-
-                // update breed counts added thru paste
-                await this.$store.dispatch('addToUsedBreeds', utils.countBreeds([
-                    paste.m,
-                    paste.f
-                ]));
+            if(!paste){
+                return;
             }
+
+            // remove breed counts from previous branch
+            if(this.hasParents){
+                await this.$store.dispatch('removeFromUsedBreeds', countBreeds([
+                    this.parents.m,
+                    this.parents.f
+                ]));
+
+                //and update selection count, if we have to
+                const count = countSelected(this.parents.m) + countSelected(this.parents.f);
+                this.$store.commit('downSelectionCount', count);
+            }
+
+            // update with new breed counts from pasted branch
+            await this.$store.dispatch('addToUsedBreeds', countBreeds([
+                paste.m,
+                paste.f
+            ]));
+
+            // insert the new branch
+            this.$emit('update:parents', paste);
         },
 
         copyBranch(){
@@ -292,11 +302,17 @@ export default {
 
         // deletes this node and ancestors
         async deleteAncestors(){
-            this.$emit('update:parents', {});
-            await this.$store.dispatch('removeFromUsedBreeds', utils.countBreeds([
+            await this.$store.dispatch('removeFromUsedBreeds', countBreeds([
                 this.parents.m,
                 this.parents.f
             ]));
+
+            // update selection count to reflect any potentially removed
+            this.$store.commit('downSelectionCount',
+                (countSelected(this.parents.m) + countSelected(this.parents.f))
+            );
+
+            this.$emit('update:parents', {});
         },
 
         labelChanged(value){
@@ -309,6 +325,7 @@ export default {
         },
 
         longPress(){
+            if(this.disabled){ return; }
             if(!this.$store.state.selectionCount){
                 if(!this.selected){
                     this.$emit('update:selected', true);
@@ -321,6 +338,7 @@ export default {
         },
 
         click(){
+            if(this.disabled){ return; }
             if(this.$store.state.selectionCount){
                 if(this.selected){
                     this.$store.commit('downSelectionCount');
@@ -363,7 +381,7 @@ ul, li {
     margin: 0;
 }
 li:first-child::before, li:last-child::after {
-    border-width: 0;
+    display: none;
 }
 li::before, li::after {
     content: "";
