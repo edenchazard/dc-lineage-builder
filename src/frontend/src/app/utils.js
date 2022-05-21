@@ -84,6 +84,8 @@ const utils = {
             f(payload);
         }
     
+        // exclude placeholders
+        breeds['Placeholder'] && delete breeds['Placeholder'];
         return breeds;
     },
 
