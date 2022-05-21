@@ -1,6 +1,8 @@
 <template>
     <span class='dragon-label'>
-        <label v-if="!editing">
+        <label
+            v-if="!editing"
+            class="label">
             <span
                 v-if="display == 1"
                 @click="clicked"
@@ -79,15 +81,17 @@ export default {
 </script>
 
 <style scoped>
+.dragon-label{
+    width: 120px;
+}
 .code{
     font-style: italic;
 }
-label{
+.label{
     display: block;
     word-wrap: break-word;
     position: relative;
     top: -4px;
-    width: 120px;
     border-collapse: collapse;
     white-space: break-spaces;
 }
