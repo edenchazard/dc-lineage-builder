@@ -131,7 +131,20 @@ const utils = {
 
     cloneObj(obj){
         return JSON.parse(JSON.stringify(obj));
-    }
+    },
+
+    countSelected(tree){
+        const a = performance.now();
+      let count = 0;
+      utils.forEveryDragon(tree, async (dragon) => {
+        if(dragon.selected){
+          count++;
+        }
+      });
+
+      console.log('COUNT SELECTED', performance.now() - a )
+      return count;
+    },
 };
 
 export default utils;
