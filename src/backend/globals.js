@@ -5,11 +5,22 @@ let precompiled_breeds = {};
 
 precompiled_breeds.entire = breedtable;
 
-// this will never change and may enhance perf
-Object.freeze(precompiled_breeds); 
+const placeholder = {
+    name: "Placeholder",
+    male: "aabb",
+    female: "aabb",
+    genderOnly: false,
+    metaData: {
+        category: "dragon",
+        ghost: false
+    }
+};
 
+precompiled_breeds.entire.unshift(placeholder);
+
+// different breed tables for different needs
 let GLOBALS ={
-    placeholder_breed: {name: "Placeholder", image: "unknown"},
+    placeholder_breed: placeholder,
     breeds: precompiled_breeds
 }
 

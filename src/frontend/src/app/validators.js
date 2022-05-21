@@ -82,9 +82,9 @@ const validators ={
             if(!pass){  // check failed, don't even bother
                 return;
             }
-            if(dragon.breed === GLOBALS.placeholder_breed.name){
+            /*if(dragon.breed == GLOBALS.placeholder_breed.name){
                 pass = false;
-            }
+            }*/
             // reject ghosties
             if(utils.breedInList(ghosts, dragon.breed)){
                 pass = false;
