@@ -20,7 +20,7 @@
           <li><font-awesome-icon icon="sync-alt" /> Switch the parent's genders. If one of the breeds is only available in one gender, the breed will be reset to the placeholder.</li>
           <li><font-awesome-icon icon="clone" /> Clone the parent nodes and any further ancestors. This button can even be used to clone parts of unrelated lineages such as from a different tab.</li>
           <li><font-awesome-icon icon="paste" /> Paste the most recently cloned item. If this node already has parents, it will replace them.</li>
-          <li><font-awesome-icon icon="cut" class='delete-children' /> Remove all descendants and make this dragon the new root.</li>
+          <li><font-awesome-icon icon="cut" /> Remove all descendants and make this dragon the new root.</li>
           <li><font-awesome-icon icon="font" /> Switch between the code or name.</li>
           <li><font-awesome-icon icon="exclamation-triangle" /> This name or code does not pass dragcave's validation. Names and codes are not checked for availability.</li>
         </ul>
@@ -33,7 +33,6 @@
           <p>You can save lineages online with Lineage Builder and share them with others but this does come with some limitations. These are:</p>
           <ul class='list'>
             <li>Must be between 1 and 12 generations.</li>
-            <li>Must contain no placeholders.</li>
             <li>Names and codes must fit DC's requirements.</li>
           </ul> 
           <p>Please note that if a lineage hasn't been viewed in 2 months, it will be removed from the site. For this reason, it's recommended you view it before 2 months is up to reset the timer.</p>
@@ -46,6 +45,13 @@
       <section>
         <h3>Changing the skin</h3>
         <p>Some users who use a different skin to DC's default may wish to view lineages using their chosen skin. Lineage Builder can simulate this as well, just change the skin in the dropdown in the header. This setting will persist even after you've closed the page.</p>
+      </section>
+      <section>
+        <h3>Selection tools</h3>
+        <p>Multiple selection is also supported. To enter selection mode, hold a tile for 300 miliseconds and the selection menu will appear. Then, every tile you click will be added to the selection.</p>
+        <p>To apply an action to the selected dragons, use the features on the right.</p>
+        <p>You can unselect a dragon by clicking the tile again. Selection mode will end when no dragons are selected.</p>
+        <p>You can select all dragons matching particular criteria using the features on the left.</p>
       </section>
     </section>
     <section id='notes'>
