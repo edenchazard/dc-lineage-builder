@@ -59,26 +59,37 @@ export default {
                 clear();
             }
         };
-    
+
+        let events = [];
+
         // touch browser
         if('ontouchstart' in document.documentElement){
-            el.addEventListener('touchstart', onPress);
-            el.addEventListener('touchend', clear);
-            el.addEventListener('touchcancel', clear);
-
-            // if the input leaves the area, cancel long press
-            el.addEventListener('touchmove', outOfBoundsClear);
+            events = [
+                ...events,
+                ['touchstart', onPress],
+                ['touchend', clear],
+                ['touchcancel', clear],
+                // if the input leaves the area, cancel long press
+                ['touchmove', outOfBoundsClear]
+            ];
         }
 
         // mousey browser
         if('onmousedown' in document.documentElement){
-            el.addEventListener('mousedown', onPress);
-            el.addEventListener('mouseleave', clear);
+            events = [
+                ...events,
+                ['mousedown', onPress],
+                ['mouseleave', clear]
+            ];
         }
 
-        disableRightClickMenu && el.addEventListener('contextmenu', prevent);
+        events.push(['click', onClick]);
 
-        el.addEventListener('click', onClick);
+        disableRightClickMenu && events.push(['contextmenu', prevent]);
+
+        events.forEach(event => el.addEventListener(event[0], event[1]))
+        // for removing them later
+        //el.events = events;
         el.classList.add(noSelectClass);
     },
 
@@ -86,7 +97,10 @@ export default {
         el.classList.add(noSelectClass);
     },
 
-    unbind(el){
+    // cleanup
+    /*unbind(el){
         el.classList.remove(noSelectClass);
-    }
+        el.events.forEach(event => el.removeEventListener(event[0], event[1]));
+        el.events = null;
+    }*/
 };
