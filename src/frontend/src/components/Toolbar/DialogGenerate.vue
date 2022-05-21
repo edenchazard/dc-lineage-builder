@@ -56,7 +56,7 @@ export default {
                 level: 3,
                 message: `At least one of these dragons does not meet the save
                 requirements. Lineages must be between 1 and 13 
-                generations large, contain no placeholders or have any
+                generations large and contain no 
                 ghost breeds. Codes and names must be valid.`
             };
             return;
