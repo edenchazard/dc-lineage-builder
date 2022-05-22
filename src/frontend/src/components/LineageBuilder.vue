@@ -4,13 +4,17 @@
       <Toolbar
         :config="config"
         :tree="tree"
+        @updateConfig="(key, value) => config[key] = value"
         @importTree="(newTree) => tree = newTree"
         @unselectAll="unselectAll"
-        @changeBreed="selectionChangeBreeds"
+        @changeBreed="selectionChangeBreed"
         @displayNames="selectionSwitchLabel(0)"
         @displayCodes="selectionSwitchLabel(1)"
         @selectCriteria="selectionCriteria"
         @randomizeLabels="selectionRandomizeLabels"
+        @deleteAncestors="selectionDeleteAncestors"
+        @addParents="selectionAddParents"
+        @switchParents="selectionSwitchParents"
       />
       <Lineage
         v-if="tree !== null"
@@ -19,7 +23,7 @@
           :config="config" 
           @requestRemoveDescendants="replaceRoot"
           @requestAddDescendant="addDescendant"
-          @contextmenu.prevent />
+          @contextmenu="() => false" />
     </div>
 </template>
 
@@ -30,6 +34,8 @@ import Toolbar from './Toolbar/Toolbar.vue';
 
 import Lineage from '@/components/Lineage/Lineage';
 import Information from '@/components/ui/Information';
+
+const { forEveryDragon, countBreeds, countSelected } = utils;
 
 export default {
   name: 'LineageBuilder',
@@ -62,7 +68,7 @@ export default {
     }
   },
 
-  mounted(){
+  async mounted(){
     const hash = this.$route.query.template;
 
     if(hash === undefined){
@@ -70,28 +76,33 @@ export default {
     }
     // the user has requested we import from an already built lineage.
     else{
-      (async() => {
-        try {
-          this.status ={
-            level: 1,
-            message: `Loading lineage... For big lineages, this can sometimes
-            take a moment to load.`
-          };
-          const response = await backend.getLineageData(hash);
-          this.tree = JSON.parse(response.data.dragon);
-          this.status = { level: 0, message: "" };
-          this.$store.dispatch('setUsedBreeds', utils.countBreeds(this.tree));
-        }
-        catch (error) {
-          const { response } = error;
-          this.status = {
-            level: 3,
-            title: `${response.status} ${response.statusText}`,
-            message: `Sorry, an error has occurred while loading the lineage.
-            The error is: ${response.status} ${response.data}`
-          };
-        }
-      })();
+      try {
+        this.status ={
+          level: 1,
+          message: `Loading lineage... For big lineages, this can sometimes
+          take a moment to load.`
+        };
+
+        const response = await backend.getLineageData(hash);
+
+        const importedTree = JSON.parse(response.data.dragon);
+
+        // add selection data
+        forEveryDragon(importedTree, dragon => dragon.selected = false);
+
+        this.tree = importedTree;
+        this.status = { level: 0, message: "" };
+        this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
+      }
+      catch (error) {
+        const { response } = error;
+        this.status = {
+          level: 3,
+          title: `${response.status} ${response.statusText}`,
+          message: `Sorry, an error has occurred while loading the lineage.
+          The error is: ${response.status} ${response.data}`
+        };
+      }
     }
   },
 
@@ -103,7 +114,6 @@ export default {
   },
 
   methods: {
-  
     addDescendant(){
       let newTree = dragonBuilder.createDragonProperties();
 
@@ -122,32 +132,22 @@ export default {
     },
 
     replaceRoot(node){
-      this.$store.dispatch('setUsedBreeds', utils.countBreeds(node));
-      this.tree = node;
-    },
+      // recalculate selected count
+      this.$store.commit('resetSelectionCount', countSelected(node));
 
-    selectBy(condition){
-      const a = performance.now();
-      let count = 0;
-      utils.forEveryDragon(this.tree, async (dragon) => {
-        if(!dragon.selected && condition(dragon)){
-          dragon.selected = true;
-          count++;
-        }
-      });
-      
-      this.$store.commit('upSelectionCount', count);
-      console.log('time2', a - performance.now())
+      // recalculate breed numbers
+      this.$store.dispatch('setUsedBreeds', countBreeds(node))
+  
+      // replace the tree
+      this.tree = node;
     },
 
     // Accepts a callback
     // Or a key and the value to change it to
     applyToSelected(prop, value){
-      const a = performance.now();
-
       const isAttribute = typeof prop === "string";
     
-      utils.forEveryDragon(this.tree, async (dragon) => {
+      forEveryDragon(this.tree, async (dragon) => {
         if(dragon.selected){
           if(isAttribute){
             dragon[prop] = value;
@@ -157,53 +157,56 @@ export default {
           }
         }
       });
-  
-      console.log('time2', a - performance.now())
     },
 
-    selectionCriteria(criteria){
-      switch(criteria){
-        case 'male':
-          this.selectBy((dragon) => dragon.gender === 'm');
-          break;
-        case 'female':
-          this.selectBy((dragon) => dragon.gender === 'f');
-          break;
-        case 'name':
-          this.selectBy((dragon) => dragon.display === 0);
-          break;
-        case 'code':
-          this.selectBy((dragon) => dragon.display === 1);
-          break;
-        case 'placeholder':
-          this.selectBy((dragon) => dragon.breed === "Placeholder");
-          break;
-      }
+    selectionCriteria(criteria, value){
+      this.selectBy((dragon) => dragon[criteria] === value);
     },
 
-    async selectionChangeBreeds(breedName){
-      utils.forEveryDragon(this.tree, async (dragon) => {
+    async selectionChangeBreed(breedName){
+      forEveryDragon(this.tree, (dragon) => {
         if(dragon.selected){
           dragon.breed = breedName;
         }
       });
 
-      // update used breeds count with new count
-      this.$store.dispatch('setUsedBreeds', utils.countBreeds(this.tree));
-  
-      ///await this.$store.dispatch('addToUsedBreeds', breedName, this.$store.state.selectionCount);
+      this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
     },
+
+    selectionDeleteAncestors(){
+      this.applyToSelected('parents', {});
+      this.$store.commit('resetSelectionCount', countSelected(this.tree));
+      this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
+    },
+
+    selectionAddParents(){
+      this.applyToSelected(dragon => {
+        if(!('f' in dragon.parents)){
+            const parents ={
+                m: dragonBuilder.createDragonProperties({gender: 'm'}),
+                f: dragonBuilder.createDragonProperties({gender: 'f'})
+            };
+            dragon.parents = parents;
+        }
+      });
+    },
+
+    selectionSwitchParents(){
+      this.applyToSelected(async dragon => {
+        const newParents = await dragonBuilder.switchParents(dragon, this.$store);
+        dragon.parents = newParents;
+      });
+    },
+
     selectionRandomizeLabels(){
       this.applyToSelected((dragon) => {
-        // randomize name
         if(dragon.display === 0){
           dragon.name = dragonBuilder.generateName();
         }
-        // randomize code
         else{
           dragon.code = dragonBuilder.generateCode();
         }
-      })
+      });
     },
   
     selectionSwitchLabel(display){
@@ -211,8 +214,20 @@ export default {
     },
   
     unselectAll(){
-      utils.forEveryDragon(this.tree, dragon => dragon.selected = false);
+      this.applyToSelected('selected', false);
       this.$store.commit('resetSelectionCount');
+    },
+
+    selectBy(condition){
+      let count = 0;
+      forEveryDragon(this.tree, (dragon) => {
+        if(!dragon.selected && condition(dragon)){
+          dragon.selected = true;
+          count++;
+        }
+      });
+      
+      this.$store.commit('upSelectionCount', count);
     }
   }
 }

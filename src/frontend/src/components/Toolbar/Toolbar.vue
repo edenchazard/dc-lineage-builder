@@ -12,11 +12,6 @@
         v-if="showGenerateDialog"
         :tree='tree'
         @close="showGenerateDialog = false" />
-    <BreedDropdownv2
-        v-if="showSelectBreedSelector === true"
-        :breeds="availableBreeds"
-        @selected="(breed) => $emit('changeBreed', breed)"
-        @close="showBreedSelector=false" />
 
     <div class='toolbar'>
         <div class='toolbar-item'>
@@ -49,34 +44,61 @@
         </div>
     </div>
     <div class="selection-tools">
-        <span>
-            Select:
-            <ToolbarButton title='Select all males' icon="mars" @click="$emit('selectCriteria', 'male')" />
-            <ToolbarButton title='Select all females' icon="venus" @click="$emit('selectCriteria', 'female')" />
+        <div>Select:
+            <ToolbarButton title='Select all males' icon="mars" @click="$emit('selectCriteria', 'gender', 'm')" />
+            <ToolbarButton title='Select all females' icon="venus" @click="$emit('selectCriteria', 'gender', 'f')" />
             <ToolbarButton
                 title='More options'
                 icon="caret-down"
                 :options="selectionOptions"
-                @optionSelected="(criteria) => $emit('selectCriteria', criteria)" />
-        </span>
-        <span
+                @optionSelected="(value) => $emit('selectCriteria', value[0], value[1])" />
+            <ToolbarButton
+                :class="{
+                    'invisible': !itemsSelected
+                }"
+                title='Unselect all'
+                icon="times"
+                @click="$emit('unselectAll')" />
+        </div>
+        <div
             class="selection-apply"
             :class="{
                 'invisible': !itemsSelected
             }">
-            With selected ({{itemsSelected}}):
-            <ToolbarButton title='Unselect all' icon="times" @click="$emit('unselectAll')" />
-            <ToolbarButton title='Change breed' icon="dragon" @click="showSelectBreedSelector = true" />
-            <ToolbarButton title='Display names' icon="font" @click="$emit('displayNames')" />
-            <ToolbarButton title='Display codes' icon="italic" @click="$emit('displayCodes')" />
-            <ToolbarButton title='Randomize visible label' icon="random" @click="$emit('randomizeLabels')" />
-        </span>
+            <div class="selection-apply-left">
+                <ToolbarButton title='Display names' icon="font" @click="$emit('displayNames')" />
+                <ToolbarButton title='Display codes' icon="italic" @click="$emit('displayCodes')" />
+                <ToolbarButton title='Randomize visible label' icon="random" @click="$emit('randomizeLabels')" />
+                <ToolbarButton title='Delete Parents and Ancestors' icon="minus" @click="$emit('deleteAncestors')" />
+                <ToolbarButton title='Add Parents' icon="arrow-right" @click="$emit('addParents')" />
+            </div>
+            <div class="selection-apply-breed">
+                <select
+                    class="selection-apply-breed-dropdown"
+                    v-model="selectedBreed"
+                    @change="$emit('changeBreed', selectedBreed)">
+                    <option
+                        v-for="breed in availableBreeds"
+                        :key="breed">
+                        {{breed}}
+                    </option>
+                </select>
+                ({{itemsSelected}}) 
+            </div>
+        </div>
     </div>
 </div>
 </template>
 
 <script>
-import { utils } from '@/app/bundle.js';
+/*
+                <ToolbarButton title='Choose tags' icon="tag">
+                    <template #dropdown>
+                        <BreedTags />
+                    </template>
+                </ToolbarButton> 
+                <ToolbarButton title='Switch Parents' icon="sync-alt" @click="$emit('switchParents')" />*/
+import { utils, GLOBALS } from '@/app/bundle.js';
 
 import { ToggleButton } from "vue-js-toggle-button";
 
@@ -86,7 +108,28 @@ import DialogGenerate from './DialogGenerate';
 
 import ToolbarButton from './ToolbarButton';
 
-import BreedDropdownv2 from '@/components/BreedDropdownv2';
+//import BreedTags from '@/components/BreedTags';
+
+const treeSelectedContains = (tree) => {
+    let
+        male = false,
+        female = false;
+
+    utils.forEveryDragon(tree, dragon => {
+        if(!dragon.selected){
+            return;
+        }
+
+        if(dragon.gender === 'm'){
+            male = true;
+        }
+        else if(dragon.gender === 'f'){
+            female = true;
+        }
+    });
+
+    return { male, female }
+}          
 
 export default {
     name: 'Toolbar',
@@ -96,7 +139,7 @@ export default {
         DialogImport,
         DialogGenerate,
         ToolbarButton,
-        BreedDropdownv2
+        //BreedTags
     },
 
     props:{
@@ -107,25 +150,75 @@ export default {
     data(){
         return {
             selectionOptions: [
-                { label: "All with code", value: "code" },
-                { label: "All with name", value: "name" },
-                { label: "All with placeholder", value: "placeholder" },
+                { label: "All with code", value: ["display", 1] },
+                { label: "All with name", value: ["display", 0] },
+                { label: "All with placeholder", value: ["breed", "Placeholder"] },
             ],
             showImportDialog: false,
             showExportDialog: false,
             showGenerateDialog: false,
             showSelectBreedSelector: false,
+            selectedBreed: null
         }
     },
 
+    /*watch:{
+        selectedBreed(){
+            this.selectedBreed = null;
+        }
+    },*/
+
     computed: {
         itemsSelected(){
-            console.log('count', this.$store.state.selectionCount)
             return this.$store.state.selectionCount;
+        },
+
+        availableBreeds(){
+            if(!this.itemsSelected){
+                return [];
+            }
+
+            const a = performance.now();
+            // should we list males, females or both
+            const { male, female } = treeSelectedContains(this.tree);
+    
+            //filter by tags
+            const breedTable = GLOBALS.breeds.entire.filter(breed =>
+                this.$store.getters.enabledTags.indexOf(breed.metaData.category) > -1
+            );
+
+            const maleBreeds = GLOBALS.breeds.males.map(({name}) => name);
+            const femaleBreeds = GLOBALS.breeds.females.map(({name}) => name);
+    
+            let breedList;
+
+            // return breeds common to both lists
+            if(male && female){
+                breedList = breedTable
+                    .filter(breed =>
+                        maleBreeds.indexOf(breed.name) > -1
+                        && femaleBreeds.indexOf(breed.name) > -1)
+            }
+            else{
+                if(male){
+                    breedList = breedTable.filter(breed => maleBreeds.indexOf(breed.name) > -1);
+                }
+                else{
+                    breedList = breedTable.filter(breed => femaleBreeds.indexOf(breed.name) > -1);
+                }
+            }
+
+            console.log("AB SPEED", performance.now() - a)
+
+            return breedList.map(breed => breed.name);
         }
     },
 
     methods:{
+        test(r){
+            console.log(r)
+        },
+
         importLineage(tree){
             this.$emit('importTree', tree);
             this.$store.dispatch('setUsedBreeds', utils.countBreeds(tree));
@@ -155,23 +248,64 @@ export default {
 .selection-tools{    
   margin:5px auto;
   max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
+.selection-tools > div{
+    
 }
 .selection-apply{
+    display: flex;
+    flex-direction: column;
     display: inline-block;
-    border-left: 2px solid var(--builderControlBG);
-    margin-left: 5px;
-    padding-left: 5px;
+    border-top: 2px solid var(--builderControlBG);
+}
+.selection-apply-left .control:first-child{
+    margin-left: 0px;
+}
+.selection-apply-breed{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    /*background: var(--builderControlBG);*/
 }
 .selection-tools .control{
-    margin:2px;
+    margin:4px;
 }
 .invisible{
   visibility: hidden;
 }
+.selection-apply-breed-dropdown{
+    max-width: 170px;
+}
 @media only screen and (min-width: 768px) {
-  .toolbar {
-    padding: 0px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
+    .toolbar {
+        padding: 0px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    /*.selection-apply{
+        display: flex;
+        flex-direction: row;
+    }*/
+    .selection-apply-breed{
+    }
+}
+@media only screen and (min-width: 470px) {
+    .toolbar {
+        padding: 0px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .selection-apply{
+        margin-left: 5px;
+        padding-left: 5px;
+        border-left: 2px solid var(--builderControlBG);
+        border-top:0px none;
+    }
+    .selection-tools{
+        flex-direction: row;
+    }
 }
 </style>
