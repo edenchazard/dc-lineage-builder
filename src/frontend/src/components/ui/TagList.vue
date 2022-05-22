@@ -4,6 +4,7 @@
             v-for="(tag, index) in tagStates"
             :key="tag.name"
             :class="(tag.active ? 'tag-active' : 'tag-inactive')"
+            type="button"
             @click="selected(index)">{{tag.name}}
         </button>
     </div>
@@ -17,6 +18,10 @@ export default {
         defaultActive: {
             type: Boolean,
             default: true
+        },
+        atLeastOneEnabled: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -40,8 +45,25 @@ export default {
 
     methods:{
         selected(index){
-            const tag = this.tagStates[index];
-            this.tagStates[index].active = !tag.active;
+            const
+                tag = this.tagStates[index],
+                newValue = !tag.active;
+
+            // if this option is enabled, then we must ensure at least one tag
+            // is enabled at all times,
+            // to do this, we simply check the array of tags for actives and not
+            // matching the selected tag name
+            if(this.atLeastOneEnabled){
+                const atLeastOne = this.tagStates.find(({active, name}) => {
+                    return active && name !== tag.name
+                });
+
+                if(!atLeastOne){
+                    return;
+                }
+            }
+
+            this.tagStates[index].active = newValue;
             this.$emit('updated', this.tagStates);
         }
     }
