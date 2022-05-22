@@ -178,7 +178,6 @@ export default {
                 return [];
             }
 
-            const a = performance.now();
             // should we list males, females or both
             const { male, female } = treeSelectedContains(this.tree);
     
@@ -208,15 +207,13 @@ export default {
                 }
             }
 
-            console.log("AB SPEED", performance.now() - a)
-
             return breedList.map(breed => breed.name);
         }
     },
 
     methods:{
         test(r){
-            console.log(r)
+            r;
         },
 
         importLineage(tree){
