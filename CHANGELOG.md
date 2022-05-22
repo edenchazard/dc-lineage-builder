@@ -1,4 +1,13 @@
 # Changelog
+## 4.0.0
+- Mass selection tools!!!
+- Broke up the toolbar into it's own component and sub-components.
+- Dialog modifications.
+- New tags: Holiday, Valentine and Halloween.
+- Breed search no longer autofocuses on mobile, this was a bit annoying.
+- Bugfix: Switch gender button wasn't clickable.
+- Limitations with placeholders removed.
+
 ## 3.3.1
 - Performance improvements - removed unnecessary DOM elements.
 - Fix bug with view page showing the import link and copy when lineage not available.
