@@ -1,5 +1,6 @@
 <template>
 <button
+    type="button"
     class='control'
     :class="{
         'dropdown': options
@@ -14,10 +15,17 @@
             <li
                 v-for="option in options"
                 class="option"
-                :key="option.value"
+                :key="option.label"
                 @click="$emit('optionSelected', option.value)">
                 {{option.label}}</li>
         </ul>
+    </div>
+    <div
+        v-else-if="$slots.dropdown"
+        class="options">
+        <slot name="dropdown">
+
+        </slot>
     </div>
 </button>
 </template>
@@ -37,15 +45,21 @@ export default {
 
 <style scoped>
 .control{
-  margin:2px 0px;
-  cursor: pointer;
-  padding: 8px;
-  color:var(--builderControlFG);
-  background: var(--builderControlBG);
-  border:none;
+    margin:2px 0px;
+    cursor: pointer;
+    padding: 8px;
+    color:var(--builderControlFG);
+    background: var(--builderControlBG);
+    border:none;
+    width:30px;
+    height: 30px;
+}
+.control svg{
+    padding:0px;
 }
 .dropdown{
     position: relative;
+    z-index: 50;
 }
 .dropdown .options{
     display:none;
@@ -53,7 +67,7 @@ export default {
     z-index:1;
     color:var(--builderControlFG);
     background: var(--builderControlBG);
-    left:0px;
+    right:0px;
     min-width: 50px;
     padding:5px;
 }

@@ -1,74 +1,9 @@
 import { uniqueNamesGenerator, names, colors, animals } from 'unique-names-generator';
 import GLOBALS from './globals';
-/*
-const builder = {
-    generateCode(){
-        const characters = "1234567890ABCDEFGHIJKLMNOPQRTUVWXYZabcdefghijklmnopqrstuvwyz";
-        let str = "";
-        for(let i = 0; i < 5; ++i){
-            str += characters[~~(Math.random() * characters.length)];
-        }
-        return str;
-    },
+import utils from './utils';
 
-    generateName(){
-        return uniqueNamesGenerator({
-            dictionaries: [names, colors, animals],
-            length: 2,
-            separator: ' ',
-            style: 'capital'
-        });
-    },
+const { getBreedData } = utils;
 
-    createDragonProperties(overrides){
-        return {
-            code: this.generateCode(),
-            name: this.generateName(),
-            parents: { },
-            breed: GLOBALS.placeholder_breed.name,
-            gender: "m",
-            display: 1,
-            selected: false,
-            ...overrides
-        };
-    }
-};
-
-function Dragon(dragon, storeDispatchFunction){
-    const dispatch = function(key, value){
-        if(!storeDispatchFunction){
-            return;
-        }
-
-        return storeDispatchFunction(key, value)
-    }
-
-    // an empty dragon object, return an object for creating
-    // things
-    if(!dragon){
-        return builder;
-    }
-    
-    return {
-        switchParents(){
-    
-        },
-
-        switchGender(){
-
-        },
-
-        changeBreed(){
-
-        },
-    
-        isPlaceholder(){
-            return dragon.breed.toLowerCase() === "placeholder";
-        }
-    }
-}
-
-Dragon;*/
 const dragonBuilder = {
     generateCode(){
         const characters = "1234567890ABCDEFGHIJKLMNOPQRTUVWXYZabcdefghijklmnopqrstuvwyz";
@@ -113,6 +48,33 @@ const dragonBuilder = {
             display: dragon.display,
             selected: false
         }
+    },
+
+    async switchParents(dragon, $store){
+        // make a new branch
+        const newParents = {
+            m: {...dragon.parents.f, gender: 'm'},
+            f: {...dragon.parents.m, gender: 'f'}
+        };
+
+        // validate breed only requirements for each parent 
+        const male = getBreedData(newParents.m.breed);
+
+        // if a genderonly flag is set, it means we must replace the breed
+        // with the placeholder
+        if(male.genderOnly){
+            newParents.m.breed = GLOBALS.placeholder_breed.name;
+            // update store to reflect we removed the breed
+            await $store.dispatch('removeFromUsedBreeds', dragon.parents.f.breed);
+        }
+
+        const female = getBreedData(newParents.f.breed);
+        if(female.genderOnly){
+            newParents.f.breed = GLOBALS.placeholder_breed.name;
+            await $store.dispatch('removeFromUsedBreeds', dragon.parents.m.breed);
+        }
+
+        return newParents;
     }
 };
 

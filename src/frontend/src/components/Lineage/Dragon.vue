@@ -170,30 +170,7 @@ export default {
 
     methods: {
         async switchParents(){
-            // make a new branch
-            const newParents = {
-                m: {...this.parents.f, gender: 'm'},
-                f: {...this.parents.m, gender: 'f'}
-            };
-
-            // validate breed only requirements for each parent 
-            const male = utils.getBreedData(newParents.m.breed);
-    
-            // if a genderonly flag is set, it means we must replace the breed
-            // with the placeholder
-            if(male.genderOnly){
-                newParents.m.breed = GLOBALS.placeholder_breed.name;
-                // update store to reflect we removed the breed
-                await this.$store.dispatch('removeFromUsedBreeds', this.parents.f.breed);
-            }
-
-            const female = utils.getBreedData(newParents.f.breed);
-            if(female.genderOnly){
-                newParents.f.breed = GLOBALS.placeholder_breed.name;
-                await this.$store.dispatch('removeFromUsedBreeds', this.parents.m.breed);
-            }
-
-            // update the parents
+            const newParents = await dragonBuilder.switchParents(this, this.$store);
             this.$emit('update:parents', newParents);
         },
 
