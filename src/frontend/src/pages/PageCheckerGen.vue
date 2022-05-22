@@ -1,12 +1,16 @@
 <template>
     <div>
-        <DialogExport :show="showExportDialog" :tree="tree" @close="showExportDialog = false" />
+        <DialogExport
+            v-if="showExportDialog"
+            :tree="tree"
+            @close="showExportDialog = false" />
+
         <div class='central-block'>
             <section>
                 <h2>Checker Generator</h2>
                 <p>On this page you can build checkers quickly. Simply select the male breed (top), the female breed (bottom) and how many generations you want it to be. You can then export it and import it for use with the editor.</p>
             </section>
-            <section id='controls'>
+            <section id='checker-controls'>
                 <div class='left'>
                     <div>
                         <label for="filter">Filter: </label>
@@ -136,10 +140,10 @@ export default {
 }
 </script>
 <style scoped>
-#controls{
+#checker-controls{
     display:flex;
 }
-#controls .left > div{
+#checker-controls .left > div{
     margin-bottom:5px;
 }
 #breeds{
