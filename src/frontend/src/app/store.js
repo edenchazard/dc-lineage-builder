@@ -117,9 +117,7 @@ const store = new Vuex.Store({
         },
 
         setUsedBreeds(state, breeds){
-            const a = Date.now();
             state.stats.usedBreeds = breeds;
-            console.log(Date.now() - a, 'time')
         },
 
         addBreed(state, { breedName, amount }){
