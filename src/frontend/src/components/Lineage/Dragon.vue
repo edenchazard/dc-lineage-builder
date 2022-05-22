@@ -10,13 +10,13 @@
                     @close="showBreedSelector=false" />
                 <DragonButton 
                     v-if="nodesFromRoot === 0"
-                    class='left'
+                    class='dragon-left'
                     title='Add descendant'
                     icon="arrow-left"
                     @click="addDescendant" />
                 <DragonButton 
                     v-if="nodesFromRoot > 0"
-                    class='left'
+                    class='dragon-left'
                     title='Remove descendants'
                     icon="cut"
                     @click="removeDescendants" />
@@ -34,19 +34,19 @@
                     :data="getBreedFromData" />
                 <DragonButton 
                     v-if="hasParents"
-                    class='right'
+                    class='dragon-right'
                     title='Remove ancestors'
                     icon="minus"
                     @click="deleteAncestors" />
                 <DragonButton 
                     v-if="hasParents"
-                    class='right2'
+                    class='dragon-right2'
                     title='Switch parents'
                     icon="sync-alt"
                     @click="switchParents" />
                 <DragonButton 
                     v-if="!hasParents"
-                    class='right'
+                    class='dragon-right'
                     title='Add ancestors'
                     icon="arrow-right"
                     @click="addAncestors" />
@@ -404,19 +404,19 @@ li::after {
 }
 </style>
 <style>
-.right, .left, .right2{
+.dragon-right, .dragon-left, .dragon-right2{
     position:absolute;
     z-index: 5;
 }
-.left{
+.dragon-left{
     left:0px;
     top:0px;
 }
-.right{
+.dragon-right{
     right:0px;
     top:0px;
 }
-.right2{
+.dragon-right2{
     right:0px;
     top:21px;
 }
