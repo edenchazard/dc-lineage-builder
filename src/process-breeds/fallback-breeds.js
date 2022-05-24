@@ -1310,4 +1310,39 @@ module.exports = {
         category: 'two-head',
         sprites: ['bZeHE', '0', '-1', '48']
     },
+    "Thundersnow": {
+        genderOnly: false,
+        category: 'dragon',
+        sprites: ['3vp64', '-14', '-1', '48']
+    },
+    "Astralophyne": {
+        genderOnly: false,
+        category: 'dragon',
+        sprites: ['3vp64', '-18', '-1', '48']
+    },
+    "Fanalea": {
+        genderOnly: false,
+        category: 'dragon',
+        sprites: ['JQjm9', '-18', '-1', '48']
+    },
+    "Pyrrhichios": {
+        genderOnly: false,
+        category: 'dragon',
+        sprites: ['zVQLQ', '0', '-1', '48']
+    },
+    "Hooded Murkling": {
+        genderOnly: false,
+        category: 'dragon',
+        sprites: ['TIOUK', '-20', '-1', '48']
+    },
+    "Furor Pygmy": {
+        genderOnly: false,
+        category: 'pygmy',
+        sprites: ['ntFiu', '-15', '-1', '48']
+    },
+    "Scourgekeeper": {
+        genderOnly: false,
+        category: 'two-head',
+        sprites: ['ny65H', '-4', '-1', '48']
+    }
 };
