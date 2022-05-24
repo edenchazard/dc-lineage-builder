@@ -1318,7 +1318,7 @@ module.exports = {
     "Astralophyne": {
         genderOnly: false,
         category: 'dragon',
-        sprites: ['3vp64', '-18', '-1', '48']
+        sprites: ['EKXWG', '-18', '-1', '48']
     },
     "Fanalea": {
         genderOnly: false,
