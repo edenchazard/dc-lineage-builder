@@ -8,7 +8,7 @@ Built with VueJS 2, nginx and NodeJS.
 - "Fully granular" control over dragons - you can clone and paste entire ancestors, switch parent genders, remove/add ancestors and descendants.
 - Automatic code and name generation! You can switch between the code and name, and edit them however you wish.
 - Code and name validation - All codes and names are validated to ensure they are legal on DC (but will not be checked for availability.) A game changer for you lyrical lineage builders out there.
-- Share a publicly viewable link to built lineages. These lineages will remain available for 2 months since they were last viewed. Example! You can even import them into the editor.
+- Share a publicly viewable link to built lineages. These lineages will remain available for 2 months since they were last viewed. [Example!](https://chazza.me/dc/lineage-builder/view/b942eb0fa7b0c2b1b261bbb7297dc76ba2b56abc) You can even import them into the editor.
 - Export and import lineages - Save a copy of your lineage and import it for later. Really useful for those massive lineages.
 - Partial support for time-based sprites and spriter alts (where permission has been granted)
 - A super cool breed dropdown when you click a dragon. Trust me, it's seriously super cool.
