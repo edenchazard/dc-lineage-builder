@@ -1,7 +1,7 @@
 # Dragcave Lineage Builder
-Dragcave lineage builder is a third-party tool for the online game [Dragcave.net](https://dragcave.net/). It enables users to preview dragon lineages, a core function of the game.
+Dragcave lineage builder is an open-source third-party tool for the online game [Dragcave.net](https://dragcave.net/). It enables users to preview dragon lineages, a core function of the game.
 
-VueJS frontend on Apache with a nodeJS API backend.
+Built with VueJS 2, nginx and NodeJS.
 
 ## Features
 - Looks nearly the same as DC! This tool aims to replicate how a lineage is displayed on DC right down to the very last pixel. ;) 
@@ -19,7 +19,7 @@ VueJS frontend on Apache with a nodeJS API backend.
 - Mass-selection tools - Change multiple breed tiles at once.
 
 ## Running the project
-Download docker.
+The project is dockerized, so download docker plus docker-compose, clone the repository and then run the development or production compose files below.
 
 ### Development
 ```docker-compose --env-file .env.dev -p dc-lb_dev up```
@@ -30,4 +30,4 @@ Change VUE_APP_URL in `docker-compose.prod.yml` to the deployment url.
 ```docker-compose --env-file .env.prod -p dc-lb -f docker-compose.prod.yml up -d --build```
 
 ## Breed processing
-Run `npm run process-breeds`. This will parse both local and fallback breed tables, create the relevant breed definitions json files and css in the correct locations.
+Run `npm run process-breeds`. This will parse both local and fallback breed tables, create the relevant breed definitions json and css files in the correct locations.
