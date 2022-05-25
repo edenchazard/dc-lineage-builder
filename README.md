@@ -14,6 +14,9 @@ VueJS frontend on Apache with a nodeJS API backend.
 - A super cool breed dropdown when you click a dragon. Trust me, it's seriously super cool.
 - Generation counter. Yep, it's there.
 - Skin switcher - Switch between the different DragCave skins on the fly, for example the default or portal 2 skins, to preview how your lineage appears on different skins.
+- Ghost breeds - Are you an artist? Insert your own lineage tiles and preview them as if they were on DC.
+- Checker generator - A handy tool for generating checker lineages faster than you can blink.
+- Mass-selection tools - Change multiple breed tiles at once.
 
 ## Running the project
 Download docker.
@@ -25,3 +28,6 @@ Download docker.
 Change VUE_APP_URL in `docker-compose.prod.yml` to the deployment url.
 
 ```docker-compose --env-file .env.prod -p dc-lb -f docker-compose.prod.yml up -d --build```
+
+## Breed processing
+Run `npm run process-breeds`. This will parse both local and fallback breed tables, create the relevant breed definitions json files and css in the correct locations.
