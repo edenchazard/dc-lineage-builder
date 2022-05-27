@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import utils from "@/app/utils";
 
 Vue.use(Vuex);
 
@@ -42,7 +41,7 @@ const store = new Vuex.Store({
             });
         },
 
-        addToUsedBreeds({commit, state}, breedNameOrObj, quantity){
+        /*addToUsedBreeds({commit, state}, breedNameOrObj, quantity){
             return new Promise((resolve, reject) => {
                 const type = typeof breedNameOrObj;
 
@@ -100,26 +99,26 @@ const store = new Vuex.Store({
                     reject(new Error("used breeds - wrong type"));
                 }
             });
-        }
+        }*/
     },
 
     mutations: {
-        resetSelectionCount(state, to = 0){
+        setSelectionCount(state, to = 0){
             state.selectionCount = to;
         },
-
+        /*
         upSelectionCount(state, count = 1){
             state.selectionCount+= count;
         },
 
         downSelectionCount(state, count = 1){
             state.selectionCount-= count;
-        },
+        },*/
 
         setUsedBreeds(state, breeds){
             state.stats.usedBreeds = breeds;
         },
-
+/*
         addBreed(state, { breedName, amount }){
             if(utils.isPlaceholder(breedName)){
                 return;
@@ -146,7 +145,7 @@ const store = new Vuex.Store({
             else{
                 state.stats.usedBreeds[breedName] = (instancesOfBreed - amount);
             }
-        },
+        },*/
 
         setTags(state, tags){
             state.tags = tags;
