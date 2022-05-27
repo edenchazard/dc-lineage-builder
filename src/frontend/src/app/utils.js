@@ -136,7 +136,6 @@ const utils = {
     },
 
     countSelected(tree){
-        const a = performance.now();
       let count = 0;
       utils.forEveryDragon(tree, async (dragon) => {
         if(dragon.selected){
@@ -144,7 +143,6 @@ const utils = {
         }
       });
 
-      console.log('COUNT SELECTED', performance.now() - a )
       return count;
     },
 };

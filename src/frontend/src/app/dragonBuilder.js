@@ -50,29 +50,27 @@ const dragonBuilder = {
         }
     },
 
-    async switchParents(dragon, $store){
-        // make a new branch
+    switchGender(dragon){
+        const newGender = (dragon.gender === 'f' ? 'm': 'f');
+
+        const breed = getBreedData(dragon.breed);
+
+        if(breed.genderOnly){
+            dragon.breed = GLOBALS.placeholder_breed.name;
+        }
+
+        dragon.gender = newGender;
+    },
+
+    /*async*/ switchParents(dragon, /*$store*/){
+        // make a new branch with the parents switched
         const newParents = {
-            m: {...dragon.parents.f, gender: 'm'},
-            f: {...dragon.parents.m, gender: 'f'}
+            m: dragon.parents.f,
+            f: dragon.parents.m
         };
 
-        // validate breed only requirements for each parent 
-        const male = getBreedData(newParents.m.breed);
-
-        // if a genderonly flag is set, it means we must replace the breed
-        // with the placeholder
-        if(male.genderOnly){
-            newParents.m.breed = GLOBALS.placeholder_breed.name;
-            // update store to reflect we removed the breed
-            await $store.dispatch('removeFromUsedBreeds', dragon.parents.f.breed);
-        }
-
-        const female = getBreedData(newParents.f.breed);
-        if(female.genderOnly){
-            newParents.f.breed = GLOBALS.placeholder_breed.name;
-            await $store.dispatch('removeFromUsedBreeds', dragon.parents.m.breed);
-        }
+        dragonBuilder.switchGender(newParents.m);
+        dragonBuilder.switchGender(newParents.f);
 
         return newParents;
     }
