@@ -51,7 +51,7 @@
                 title='More options'
                 icon="caret-down"
                 :options="selectionOptions"
-                @optionSelected="(value) => $emit('selectCriteria', value[0], value[1])" />
+                @optionSelected="([crit, value]) => $emit('selectCriteria', crit, value)" />
             <ToolbarButton
                 :class="{
                     'invisible': !itemsSelected
@@ -71,6 +71,7 @@
                 <ToolbarButton title='Randomize visible label' icon="random" @click="$emit('randomizeLabels')" />
                 <ToolbarButton title='Delete Parents and Ancestors' icon="minus" @click="$emit('deleteAncestors')" />
                 <ToolbarButton title='Add Parents' icon="arrow-right" @click="$emit('addParents')" />
+                <ToolbarButton title='Switch Parents' icon="sync-alt" @click="$emit('switchParents')" />
             </div>
             <div class="selection-apply-breed">
                 <select
@@ -96,8 +97,7 @@
                     <template #dropdown>
                         <BreedTags />
                     </template>
-                </ToolbarButton> 
-                <ToolbarButton title='Switch Parents' icon="sync-alt" @click="$emit('switchParents')" />*/
+                </ToolbarButton> */
 import { utils, GLOBALS } from '@/app/bundle.js';
 
 import { ToggleButton } from "vue-js-toggle-button";
@@ -174,9 +174,9 @@ export default {
         },
 
         availableBreeds(){
-            if(!this.itemsSelected){
-                return [];
-            }
+            // no tree, ignore. prevents exception when switching routes
+            if(!this.tree) return [];
+            if(!this.itemsSelected) return [];
 
             // should we list males, females or both
             const { male, female } = treeSelectedContains(this.tree);
@@ -189,25 +189,23 @@ export default {
             const maleBreeds = GLOBALS.breeds.males.map(({name}) => name);
             const femaleBreeds = GLOBALS.breeds.females.map(({name}) => name);
     
-            let breedList;
-
             // return breeds common to both lists
+            let filter;
             if(male && female){
-                breedList = breedTable
-                    .filter(breed =>
+                filter = breed =>
                         maleBreeds.indexOf(breed.name) > -1
-                        && femaleBreeds.indexOf(breed.name) > -1)
+                        && femaleBreeds.indexOf(breed.name) > -1
             }
             else{
                 if(male){
-                    breedList = breedTable.filter(breed => maleBreeds.indexOf(breed.name) > -1);
+                    filter = breed => maleBreeds.indexOf(breed.name) > -1;
                 }
                 else{
-                    breedList = breedTable.filter(breed => femaleBreeds.indexOf(breed.name) > -1);
+                    filter = breed => femaleBreeds.indexOf(breed.name) > -1;
                 }
             }
 
-            return breedList.map(breed => breed.name);
+            return breedTable.filter(filter).map(breed => breed.name);
         }
     },
 

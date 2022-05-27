@@ -107,8 +107,8 @@ import { GLOBALS, utils, validators, dragonBuilder } from '@/app/bundle';
 import longPressDirective from "@/directives/long-press/long-press";
 
 const
-    ls = localStorage,
-    { countSelected, countBreeds } = utils;
+    ls = localStorage;//,
+    //{ countSelected, countBreeds } = utils;
 
 export default {
     name: 'Dragon',
@@ -170,7 +170,7 @@ export default {
 
     methods: {
         async switchParents(){
-            const newParents = await dragonBuilder.switchParents(this, this.$store);
+            const newParents = /*await*/ dragonBuilder.switchParents(this);
             this.$emit('update:parents', newParents);
         },
 
@@ -207,8 +207,8 @@ export default {
 
             // update the breed
             this.$emit('update:breed', e.name);
-            await this.$store.dispatch('removeFromUsedBreeds', this.breed);
-            await this.$store.dispatch('addToUsedBreeds', e.name);
+            //await this.$store.dispatch('removeFromUsedBreeds', this.breed);
+            //await this.$store.dispatch('addToUsedBreeds', e.name);
         },
 
         async pasteBranch(){
@@ -222,21 +222,21 @@ export default {
 
             // remove breed counts from previous branch
             if(this.hasParents){
-                await this.$store.dispatch('removeFromUsedBreeds', countBreeds([
+                /*await this.$store.dispatch('removeFromUsedBreeds', countBreeds([
                     this.parents.m,
                     this.parents.f
-                ]));
+                ]));*/
 
                 //and update selection count, if we have to
-                const count = countSelected(this.parents.m) + countSelected(this.parents.f);
-                this.$store.commit('downSelectionCount', count);
+                //const count = countSelected(this.parents.m) + countSelected(this.parents.f);
+                //this.$store.commit('downSelectionCount', count);
             }
 
             // update with new breed counts from pasted branch
-            await this.$store.dispatch('addToUsedBreeds', countBreeds([
+            /*await this.$store.dispatch('addToUsedBreeds', countBreeds([
                 paste.m,
                 paste.f
-            ]));
+            ]));*/
 
             // insert the new branch
             this.$emit('update:parents', paste);
@@ -279,7 +279,7 @@ export default {
 
         // deletes this node and ancestors
         async deleteAncestors(){
-            await this.$store.dispatch('removeFromUsedBreeds', countBreeds([
+            /*await this.$store.dispatch('removeFromUsedBreeds', countBreeds([
                 this.parents.m,
                 this.parents.f
             ]));
@@ -287,7 +287,7 @@ export default {
             // update selection count to reflect any potentially removed
             this.$store.commit('downSelectionCount',
                 (countSelected(this.parents.m) + countSelected(this.parents.f))
-            );
+            );*/
 
             this.$emit('update:parents', {});
         },
@@ -306,7 +306,7 @@ export default {
             if(!this.$store.state.selectionCount){
                 if(!this.selected){
                     this.$emit('update:selected', true);
-                    this.$store.commit('upSelectionCount');
+                    //this.$store.commit('upSelectionCount');
                 }
             }
             else{
@@ -318,11 +318,11 @@ export default {
             if(this.disabled){ return; }
             if(this.$store.state.selectionCount){
                 if(this.selected){
-                    this.$store.commit('downSelectionCount');
+                    //this.$store.commit('downSelectionCount');
                     this.$emit('update:selected', false);
                 }
                 else{
-                    this.$store.commit('upSelectionCount');
+                    //this.$store.commit('upSelectionCount');
                     this.$emit('update:selected', true);
                 }
             }

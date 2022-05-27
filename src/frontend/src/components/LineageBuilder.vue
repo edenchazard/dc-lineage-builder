@@ -35,7 +35,7 @@ import Toolbar from './Toolbar/Toolbar.vue';
 import Lineage from '@/components/Lineage/Lineage';
 import Information from '@/components/ui/Information';
 
-const { forEveryDragon, countBreeds, countSelected } = utils;
+const { forEveryDragon } = utils;
 
 export default {
   name: 'LineageBuilder',
@@ -55,15 +55,42 @@ export default {
         disabled: false
       },
       viewLink: "",
-      categories: [
-        {id: 1, name: "Dragon"},
-        {id: 2, name: "Pygmy"},
-        {id: 3, name: "Two-head"}
-      ],
       status: {
         level: 0,
         message: "",
         title: ""
+      }
+    }
+  },
+
+  watch: {
+    
+    tree: {
+      deep: true,
+      handler(){
+        //const a = performance.now();
+        // count breeds in the tree recursively
+        // accepts an array of trees
+        const addToCountBreeds = (list, breed) => {
+          list[breed] = list[breed] + 1 || 1;
+        };
+      
+        const breeds = {};
+        let selected = 0;
+    
+        utils.forEveryDragon(this.tree, (dragon) => {
+          addToCountBreeds(breeds, dragon.breed);
+          if(dragon.selected){
+            selected++;
+          }
+        });
+
+        // exclude placeholders
+        breeds['Placeholder'] && delete breeds['Placeholder'];
+
+        this.$store.commit('setUsedBreeds', breeds);
+        this.$store.commit('setSelectionCount', selected);
+        //console.log(performance.now() - a)
       }
     }
   },
@@ -92,7 +119,7 @@ export default {
 
         this.tree = importedTree;
         this.status = { level: 0, message: "" };
-        this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
+        //this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
       }
       catch (error) {
         const { response } = error;
@@ -110,7 +137,7 @@ export default {
   // tree can be a large memory hog, and gc doesn't always get to it immediately.
   beforeDestroy(){
     this.tree = null;
-    this.$store.dispatch('setUsedBreeds', []);
+    //this.$store.dispatch('setUsedBreeds', []);
   },
 
   methods: {
@@ -133,10 +160,10 @@ export default {
 
     replaceRoot(node){
       // recalculate selected count
-      this.$store.commit('resetSelectionCount', countSelected(node));
+      //this.$store.commit('resetSelectionCount', countSelected(node));
 
       // recalculate breed numbers
-      this.$store.dispatch('setUsedBreeds', countBreeds(node))
+      //this.$store.dispatch('setUsedBreeds', countBreeds(node))
   
       // replace the tree
       this.tree = node;
@@ -170,13 +197,13 @@ export default {
         }
       });
 
-      this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
+      //this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
     },
 
     selectionDeleteAncestors(){
       this.applyToSelected('parents', {});
-      this.$store.commit('resetSelectionCount', countSelected(this.tree));
-      this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
+      //this.$store.commit('resetSelectionCount', countSelected(this.tree));
+      //this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
     },
 
     selectionAddParents(){
@@ -191,9 +218,13 @@ export default {
       });
     },
 
-    selectionSwitchParents(){
-      this.applyToSelected(async dragon => {
-        const newParents = await dragonBuilder.switchParents(dragon, this.$store);
+    async selectionSwitchParents(){
+      this.applyToSelected(dragon => {
+        // no parents, ignore
+        if(!('f' in dragon.parents)){
+          return;
+        }
+        const newParents = dragonBuilder.switchParents(dragon);
         dragon.parents = newParents;
       });
     },
@@ -215,19 +246,17 @@ export default {
   
     unselectAll(){
       this.applyToSelected('selected', false);
-      this.$store.commit('resetSelectionCount');
+      //this.$store.commit('resetSelectionCount');
     },
 
     selectBy(condition){
-      let count = 0;
       forEveryDragon(this.tree, (dragon) => {
         if(!dragon.selected && condition(dragon)){
           dragon.selected = true;
-          count++;
         }
       });
       
-      this.$store.commit('upSelectionCount', count);
+      //this.$store.commit('upSelectionCount', count);
     }
   }
 }
