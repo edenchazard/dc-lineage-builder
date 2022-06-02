@@ -7,7 +7,11 @@
         </div>
         <div v-if="tree != null" id='options'>
           <span class='option'>
-            <router-link :to="{ path: '/', query: { template: hash }}">Import into editor</router-link>
+            <router-link
+              :to="{
+                path: '/',
+                query: { template: hash }
+              }">Import into editor</router-link>
           </span>
           <span class='option'>
             Share link: <TextCopy v-model="shareLink" type='input' />
