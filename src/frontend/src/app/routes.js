@@ -1,56 +1,37 @@
-import PageView from "../pages/PageView.vue";
-import PageBuilder from '../pages/PageBuilder.vue';
-import PageError from '../pages/PageError.vue';
-import PageHowTo from '../pages/PageHowTo.vue';
-import PageDisclaimer from '../pages/PageDisclaimer.vue';
-import PageCheckerGen from '../pages/PageCheckerGen.vue';
-import PageGhostBreeds from '../pages/PageGhostBreeds.vue';
-
 export default [
     { 
         path: '/',
         name: "Build",
-        component: PageBuilder
+        component: () => import(/* webpackChunkName: "builder" */'../pages/PageBuilder.vue')
     },
     {
         path: '/view/:hash',
         name: "Viewing Lineage",
-        component: PageView
+        component: () => import(/* webpackChunkName: "view" */"../pages/PageView.vue")
     },
     {
         path: '/how-to',
         name: "How to Use",
-        component: PageHowTo
+        component: () => import(/* webpackChunkName: "how-to" */'../pages/PageHowTo.vue')
     },
     {
         path: '/disclaimer',
         name: "Disclaimer",
-        component: PageDisclaimer
+        component: () => import(/* webpackChunkName: "disclaimer" */'../pages/PageDisclaimer.vue')
     },
     {
         path: '/checkers',
         name: "Checker Generator",
-        component: PageCheckerGen
+        component: () => import(/* webpackChunkName: "checker-gen" */'../pages/PageCheckerGen.vue')
     },
     {
         path: '/ghost-breeds',
         name: "Ghost Breeds",
-        component: PageGhostBreeds
+        component: () => import(/* webpackChunkName: "ghost-breeds" */'../pages/PageGhostBreeds.vue')
     },
     {
         path: '*',
         name: "Error",
-        component: PageError
+        component: () => import(/* webpackChunkName: "error" */'../pages/PageError.vue')
     }
 ];
-
-
-/*
-const routes = [
-    { path: '/', name: "Build", component: () => import('@/pages/PageBuilder') },
-    { path: '/view/:hash', name: "Viewing Lineage", component: () => import('@/pages/PageView') },
-    { path: '/how-to', name: "How to Use", component: () => import('@/pages/PageHowTo') },
-    { path: '/disclaimer', name: "Disclaimer", component: () => import('@/pages/PageDisclaimer') },
-    { path: '*', name: "Error", component: () => import('@/pages/PageError') }
-];
-*/
