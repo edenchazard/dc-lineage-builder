@@ -15,7 +15,7 @@
           </section>
         </section>
         */
-import LineageBuilder from '@/components/LineageBuilder';
+import LineageBuilder from '../components/LineageBuilder.vue';
 
 export default {
   name: 'PageBuilder',

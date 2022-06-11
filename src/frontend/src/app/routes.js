@@ -1,10 +1,10 @@
-import PageView from '@/pages/PageView';
-import PageBuilder from '@/pages/PageBuilder';
-import PageError from '@/pages/PageError';
-import PageHowTo from '@/pages/PageHowTo';
-import PageDisclaimer from '@/pages/PageDisclaimer';
-import PageCheckerGen from '@/pages/PageCheckerGen';
-import PageGhostBreeds from '@/pages/PageGhostBreeds';
+import PageView from "../pages/PageView.vue";
+import PageBuilder from '../pages/PageBuilder.vue';
+import PageError from '../pages/PageError.vue';
+import PageHowTo from '../pages/PageHowTo.vue';
+import PageDisclaimer from '../pages/PageDisclaimer.vue';
+import PageCheckerGen from '../pages/PageCheckerGen.vue';
+import PageGhostBreeds from '../pages/PageGhostBreeds.vue';
 
 export default [
     { 

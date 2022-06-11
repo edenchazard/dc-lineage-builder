@@ -8,8 +8,9 @@
     </div>
 </template>
 <script>
-import BreedGrid from "@/components/BreedGrid";
-import { utils } from '@/app/bundle';
+import { getBreedData, filterBreedTableByGender } from '../app/utils';
+
+import BreedGrid from "./BreedGrid.vue";
 
 export default {
     name: 'BreedDropdownReuse',
@@ -20,8 +21,8 @@ export default {
     computed: {
         recentlyUsed(){
             const uniqueBreedNames = Object.keys(this.$store.state.stats.usedBreeds);
-            const uniqueBreeds = uniqueBreedNames.map(breedName => utils.getBreedData(breedName))
-            const r = utils.filterBreedTableByGender(uniqueBreeds, this.filterByGender);
+            const uniqueBreeds = uniqueBreedNames.map(breedName => getBreedData(breedName))
+            const r = filterBreedTableByGender(uniqueBreeds, this.filterByGender);
             return r;
         }
     }

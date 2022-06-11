@@ -24,7 +24,8 @@
     </span>
 </template>
 <script>
-import { dragonBuilder } from '@/app/bundle'; 
+import { generateName, generateCode } from "../../app/dragonBuilder";
+
 export default {
     name: 'DragonLabelField',
     components: { },
@@ -66,10 +67,10 @@ export default {
             // a new string of name or code
             if(value == ''){
                 if(this.display == 1){
-                    value = dragonBuilder.generateCode();
+                    value = generateCode();
                 }
                 else{
-                    value = dragonBuilder.generateName();
+                    value = generateName();
                 }
             }
 

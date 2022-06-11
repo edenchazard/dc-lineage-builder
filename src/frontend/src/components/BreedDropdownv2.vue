@@ -38,10 +38,10 @@
     </FocusableDialog>
 </template>
 <script>
-import BreedDropdownResults from '@/components/BreedDropdownResults';
-import BreedDropdownReuse from '@/components/BreedDropdownReuse';
-import FocusableDialog from '@/components/FocusableDialog';
-import BreedTags from '@/components/BreedTags';
+import BreedDropdownResults from './BreedDropdownResults.vue';
+import BreedDropdownReuse from './BreedDropdownReuse.vue';
+import FocusableDialog from './FocusableDialog.vue';
+import BreedTags from './BreedTags.vue';
 
 export default {
     name: 'BreedDropdownv2',

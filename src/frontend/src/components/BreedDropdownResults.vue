@@ -14,7 +14,7 @@
     </div>
 </template>
 <script>
-import BreedGrid from "@/components/BreedGrid"
+import BreedGrid from "./BreedGrid.vue"
 
 export default {
     name: 'BreedDropdownResults',

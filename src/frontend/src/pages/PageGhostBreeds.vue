@@ -63,9 +63,10 @@
 </template>
   
 <script>
-import GhostBreedUpload from "@/components/GhostBreedUpload.vue";
-import { utils } from '@/app/bundle.js';
-import Information from '@/components/ui/Information';
+import { addBreed } from '../app/utils';
+
+import GhostBreedUpload from "../components/GhostBreedUpload.vue";
+import Information from '../components/ui/Information';
 
 export default {
   name: 'PageGhostBreeds',
@@ -149,7 +150,7 @@ export default {
         ...getGenderProps()
       }
 
-      if(utils.addBreed(breed)){
+      if(addBreed(breed)){
         // successfully added
         this.status = { level: 1, message: "Breed successfully added: "+this.name };
       }

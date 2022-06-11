@@ -17,11 +17,13 @@
     </Dialog>
 </template>
 <script>
-import { validators, backend } from '@/app/bundle.js';
-import Dialog from '@/components/Dialog';
-import Information from '@/components/ui/Information';
-import TextCopy from '@/components/ui/TextCopy';
-import { utils } from '@/app/bundle';
+import { verifyIntegrity, meetsSaveRequirements } from '../../app/validators';
+import { cloneObj, forEveryDragon } from "../../app/utils";
+import { generateUrl } from "../../app/api";
+
+import Dialog from "../Dialog.vue";
+import Information from "../ui/Information.vue";
+import TextCopy from "../ui/TextCopy.vue";
 
 export default {
     name: 'DialogGenerate',
@@ -42,16 +44,16 @@ export default {
 
     async mounted(){
         // we do this conversion because vue attaches getters/setters to our tree
-        const exportedTree = utils.cloneObj(this.tree);
+        const exportedTree = cloneObj(this.tree);
 
-        utils.forEveryDragon(exportedTree, dragon => {
+        forEveryDragon(exportedTree, dragon => {
             delete dragon.selected;
         });
 
         // this could happen, we need to make sure the lineage fits
         // our requirements for saving
-        if(!validators.verifyIntegrity(exportedTree)
-        || !validators.meetsSaveRequirements(exportedTree)){
+        if(!verifyIntegrity(exportedTree)
+        || !meetsSaveRequirements(exportedTree)){
             this.status = {
                 level: 3,
                 message: `At least one of these dragons does not meet the save
@@ -64,7 +66,7 @@ export default {
 
         try {
             this.status = { level: 1, message: "Generating link..." };
-            const response = await backend.generateUrl(exportedTree);
+            const response = await generateUrl(exportedTree);
             this.viewLink = `${window.location.origin}${process.env.VUE_APP_URL}view/${response.data.hash}`;
             this.status = { level: 0, message: "" };
         }

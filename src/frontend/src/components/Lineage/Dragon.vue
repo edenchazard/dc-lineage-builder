@@ -99,16 +99,20 @@
 notes for meself
 label warning is a bit hacky and needs improving
 */
-import DragonLabelField from './DragonLabelField';
-import BreedDropdownv2 from '@/components/BreedDropdownv2'
-import DragonPortrait from "@/components/DragonPortrait";
-import DragonButton from "./DragonButton";
-import { GLOBALS, utils, validators, dragonBuilder } from '@/app/bundle';
-import longPressDirective from "@/directives/long-press/long-press";
+import GLOBALS from "../../app/globals";
+import { getBreedData, cloneObj, forEveryDragon } from "../../app/utils";
+import { validateCode, validateName } from "../../app/validators";
+import { switchParents, createDragonProperties, copyTreeFromComponent } from "../../app/dragonBuilder";
+
+import DragonLabelField from './DragonLabelField.vue';
+import BreedDropdownv2 from "../BreedDropdownv2.vue";
+import DragonPortrait from "../DragonPortrait.vue";
+import DragonButton from "./DragonButton.vue";
+
+import longPressDirective from "../../directives/long-press/long-press";
 
 const
-    ls = localStorage;//,
-    //{ countSelected, countBreeds } = utils;
+    ls = localStorage;
 
 export default {
     name: 'Dragon',
@@ -163,14 +167,14 @@ export default {
             return o.find((v) => v.name === this.breed) || GLOBALS.placeholder_breed;
         },
         labelWarning(){
-           const a = (this.display == 1 ? validators.code(this.code) : validators.name(this.name));
+           const a = (this.display == 1 ? validateCode(this.code) : validateName(this.name));
            return !a;
         }
     },
 
     methods: {
         async switchParents(){
-            const newParents = /*await*/ dragonBuilder.switchParents(this);
+            const newParents = /*await*/ switchParents(this);
             this.$emit('update:parents', newParents);
         },
 
@@ -183,11 +187,10 @@ export default {
                 this.$emit("update:breed", GLOBALS.placeholder_breed.name);
                 //await this.$store.dispatch('removeFromUsedBreeds', this.breed);
             }
-
             // Handling a non-placeholder
             else{
                 // First, check that the current breed can be gender flipped
-                const breedData = utils.getBreedData(this.breed);
+                const breedData = getBreedData(this.breed);
 
                 if(!breedData.genderOnly){
                     // This breed has both male and female genders, so flipping isn't an issue.
@@ -244,10 +247,10 @@ export default {
 
         copyBranch(){
             if(this.hasParents){
-                // I could change how utils.fED works but this is easier
-                const noSelect = utils.cloneObj({ parents: this.parents });
+                // I could change how fED works but this is easier
+                const noSelect = cloneObj({ parents: this.parents });
         
-                utils.forEveryDragon(noSelect, (dragon) => dragon.selected = false);
+                forEveryDragon(noSelect, (dragon) => dragon.selected = false);
 
                 ls.setItem('clipboard', JSON.stringify({ ... noSelect.parents }));
             }
@@ -261,7 +264,7 @@ export default {
             // here's where our bubble plugin changes the game.
             // it'll bubble the event up the nodes until it reaches 
             // the lineage builder component, and can be handled there.
-            this.$bubble('requestRemoveDescendants', dragonBuilder.copyTreeFromComponent(this));
+            this.$bubble('requestRemoveDescendants', copyTreeFromComponent(this));
         },
 
         addDescendant(){
@@ -271,8 +274,8 @@ export default {
         // adds a new node to the tree
         addAncestors(){
             const parents ={
-                m: dragonBuilder.createDragonProperties({gender: 'm'}),
-                f: dragonBuilder.createDragonProperties({gender: 'f'})
+                m: createDragonProperties({gender: 'm'}),
+                f: createDragonProperties({gender: 'f'})
             };
             this.$emit('update:parents', parents);
         },
