@@ -1,8 +1,11 @@
 import Vue from 'vue';
-import App from '@/App';
-import { router } from '@/app/router';
-import { FontAwesomeIcon } from '@/app/fontawesome';
-import { store } from '@/app/store';
+import { FontAwesomeIcon } from './app/fontawesome';
+
+
+import { router } from "./app/router";
+import { store } from './app/store';
+
+import App from "./App.vue";
 
 // vue settings
 Vue.config.productionTip = false;

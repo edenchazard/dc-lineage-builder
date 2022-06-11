@@ -70,10 +70,12 @@
 </template>
 
 <script>
-import { dragonBuilder, GLOBALS } from '@/app/bundle';
-import Lineage from '@/components/Lineage/Lineage';
-import BreedDropdownResults from '@/components/BreedDropdownResults';
-import DialogExport from '@/components/Toolbar/DialogExport';
+import GLOBALS from '../app/globals';
+import { createDragonProperties } from '../app/dragonBuilder';
+
+import Lineage from "../components/Lineage/Lineage.vue";
+import BreedDropdownResults from "../components/BreedDropdownResults.vue";
+import DialogExport from "../components/Toolbar/DialogExport.vue";
 
 export default {
     name: 'PageCheckerGen',
@@ -81,7 +83,7 @@ export default {
 
     data() {
         return {
-            tree: dragonBuilder.createDragonProperties(),
+            tree: createDragonProperties(),
             maleBreed: "Placeholder",
             maleBreeds: GLOBALS.breeds.males,
             femaleBreed: "Placeholder",
@@ -105,11 +107,11 @@ export default {
         updateTree(finalGenGender){
             let createParents = (n) => {
                 let branch ={
-                    m: dragonBuilder.createDragonProperties({
+                    m: createDragonProperties({
                         gender: 'm',
                         breed: this.maleBreed
                     }),
-                    f: dragonBuilder.createDragonProperties({
+                    f: createDragonProperties({
                         gender: 'f',
                         breed: this.femaleBreed
                     })
@@ -128,7 +130,7 @@ export default {
             if(finalGenGender === 'f'){
                 options = { gender: 'f', breed: this.femaleBreed };
             }
-            let final = dragonBuilder.createDragonProperties({
+            let final = createDragonProperties({
                 ...options,
                 parents: createParents(2)
             });

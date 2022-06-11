@@ -17,9 +17,10 @@
 </div>
 </template>
 <script>
-import Dragon from './Dragon';
-import LineageGenerationCounter from './LineageGenerationCounter';
-import { utils } from '@/app/bundle';
+import { countGenerations } from '../../app/utils';
+
+import Dragon from './Dragon.vue';
+import LineageGenerationCounter from './LineageGenerationCounter.vue';
 
 export default {
   name: 'Lineage',
@@ -35,7 +36,7 @@ export default {
 
   computed: {
     generations(){
-      return utils.countGenerations(this.tree);
+      return countGenerations(this.tree);
     }
   }
 }

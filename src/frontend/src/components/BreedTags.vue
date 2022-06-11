@@ -5,7 +5,7 @@
     @updated="$store.commit('setTags', $event)" />
 </template>
 <script>
-import TagList from '@/components/ui/TagList';
+import TagList from './ui/TagList.vue';
 
 export default {
     name: "BreedTags",

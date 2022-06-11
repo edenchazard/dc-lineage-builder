@@ -11,8 +11,11 @@
 
 <script>
 import 'reset-css';
-import '@/assets/theming.css';
-import Header from '@/components/Header';
+
+import Header from "./components/Header.vue";
+
+import "./assets/theming.css";
+
 export default {
   name: 'App',
   components: { Header },
