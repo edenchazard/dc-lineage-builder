@@ -27,9 +27,10 @@
 </template>
   
 <script>
-import Lineage from '@/components/Lineage/Lineage';
-import { backend } from '@/app/bundle.js';
-import TextCopy from '@/components/ui/TextCopy';
+import { getLineageData } from "../app/api";
+
+import Lineage from "../components/Lineage/Lineage.vue";
+import TextCopy from '../components/ui/TextCopy.vue';
 
 export default {
   name: 'PageView',
@@ -70,7 +71,7 @@ export default {
           take a moment to load.`
         };
         
-        const response = await backend.getLineageData(this.hash);
+        const response = await getLineageData(this.hash);
         this.shareLink = `${window.location.origin}${process.env.VUE_APP_URL}view/${this.hash}`;
         this.tree = JSON.parse(response.data.dragon);
         this.status = { level: 0, message: "" };

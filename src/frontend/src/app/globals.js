@@ -1,8 +1,8 @@
-import breedtable from "@/breed-definitions.json";
-import utils from "@/app/utils";
+import breedtable from "../breed-definitions.json";
+import { getDCTime, filterBreedTableByGender } from "../app/utils";
 
 function isNocturneActive(){
-    const hours = utils.getDCTime().getHours();
+    const hours = getDCTime().getHours();
     return hours > 18 || hours <= 6;
 }
 
@@ -50,8 +50,8 @@ let GLOBALS ={
     placeholder_breed: placeholder,
     breeds: {
         entire: breedtable,
-        males: utils.filterBreedTableByGender(breedtable, 'm'),
-        females: utils.filterBreedTableByGender(breedtable, 'f')
+        males: filterBreedTableByGender(breedtable, 'm'),
+        females: filterBreedTableByGender(breedtable, 'f')
     }
 }
 // Prevent modification

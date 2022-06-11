@@ -17,10 +17,12 @@
     </Dialog>
 </template>
 <script>
-import Dialog from '@/components/Dialog';
-import { validators, utils } from '@/app/bundle.js';
-import Information from '@/components/ui/Information';
-import TextCopy from '@/components/ui/TextCopy';
+import { verifyIntegrity } from '../../app/validators';
+import { forEveryDragon } from "../../app/utils";
+
+import Dialog from "../Dialog.vue";
+import Information from "../ui/Information.vue";
+import TextCopy from "../ui/TextCopy.vue";
 
 export default {
   name: 'DialogImport',
@@ -52,13 +54,13 @@ export default {
       try{
         const importedTree = JSON.parse(this.file.trim());
 
-        if(!validators.verifyIntegrity(importedTree)){
+        if(!verifyIntegrity(importedTree)){
           this.status = errMsg;
           return;
         }
 
         // add selection data
-        utils.forEveryDragon(importedTree, dragon => dragon.selected = false);
+        forEveryDragon(importedTree, dragon => dragon.selected = false);
 
         this.$emit('onImport', importedTree);
         this.$emit('close');

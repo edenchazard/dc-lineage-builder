@@ -98,24 +98,22 @@
                         <BreedTags />
                     </template>
                 </ToolbarButton> */
-import { utils, GLOBALS } from '@/app/bundle.js';
-
 import { ToggleButton } from "vue-js-toggle-button";
 
-import DialogExport from './DialogExport';
-import DialogImport from './DialogImport';
-import DialogGenerate from './DialogGenerate';
+import GLOBALS from "../../app/globals";
+import { forEveryDragon, countBreeds } from "../../app/utils";
 
-import ToolbarButton from './ToolbarButton';
-
-//import BreedTags from '@/components/BreedTags';
+import DialogExport from './DialogExport.vue';
+import DialogImport from './DialogImport.vue';
+import DialogGenerate from './DialogGenerate.vue';
+import ToolbarButton from './ToolbarButton.vue';
 
 const treeSelectedContains = (tree) => {
     let
         male = false,
         female = false;
 
-    utils.forEveryDragon(tree, dragon => {
+    forEveryDragon(tree, dragon => {
         if(!dragon.selected){
             return;
         }
@@ -216,7 +214,7 @@ export default {
 
         importLineage(tree){
             this.$emit('importTree', tree);
-            this.$store.dispatch('setUsedBreeds', utils.countBreeds(tree));
+            this.$store.dispatch('setUsedBreeds', countBreeds(tree));
         },
     }
 }

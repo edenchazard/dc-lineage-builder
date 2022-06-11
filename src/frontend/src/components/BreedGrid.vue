@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import DragonPortrait from "@/components/DragonPortrait";
+import DragonPortrait from "./DragonPortrait.vue";
 
 export default {
     name: 'BreedGrid',

@@ -18,10 +18,12 @@
     </Dialog>
 </template>
 <script>
-import Dialog from '@/components/Dialog';
-import { utils, validators } from '@/app/bundle.js';
-import Information from '@/components/ui/Information';
-import TextCopy from '@/components/ui/TextCopy';
+import { cloneObj, forEveryDragon } from "../../app/utils";
+import { verifyIntegrity } from "../../app/validators";
+
+import Dialog from "../Dialog.vue";
+import Information from "../ui/Information.vue"
+import TextCopy from '../ui/TextCopy.vue';
 
 export default {
     name: 'DialogExport',
@@ -42,13 +44,13 @@ export default {
 
     mounted(){
         // we do this conversion because vue attaches getters/setters to our tree
-        const exportedTree = utils.cloneObj(this.tree);
+        const exportedTree = cloneObj(this.tree);
 
-        utils.forEveryDragon(exportedTree, dragon => {
+        forEveryDragon(exportedTree, dragon => {
             delete dragon.selected;
         });
 
-        if(!validators.verifyIntegrity(exportedTree)){
+        if(!verifyIntegrity(exportedTree)){
             this.status = {
                 level: 3,
                 message: "Error creating export code. Please ensure dragons are properly named and coded in the lineage."

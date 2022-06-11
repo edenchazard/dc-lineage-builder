@@ -28,14 +28,13 @@
 </template>
 
 <script>
-import { dragonBuilder, utils, backend } from '@/app/bundle.js';
+import * as dragonBuilder from "../app/dragonBuilder";
+import { forEveryDragon } from "../app/utils";
+import { getLineageData } from "../app/api";
 
 import Toolbar from './Toolbar/Toolbar.vue';
-
-import Lineage from '@/components/Lineage/Lineage';
-import Information from '@/components/ui/Information';
-
-const { forEveryDragon } = utils;
+import Lineage from './Lineage/Lineage.vue';
+import Information from './ui/Information.vue';
 
 export default {
   name: 'LineageBuilder',
@@ -78,7 +77,7 @@ export default {
         const breeds = {};
         let selected = 0;
     
-        utils.forEveryDragon(this.tree, (dragon) => {
+        forEveryDragon(this.tree, (dragon) => {
           addToCountBreeds(breeds, dragon.breed);
           if(dragon.selected){
             selected++;
@@ -110,7 +109,7 @@ export default {
           take a moment to load.`
         };
 
-        const response = await backend.getLineageData(hash);
+        const response = await getLineageData(hash);
 
         const importedTree = JSON.parse(response.data.dragon);
 
