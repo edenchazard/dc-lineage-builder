@@ -353,5 +353,32 @@ module.exports = {
         dimorphism: false,
         category: "dragon",
         sprites: 'L0y1'
+    },
+    "Vermeil":{
+        genderOnly: "m",
+        dimorphism: false,
+        category: "dragon",
+        sprites: {
+            "Salt TCA": '19M0',
+            "Salt Nirami": 'JbbH'
+        }
+    },
+    "Arcana": {
+        genderOnly: false,
+        dimorphism: true,
+        category: "dragon",
+        sprites: {
+            "Regular": ['0Zm7', 'xMll'],
+            "Salt TCA": ['4v7B', 'wZb6'],
+            "Salt Nirami": ['FmOA', 'p6uB']
+        }
+    },
+    "Starsinger": {
+        genderOnly: 'f',
+        dimorphism: false,
+        category: "dragon",
+        sprites: {
+            "Salt Nirami": 'N2Nl'
+        }
     }
 };
