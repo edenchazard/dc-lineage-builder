@@ -1,4 +1,8 @@
 # Changelog
+## 4.1.1
+- Performance: Improved imports with tree shaking, re-ordering, and relative paths.
+- Performance: Changed to dynamic imports.
+- New breeds: Nirami and TCA salts.
 ## 4.0.0
 - Mass selection tools!!!
 - Broke up the toolbar into it's own component and sub-components.
