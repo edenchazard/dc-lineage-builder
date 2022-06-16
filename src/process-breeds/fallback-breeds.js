@@ -47,11 +47,6 @@ module.exports = {
         category: "dragon",
         sprites: ["NuOVp", "-6", "-1", "48", "j9tBc", "0", "-1", "48"]
     },
-    "Arcana": {
-        genderOnly: false,
-        category: "dragon",
-        sprites: ["takea", "-14", "-1", "48", "llthe", "0", "-1", "48"]
-    },
     "Aria": {
         genderOnly: false,
         category: "dragon",
