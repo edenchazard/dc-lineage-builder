@@ -1339,5 +1339,23 @@ module.exports = {
         genderOnly: false,
         category: 'two-head',
         sprites: ['ny65H', '-4', '-1', '48']
-    }
+    },
+    "False-Headed Hydra": {
+        genderOnly: false,
+        category: "two-head",
+        sprites: {
+            "Alpine": ['5blvT', '0', '0', '48', 'F3Nz1', '-18', '-1', '48'],
+            "Coast": ['dEBMJ', '0', '0', '48', '5G9TY', '-18', '-1', '48'],
+            "Desert": ['a8J5I', '0', '0', '48', 'hsEoA', '-18', '-1', '48'],
+            "Forest": ['svHQy', '0', '0', '48', 'xdUHc', '-18', '-1', '48'],
+            "Jungle": ['3xuhb', '0', '0', '48', '0QRgZ', '-18', '-1', '48'],
+            "Volcano": ['bfRHB', '0', '0', '48', 'rmAKv', '-18', '-1', '48']
+        }
+    },
+    
+    "Lightning Pygmy": {
+        genderOnly: false,
+        category: 'pygmy',
+        sprites: ['bITER', '-14', '-1', '48', 'yaigm', '0', '-1', '48']
+    },
 };
