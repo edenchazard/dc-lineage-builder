@@ -187,4 +187,3 @@ async function copyTiles(src){
     processCSS("./src/process-breeds/breeds.txt", "sprites.css");
     copyTiles("./src/process-breeds/tiles.png");
 })();
-
