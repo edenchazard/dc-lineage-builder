@@ -7,7 +7,7 @@
           <p>Paste the export text and click 'import'.</p>
           <p>Please note if you have a lineage in progress, importing a new lineage will overwrite it.</p>
           <div>
-            <TextCopy v-model="file" placeholder="Paste your import text here" />
+            <textarea v-model="file" placeholder="Paste your import text here" />
           </div>
           <Information :info="status" />
         </template>
@@ -22,11 +22,10 @@ import { forEveryDragon } from "../../app/utils";
 
 import Dialog from "../Dialog.vue";
 import Information from "../ui/Information.vue";
-import TextCopy from "../ui/TextCopy.vue";
 
 export default {
   name: 'DialogImport',
-  components: { Dialog, Information, TextCopy },
+  components: { Dialog, Information },
   props: {
       show: Boolean,
       tree: Object,
