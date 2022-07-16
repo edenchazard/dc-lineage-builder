@@ -20,9 +20,11 @@
             <button
                 class='copy-button'
                 type='button'
-                @mousedown="copy">
+                @click="copy">
                 <font-awesome-icon icon="copy" /> Copy
-                <span class='tooltip'>{{tooltip}}</span>
+                <span
+                    v-show="tooltip"
+                    class='tooltip'>{{tooltip}}</span>
             </button>
         </span>
     </div>
@@ -55,6 +57,8 @@ export default {
         catch(ex){
             this.tooltip = "Error copying";
         }
+
+        setTimeout(() => this.tooltip = null, 1000);
     }
   }
 };
@@ -75,13 +79,13 @@ div{
     position: relative;
 }
 .tooltip{
-    display: none;
+    display: block;
     position: absolute;
     background: var(--colourFG);
     color: var(--colourBG);
     padding: 5px;
     right:0px;
-    top:28px;
+    top:-39px;
 }
 .copy-button:hover{
     cursor: pointer;
@@ -90,13 +94,11 @@ div{
     content: "";
     display: block;
     position: absolute;
-    right: 1rem;
-    top: -9px;
-    border-bottom: 10px solid var(--colourFG);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-}
-.copy-button:active .tooltip{
-    display: block;
+    top: 25px;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: var(--colourFG) transparent transparent transparent;
 }
 </style>
