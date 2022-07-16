@@ -83,6 +83,7 @@ export default {
 .results{
     padding:0px;
     overflow-y: auto;
+    flex: 1;
     scrollbar-gutter: stable;
 }
 .no-results{
