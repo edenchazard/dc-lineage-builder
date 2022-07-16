@@ -31,7 +31,10 @@ export default {
 
 <style scoped>
 .reuse{
-    max-height: 100px;
+    /* limit to two rows */
+    max-height: 108px;
+    /* fixes the annoying scroll bar from appearing with a single row */
+    min-height: 54px;
     overflow-y: auto;
     scrollbar-gutter: stable;
 }
