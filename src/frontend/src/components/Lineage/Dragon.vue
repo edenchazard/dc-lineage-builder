@@ -62,9 +62,14 @@
                 @changed="labelChanged"
                 :disabled="disabled" />
             <DragonButton 
-                v-if="nodesFromRoot === 0"
-                title='Switch gender'
-                icon="venus-mars"
+                v-if="nodesFromRoot === 0 && gender === 'm'"
+                title='Switch gender to female'
+                icon="mars"
+                @click="switchGender" />
+            <DragonButton 
+                v-else-if="nodesFromRoot === 0 && gender === 'f'"
+                title='Switch gender to male'
+                icon="venus"
                 @click="switchGender" />
             <DragonButton 
                 class='switchLabel'
