@@ -46,7 +46,7 @@ export default {
 
             // if we have tags, make sure to filter them
             const breeds = !this.tags ? this.breeds : this.breeds.filter(breed =>
-                this.tags.indexOf(breed.metaData.category) > -1
+                this.tags.indexOf(breed.metaData.group) > -1
             );
     
             if(search == ""){
