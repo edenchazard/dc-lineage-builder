@@ -34,7 +34,7 @@ async function main(){
 
         console.log(`${breeds.length} breeds.`);
 
-        const spritesMissing = await missingSprites(sprites72, sprites36);
+        const spritesMissing = await missingSprites([sprites72, sprites36]);
 
         if(spritesMissing){
             console.log("Script cancelled: sprites missing.");
