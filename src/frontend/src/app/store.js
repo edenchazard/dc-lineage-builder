@@ -9,7 +9,7 @@ const SESSION_KEY = 'session';
 function getTags(){
     //'holiday', 'valentines', 'halloween'
     const
-        availableTags = ['dragon', 'drake', 'pygmy', 'two-head'],
+        availableTags = ['standard', 'drake', 'pygmy', 'two-head'],
         defaultTags = availableTags.map(tag => ({ name: tag, active: true }));
 
     const session = sessionStorage.getItem(SESSION_KEY);

@@ -103,7 +103,8 @@ export function getBreedTable(){
     for(let breedName in fallbacks){
         const breed = fallbacks[breedName];
         const metaData = {
-            category: breed.category,
+            group: breed.group,
+            tags: breed.tags,
             src: "dc"
         }
 
