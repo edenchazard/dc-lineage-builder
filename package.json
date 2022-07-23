@@ -1,9 +1,10 @@
 {
     "name": "dc-lineage-builder",
     "version": "2.3.1",
+    "type": "module",
     "description": "",
     "scripts": {
-        "process-breeds": "node ./src/process-breeds/process.js"
+        "process-breeds": "node --experimental-json-modules ./src/process-breeds/process.js"
     },
     "keywords": [],
     "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
