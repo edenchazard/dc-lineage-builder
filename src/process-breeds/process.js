@@ -1,3 +1,18 @@
+/*
+    This script is to be run every time a new breed is added in development.
+    It creates:
+    1)  breed-definitions.json
+        File containing information about all breeds
+    2)  fallbacks.css
+        File containing left, top and height css data for breeds
+        rendered with the fallback method (dc src)
+    3)  breed-tiles-36x48.png
+        CSS spritesheet for locally rendered breeds.
+    4)  sprites-36x48.css
+        File with CSS information for the spritesheet.
+    5)  There's also a 72x96 resolution format for the two files above
+        intended for higher DPI screens.
+*/
 import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
