@@ -12,25 +12,14 @@ function isNocturneActive(){
 if(!isNocturneActive()){
     const
         nocturne = breedtable.findIndex((breed) => breed.name === 'Nocturne'),
-        daytimePos = {
-            code: 'OrTHo',
-            x:0,
-            y:-1,
-            h:48,
-            link: 'https://dragcave.net/image/OrTHo?daytime'
-        };
+        daytime = "OrTHo_day";
 
     breedtable[nocturne] = {
         ...breedtable[nocturne],
-        female: daytimePos,
-        male: daytimePos
+        female: daytime,
+        male: daytime
     }
 }
-
-// add some default metadata
-breedtable.forEach((breed, index) => {
-    breedtable[index].metaData.ghost = false;
-});
 
 const placeholder = {
     name: "Placeholder",
@@ -39,7 +28,7 @@ const placeholder = {
     genderOnly: false,
     metaData: {
         category: "dragon",
-        ghost: false
+        src: "local"
     }
 };
 
@@ -54,6 +43,7 @@ let GLOBALS ={
         females: filterBreedTableByGender(breedtable, 'f')
     }
 }
+
 // Prevent modification
 //Object.freeze(GLOBALS);
 
