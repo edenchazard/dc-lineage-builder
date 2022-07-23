@@ -27,7 +27,7 @@ const placeholder = {
     female: "aabb",
     genderOnly: false,
     metaData: {
-        category: "dragon",
+        category: "standard",
         src: "local"
     }
 };

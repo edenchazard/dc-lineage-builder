@@ -1,43 +1,50 @@
 {
     "Mint": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "3KzT"
     },
     "Caligene": {
         "genderOnly": false,
+        "tags": ["Halloween"],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": ["eyFH", "UROi"]
     },
     "Khusa": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "t4gH"
     },
     "Blazeback": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "QlvR"
     },
     "White": {
         "genderOnly": false,
-        "category": "dragon",
+        "tags": [],
+        "group": "standard",
         "sprites": "FVYv"
     },
     "Aether Wyvern": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "YSKU"
     },
     "Witchlight": {
         "genderOnly": false,
+        "tags": ["Halloween"],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Regular" : ["X36R", "HcVs"],
             "Salt Odeen": ["rDCT", "FaaC"]
@@ -45,8 +52,9 @@
     },
     "Undead": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Western": "Jh2A",
             "Wingless": "Tfzh",
@@ -67,44 +75,51 @@
     },
     "Leodon": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "M90y"
     },
     "Mariner Pygmy": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "pygmy",
+        "group": "pygmy",
         "sprites": "9IM3"
     },
     "Monarch": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": ["G0OH", "G3q8"]
     },    
     "Mutamore": {
         "genderOnly": "m",
+        "tags": ["Valentine"],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "gJzP"
     },
     "Morphodrake": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "drake",
+        "group": "drake",
         "sprites": "L6Yk"
     },
     "Diamondwing":{
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "FSB9"
     },
     
     "Solstice": {
         "genderOnly": "f",
-        "category": "dragon",
+        "tags": ["Christmas"],
+        "group": "standard",
         "dimorphism": false,
         "sprites": {
             "Day": "fjXK",
@@ -114,7 +129,8 @@
     },
     "Aegis": {
         "genderOnly": "m",
-        "category": "dragon",
+        "tags": ["Christmas"],
+        "group": "standard",
         "dimorphism": false,
         "sprites": {
             "Enraged": "BXfr",
@@ -125,7 +141,8 @@
     },
     "Garland": {
         "genderOnly": "f",
-        "category": "dragon",
+        "tags": ["Christmas"],
+        "group": "standard",
         "dimorphism": false,
         "sprites": {
             "Regular": "kfSv",
@@ -134,44 +151,51 @@
     },
     "Tatterdrake": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "drake",
+        "group": "drake",
         "sprites": "8tBK"
     },
     "Tarantula Hawk Drake": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "drake",
+        "group": "drake",
         "sprites": "olE7"
     },
     "Spotted Teal Drake": {
         "genderOnly": false,
+        "tags": ["Hybrid"],
         "dimorphism": false,
-        "category": "drake",
+        "group": "drake",
         "sprites": "XITZ"
     },
     "Snow": {
         "genderOnly": "m",
+        "tags": ["Christmas"],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "LEKo"
     },
     "Sandwaste": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": ["oeng", "WvNI"]
     },  
     "Honey Drake": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "drake",
+        "group": "drake",
         "sprites": ["qgLL", "Cj7p"]
     },
     "Shumoga": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Pale": "sEsC",
             "Wild": "otAr"
@@ -179,14 +203,16 @@
     },
     "Scymrian Pygmy": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "pygmy",
+        "group": "pygmy",
         "sprites": "dNrN"
     },
     "Baikala": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "two-head",
+        "group": "two-head",
         "sprites": {
             "Blue": ["H26N", "1h4b"],
             "Green": ["KLck", "Daqg"]
@@ -194,20 +220,23 @@
     },
     "Celestial": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": ["AUjl", "Oy2k"]
     },
     "Fell": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": ["bSaE", "d9XV"]
     },
     "Gemshard": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Sapphire": ["wbLD", "RMeX"],
             "Jade": ["Evhl", "XV4A"],
@@ -219,8 +248,9 @@
     },
     "Pyropellis Wyvern": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Orange": "R4h7",
             "Flameless": "OJ1Z",
@@ -232,32 +262,37 @@
     },
     "Gilded Bloodscale": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "two-head",
+        "group": "two-head",
         "sprites": ["J4NN", "JlHA"]
     },
     "Howler Drake": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "drake",
+        "group": "drake",
         "sprites": ["TzqY", "mv69"]
     },
     "Hooktalon": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "two-head",
+        "group": "two-head",
         "sprites": ["nv0m", "5F1Y"]
     },
     "Nexus": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "two-head",
+        "group": "two-head",
         "sprites": ["Wiov", "GS46"]
     },
     "Tinsel": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Gold": "mcux",
             "Silver": "4gb0",
@@ -267,56 +302,65 @@
     },
     "Wrapping-Wing": {
         "genderOnly": "m",
+        "tags": ["Christmas"],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "WNOu"
     },
     "Grave": {
         "genderOnly": false,
+        "tags": ["Halloween"],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": ["Qck1", "HPH4"]
     },
     "Heartstealing": {
         "genderOnly": "f",
+        "tags": ["Valentine"],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "pu0s"
     },
     "Aranoa": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "ixU5"
     },
     "Equinox": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "Rl8q"
     },
     "Kohraki": {
         "genderOnly": false,
+        "tags": ["Halloween"],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": ["puKB", "TYsV"]
     },
     "Sawtooth": {
         "genderOnly": false,
-        "category": "dragon",
+        "tags": [],
+        "group": "standard",
         "dimorphism": true,
         "sprites": ["iQ4U", "tFwi"]
     },
     "Stratos": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "6gX0"
     },
     "Tombstone": {
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Generic": "MCVW",
             "Alpine": "kaI8",
@@ -329,32 +373,37 @@
     },
     "Pink":{
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": ["Uqbx", "y89t"]
     },
     "Wisteria":{
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "5rcm"
     },
     "Avin Pygmy":{
         "genderOnly": false,
+        "tags": [],
         "dimorphism": true,
-        "category": "pygmy",
+        "group": "pygmy",
         "sprites": ["1BNG", "TCnM"]
     },
     "Lotaan":{
         "genderOnly": false,
+        "tags": [],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": "L0y1"
     },
     "Vermeil":{
         "genderOnly": "m",
+        "tags": ["Valentine"],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Salt TCA": "19M0",
             "Salt Nirami": "JbbH"
@@ -362,8 +411,9 @@
     },
     "Arcana": {
         "genderOnly": false,
+        "tags": ["Halloween"],
         "dimorphism": true,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Regular": ["0Zm7", "xMll"],
             "Salt TCA": ["4v7B", "wZb6"],
@@ -372,8 +422,9 @@
     },
     "Starsinger": {
         "genderOnly": "f",
+        "tags": ["Christmas"],
         "dimorphism": false,
-        "category": "dragon",
+        "group": "standard",
         "sprites": {
             "Salt Nirami": "N2Nl"
         }

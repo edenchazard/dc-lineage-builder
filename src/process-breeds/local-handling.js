@@ -10,7 +10,8 @@ export function getBreedTable(){
             name: name,
             genderOnly: breed.genderOnly,
             metaData: {
-                category: breed.category,
+                group: breed.group,
+                tags: breed.tags,
                 src: "local"
             }
         };

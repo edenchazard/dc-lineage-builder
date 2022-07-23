@@ -16,7 +16,7 @@
             <section class='breeds'>
                 <h3>Breeds</h3>
                 <div class='applied-tags'>
-                    <label>Showing:</label>
+                    <label>Group:</label>
                     <BreedTags />
                 </div>
                 <div class='search'>
