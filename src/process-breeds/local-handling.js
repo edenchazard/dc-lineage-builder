@@ -126,44 +126,38 @@ export async function createResolutionSet({CSSStep, locTiles, locSpriteSheet, lo
     console.log("Done.")
 }
 
-export async function missingSprites(folderA, folderB){
-    const
-        [ spritesA, spritesB ] = await Promise.all([
-            getTilesInFolder(folderA),
-            getTilesInFolder(folderB)
-        ]);
+export async function missingSprites(folderList){
+    const folders = await Promise.all(folderList.map(async folder => ({
+        files: await getTilesInFolder(folder),
+        location: folder,
+        missing: []
+    })));
 
-    const missing = (src, target) => {
-        const sprites = [];
+    // get a unique set of filenames
+    let files = [];
+    folders.forEach(folder => files = files.concat(folder.files));
+    const uniqueFiles = new Set(files);
 
-        for(let file of src){
-            if(target.indexOf(file) === -1){
-                sprites.push(file);
+    // examine each file list from each folder and test if
+    // it contains each code
+    uniqueFiles.forEach(code => {
+        folders.forEach(folder => {
+            if(folder.files.indexOf(code) === -1){
+                folder.missing.push(code)
             }
-        }
+        })
+    });
 
-        return sprites;
-    }
+    console.log("Examining folders for missing sprites.");
 
-    console.log("Checking folders for missing sprites.");
-
-    // sprites missing
-    // check both folders for the missing sprites
-    const
-        a = missing(spritesA, spritesB),
-        b = missing(spritesB, spritesA);
     let fail = false;
-
-    if(a.length > 0){
-        console.log(`Missing sprites in ${folderA}`);
-        console.log(a.join(', '));
-        fail = true;
-    }
-    if(b.length > 0){
-        console.log(`Missing sprites in ${folderB}`);
-        console.log(b.join(', '));
-        fail = true;
-    }
+    folders.forEach(folder => {
+        if(folder.missing.length > 0){
+            console.log(`Missing sprites in ${folder.location}:`);
+            console.log(folder.missing.join(', '));
+            fail = true;
+        }
+    });
 
     return fail;
 }
