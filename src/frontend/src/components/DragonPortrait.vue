@@ -3,18 +3,19 @@
         :title="data.name"
         class="imgbox imgbox-fullsize">
         <img
-            v-if="data.image.x !== undefined"
-            :src="data.image.link"
-            :style="{
-                left: data.image.x+'px',
-                top: data.image.y+'px', 
-                height: (data.image.h == '' ? 'initial' : data.image.h+'px')
-            }"
-            class='fallback' />
-        <span v-else-if="data.metaData.ghost === false" class='local' :class="'d-'+data.image" />
-        <img v-else-if="data.metaData.ghost === true" class='ghost' :src="data.image" />
+            v-if="data.metaData.src == 'dc'"
+            :src="'//dragcave.net/image/'+data.image"
+            :class="'fallback d-'+data.image" />
+        <span
+            v-else-if="data.metaData.src === 'local'"
+            :class="'local d-'+data.image" />
+        <img
+            v-else-if="data.metaData.src === 'ghost'"
+            class='ghost'
+            :src="data.image" />
     </span>
 </template>
+
 <script>
 export default {
     name: 'DragonPortrait',
@@ -53,6 +54,9 @@ export default {
 };
 </script>
 <style scoped>
+/* add css for fallbacks */
+@import url("../assets/fallbacks.css");
+
 /* apply the correct spritesheet depending on pixel ratio */
 @import url("../assets/sprites-36x48.css")
     (-webkit-min-device-pixel-ratio: 0),
@@ -72,7 +76,6 @@ export default {
     margin:-1px -1px;
     display: inline-block;
     background-size: cover;
-    image-rendering: -webkit-optimize-contrast;
 }
 
 .imgbox {
@@ -105,5 +108,12 @@ export default {
 }
 .ghost{
     margin:-1px -1px;
+}
+/* mods */
+/* nocturne */
+.d-OrTHo_day{
+    top:-1px;
+    left:0px;
+    height:48px
 }
 </style>
