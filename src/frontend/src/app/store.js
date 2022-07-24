@@ -7,9 +7,9 @@ const SESSION_KEY = 'session';
 
 // returns tags in session if set, or defaults
 function getTags(){
-    //'holiday', 'valentines', 'halloween'
     const
-        availableTags = ['Valentine', 'Christmas', 'Halloween', 'Hybrid'],
+        availableTags = ['Valentine', 'Christmas', 'Halloween', 'Hybrid',
+                        'CB'],
         defaultTags = availableTags.map(tag => ({ name: tag, active: true }));
 
     const session = sessionStorage.getItem(SESSION_KEY);
