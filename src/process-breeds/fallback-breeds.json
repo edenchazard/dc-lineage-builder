@@ -336,7 +336,7 @@
     },
     "Dusk Pygmy": {
         "genderOnly": false,
-        "tags": [],
+        "tags": ["Hybrid"],
         "group": "pygmy",
         "sprites": ["HIWV5", "-1", "6", "", "sALdr", "0", "1", ""]
     },
@@ -1003,7 +1003,7 @@
     },
     "Sinomorph": {
         "genderOnly": false,
-        "tags": [],
+        "tags": ["CB"],
         "group": "standard",
         "sprites": ["TfmjY", "-11", "-1", "48"]
     },
