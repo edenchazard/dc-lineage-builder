@@ -54,7 +54,7 @@
         "genderOnly": false,
         "tags": [],
         "dimorphism": false,
-        "group": "standard",
+        "group": "other",
         "sprites": {
             "Western": "Jh2A",
             "Wingless": "Tfzh",
@@ -360,7 +360,7 @@
         "genderOnly": false,
         "tags": [],
         "dimorphism": false,
-        "group": "standard",
+        "group": "other",
         "sprites": {
             "Generic": "MCVW",
             "Alpine": "kaI8",
