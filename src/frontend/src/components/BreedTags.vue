@@ -1,6 +1,6 @@
 <template>
 <TagList
-    :atLeastOneEnabled="true"
+    :atLeastOneEnabled="false"
     :value="$store.state.tags"
     @updated="$store.commit('setTags', $event)" />
 </template>
