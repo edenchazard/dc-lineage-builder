@@ -208,10 +208,6 @@ export default {
     },
 
     methods:{
-        test(r){
-            r;
-        },
-
         importLineage(tree){
             this.$emit('importTree', tree);
             this.$store.dispatch('setUsedBreeds', countBreeds(tree));
