@@ -1,8 +1,7 @@
 import { promises as fs } from 'fs';
 import imagesLib from "images";
-import localBreeds from './local-breeds.json';
 
-export function getBreedTable(){
+export function getBreedTable(json){
     let entries = [];
 
     const createEntry = function(name, breed, spritedata){
@@ -33,8 +32,8 @@ export function getBreedTable(){
         return entry;
     }
 
-    for(let breedname in localBreeds){
-        const breed = localBreeds[breedname];
+    for(let breedname in json){
+        const breed = json[breedname];
         const has_alts = Object.getPrototypeOf(breed.sprites) === Object.prototype;
 
         if(has_alts){

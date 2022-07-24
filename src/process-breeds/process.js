@@ -23,16 +23,20 @@ import {
     getBreedTable as localBreedTable
 } from "./local-handling.js";
 
+import localJSON from "./local-breeds.json";
+
 import {
     makeCSSStyleSheet,
     getBreedTable as fallbackBreedTable,
 } from "./fallback-handling.js";
 
+import fallbackJSON from "./fallback-breeds.json";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function getBreedsTable(){
-    let table = fallbackBreedTable().concat(localBreedTable());
+    let table = fallbackBreedTable(fallbackJSON).concat(localBreedTable(localJSON));
     table.sort((a, b) => a.name.localeCompare(b.name));
 
     return table;
@@ -84,7 +88,7 @@ async function main(){
         console.log("... copied breed definitions to SPA and Server.");
 
         // make and save the fallbacks stylesheet
-        await fs.writeFile('./src/frontend/src/assets/fallbacks.css', makeCSSStyleSheet(), 'utf8');
+        await fs.writeFile('./src/frontend/src/assets/fallbacks.css', makeCSSStyleSheet(fallbackJSON), 'utf8');
         console.log("... saved fallbacks css.");
         console.log("SCRIPT COMPLETE");
     }
