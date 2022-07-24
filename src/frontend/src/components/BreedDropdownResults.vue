@@ -40,16 +40,44 @@ export default {
 
     computed: {
         filteredBreeds() {
-            // if the search string is empty, return the whole 
-            // list
+            // These two functions return filter functions for
+            // the group and the tags
+            // eslint-disable-next-line
+            const filterGroup = (enabledGroup) => {
+                // A group of "*" is a match all, it should be available
+                // no matter the group filter, e.g. placeholder
+                return (breed) => breed.metaData.group  === enabledGroup
+                                    || breed.metaData.group === "*";
+            }
+
+            const filterTags = (enabledTags) => {
+                return (breed) => {
+                    const tags = breed.metaData.tags;
+                    // If it's an empty tag list, automatically include the breed
+                    if(tags.length === 0)
+                        return true;
+
+                    // If the breed has tags, then check against our tag list
+                    // for at least one tag and include it if so
+                    for(let tag of tags){
+                        if(enabledTags.indexOf(tag) > -1)
+                            return true;
+                    }
+                    return false;
+                }
+            }
+
             const search = this.search.toLowerCase().trim();
 
-            // if we have tags, make sure to filter them
-            const breeds = !this.tags ? this.breeds : this.breeds.filter(breed =>
-                this.tags.indexOf(breed.metaData.group) > -1
-            );
-    
-            if(search == ""){
+            const breeds = this.breeds
+                // filter the group
+                //.filter(filterGroup('standard'))
+                // if we have tags, make sure to filter them
+                .filter(filterTags(this.tags));
+
+            // if the search string is empty, return the whole 
+            // list
+            if(search === ""){
                 return breeds;
             }
             else{

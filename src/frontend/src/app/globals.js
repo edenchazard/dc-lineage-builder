@@ -27,8 +27,9 @@ const placeholder = {
     female: "aabb",
     genderOnly: false,
     metaData: {
-        category: "standard",
-        src: "local"
+        group: "*",
+        src: "local",
+        tags: []
     }
 };
 

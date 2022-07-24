@@ -15,8 +15,12 @@
             </section>
             <section class='breeds'>
                 <h3>Breeds</h3>
-                <div class='applied-tags'>
+                <div class='groups'>
                     <label>Group:</label>
+                    Standard | Pygmy | Two-Head | Drake
+                </div>
+                <div class='applied-tags'>
+                    <label>Showing:</label>
                     <BreedTags />
                 </div>
                 <div class='search'>
@@ -99,7 +103,7 @@ export default {
     flex-direction: column;
     flex:1;
 }
-.applied-tags{
+.applied-tags, .groups{
     display: flex;
     flex-direction: row;
     align-items: center;
