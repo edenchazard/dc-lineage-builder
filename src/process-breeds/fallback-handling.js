@@ -1,5 +1,3 @@
-import fallbacks from './fallback-breeds.json';
-
 const isDimorphic = (spriteArray) => !!spriteArray[4];
 const hasAlts = (spriteObj) => Object.getPrototypeOf(spriteObj) === Object.prototype;
 
@@ -54,7 +52,7 @@ function getImages(fallbacks){
 }
 
 
-export function makeCSSStyleSheet(){
+export function makeCSSStyleSheet(json){
     const makeClass = ({code, left, top, height}) => {
         let attributes = (
             `left:${left}px;`+
@@ -65,12 +63,12 @@ export function makeCSSStyleSheet(){
         return `.d-${code}{`+attributes+`}`;
     }
 
-    return getImages(fallbacks)
+    return getImages(json)
             .map(makeClass)
             .join("");
 }
 
-export function getBreedTable(){    
+export function getBreedTable(json){    
     const createBreed = (spriteArray, genderOnly) => {
         const
             entry = { },
@@ -100,8 +98,8 @@ export function getBreedTable(){
     // create a flat list of breeds, with alts as "separate breeds"
     const breeds = [];
 
-    for(let breedName in fallbacks){
-        const breed = fallbacks[breedName];
+    for(let breedName in json){
+        const breed = json[breedName];
         const metaData = {
             group: breed.group,
             tags: breed.tags,
