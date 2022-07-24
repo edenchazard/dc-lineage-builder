@@ -696,7 +696,7 @@
     "Neglected": {
         "genderOnly": false,
         "tags": [],
-        "group": "standard",
+        "group": "other",
         "sprites": ["nV5A", "0", "-1", "48", "QZvE", "0", "-1", "48"]
     },
     "Neotropical": {
@@ -1242,7 +1242,7 @@
     "Vampire": {
         "genderOnly": false,
         "tags": [],
-        "group": "standard",
+        "group": "other",
         "sprites": ["Ivh5", "0", "-1", "47", "MXv75", "0", "-1", "47"]
     },
     "Venturis": {
