@@ -3,22 +3,34 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-const SESSION_KEY = 'session';
+const SESSION_TAGS = {
+    key: 'session-tags',
+    tags: ['Valentine', 'Christmas', 'Halloween', 'Hybrid', 'CB']
+}
+
+const SESSION_GROUPS = {
+    key: "session-groups",
+    tags: ["Standard", "Drake", "Pygmy", "Two-headed", "Other"]
+}
 
 // returns tags in session if set, or defaults
-function getTags(){
-    const
-        availableTags = ['Valentine', 'Christmas', 'Halloween', 'Hybrid',
-                        'CB'],
-        defaultTags = availableTags.map(tag => ({ name: tag, active: true }));
+function loadTags(session){
+    const defaultTags = session.tags.map(tag => ({ name: tag, active: true }));
+    return JSON.parse(sessionStorage.getItem(session.key)) ?? defaultTags;
+}
 
-    const session = sessionStorage.getItem(SESSION_KEY);
-    return session ? JSON.parse(session) : defaultTags;
+function saveTagsToStorage(key, newValue){
+    sessionStorage.setItem(key, JSON.stringify(newValue));
+}
+
+function getTagsFromState(stateTags){
+    return stateTags.filter(tag => tag.active).map(tag => tag.name);
 }
 
 const store = new Vuex.Store({
     state: {
-        tags: getTags(),
+        tags: loadTags(SESSION_TAGS),
+        groups: loadTags(SESSION_GROUPS),
         stats:{
             usedBreeds: []
         },
@@ -28,9 +40,8 @@ const store = new Vuex.Store({
 
     getters: {
         // save the enabled tags for duration of session
-        enabledTags: state => state.tags
-            .filter(tag => tag.active)
-            .map(tag => tag.name)
+        enabledTags: (state) => getTagsFromState(state.tags),
+        enabledGroups: (state) => getTagsFromState(state.groups)
     },
 
     actions:{
@@ -53,7 +64,12 @@ const store = new Vuex.Store({
 
         setTags(state, tags){
             state.tags = tags;
-            sessionStorage.setItem(SESSION_KEY, JSON.stringify(tags));
+            saveTagsToStorage(SESSION_TAGS.key, tags);
+        },
+
+        setGroups(state, tags){
+            state.groups = tags;
+            saveTagsToStorage(SESSION_GROUPS.key, tags);
         }
     }
 });

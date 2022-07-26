@@ -16,12 +16,12 @@
             <section class='breeds'>
                 <h3>Breeds</h3>
                 <div class='groups'>
-                    <label>Group:</label>
-                    Standard | Pygmy | Two-Head | Drake
+                    <label>Groups:</label>
+                    <BreedGroupsTagSelector />
                 </div>
                 <div class='applied-tags'>
                     <label>Showing:</label>
-                    <BreedTags />
+                    <BreedTagsSelector />
                 </div>
                 <div class='search'>
                     <label for='mates-search'><font-awesome-icon icon="search" /> Filter:</label>
@@ -35,6 +35,7 @@
                     :search="searchString"
                     :breeds="breeds"
                     :tags="$store.getters.enabledTags"
+                    :groups="$store.getters.enabledGroups"
                     noResultsText="There are no breeds that match this criteria."
                     @selected="selected" />
             </section>
@@ -45,7 +46,8 @@
 import BreedDropdownResults from './BreedDropdownResults.vue';
 import BreedDropdownReuse from './BreedDropdownReuse.vue';
 import FocusableDialog from './FocusableDialog.vue';
-import BreedTags from './BreedTags.vue';
+import BreedTagsSelector from './BreedTagsSelector.vue';
+import BreedGroupsTagSelector from './BreedGroupsTagSelector.vue';
 
 export default {
     name: 'BreedDropdownv2',
@@ -53,7 +55,8 @@ export default {
         BreedDropdownResults,
         BreedDropdownReuse,
         FocusableDialog,
-        BreedTags
+        BreedTagsSelector,
+        BreedGroupsTagSelector
     },
 
     props: {
