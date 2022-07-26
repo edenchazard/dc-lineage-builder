@@ -101,7 +101,11 @@
 import { ToggleButton } from "vue-js-toggle-button";
 
 import GLOBALS from "../../app/globals";
-import { forEveryDragon, countBreeds } from "../../app/utils";
+import {
+    forEveryDragon,
+    countBreeds,
+    filterGroup,
+    filterTags } from "../../app/utils";
 
 import DialogExport from './DialogExport.vue';
 import DialogImport from './DialogImport.vue';
@@ -179,10 +183,11 @@ export default {
             // should we list males, females or both
             const { male, female } = treeSelectedContains(this.tree);
     
-            //filter by tags
-            const breedTable = GLOBALS.breeds.entire.filter(breed =>
-                this.$store.getters.enabledTags.indexOf(breed.metaData.category) > -1
-            );
+            const breedTable = GLOBALS.breeds.entire
+                // filter the group
+                .filter(filterGroup(this.$store.getters.enabledGroups))
+                // if we have tags, make sure to filter them
+                .filter(filterTags(this.$store.getters.enabledTags));
 
             const maleBreeds = GLOBALS.breeds.males.map(({name}) => name);
             const femaleBreeds = GLOBALS.breeds.females.map(({name}) => name);

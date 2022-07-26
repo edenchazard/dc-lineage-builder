@@ -14,7 +14,8 @@
     </div>
 </template>
 <script>
-import BreedGrid from "./BreedGrid.vue"
+import { filterGroup, filterTags } from "../app/utils";
+import BreedGrid from "./BreedGrid.vue";
 
 export default {
     name: 'BreedDropdownResults',
@@ -41,41 +42,6 @@ export default {
 
     computed: {
         filteredBreeds() {
-            // These two functions return filter functions for
-            // the group and the tags
-            // eslint-disable-next-line
-            const filterGroup = (enabledGroups) => {
-                return (breed) => {
-                    // Small op: Most breeds are not 
-                    if(enabledGroups.indexOf(breed.metaData.group) > -1)
-                        return true;
-
-                    // A group of "*" is a match all, it should be available
-                    // no matter the group filter, e.g. placeholder
-                    if(breed.metaData.group === "*")
-                        return true;
-
-                    return false;
-                }
-            }
-
-            const filterTags = (enabledTags) => {
-                return (breed) => {
-                    const tags = breed.metaData.tags;
-                    // If it's an empty tag list, automatically include the breed
-                    if(tags.length === 0)
-                        return true;
-
-                    // If the breed has tags, then check against our tag list
-                    // for at least one tag and include it if so
-                    for(let tag of tags){
-                        if(enabledTags.indexOf(tag) > -1)
-                            return true;
-                    }
-                    return false;
-                }
-            }
-
             const search = this.search.toLowerCase().trim();
 
             const breeds = this.breeds
