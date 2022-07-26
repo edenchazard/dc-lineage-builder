@@ -22,8 +22,9 @@ export default {
     props: {
         breeds: Array,
         search: String,
+        noResultsText: String,
         tags: Array,
-        noResultsText: String
+        groups: Array
     },
 
     data() {
@@ -43,11 +44,19 @@ export default {
             // These two functions return filter functions for
             // the group and the tags
             // eslint-disable-next-line
-            const filterGroup = (enabledGroup) => {
-                // A group of "*" is a match all, it should be available
-                // no matter the group filter, e.g. placeholder
-                return (breed) => breed.metaData.group  === enabledGroup
-                                    || breed.metaData.group === "*";
+            const filterGroup = (enabledGroups) => {
+                return (breed) => {
+                    // Small op: Most breeds are not 
+                    if(enabledGroups.indexOf(breed.metaData.group) > -1)
+                        return true;
+
+                    // A group of "*" is a match all, it should be available
+                    // no matter the group filter, e.g. placeholder
+                    if(breed.metaData.group === "*")
+                        return true;
+
+                    return false;
+                }
             }
 
             const filterTags = (enabledTags) => {
@@ -71,7 +80,7 @@ export default {
 
             const breeds = this.breeds
                 // filter the group
-                //.filter(filterGroup('standard'))
+                .filter(filterGroup(this.groups))
                 // if we have tags, make sure to filter them
                 .filter(filterTags(this.tags));
 
