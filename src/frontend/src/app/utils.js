@@ -146,3 +146,38 @@ export function countSelected(tree){
 
     return count;
 }
+
+// These two functions return filter functions for the group and the tags when
+// provided a list of acceptable tags
+export function filterGroup(enabledGroups){
+    return (breed) => {
+        const group = breed.metaData.group;
+        // Small op: Most breeds are not 
+        if(enabledGroups.indexOf(group) > -1)
+            return true;
+
+        // A group of "*" is a match all, it should be available
+        // no matter the group filter, e.g. placeholder
+        if(group === "*")
+            return true;
+
+        return false;
+    }
+}
+
+export function filterTags(enabledTags){
+    return (breed) => {
+        const tags = breed.metaData.tags;
+        // If it's an empty tag list, automatically include the breed
+        if(tags.length === 0)
+            return true;
+
+        // If the breed has tags, then check against our tag list
+        // for at least one tag and include it if so
+        for(let tag of tags){
+            if(enabledTags.indexOf(tag) > -1)
+                return true;
+        }
+        return false;
+    }
+}
