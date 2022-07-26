@@ -298,7 +298,7 @@
     "Sunbeam Drake": {
         "genderOnly": false,
         "tags": [],
-        "group": "drake",
+        "group": "Drake",
         "sprites": ["kErGP", "-6", "-1", "48"]
     },
     "Daydream": {
@@ -454,7 +454,7 @@
     "Glaucus Drake": {
         "genderOnly": false,
         "tags": [],
-        "group": "drake",
+        "group": "Drake",
         "sprites": ["fIEj6", "-9", "-1", "48", "8PZ1h", "-4", "-1", "48"]
     },
     "Glowback Pygmy": {
@@ -484,7 +484,7 @@
     "Greater Spotted Drake": {
         "genderOnly": false,
         "tags": [],
-        "group": "drake",
+        "group": "Drake",
         "sprites": ["6Qpow", "0", "-1", "48"]
     },
     "Green": {
@@ -714,7 +714,7 @@
     "Moonglow Drake": {
         "genderOnly": false,
         "tags": [],
-        "group": "drake",
+        "group": "Drake",
         "sprites": ["KmIoR", "-1", "-1", "47.5"]
     },
     "Nilia Pygmy": {
@@ -735,7 +735,7 @@
     "Ochredrake": {
         "genderOnly": false,
         "tags": [],
-        "group": "drake",
+        "group": "Drake",
         "sprites": ["k2gGG", "0", "-1", "48"]
     },
     "Olive": {
@@ -1254,7 +1254,7 @@
     "Vremya Drake": {
         "genderOnly": false,
         "tags": [],
-        "group": "drake",
+        "group": "Drake",
         "sprites": ["hdhTm", "0", "-1", "48"]
     },
     "Water": {
@@ -1426,7 +1426,7 @@
     "Sabertooth Bull Drake": {
         "genderOnly": false,
         "tags": [],
-        "group": "drake",
+        "group": "Drake",
         "sprites": ["ywZKC", "0", "-1", "48"]
     },
     "Royal Eminence": {
@@ -1517,7 +1517,7 @@
     "Pseudo-wyvern Drake": {
         "genderOnly": false,
         "tags": [],
-        "group": "drake",
+        "group": "Drake",
         "sprites": ["VNOng", "0", "-1", "48"]
     },
     "Iridichi":{
