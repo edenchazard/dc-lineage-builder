@@ -36,7 +36,7 @@ const placeholder = {
 breedtable.unshift(placeholder);
 
 // different breed tables for different needs
-let GLOBALS ={
+const GLOBALS ={
     placeholder_breed: placeholder,
     breeds: {
         entire: breedtable,
