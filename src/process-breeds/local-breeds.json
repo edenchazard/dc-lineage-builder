@@ -101,7 +101,7 @@
         "group": "Standard",
         "sprites": "gJzP"
     },
-    "MorphoDrake": {
+    "Morphodrake": {
         "genderOnly": false,
         "tags": [],
         "dimorphism": false,
@@ -149,7 +149,7 @@
             "Salt Odeen": "kvjh"
         }
     },
-    "TatterDrake": {
+    "Tatterdrake": {
         "genderOnly": false,
         "tags": [],
         "dimorphism": false,
