@@ -8,7 +8,7 @@
 import TagList from './ui/TagList.vue';
 
 export default {
-    name: "BreedTags",
+    name: "BreedTagsSelector",
 
     components: {
         TagList
