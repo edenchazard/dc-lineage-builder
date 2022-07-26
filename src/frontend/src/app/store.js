@@ -45,11 +45,8 @@ const store = new Vuex.Store({
     },
 
     actions:{
-        setUsedBreeds({commit}, arr){
-            return new Promise((resolve) =>{
-                commit('setUsedBreeds', arr);
-                resolve();
-            });
+        async setUsedBreeds({ commit }, arr){
+            commit('setUsedBreeds', arr);
         }
     },
 
