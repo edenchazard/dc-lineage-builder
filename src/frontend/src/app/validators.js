@@ -1,11 +1,9 @@
-import { breedInList, countGenerations } from "./utils";
+import { isBreedInList, countGenerations } from "./utils";
 import GLOBALS from "./globals";
 
 // returns a list of ghost breed names
-const findGhosts = () => {
-    return GLOBALS.breeds.entire
-        .filter(breed => breed.metaData.ghost === true)
-        .map(breed => breed.name);
+const findGhosts = (list) => {
+    return list.filter(breed => breed.metaData.src === "ghost");
 }
 
 function fitsBreed(obj) {
@@ -74,7 +72,7 @@ function isLineageHash(str){
 //assumes verify integrity has been run first.
 function meetsSaveRequirements(obj){
     // fetch ghosties
-    const ghosts = findGhosts();
+    const ghosts = findGhosts(GLOBALS.breeds.entire);
     
     // our requirements are no placeholders in the lineage and
     // between 1 and 9 generations
@@ -92,7 +90,7 @@ function meetsSaveRequirements(obj){
             pass = false;
         }*/
         // reject ghosties
-        if(breedInList(ghosts, dragon.breed)){
+        if(isBreedInList(ghosts, dragon.breed)){
             pass = false;
         }
         if(hasBothParents(dragon.parents)){

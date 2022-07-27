@@ -96,12 +96,10 @@ export default {
 
   methods:{
     portraitSelected(gender, base64){
-      if(gender == 'male'){
+      if(gender == 'male')
         this.maleBase64 = base64;
-      }
-      else if (gender == 'female'){
+      else if (gender == 'female')
         this.femaleBase64 = base64;
-      }
     },
 
     uploadError(){
@@ -119,35 +117,24 @@ export default {
 
       // returns a set of specific properties depending
       // on the availability option selected
-      const getGenderProps = () => {
-        let props ={
-          genderOnly: false
-        };
-      
-        if(this.genderAvailability == "both"){
-          props.female = this.femaleBase64;
-          props.male = this.maleBase64;
-        }
-        else if(this.genderAvailability === 'female'){
-          props.genderOnly = 'f';
-          props.female = this.femaleBase64;
-        }
-        else if(this.genderAvailability === "male"){
-          props.genderOnly = 'm';
-          props.male = this.maleBase64;
-        }
-
-        return props;
+      const getGenderProps = (availability, male, female) => {      
+        if(availability === "both")
+          return { genderOnly: false, female, male };
+        else if(availability === 'female')
+          return { genderOnly: 'f', female };
+        else if(availability === "male")
+          return { genderOnly: 'm', male };
       };
 
       // add the breed
       const breed = {
         name: this.name,
         metaData: {
-          category: "dragon",
-          ghost: true
+          group: "*",
+          tags: [],
+          src: "ghost"
         },
-        ...getGenderProps()
+        ...getGenderProps(this.genderAvailability, this.maleBase64, this.femaleBase64)
       }
 
       if(addBreed(breed)){
@@ -169,9 +156,6 @@ export default {
 
 <style scoped>
 .field-label{
-  font-weight: bold;
-}
-strong{
   font-weight: bold;
 }
 #tile-upload{
