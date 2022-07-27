@@ -94,28 +94,29 @@ export function isPlaceholder(str){
     return str.toLowerCase() === "placeholder";
 }
 
-export function breedInList(list, breedName){
-    if(typeof breedName === 'string'){
-        return list.indexOf(breedName) > -1;
-    }
-    else if (typeof breedName === 'object'){
-        return list.findIndex(breed => breedName === breed.name > -1);
-    }
-
-    throw new Error("not string or object of breeds, type "+typeof breedName);
+export function isBreedInList(list, breedName){
+    //if(typeof breedName === 'string'){
+        return list.findIndex(breed => breed.name === breedName) > -1;
+    //}
+    /*else if (typeof breedName === 'object'){
+        console.log('r');
+        return list.findIndex(breed => breed.name === breedName) > -1;
+    }*/
+    //throw new Error("not string or object of breeds, type "+typeof breedName);
 }
 
 export function addBreed(breedObj){
     const breedTable = GLOBALS.breeds.entire;
 
-    // check stuff
-    if(breedObj.name.trim() === ""){
+    // Reject empty names
+    if(breedObj.name.trim() === "")
         return false;
-    }
 
-    if(breedInList(breedTable, breedObj.name)){
+    // There's already a breed matching this name
+    if(isBreedInList(breedTable, breedObj.name))
         return false;
-    }
+
+    // TODO: We should add some tests to check metadata etc
 
     breedTable.push(breedObj);
 

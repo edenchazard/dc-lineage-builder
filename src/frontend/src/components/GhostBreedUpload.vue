@@ -1,6 +1,6 @@
 <template>
     <div class='breed-upload'>
-        <div v-if="uploaded">
+        <div v-if="dragon.image !== null">
             <DragonPortrait
                 class="tile-portrait disabled"
                 :data="dragon" />
@@ -8,8 +8,7 @@
         <input
             type='file'
             accept="image/png, image/gif"
-            @change="imageChanged"
-            />
+            @change="imageChanged" />
     </div>
 </template>
 <script>
@@ -22,13 +21,14 @@ export default {
 
     data() {
         return {
-            dragon:{
+            // We have to use a "dummy" dragon to display the portrait
+            // unfortunately
+            dragon: {
                 image: null,
                 metaData:{
-                    ghost: true
+                    src: "ghost"
                 }
-            },
-            uploaded: false
+            }
         }
     },
 
@@ -44,7 +44,6 @@ export default {
 
                     reader.addEventListener("load", () => {
                         this.dragon.image = reader.result;
-                        this.uploaded = true;
                         this.$emit("tileChosen", reader.result);
                     });
 
