@@ -205,7 +205,7 @@ export default {
                     // It doesn't. Replace with opposite gender and put in the placeholder.
                     this.$emit("update:gender", invertedGender);
                     this.$emit("update:breed", GLOBALS.placeholder_breed.name);
-                    this.$store.dispatch('removeFromUsedBreeds', this.breed);
+                    //this.$store.dispatch('removeFromUsedBreeds', this.breed);
                 }
             }
         },
