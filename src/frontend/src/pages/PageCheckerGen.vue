@@ -149,8 +149,8 @@ export default {
         },
 
         updateTree(finalGenGender){
-            let createParents = (n) => {
-                let branch ={
+            const createParents = (n) => {
+                const branch ={
                     m: createDragonProperties({
                         gender: 'm',
                         breed: this.maleBreed
@@ -174,7 +174,7 @@ export default {
             if(finalGenGender === 'f'){
                 options = { gender: 'f', breed: this.femaleBreed };
             }
-            let final = createDragonProperties({
+            const final = createDragonProperties({
                 ...options,
                 parents: createParents(2)
             });
@@ -192,7 +192,7 @@ export default {
 
             this.maleBreed = dragons[1];
             this.femaleBreed = dragons[0];            
-            this.updateTree();
+            this.updateTree(this.tree.gender);
         }
     }
 }
