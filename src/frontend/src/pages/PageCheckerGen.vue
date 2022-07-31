@@ -59,6 +59,11 @@
                             icon="save"
                             label="Export"
                             @click="showExportDialog = true" />
+                        <ToolbarButton
+                            title='Switch breeds'
+                            icon="exchange-alt"
+                            label="Switch breeds"
+                            @click="switchBreeds" />
                     </div>
                 </div>
             </section>
@@ -97,6 +102,7 @@
 <script>
 import GLOBALS from '../app/globals';
 import { createDragonProperties } from '../app/dragonBuilder';
+import { getBreedData } from "../app/utils";
 
 import Lineage from "../components/Lineage/Lineage.vue";
 import BreedDropdownResults from "../components/BreedDropdownResults.vue";
@@ -175,6 +181,18 @@ export default {
 
             // update our tree
             this.tree = final;
+        },
+
+        switchBreeds(){
+            // Check that the breed can be gender flipped
+            // or should be replaced with the placeholder
+            const dragons = [this.maleBreed, this.femaleBreed].map(breed => 
+                getBreedData(breed).genderOnly ? "Placeholder" : breed
+            );
+
+            this.maleBreed = dragons[1];
+            this.femaleBreed = dragons[0];            
+            this.updateTree();
         }
     }
 }
