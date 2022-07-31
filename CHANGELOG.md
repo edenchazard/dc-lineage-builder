@@ -1,4 +1,19 @@
 # Changelog
+## 4.2.0
+- Fixed scrollbars in the breed selector.
+- Added a copy to clipboard button for things such as view links and export codes.
+- The root node now displays the gender icon of the dragon instead of the venus-mars icon.
+- Optimised portraits and rewrote process breeds script to be tidier. Inline styling moved into CSS classes, so should provide a performance benefit.
+- Bug fix: Entering a duplicate name on ghost breeds would cause a crash.
+- Upgraded tagging system: In addition to egg group filtering, Lineage Builder now offers additional tags such as holidays, hybrids and CB only breeds.
+- Moved breeds like neglected, vampire, tombstones and zombies to the "other" egg group.
+- Checker generator changes:
+    - Added "generate link"
+    - Added "switch breeds"
+    - Added tagging
+    - Styling updates
+## 4.1.2
+- Added new breeds: false-headed hydra and lightning pygmy.
 ## 4.1.1
 - Performance: Improved imports with tree shaking, re-ordering, and relative paths.
 - Performance: Changed to dynamic imports.
