@@ -4,6 +4,10 @@
             v-if="showExportDialog"
             :tree="tree"
             @close="showExportDialog = false" />
+        <DialogGenerate
+            v-if="showGenerateDialog"
+            :tree='tree'
+            @close="showGenerateDialog = false" />
 
         <div class='central-block'>
             <section>
@@ -44,10 +48,17 @@
                             </option>
                         </select>
                     </div>
-                    <div>
-                        <button class='themed-button' @click="showExportDialog = true">
-                            <font-awesome-icon icon="save" /> Export
-                        </button>
+                    <div class="buttons">
+                        <ToolbarButton
+                            title='Get Link'
+                            icon="link"
+                            label="Get Link"
+                            @click="showGenerateDialog = true" />
+                        <ToolbarButton
+                            title='Export dragon'
+                            icon="save"
+                            label="Export"
+                            @click="showExportDialog = true" />
                     </div>
                 </div>
             </section>
@@ -89,9 +100,11 @@ import { createDragonProperties } from '../app/dragonBuilder';
 
 import Lineage from "../components/Lineage/Lineage.vue";
 import BreedDropdownResults from "../components/BreedDropdownResults.vue";
-import DialogExport from "../components/Toolbar/DialogExport.vue";
 import BreedTagsSelector from '../components/BreedTagsSelector.vue';
 import BreedGroupsTagSelector from '../components/BreedGroupsTagSelector.vue';
+import DialogExport from "../components/Toolbar/DialogExport.vue";
+import DialogGenerate from '../components/Toolbar/DialogGenerate.vue';
+import ToolbarButton from '../components/Toolbar/ToolbarButton.vue';
 
 export default {
     name: 'PageCheckerGen',
@@ -99,8 +112,10 @@ export default {
         Lineage,
         BreedDropdownResults,
         DialogExport,
+        DialogGenerate,
         BreedTagsSelector,
-        BreedGroupsTagSelector
+        BreedGroupsTagSelector,
+        ToolbarButton
     },
 
     data() {
@@ -113,6 +128,7 @@ export default {
             genCount: 2,
             query: "",
             showExportDialog: false,
+            showGenerateDialog: false
         }
     },
     methods: {
@@ -173,7 +189,7 @@ export default {
 }
 #breeds{
     display: flex;
-    margin-bottom:10px;
+    margin:10px 0px;
 }
 #breeds > div{
     width:100%;
@@ -197,7 +213,13 @@ label{
     display: flex;
     flex-direction: column
 }
-
+.buttons{
+    margin: 5px 0px 0px 0px;
+}
+.buttons button{
+    width:unset;
+    margin:2px;
+}
 @media only screen and (min-width: 700px){
     #checker-controls{
         flex-direction: row;
