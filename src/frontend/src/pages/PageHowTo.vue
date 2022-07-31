@@ -16,7 +16,7 @@
           <li><font-awesome-icon icon="arrow-right" /> Add parents.</li>
           <li><font-awesome-icon icon="arrow-left" /> Add a child.</li>
           <li><font-awesome-icon icon="minus" /> Remove the parents (and any ancestors of those).</li>
-          <li><font-awesome-icon icon="venus-mars" /> Swap the gender, which by default is always male. This button only appears on the root node. If this breed is available in both genders, it will swap the gender directly and update the sprite. If this breed is only available in one gender, such as some event dragons, the breed will be reset to the placeholder.</li>
+          <li><font-awesome-icon icon="mars" />/<font-awesome-icon icon="venus" /> Swap the gender, which by default is always male. This button only appears on the root node. If this breed is available in both genders, it will swap the gender directly and update the sprite. If this breed is only available in one gender, such as some event dragons, the breed will be reset to the placeholder.</li>
           <li><font-awesome-icon icon="sync-alt" /> Switch the parent's genders. If one of the breeds is only available in one gender, the breed will be reset to the placeholder.</li>
           <li><font-awesome-icon icon="clone" /> Clone the parent nodes and any further ancestors. This button can even be used to clone parts of unrelated lineages such as from a different tab.</li>
           <li><font-awesome-icon icon="paste" /> Paste the most recently cloned item. If this node already has parents, it will replace them.</li>
