@@ -117,3 +117,12 @@ and I can't be arsed to change things properly with the variables. */
 .skin-mobile-dark .dragon-label label{
   margin-top: -3px !important;
 }
+
+
+strong{
+  font-weight: bold;
+}
+
+p {
+  margin-top:10px;
+}
