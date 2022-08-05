@@ -1483,7 +1483,7 @@
     },
     "Pitfire": {
         "genderOnly": false,
-        "tags": [],
+        "tags": ["Halloween"],
         "group": "Standard",
         "sprites": {
             "Standard": ["VTThe", "-31", "-1", "48", "Lostt", "0", "-1", "48"],

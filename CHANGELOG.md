@@ -1,4 +1,6 @@
 # Changelog
+## 4.2.1
+- Pitfires weren't tagged with Halloween.
 ## 4.2.0
 - Fixed scrollbars in the breed selector.
 - Added a copy to clipboard button for things such as view links and export codes.
