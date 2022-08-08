@@ -1465,7 +1465,7 @@
     },
     "Amarignis": {
         "genderOnly": "f",
-        "tags": [],
+        "tags": ["Valentine"],
         "group": "Standard",
         "sprites": ["CastA", "-14", "-1", "48"]
     },
