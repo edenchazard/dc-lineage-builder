@@ -29,8 +29,8 @@
                         <input
                             id='search'
                             type='search'
-                            v-model="query"
-                            placeholder="Search breeds" />
+                            placeholder="Search breeds"
+                            @input="search" />
                     </div>
                 </div>
                 <div class='right'>
@@ -102,7 +102,7 @@
 <script>
 import GLOBALS from '../app/globals';
 import { createDragonProperties } from '../app/dragonBuilder';
-import { getBreedData } from "../app/utils";
+import { getBreedData, debounce } from "../app/utils";
 
 import Lineage from "../components/Lineage/Lineage.vue";
 import BreedDropdownResults from "../components/BreedDropdownResults.vue";
@@ -124,6 +124,11 @@ export default {
         ToolbarButton
     },
 
+    created(){
+        // debounced to avoid it running every key press rapidly
+        this.search = debounce((e) => this.query = e.target.value, 150);
+    },
+
     data() {
         return {
             tree: createDragonProperties(),
@@ -137,6 +142,7 @@ export default {
             showGenerateDialog: false
         }
     },
+
     methods: {
         selectMale(breed){
             this.maleBreed = breed.name;
