@@ -27,9 +27,9 @@
                     <label for='mates-search'><font-awesome-icon icon="search" /> Filter:</label>
                     <input
                         type="search"
-                        v-model="searchString"
                         placeholder="search"
-                        ref="matesSearch" />
+                        ref="matesSearch"
+                        @input="searchBreeds" />
                 </div>
                 <BreedDropdownResults
                     :search="searchString"
@@ -43,6 +43,7 @@
     </FocusableDialog>
 </template>
 <script>
+import { debounce } from '../app/utils';
 import BreedDropdownResults from './BreedDropdownResults.vue';
 import BreedDropdownReuse from './BreedDropdownReuse.vue';
 import FocusableDialog from './FocusableDialog.vue';
@@ -68,6 +69,11 @@ export default {
         return {
             searchString: ""
         }
+    },
+
+    created(){
+        // debounced to avoid it running every key press rapidly
+        this.searchBreeds = debounce((e) => this.searchString = e.target.value, 150);
     },
 
     mounted(){
