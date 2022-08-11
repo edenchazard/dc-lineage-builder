@@ -92,6 +92,10 @@ export default {
 };
 </script>
 <style scoped>
+/* hide labels on mobile screens */
+.breeds label{
+    display:none;
+}
 .breed-selector{
     color:var(--breedDropDownColourFG);
     display:flex;
@@ -144,6 +148,9 @@ h3:after {
     background-color: #000;
     margin-left: 5px;
 }
-</style>
-<style>
+@media only screen and (min-width: 500px) {
+    .breeds label{
+        display:unset;
+    }
+}
 </style>
