@@ -1,5 +1,6 @@
 <template>
     <span
+        v-on="$listeners"
         :title="data.name"
         class="imgbox imgbox-fullsize">
         <img
@@ -22,8 +23,7 @@ export default {
     props: {
         data: Object,
         gen: Number
-    }
-    
+    },
     /*,
     computed:{
         // determines whether to provide a full size image or a small image
