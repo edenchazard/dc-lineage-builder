@@ -3,7 +3,7 @@
         <BreedGrid
             v-if="filteredBreeds.length > 0"
             ref="results"
-            :breeds="filteredBreeds"
+            :list="filteredBreeds.map(breed => ({ data: breed }))"
             :compact="filteredBreeds.length > 5"
             v-on="$listeners" />
         <div
@@ -85,9 +85,8 @@ export default {
 <style scoped>
 .results{
     padding:0px;
-    overflow-y: auto;
+    overflow-y: hidden;
     flex: 1;
-    scrollbar-gutter: stable;
 }
 .no-results{
     font-style: italic;

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { FontAwesomeIcon } from './app/fontawesome';
-
+import VirtualCollection from "vue-virtual-collection";
 
 import { router } from "./app/router";
 import { store } from './app/store';
@@ -12,6 +12,8 @@ Vue.config.productionTip = false;
 
 // Add Font Awesome
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+Vue.use(VirtualCollection);
 
 // bubble plugin via https://stackoverflow.com/a/54940012
 // Add this as a Vue plugin

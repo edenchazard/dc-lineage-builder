@@ -1,7 +1,7 @@
 <template>
     <div class="reuse">
         <BreedGrid v-if="recentlyUsed.length > 0"
-            :breeds="recentlyUsed"
+            :list="recentlyUsed.map(breed => ({ data: breed }))"
             :compact="true"
             v-on="$listeners" />
         <p v-else class='information'>Unavailable.</p>
