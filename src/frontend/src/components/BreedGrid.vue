@@ -1,7 +1,7 @@
 <template>
 <VirtualCollection
     v-if="compact && list.length > 0"
-    class="collection mates-compact"
+    class="mates-compact"
     :cellSizeAndPositionGetter="cellSizeAndPositionGetter"
     :collection="list"
     :height="height"
@@ -29,13 +29,6 @@
 </template>
 
 <script>
-/*
-    <div 
-        slot="cell"
-        slot-scope="props"
-        @click="$emit('selected', props.data)">
-        <DragonPortrait :data="props.data" />
-    </div>*/
 import DragonPortrait from "./DragonPortrait.vue";
 
 const obs = {
@@ -113,41 +106,18 @@ export default {
         }
     }
 }
-/*
-    <ul
-        v-if="breeds.length > 0"
-        :class="compact ? 'mates-compact' : 'mates-list'" 
-        class='mates'>
-        <li
-            v-for="breed in breeds"
-            :key="breed.name"
-            @click="$emit('selected', breed)">
-            <DragonPortrait
-                :data="breed" />
-                {{compact ? '' : breed.name}}
-        </li>
-    </ul>*/
 </script>
 
 <style scoped>
-.collection{
-    overflow: hidden auto;
-}
 .mates{
     list-style-type:none;
     margin: 0 auto;
 }
-.mates li{
+.mates-compact .imgbox, .mates-list li {
     cursor: pointer;
 }
 .mates-compact{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 36px);
-    grid-auto-rows: 1fr;
-    grid-gap: 2px;
-}
-.mates-compact li{
-    height: 48px;
+    overflow: hidden auto;
 }
 .mates-list li{
     text-overflow: ellipsis;
