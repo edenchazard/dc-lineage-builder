@@ -1479,7 +1479,12 @@
         "genderOnly": "m",
         "tags": ["Christmas"],
         "group": "Standard",
-        "sprites": ["prtty", "-11", "-1", "48"]
+        "sprites": {
+            "Multi-color": ["HxQ3G", "-11", "-1", "48"],
+            "Red-green": ["4VIcp", "-11", "-1", "48"],
+            "Red-yellow": ["6L2BZ", "-11", "-1", "48"],
+            "Yellow": ["42Flu", "-11", "-1", "48"]
+        }
     },
     "Pitfire": {
         "genderOnly": false,
