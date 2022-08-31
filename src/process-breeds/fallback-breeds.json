@@ -1604,11 +1604,16 @@
             "Volcano": ["bfRHB", "0", "0", "48", "rmAKv", "-18", "-1", "48"]
         }
     },
-    
     "Lightning Pygmy": {
         "genderOnly": false,
         "tags": [],
         "group": "Pygmy",
         "sprites": ["bITER", "-14", "-1", "48", "yaigm", "0", "-1", "48"]
+    },
+    "Quonebb": {
+        "genderOnly": false,
+        "tags": [],
+        "group": "Two-headed",
+        "sprites":["ZNJKk", "0", "-1", "48", "zIr9l", "-14", "-1", "48"]
     }
 }
