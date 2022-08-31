@@ -428,5 +428,12 @@
         "sprites": {
             "Salt Nirami": "N2Nl"
         }
+    },
+    "Ceriuth": {
+        "genderOnly": false,
+        "tags": ["Hybrid"],
+        "dimorphism": false,
+        "group": "Standard",
+        "sprites": "xjv6"
     }
 }
