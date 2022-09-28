@@ -435,5 +435,12 @@
         "dimorphism": false,
         "group": "Standard",
         "sprites": "xjv6"
+    },
+    "Berry Drake":{
+        "genderOnly": false,
+        "tags": [],
+        "dimorphism": false,
+        "group": "Drake",
+        "sprites": "Alve"
     }
 }
