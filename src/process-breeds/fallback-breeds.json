@@ -1615,5 +1615,11 @@
         "tags": [],
         "group": "Two-headed",
         "sprites":["ZNJKk", "0", "-1", "48", "zIr9l", "-14", "-1", "48"]
+    },
+    "Painted Ray Pygmy": {
+        "genderOnly": false,
+        "tags": [],
+        "group": "Pygmy",
+        "sprites":["8wYsC", "-1", "-1", "48", "chLaD", "0", "0", ""]
     }
 }
