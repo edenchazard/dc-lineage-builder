@@ -4,6 +4,13 @@
 - Prebuilt templates.
 - Finish adding zombies.
 - Fix mobile bug with ghost breeds page
-- Improvements to checker generator
-- Fix toolbar -> config emit and mutating props
-- dragonbutton component -> functional template. Caused mem leaks last time.
+- Fix toolbar -> config emit and mutating props.
+- ghost breeds: disallow uploading "nothing".
+- ghost breeds: fix error message when tile doesn't fit requirements.
+- ghost breeds: show list of active ghost breeds
+- disable background interactions on mobile/small breed selector
+- lineage previewer
+- css updates
+- add github link
+- change mass select breed selector
+- some sort of feature that lists the dragon involved in the lineage
