@@ -23,14 +23,14 @@ import {
     getBreedTable as localBreedTable
 } from "./local-handling.js";
 
-import localJSON from "./local-breeds.json";
+import localJSON from "./local-breeds.json" assert { type: "json" };
 
 import {
     makeCSSStyleSheet,
     getBreedTable as fallbackBreedTable,
 } from "./fallback-handling.js";
 
-import fallbackJSON from "./fallback-breeds.json";
+import fallbackJSON from "./fallback-breeds.json" assert { type: "json" };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -64,9 +64,9 @@ async function main(){
             // where to find the sprites
             locTiles: sprites72,
             // where to save the finished spritesheet
-            locSpriteSheet: "./src/frontend/src/assets/breed-tiles-72x96.png",
+            locSpriteSheet: "../frontend/src/assets/breed-tiles-72x96.png",
             // where to save the css file
-            locCSSFile: './src/frontend/src/assets/sprites-72x96.css',
+            locCSSFile: '../frontend/src/assets/sprites-72x96.css',
             sizing: { width: 72, height: 96, spacing: 0},
             CSSStep: 36
         });
@@ -74,21 +74,21 @@ async function main(){
         // 36 x 48 
         await createResolutionSet({
             locTiles: sprites36,
-            locSpriteSheet: "./src/frontend/src/assets/breed-tiles-36x48.png",
-            locCSSFile: './src/frontend/src/assets/sprites-36x48.css',
+            locSpriteSheet: "../frontend/src/assets/breed-tiles-36x48.png",
+            locCSSFile: '../frontend/src/assets/sprites-36x48.css',
             sizing: { width: 36, height: 48, spacing: 0 },
             CSSStep: 36
         });
 
         // make and save the definition file to frontend and backend
         await Promise.all([
-            fs.writeFile('./src/frontend/src/'+definitionsJSON, json, 'utf8'),
-            fs.writeFile('./src/backend/'+definitionsJSON, json, 'utf8')
+            fs.writeFile('../frontend/src/'+definitionsJSON, json, 'utf8'),
+            fs.writeFile('../backend/'+definitionsJSON, json, 'utf8')
         ]);
         console.log("... copied breed definitions to SPA and Server.");
 
         // make and save the fallbacks stylesheet
-        await fs.writeFile('./src/frontend/src/assets/fallbacks.css', makeCSSStyleSheet(fallbackJSON), 'utf8');
+        await fs.writeFile('../frontend/src/assets/fallbacks.css', makeCSSStyleSheet(fallbackJSON), 'utf8');
         console.log("... saved fallbacks css.");
         console.log("SCRIPT COMPLETE");
     }
