@@ -1,17 +1,15 @@
+name: dc-lb_dev
 services:
   vue:
     container_name: dc-lb-dev-vue
     build:
-      context: .
-      dockerfile: ./docker/dev-vue.Dockerfile
+      context: ./src/frontend
+      dockerfile: ./df.Dockerfile
     volumes:
       - ./src/frontend:/app
       - /app/node_modules
     ports:
       - 8080:8080
-    environment:
-      - VUE_APP_URL=/
-      - VUE_APP_VERSION=${VERSION}
     depends_on:
       - db
       - api
@@ -21,8 +19,8 @@ services:
   api:
     container_name: dc-lb-dev-api
     build:
-      context: .
-      dockerfile: ./docker/dev-api.Dockerfile
+      context: ./src/backend
+      dockerfile: ./df.Dockerfile
     depends_on:
       - db
     volumes:
@@ -34,7 +32,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
-      - APP_VERSION=${VERSION}
     networks:
       - internal
 
@@ -43,7 +40,7 @@ services:
     image: mariadb:10.6
     tty: true
     volumes:
-      - ./docker/db:/docker-entrypoint-initdb.d
+      - ./db/dev:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/mysql
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -58,7 +55,7 @@ services:
     container_name: dc-lb-dev-adminer
     image: adminer:latest
     environment:
-      ADMINER_DEFAULT_SERVER: lineage_builder
+      ADMINER_DEFAULT_SERVER: ${MYSQL_DATABASE}
     ports:
       - 82:8080
     networks:

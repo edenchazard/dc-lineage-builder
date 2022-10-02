@@ -29,17 +29,17 @@ The project is dockerized, so download docker plus docker-compose, clone the rep
 From the project root directory, use the command:
 
 ```sh
-docker-compose --env-file .env.dev -p dc-lb_dev up
+docker-compose --env-file .env.dev up
 ```
 
 ### Production
 
-Change VUE_APP_URL in `docker-compose.prod.yml` to the deployment url.
-
-From the project root directory, use the command:
+1. Change MOUNT_PATH in `docker-compose.prod.yml` to the deployment url.
+2. Copy .env.dev, rename to .env.prod and replace with your details.
+3. From the project root directory, use the command:
 
 ```sh
-docker-compose --env-file .env.prod -p dc-lb -f docker-compose.prod.yml up -d --build
+docker-compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
 ```
 
 ## Breed processing

@@ -1,12 +1,12 @@
+name: dc-lb
 services:
   frontend:
     container_name: dc-lb-frontend
     build:
-      context: .
-      dockerfile: ./docker/prod-frontend.Dockerfile
+      context: ./src/frontend
+      dockerfile: ./df-prod.Dockerfile
       args:
-        - VUE_APP_URL=/dc/lineage-builder/
-        - VUE_APP_VERSION=${VERSION}
+        - MOUNT_PATH=/dc/lineage-builder/
     ports:
       - 90:8080
     depends_on:
@@ -20,8 +20,8 @@ services:
   api:
     container_name: dc-lb-api
     build:
-      context: .
-      dockerfile: ./docker/prod-api.Dockerfile
+      context: ./src/backend
+      dockerfile: ./df-prod.Dockerfile
     depends_on:
       - db
     restart: always
@@ -31,7 +31,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
-      - APP_VERSION=${VERSION}
     networks:
       - internal
 
@@ -41,7 +40,7 @@ services:
     restart: always
     tty: true
     volumes:
-      - ./docker/prod-db:/docker-entrypoint-initdb.d
+      - ./src/db/prod:/docker-entrypoint-initdb.d
       - builder_db:/var/lib/mysql
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
