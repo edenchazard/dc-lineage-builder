@@ -83,7 +83,7 @@ async function main(){
         // make and save the definition file to frontend and backend
         await Promise.all([
             fs.writeFile('../frontend/src/'+definitionsJSON, json, 'utf8'),
-            fs.writeFile('../backend/'+definitionsJSON, json, 'utf8')
+            fs.writeFile('../backend/src/'+definitionsJSON, json, 'utf8')
         ]);
         console.log("... copied breed definitions to SPA and Server.");
 
