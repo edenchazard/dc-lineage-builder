@@ -40,7 +40,7 @@ services:
     image: mariadb:10.6
     tty: true
     volumes:
-      - ./db/dev:/docker-entrypoint-initdb.d
+      - ./src/db/dev:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/mysql
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
