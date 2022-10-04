@@ -4,16 +4,15 @@
   "private": true,
   "author": "Charley Reeson (https://chazza.me)",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^2.0.5",
     "axios": "^0.24.0",
-    "core-js": "^3.20.2",
     "reset-css": "^5.0.1",
     "unique-names-generator": "^4.6.0",
     "vue": "^2.6.11",
@@ -23,29 +22,20 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.4",
-    "@vue/cli-plugin-eslint": "~5.0.4",
-    "@vue/cli-plugin-router": "~5.0.4",
-    "@vue/cli-service": "~5.0.4",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
     "url-loader": "^4.1.1",
-    "vue-template-compiler": "^2.6.11"
+    "@vitejs/plugin-vue": "^1.6.1",
+    "vite": "^2.5.4",
+    "vite-plugin-vue2" : "1.9.0"
   },
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "es2021": true
     },
     "extends": [
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
     "rules": {
       "vue/multi-word-component-names": "off",
       "vue/no-mutating-props": "off"

@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import routes from "./routes";
 
 const router = new VueRouter({
-    base: process.env.VUE_APP_URL,
+    base: import.meta.env.VITE_APP_URL,
     mode: 'history',
     routes: routes
 });

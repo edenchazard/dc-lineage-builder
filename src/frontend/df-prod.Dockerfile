@@ -1,7 +1,7 @@
 FROM node:lts-alpine3.14 as build
 WORKDIR /app
 ARG MOUNT_PATH
-ENV VUE_APP_URL=$MOUNT_PATH
+ENV VITE_APP_URL=$MOUNT_PATH
 RUN npm install --global @vue/cli
 COPY ./ ./
 RUN npm ci && npm run build

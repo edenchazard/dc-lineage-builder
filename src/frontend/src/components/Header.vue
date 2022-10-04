@@ -44,7 +44,7 @@ export default {
     },
   data() {
     return {
-      appVersion: process.env.VUE_APP_VERSION,
+      appVersion: import.meta.env.VITE_APP_VERSION,
       availableSkins: [
         { cssName: 'skin-default', prettyName: 'Default' },
         { cssName: 'skin-portal2', prettyName: 'Portal 2' },

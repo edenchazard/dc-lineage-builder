@@ -67,7 +67,7 @@ export default {
         try {
             this.status = { level: 1, message: "Generating link..." };
             const response = await generateUrl(exportedTree);
-            this.viewLink = `${window.location.origin}${process.env.VUE_APP_URL}view/${response.data.hash}`;
+            this.viewLink = `${window.location.origin}${import.meta.env.VITE_APP_URL}view/${response.data.hash}`;
             this.status = { level: 0, message: "" };
         }
         catch (error) {
