@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.14 as build
+FROM node:lts-alpine as build
 WORKDIR /app
 ARG MOUNT_PATH
 ENV VITE_APP_URL=$MOUNT_PATH
