@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.14
+FROM node:lts-alpine
 WORKDIR /app
 ENV NODE_ENV=development
 ENV VITE_APP_URL=/

@@ -36,7 +36,7 @@ services:
 
   db:
     container_name: dc-lb-db
-    image: mariadb:10.6
+    image: mariadb:10
     restart: always
     tty: true
     volumes:
