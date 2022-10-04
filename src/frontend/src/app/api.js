@@ -1,6 +1,6 @@
 
 import axios from "axios";
-const API_URL = "./api";
+const API_URL = "/api";
 
 export function callAPI(options){
     options.url = API_URL+options.url;

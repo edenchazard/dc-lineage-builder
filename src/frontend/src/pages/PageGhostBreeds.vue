@@ -66,7 +66,7 @@
 import { addBreed } from '../app/utils';
 
 import GhostBreedUpload from "../components/GhostBreedUpload.vue";
-import Information from '../components/ui/Information';
+import Information from '../components/ui/Information.vue';
 
 export default {
   name: 'PageGhostBreeds',
