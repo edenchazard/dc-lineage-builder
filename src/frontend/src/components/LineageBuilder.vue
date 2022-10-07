@@ -19,7 +19,7 @@
       <Lineage
         v-if="tree !== null"
           class="builder"
-          :tree.sync="tree"
+          :root="tree"
           :config="config" 
           @requestRemoveDescendants="replaceRoot"
           @requestAddDescendant="addDescendant"
@@ -27,10 +27,11 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import * as dragonBuilder from "../app/dragonBuilder";
 import { forEveryDragon } from "../app/utils";
 import { getLineageData } from "../app/api";
+import { useAppStore } from "../store"
 
 import Toolbar from './Toolbar/Toolbar.vue';
 import Lineage from './Lineage/Lineage.vue';
@@ -42,6 +43,10 @@ export default {
     Lineage,
     Information,
     Toolbar
+  },
+
+  setup() {
+      return { appStore: useAppStore() }
   },
 
   data() {
@@ -63,7 +68,6 @@ export default {
   },
 
   watch: {
-    
     tree: {
       deep: true,
       handler(){
@@ -87,8 +91,8 @@ export default {
         // exclude placeholders
         breeds['Placeholder'] && delete breeds['Placeholder'];
 
-        this.$store.commit('setUsedBreeds', breeds);
-        this.$store.commit('setSelectionCount', selected);
+        this.appStore.setUsedBreeds(breeds);
+        this.appStore.setSelectionCount(selected);
         //console.log(performance.now() - a)
       }
     }
@@ -98,7 +102,11 @@ export default {
     const hash = this.$route.query.template;
 
     if(hash === undefined){
-      this.tree = dragonBuilder.createDragonProperties();
+      // set the active tree
+      this.appStore.activeTree = dragonBuilder.createDragonProperties();
+
+      // store a reference to our active tree
+      this.tree = this.appStore.activeTree;
     }
     // the user has requested we import from an already built lineage.
     else{

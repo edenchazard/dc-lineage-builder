@@ -12,7 +12,7 @@ const clear = () => {
 const prevent = (event) => event.preventDefault(); 
 
 export default {
-    bind(el, binding) {
+    beforeMount(el, binding) {
         const {
             longPress, click, press, // callbacks
             wait, disableRightClickMenu // options
@@ -93,7 +93,7 @@ export default {
         el.classList.add(noSelectClass);
     },
 
-    update(el){
+    updated(el){
         el.classList.add(noSelectClass);
     },
 

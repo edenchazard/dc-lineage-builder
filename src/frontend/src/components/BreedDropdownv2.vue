@@ -34,21 +34,22 @@
                 <BreedDropdownResults
                     :search="searchString"
                     :breeds="breeds"
-                    :tags="$store.getters.enabledTags"
-                    :groups="$store.getters.enabledGroups"
+                    :tags="appStore.enabledTags"
+                    :groups="appStore.enabledGroups"
                     noResultsText="There are no breeds that match this criteria."
                     @selected="selected" />
             </section>
         </template>
     </FocusableDialog>
 </template>
-<script>
+<script lang="ts">
 import { debounce } from '../app/utils';
 import BreedDropdownResults from './BreedDropdownResults.vue';
 import BreedDropdownReuse from './BreedDropdownReuse.vue';
 import FocusableDialog from './FocusableDialog.vue';
 import BreedTagsSelector from './BreedTagsSelector.vue';
 import BreedGroupsTagSelector from './BreedGroupsTagSelector.vue';
+import { useAppStore } from '../store';
 
 export default {
     name: 'BreedDropdownv2',
@@ -63,6 +64,10 @@ export default {
     props: {
         breeds: Array,
         genderFilter: String
+    },
+
+    setup() {
+      return { appStore: useAppStore() }
     },
 
     data() {

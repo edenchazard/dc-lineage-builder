@@ -9,14 +9,16 @@
     <LineageGenerationCounter :count="generations" />
     <ul class="lineage-root">
       <Dragon
-        v-bind.sync="tree" 
+        :data="root"
         :nodesFromRoot="0"
         :disabled="config.disabled" />
     </ul>
   </div>
 </div>
 </template>
-<script>
+<script lang="ts">
+import { PropType } from 'vue';
+import { DragonType } from '../../app/types';
 import { countGenerations } from '../../app/utils';
 
 import Dragon from './Dragon.vue';
@@ -26,7 +28,7 @@ export default {
   name: 'Lineage',
   components: { Dragon, LineageGenerationCounter },
   props:{
-    tree: Object,
+    root: Object as PropType<DragonType>,
     config: Object
   },
 
@@ -36,7 +38,7 @@ export default {
 
   computed: {
     generations(){
-      return countGenerations(this.tree);
+      return countGenerations(this.root);
     }
   }
 }

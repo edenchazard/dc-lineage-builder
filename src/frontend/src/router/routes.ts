@@ -1,4 +1,9 @@
 export default [
+    {
+        path: '/:pathMatch(.*)*',
+        name: "Error",
+        component: () => import('../pages/PageError.vue')
+    },
     { 
         path: '/',
         name: "Build",
@@ -28,10 +33,5 @@ export default [
         path: '/ghost-breeds',
         name: "Ghost Breeds",
         component: () => import('../pages/PageGhostBreeds.vue')
-    },
-    {
-        path: '*',
-        name: "Error",
-        component: () => import('../pages/PageError.vue')
     }
 ];
