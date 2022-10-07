@@ -5,7 +5,7 @@
                 <BreedDropdownv2
                     v-if="!disabled && showBreedSelector===true"
                     :breeds="availableBreeds"
-                    :genderFilter="gender"
+                    :genderFilter="data.gender"
                     @selected="changeBreed"
                     @close="showBreedSelector=false" />
                 <DragonButton 
@@ -29,7 +29,7 @@
                     :class="{
                         'active': !disabled,
                         'disabled': disabled,
-                        'selected': selected
+                        'selected': data.selected
                     }"
                     :data="getBreedFromData" />
                 <DragonButton 
@@ -57,17 +57,17 @@
                 <font-awesome-icon icon="exclamation-triangle" />
             </span>
             <DragonLabelField
-                :value="(display === 1 ? code : name)"
-                :display="display"
+                :value="(data.display === 1 ? data.code : data.name)"
+                :display="data.display"
                 @changed="labelChanged"
                 :disabled="disabled" />
             <DragonButton 
-                v-if="nodesFromRoot === 0 && gender === 'm'"
+                v-if="nodesFromRoot === 0 && data.gender === 'm'"
                 title='Switch gender to female'
                 icon="mars"
                 @click="switchGender" />
             <DragonButton 
-                v-else-if="nodesFromRoot === 0 && gender === 'f'"
+                v-else-if="nodesFromRoot === 0 && data.gender === 'f'"
                 title='Switch gender to male'
                 icon="venus"
                 @click="switchGender" />
@@ -88,18 +88,18 @@
         </div>
         <ul v-if="hasParents">
             <Dragon
-                v-bind.sync="parents.m"
+                :data="data.parents.m"
                 :nodesFromRoot="nodesFromRoot+1"
                 :disabled="disabled" />
             <Dragon
-                v-bind.sync="parents.f"
+                :data="data.parents.f"
                 :nodesFromRoot="nodesFromRoot+1"
                 :disabled="disabled" />
         </ul>
     </li>
 </template>
 
-<script>
+<script lang="ts">
 /*
 notes for meself
 label warning is a bit hacky and needs improving
@@ -108,21 +108,27 @@ import GLOBALS from "../../app/globals";
 import { getBreedData, cloneObj, forEveryDragon } from "../../app/utils";
 import { validateCode, validateName } from "../../app/validators";
 import { switchParents, createDragonProperties, copyTreeFromComponent } from "../../app/dragonBuilder";
+import { useAppStore } from "../../store";
 
 import DragonLabelField from './DragonLabelField.vue';
 import BreedDropdownv2 from "../BreedDropdownv2.vue";
 import DragonPortrait from "../DragonPortrait.vue";
 import DragonButton from "./DragonButton.vue";
+import { DragonType } from "../../app/types";
 
 import longPressDirective from "../../directives/long-press/long-press";
+import { defineComponent, PropType } from "vue";
 
-const
-    ls = localStorage;
+const ls = localStorage;
 
-export default {
+export default defineComponent({
     name: 'Dragon',
     directives: {
         "long-press": longPressDirective
+    },
+
+    setup() {
+        return { appStore: useAppStore() }
     },
 
     data(){
@@ -132,20 +138,18 @@ export default {
     },
 
     props: {
-        code: String,
-        name: String,
-        parents: Object,
-        gender: String,
-        breed: String,
-        disabled: Boolean,
-        display: {
-            default: 1, //1: code 0: name
-            type: Number
+        data: {
+            type: Object as PropType<DragonType>,
+            required: true
         },
-        nodesFromRoot: Number,
-        selected: {
-            default: false,
-            type: Boolean
+        disabled: {
+            type: Boolean,
+            default: true,
+            required: false
+        },
+        nodesFromRoot: {
+            type: Number,
+            required: true
         }
     },
 
@@ -157,54 +161,53 @@ export default {
     },
     computed:{
         hasParents(){
-            return 'f' in this.parents;
+            return 'f' in this.data.parents;
         },
 
         availableBreeds(){
             // select the table
-            return  (this.gender === 'm' ? GLOBALS.breeds.males : GLOBALS.breeds.females);
+            return  (this.data.gender === 'm' ? GLOBALS.breeds.males : GLOBALS.breeds.females);
         },
 
         getBreedFromData(){
             // todo refactor
-            const o = (this.gender == 'm' ? GLOBALS.breeds.males : GLOBALS.breeds.females);
+            const o = (this.data.gender == 'm' ? GLOBALS.breeds.males : GLOBALS.breeds.females);
             // return the breed data for this breed name or if no match, the placeholder
-            return o.find((v) => v.name === this.breed) || GLOBALS.placeholder_breed;
+            return o.find((v) => v.name === this.data.breed) || GLOBALS.placeholder_breed;
         },
         labelWarning(){
-           const a = (this.display == 1 ? validateCode(this.code) : validateName(this.name));
+           const a = (this.data.display == 1 ? validateCode(this.data.code) : validateName(this.data.name));
            return !a;
         }
     },
 
     methods: {
         async switchParents(){
-            const newParents = /*await*/ switchParents(this);
-            this.$emit('update:parents', newParents);
+            this.data.parents = switchParents(this.data);
         },
 
         switchGender(){
-            const invertedGender = this.gender === 'f' ? 'm' : 'f';
+            const invertedGender = this.data.gender === 'f' ? 'm' : 'f';
 
             // Handle placeholder
-            if(this.breed === "Placeholder"){
-                this.$emit("update:gender", invertedGender);
-                this.$emit("update:breed", GLOBALS.placeholder_breed.name);
+            if(this.data.breed === "Placeholder"){
+                this.data.gender = invertedGender;
+                this.data.breed = GLOBALS.placeholder_breed.name;
                 //await this.$store.dispatch('removeFromUsedBreeds', this.breed);
             }
             // Handling a non-placeholder
             else{
                 // First, check that the current breed can be gender flipped
-                const breedData = getBreedData(this.breed);
+                const breedData = getBreedData(this.data.breed);
 
                 if(!breedData.genderOnly){
                     // This breed has both male and female genders, so flipping isn't an issue.
-                    this.$emit("update:gender", invertedGender);
+                    this.data.gender = invertedGender;
                 }
                 else{
                     // It doesn't. Replace with opposite gender and put in the placeholder.
-                    this.$emit("update:gender", invertedGender);
-                    this.$emit("update:breed", GLOBALS.placeholder_breed.name);
+                    this.data.gender = invertedGender;
+                    this.data.breed = GLOBALS.placeholder_breed.name;
                     //this.$store.dispatch('removeFromUsedBreeds', this.breed);
                 }
             }
@@ -214,7 +217,7 @@ export default {
             this.showBreedSelector = false;
 
             // update the breed
-            this.$emit('update:breed', e.name);
+            this.data.breed = e.name;
             //await this.$store.dispatch('removeFromUsedBreeds', this.breed);
             //await this.$store.dispatch('addToUsedBreeds', e.name);
         },
@@ -247,13 +250,13 @@ export default {
             ]));*/
 
             // insert the new branch
-            this.$emit('update:parents', paste);
+            this.data.parents = paste;
         },
 
         copyBranch(){
             if(this.hasParents){
                 // I could change how fED works but this is easier
-                const noSelect = cloneObj({ parents: this.parents });
+                const noSelect = cloneObj({ parents: this.data.parents });
         
                 forEveryDragon(noSelect, (dragon) => dragon.selected = false);
 
@@ -269,11 +272,11 @@ export default {
             // here's where our bubble plugin changes the game.
             // it'll bubble the event up the nodes until it reaches 
             // the lineage builder component, and can be handled there.
-            this.$bubble('requestRemoveDescendants', copyTreeFromComponent(this));
+            //this.$bubble('requestRemoveDescendants', copyTreeFromComponent(this));
         },
 
         addDescendant(){
-            this.$bubble('requestAddDescendant');
+            //this.$bubble('requestAddDescendant');
         },
 
         // adds a new node to the tree
@@ -282,7 +285,7 @@ export default {
                 m: createDragonProperties({gender: 'm'}),
                 f: createDragonProperties({gender: 'f'})
             };
-            this.$emit('update:parents', parents);
+            this.data.parents = parents;
         },
 
         // deletes this node and ancestors
@@ -297,21 +300,21 @@ export default {
                 (countSelected(this.parents.m) + countSelected(this.parents.f))
             );*/
 
-            this.$emit('update:parents', {});
+            this.data.parents = {};
         },
 
         labelChanged(value){
-            const attr = (this.display === 1 ? 'code' : 'name');
-            this.$emit(`update:${attr}`, value);
+            const attr = (this.data.display === 1 ? 'code' : 'name');
+            this.data[attr] = value;
         },
 
         switchLabel(){
-            this.$emit('update:display', this.display == 1 ? 0 : 1);
+            this.data.display = this.data.display == 1 ? 0 : 1;
         },
 
         longPress(){
             if(this.disabled){ return; }
-            if(!this.$store.state.selectionCount){
+            if(!this.appStore.selectionCount){
                 if(!this.selected){
                     this.$emit('update:selected', true);
                     //this.$store.commit('upSelectionCount');
@@ -323,23 +326,17 @@ export default {
         },
 
         click(){
+            console.log('clicked')
             if(this.disabled){ return; }
-            if(this.$store.state.selectionCount){
-                if(this.selected){
-                    //this.$store.commit('downSelectionCount');
-                    this.$emit('update:selected', false);
-                }
-                else{
-                    //this.$store.commit('upSelectionCount');
-                    this.$emit('update:selected', true);
-                }
+            if(this.appStore.selectionCount){
+                this.data.selected = !this.data.selected;
             }
             else{
                 this.showBreedSelector = true;
             }
         }
     }
-}
+});
 </script>
 
 <style scoped>

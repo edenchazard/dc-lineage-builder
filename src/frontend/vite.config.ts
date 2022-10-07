@@ -1,8 +1,7 @@
-import { createVuePlugin as vue } from "vite-plugin-vue2";
+import vue from '@vitejs/plugin-vue';
 import { defineConfig, loadEnv } from 'vite';
 
 export default ({ mode }) => {
-  // eslint-disable-next-line no-undef
   const env = {...process.env, ...loadEnv(mode, process.cwd())};
 
   return defineConfig({

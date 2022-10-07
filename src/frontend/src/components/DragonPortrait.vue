@@ -1,6 +1,6 @@
 <template>
     <span
-        v-on="$listeners"
+        v-bind="$attrs"
         :title="data.name"
         class="imgbox imgbox-fullsize">
         <img
@@ -17,7 +17,7 @@
     </span>
 </template>
 
-<script>
+<script lang="ts">
 export default {
     name: 'DragonPortrait',
     props: {

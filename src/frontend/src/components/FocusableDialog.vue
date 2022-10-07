@@ -18,7 +18,7 @@
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
 // I know this is hacky but this is the easiest and most optimal solution
 // I could think of
 export default {

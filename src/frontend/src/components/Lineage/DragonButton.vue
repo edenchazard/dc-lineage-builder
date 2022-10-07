@@ -7,7 +7,7 @@
     <font-awesome-icon :icon="icon" /></button>
 </template>
 
-<script>
+<script lang="ts">
 export default {
     name: "DragonButton",
     props: {

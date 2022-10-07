@@ -15,11 +15,9 @@
 
     <div class='toolbar'>
         <div class='toolbar-item'>
-            <toggle-button v-model="config.showInterface" color="var(--builderControlBG)" />
             <span>Show interface</span>
         </div>
         <div class='toolbar-item'>
-            <toggle-button v-model="config.showLabels" color="var(--builderControlBG)" />
             <span>Show labels</span>
         </div>
         <div class='toolbar-item'>
@@ -91,14 +89,13 @@
 </div>
 </template>
 
-<script>
+<script lang="ts">
 /*
                 <ToolbarButton title='Choose tags' icon="tag">
                     <template #dropdown>
                         <BreedTags />
                     </template>
                 </ToolbarButton> */
-import { ToggleButton } from "vue-js-toggle-button";
 
 import GLOBALS from "../../app/globals";
 import {
@@ -111,6 +108,7 @@ import DialogExport from './DialogExport.vue';
 import DialogImport from './DialogImport.vue';
 import DialogGenerate from './DialogGenerate.vue';
 import ToolbarButton from './ToolbarButton.vue';
+import { useAppStore } from "../../store";
 
 const treeSelectedContains = (tree) => {
     let
@@ -136,7 +134,6 @@ const treeSelectedContains = (tree) => {
 export default {
     name: 'Toolbar',
     components: {
-        ToggleButton,
         DialogExport,
         DialogImport,
         DialogGenerate,
@@ -147,6 +144,10 @@ export default {
     props:{
         tree: Object,
         config: Object
+    },
+
+    setup() {
+        return { appStore: useAppStore() }
     },
 
     data(){
@@ -172,9 +173,8 @@ export default {
 
     computed: {
         itemsSelected(){
-            return this.$store.state.selectionCount;
+            return this.appStore.selectionCount;
         },
-
         availableBreeds(){
             // no tree, ignore. prevents exception when switching routes
             if(!this.tree) return [];
@@ -185,9 +185,9 @@ export default {
     
             const breedTable = GLOBALS.breeds.entire
                 // filter the group
-                .filter(filterGroup(this.$store.getters.enabledGroups))
+                .filter(filterGroup(this.appStore.enabledGroups))
                 // if we have tags, make sure to filter them
-                .filter(filterTags(this.$store.getters.enabledTags));
+                .filter(filterTags(this.appStore.enabledTags));
 
             const maleBreeds = GLOBALS.breeds.males.map(({name}) => name);
             const femaleBreeds = GLOBALS.breeds.females.map(({name}) => name);
@@ -215,7 +215,7 @@ export default {
     methods:{
         importLineage(tree){
             this.$emit('importTree', tree);
-            this.$store.dispatch('setUsedBreeds', countBreeds(tree));
+            this.appStore.setUsedBreeds(countBreeds(tree));
         },
     }
 }
