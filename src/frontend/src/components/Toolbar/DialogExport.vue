@@ -17,8 +17,10 @@
         </template>
     </Dialog>
 </template>
-<script>
-import { cloneObj, forEveryDragon } from "../../app/utils";
+<script lang="ts">
+import { PropType } from "vue";
+import { LineageRoot } from "../../app/types";
+import { deepClone, forEveryDragon } from "../../app/utils";
 import { verifyIntegrity } from "../../app/validators";
 
 import Dialog from "../Dialog.vue";
@@ -29,9 +31,12 @@ export default {
     name: 'DialogExport',
     components: { Dialog, Information, TextCopy },
     props: {
-        show: Boolean,
-        tree: Object
+        tree: {
+            type: Object as PropType<LineageRoot>,
+            required: true
+        }
     },
+
     data(){
         return {
             file: "",
@@ -44,7 +49,7 @@ export default {
 
     mounted(){
         // we do this conversion because vue attaches getters/setters to our tree
-        const exportedTree = cloneObj(this.tree);
+        const exportedTree = deepClone(this.tree);
 
         forEveryDragon(exportedTree, dragon => {
             delete dragon.selected;

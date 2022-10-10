@@ -1,43 +1,58 @@
 <template>
-    <div class="lineage-builder">
-      <Information :info="status" />
-      <Toolbar
-        :config="config"
-        :tree="tree"
-        @updateConfig="(key, value) => config[key] = value"
-        @importTree="(newTree) => tree = newTree"
-        @unselectAll="unselectAll"
-        @changeBreed="selectionChangeBreed"
-        @displayNames="selectionSwitchLabel(0)"
-        @displayCodes="selectionSwitchLabel(1)"
-        @selectCriteria="selectionCriteria"
-        @randomizeLabels="selectionRandomizeLabels"
-        @deleteAncestors="selectionDeleteAncestors"
-        @addParents="selectionAddParents"
-        @switchParents="selectionSwitchParents"
-      />
-      <Lineage
-        v-if="tree !== null"
-          class="builder"
-          :root="tree"
-          :config="config" 
-          @requestRemoveDescendants="replaceRoot"
-          @requestAddDescendant="addDescendant"
-          @contextmenu="() => false" />
-    </div>
+  <div
+    v-if="tree !== null"
+    class="lineage-builder">
+    <Information :info="status" />
+    <Toolbar
+      :config="config"
+      :tree="tree"
+      @updateConfig="(key, value) => config[key] = value"
+      @importTree="(newTree) => tree = newTree"
+      @unselectAll="unselectAll"
+      @changeBreed="selectionChangeBreed"
+      @displayNames="selectionSwitchLabel(0)"
+      @displayCodes="selectionSwitchLabel(1)"
+      @selectCriteria="selectionCriteria"
+      @randomizeLabels="selectionRandomizeLabels"
+      @deleteAncestors="selectionDeleteAncestors"
+      @addParents="selectionAddParents"
+      @switchParents="selectionSwitchParents"
+    />
+    <Lineage
+      class="builder"
+      :root="tree"
+      :config="config" 
+      @requestRemoveDescendants="replaceRoot"
+      @requestAddDescendant="addDescendant"
+      @contextmenu="() => false" />
+  </div>
 </template>
 
 <script lang="ts">
 import * as dragonBuilder from "../app/dragonBuilder";
-import { forEveryDragon } from "../app/utils";
+import { forEveryDragon, hasParents } from "../app/utils";
 import { getLineageData } from "../app/api";
-import { useAppStore } from "../store"
+import { useAppStore } from "../store";
+import { LineageRoot, DragonType, DragonDisplay } from "../app/types";
 
 import Toolbar from './Toolbar/Toolbar.vue';
 import Lineage from './Lineage/Lineage.vue';
 import Information from './ui/Information.vue';
+import { LineageConfig } from "../app/types";
+import { defineComponent } from "vue";
 
-export default {
+interface State {
+  tree: null | LineageRoot,
+  config: LineageConfig,
+  viewLink: string,
+  status: {
+    level: 0 | 1 | 2 | 3,
+    message: string,
+    title?: string
+  }
+}
+
+export default defineComponent({
   name: 'LineageBuilder',
   components: {
     Lineage,
@@ -46,14 +61,13 @@ export default {
   },
 
   setup() {
-      return { appStore: useAppStore() }
+    return { appStore: useAppStore() }
   },
 
-  data() {
+  data(): State {
     return {
       tree: null,
-      config:{
-        strict: false,
+      config: {
         showInterface: true,
         showLabels: true,
         disabled: false
@@ -71,42 +85,34 @@ export default {
     tree: {
       deep: true,
       handler(){
-        //const a = performance.now();
-        // count breeds in the tree recursively
-        // accepts an array of trees
-        const addToCountBreeds = (list, breed) => {
+        if(this.tree === null) return;
+
+        const addToCountBreeds = (list: { [x: string]: number }, breed: string) =>
           list[breed] = list[breed] + 1 || 1;
-        };
-      
-        const breeds = {};
+    
+        const breedCounts: {[x: string]: number} = {};
         let selected = 0;
     
         forEveryDragon(this.tree, (dragon) => {
-          addToCountBreeds(breeds, dragon.breed);
-          if(dragon.selected){
-            selected++;
-          }
+          addToCountBreeds(breedCounts, dragon.breed);
+          if(dragon.selected) selected++;
         });
 
         // exclude placeholders
-        breeds['Placeholder'] && delete breeds['Placeholder'];
+        breedCounts['Placeholder'] && delete breedCounts['Placeholder'];
 
-        this.appStore.setUsedBreeds(breeds);
-        this.appStore.setSelectionCount(selected);
-        //console.log(performance.now() - a)
+        this.appStore.setUsedBreeds(breedCounts);
+        this.appStore.selectionCount = selected;
       }
     }
   },
 
   async mounted(){
-    const hash = this.$route.query.template;
+    const hash = this.$route.query.template as string | undefined;
 
     if(hash === undefined){
-      // set the active tree
+      // No template, so start from scratch
       this.appStore.activeTree = dragonBuilder.createDragonProperties();
-
-      // store a reference to our active tree
-      this.tree = this.appStore.activeTree;
     }
     // the user has requested we import from an already built lineage.
     else{
@@ -117,16 +123,17 @@ export default {
           take a moment to load.`
         };
 
+        // fetch from server
         const response = await getLineageData(hash);
 
-        const importedTree = JSON.parse(response.data.dragon);
+        // parse response
+        const savedTree = JSON.parse(response.data.dragon);
 
         // add selection data
-        forEveryDragon(importedTree, dragon => dragon.selected = false);
+        forEveryDragon(savedTree, dragon => dragon.selected = false);
 
-        this.tree = importedTree;
+        this.appStore.activeTree = savedTree;
         this.status = { level: 0, message: "" };
-        //this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
       }
       catch (error) {
         const { response } = error;
@@ -138,89 +145,85 @@ export default {
         };
       }
     }
+  
+    // store a reference to our active tree
+    this.tree = this.appStore.activeTree;
   },
 
   // reset stuff
   // tree can be a large memory hog, and gc doesn't always get to it immediately.
   beforeDestroy(){
     this.tree = null;
-    //this.$store.dispatch('setUsedBreeds', []);
   },
 
   methods: {
     addDescendant(){
-      let newTree = dragonBuilder.createDragonProperties();
+      let newTree = dragonBuilder.createDragonProperties() as LineageRoot;
 
-      // check current root
-      if(this.tree.gender === 'f'){
-        newTree.parents.f = this.tree;
-        newTree.parents.m = dragonBuilder.createDragonProperties({gender: 'm'});
-      }
-      else{
-        newTree.parents.f = dragonBuilder.createDragonProperties({gender: 'f'});
-        newTree.parents.m = this.tree;
+      // check current root if exists
+      if(this.tree !== null){
+        if(this.tree.gender === 'f'){
+          newTree.parents = {
+            f: this.tree,
+            m: dragonBuilder.createDragonProperties({gender: 'm'})
+          };
+        }
+        else{
+          newTree.parents = {
+            f: dragonBuilder.createDragonProperties({gender: 'f'}),
+            m: this.tree
+          };
+        }
       }
 
       // replace the existing root with the new tree.
       this.tree = newTree;
     },
 
-    replaceRoot(node){
-      // recalculate selected count
-      //this.$store.commit('resetSelectionCount', countSelected(node));
-
-      // recalculate breed numbers
-      //this.$store.dispatch('setUsedBreeds', countBreeds(node))
-  
+    replaceRoot(node: LineageRoot){
       // replace the tree
       this.tree = node;
     },
 
     // Accepts a callback
     // Or a key and the value to change it to
-    applyToSelected(prop, value){
-      const isAttribute = typeof prop === "string";
-    
-      forEveryDragon(this.tree, async (dragon) => {
-        if(dragon.selected){
-          if(isAttribute){
-            dragon[prop] = value;
-          }
-          else{
-            prop(dragon);
-          }
-        }
-      });
+    applyToSelected(keyOrFunc: keyof DragonType | ((dragon: DragonType) => void), value?: any){
+      if(typeof keyOrFunc === "string"){
+        const key = keyOrFunc.toString();
+        forEveryDragon(this.tree as LineageRoot, (dragon) => {
+            if(dragon.selected) dragon[key] = value;
+        });
+      }
+      else if(typeof keyOrFunc === "function"){
+        const callback = keyOrFunc;
+        forEveryDragon(this.tree as LineageRoot, (dragon) => {
+            if(dragon.selected) callback(dragon);
+        });
+      }
     },
 
-    selectionCriteria(criteria, value){
-      this.selectBy((dragon) => dragon[criteria] === value);
+    selectionCriteria(criteria: keyof DragonType, value: DragonType[keyof DragonType]){
+      const key = criteria.toString();
+      this.selectBy((dragon) => dragon[key] === value);
     },
 
-    async selectionChangeBreed(breedName){
-      forEveryDragon(this.tree, (dragon) => {
-        if(dragon.selected){
-          dragon.breed = breedName;
-        }
+    async selectionChangeBreed(breedName: string){
+      forEveryDragon(this.tree as LineageRoot, (dragon) => {
+        if(dragon.selected) dragon.breed = breedName;
       });
-
-      //this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
     },
 
     selectionDeleteAncestors(){
       this.applyToSelected('parents', {});
-      //this.$store.commit('resetSelectionCount', countSelected(this.tree));
-      //this.$store.dispatch('setUsedBreeds', countBreeds(this.tree));
     },
 
     selectionAddParents(){
       this.applyToSelected(dragon => {
-        if(!('f' in dragon.parents)){
-            const parents ={
+        if(!hasParents(dragon)){
+            dragon.parents = {
                 m: dragonBuilder.createDragonProperties({gender: 'm'}),
                 f: dragonBuilder.createDragonProperties({gender: 'f'})
             };
-            dragon.parents = parents;
         }
       });
     },
@@ -228,45 +231,34 @@ export default {
     async selectionSwitchParents(){
       this.applyToSelected(dragon => {
         // no parents, ignore
-        if(!('f' in dragon.parents)){
-          return;
-        }
-        const newParents = dragonBuilder.switchParents(dragon);
+        if(!hasParents(dragon)) return;
+        const newParents = dragonBuilder.switchParents(dragon.parents);
         dragon.parents = newParents;
       });
     },
 
     selectionRandomizeLabels(){
       this.applyToSelected((dragon) => {
-        if(dragon.display === 0){
-          dragon.name = dragonBuilder.generateName();
-        }
-        else{
-          dragon.code = dragonBuilder.generateCode();
-        }
+        if(dragon.display === 0) dragon.name = dragonBuilder.generateName();
+        else dragon.code = dragonBuilder.generateCode();
       });
     },
   
-    selectionSwitchLabel(display){
+    selectionSwitchLabel(display: DragonDisplay){
       this.applyToSelected('display', display);
     },
   
     unselectAll(){
       this.applyToSelected('selected', false);
-      //this.$store.commit('resetSelectionCount');
     },
 
-    selectBy(condition){
-      forEveryDragon(this.tree, (dragon) => {
-        if(!dragon.selected && condition(dragon)){
-          dragon.selected = true;
-        }
+    selectBy(condition: ((dragon: DragonType) => boolean)){
+      forEveryDragon(this.tree as LineageRoot, (dragon: DragonType) => {
+        if(!dragon.selected && condition(dragon)) dragon.selected = true;
       });
-      
-      //this.$store.commit('upSelectionCount', count);
     }
   }
-}
+});
 </script>
 
 <style scoped>

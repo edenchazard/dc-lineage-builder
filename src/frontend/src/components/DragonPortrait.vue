@@ -17,41 +17,49 @@
     </span>
 </template>
 
-<script lang="ts">
-export default {
-    name: 'DragonPortrait',
-    props: {
-        data: Object,
-        gen: Number
+<script setup lang="ts">
+import { PropType } from 'vue';
+import { PortraitData } from '../app/types';
+
+const props = defineProps({
+    data: {
+        type: Object as PropType<PortraitData>,
+        required: true,
     },
-    /*,
-    computed:{
-        // determines whether to provide a full size image or a small image
-        calculated: function(){
-            let real = { };
-            if(this.gen > 3){
-                const initial = this.data.image;
-                if(initial.x != 0){
-                    real.x = initial.x - (initial.x / 3);
-                }
-                else{
-                    real.x = 0;
-                }
-                if(initial.h > 32){
-                    real.h = initial.h - (initial.h / 3)
-                }
-                else{
-                    real.h = initial.h;
-                }
-                real.w = 24;
-                return real;
+    gen: {
+        type: Number,
+        required: false,
+        default: 1
+    }
+});
+
+/*,
+computed:{
+    // determines whether to provide a full size image or a small image
+    calculated: function(){
+        let real = { };
+        if(this.gen > 3){
+            const initial = this.data.image;
+            if(initial.x != 0){
+                real.x = initial.x - (initial.x / 3);
             }
             else{
-                return { ...this.data.image, w: 34};
+                real.x = 0;
             }
+            if(initial.h > 32){
+                real.h = initial.h - (initial.h / 3)
+            }
+            else{
+                real.h = initial.h;
+            }
+            real.w = 24;
+            return real;
         }
-    }*/
-};
+        else{
+            return { ...this.data.image, w: 34};
+        }
+    }
+}*/
 </script>
 <style scoped>
 /* add css for fallbacks */

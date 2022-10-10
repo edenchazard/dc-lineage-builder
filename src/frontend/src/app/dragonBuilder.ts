@@ -1,6 +1,7 @@
 import { uniqueNamesGenerator, names, colors, animals } from 'unique-names-generator';
 
 import GLOBALS from './globals';
+import { DragonParents, DragonType } from './types';
 import { getBreedData } from './utils';
 
 export function generateCode(){
@@ -21,50 +22,49 @@ export function generateName(){
     });
 }
 
-export function createDragonProperties(changes){
-    let defaults = {
+export function createDragonProperties(changes?: Partial<DragonType>){
+    const defaults: DragonType = {
         code: generateCode(),
         name: generateName(),
-        parents: { },
-        breed: GLOBALS.placeholder_breed.name,
+        parents: null,
+        breed: GLOBALS.placeholder.name,
         gender: "m",
         display: 1,
         selected: false
     };
 
-    Object.assign(defaults, changes);
-    return defaults;
+    return changes === undefined ? defaults : {...defaults, ...changes};
 }
 
-export function copyTreeFromComponent(dragon){
+export function cloneDragon(dragon: DragonType){
     return {
-        code: dragon.code,
-        gender: dragon.gender,
-        breed: dragon.breed,
-        name: dragon.name,
-        parents: dragon.parents,
-        display: dragon.display,
+        ...dragon,
         selected: false
     }
 }
 
-export function switchGender(dragon){
-    const newGender = (dragon.gender === 'f' ? 'm': 'f');
+// Takes a parents object and switches the two
+// If null, returns null
+export function switchParents(parents: DragonParents | null) {
+    // check it has parents
+    if(parents === null) return null;
 
-    const breed = getBreedData(dragon.breed);
-
-    if(breed.genderOnly){
-        dragon.breed = GLOBALS.placeholder_breed.name;
+    const switchGender = (dragon: DragonType) => {
+        const newGender = (dragon.gender === 'f' ? 'm': 'f');
+    
+        const breed = getBreedData(dragon.breed);
+    
+        // todo
+        if(breed!.genderOnly)
+            dragon.breed = GLOBALS.placeholder.name;
+    
+        dragon.gender = newGender;
     }
 
-    dragon.gender = newGender;
-}
-
-export function switchParents(dragon){
     // make a new branch with the parents switched
-    const newParents = {
-        m: dragon.parents.f,
-        f: dragon.parents.m
+    const newParents: DragonParents = {
+        m: parents.f,
+        f: parents.m
     };
 
     switchGender(newParents.m);

@@ -86,7 +86,7 @@ function meetsSaveRequirements(obj){
         if(!pass){  // check failed, don't even bother
             return;
         }
-        /*if(dragon.breed == GLOBALS.placeholder_breed.name){
+        /*if(dragon.breed == GLOBALS.placeholder.name){
             pass = false;
         }*/
         // reject ghosties

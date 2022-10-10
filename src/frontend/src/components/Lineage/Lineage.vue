@@ -7,7 +7,9 @@
       'hideEdit': !config.showInterface
     }">
     <LineageGenerationCounter :count="generations" />
-    <ul class="lineage-root">
+    <ul
+      v-if="root !== null"
+      class="lineage-root">
       <Dragon
         :data="root"
         :nodesFromRoot="0"
@@ -17,31 +19,40 @@
 </div>
 </template>
 <script lang="ts">
-import { PropType } from 'vue';
-import { DragonType } from '../../app/types';
+import { defineComponent, PropType } from 'vue';
+import { LineageConfig, LineageRoot } from '../../app/types';
 import { countGenerations } from '../../app/utils';
 
 import Dragon from './Dragon.vue';
 import LineageGenerationCounter from './LineageGenerationCounter.vue';
 
-export default {
+export default defineComponent({
   name: 'Lineage',
   components: { Dragon, LineageGenerationCounter },
   props:{
-    root: Object as PropType<DragonType>,
-    config: Object
-  },
-
-  data() {
-    return {    }
+    root: {
+      type: Object as PropType<LineageRoot> | null,
+      required: true,
+      default: null
+    },
+    config: {
+      type: Object as PropType<LineageConfig>,
+      required: false,
+      default: {
+        showLabels: true,
+        showInterface: false,
+        disabled: true
+      }
+    }
   },
 
   computed: {
     generations(){
+      if(this.root === null) return 0;
       return countGenerations(this.root);
     }
   }
-}
+});
 </script>
 
 <style scoped>
