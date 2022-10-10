@@ -18,7 +18,7 @@
 </template>
 <script>
 import { verifyIntegrity, meetsSaveRequirements } from '../../app/validators';
-import { cloneObj, forEveryDragon } from "../../app/utils";
+import { deepClone, forEveryDragon } from "../../app/utils";
 import { generateUrl } from "../../app/api";
 
 import Dialog from "../Dialog.vue";
@@ -44,7 +44,7 @@ export default {
 
     async mounted(){
         // we do this conversion because vue attaches getters/setters to our tree
-        const exportedTree = cloneObj(this.tree);
+        const exportedTree = deepClone(this.tree);
 
         forEveryDragon(exportedTree, dragon => {
             delete dragon.selected;

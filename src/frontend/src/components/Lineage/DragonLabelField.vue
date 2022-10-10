@@ -23,7 +23,7 @@
         </span>
     </span>
 </template>
-<script>
+<script lang="ts">
 import { generateName, generateCode } from "../../app/dragonBuilder";
 
 export default {
@@ -41,13 +41,6 @@ export default {
         }
     },
 
-        /*
-    filters:{
-        formatSpaces: function(str){
-            return str.replace(' ', '&nbsp;');
-        }
-    },*/
-
     methods:{
         clicked(){
             if(this.disabled){
@@ -57,22 +50,16 @@ export default {
             this.editing = true;
 
             // focus the input so users can type immediately
-            this.$nextTick(() => this.$refs.inputel.focus());
+            this.$nextTick(() => (this.$refs.inputel as HTMLInputElement).focus());
         },
 
-        finishedEditing(e){
-            let value = e.target.value;
+        finishedEditing(e: Event){
+            let value = (e.target as HTMLInputElement).value;
 
             // we'll fill blanks in by automatically generating
             // a new string of name or code
-            if(value == ''){
-                if(this.display == 1){
-                    value = generateCode();
-                }
-                else{
-                    value = generateName();
-                }
-            }
+            if(value === '')
+                value = this.display === 1 ? generateCode() : generateName();
 
             this.$emit('changed', value);
             this.editing = false;

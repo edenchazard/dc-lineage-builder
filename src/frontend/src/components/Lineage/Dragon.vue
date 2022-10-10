@@ -4,7 +4,7 @@
             <div>
                 <BreedDropdownv2
                     v-if="!disabled && showBreedSelector===true"
-                    :breeds="availableBreeds"
+                    :breeds="availableMates"
                     :genderFilter="data.gender"
                     @selected="changeBreed"
                     @close="showBreedSelector=false" />
@@ -21,7 +21,7 @@
                     icon="cut"
                     @click="removeDescendants" />
                 <DragonPortrait
-                    v-long-press="{
+                    v-longPress="{
                         click: click,
                         longPress: longPress
                     }"
@@ -31,21 +31,21 @@
                         'disabled': disabled,
                         'selected': data.selected
                     }"
-                    :data="getBreedFromData" />
+                    :data="getImage" />
                 <DragonButton 
-                    v-if="hasParents"
+                    v-if="hasAncestry"
                     class='dragon-right'
                     title='Remove ancestors'
                     icon="minus"
                     @click="deleteAncestors" />
                 <DragonButton 
-                    v-if="hasParents"
+                    v-if="hasAncestry"
                     class='dragon-right2'
                     title='Switch parents'
                     icon="sync-alt"
-                    @click="switchParents" />
+                    @click="swapParents" />
                 <DragonButton 
-                    v-if="!hasParents"
+                    v-if="!hasAncestry"
                     class='dragon-right'
                     title='Add ancestors'
                     icon="arrow-right"
@@ -77,7 +77,7 @@
                 icon="font"
                 @click="switchLabel" />
             <DragonButton 
-                v-if="hasParents"
+                v-if="hasAncestry"
                 title='Copy ancestors'
                 icon="clone"
                 @click="copyBranch" />
@@ -86,257 +86,211 @@
                 icon="paste"
                 @click="pasteBranch" />
         </div>
-        <ul v-if="hasParents">
+        <ul v-if="hasAncestry">
             <Dragon
-                :data="data.parents.m"
+                :data="data.parents!.m"
                 :nodesFromRoot="nodesFromRoot+1"
                 :disabled="disabled" />
             <Dragon
-                :data="data.parents.f"
+                :data="data.parents!.f"
                 :nodesFromRoot="nodesFromRoot+1"
                 :disabled="disabled" />
         </ul>
     </li>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 /*
 notes for meself
 label warning is a bit hacky and needs improving
 */
 import GLOBALS from "../../app/globals";
-import { getBreedData, cloneObj, forEveryDragon } from "../../app/utils";
+import { getBreedData, deepClone, forEveryDragon, getTable,
+        breedEntryToPortrait, expandGender, hasParents } from "../../app/utils";
 import { validateCode, validateName } from "../../app/validators";
-import { switchParents, createDragonProperties, copyTreeFromComponent } from "../../app/dragonBuilder";
+import { switchParents, createDragonProperties } from "../../app/dragonBuilder";
 import { useAppStore } from "../../store";
 
 import DragonLabelField from './DragonLabelField.vue';
 import BreedDropdownv2 from "../BreedDropdownv2.vue";
 import DragonPortrait from "../DragonPortrait.vue";
 import DragonButton from "./DragonButton.vue";
-import { DragonType } from "../../app/types";
+import { BreedEntry, DragonParents, DragonType, PortraitData } from "../../app/types";
 
-import longPressDirective from "../../directives/long-press/long-press";
-import { defineComponent, PropType } from "vue";
+import vLongPress from "../../directives/long-press/vue-3-long-press";
+import { computed, PropType, ref } from "vue";
 
-const ls = localStorage;
-
-export default defineComponent({
-    name: 'Dragon',
-    directives: {
-        "long-press": longPressDirective
+const props = defineProps({
+    // Dragon properties
+    data: {
+        type: Object as PropType<DragonType>,
+        required: true
     },
-
-    setup() {
-        return { appStore: useAppStore() }
+    // Whether to disable the click
+    disabled: {
+        type: Boolean,
+        default: true,
+        required: false
     },
-
-    data(){
-        return {
-            showBreedSelector: false,
-        }
-    },
-
-    props: {
-        data: {
-            type: Object as PropType<DragonType>,
-            required: true
-        },
-        disabled: {
-            type: Boolean,
-            default: true,
-            required: false
-        },
-        nodesFromRoot: {
-            type: Number,
-            required: true
-        }
-    },
-
-    components: {
-        DragonLabelField,
-        BreedDropdownv2,
-        DragonPortrait,
-        DragonButton
-    },
-    computed:{
-        hasParents(){
-            return 'f' in this.data.parents;
-        },
-
-        availableBreeds(){
-            // select the table
-            return  (this.data.gender === 'm' ? GLOBALS.breeds.males : GLOBALS.breeds.females);
-        },
-
-        getBreedFromData(){
-            // todo refactor
-            const o = (this.data.gender == 'm' ? GLOBALS.breeds.males : GLOBALS.breeds.females);
-            // return the breed data for this breed name or if no match, the placeholder
-            return o.find((v) => v.name === this.data.breed) || GLOBALS.placeholder_breed;
-        },
-        labelWarning(){
-           const a = (this.data.display == 1 ? validateCode(this.data.code) : validateName(this.data.name));
-           return !a;
-        }
-    },
-
-    methods: {
-        async switchParents(){
-            this.data.parents = switchParents(this.data);
-        },
-
-        switchGender(){
-            const invertedGender = this.data.gender === 'f' ? 'm' : 'f';
-
-            // Handle placeholder
-            if(this.data.breed === "Placeholder"){
-                this.data.gender = invertedGender;
-                this.data.breed = GLOBALS.placeholder_breed.name;
-                //await this.$store.dispatch('removeFromUsedBreeds', this.breed);
-            }
-            // Handling a non-placeholder
-            else{
-                // First, check that the current breed can be gender flipped
-                const breedData = getBreedData(this.data.breed);
-
-                if(!breedData.genderOnly){
-                    // This breed has both male and female genders, so flipping isn't an issue.
-                    this.data.gender = invertedGender;
-                }
-                else{
-                    // It doesn't. Replace with opposite gender and put in the placeholder.
-                    this.data.gender = invertedGender;
-                    this.data.breed = GLOBALS.placeholder_breed.name;
-                    //this.$store.dispatch('removeFromUsedBreeds', this.breed);
-                }
-            }
-        },
-
-        async changeBreed(e){
-            this.showBreedSelector = false;
-
-            // update the breed
-            this.data.breed = e.name;
-            //await this.$store.dispatch('removeFromUsedBreeds', this.breed);
-            //await this.$store.dispatch('addToUsedBreeds', e.name);
-        },
-
-        async pasteBranch(){
-            const paste = JSON.parse(ls.getItem('clipboard')) || null;
-
-            // check there's data available
-            // todo add an integrity check
-            if(!paste){
-                return;
-            }
-
-            // remove breed counts from previous branch
-            if(this.hasParents){
-                /*await this.$store.dispatch('removeFromUsedBreeds', countBreeds([
-                    this.parents.m,
-                    this.parents.f
-                ]));*/
-
-                //and update selection count, if we have to
-                //const count = countSelected(this.parents.m) + countSelected(this.parents.f);
-                //this.$store.commit('downSelectionCount', count);
-            }
-
-            // update with new breed counts from pasted branch
-            /*await this.$store.dispatch('addToUsedBreeds', countBreeds([
-                paste.m,
-                paste.f
-            ]));*/
-
-            // insert the new branch
-            this.data.parents = paste;
-        },
-
-        copyBranch(){
-            if(this.hasParents){
-                // I could change how fED works but this is easier
-                const noSelect = cloneObj({ parents: this.data.parents });
-        
-                forEveryDragon(noSelect, (dragon) => dragon.selected = false);
-
-                ls.setItem('clipboard', JSON.stringify({ ... noSelect.parents }));
-            }
-        },
-
-        // this is a bit stupid. basically, we have to make a new root node
-        // for the parent with all the properties of this node
-        removeDescendants(){
-            // another stupid thing, child components can only emit events
-            // up to the parent, so no grandchild -> grandparent stuff
-            // here's where our bubble plugin changes the game.
-            // it'll bubble the event up the nodes until it reaches 
-            // the lineage builder component, and can be handled there.
-            //this.$bubble('requestRemoveDescendants', copyTreeFromComponent(this));
-        },
-
-        addDescendant(){
-            //this.$bubble('requestAddDescendant');
-        },
-
-        // adds a new node to the tree
-        addAncestors(){
-            const parents ={
-                m: createDragonProperties({gender: 'm'}),
-                f: createDragonProperties({gender: 'f'})
-            };
-            this.data.parents = parents;
-        },
-
-        // deletes this node and ancestors
-        async deleteAncestors(){
-            /*await this.$store.dispatch('removeFromUsedBreeds', countBreeds([
-                this.parents.m,
-                this.parents.f
-            ]));
-
-            // update selection count to reflect any potentially removed
-            this.$store.commit('downSelectionCount',
-                (countSelected(this.parents.m) + countSelected(this.parents.f))
-            );*/
-
-            this.data.parents = {};
-        },
-
-        labelChanged(value){
-            const attr = (this.data.display === 1 ? 'code' : 'name');
-            this.data[attr] = value;
-        },
-
-        switchLabel(){
-            this.data.display = this.data.display == 1 ? 0 : 1;
-        },
-
-        longPress(){
-            if(this.disabled){ return; }
-            if(!this.appStore.selectionCount){
-                if(!this.selected){
-                    this.$emit('update:selected', true);
-                    //this.$store.commit('upSelectionCount');
-                }
-            }
-            else{
-                this.click();
-            }
-        },
-
-        click(){
-            console.log('clicked')
-            if(this.disabled){ return; }
-            if(this.appStore.selectionCount){
-                this.data.selected = !this.data.selected;
-            }
-            else{
-                this.showBreedSelector = true;
-            }
-        }
+    // How many gens is this?
+    nodesFromRoot: {
+        type: Number,
+        required: true
     }
 });
+
+const ls = localStorage;
+const appStore = useAppStore();
+const showBreedSelector = ref(false);
+
+const hasAncestry = computed(() => hasParents(props.data));
+
+const availableMates = computed(() => getTable(props.data.gender));
+
+const getImage = computed(() => {
+    // return the breed data for this breed name or if no match, the placeholder
+    let entry = getBreedData(props.data.breed);
+
+    if(!entry) {
+        // if unavailable, replace with placeholder
+        props.data.breed = GLOBALS.placeholder.name;
+        entry = getBreedData(props.data.breed) as BreedEntry;
+    };
+
+    const portrait = breedEntryToPortrait(entry, expandGender(props.data.gender));
+
+    return portrait;
+});
+
+const labelWarning = computed(() => {
+    const a = props.data.display === 1 ? validateCode(props.data.code) : validateName(props.data.name);
+    return !a;
+});
+
+function swapParents(){
+    props.data.parents = switchParents(props.data.parents);
+}
+
+function switchGender(){
+    const invertedGender = props.data.gender === 'f' ? 'm' : 'f';
+
+    // Handle placeholder
+    if(props.data.breed === "Placeholder"){
+        props.data.gender = invertedGender;
+        props.data.breed = GLOBALS.placeholder.name;
+    }
+    // Handling a non-placeholder
+    else{
+        // First, check that the current breed can be gender flipped
+        const entry = getBreedData(props.data.breed);
+
+        if(!entry) return;
+
+        if(!entry.genderOnly){
+            // This breed has both male and female genders, so flipping isn't an issue.
+            props.data.gender = invertedGender;
+        }
+        else{
+            // It doesn't. Replace with opposite gender and put in the placeholder.
+            props.data.gender = invertedGender;
+            props.data.breed = GLOBALS.placeholder.name;
+        }
+    }
+}
+
+// todo type this
+function changeBreed(e: PortraitData){
+    showBreedSelector.value = false;
+
+    // update the breed
+    props.data.breed = e.name;
+}
+
+function pasteBranch(){
+    const clipboard = ls.getItem('clipboard');
+
+    // check there's data available
+    // todo add an integrity check
+    // no data... do nothing
+    if(clipboard === null) return;
+
+    // insert the new branch
+    // Todo type this
+    props.data.parents = JSON.parse(clipboard);
+}
+
+function copyBranch(){
+    // Do nothing if no parents
+    if(!hasAncestry) return;
+
+    const noSelect = deepClone({ parents: props.data.parents });
+
+    // We have to make sure we deselect all of them, or they'll
+    // be copied as selected lol
+    forEveryDragon(noSelect, (dragon) => dragon.selected = false);
+
+    ls.setItem('clipboard', JSON.stringify({ ... noSelect.parents }));
+}
+
+// this is a bit stupid. basically, we have to make a new root node
+// for the parent with all the properties of this node
+function removeDescendants(){
+    // another stupid thing, child components can only emit events
+    // up to the parent, so no grandchild -> grandparent stuff
+    // here's where our bubble plugin changes the game.
+    // it'll bubble the event up the nodes until it reaches 
+    // the lineage builder component, and can be handled there.
+    //props.$bubble('requestRemoveDescendants', copyTreeFromComponent(this));
+}
+
+function addDescendant(){
+    //props.$bubble('requestAddDescendant');
+}
+
+// adds a new node to the tree
+function addAncestors(){
+    const parents: DragonParents = {
+        m: createDragonProperties({gender: 'm'}),
+        f: createDragonProperties({gender: 'f'})
+    };
+    props.data.parents = parents;
+}
+
+// deletes this node and ancestors
+function deleteAncestors(){
+    props.data.parents = null;
+}
+
+function labelChanged(value: string){
+    const attr = (props.data.display === 1 ? 'code' : 'name');
+    props.data[attr] = value;
+}
+
+function switchLabel(){
+    props.data.display = props.data.display === 1 ? 0 : 1;
+}
+
+function longPress(){
+    if(props.disabled){ return; }
+    if(!appStore.selectionCount){
+        if(!props.data.selected){
+            props.data.selected = true;
+        }
+    }
+    else{
+        click();
+    }
+}
+
+function click(){
+    if(props.disabled){ return; }
+    if(appStore.selectionCount){
+        props.data.selected = !props.data.selected;
+    }
+    else{
+        showBreedSelector.value = true;
+    }
+}
 </script>
 
 <style scoped>

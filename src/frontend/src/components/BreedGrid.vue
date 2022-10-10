@@ -1,109 +1,107 @@
 <template>
-<VirtualCollection
-    v-if="compact && list.length > 0"
-    class="mates-compact"
-    :cellSizeAndPositionGetter="cellSizeAndPositionGetter"
-    :collection="list"
-    :height="height"
-    :width="width"
-    :sectionSize="size">
-    <DragonPortrait
-        v-if="props.data"
-        slot="cell"
-        slot-scope="props"
-        :data="props.data"
-        @click="$emit('selected', props.data)" />
-</VirtualCollection>
-<ul
-    v-else
-    class="mates-list">
-    <li
-        v-for="breed in list"
-        :key="breed.data.name"
-        @click="$emit('selected', breed.data)">
-        <DragonPortrait
-            :data="breed.data" />
-            {{breed.data.name}}
-    </li>
-</ul>
-</template>
+    <VirtualCollection
+        v-if="compact && list.length > 0"
+        class="mates-compact"
+        :cellSizeAndPositionGetter="cellSizeAndPositionGetter"
+        :collection="list"
+        :height="sizeH"
+        :width="sizeW"
+        :sectionSize="size">
+        <template v-slot:cell="{ data: breed }">
+            <DragonPortrait
+                :data="breed"
+                @click="$emit('selected', breed)" />
+        </template>
+    </VirtualCollection>
+    <ul
+        v-else
+        class="mates-list">
+        <li
+            v-for="{ data: breed } in list"
+            :key="breed.name"
+            @click="$emit('selected', breed)">
+            <DragonPortrait
+                :data="breed" />
+                {{breed.name}}
+        </li>
+    </ul>
+    </template>
 
-<script>
+<script setup lang="ts">
+import VirtualCollection from "vue-virtual-collection/src/VirtualCollection.vue";
+import { getCurrentInstance, onMounted, ref } from "vue";
+import { PortraitData } from "../app/types";
 import DragonPortrait from "./DragonPortrait.vue";
 
-const obs = {
+const props = defineProps({
+    compact: {
+        type: Boolean,
+        required: true
+    },
+    list: {
+        type: Array<{ data: PortraitData }>,
+        default: []
+    },
+    size: {
+        type: Number,
+        default: 600
+    }
+});
+
+interface obsProps {
+    func: (() => void) | null,
+    observer: ResizeObserver | null
+}
+
+const obs: obsProps = {
     func: null,
     observer: null
 }
 
-export default {
-    name: 'BreedGrid',
-    components: {
-        DragonPortrait,
-    },
-    props: {
-        compact: Boolean,
-        list: {
-            default: () => [],
-            type: Array
-        },
-        size: {
-            default: 600,
-            type: Number
-        }
-    },
-    mounted(){
-        obs.func = () => {
-            // the breed grid should expand to fill the space of the parent,
-            // so we have to manually calculate the width and height
-            const { width, height } = this.$parent.$el.getBoundingClientRect();
-            this.width = width;
-            this.height = height;
-        }
+const sizeH = ref(0);
+const sizeW = ref(0);
 
-        // once on initiation
-        obs.func();
+// We want our grid to be fluid, which means we have to employ a somewhat
+// hacky solution to ensure it takes up the parent container's space
+// once on initiation and there again when it's resized
+onMounted(() => {
+    const instance = getCurrentInstance();
+    const parent = instance?.parent?.proxy?.$el;
 
-        // and again when the parent is resized
-        obs.observer = new ResizeObserver(() => obs.func());
+    if(!parent) return;
 
-        obs.observer.observe(this.$parent.$el);
-    },
+    obs.func = () => {
+        if(!parent) return;
 
-    // clean up
-    beforeDestroy(){
-        // Commented out because it can cause an exception
-        // However it's not totally necessary because it only
-        // Gets replaced when remounted
-        //obs.observer.disconnect();
-        //obs.func = null;
-        //obs.observer = null;
-    },
+        // the breed grid should expand to fill the space of the parent,
+        // so we have to manually calculate the width and height
+        const { width, height } = (parent as HTMLElement).getBoundingClientRect();
+        sizeW.value = width;
+        sizeH.value = height;
+    }
 
-    data(){
-        return {
-            width: 0,
-            height: 0
-        }
-    },
+    // once on initiation
+    obs.func();
 
-    methods:{
-        cellSizeAndPositionGetter(item, index){
-            const
-                containerWidth = this.width,
-                portraitWidth = 36,
-                portraitHeight = 48,
-                margin = 2,
-                columns = Math.floor(containerWidth / (portraitWidth + (margin * 2)));
+    // and again when the parent is resized
+    obs.observer = new ResizeObserver(() => { if(obs.func) obs.func() });
+    obs.observer.observe(parent);
+});
 
-            // compute size and position
-            return {
-                width: portraitWidth,
-                height: portraitHeight,
-                x: (index % columns) * (portraitWidth + margin),
-                y: parseInt(index / columns) * (portraitHeight + margin)
-            }
-        }
+function cellSizeAndPositionGetter(item: PortraitData, index: number){
+    const
+        containerWidth = sizeW.value,
+        portraitWidth = 36,
+        portraitHeight = 48,
+        margin = 2,
+        columns = Math.floor(containerWidth / (portraitWidth + (margin * 2)));
+
+    // compute size and position
+    return {
+        width: portraitWidth,
+        height: portraitHeight,
+        x: (index % columns) * (portraitWidth + margin),
+        y: Math.floor(index / columns) * (portraitHeight + margin)
     }
 }
 </script>

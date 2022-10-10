@@ -1,5 +1,6 @@
 
 import axios from "axios";
+import { DragonType, LineageRoot } from "./types";
 const API_URL = "/api";
 
 export function callAPI(options){
@@ -8,14 +9,17 @@ export function callAPI(options){
         method: 'get'
     };
 
-    return axios({...defaults, ...options })
+    return axios.get({...defaults, ...options })
 }
 
-export function getLineageData(hash){
+interface LineageResponse {
+    data: DragonType
+}
+export function getLineageData(hash: string){
     return callAPI({ url: `/lineage/${hash}`});
 }
 
-export function generateUrl(tree){
+export function generateUrl(tree: LineageRoot){
     return callAPI({
         url: `/lineage/create`,
         method: 'post',

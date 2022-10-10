@@ -15,9 +15,15 @@
 
     <div class='toolbar'>
         <div class='toolbar-item'>
+            <Vue3ToggleButton 
+                v-model:isActive="config.showInterface"
+                handleColor="var(--builderControlBG)" />
             <span>Show interface</span>
         </div>
         <div class='toolbar-item'>
+            <Vue3ToggleButton 
+                v-model:isActive="config.showLabels"
+                handleColor="var(--builderControlBG)" />
             <span>Show labels</span>
         </div>
         <div class='toolbar-item'>
@@ -96,7 +102,8 @@
                         <BreedTags />
                     </template>
                 </ToolbarButton> */
-
+import { Vue3ToggleButton } from 'vue3-toggle-button';
+import '../../../node_modules/vue3-toggle-button/dist/style.css';
 import GLOBALS from "../../app/globals";
 import {
     forEveryDragon,
@@ -109,8 +116,10 @@ import DialogImport from './DialogImport.vue';
 import DialogGenerate from './DialogGenerate.vue';
 import ToolbarButton from './ToolbarButton.vue';
 import { useAppStore } from "../../store";
+import { LineageConfig, LineageRoot } from "../../app/types";
+import { defineComponent, PropType } from "vue";
 
-const treeSelectedContains = (tree) => {
+const treeSelectedContains = (tree: LineageRoot) => {
     let
         male = false,
         female = false;
@@ -131,19 +140,25 @@ const treeSelectedContains = (tree) => {
     return { male, female }
 }          
 
-export default {
+export default defineComponent({
     name: 'Toolbar',
     components: {
         DialogExport,
         DialogImport,
         DialogGenerate,
         ToolbarButton,
-        //BreedTags
+        Vue3ToggleButton
     },
 
     props:{
-        tree: Object,
-        config: Object
+        tree: {
+            type: Object as PropType<LineageRoot>,
+            required: true
+        },
+        config: {
+            type: Object as PropType<LineageConfig>,
+            required: true
+        }
     },
 
     setup() {
@@ -218,7 +233,7 @@ export default {
             this.appStore.setUsedBreeds(countBreeds(tree));
         },
     }
-}
+});
 </script>
 
 <style scoped>

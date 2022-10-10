@@ -28,7 +28,7 @@
                     <input
                         type="search"
                         placeholder="search"
-                        ref="matesSearch"
+                        ref="mateSearchEl"
                         @input="searchBreeds" />
                 </div>
                 <BreedDropdownResults
@@ -42,7 +42,7 @@
         </template>
     </FocusableDialog>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import { debounce } from '../app/utils';
 import BreedDropdownResults from './BreedDropdownResults.vue';
 import BreedDropdownReuse from './BreedDropdownReuse.vue';
@@ -50,57 +50,48 @@ import FocusableDialog from './FocusableDialog.vue';
 import BreedTagsSelector from './BreedTagsSelector.vue';
 import BreedGroupsTagSelector from './BreedGroupsTagSelector.vue';
 import { useAppStore } from '../store';
+import { onMounted, PropType, ref } from 'vue';
+import { Gender, PortraitData } from '../app/types';
 
-export default {
-    name: 'BreedDropdownv2',
-    components: {
-        BreedDropdownResults,
-        BreedDropdownReuse,
-        FocusableDialog,
-        BreedTagsSelector,
-        BreedGroupsTagSelector
+const props = defineProps({
+    breeds: {
+        type: Array<PortraitData>,
+        required: true
     },
-
-    props: {
-        breeds: Array,
-        genderFilter: String
-    },
-
-    setup() {
-      return { appStore: useAppStore() }
-    },
-
-    data() {
-        return {
-            searchString: ""
-        }
-    },
-
-    created(){
-        // debounced to avoid it running every key press rapidly
-        this.searchBreeds = debounce((e) => this.searchString = e.target.value, 150);
-    },
-
-    mounted(){
-        // automatically focus the search bar if desktop
-        // on mobile I personally find it annoying for the 
-        // keyboard to immediately pop up
-        if('ontouchstart' in document.documentElement === false){
-            this.$refs.matesSearch.focus();
-        }
-    },
-
-    methods: {
-        selected(breed){
-            this.$emit('selected', breed);
-            this.close();
-        },
-
-        close(){
-            this.$emit('close');
-        }
+    genderFilter: {
+        type: String as PropType<Gender>,
+        required: true
     }
-};
+});
+
+const emit = defineEmits<{
+    (e: 'selected', breed: PortraitData): void,
+    (e: 'close'): void
+}>();
+
+const appStore = useAppStore();
+const searchString = ref("");
+const mateSearchEl = ref<HTMLInputElement | null>(null);
+
+onMounted(() => {
+    // automatically focus the search bar if desktop
+    // on mobile I personally find it annoying for the 
+    // keyboard to immediately pop up
+    if(mateSearchEl.value && 'ontouchstart' in document.documentElement === false)
+        mateSearchEl.value.focus();
+});
+
+function selected(breed: PortraitData){
+    emit('selected', breed);
+    close();
+}
+
+function close(){
+    emit('close');
+}
+
+// debounced to avoid it running every key press rapidly
+const searchBreeds = debounce((e: Event) => searchString.value = (e.target as HTMLInputElement).value, 250);
 </script>
 <style scoped>
 /* hide labels on mobile screens */

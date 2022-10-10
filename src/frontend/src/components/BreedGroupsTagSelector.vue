@@ -1,17 +1,12 @@
 <template>
 <TagList
     :atLeastOneEnabled="true"
-    :value="$store.state.groups"
-    @updated="$store.commit('setGroups', $event)" />
+    :value="appStore.groups"
+    @updated="appStore.setGroups($event)" />
 </template>
-<script>
+<script setup lang="ts">
+import { useAppStore } from '../store';
 import TagList from './ui/TagList.vue';
 
-export default {
-    name: "BreedGroupsTagSelector",
-
-    components: {
-        TagList
-    }
-}
+const appStore = useAppStore();
 </script>
