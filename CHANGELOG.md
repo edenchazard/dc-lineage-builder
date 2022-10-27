@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.5.0
+
+- Give regular breeds their own tag to separate them from search results. (alwerien and missk. problem)
+
+## 4.4.0
+
+- Migrate from vue-cli to vite.
+
 ## 4.3.3
 
 - New breeds: Berry Drake and Painted Ray Pygmy.
