@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 const SESSION_TAGS = {
     key: 'session-tags',
-    tags: ['Valentine', 'Christmas', 'Halloween', 'Hybrid', 'CB']
+    tags: ['Valentine', 'Christmas', 'Halloween', 'Hybrid', 'CB', 'Regular']
 }
 
 const SESSION_GROUPS = {

@@ -169,10 +169,6 @@ export function filterGroup(enabledGroups){
 export function filterTags(enabledTags){
     return (breed) => {
         const tags = breed.metaData.tags;
-        // If it's an empty tag list, automatically include the breed
-        if(tags.length === 0)
-            return true;
-
         // If the breed has tags, then check against our tag list
         // for at least one tag and include it if so
         for(let tag of tags){
