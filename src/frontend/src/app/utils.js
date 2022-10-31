@@ -153,13 +153,12 @@ export function countSelected(tree){
 export function filterGroup(enabledGroups){
     return (breed) => {
         const group = breed.metaData.group;
-        // Small op: Most breeds are not 
-        if(enabledGroups.indexOf(group) > -1)
-            return true;
-
         // A group of "*" is a match all, it should be available
         // no matter the group filter, e.g. placeholder
         if(group === "*")
+            return true;
+ 
+        if(enabledGroups.indexOf(group) > -1)
             return true;
 
         return false;
