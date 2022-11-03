@@ -1,13 +1,12 @@
 <template>
 <TagList
-    :atLeastOneEnabled="false"
-    :value="appStore.tags"
-    @updated="appStore.setTags($event)" />
+    v-model="tagStore.tags" 
+    :atLeastOneEnabled="true" />
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '../store';
+import { useTagStore } from '../store/tags';
 import TagList from './ui/TagList.vue';
 
-const appStore = useAppStore();
+const tagStore = useTagStore();
 </script>

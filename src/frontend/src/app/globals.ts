@@ -2,8 +2,7 @@ import breeds from "../breed-definitions.json";
 import { getDCTime, filterBreedTableByGender } from "./utils";
 import { BreedEntry } from "./types";
 
-// @ts-ignore Fuck off typescript
-const breedTable: BreedEntry[] = breeds;
+const breedTable = breeds as BreedEntry[];
 
 function isNocturneActive(){
     const hours = getDCTime().getHours();

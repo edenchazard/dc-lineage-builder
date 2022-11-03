@@ -10,7 +10,7 @@
         <template v-slot:cell="{ data: breed }">
             <DragonPortrait
                 :data="breed"
-                @click="$emit('selected', breed)" />
+                @click="emit('breedSelected', breed)" />
         </template>
     </VirtualCollection>
     <ul
@@ -19,7 +19,7 @@
         <li
             v-for="{ data: breed } in list"
             :key="breed.name"
-            @click="$emit('selected', breed)">
+            @click="emit('breedSelected', breed)">
             <DragonPortrait
                 :data="breed" />
                 {{breed.name}}
@@ -48,15 +48,17 @@ const props = defineProps({
     }
 });
 
-interface obsProps {
+const obs: {
     func: (() => void) | null,
     observer: ResizeObserver | null
-}
-
-const obs: obsProps = {
+} = {
     func: null,
     observer: null
 }
+
+const emit = defineEmits<{
+    (e: 'breedSelected', breed: PortraitData): void
+}>();
 
 const sizeH = ref(0);
 const sizeW = ref(0);

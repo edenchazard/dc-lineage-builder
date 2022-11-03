@@ -6,7 +6,7 @@
         'dropdown': options
     }"
     :title="title"
-    @click="$emit('click')">
+    @click="emit('click')">
     <font-awesome-icon :icon="icon" /> {{label}}
     <div
         v-if='options'
@@ -16,7 +16,7 @@
                 v-for="option in options"
                 class="option"
                 :key="option.label"
-                @click="$emit('optionSelected', option.value)">
+                @click="emit('optionSelected', option.value)">
                 {{option.label}}</li>
         </ul>
     </div>
@@ -24,23 +24,34 @@
         v-else-if="$slots.dropdown"
         class="options">
         <slot name="dropdown">
-
         </slot>
     </div>
 </button>
 </template>
 
-<script lang="ts">
-export default {
-    name: 'ToolbarButton',
-    props: {
-        title: String,
-        icon: String,
-        label: String,
-        click: Function,
-        options: Array
+<script setup lang="ts">
+defineProps({
+    title: {
+        type: String,
+        required: true
+    },
+    icon: {
+        type: String,
+        required: true
+    },
+    label: {
+        type: String,
+        default: ""
+    },
+    options: {
+        type: Array<{ label: string, value: any }>
     }
-}
+});
+
+const emit = defineEmits<{
+    (e: "click"): void,
+    (e: "optionSelected", value: { label: string, value: any }): void
+}>();
 </script>
 
 <style scoped>

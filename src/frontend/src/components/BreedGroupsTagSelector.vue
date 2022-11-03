@@ -1,12 +1,11 @@
 <template>
 <TagList
-    :atLeastOneEnabled="true"
-    :value="appStore.groups"
-    @updated="appStore.setGroups($event)" />
+    v-model="tagStore.groups" 
+    :atLeastOneEnabled="true" />
 </template>
 <script setup lang="ts">
-import { useAppStore } from '../store';
+import { useTagStore } from '../store/tags';
 import TagList from './ui/TagList.vue';
 
-const appStore = useAppStore();
+const tagStore = useTagStore();
 </script>

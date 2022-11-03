@@ -9,48 +9,48 @@
       </p>
     </section>
     <section>
-      <form @submit="addBreed">
+      <form @submit="addToEntries">
         <div>
           <label for="name">Breed name: </label>
           <input type="text" id="name" name="name" v-model="name" />
         </div>
         <div>
           <span>Gender availability:</span>
-          <input type="radio" v-model='genderAvailability' id="avail_both" value="both" />
+          <input type="radio" v-model='genderAvailability' id="avail_both" value="b" />
           <label for="avail_both">Both</label>
-          <input type="radio" v-model='genderAvailability' id="avail_male" value="male" />
+          <input type="radio" v-model='genderAvailability' id="avail_male" value="m" />
           <label for="avail_male">Male-only</label>
-          <input type="radio" v-model='genderAvailability' id="avail_female" value="female" />
+          <input type="radio" v-model='genderAvailability' id="avail_female" value="f" />
           <label for="avail_female">Female-only</label>
         </div>
         <div>
           <span class='field-label'>Tile</span>
-          <div v-if="genderAvailability == 'both'" id='tile-upload'>
+          <div v-if="genderAvailability === 'b'" id='tile-upload'>
             <div>
               <GhostBreedUpload
-                @tileChosen = "(base64) => portraitSelected('male', base64)"
+                @tileChosen = "(base64) => portraitSelected('m', base64)"
                 @uploadError = "uploadError" />
               <span class='field-label'>Male</span>
             </div>
             <div>
               <GhostBreedUpload
-                @tileChosen = "(base64) => portraitSelected('female', base64)"
+                @tileChosen = "(base64) => portraitSelected('f', base64)"
                 @uploadError = "uploadError" />
               <span class='field-label'>Female</span>
             </div>
           </div>
-          <div v-if="genderAvailability == 'male'">
+          <div v-if="genderAvailability === 'm'">
             <div>
               <GhostBreedUpload
-                @tileChosen = "(base64) => portraitSelected('male', base64)"
+                @tileChosen = "(base64) => portraitSelected('m', base64)"
                 @uploadError = "uploadError" />
               <span class='field-label'>Male</span>
             </div>
           </div>
-          <div v-if="genderAvailability == 'female'">
+          <div v-if="genderAvailability === 'f'">
             <div>
               <GhostBreedUpload
-                @tileChosen = "(base64) => portraitSelected('female', base64)"
+                @tileChosen = "(base64) => portraitSelected('f', base64)"
                 @uploadError = "uploadError" />
               <span class='field-label'>Female</span>
             </div>
@@ -62,94 +62,98 @@
   </div>
 </template>
   
-<script>
+<script setup lang="ts">
+import { reactive, ref, watch } from 'vue';
+
+import { BreedEntry, Gender } from '../app/types';
 import { addBreed } from '../app/utils';
 
 import GhostBreedUpload from "../components/GhostBreedUpload.vue";
 import Information from '../components/ui/Information.vue';
+type Availability = "b" | Gender;
 
-export default {
-  name: 'PageGhostBreeds',
-  components: { Information, GhostBreedUpload },
+const name = ref("");
+// b for both
+const genderAvailability = ref<Availability>("b");
+const femaleBase64 = ref("");
+const maleBase64 = ref("");
+const status = reactive({
+  level: 0,
+  message: "",
+  title: ""
+});
 
-  data() {
-    return {
-      name: "",
-      genderAvailability: "both",
-      femaleBase64: null,
-      maleBase64: null,
-      status: {
-        level: 0,
-        message: "",
-        title: ""
-      }
+// reset when availability changes
+watch(genderAvailability, () => {
+  femaleBase64.value = "";
+  maleBase64.value = "";
+});
+
+function portraitSelected(gender: Gender, base64: string){
+  if(gender === 'm')
+    maleBase64.value = base64;
+  else if (gender === 'f')
+    femaleBase64.value = base64;
+}
+
+function uploadError(){
+  Object.assign(status, {
+    level: 3,
+    title: "",
+    message: `An error occurred adding the breed. Please check the
+    limitations and try again.`
+  });
+}
+
+function addToEntries(e: Event){
+  // don't submit form
+  e.preventDefault();
+
+  // returns a set of specific properties depending
+  // on the availability option selected
+  const getGenderProps = (availability: Availability, male: string, female: string) => {
+    if(availability === 'f')
+      return { genderOnly: 'f', female };
+    else if(availability === "m")
+      return { genderOnly: 'm', male };
+    
+    // default to both
+    return { genderOnly: false, female, male };
+  };
+
+  // create gender props
+  const genderProps = getGenderProps(genderAvailability.value, maleBase64.value, femaleBase64.value);
+
+  // there was an issue creating the props
+  if(!genderProps) return;
+
+  // add the breed
+  const breed: BreedEntry = {
+    name: name.value,
+    //...{ genderOnly: 2, female: "", male: "" },
+    ...getGenderProps(genderAvailability.value, maleBase64.value, femaleBase64.value),
+    metaData: {
+      group: "*",
+      tags: ["Regular"],
+      src: "ghost"
     }
-  },
+  }
 
-  watch:{
-    // reset when availability changes
-    'genderAvailability'(){
-      this.femaleBase64 = null;
-      this.maleBase64 = null;
-    }
-  },
-
-  methods:{
-    portraitSelected(gender, base64){
-      if(gender == 'male')
-        this.maleBase64 = base64;
-      else if (gender == 'female')
-        this.femaleBase64 = base64;
-    },
-
-    uploadError(){
-        this.status = {
-          level: 3,
-          title: "",
-          message: `An error occurred adding the breed. Please check the
-          limitations and try again.`
-        };
-    },
-
-    addBreed(e){
-      // don't submit form
-      e.preventDefault();
-
-      // returns a set of specific properties depending
-      // on the availability option selected
-      const getGenderProps = (availability, male, female) => {      
-        if(availability === "both")
-          return { genderOnly: false, female, male };
-        else if(availability === 'female')
-          return { genderOnly: 'f', female };
-        else if(availability === "male")
-          return { genderOnly: 'm', male };
-      };
-
-      // add the breed
-      const breed = {
-        name: this.name,
-        metaData: {
-          group: "*",
-          tags: [],
-          src: "ghost"
-        },
-        ...getGenderProps(this.genderAvailability, this.maleBase64, this.femaleBase64)
-      }
-
-      if(addBreed(breed)){
-        // successfully added
-        this.status = { level: 1, message: "Breed successfully added: "+this.name };
-      }
-      else{
-        this.status = {
-          level: 3,
-          title: "",
-          message: `An error occurred adding the breed. Please check the
-          limitations and try again.`
-        };
-      }
-    }
+  if(addBreed(breed)){
+    // successfully added
+    Object.assign(status, {
+      level: 1,
+      title: "",
+      message: "Breed successfully added: "+name.value
+    });
+  }
+  else{
+    Object.assign(status, {
+      level: 3,
+      title: "",
+      message: `An error occurred adding the breed. Please check the
+      limitations and try again.`
+    });
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <Dialog @close="$emit('close')">
+    <Dialog @close="emit('close')">
         <template v-slot:header>
           Import lineage
         </template>
@@ -7,7 +7,10 @@
           <p>Paste the export text and click 'import'.</p>
           <p>Please note if you have a lineage in progress, importing a new lineage will overwrite it.</p>
           <div>
-            <textarea v-model="file" placeholder="Paste your import text here" />
+            <Textbox
+              v-model="file"
+              placeholder="Paste your import text here"
+              type='textarea'/>
           </div>
           <Information :info="status" />
         </template>
@@ -16,58 +19,52 @@
         </template>
     </Dialog>
 </template>
-<script>
+<script setup lang="ts">
+import { reactive, ref } from 'vue';
+
 import { verifyIntegrity } from '../../app/validators';
 import { forEveryDragon } from "../../app/utils";
+import { LineageRoot } from '../../app/types';
 
 import Dialog from "../Dialog.vue";
+import Textbox from '../ui/Textbox.vue';
 import Information from "../ui/Information.vue";
 
-export default {
-  name: 'DialogImport',
-  components: { Dialog, Information },
-  props: {
-      show: Boolean,
-      tree: Object,
-      onImport: Function
-  },
+const emit = defineEmits<{
+    (e: "close"): void,
+    (e: "onImport", tree: LineageRoot): void
+}>();
 
-  data(){
-    return {
-      file: "",
-      status: {
-        level: 0,
-        message: ""
-      },
+const file = ref("");
+const status = reactive({
+  level: 0,
+  message: ""
+});
+
+function importLineage(){
+  try{
+    const importedTree = JSON.parse(file.value.trim());
+    const { failed, failedTests } = verifyIntegrity(importedTree);
+  
+    if(failed){
+        Object.assign(status, {
+          level: 3,
+          message: `Error reading export code. Tests failed: ${failedTests.join(', ')}`
+        });
+        return;
     }
-  },
 
-  methods:{
-    importLineage(){
-      const errMsg = {
-        level: 3,
-        message: `Error reading export code. This export code could be corrupt or
-        include a ghost breed that hasn't been re-uploaded.`
-      };
+    // add selection data
+    forEveryDragon(importedTree, dragon => dragon.selected = false);
 
-      try{
-        const importedTree = JSON.parse(this.file.trim());
-
-        if(!verifyIntegrity(importedTree)){
-          this.status = errMsg;
-          return;
-        }
-
-        // add selection data
-        forEveryDragon(importedTree, dragon => dragon.selected = false);
-
-        this.$emit('onImport', importedTree);
-        this.$emit('close');
-      }
-      catch{
-          this.status = errMsg;
-      }
-    }
+    emit('onImport', importedTree);
+    emit('close');
   }
-};
+  catch {
+    Object.assign(status, {
+      level: 3,
+      message: `Error reading export code. JSON is possibly malformed.`
+    });
+  }
+}
 </script>

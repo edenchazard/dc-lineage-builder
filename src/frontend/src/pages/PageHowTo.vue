@@ -67,17 +67,6 @@
     </section>
   </div>
 </template>
-  
-<script>
-export default {
-  name: 'PageHowTo',
-  components: {  },
-
-  data() {
-    return {}
-  },
-}
-</script>
 
 <style scoped>
 .buttons-list .svg-inline--fa{

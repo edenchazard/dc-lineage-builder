@@ -1,7 +1,7 @@
 <template>
     <div class='tag-list'>
         <button
-            v-for="(tag, index) in tagStates"
+            v-for="(tag, index) in tags"
             :key="tag.name"
             :class="(tag.active ? 'tag-active' : 'tag-inactive')"
             type="button"
@@ -9,65 +9,57 @@
         </button>
     </div>
 </template>
-<script>
-export default {
-    name: 'TagList',
-    props: {
-        //// object accepts [{ name: 'tag1', active: true}]
-        value: Array,
-        defaultActive: {
-            type: Boolean,
-            default: true
-        },
-        atLeastOneEnabled: {
-            type: Boolean,
-            default: false
-        }
+<script setup lang="ts">
+import { ref, PropType } from 'vue';
+import { TagListOption } from '../../app/types';
+import { deepClone } from '../../app/utils';
+const props = defineProps({
+    // Accepts a mixed array of { name, active }
+    // or simple strings. If a string is provided,
+    // the tag will be transformed into the tag object
+    // with the default value applied
+    modelValue: {
+        type: Array as PropType<Array<string | TagListOption>>,
+        required: true
     },
-
-    data(){
-        // tag list can be an array or object (with definite states)
-        // so we need to handle it appropriately. if array,
-        // assume defaultActive
-        let tagStates;
-        if(!this.value[0]?.name){
-            tagStates = this.value.map(tag => ({ 
-                name: tag,
-                active: this.defaultActive
-            }));
-        }
-        else{
-            tagStates = this.value;
-        }
-
-        return { tagStates };
+    defaultActive: {
+        type: Boolean,
+        default: true
     },
-
-    methods:{
-        selected(index){
-            const
-                tag = this.tagStates[index],
-                newValue = !tag.active;
-
-            // if this option is enabled, then we must ensure at least one tag
-            // is enabled at all times,
-            // to do this, we simply check the array of tags for actives and not
-            // matching the selected tag name
-            if(this.atLeastOneEnabled){
-                const atLeastOne = this.tagStates.find(({active, name}) => {
-                    return active && name !== tag.name
-                });
-
-                if(!atLeastOne){
-                    return;
-                }
-            }
-
-            this.tagStates[index].active = newValue;
-            this.$emit('updated', this.tagStates);
-        }
+    atLeastOneEnabled: {
+        type: Boolean,
+        default: false
     }
-};
+});
+
+const emit = defineEmits<{
+    (e: "update:modelValue", values: TagListOption[]): void
+}>();
+
+// create our tag states based on values provided in initial
+const tags = ref<TagListOption[]>(props.modelValue.map(tag => (
+    typeof tag === 'string' 
+    // if string, transform into { name, active } object
+    ? { name: tag, active: props.defaultActive }
+    // or return the tag as provided
+    : tag
+)));
+
+function selected(index: number){
+    const tag = tags.value[index];
+
+    // if this option is enabled, then we must ensure at least one tag
+    // is enabled at all times,
+    // to do this, we simply check the array of tags for actives and not
+    // matching the selected tag name
+    if(props.atLeastOneEnabled){
+        const cb = ({ active, name }: TagListOption) => active && name !== tag.name;
+        if(!tags.value.some(cb)) return;
+    }
+
+    tags.value[index].active = !tag.active;
+    emit('update:modelValue', deepClone(tags.value));
+}
 </script>
 <style scoped>
 .tag-list button{

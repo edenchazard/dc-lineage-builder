@@ -11,49 +11,52 @@
             @change="imageChanged" />
     </div>
 </template>
-<script>
+<script setup lang="ts">
+import { reactive } from "vue";
+import GLOBALS from "../app/globals";
+import { PortraitData } from "../app/types";
 import DragonPortrait from "./DragonPortrait.vue";
 
-export default {
-    name: 'GhostBreedUpload',
-    components: { DragonPortrait },
-    props: { },
+const emit = defineEmits<{
+    (e: "tileChosen", base64Data: string): void,
+    (e: "uploadError"): void
+}>();
 
-    data() {
-        return {
-            // We have to use a "dummy" dragon to display the portrait
-            // unfortunately
-            dragon: {
-                image: null,
-                metaData:{
-                    src: "ghost"
-                }
-            }
-        }
-    },
-
-    methods: {
-        imageChanged(e){
-            const input = e.target;
-
-            if (input.files && input.files[0]) {
-                const [file] = input.files;
-                // ensure file is under 8kb
-                if(file.size < 8000){
-                    const reader = new FileReader();
-
-                    reader.addEventListener("load", () => {
-                        this.dragon.image = reader.result;
-                        this.$emit("tileChosen", reader.result);
-                    });
-
-                    reader.readAsDataURL(file);
-                }
-                else {
-                    this.$emit("uploadError");
-                }
-            }
-        }
+// We have to use a "dummy" dragon to display the portrait
+// unfortunately
+const dragon = reactive<PortraitData>({
+    // copy placeholder properties and replace what we need
+    ...GLOBALS.placeholder,
+    image: "",
+    metaData: {
+        src: "ghost",
+        group: "Standard",
+        tags: ["Regular"]
     }
-};
+});
+
+function imageChanged(e: Event){
+    const input = e.target as HTMLInputElement;
+
+    if (input.files instanceof FileList && input.files[0]) {
+        const file = input.files[0];
+
+        // ensure file is under 8kb
+        if(file.size < 8000){
+            const reader = new FileReader();
+
+            reader.addEventListener("load", () => {
+                if(typeof reader.result === "string"){
+                    const data = reader.result;
+                    dragon.image = data;
+                    emit("tileChosen", data);
+                }
+                else emit("uploadError");
+            });
+
+            reader.readAsDataURL(file);
+        }
+        else emit("uploadError");
+    }
+}
 </script>

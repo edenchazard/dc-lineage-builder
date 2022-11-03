@@ -6,7 +6,7 @@
                     v-if="!disabled && showBreedSelector===true"
                     :breeds="availableMates"
                     :genderFilter="data.gender"
-                    @selected="changeBreed"
+                    @breedSelected="changeBreed"
                     @close="showBreedSelector=false" />
                 <DragonButton 
                     v-if="nodesFromRoot === 0"
@@ -86,14 +86,14 @@
                 icon="paste"
                 @click="pasteBranch" />
         </div>
-        <ul v-if="hasAncestry">
+        <ul v-if="hasAncestry" >
             <Dragon
-                :data="data.parents!.m"
-                :nodesFromRoot="nodesFromRoot+1"
+                :data="data.parents.m"
+                :nodesFromRoot="nodesFromRoot + 1"
                 :disabled="disabled" />
             <Dragon
-                :data="data.parents!.f"
-                :nodesFromRoot="nodesFromRoot+1"
+                :data="data.parents.f"
+                :nodesFromRoot="nodesFromRoot + 1"
                 :disabled="disabled" />
         </ul>
     </li>
@@ -109,7 +109,7 @@ import { getBreedData, deepClone, forEveryDragon, getTable,
         breedEntryToPortrait, expandGender, hasParents } from "../../app/utils";
 import { validateCode, validateName } from "../../app/validators";
 import { switchParents, createDragonProperties } from "../../app/dragonBuilder";
-import { useAppStore } from "../../store";
+import { useAppStore } from "../../store/app";
 
 import DragonLabelField from './DragonLabelField.vue';
 import BreedDropdownv2 from "../BreedDropdownv2.vue";
@@ -163,8 +163,10 @@ const getImage = computed(() => {
 });
 
 const labelWarning = computed(() => {
-    const a = props.data.display === 1 ? validateCode(props.data.code) : validateName(props.data.name);
-    return !a;
+    return !(
+    props.data.display === 1
+    ? validateCode(props.data.code)
+    : validateName(props.data.name));
 });
 
 function swapParents(){
@@ -227,7 +229,9 @@ function copyBranch(){
 
     // We have to make sure we deselect all of them, or they'll
     // be copied as selected lol
-    forEveryDragon(noSelect, (dragon) => dragon.selected = false);
+    const cb = (dragon: DragonType) => dragon.selected = false;
+    forEveryDragon(noSelect.parents!.f, cb);
+    forEveryDragon(noSelect.parents!.m, cb);
 
     ls.setItem('clipboard', JSON.stringify({ ... noSelect.parents }));
 }
@@ -235,16 +239,11 @@ function copyBranch(){
 // this is a bit stupid. basically, we have to make a new root node
 // for the parent with all the properties of this node
 function removeDescendants(){
-    // another stupid thing, child components can only emit events
-    // up to the parent, so no grandchild -> grandparent stuff
-    // here's where our bubble plugin changes the game.
-    // it'll bubble the event up the nodes until it reaches 
-    // the lineage builder component, and can be handled there.
-    //props.$bubble('requestRemoveDescendants', copyTreeFromComponent(this));
+    appStore.activeTree = props.data;
 }
 
 function addDescendant(){
-    //props.$bubble('requestAddDescendant');
+    appStore.addDescendant();
 }
 
 // adds a new node to the tree
@@ -258,7 +257,7 @@ function addAncestors(){
 
 // deletes this node and ancestors
 function deleteAncestors(){
-    props.data.parents = null;
+    props.data.parents = {};
 }
 
 function labelChanged(value: string){
@@ -271,25 +270,20 @@ function switchLabel(){
 }
 
 function longPress(){
-    if(props.disabled){ return; }
+    if(props.disabled) return;
     if(!appStore.selectionCount){
-        if(!props.data.selected){
+        if(!props.data.selected)
             props.data.selected = true;
-        }
     }
-    else{
-        click();
-    }
+    else click();
 }
 
 function click(){
-    if(props.disabled){ return; }
-    if(appStore.selectionCount){
+    if(props.disabled) return;
+    if(appStore.selectionCount)
         props.data.selected = !props.data.selected;
-    }
-    else{
+    else
         showBreedSelector.value = true;
-    }
 }
 </script>
 

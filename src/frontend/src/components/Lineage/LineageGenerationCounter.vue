@@ -5,14 +5,13 @@
       </span>
     </span>
 </template>
-<script>
-export default {
-  name: 'LineageGenerationCounter',
-  components: { },
-  props:{
-      count: Number
-  },
-}
+<script setup lang="ts">
+defineProps({
+  count: {
+    type: Number,
+    default: 1
+  }
+});
 </script>
 <style scoped>
 .generation-counter{

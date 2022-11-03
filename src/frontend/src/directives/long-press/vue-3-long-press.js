@@ -22,9 +22,7 @@ export default {
             event.stopPropagation();
 
             // only left click or touch
-            if(event.which > 1){
-                return;
-            }
+            if(event.which > 1) return;
             
             timeout = setTimeout(() => {
                 timeout = null;
@@ -45,9 +43,7 @@ export default {
 
         const outOfBoundsClear = (event) => {
             // no need to continue if timeout is already expired
-            if(!timeout){
-                return;
-            }
+            if(!timeout) return;
 
             const
                 touch = event.targetTouches[0],

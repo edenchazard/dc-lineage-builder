@@ -1,5 +1,40 @@
 # Changelog
 
+## 5.0.0
+
+Massive changes.
+
+- Migrated Vue 2 to Vue 3.
+- Rewrote in TypeScript. Everything is fully typed. OwO
+- Rewrote components and stores to take advantage of Vue 3 APIs - composition, script setup etc.
+- Added proper emits and prop types to all components.
+- Changed out Vuex for Pinia. Begone.
+- Rewrote some areas:
+  - Stores
+    - Skin handling is now in its own store. Header updated to reflect this.
+    - "App" store was refactored into tags and app stores.
+  - Validators
+    - Refactored + implemented integrity and save reqs failure reasoning.
+  - Router
+    - Separate routes.
+    - Integrate new APIs.
+  - Utils
+    - New functionality added.
+- Filtering:
+  - Introduced "Regular" tag.
+  - Placeholder now appears regardless of tags enabled when no query is applied.
+- Cleaned up some files.
+- Removed unused css and functions.
+- Improved documentation.
+
+## 4.5.0
+
+- Give regular breeds their own tag to separate them from search results. (alwerien and missk. problem)
+
+## 4.4.0
+
+- Migrate from vue-cli to vite.
+
 ## 4.3.3
 
 - New breeds: Berry Drake and Painted Ray Pygmy.
