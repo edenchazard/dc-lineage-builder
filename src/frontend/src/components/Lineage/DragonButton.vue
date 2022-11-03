@@ -2,26 +2,25 @@
 <button
     class='control'
     type="button"
-    :title="title">
+    :title="title"
+    @click="emit('click')">
     <font-awesome-icon :icon="icon" /></button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    name: "DragonButton",
-    props: {
-        title: {
-            type: String,
-            required: true
-        },
-        icon: {
-            type: String,
-            required: true
-        }
+<script setup lang="ts">
+defineProps({
+    title: {
+        type: String,
+        required: true
+    },
+    icon: {
+        type: String,
+        required: true
     }
 });
+const emit = defineEmits<{
+    (e: "click"): void
+}>();
 </script>
 <style scoped>
 .control {

@@ -1,5 +1,5 @@
 import GLOBALS from "./globals";
-import { BreedEntry, DragonType, Gender, LineageRoot, PortraitData, Tag } from "./types";
+import { BreedEntry, DragonType, FilterTag, Gender, GroupTag, PortraitData, PartialLineage } from "./types";
 
 function validGenderForBreed(gender: Gender, breed: BreedEntry): boolean {
     // if the genderonly attribute is not false,
@@ -12,10 +12,11 @@ export function throwBreedError(name: string){
     throw new Error(`Breed ${name} doesn't exist.`);
 }
 
+// returns undefined if breed isn't in the global list
 export function getBreedData(breedName: string){
     const entry = GLOBALS.breeds.entire.find((v) => v.name === breedName);
 
-    if(!entry) throwBreedError(breedName);
+    //if(!entry) throwBreedError(breedName);
 
     return entry;
 }
@@ -26,7 +27,7 @@ export function breedEntryToPortrait(breed: BreedEntry, gender: "male" | "female
 
     const data: PortraitData = {
         name: breed.name,
-        image: breed[gender],
+        image: breed[gender] as string,
         metaData: breed.metaData
     };
 
@@ -47,7 +48,7 @@ export function getTable(gender: Gender): PortraitData[]{
 }
 
 export function hasParents(dragon: DragonType){
-    return dragon.parents !== null;
+    return 'f' in dragon.parents && 'm' in dragon.parents;
 }
 // Returns a list of breed entries filtered by gender
 export function filterBreedTableByGender(breeds: BreedEntry[], gender: Gender){
@@ -58,13 +59,13 @@ export function filterBreedTableByGender(breeds: BreedEntry[], gender: Gender){
         .map(breed => breedEntryToPortrait(breed, expandedGender));
 }
 
-export function countGenerations(root: LineageRoot): number {
+export function countGenerations(root: PartialLineage): number {
     // find the furthest gen back by scanning the tree
     let max = 1;
     const scan = (dragon: DragonType, x: number) => {
         if(hasParents(dragon)){
-            scan(dragon.parents!.m, x+1);
-            scan(dragon.parents!.f, x+1);
+            scan(dragon.parents.m, x+1);
+            scan(dragon.parents.f, x+1);
         }
         // end of branch
         else if(x > max) max = x;
@@ -73,19 +74,19 @@ export function countGenerations(root: LineageRoot): number {
     return max;
 }
 
-export function countDragons(root: LineageRoot){
+export function countDragons(root: PartialLineage){
     let count = 0;
     forEveryDragon(root, () => count++);
 
     return count;
 }
 
-export function forEveryDragon(root: LineageRoot, func: (Dragon: DragonType) => void){
+export function forEveryDragon(root: PartialLineage, callback: (Dragon: DragonType) => void){
     const analyse = (dragon: DragonType) => {
-        func(dragon);
+        callback(dragon);
         if(hasParents(dragon)){
-            analyse(dragon.parents!.f);
-            analyse(dragon.parents!.m);
+            analyse(dragon.parents.f);
+            analyse(dragon.parents.m);
         }
     }
 
@@ -93,24 +94,13 @@ export function forEveryDragon(root: LineageRoot, func: (Dragon: DragonType) => 
 }
     
 // count breeds in the tree recursively
-export function countBreeds(root: LineageRoot /*| LineageRoot[]*/){
+export function countBreeds(root: PartialLineage){
     const breeds: { [key: string]: number }[] = [];
 
-    //const f = (tree: LineageRoot) =>{
-    forEveryDragon(root, (dragon) => {
-        breeds[dragon.breed] = breeds[dragon.breed] + 1 || 1;
-    });
-    //}
-    
-    /*if(Array.isArray(payload)){
-        for(const i of payload){
-            f(i);
-        }
-    }
-    else f(payload);*/
+    forEveryDragon(root, dragon => breeds[dragon.breed] = breeds[dragon.breed] + 1 || 1);
 
     // exclude placeholder
-    breeds['Placeholder'] && delete breeds['Placeholder'];
+    breeds[GLOBALS.placeholder.name] && delete breeds[GLOBALS.placeholder.name];
     return breeds;
 }
 
@@ -129,7 +119,7 @@ export function isBreedInList(list: BreedEntry[], breedName: string){
     //throw new Error("not string or object of breeds, type "+typeof breedName);
 }
 
-export function addBreed(breedObj: BreedEntry){
+export function addBreed(breedObj: BreedEntry, resort: boolean = true){
     const breedTable = GLOBALS.breeds.entire;
 
     // Reject empty names
@@ -142,9 +132,12 @@ export function addBreed(breedObj: BreedEntry){
 
     breedTable.push(breedObj);
 
-    // retain our alphabetical sort
-    breedTable.sort((breed1, breed2) => breed1.name.localeCompare(breed2.name));
-
+    if(resort){
+        // if required retain our alphabetical sort
+        const sort = (breed1: BreedEntry, breed2: BreedEntry) =>
+            breed1.name.localeCompare(breed2.name);
+        breedTable.sort(sort);
+    }
     // update gender tables
     GLOBALS.breeds.males = filterBreedTableByGender(breedTable, 'm');
     GLOBALS.breeds.females = filterBreedTableByGender(breedTable, 'f');
@@ -155,11 +148,11 @@ export function getDCTime() {
     return new Date(new Date().toLocaleString('en-US', { timeZone: "America/New_York" }));
 }
 
-export function deepClone(obj: Object){
+export function deepClone<T>(obj: T): T{
     return JSON.parse(JSON.stringify(obj));
 }
 
-export function countSelected(root: LineageRoot){
+export function countSelected(root: PartialLineage){
     let count = 0;
     forEveryDragon(root, async (dragon) => {
         if(dragon.selected) count++;
@@ -170,26 +163,26 @@ export function countSelected(root: LineageRoot){
 
 // These two functions return filter functions for the group and the tags when
 // provided a list of acceptable tags
-export function filterGroup(enabledGroups: string[]){
-    return (breed) => {
+export function filterGroup(enabledGroups: GroupTag[]){
+    return (breed: PortraitData | BreedEntry) => {
         const group = breed.metaData.group;
-        // Small op: Most breeds are not 
-        if(enabledGroups.indexOf(group) > -1)
-            return true;
-
         // A group of "*" is a match all, it should be available
         // no matter the group filter, e.g. placeholder
         if(group === "*")
             return true;
 
+        // Check at least one tag matches
+        if(enabledGroups.indexOf(group) > -1)
+            return true;
         return false;
     }
 }
 
-export function filterTags(enabledTags: string[]){
-    return (breed: BreedEntry) => {
+export function filterTags(enabledTags: FilterTag[]){
+    return (breed: PortraitData | BreedEntry) => {
         const tags = breed.metaData.tags;
-        // If it's an empty tag list, automatically include the breed
+
+        // an empty tag array should return true by default.
         if(tags.length === 0) return true;
 
         // If the breed has tags, then check against our tag list
@@ -198,11 +191,17 @@ export function filterTags(enabledTags: string[]){
     }
 }
 
-export function debounce(func: Function, timeout = 300){
+export function debounce(callback: Function, timeout = 300){
     let timer: NodeJS.Timeout;
 
     return (...args: any) => {
         clearTimeout(timer);
-        timer = setTimeout(() => { func.apply(window, args); }, timeout);
+        timer = setTimeout(() => { callback.apply(window, args); }, timeout);
     };
+}
+
+export function createLineageLink(hash: string){
+    const origin = window.location.origin;
+    const mountPath = import.meta.env.VITE_APP_URL;
+    return `${origin}${mountPath}view/${hash}`;
 }

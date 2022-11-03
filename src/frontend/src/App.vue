@@ -1,37 +1,22 @@
 <template>
-  <div id="app" :class='skin'>
-    <Header
-      :skin="skin"
-      @skinChanged="updateSkin"/>
+  <div id="app" :class='skinStore.activeSkin'>
+    <Header />
     <main id='content'>
-      <router-view :key="$route.fullPath"></router-view>
+      <router-view :key="route.fullPath"></router-view>
     </main>
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import 'reset-css';
-
-import Header from "./components/Header.vue";
+import { useRoute } from 'vue-router';
 
 import "./assets/theming.css";
+import Header from "./components/Header.vue";
+import { useSkinStore } from './store/skin';
 
-export default {
-  name: 'App',
-  components: { Header },
-
-  data() {
-    return {
-      skin: '',
-    }
-  },
-
-  methods:{
-    updateSkin(newSkin){
-      this.skin = newSkin;
-    }
-  }
-}
+const route = useRoute();
+const skinStore = useSkinStore();
 </script>
 
 <style>
@@ -41,9 +26,6 @@ export default {
     color:var(--colourFG);
     background:var(--builderBG);
     min-height: 100vh;
-}
-
-#content{
 }
 
 /* global css */

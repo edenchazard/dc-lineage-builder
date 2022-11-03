@@ -14,80 +14,69 @@
               }">Import into editor</router-link>
           </span>
           <span class='option'>
-            Share link: <TextCopy v-model="shareLink" type='input' />
+            Share link: <Textbox v-model="shareLink" type='input' :showCopyButton="true" />
           </span>
         </div>
       </div>
       <div v-if="tree != null">
         <Lineage
-          :tree="tree"
+          :root="tree"
           :config="config" />
       </div>
     </div>
 </template>
   
-<script>
-import { getLineageData } from "../app/api";
+<script setup lang="ts">
+import { reactive, ref, onBeforeUnmount, onMounted } from "vue";
+import { useRoute } from 'vue-router'
+
+import { getLineage } from "../app/api";
+import { LineageConfig, LineageRoot } from "../app/types";
+import { createLineageLink } from "../app/utils";
 
 import Lineage from "../components/Lineage/Lineage.vue";
-import TextCopy from '../components/ui/TextCopy.vue';
+import Textbox from '../components/ui/Textbox.vue';
 
-export default {
-  name: 'PageView',
-  components: { Lineage, TextCopy },
+const route = useRoute();
+const tree = ref<null | LineageRoot>(null);
+const hash = route.params.hash as string;
+const shareLink = createLineageLink(hash);
+const config = reactive<LineageConfig>({
+  showInterface: false,
+  showLabels: true,
+  disabled: true
+});
+const status = reactive({
+  level: 1,
+  message: "Loading lineage... For big lineages, this can sometimes take a moment to load.",
+  title: ""
+});
 
-  data() {
-    return {
-      tree: null,
-      shareLink: null,
-      config:{
-        strict: false,
-        showInterface: false,
-        showLabels: true,
-        disabled: true
-      },
-      status: {
-        level: 1,
-        message: "Loading lineage... For big lineages, this can sometimes take a moment to load.",
-        title: ""
-      },
-      hash: this.$route.params.hash
-    }
-  },
-  beforeDestroy(){
-      this.tree = null;
-  },
-  mounted(){
-    /*if(!validators.isLineageHash(this.$route.params.hash)){
-      this.status = { error: 2, message: "Invalid hash." };
-      return;
-    }
-    */
-    (async() => {
-      try {
-        this.status ={
-          level: 1,
-          message: `Loading lineage... For big lineages, this can sometimes
-          take a moment to load.`
-        };
-        
-        const response = await getLineageData(this.hash);
-        this.shareLink = `${window.location.origin}${import.meta.env.VITE_APP_URL}view/${this.hash}`;
-        this.tree = JSON.parse(response.data.dragon);
-        this.status = { level: 0, message: "" };
-      }
-      catch (error) {
-        const { response } = error;
-        this.status = {
-          level: 3,
-          title: `${response.status} ${response.statusText}`,
-          message: `Sorry, an error has occurred while loading the lineage.
-          The error is: ${response.status} ${response.data}`
-        };
-      }
-    })();
+onBeforeUnmount(() => tree.value = null);
+
+onMounted(async () => {
+  try {
+    Object.assign(status, {
+      level: 1,
+      message: `Loading lineage... For big lineages, this can sometimes
+      take a moment to load.`
+    });
+    
+    // fetch from server
+    const response = await getLineage(hash);
+    tree.value = response.data.dragon;
+    Object.assign(status, { level: 0, message: "" });
   }
-}
+  catch (error) {
+    const { response } = error;
+    Object.assign(status, {
+      level: 3,
+      title: `${response.status} ${response.statusText}`,
+      message: `Sorry, an error has occurred while loading the lineage.
+      The error is: ${response.status} ${response.data}`
+    });
+  }
+});
 </script>
 <style scoped>
 #options{

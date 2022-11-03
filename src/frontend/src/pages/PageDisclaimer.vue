@@ -42,10 +42,3 @@
     </section>
   </div>
 </template>
-  
-<script>
-export default {
-  name: 'PageDisclaimer',
-  components: {  }
-}
-</script>

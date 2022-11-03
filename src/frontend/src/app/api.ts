@@ -1,28 +1,42 @@
-
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { DragonType, LineageRoot } from "./types";
-const API_URL = "/api";
+const API_URL = import.meta.env.BASE_URL + "api";
 
-export function callAPI(options){
-    options.url = API_URL+options.url;
-    const defaults = {
+function callAPI<T>(url: string, options: AxiosRequestConfig = {}){
+    url = API_URL + url;
+
+    if(options.url)
+        throw Error("options parameter should not contain url");
+
+    const defaults: AxiosRequestConfig = {
         method: 'get'
     };
 
-    return axios.get({...defaults, ...options })
+    // url comes last to prevent it being overwritten via options
+    return axios.request<T>({...defaults, ...options, url })
 }
 
 interface LineageResponse {
-    data: DragonType
+    status: number,
+    dragon: DragonType
 }
-export function getLineageData(hash: string){
-    return callAPI({ url: `/lineage/${hash}`});
+async function getLineage(hash: string){
+    return callAPI<LineageResponse>(`/lineage/${hash}`)
 }
 
-export function generateUrl(tree: LineageRoot){
-    return callAPI({
-        url: `/lineage/create`,
+interface LineageGenerationResponse {
+    status: number,
+    hash: string
+}
+function saveLineage(tree: LineageRoot){
+    return callAPI<LineageGenerationResponse>('/lineage/create', {
         method: 'post',
         data: tree
     });
+}
+
+export {
+    callAPI,
+    getLineage,
+    saveLineage
 }

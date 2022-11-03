@@ -4,7 +4,7 @@
             v-if="!editing"
             class="label">
             <span
-                v-if="display == 1"
+                v-if="display === 1"
                 @click="clicked"
                 class="code">({{value}})</span>
             <span
@@ -13,7 +13,8 @@
                 class="name">{{value}}</span>
         </label>
         <span v-else>
-            <input ref="inputel"
+            <input
+                ref="inputel"
                 :value="value"
                 @keydown.enter="finishedEditing"
                 @blur="finishedEditing"
@@ -23,49 +24,52 @@
         </span>
     </span>
 </template>
-<script lang="ts">
+<script setup lang="ts">
+import { nextTick, ref } from "vue";
 import { generateName, generateCode } from "../../app/dragonBuilder";
 
-export default {
-    name: 'DragonLabelField',
-    components: { },
-    props: {
-        value: String,
-        display: Number,
-        disabled: Boolean
+const props = defineProps({
+    value: {
+        type: String,
+        required: true
     },
-
-    data() {
-        return {
-            editing: false
-        }
+    display: {
+        type: Number,
+        required: true
     },
-
-    methods:{
-        clicked(){
-            if(this.disabled){
-                return;
-            }
-
-            this.editing = true;
-
-            // focus the input so users can type immediately
-            this.$nextTick(() => (this.$refs.inputel as HTMLInputElement).focus());
-        },
-
-        finishedEditing(e: Event){
-            let value = (e.target as HTMLInputElement).value;
-
-            // we'll fill blanks in by automatically generating
-            // a new string of name or code
-            if(value === '')
-                value = this.display === 1 ? generateCode() : generateName();
-
-            this.$emit('changed', value);
-            this.editing = false;
-        }
+    // determines whether click to edit is enabled
+    disabled: {
+        type: Boolean,
+        default: true
     }
-};
+});
+
+const emit = defineEmits<{
+    (e: "changed", value: string): void
+}>();
+
+const editing = ref(false);
+const inputEl = ref<HTMLInputElement>();
+
+function clicked(){
+    if(props.disabled) return;
+
+    editing.value = true;
+
+    // focus the input so users can type immediately
+    nextTick(() => inputEl.value && inputEl.value.focus());
+}
+
+function finishedEditing(e: Event){
+    let value = (e.target as HTMLInputElement).value;
+
+    // if a blank string is given, we'll generate a new name or code
+    if(value === '')
+        value = props.display === 1 ? generateCode() : generateName();
+
+    emit('changed', value);
+    editing.value = false;
+}
 </script>
 
 <style scoped>

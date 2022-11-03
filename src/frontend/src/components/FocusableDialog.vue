@@ -2,7 +2,8 @@
     <div
         class='focusable-dialog'
         role="dialog"
-        aria-modal="true">
+        aria-modal="true"
+        ref="rootEl">
         <div id='modal-header'>
             <slot name='title'>
                 Dialog Title
@@ -18,57 +19,51 @@
         </div>
     </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 // I know this is hacky but this is the easiest and most optimal solution
 // I could think of
-export default {
-    name: 'FocusableDialog',
+import { onMounted, onUnmounted, ref } from 'vue';
 
-    mounted(){
-        this.$el.outsideEvent = (e) => {
-            //console.log('b', this.$el)
-            //console.log('t', e.target)
-            if (!this?.$el?.parentNode?.contains(e.target)) {
-                this.close();
-            }
-        };
+const emit = defineEmits<{
+    (e: 'close'): void
+}>();
 
-        this.hideBodyScrollbar();
-        document.addEventListener('click', this.$el.outsideEvent);
-    },
+const rootEl = ref<HTMLDivElement>();
 
-    // clean up
-    beforeDestroy(){
-        this.cleanUp();
-    },
+function outsideEvent(e: MouseEvent) {
+    // Check whether the clicked element exists within the parent node
+    // of the root element. If it doesn't, we can conclude to close the
+    // dialog
+    if (e.target && !rootEl.value?.parentNode?.contains(e.target as HTMLElement))
+        close();
+}
 
-    methods: {
-        hideBodyScrollbar(){
-            document.body.style.overflow = "hidden";
-            document.documentElement.style.overflow = "hidden";
-        },
+onMounted(() => {
+    hideBodyScrollbar();
+    document.addEventListener('click', outsideEvent);
+});
 
-        unhideBodyScrollbar(){
-            document.body.style.overflow = "";
-            document.documentElement.style.overflow = "";
-        },
-    
-        cleanUp(){
-            this.unhideBodyScrollbar();
-            document.removeEventListener('click', this.$el.outsideEvent);
-        },
+onUnmounted(cleanUp);
 
-        selected(breed){
-            this.close();
-            this.$emit('selected', breed);
-        },
+function hideBodyScrollbar(){
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+}
 
-        close(){
-            this.cleanUp();
-            this.$emit('close');
-        }
-    }
-};
+function unhideBodyScrollbar(){
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+}
+
+function cleanUp(){
+    unhideBodyScrollbar();
+    document.removeEventListener('click', outsideEvent);
+}
+
+function close(){
+    cleanUp();
+    emit('close');
+}
 </script>
 <style scoped>
 .focusable-dialog{

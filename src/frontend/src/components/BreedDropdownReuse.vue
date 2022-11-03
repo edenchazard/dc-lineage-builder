@@ -1,16 +1,18 @@
 <template>
     <div class="reuse">
-        <BreedGrid v-if="recentlyUsed.length > 0"
+        <BreedGrid
+            v-if="recentlyUsed.length > 0"
             :list="recentlyUsed.map(breed => ({ data: breed }))"
-            :compact="true" />
+            :compact="true" 
+            @breedSelected="(breed) => emit('breedSelected', breed)" />
         <p v-else class='information'>Unavailable.</p>
     </div>
 </template>
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
-import { Gender } from '../app/types';
+import { BreedEntry, Gender, PortraitData } from '../app/types';
 import { getBreedData, filterBreedTableByGender } from '../app/utils';
-import { useAppStore } from '../store';
+import { useAppStore } from '../store/app';
 import BreedGrid from "./BreedGrid.vue";
 
 const props = defineProps({
@@ -20,10 +22,19 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits<{
+    (e: 'breedSelected', breed: PortraitData): void
+}>();
+
 const appStore = useAppStore();
 const recentlyUsed = computed(() => {
-    const uniqueBreedNames = Object.keys(appStore.stats.usedBreeds);
-    const uniqueBreeds = uniqueBreedNames.map(breedName => getBreedData(breedName))
+    const uniqueBreedNames = Object.keys(appStore.usedBreeds);
+
+    // no breeds logged
+    if(uniqueBreedNames.length === 0) return [];
+
+    // in these circumstances, it should never return undefined
+    const uniqueBreeds = uniqueBreedNames.map(breedName => getBreedData(breedName) as BreedEntry)
     return filterBreedTableByGender(uniqueBreeds, props.filterByGender);
 });
 </script>

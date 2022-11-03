@@ -11,7 +11,7 @@
                 <h3>Breeds already in lineage</h3>
                 <BreedDropdownReuse
                     :filterByGender="genderFilter"
-                    @selected="selected" />
+                    @breedSelected="breedSelected" />
             </section>
             <section class='breeds'>
                 <h3>Breeds</h3>
@@ -25,33 +25,31 @@
                 </div>
                 <div class='search'>
                     <label for='mates-search'><font-awesome-icon icon="search" /> Filter:</label>
-                    <input
-                        type="search"
-                        placeholder="search"
+                    <BreedSearchControl
                         ref="mateSearchEl"
-                        @input="searchBreeds" />
+                        @update="(search) => searchString = search" />
                 </div>
                 <BreedDropdownResults
                     :search="searchString"
                     :breeds="breeds"
-                    :tags="appStore.enabledTags"
-                    :groups="appStore.enabledGroups"
+                    :tags="tagStore.enabledTags"
+                    :groups="tagStore.enabledGroups"
                     noResultsText="There are no breeds that match this criteria."
-                    @selected="selected" />
+                    @breedSelected="breedSelected" />
             </section>
         </template>
     </FocusableDialog>
 </template>
 <script setup lang="ts">
-import { debounce } from '../app/utils';
+import { onMounted, PropType, ref } from 'vue';
+import { useTagStore } from '../store/tags';
+import { Gender, PortraitData } from '../app/types';
 import BreedDropdownResults from './BreedDropdownResults.vue';
 import BreedDropdownReuse from './BreedDropdownReuse.vue';
 import FocusableDialog from './FocusableDialog.vue';
 import BreedTagsSelector from './BreedTagsSelector.vue';
 import BreedGroupsTagSelector from './BreedGroupsTagSelector.vue';
-import { useAppStore } from '../store';
-import { onMounted, PropType, ref } from 'vue';
-import { Gender, PortraitData } from '../app/types';
+import BreedSearchControl from './BreedSearchControl.vue';
 
 const props = defineProps({
     breeds: {
@@ -65,24 +63,24 @@ const props = defineProps({
 });
 
 const emit = defineEmits<{
-    (e: 'selected', breed: PortraitData): void,
+    (e: 'breedSelected', breed: PortraitData): void,
     (e: 'close'): void
 }>();
 
-const appStore = useAppStore();
+const tagStore = useTagStore();
 const searchString = ref("");
-const mateSearchEl = ref<HTMLInputElement | null>(null);
+const mateSearchEl = ref<HTMLInputElement>();
 
 onMounted(() => {
     // automatically focus the search bar if desktop
     // on mobile I personally find it annoying for the 
     // keyboard to immediately pop up
     if(mateSearchEl.value && 'ontouchstart' in document.documentElement === false)
-        mateSearchEl.value.focus();
+        mateSearchEl.value.$el.focus(); // todo fix
 });
 
-function selected(breed: PortraitData){
-    emit('selected', breed);
+function breedSelected(breed: PortraitData){
+    emit('breedSelected', breed);
     close();
 }
 
@@ -90,8 +88,6 @@ function close(){
     emit('close');
 }
 
-// debounced to avoid it running every key press rapidly
-const searchBreeds = debounce((e: Event) => searchString.value = (e.target as HTMLInputElement).value, 250);
 </script>
 <style scoped>
 /* hide labels on mobile screens */

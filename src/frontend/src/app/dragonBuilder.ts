@@ -1,7 +1,7 @@
 import { uniqueNamesGenerator, names, colors, animals } from 'unique-names-generator';
 
 import GLOBALS from './globals';
-import { DragonParents, DragonType } from './types';
+import { DragonParents, DragonType, EmptyParents } from './types';
 import { getBreedData } from './utils';
 
 export function generateCode(){
@@ -26,7 +26,7 @@ export function createDragonProperties(changes?: Partial<DragonType>){
     const defaults: DragonType = {
         code: generateCode(),
         name: generateName(),
-        parents: null,
+        parents: {},
         breed: GLOBALS.placeholder.name,
         gender: "m",
         display: 1,
@@ -45,9 +45,9 @@ export function cloneDragon(dragon: DragonType){
 
 // Takes a parents object and switches the two
 // If null, returns null
-export function switchParents(parents: DragonParents | null) {
+export function switchParents(parents: DragonParents | EmptyParents) {
     // check it has parents
-    if(parents === null) return null;
+    if(parents === null) return {};
 
     const switchGender = (dragon: DragonType) => {
         const newGender = (dragon.gender === 'f' ? 'm': 'f');

@@ -6,7 +6,8 @@
             v-if="filteredBreeds.length > 0"
             :list="filteredBreeds.map(breed => ({ data: breed }))"
             :compact="filteredBreeds.length > 5"
-            v-bind="$attrs" />
+            v-bind="$attrs"
+            @breedSelected="(breed) => emit('breedSelected', breed)" />
         <div
             v-else
             class="no-results">
@@ -15,9 +16,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from "@vue/reactivity";
-import { nextTick, PropType, watch } from "vue";
-import { PortraitData } from "../app/types";
+import { nextTick, PropType, watch, computed, ref } from "vue";
+import { FilterTag, GroupTag, PortraitData } from "../app/types";
 import { filterGroup, filterTags } from "../app/utils";
 import BreedGrid from "./BreedGrid.vue";
 
@@ -35,14 +35,18 @@ const props = defineProps({
         default: "No results"
     },
     tags: {
-        type: Array as PropType<string[]>,
+        type: Array as PropType<FilterTag[]>,
         required: true
     },
     groups: {
-        type: Array as PropType<string[]>,
+        type: Array as PropType<GroupTag[]>,
         required: true
     }
 });
+
+const emit = defineEmits<{
+    (e: 'breedSelected', breed: PortraitData): void
+}>();
 
 const container = ref<HTMLDivElement | null>(null);
 
@@ -50,7 +54,8 @@ const filteredBreeds = computed(() => {
     const search = props.search.toLowerCase().trim();
     const breeds = props.breeds
         // filter the group and tags
-        .filter(() => filterGroup(props.groups) && filterTags(props.tags));
+        .filter(filterGroup(props.groups))
+        .filter(filterTags(props.tags));
 
     // if the search string is empty, return the whole 
     // list
@@ -59,36 +64,30 @@ const filteredBreeds = computed(() => {
     // we make two arrays, one for primary results (the search matches
     // the beginning of the breed name, and secondary results, where
     // the breed name includes the search term somewhere.
-    let
-        primaryResults: PortraitData[]  = [],
-        secondaryResults: PortraitData[] = [];
+    const
+        primary: PortraitData[]  = [],
+        secondary: PortraitData[] = [];
 
     for(let breed of breeds){
-        const
-            prettyName = breed.name.toLowerCase().trim(),
-            position = prettyName.indexOf(search);
-
+        const position = breed.name.toLowerCase().trim().indexOf(search);
         if(position === 0)
-            primaryResults.push(breed);
+            primary.push(breed);
         else if(position > -1)
-            secondaryResults.push(breed);
+            secondary.push(breed);
     }
-    return primaryResults.concat(secondaryResults);
+    return primary.concat(secondary);
 });
-
-watch(filteredBreeds, () => console.log('BREEDS', filteredBreeds.value))
 
 watch(container, () => {
     // scrolls the results back to the top to prevent
     // the view port being stuck further down
-    if(container !== null) nextTick(() => (container.value as HTMLDivElement).scrollTop = 0);
+    if(container.value !== null) nextTick(() => (container.value as HTMLDivElement).scrollTop = 0);
 });
 </script>
 
 <style scoped>
 .results{
     padding:0px;
-    overflow-y: hidden;
     flex: 1;
 }
 .no-results{

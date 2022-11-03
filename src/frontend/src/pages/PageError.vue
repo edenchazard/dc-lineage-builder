@@ -4,18 +4,3 @@
       <p>The page could not be found.</p>
     </div>
 </template>
-  
-<script>
-
-export default {
-  name: 'PageError',
-  components: {  },
-
-  data() {
-    return {}
-  }
-}
-</script>
-<style>
-
-</style>

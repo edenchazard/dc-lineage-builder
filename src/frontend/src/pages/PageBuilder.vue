@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 /*
 
           <section role='information about strict mode'>
@@ -16,14 +16,4 @@
         </section>
         */
 import LineageBuilder from '../components/LineageBuilder.vue';
-
-export default {
-  name: 'PageBuilder',
-  components: { LineageBuilder },
-
-  data() {
-    return {
-    }
-  }
-}
 </script>

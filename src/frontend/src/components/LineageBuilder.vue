@@ -1,13 +1,13 @@
 <template>
   <div
-    v-if="tree !== null"
+    v-if="appStore.activeTree !== null"
     class="lineage-builder">
     <Information :info="status" />
     <Toolbar
       :config="config"
-      :tree="tree"
+      :tree="appStore.activeTree"
       @updateConfig="(key, value) => config[key] = value"
-      @importTree="(newTree) => tree = newTree"
+      @importTree="(newTree) => appStore.activeTree = newTree"
       @unselectAll="unselectAll"
       @changeBreed="selectionChangeBreed"
       @displayNames="selectionSwitchLabel(0)"
@@ -20,245 +20,162 @@
     />
     <Lineage
       class="builder"
-      :root="tree"
-      :config="config" 
-      @requestRemoveDescendants="replaceRoot"
-      @requestAddDescendant="addDescendant"
+      :root="appStore.activeTree"
+      :config="config"
       @contextmenu="() => false" />
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+//todo fix @updateConfig="(key, value) => config[key] = value"
 import * as dragonBuilder from "../app/dragonBuilder";
 import { forEveryDragon, hasParents } from "../app/utils";
-import { getLineageData } from "../app/api";
-import { useAppStore } from "../store";
-import { LineageRoot, DragonType, DragonDisplay } from "../app/types";
+import { getLineage } from "../app/api";
+import { useAppStore } from "../store/app";
+import { LineageRoot, DragonType, DragonDisplay, LineageConfig } from "../app/types";
 
 import Toolbar from './Toolbar/Toolbar.vue';
 import Lineage from './Lineage/Lineage.vue';
 import Information from './ui/Information.vue';
-import { LineageConfig } from "../app/types";
-import { defineComponent } from "vue";
+import { onBeforeUnmount, onMounted, reactive } from "vue";
+import { useRoute } from "vue-router";
 
-interface State {
-  tree: null | LineageRoot,
-  config: LineageConfig,
-  viewLink: string,
-  status: {
-    level: 0 | 1 | 2 | 3,
-    message: string,
-    title?: string
-  }
-}
+const route = useRoute();
+const appStore = useAppStore();
 
-export default defineComponent({
-  name: 'LineageBuilder',
-  components: {
-    Lineage,
-    Information,
-    Toolbar
-  },
+const config = reactive<LineageConfig>({
+  showInterface: true,
+  showLabels: true,
+  disabled: false
+});
+const status = reactive({
+  level: 0,
+  message: "",
+  title: ""
+});
 
-  setup() {
-    return { appStore: useAppStore() }
-  },
+onMounted(async () => {
+  const hash = route.query.template as string | undefined;
 
-  data(): State {
-    return {
-      tree: null,
-      config: {
-        showInterface: true,
-        showLabels: true,
-        disabled: false
-      },
-      viewLink: "",
-      status: {
-        level: 0,
-        message: "",
-        title: ""
-      }
-    }
-  },
-
-  watch: {
-    tree: {
-      deep: true,
-      handler(){
-        if(this.tree === null) return;
-
-        const addToCountBreeds = (list: { [x: string]: number }, breed: string) =>
-          list[breed] = list[breed] + 1 || 1;
-    
-        const breedCounts: {[x: string]: number} = {};
-        let selected = 0;
-    
-        forEveryDragon(this.tree, (dragon) => {
-          addToCountBreeds(breedCounts, dragon.breed);
-          if(dragon.selected) selected++;
-        });
-
-        // exclude placeholders
-        breedCounts['Placeholder'] && delete breedCounts['Placeholder'];
-
-        this.appStore.setUsedBreeds(breedCounts);
-        this.appStore.selectionCount = selected;
-      }
-    }
-  },
-
-  async mounted(){
-    const hash = this.$route.query.template as string | undefined;
-
-    if(hash === undefined){
-      // No template, so start from scratch
-      this.appStore.activeTree = dragonBuilder.createDragonProperties();
-    }
-    // the user has requested we import from an already built lineage.
-    else{
-      try {
-        this.status ={
-          level: 1,
-          message: `Loading lineage... For big lineages, this can sometimes
-          take a moment to load.`
-        };
-
-        // fetch from server
-        const response = await getLineageData(hash);
-
-        // parse response
-        const savedTree = JSON.parse(response.data.dragon);
-
-        // add selection data
-        forEveryDragon(savedTree, dragon => dragon.selected = false);
-
-        this.appStore.activeTree = savedTree;
-        this.status = { level: 0, message: "" };
-      }
-      catch (error) {
-        const { response } = error;
-        this.status = {
-          level: 3,
-          title: `${response.status} ${response.statusText}`,
-          message: `Sorry, an error has occurred while loading the lineage.
-          The error is: ${response.status} ${response.data}`
-        };
-      }
-    }
-  
-    // store a reference to our active tree
-    this.tree = this.appStore.activeTree;
-  },
-
-  // reset stuff
-  // tree can be a large memory hog, and gc doesn't always get to it immediately.
-  beforeDestroy(){
-    this.tree = null;
-  },
-
-  methods: {
-    addDescendant(){
-      let newTree = dragonBuilder.createDragonProperties() as LineageRoot;
-
-      // check current root if exists
-      if(this.tree !== null){
-        if(this.tree.gender === 'f'){
-          newTree.parents = {
-            f: this.tree,
-            m: dragonBuilder.createDragonProperties({gender: 'm'})
-          };
-        }
-        else{
-          newTree.parents = {
-            f: dragonBuilder.createDragonProperties({gender: 'f'}),
-            m: this.tree
-          };
-        }
-      }
-
-      // replace the existing root with the new tree.
-      this.tree = newTree;
-    },
-
-    replaceRoot(node: LineageRoot){
-      // replace the tree
-      this.tree = node;
-    },
-
-    // Accepts a callback
-    // Or a key and the value to change it to
-    applyToSelected(keyOrFunc: keyof DragonType | ((dragon: DragonType) => void), value?: any){
-      if(typeof keyOrFunc === "string"){
-        const key = keyOrFunc.toString();
-        forEveryDragon(this.tree as LineageRoot, (dragon) => {
-            if(dragon.selected) dragon[key] = value;
-        });
-      }
-      else if(typeof keyOrFunc === "function"){
-        const callback = keyOrFunc;
-        forEveryDragon(this.tree as LineageRoot, (dragon) => {
-            if(dragon.selected) callback(dragon);
-        });
-      }
-    },
-
-    selectionCriteria(criteria: keyof DragonType, value: DragonType[keyof DragonType]){
-      const key = criteria.toString();
-      this.selectBy((dragon) => dragon[key] === value);
-    },
-
-    async selectionChangeBreed(breedName: string){
-      forEveryDragon(this.tree as LineageRoot, (dragon) => {
-        if(dragon.selected) dragon.breed = breedName;
+  // No template, so start from scratch
+  if(hash === undefined)
+    appStore.activeTree = dragonBuilder.createDragonProperties();
+  // the user has requested we import from an already built lineage.
+  else{
+    try {
+      Object.assign(status, {
+        level: 1,
+        message: `Loading lineage... For big lineages, this can sometimes
+        take a moment to load.`
       });
-    },
 
-    selectionDeleteAncestors(){
-      this.applyToSelected('parents', {});
-    },
+      // fetch from server
+      const response = await getLineage(hash);
+      const savedTree = response.data.dragon;
 
-    selectionAddParents(){
-      this.applyToSelected(dragon => {
-        if(!hasParents(dragon)){
-            dragon.parents = {
-                m: dragonBuilder.createDragonProperties({gender: 'm'}),
-                f: dragonBuilder.createDragonProperties({gender: 'f'})
-            };
-        }
-      });
-    },
+      // add selection data
+      forEveryDragon(savedTree, dragon => dragon.selected = false);
 
-    async selectionSwitchParents(){
-      this.applyToSelected(dragon => {
-        // no parents, ignore
-        if(!hasParents(dragon)) return;
-        const newParents = dragonBuilder.switchParents(dragon.parents);
-        dragon.parents = newParents;
-      });
-    },
-
-    selectionRandomizeLabels(){
-      this.applyToSelected((dragon) => {
-        if(dragon.display === 0) dragon.name = dragonBuilder.generateName();
-        else dragon.code = dragonBuilder.generateCode();
-      });
-    },
-  
-    selectionSwitchLabel(display: DragonDisplay){
-      this.applyToSelected('display', display);
-    },
-  
-    unselectAll(){
-      this.applyToSelected('selected', false);
-    },
-
-    selectBy(condition: ((dragon: DragonType) => boolean)){
-      forEveryDragon(this.tree as LineageRoot, (dragon: DragonType) => {
-        if(!dragon.selected && condition(dragon)) dragon.selected = true;
+      appStore.activeTree = savedTree;
+      Object.assign(status, { level: 0, message: "" });
+    }
+    catch (error) {
+      const { response } = error;
+      Object.assign(status, {
+        level: 3,
+        title: `${response.status} ${response.statusText}`,
+        message: `Sorry, an error has occurred while loading the lineage.
+        The error is: ${response.status} ${response.data}`
       });
     }
   }
 });
+
+// reset stuff
+// tree can be a large memory hog, and gc doesn't always get to it immediately.
+onBeforeUnmount(() => appStore.activeTree = null);
+
+// Accepts a callback
+// Or a key and the value to change it to
+function applyToSelected(callback: (dragon: DragonType) => void): void;
+function applyToSelected(key: keyof DragonType, value: any): void;
+function applyToSelected(keyOrCallback: keyof DragonType | ((dragon: DragonType) => void), value?: any){
+  if(typeof keyOrCallback === "string"){
+    const key = keyOrCallback.toString();
+    forEveryDragon(appStore.activeTree as LineageRoot, (dragon) => {
+        if(dragon.selected) dragon[key] = value;
+    });
+  }
+  else if(typeof keyOrCallback === "function"){
+    const callback = keyOrCallback;
+    forEveryDragon(appStore.activeTree as LineageRoot, (dragon) => {
+        if(dragon.selected) callback(dragon);
+    });
+  }
+}
+
+function selectionCriteria(callback: (dragon: DragonType) => boolean): void;
+function selectionCriteria(key: keyof DragonType, value: any): void;
+function selectionCriteria(keyOrCallback: keyof DragonType | ((dragon: DragonType) => boolean), value?: any){
+  if(typeof keyOrCallback === "string"){
+    const key = keyOrCallback.toString();
+    selectBy((dragon) => dragon[key] === value)
+  }
+  else if(typeof keyOrCallback === "function"){
+    const condition = keyOrCallback;
+    selectBy(condition);
+  }
+}
+
+function selectionChangeBreed(breedName: string){
+  forEveryDragon(appStore.activeTree as LineageRoot, (dragon) => {
+    if(dragon.selected) dragon.breed = breedName;
+  });
+}
+
+function selectionDeleteAncestors(){
+  applyToSelected('parents', {});
+}
+
+function selectionAddParents(){
+  applyToSelected(dragon => {
+    if(!hasParents(dragon)){
+        dragon.parents = {
+            m: dragonBuilder.createDragonProperties({gender: 'm'}),
+            f: dragonBuilder.createDragonProperties({gender: 'f'})
+        };
+    }
+  });
+}
+
+function selectionSwitchParents(){
+  applyToSelected(dragon => {
+    // no parents, ignore
+    if(!hasParents(dragon)) return;
+    dragon.parents = dragonBuilder.switchParents(dragon.parents);
+  });
+}
+
+function selectionRandomizeLabels(){
+  applyToSelected((dragon) => {
+    if(dragon.display === 0) dragon.name = dragonBuilder.generateName();
+    else dragon.code = dragonBuilder.generateCode();
+  });
+}
+
+function selectionSwitchLabel(display: DragonDisplay){
+  applyToSelected('display', display);
+}
+
+function unselectAll(){
+  applyToSelected('selected', false);
+}
+
+function selectBy(condition: ((dragon: DragonType) => boolean)){
+  forEveryDragon(appStore.activeTree as LineageRoot, (dragon: DragonType) => {
+    if(!dragon.selected && condition(dragon)) dragon.selected = true;
+  });
+}
 </script>
 
 <style scoped>

@@ -18,40 +18,34 @@
   </div>
 </div>
 </template>
-<script lang="ts">
-import { defineComponent, PropType } from 'vue';
+<script setup lang="ts">
+import { computed, PropType } from 'vue';
 import { LineageConfig, LineageRoot } from '../../app/types';
 import { countGenerations } from '../../app/utils';
 
 import Dragon from './Dragon.vue';
 import LineageGenerationCounter from './LineageGenerationCounter.vue';
 
-export default defineComponent({
-  name: 'Lineage',
-  components: { Dragon, LineageGenerationCounter },
-  props:{
-    root: {
-      type: Object as PropType<LineageRoot> | null,
-      required: true,
-      default: null
-    },
-    config: {
-      type: Object as PropType<LineageConfig>,
-      required: false,
-      default: {
-        showLabels: true,
-        showInterface: false,
-        disabled: true
-      }
-    }
+const props = defineProps({
+  root: {
+    type: Object as PropType<LineageRoot> | null,
+    required: true,
+    default: null
   },
-
-  computed: {
-    generations(){
-      if(this.root === null) return 0;
-      return countGenerations(this.root);
+  config: {
+    type: Object as PropType<LineageConfig>,
+    required: false,
+    default: {
+      showLabels: true,
+      showInterface: false,
+      disabled: true
     }
   }
+});
+
+const generations = computed(() => {
+  if(props.root === null) return 0;
+  return countGenerations(props.root);
 });
 </script>
 

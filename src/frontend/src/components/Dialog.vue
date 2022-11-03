@@ -41,15 +41,14 @@
 </div>
 </template>
 
-<script>
-  export default {
-    name: 'Dialog',
-    methods: {
-      close() {
-        this.$emit('close');
-      },
-    },
-  };
+<script setup lang="ts">
+const emit = defineEmits<{
+  (e: "close"): void
+}>();
+
+function close(){
+  emit("close");
+}
 </script>
 
 <style scoped>

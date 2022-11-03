@@ -4,7 +4,7 @@
         <div id='header-title'>
             <router-link to="/" id="logo"><h1>Lineage Builder</h1></router-link>
             <div class='part-of'>Part of <a href='/dc/tools'>Chazza's DC Tools</a></div>
-            <div class='subtitle'>v{{appVersion}} &copy; eden chazard</div>
+            <div class='subtitle'>v{{appStore.appVersion}} &copy; eden chazard</div>
         </div>
         <div id='header-right'>
             <nav id="menu">
@@ -21,10 +21,10 @@
             Skin: 
             <select
                 title="Skin"
-                :value="skin"
-                @change="setSkin($event.target.value)">
+                :value="skinStore.activeSkin"
+                @change="(e: Event) => skinStore.setSkin((e.target as HTMLSelectElement).value)">
                 <option
-                  v-for="skin in availableSkins"
+                  v-for="skin in skinStore.availableSkins"
                   :value="skin.cssName"
                   :key='skin.cssName'>{{skin.prettyName}}
                 </option>
@@ -35,44 +35,15 @@
 </div>
 </template>
 
-<script>
-const ls = localStorage;
+<script setup lang="ts">
+import { onMounted } from 'vue';
+import { useAppStore } from '../store/app';
+import { useSkinStore } from '../store/skin';
 
-export default {
-    props: {
-        skin: String,
-    },
-  data() {
-    return {
-      appVersion: import.meta.env.VITE_APP_VERSION,
-      availableSkins: [
-        { cssName: 'skin-default', prettyName: 'Default' },
-        { cssName: 'skin-portal2', prettyName: 'Portal 2' },
-        { cssName: 'skin-portal2-light', prettyName: 'Portal 2 Light' },
-        { cssName: "skin-mobile-dark", prettyName: "Mobile/Tablet Dark" }
-      ]
-    }
-  },
-  
-  mounted(){
-    // set default skin if no skin set
-    this.setSkin(ls.getItem('skin') || 'skin-default');
-  },
+const appStore = useAppStore();
+const skinStore = useSkinStore();
 
-  methods:{
-    setSkin(to){
-      // ensure valid skin in case it's been edited by user
-      // in localstorage
-      if(!this.availableSkins.find((skin) => skin.cssName === to)){
-        this.setSkin('skin-default');
-        return;
-      }
-
-      ls.setItem('skin', to);
-      this.$emit('skinChanged', to);
-    }
-  }
-}
+onMounted(() => skinStore.setup());
 </script>
 <style scoped>
 #top{

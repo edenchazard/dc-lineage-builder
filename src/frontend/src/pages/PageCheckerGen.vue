@@ -26,11 +26,10 @@
                     </div>
                     <div>
                         <label for="search">Search: </label>
-                        <input
+                        <BreedSearchControl
                             id='search'
-                            type='search'
                             placeholder="Search breeds"
-                            @input="search" />
+                            @update="(search: string) => query = search" />
                     </div>
                 </div>
                 <div class='right'>
@@ -39,8 +38,7 @@
                         <select
                             id='generations'
                             title="Generations"
-                            v-model="genCount"
-                            @change="updateTree">
+                            v-model="genCount">
                             <option
                                 v-for="index in 6"
                                 :value="(index+1)"
@@ -72,20 +70,20 @@
                     <label>Male breed</label>
                     <BreedDropdownResults
                         :search="query"
-                        :breeds="maleBreeds"
-                        :tags="$store.getters.enabledTags"
-                        :groups="$store.getters.enabledGroups"
-                        @selected="selectMale"
+                        :breeds="GLOBALS.breeds.males"
+                        :tags="tagStore.enabledTags"
+                        :groups="tagStore.enabledGroups"
+                        @breedSelected="selectMale"
                         class='results' />
                 </div>
                 <div>
                     <label>Female breed</label>
                     <BreedDropdownResults
                         :search="query"
-                        :breeds="femaleBreeds"
-                        :tags="$store.getters.enabledTags"
-                        :groups="$store.getters.enabledGroups"
-                        @selected="selectFemale"
+                        :breeds="GLOBALS.breeds.females"
+                        :tags="tagStore.enabledTags"
+                        :groups="tagStore.enabledGroups"
+                        @breedSelected="selectFemale"
                         class='results' />
                 </div>
             </section>
@@ -93,16 +91,20 @@
         <section>
             <Lineage
                 v-if="tree !== null"
-                :tree.sync="tree"
+                :root="tree"
                 :config="{showInterface: false, showLabels: true, disabled: true}" />
         </section>
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+
+import { PortraitData, Gender } from '../app/types';
 import GLOBALS from '../app/globals';
 import { createDragonProperties } from '../app/dragonBuilder';
-import { getBreedData, debounce } from "../app/utils";
+import { getBreedData } from "../app/utils";
+import { useTagStore } from '../store/tags';
 
 import Lineage from "../components/Lineage/Lineage.vue";
 import BreedDropdownResults from "../components/BreedDropdownResults.vue";
@@ -111,96 +113,74 @@ import BreedGroupsTagSelector from '../components/BreedGroupsTagSelector.vue';
 import DialogExport from "../components/Toolbar/DialogExport.vue";
 import DialogGenerate from '../components/Toolbar/DialogGenerate.vue';
 import ToolbarButton from '../components/Toolbar/ToolbarButton.vue';
+import BreedSearchControl from "../components/BreedSearchControl.vue";
 
-export default {
-    name: 'PageCheckerGen',
-    components: {
-        Lineage,
-        BreedDropdownResults,
-        DialogExport,
-        DialogGenerate,
-        BreedTagsSelector,
-        BreedGroupsTagSelector,
-        ToolbarButton
-    },
+const tree = ref(createDragonProperties());
+const tagStore = useTagStore();
+const maleBreed = ref(GLOBALS.placeholder.name);
+const femaleBreed = ref(GLOBALS.placeholder.name);
+const genCount = ref(2);
+const query = ref("");
+const showExportDialog = ref(false);
+const showGenerateDialog = ref(false);
 
-    created(){
-        // debounced to avoid it running every key press rapidly
-        this.search = debounce((e) => this.query = e.target.value, 150);
-    },
+// whenever the gen count changes, the tree should update to reflect it
+watch(genCount, () => updateTree(tree.value.gender));
 
-    data() {
-        return {
-            tree: createDragonProperties(),
-            maleBreed: "Placeholder",
-            maleBreeds: GLOBALS.breeds.males,
-            femaleBreed: "Placeholder",
-            femaleBreeds: GLOBALS.breeds.females,
-            genCount: 2,
-            query: "",
-            showExportDialog: false,
-            showGenerateDialog: false
+function selectMale(breed: PortraitData){
+    maleBreed.value = breed.name;
+    updateTree('m');
+}
+
+function selectFemale(breed: PortraitData){
+    femaleBreed.value = breed.name;
+    updateTree('f');
+}
+
+function updateTree(finalGenGender?: Gender){
+    const createParents = (gen: number) => {
+        const branch = {
+            m: createDragonProperties({
+                gender: 'm',
+                breed: maleBreed.value
+            }),
+            f: createDragonProperties({
+                gender: 'f',
+                breed: femaleBreed.value
+            })
+        };
+
+        if(gen < genCount.value){
+            branch.m.parents = createParents(gen + 1);
+            branch.f.parents = createParents(gen + 1);
         }
-    },
+        return branch;
+    };
 
-    methods: {
-        selectMale(breed){
-            this.maleBreed = breed.name;
-            this.updateTree('m');
-        },
+    // The breed and gender of the final dragon (meaning) the highest gen
+    // should always be the last selected
+    const final: { gender: Gender, breed: string } = finalGenGender === 'f'
+        ? { gender: 'f', breed: femaleBreed.value }
+        // defaults to male
+        : { gender: 'm', breed: maleBreed.value };
 
-        selectFemale(breed){
-            this.femaleBreed = breed.name;
-            this.updateTree('f');
-        },
+    // update our tree
+    Object.assign(tree, createDragonProperties({
+        ...final,
+        parents: createParents(2)
+    }));
+}
 
-        updateTree(finalGenGender){
-            const createParents = (n) => {
-                const branch ={
-                    m: createDragonProperties({
-                        gender: 'm',
-                        breed: this.maleBreed
-                    }),
-                    f: createDragonProperties({
-                        gender: 'f',
-                        breed: this.femaleBreed
-                    })
-                };
+function switchBreeds(){
+    // Check that the breed can be gender flipped
+    // or should be replaced with the placeholder
+    const [newFemale, newMale] = [maleBreed, femaleBreed].map(breed => 
+        getBreedData(breed.value)?.genderOnly ? GLOBALS.placeholder.name : breed.value
+    );
 
-                if(n < this.genCount){
-                    branch.m.parents = createParents(n + 1);
-                    branch.f.parents = createParents(n + 1);
-                }
-                return branch;
-            };
-
-            // The breed and gender of the final dragon (meaning) the highest gen
-            // should always be the last selected
-            let options = { gender: 'm', breed: this.maleBreed };
-            if(finalGenGender === 'f'){
-                options = { gender: 'f', breed: this.femaleBreed };
-            }
-            const final = createDragonProperties({
-                ...options,
-                parents: createParents(2)
-            });
-
-            // update our tree
-            this.tree = final;
-        },
-
-        switchBreeds(){
-            // Check that the breed can be gender flipped
-            // or should be replaced with the placeholder
-            const dragons = [this.maleBreed, this.femaleBreed].map(breed => 
-                getBreedData(breed).genderOnly ? "Placeholder" : breed
-            );
-
-            this.maleBreed = dragons[1];
-            this.femaleBreed = dragons[0];            
-            this.updateTree(this.tree.gender);
-        }
-    }
+    maleBreed.value =  newMale;
+    femaleBreed.value = newFemale;
+    updateTree(tree.value.gender);
 }
 </script>
 <style scoped>
