@@ -40,7 +40,7 @@ router.get('/lineage/:hash', async (ctx) => {
                 [hashCode]);
 
             const jsonContent = row[0].content;
-            ctx.body = { status: 1, dragon: jsonContent};
+            ctx.body = { status: 1, dragon: JSON.parse(jsonContent) };
         }
         else{
             ctx.status = 404;
