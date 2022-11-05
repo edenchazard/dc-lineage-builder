@@ -1,19 +1,17 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { DragonType, LineageRoot } from "./types";
-const API_URL = import.meta.env.BASE_URL + "api";
+
+const http = axios.create({
+    method: 'get',
+    baseURL: import.meta.env.BASE_URL + "api"
+});
 
 function callAPI<T>(url: string, options: AxiosRequestConfig = {}){
-    url = API_URL + url;
-
-    if(options.url)
+    if('url' in options)
         throw Error("options parameter should not contain url");
 
-    const defaults: AxiosRequestConfig = {
-        method: 'get'
-    };
-
     // url comes last to prevent it being overwritten via options
-    return axios.request<T>({...defaults, ...options, url })
+    return http.request<T>({...options, url })
 }
 
 interface LineageResponse {

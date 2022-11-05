@@ -1,4 +1,6 @@
-export default [
+import { RouteRecordRaw } from 'vue-router';
+
+const routes: RouteRecordRaw[] = [
     {
         path: '/:pathMatch(.*)*',
         name: "Error",
@@ -35,3 +37,5 @@ export default [
         component: () => import('../pages/PageGhostBreeds.vue')
     }
 ];
+
+export default routes;
