@@ -448,6 +448,9 @@
         "tags": ["Halloween"],
         "dimorphism": true,
         "group": "Two-headed",
-        "sprites": ["KWDJ", "LAzH"]
+        "sprites": {
+            "Regular": ["KWDJ", "LAzH"],
+            "Salt Odeen": ["RBtw", "DArI"]
+        }
     }
 }
