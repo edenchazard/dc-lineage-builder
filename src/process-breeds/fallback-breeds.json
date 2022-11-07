@@ -1453,8 +1453,8 @@
         "tags": ["Regular"],
         "group": "Two-headed",
         "sprites": {
-            "Desert": ["Jaqrx", "0", "-1", "48", "NDgdL", "-24", "-1", "48"],
-            "Volcano": ["VPzbi", "0", "-1", "48", "890sz", "-24", "-1", "48"]
+            "Volcano": ["Jaqrx", "0", "-1", "48", "NDgdL", "-24", "-1", "48"],
+            "Desert": ["VPzbi", "0", "-1", "48", "890sz", "-24", "-1", "48"]
         }
     },
     "Hydrophidius": {
