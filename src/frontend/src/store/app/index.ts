@@ -10,9 +10,9 @@ export const useAppStore = defineStore('appStore', () => {
 
     // When the tree is modified, we need to update our breed counts
     // and selection count
-    const usedBreeds = computed<{ [x: string]: number }[]>(
+    const usedBreeds = computed(
         () => activeTree.value === null
-        ? []
+        ? new Map<string, number>()
         : countBreeds(activeTree.value)
     );
 

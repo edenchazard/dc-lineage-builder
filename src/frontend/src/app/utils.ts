@@ -1,3 +1,4 @@
+import { stringify } from "querystring";
 import GLOBALS from "./globals";
 import { BreedEntry, DragonType, FilterTag, Gender, GroupTag, PortraitData, PartialLineage } from "./types";
 
@@ -95,12 +96,11 @@ export function forEveryDragon(root: PartialLineage, callback: (Dragon: DragonTy
     
 // count breeds in the tree recursively
 export function countBreeds(root: PartialLineage){
-    const breeds: { [key: string]: number }[] = [];
-
-    forEveryDragon(root, dragon => breeds[dragon.breed] = breeds[dragon.breed] + 1 || 1);
+    const breeds = new Map<string, number>();
+    forEveryDragon(root, dragon => breeds.set(dragon.breed, (breeds.get(dragon.breed) ?? 0) + 1));
 
     // exclude placeholder
-    breeds[GLOBALS.placeholder.name] && delete breeds[GLOBALS.placeholder.name];
+    breeds.delete(GLOBALS.placeholder.name);
     return breeds;
 }
 
