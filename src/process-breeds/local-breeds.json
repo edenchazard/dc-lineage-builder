@@ -442,5 +442,15 @@
         "dimorphism": false,
         "group": "Drake",
         "sprites": "Alve"
+    },
+    "Crypt": {
+        "genderOnly": false,
+        "tags": ["Halloween"],
+        "dimorphism": true,
+        "group": "Two-headed",
+        "sprites": {
+            "Regular": ["KWDJ", "LAzH"],
+            "Salt Odeen": ["RBtw", "DArI"]
+        }
     }
 }
