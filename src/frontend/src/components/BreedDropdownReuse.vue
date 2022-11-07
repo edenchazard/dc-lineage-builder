@@ -28,13 +28,10 @@ const emit = defineEmits<{
 
 const appStore = useAppStore();
 const recentlyUsed = computed(() => {
-    const uniqueBreedNames = Object.keys(appStore.usedBreeds);
-
-    // no breeds logged
-    if(uniqueBreedNames.length === 0) return [];
+    const uniqueBreeds = [...appStore.usedBreeds.keys()]
+        .map(name => getBreedData(name) as BreedEntry);
 
     // in these circumstances, it should never return undefined
-    const uniqueBreeds = uniqueBreedNames.map(breedName => getBreedData(breedName) as BreedEntry)
     return filterBreedTableByGender(uniqueBreeds, props.filterByGender);
 });
 </script>

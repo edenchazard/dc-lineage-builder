@@ -54,14 +54,16 @@ function hasBothParents(parents: DragonParents | EmptyParents){
     return false;
 }
 
+// The dragon MUST be supplied without the vue-specific keys applied
+// such as selected, disabled
 function hasAllKeys(dragon: DragonType){
     const dragonKeys: string[] = ['parents', 'name', 'code', 'display', 'gender', 'breed'];
     if(Object.getOwnPropertyNames(dragon).length !== dragonKeys.length)
         return false;
     
     // run a test to check undefined for each key
-    const tests = dragonKeys.map(key => typeof dragon[key] === "undefined");
-    return tests.includes(false);
+    const tests = dragonKeys.map(key => Object.hasOwn(dragon, key));
+    return !tests.includes(false);
 }
 
 function isLineageHash(str: string){
