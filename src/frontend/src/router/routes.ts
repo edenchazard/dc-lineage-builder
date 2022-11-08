@@ -35,6 +35,11 @@ const routes: RouteRecordRaw[] = [
         path: '/ghost-breeds',
         name: "Ghost Breeds",
         component: () => import('../pages/PageGhostBreeds.vue')
+    },
+    {
+        path: '/onsite-preview',
+        name: "Onsite Preview",
+        component: () => import('../pages/PageOnsitePreview.vue')
     }
 ];
 
