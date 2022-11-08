@@ -3,6 +3,7 @@ const validators  = require('./validators.js');
 const config =  require('./config.js');
 const Router = require('@koa/router');
 const crypto  = require('crypto');
+const onsite = require('./onsite.js');
 
 const router = new Router({
     prefix: config.apiPath
@@ -93,6 +94,16 @@ router.post('/lineage/create', async (ctx) => {
         console.log(err);
         ctx.status = 500;
         ctx.body = GLOBALS.default_error;
+    }
+});
+
+router.post('/onsite-preview/:male/:female', async (ctx) => {
+    const { male, female } = ctx.params;
+    
+    const html = await onsite.getRootHTMLForPair([male, female]);
+    ctx.body = {
+        status: 1,
+        html
     }
 });
 

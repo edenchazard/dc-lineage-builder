@@ -1,6 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { DragonType, LineageRoot } from "./types";
 
+interface APIResponse {
+    status: number
+}
+
 const http = axios.create({
     method: 'get',
     baseURL: import.meta.env.BASE_URL + "api"
@@ -14,16 +18,14 @@ function callAPI<T>(url: string, options: AxiosRequestConfig = {}){
     return http.request<T>({...options, url })
 }
 
-interface LineageResponse {
-    status: number,
+interface LineageResponse extends APIResponse {
     dragon: DragonType
 }
 async function getLineage(hash: string){
     return callAPI<LineageResponse>(`/lineage/${hash}`)
 }
 
-interface LineageGenerationResponse {
-    status: number,
+interface LineageGenerationResponse extends APIResponse {
     hash: string
 }
 function saveLineage(tree: LineageRoot){
@@ -33,8 +35,18 @@ function saveLineage(tree: LineageRoot){
     });
 }
 
+interface OnSitePreviewResponse extends APIResponse {
+    html: string
+}
+function getPreviewOnsite(maleCode: string, femaleCode: string){
+    return callAPI<OnSitePreviewResponse>(`/onsite-preview/${maleCode}/${femaleCode}`, {
+        method: 'post'
+    });
+}
+
 export {
     callAPI,
     getLineage,
-    saveLineage
+    saveLineage,
+    getPreviewOnsite
 }
