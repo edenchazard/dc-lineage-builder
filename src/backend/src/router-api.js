@@ -3,7 +3,7 @@ const validators  = require('./validators.js');
 const config =  require('./config.js');
 const Router = require('@koa/router');
 const crypto  = require('crypto');
-const onsite = require('./onsite.js');
+const { OnsiteError, createRootHTMLForPair } = require('./onsite.js');
 
 const router = new Router({
     prefix: config.apiPath
@@ -99,11 +99,36 @@ router.post('/lineage/create', async (ctx) => {
 
 router.post('/onsite-preview/:male/:female', async (ctx) => {
     const { male, female } = ctx.params;
-    
-    const html = await onsite.getRootHTMLForPair([male, female]);
-    ctx.body = {
-        status: 1,
-        html
+
+    // validate they are valid code syntax
+    if(!validators.code(male) || !validators.code(female)){
+        ctx.body = {
+            status: 2,
+            error: "A code has an invalid format."
+        }
+        return;
+    }
+
+    try {
+        // try to fetch the html for both codes
+        const html = await createRootHTMLForPair([male, female]);
+        ctx.body = {
+            status: 1,
+            html
+        }
+    }
+    catch(err){
+        if(err instanceof OnsiteError){
+            ctx.body = {
+                status: 2,
+                error: err.message
+            }
+        }
+        else
+            ctx.body = {
+                status: 2,
+                error: GLOBALS.default_error
+            }
     }
 });
 
