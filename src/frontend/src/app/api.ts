@@ -38,9 +38,14 @@ function saveLineage(tree: LineageRoot){
 interface OnSitePreviewResponse extends APIResponse {
     html: string
 }
-function getPreviewOnsite(maleCode: string, femaleCode: string){
-    return callAPI<OnSitePreviewResponse>(`/onsite-preview/${maleCode}/${femaleCode}`, {
-        method: 'post'
+function getOnSitePreview(male: string, female: string, doChecks: boolean = false){
+    return callAPI<OnSitePreviewResponse>(`/onsite-preview`, {
+        method: 'post',
+        data: {
+            male,
+            female,
+            doChecks
+        }
     });
 }
 
@@ -48,5 +53,5 @@ export {
     callAPI,
     getLineage,
     saveLineage,
-    getPreviewOnsite
+    getOnSitePreview
 }
