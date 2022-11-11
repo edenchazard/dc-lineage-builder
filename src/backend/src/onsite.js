@@ -1,11 +1,30 @@
 const axios = require("axios");
 const nodeHTMLParser = require('node-html-parser');
+const { getDragonsByCode } = require('./dcapi');
 
 class OnsiteError extends Error {
     constructor(message) {
         super(message);
         this.name = 'OnsiteError';
     }
+}
+
+// codes as [male, female]
+async function checkDragonsMatchGender(codes){
+    const apiDragons = await getDragonsByCode(codes);
+    const [ male, female ] = codes;
+
+    const checkGender = (code, shouldBe) => {
+        if(!(code in apiDragons))
+            return false;
+
+        if([shouldBe, ''].includes(apiDragons[code].gender))
+            return true;
+        
+        return false;
+    }
+
+    return [checkGender(male, 'Male'), checkGender(female, 'Female')];
 }
 
 async function grabHTML(code){ //string){
@@ -21,7 +40,7 @@ async function grabHTML(code){ //string){
                     throw new OnsiteError(`Non-200 OK response when grabbing from DC. Dragon: ${code}`);
             }
             else
-                throw new OnsiteError(`Unknown error while retrieving. Dragon: ${code}`)
+                throw new OnsiteError(`Unknown error while retrieving. Dragon: ${code}`);
         }
     }
 
@@ -43,7 +62,7 @@ async function grabHTML(code){ //string){
     return innerHTML;
 }
 
-async function createRootHTMLForPair(codes){ //: [string, string]){
+async function getHTMLForPair(codes){ //: [string, string]){
     const [ male, female ] = await Promise.all(codes.map(code => grabHTML(code)));
 
     /* // one lineage wasn't returned
@@ -51,21 +70,9 @@ async function createRootHTMLForPair(codes){ //: [string, string]){
         throw new OnsiteError("Missing dragon."); */
 
     // create a root ul
-    const root = (
-        `<ul>
-            <li>
-                <div>
-                    <img src="src/assets/placeholder.png" alt="result placeholder" />
-                    <label>Result</label>
-                </div>
-                <ul>
-                    <li>${male}</li>
-                    <li>${female}</li>
-                </ul>
-            </li>
-        </ul>`)
+    const root = (`<li>${male}</li><li>${female}</li>`)
         // strip large whitespaces
-        .replace(/\s{2,}/g, '')
+        //.replace(/\s{2,}/g, '')
         // add additional properties to links
         .replaceAll("<a ", "<a rel='noopener noreferrer' target='_blank' ")
         // replace the shorthanded urls with full links to dragcave
@@ -78,5 +85,6 @@ async function createRootHTMLForPair(codes){ //: [string, string]){
 module.exports = {
     OnsiteError,
     grabHTML,
-    createRootHTMLForPair
+    getHTMLForPair,
+    checkDragonsMatchGender
 }

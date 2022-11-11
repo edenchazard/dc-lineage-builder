@@ -3,7 +3,7 @@ const validators  = require('./validators.js');
 const config =  require('./config.js');
 const Router = require('@koa/router');
 const crypto  = require('crypto');
-const { OnsiteError, createRootHTMLForPair } = require('./onsite.js');
+const { OnsiteError, getHTMLForPair, checkDragonsMatchGender } = require('./onsite.js');
 
 const router = new Router({
     prefix: config.apiPath
@@ -97,8 +97,9 @@ router.post('/lineage/create', async (ctx) => {
     }
 });
 
-router.post('/onsite-preview/:male/:female', async (ctx) => {
-    const { male, female } = ctx.params;
+router.post('/onsite-preview', async (ctx) => {
+    const { male, female, doChecks } = ctx.request.body;
+    const codesAsArray = [male, female];
 
     // validate they are valid code syntax
     if(!validators.code(male) || !validators.code(female)){
@@ -110,8 +111,20 @@ router.post('/onsite-preview/:male/:female', async (ctx) => {
     }
 
     try {
+         // do our checks, such as ensuring the dragons match the gender
+        if(doChecks){
+            const genderChecks = await checkDragonsMatchGender(codesAsArray);
+            if(genderChecks.includes(false)){
+                ctx.body = {
+                    status: 2,
+                    error: "One of the dragons is not the correct gender."
+                }
+                return;
+            }
+        }
+
         // try to fetch the html for both codes
-        const html = await createRootHTMLForPair([male, female]);
+        const html = await getHTMLForPair(codesAsArray);
         ctx.body = {
             status: 1,
             html
