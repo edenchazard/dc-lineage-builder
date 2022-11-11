@@ -26,6 +26,9 @@ Massive changes.
 - Cleaned up some files.
 - Removed unused css and functions.
 - Improved documentation.
+- Ghost breeds:
+  - Upload limit upped to 20kb.
+  - Tiles will now be resized to fit the box. This prevents 72w96h images acting funky.
 
 ## 4.5.0
 
