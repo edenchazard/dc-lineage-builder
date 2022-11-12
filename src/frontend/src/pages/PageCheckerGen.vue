@@ -165,10 +165,10 @@ function updateTree(finalGenGender?: Gender){
         : { gender: 'm', breed: maleBreed.value };
 
     // update our tree
-    Object.assign(tree, createDragonProperties({
+    tree.value = createDragonProperties({
         ...final,
         parents: createParents(2)
-    }));
+    });
 }
 
 function switchBreeds(){
