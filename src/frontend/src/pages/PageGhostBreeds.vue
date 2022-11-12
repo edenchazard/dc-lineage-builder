@@ -3,9 +3,9 @@
     <Information :info="status" />
     <section>
       <p>On this page you can upload custom breeds, aka "ghost breeds", to Lineage Builder. This can be useful if you have breed you've created and want to see what it looks like in lineages. All you have to do is upload the lineage tile and fill in the settings.</p>
-      <p>Ghost breeds will be added under the "Standard" and "Regular" tag and will only be active for the <strong>duration of the session</strong>, as soon as you exit the page they will be automatically deleted! Ghost breeds are also <strong>not uploaded</strong> to the server, the whole process takes place client-side. That means it doesn't break DC's artist agreement for sharing unreleased breed information.</p>
+      <p>Ghost breeds will be added under the "Standard" and "Regular" tags and will only be active for the <strong>duration of the session</strong>. As soon as you exit the page they will be automatically deleted! The whole process takes place client-side, they are <strong>not uploaded</strong> to the server which means it doesn't break DC's artist agreement for sharing unreleased breeds.</p>
       <p>
-        Please ensure that names are unique and tiles are less than {{settings.ghostBreedSize/1000}}KB. DC lineage tiles are 48Hx36W on lower resolutions and 96Hx72W on higher resolutions.
+        Ensure that names are unique and tiles are less than {{settings.ghostBreedSize/1000}}KB. DC lineage tiles are 48Hx36W on lower resolutions and 96Hx72W on higher resolutions.
       </p>
     </section>
     <section>

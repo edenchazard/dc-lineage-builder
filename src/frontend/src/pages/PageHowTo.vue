@@ -3,11 +3,10 @@
     <section>
       <h2>How to use</h2>
       <p>This lineage builder aims to allow you to create a lineage as it appears in the cave, right down to the fonts, spacing and colour. Use it for previewing new combinations and planning your code/lyrical lineages!</p>
-      <p><span class='warning'>Warning: </span> This tool is experimental and not guaranteed to work. While most things should work, you may run into bugs or errors.</p>
       <ul class='list'>
-        <li>Work backwards by adding parents to each node, or forwards by adding children.</li>
+        <li>Add children or parents using the arrows next to each dragon.</li>
         <li>Names and codes are automatically generated, but you can single click the name/code to change it. Erasing a name or code will generate a new one.</li>
-        <li>Click the dragon's image to change the breed. Only breeds and variations* of the opposite gender will show. You can use the textbox to filter the breed name by your search. Results are ordered by primary (the start of the breed name matches the query) and then secondary (your query matches anywhere in the breed name).</li>
+        <li>Click the dragon's image to change the breed. Breeds are automatically filtered. You can use the textbox to filter the breed name by your search. Results are ordered by breed names starting with the query and then those where the query appears anywhere else in the name.</li>
         <li>Hide the interface using the "hide/show interface" button. This will also display the lineage as it should appear in the cave.</li>
       </ul>
       <section>
@@ -16,7 +15,7 @@
           <li><font-awesome-icon icon="arrow-right" /> Add parents.</li>
           <li><font-awesome-icon icon="arrow-left" /> Add a child.</li>
           <li><font-awesome-icon icon="minus" /> Remove the parents (and any ancestors of those).</li>
-          <li><font-awesome-icon icon="mars" />/<font-awesome-icon icon="venus" /> Swap the gender, which by default is always male. This button only appears on the root node. If this breed is available in both genders, it will swap the gender directly and update the sprite. If this breed is only available in one gender, such as some event dragons, the breed will be reset to the placeholder.</li>
+          <li><font-awesome-icon icon="mars" />/<font-awesome-icon icon="venus" /> Swap the gender, which by default is always male. This button only appears on the leftmost node. If this breed is available in both genders, it will swap the gender directly and update the sprite. If this breed is only available in one gender, such as some event dragons, the breed will be reset to the placeholder.</li>
           <li><font-awesome-icon icon="sync-alt" /> Switch the parent's genders. If one of the breeds is only available in one gender, the breed will be reset to the placeholder.</li>
           <li><font-awesome-icon icon="clone" /> Clone the parent nodes and any further ancestors. This button can even be used to clone parts of unrelated lineages such as from a different tab.</li>
           <li><font-awesome-icon icon="paste" /> Paste the most recently cloned item. If this node already has parents, it will replace them.</li>
@@ -48,7 +47,7 @@
       </section>
       <section>
         <h3>Selection tools</h3>
-        <p>Multiple selection is also supported. To enter selection mode, hold a tile for 300 miliseconds and the selection menu will appear. Then, every tile you click will be added to the selection.</p>
+        <p>To enter selection mode, hold a tile for 300 miliseconds and the selection menu will appear. Then, every tile you click will be added to the selection.</p>
         <p>To apply an action to the selected dragons, use the features on the right.</p>
         <p>You can unselect a dragon by clicking the tile again. Selection mode will end when no dragons are selected.</p>
         <p>You can select all dragons matching particular criteria using the features on the left.</p>
