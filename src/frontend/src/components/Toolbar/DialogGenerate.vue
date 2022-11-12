@@ -26,6 +26,7 @@ import Dialog from "../Dialog.vue";
 import Information from "../ui/Information.vue";
 import Textbox from "../ui/Textbox.vue";
 import { LineageRoot } from '../../app/types';
+import settings from '../../app/settings';
 
 const props = defineProps({
     tree: {
@@ -67,8 +68,8 @@ onMounted(async () => {
     if(saveReqs.failed){
         Object.assign(status, {
             level: 3,
-            message: `To save on the server, lineages must be between 2
-            and 13 generations long inclusively. There must also be
+            message: `To save on the server, lineages must be between ${settings.gens.min}
+            and ${settings.gens.max} generations long inclusively. There must also be
             no ghost breeds. Tests failed: ${saveReqs.failedTests.join(', ')}`
         });
         return;

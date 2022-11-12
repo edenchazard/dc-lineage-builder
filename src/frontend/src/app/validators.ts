@@ -1,5 +1,6 @@
 import { isBreedInList, countGenerations, getBreedData } from "./utils";
 import GLOBALS from "./globals";
+import settings from "./settings";
 import { DragonDisplay, DragonParents, DragonType, Gender, LineageRoot, EmptyParents } from "./types";
 import { createTester } from "./minitester";
 
@@ -88,7 +89,7 @@ function meetsSaveRequirements(root: LineageRoot, supressReasoning = false){
     const ghostList = GLOBALS.breeds.entire.filter(breed => breed.metaData.src === "ghost");
 
     function notGhost(breed: string) { return !isBreedInList(ghostList, breed); }
-    function genRange(count: number){ return count >= 2 && count <= 13; }
+    function genRange(count: number){ return count >= settings.gens.min && count <= settings.gens.max; }
 
     const analyseDragon = (dragon: DragonType) => {
         // check failed, don't even bother

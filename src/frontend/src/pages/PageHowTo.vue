@@ -32,14 +32,14 @@
           <h4>Online</h4>
           <p>You can save lineages online with Lineage Builder and share them with others but this does come with some limitations. These are:</p>
           <ul class='list'>
-            <li>Must be between 1 and 12 generations.</li>
+            <li>Must be between {{settings.gens.min}} and {{settings.gens.max}} generations.</li>
             <li>Names and codes must fit DC's requirements.</li>
           </ul> 
           <p>Please note that if a lineage hasn't been viewed in 2 months, it will be removed from the site. For this reason, it's recommended you view it before 2 months is up to reset the timer.</p>
         </section>
         <section>
           <h4>Export/Import</h4>
-          <p>If your lineage is longer than 12 generations, you can save the tree to a text file by using the export button and importing it that way.</p>
+          <p>If your lineage is longer than {{settings.gens.max}} generations, you can save the tree to a text file by using the export button and importing it that way.</p>
         </section>
       </section>
       <section>
@@ -67,6 +67,10 @@
     </section>
   </div>
 </template>
+
+<script setup lang="ts">
+import settings from '../app/settings';
+</script>
 
 <style scoped>
 .buttons-list .svg-inline--fa{
