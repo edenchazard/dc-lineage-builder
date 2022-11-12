@@ -18,7 +18,7 @@
       <h2>Terms of Use</h2>
       <p>Have fun! Lineage Builder is a fan-made project unaffiliated with DragCave.net.</p>
       <p>Its intended use is for building DragCave lineages, anything else may constitute misuse.</p>
-      <p>There are no guarantees made about this project and no responsibility will be accepted for anything that may happen as a result of you using its services.</p>
+      <p>There are no guarantees made about this project and no responsibility will be accepted for anything that may happen as a result of you using it.</p>
     </section>
     <section>
       <h2>Privacy Policy</h2>

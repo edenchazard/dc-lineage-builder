@@ -5,7 +5,7 @@
 Massive changes.
 
 - Migrated Vue 2 to Vue 3.
-- Rewrote in TypeScript. Everything is fully typed. OwO
+- Rewrote Vue side of things in TypeScript. Everything is fully typed. OwO
 - Rewrote components and stores to take advantage of Vue 3 APIs - composition, script setup etc.
 - Added proper emits and prop types to all components.
 - Changed out Vuex for Pinia. Begone.
@@ -29,6 +29,7 @@ Massive changes.
 - Ghost breeds:
   - Upload limit upped to 20kb.
   - Tiles will now be resized to fit the box. This prevents 72w96h images acting funky.
+- New feature: Onsite Preview: utility that allows you to preview two existing onsite lineages.
 
 ## 4.5.0
 
