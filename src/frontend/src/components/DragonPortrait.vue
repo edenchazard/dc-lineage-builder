@@ -14,6 +14,7 @@
             v-else-if="data.metaData.src === 'ghost'"
             class='ghost'
             :src="data.image" />
+        <img v-else class="empty" src="/src/assets/placeholder.png" />
     </span>
 </template>
 
@@ -32,7 +33,6 @@ const props = defineProps({
         default: 1
     }
 });
-
 /*,
 computed:{
     // determines whether to provide a full size image or a small image
@@ -62,6 +62,7 @@ computed:{
 }*/
 </script>
 <style scoped>
+
 /* add css for fallbacks */
 @import url("../assets/fallbacks.css");
 
@@ -77,13 +78,14 @@ computed:{
     (-moz-min-device-pixel-ratio: 1.05),
     (-o-min-device-pixel-ratio: 21/20),
     (min-device-pixel-ratio: 1.05);
-
+.ghost, .local {
+    width: var(--size36x48W);
+    height: var(--size36x48H);
+    background-size: cover;
+}
 .local{
-    width: 36px;
-    height: 48px;
     margin:-1px -1px;
     display: inline-block;
-    background-size: cover;
 }
 
 .imgbox {
@@ -94,8 +96,9 @@ computed:{
     user-select: none;
 }
 .imgbox-fullsize{
-    width: 34px;
-    height: 46px;
+    /* this needs adjusting by 2px in either directon */
+    width: calc(var(--size36x48W) - 2px);
+    height: calc(var(--size36x48H) - 2px);
 }
 .imgbox-twothirds{
     width: 24px;
@@ -123,5 +126,14 @@ computed:{
     top:-1px;
     left:0px;
     height:48px
+}
+</style>
+<style>
+/* need a way of referencing these to the ones in the settings file */
+:root{
+    --size36x48W: 36px;
+    --size36x48H: 48px;
+    --size24x32W: 24px;
+    --size24x32H: 32px;
 }
 </style>

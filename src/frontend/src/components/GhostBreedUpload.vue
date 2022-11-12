@@ -28,7 +28,7 @@
   const dragon = reactive<PortraitData>({
     // copy placeholder properties and replace what we need
     ...GLOBALS.placeholder,
-    image: "",
+    image: "/src/assets/placeholder.png",
     metaData: {
         src: "ghost",
         group: "Standard",

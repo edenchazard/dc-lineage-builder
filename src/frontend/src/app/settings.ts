@@ -1,23 +1,34 @@
+interface TileSize {
+    width: number,
+    height: number,
+    widthpx: string,
+    heightpx: string
+}
 interface Settings {
     ghostBreedSize: number,
-    tileSizes: { [x: string]: { width: string, height: string } },
+    tileSizes: {
+        [x: string]: TileSize
+    },
     gens: {
         min: number,
         max: number
     }
 }
 
+function createTilesize(w: number, h: number): TileSize{
+    return {
+        width: w,
+        height: h,
+        widthpx: `${w}px`,
+        heightpx: `${h}px`
+    }
+}
+
 const settings: Settings = {
-    ghostBreedSize: 8000,
+    ghostBreedSize: 20000,
     tileSizes: {
-        fullSize: {
-            width: '36px',
-            height: '48px'
-        },
-        twoThirds: {
-            width: '24px',
-            height: '32px'
-        }
+        fullSize: createTilesize(36, 48),
+        twoThirds: createTilesize(24, 32)
     },
     // inclusive
     gens: {
