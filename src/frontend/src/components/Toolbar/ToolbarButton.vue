@@ -16,7 +16,7 @@
                 v-for="option in options"
                 class="option"
                 :key="option.label"
-                @click="emit('optionSelected', option.value)">
+                @click="emit('optionSelected', option)">
                 {{option.label}}</li>
         </ul>
     </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
+const p = defineProps({
     title: {
         type: String,
         required: true
@@ -50,7 +50,7 @@ defineProps({
 
 const emit = defineEmits<{
     (e: "click"): void,
-    (e: "optionSelected", value: { label: string, value: any }): void
+    (e: "optionSelected", option: { label: string, value: any }): void
 }>();
 </script>
 

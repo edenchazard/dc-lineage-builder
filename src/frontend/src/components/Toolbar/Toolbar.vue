@@ -55,7 +55,7 @@
                 title='More options'
                 icon="caret-down"
                 :options="selectionOptions"
-                @optionSelected="({ label, value }) => emit('selectCriteria', label, value)" />
+                @optionSelected="({value: [crit, value] }) => emit('selectCriteria', crit, value)" />
             <ToolbarButton
                 :class="{
                     'invisible': !itemsSelected
@@ -162,10 +162,10 @@ const treeSelectedContains = (tree: LineageRoot) => {
 const tagStore = useTagStore();
 const appStore = useAppStore();
 
-const selectionOptions = reactive([
+const selectionOptions = reactive<{ label: string, value: [keyof DragonType, any] }[]>([
     { label: "All with code", value: ["display", 1] },
     { label: "All with name", value: ["display", 0] },
-    { label: "All with placeholder", value: ["breed", "Placeholder"] },
+    { label: "All with placeholder", value: ["breed", "Placeholder"] }
 ]);
 const dialogs = reactive({
     showImportDialog: false,
