@@ -33,7 +33,7 @@
                     :search="searchString"
                     :breeds="breeds"
                     :tags="tagStore.enabledTags"
-                    :groups="tagStore.enabledGroups"
+                    :groups="tagStore.enabledEggGroups"
                     noResultsText="There are no breeds that match this criteria."
                     @breedSelected="breedSelected" />
             </section>

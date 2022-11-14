@@ -110,7 +110,7 @@ import '../../../node_modules/vue3-toggle-button/dist/style.css';
 import GLOBALS from "../../app/globals";
 import {
     forEveryDragon,
-    filterGroup,
+    filterEggGroups,
     filterTags } from "../../app/utils";
 import { useAppStore } from "../../store/app";
 import { BreedEntry, DragonType, LineageConfig, LineageRoot, PortraitData } from "../../app/types";
@@ -191,7 +191,7 @@ const availableBreeds = computed(() => {
 
     const breedTable = GLOBALS.breeds.entire
         // filter the group
-        .filter(filterGroup(tagStore.enabledGroups))
+        .filter(filterEggGroups(tagStore.enabledEggGroups))
         // if we have tags, make sure to filter them
         .filter(filterTags(tagStore.enabledTags));
 
