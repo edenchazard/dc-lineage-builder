@@ -17,8 +17,8 @@
 </template>
 <script setup lang="ts">
 import { nextTick, PropType, watch, computed, ref } from "vue";
-import { FilterTag, GroupTag, PortraitData } from "../app/types";
-import { filterGroup, filterTags } from "../app/utils";
+import { FilterTag, EggGroupTag, PortraitData } from "../app/types";
+import { filterEggGroups, filterTags } from "../app/utils";
 import BreedGrid from "./BreedGrid.vue";
 
 const props = defineProps({
@@ -39,7 +39,7 @@ const props = defineProps({
         required: true
     },
     groups: {
-        type: Array as PropType<GroupTag[]>,
+        type: Array as PropType<EggGroupTag[]>,
         required: true
     }
 });
@@ -54,7 +54,7 @@ const filteredBreeds = computed(() => {
     const search = props.search.toLowerCase().trim();
     const breeds = props.breeds
         // filter the group and tags
-        .filter(filterGroup(props.groups))
+        .filter(filterEggGroups(props.groups))
         .filter(filterTags(props.tags));
 
     // if the search string is empty, return the whole 

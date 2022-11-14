@@ -1,7 +1,7 @@
 const filterTags = ['Valentine', 'Christmas', 'Halloween', 'Hybrid', 'CB', 'Regular'] as const;
-const groupTags = ["Standard", "Pygmy",  "Two-headed",  "Drake",  "Other", "*"] as const;
+const eggGroups = ["Standard", "Pygmy",  "Two-headed",  "Drake",  "Other", "*"] as const;
 type FilterTag = typeof filterTags[number];
-type GroupTag = typeof groupTags[number];
+type EggGroupTag = typeof eggGroups[number];
 interface TagListOption {
     name: string,
     active: boolean
@@ -34,7 +34,7 @@ interface BreedEntry {
 }
 type GenderOnly = Gender | false;
 interface MetaData {
-    group: GroupTag,
+    group: EggGroupTag,
     tags: FilterTag[],
     src: Sources
 }
@@ -69,11 +69,11 @@ export type {
     DragonDisplay,
     PortraitData,
     FilterTag,
-    GroupTag,
+    EggGroupTag,
     PartialLineage
 }
 
 export {
     filterTags,
-    groupTags
+    eggGroups
 }

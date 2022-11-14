@@ -1,5 +1,5 @@
 import GLOBALS from "./globals";
-import { BreedEntry, DragonType, FilterTag, Gender, GroupTag, PortraitData, PartialLineage } from "./types";
+import { BreedEntry, DragonType, FilterTag, Gender, EggGroupTag, PortraitData, PartialLineage } from "./types";
 
 function validGenderForBreed(gender: Gender, breed: BreedEntry): boolean {
     // if the genderonly attribute is not false,
@@ -162,7 +162,7 @@ export function countSelected(root: PartialLineage){
 
 // These two functions return filter functions for the group and the tags when
 // provided a list of acceptable tags
-export function filterGroup(enabledGroups: GroupTag[]){
+export function filterEggGroups(enabledGroups: EggGroupTag[]){
     return (breed: PortraitData | BreedEntry) => {
         const group = breed.metaData.group;
         // A group of "*" is a match all, it should be available

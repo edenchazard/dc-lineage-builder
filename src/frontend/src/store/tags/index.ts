@@ -1,11 +1,11 @@
 import { computed, ComputedRef, ref, WritableComputedRef } from 'vue';
 import { defineStore } from 'pinia';
 import { deepClone } from '../../app/utils';
-import { TagListOption, filterTags, groupTags, FilterTag, GroupTag } from '../../app/types';
+import { TagListOption, filterTags, eggGroups, FilterTag, EggGroupTag } from '../../app/types';
 
 interface SessionTagSet {
     key: string,
-    tags: readonly GroupTag[] | readonly FilterTag[]
+    tags: readonly EggGroupTag[] | readonly FilterTag[]
 }
 
 // returns tags in session if set, or defaults
@@ -29,7 +29,7 @@ function flattenTagArray(tags: TagListOption[]){
         .map(tag => tag.name);
 }
 
-function useCreateTagStorage<T extends FilterTag[] | GroupTag[]>(session: SessionTagSet){
+function useCreateTagStorage<T extends FilterTag[] | EggGroupTag[]>(session: SessionTagSet){
     const tags = ref(loadTags(session));
     // updates sessionstorage whenever the tags are updated
     const comp = computed({
@@ -54,15 +54,15 @@ export const useTagStore = defineStore('tagStore', () => {
 
     // groups to hide from the selection interface, such as *
     const hidden = ['*'];
-    const [ groups, enabledGroups ] = useCreateTagStorage<GroupTag[]>({
+    const [ groups, enabledEggGroups ] = useCreateTagStorage<EggGroupTag[]>({
         key: 'session-groups',
-        tags: groupTags.filter(tag => !hidden.includes(tag))
+        tags: eggGroups.filter(tag => !hidden.includes(tag))
     });
 
     return {
         tags,
         groups,        
-        enabledGroups,
+        enabledEggGroups,
         enabledTags
     }
 });
