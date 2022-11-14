@@ -3,7 +3,7 @@ const validators  = require('./validators.js');
 const config =  require('./config.js');
 const Router = require('@koa/router');
 const crypto  = require('crypto');
-const { OnsiteError, getHTMLForPair, checkDragonsMatchGender } = require('./onsite.js');
+const { OnsiteError, getDataForPair, checkDragonsMatchGender } = require('./onsite.js');
 
 const router = new Router({
     prefix: config.apiPath
@@ -124,10 +124,10 @@ router.post('/onsite-preview', async (ctx) => {
         }
 
         // try to fetch the html for both codes
-        const html = await getHTMLForPair(codesAsArray);
+        const dragons = await getDataForPair(codesAsArray);
         ctx.body = {
             status: 1,
-            html
+            dragons
         }
     }
     catch(err){
@@ -137,6 +137,7 @@ router.post('/onsite-preview', async (ctx) => {
                 error: err.message
             }
         }
+        // all other errors
         else
             ctx.body = {
                 status: 2,

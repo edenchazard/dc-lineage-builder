@@ -16,9 +16,7 @@ async function getDragonsByCode(codes){
     try {
         const response = await dcapi.post(`/massview`, {
             ids: codes.join(',')
-        }, {
-            headers: { "Content-Type": "multipart/form-data" },
-        });
+        }, { headers: { "Content-Type": "multipart/form-data" } });
 
         const responseData = response.data;
         if(responseData.errors.length > 0)
@@ -27,7 +25,7 @@ async function getDragonsByCode(codes){
     }
     // catch the axios exception and fire our own
     catch(err){
-        throw new APIError(`Unexpected response from Dragcave API.`, err);
+        throw new APIError(`Unexpected response from Dragcave API.`);
     }
 }
 

@@ -1,16 +1,37 @@
 <template>
     <span class='generation-counter'>
-      <span class='generation' v-for="index in count" :key="index">
-        {{count - index + 1}}
+      <span
+        class='generation'
+        v-for="gen in gens"
+        :key="gen">
+        {{ gen }}
       </span>
     </span>
 </template>
 <script setup lang="ts">
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
   count: {
     type: Number,
     default: 1
+  },
+  // when set to 1, the lineage will not be cut off at any gen
+  limit: {
+    type: Number,
+    default: -1
   }
+});
+
+const gens = computed<number[]>(() => {
+  let length: number;
+  if(props.limit > -1 && props.limit > props.count)
+    length = props.count;
+  else if(props.limit === -1)
+    length = props.count;
+  else
+    length = props.limit;
+  return Array.from({ length }, (_, i) => props.count - i);
 });
 </script>
 <style scoped>
