@@ -36,7 +36,18 @@ function saveLineage(tree: LineageRoot){
 }
 
 interface OnSitePreviewResponse extends APIResponse {
-    html: string
+    dragons: {
+        male: {
+            code: string,
+            html: string,
+            gen: number
+        },
+        female: {
+            code: string,
+            html: string,
+            gen: number
+        }
+    }
 }
 function getOnSitePreview(male: string, female: string, doChecks: boolean = false){
     return callAPI<OnSitePreviewResponse>(`/onsite-preview`, {

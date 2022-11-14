@@ -108,6 +108,9 @@ defineProps({
     position: relative;
     top: -4px;
 }
+:deep(label > i){
+    font-style: italic;
+}
 :deep(li::after) {
     top: calc(50% - 14px);
     bottom: auto;
@@ -122,5 +125,9 @@ defineProps({
     border-top: var(--lineageLineStyle);
     width: 24px;
     height: 0;
+}
+/* fix for the bar showing up on the rightmost gen */
+:deep(li div:last-child::after){
+    display: none;
 }
 </style>
