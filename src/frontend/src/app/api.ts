@@ -2,7 +2,8 @@ import axios, { AxiosRequestConfig } from "axios";
 import { DragonType, LineageRoot } from "./types";
 
 interface APIResponse {
-    status: number
+    errors: Array<{ type: 1 | 2, msg: string }>,
+    data: null | Object
 }
 
 const http = axios.create({
@@ -36,16 +37,18 @@ function saveLineage(tree: LineageRoot){
 }
 
 interface OnSitePreviewResponse extends APIResponse {
-    dragons: {
-        male: {
-            code: string,
-            html: string,
-            gen: number
-        },
-        female: {
-            code: string,
-            html: string,
-            gen: number
+    data: {
+        dragons: {
+            male: {
+                code: string,
+                html: string,
+                gen: number
+            },
+            female: {
+                code: string,
+                html: string,
+                gen: number
+            }
         }
     }
 }

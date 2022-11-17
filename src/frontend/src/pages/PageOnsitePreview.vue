@@ -1,6 +1,9 @@
 <template>
 <div>
     <div class='central-block'>
+        <div>
+            <Feedback ref="status" />
+        </div>
         <section
             id="information">
             <div>
@@ -68,6 +71,7 @@ import { getOnSitePreview } from '../app/api';
 import { validateCode } from '../app/validators';
 import OnSitePreview from '../components/OnSitePreview.vue';
 import LineageGenerationCounter from '../components/Lineage/LineageGenerationCounter.vue';
+import Feedback from '../components/ui/Feedback.vue';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref("");
@@ -77,6 +81,7 @@ const doChecks = ref(true);
 const generations = ref(0);
 const cutoff = ref(13);
 const fixRightmostColumn = ref(true);
+const status = ref<InstanceType<typeof Feedback>>();
 
 // specify how many columns down we need to go and then return the li nodes
 function getColumnsNDeep<T extends HTMLElement>(depth: number, additionalSelectors: string = ""){
@@ -96,29 +101,42 @@ function getColumn(depth: number) {
 
 async function fetchLineage(e: Event){
     e.preventDefault();
+    if(!status.value) return;
+
+    // reset
+    status.value.close();
+
     const mCode = maleCode.value;
     const fCode = femaleCode.value;
 
     if(!validateCode(mCode) || !validateCode(fCode)){
+        status.value.warn("Invalid code. Codes must be 4-5 characters in length and alphanumeric.");
         // error
         return;
     }
 
+    status.value.info({ message: "Contacting server...", showDismiss: false });
     const response = await getOnSitePreview(mCode, fCode, doChecks.value);
 
-    if(response.data.status !== 1){
-
-        // error
-        return;
+    // error
+    if(response.data.errors.length > 0){
+        const error = response.data.errors[0];
+        if(error.type === 1)
+            status.value.warn(error.msg);
+        else {
+            status.value.error(error.msg);
+            return;
+        }
     }
+    else status.value.close();
 
-    const { male, female } = response.data.dragons;
+    const { male, female } = response.data.data.dragons;
 
     // build the lineage html
     htmlPreview.value = male.html + female.html;
 
     // Choose the highest gen from our pair and plus one (for the result)
-    generations.value = (Math.max(male.gen, female.gen) + 1);
+    generations.value = Math.max(male.gen, female.gen) + 1;
 
     // Clean up lineage
     nextTick(() => {

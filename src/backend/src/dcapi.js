@@ -19,9 +19,11 @@ async function getDragonsByCode(codes){
         }, { headers: { "Content-Type": "multipart/form-data" } });
 
         const responseData = response.data;
+
         if(responseData.errors.length > 0)
             throw new APIError("Error in response.");
-        return responseData.dragons;
+
+        return responseData.dragons ?? { };
     }
     // catch the axios exception and fire our own
     catch(err){
