@@ -6,22 +6,20 @@ const breedTable = breeds as BreedEntry[];
 
 function isNocturneActive(){
     const hours = getDCTime().getHours();
-    return hours > 18 || hours <= 6;
+    return hours > 18 || hours < 6;
 }
 
 // In the daytime, nocturnes
 // have a different position.
 // modify to daytime positioning
-if(isNocturneActive()){
-    const
-        nocturne = breedTable.findIndex((breed) => breed.name === 'Nocturne'),
-        daytime = "OrTHo_day";
+if(!isNocturneActive()){
+    const nocturne = breedTable.findIndex(breed => breed.name === 'Nocturne');
     if(nocturne !== -1){
         breedTable[nocturne] = {
             ...breedTable[nocturne],
-            female: daytime,
-            male: daytime
-        }
+            female: "OrTHo_day",
+            male: "OrTHo_day"
+        };
     }
 }
 
