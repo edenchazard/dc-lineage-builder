@@ -16,7 +16,7 @@ async function checkDragonsMatchGender(codes){
 
     const checkGender = (code, shouldBe) => {
         if(!(code in apiDragons))
-            return false;
+            return null;
 
         if([shouldBe, ''].includes(apiDragons[code].gender))
             return true;
@@ -25,15 +25,15 @@ async function checkDragonsMatchGender(codes){
     }
 
     return [
-        checkGender(male, 'Male'),
-        checkGender(female, 'Female')
+        { code: male, correct: checkGender(male, 'Male') },
+        { code: female, correct: checkGender(female, 'Female') }
     ];
 }
 
 async function grabHTML(code, filter = true){ //string){
     const fetchDragon = async (code) => {
         try{ 
-            return await axios.get(`https://dragcave.net/lineage/${code}`);
+            return (await axios.get(`https://dragcave.net/lineage/${code}`)).data;
         }
         catch(err){
             if(err.response){
@@ -73,36 +73,43 @@ async function grabHTML(code, filter = true){ //string){
     const getGen = (root) => {
         const genNodes = root.querySelector('._2y_r');
         if(genNodes === null)
-            throw new OnsiteError(`Couldn't find lineage count. Dragon: ${code}`);
+            throw new OnsiteError(`Couldn't find lineage tag. Dragon: ${code}`);
 
         // we use the text property instead of counting the childnodes length
         // because it could be a lineage > 13 gens
-        const gen = parseInt(genNodes.childNodes[0].toString());
-        return gen;
+        return parseInt(genNodes.childNodes[0].toString());
     }
 
-    const response = await fetchDragon(code);
-    const a = performance.now();
-    const root = nodeHTMLParser.parse(response.data);
-    const html = getHTML(root, filter);
-    const gen = getGen(root);
-   
-    const b = performance.now();
-    console.log(`parse complete in ${(b-a)} for ${code}`);
+    try {
+        const response = await fetchDragon(code);
+        //const a = performance.now();
+        const root = nodeHTMLParser.parse(response);
 
-    return {
-        html,
-        gen,
-        code
+        //const b = performance.now();
+        //console.log(`parse complete in ${(b-a)} for ${code}`);
+
+        return {
+            code,
+            html: getHTML(root, filter),
+            gen: getGen(root)
+        }
+    }
+    catch(ex){
+        return ex;
     }
 }
 
 async function getDataForPair(codes /*: [string, string] */){
-    const [ male, female ] = await Promise.all(codes.map(code => grabHTML(code)));
+    const dragons = await Promise.all(codes.map(code => grabHTML(code)));
 
-    // surround with li tags
-    male.html = `<li>${male.html}</li>`;
-    female.html = `<li>${female.html}</li>`;
+    const [male, female] = dragons.map(dragon => {
+        // return with error for this dragon
+        if(dragon instanceof OnsiteError)
+            return dragon;
+
+        // surround with li tags
+        else return {...dragon, html: `<li>${dragon.html}</li>`};
+    });
 
     return {
         male,

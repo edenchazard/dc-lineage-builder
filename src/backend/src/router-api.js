@@ -97,16 +97,25 @@ router.post('/lineage/create', async (ctx) => {
     }
 });
 
+/*
+    errors
+    1: warning
+    2: attention
+*/
 router.post('/onsite-preview', async (ctx) => {
-    const { male, female, doChecks } = ctx.request.body;
-    const codesAsArray = [male, female];
-
-    // validate they are valid code syntax
-    if(!validators.code(male) || !validators.code(female)){
-        ctx.body = {
-            status: 2,
-            error: "A code has an invalid format."
+    const doChecks = !!ctx.request.body.doChecks;
+    const codesAsArray = [ctx.request.body.male, ctx.request.body.female];
+    const body = {
+        errors: [],
+        data: {
+            dragons: { }
         }
+    };
+
+    // validate both are valid code syntax
+    if(!codesAsArray.every(validators.code)){
+        body.errors.push({ type: 2, msg: "A code has an invalid format." });
+        ctx.body = body;
         return;
     }
 
@@ -114,35 +123,39 @@ router.post('/onsite-preview', async (ctx) => {
          // do our checks, such as ensuring the dragons match the gender
         if(doChecks){
             const genderChecks = await checkDragonsMatchGender(codesAsArray);
-            if(genderChecks.includes(false)){
-                ctx.body = {
-                    status: 2,
-                    error: "One of the dragons is not the correct gender."
-                }
-                return;
-            }
+            genderChecks.forEach(dragon => {
+                if(dragon.correct === false)
+                    body.errors.push({ type: 1, msg: `Dragon ${dragon.code} is not the correct gender.` });
+                else if(dragon.correct === null)
+                    body.errors.push({ type: 2, msg: `Dragon ${dragon.code} couldn't be looked at for gender check. It may not exist.` });
+            });
         }
 
         // try to fetch the html for both codes
         const dragons = await getDataForPair(codesAsArray);
-        ctx.body = {
-            status: 1,
-            dragons
-        }
+
+        const action = (dragon, gender) => {
+            // handle error'd dragon
+            if(dragon instanceof OnsiteError){
+                // add the error
+                body.errors.push({ type: 1, msg: dragon.message });
+                // nullify dragon data
+                body.data.dragons[gender] = null;
+            }
+            else
+                body.data.dragons[gender] = dragon;
+        };
+
+        action(dragons.male, 'male');
+        action(dragons.female, 'female');
     }
-    catch(err){
-        if(err instanceof OnsiteError){
-            ctx.body = {
-                status: 2,
-                error: err.message
-            }
-        }
-        // all other errors
-        else
-            ctx.body = {
-                status: 2,
-                error: GLOBALS.default_error
-            }
+    // all other errors
+    catch(ex){
+        console.log(ex)
+        body.errors.push({ type: 2, msg: GLOBALS.default_error });
+    }
+    finally {
+        ctx.body = body;
     }
 });
 
