@@ -72,7 +72,7 @@
                         :search="query"
                         :breeds="GLOBALS.breeds.males"
                         :tags="tagStore.enabledTags"
-                        :groups="tagStore.enabledGroups"
+                        :groups="tagStore.enabledEggGroups"
                         @breedSelected="selectMale"
                         class='results' />
                 </div>
@@ -82,7 +82,7 @@
                         :search="query"
                         :breeds="GLOBALS.breeds.females"
                         :tags="tagStore.enabledTags"
-                        :groups="tagStore.enabledGroups"
+                        :groups="tagStore.enabledEggGroups"
                         @breedSelected="selectFemale"
                         class='results' />
                 </div>
