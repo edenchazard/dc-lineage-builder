@@ -452,5 +452,29 @@
             "Regular": ["KWDJ", "LAzH"],
             "Salt Odeen": ["RBtw", "DArI"]
         }
+    },
+    "Pitfire": {
+        "genderOnly": false,
+        "tags": ["Halloween"],
+        "dimorphism": true,
+        "group": "Standard",
+        "sprites": {
+            "Salt Spatio": ["5VC5", "D5jK"],
+            "Reborn Salt Spatio": ["IbG1", "HADI"]
+        }
+    },
+    "Glystere Wyrm": {
+        "genderOnly": "m",
+        "tags": ["Christmas"],
+        "group": "Standard",
+        "sprites": {
+            "Salt Spatio": "KH4q"
+        }
+    },
+    "Erador Lindwyrm": {
+        "genderOnly": "m",
+        "tags": ["Valentine"],
+        "group": "Standard",
+        "sprites": "8HLh"
     }
 }
