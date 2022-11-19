@@ -17,13 +17,19 @@
         <div class='toolbar-item'>
             <Vue3ToggleButton 
                 v-model:isActive="config.showInterface"
-                handleColor="var(--builderControlBG)" />
+                trackActiveColor="var(--builderControlBG)"
+                trackHeight="20px"
+                handleDiameter="18px" 
+                handleDistance="52px"/>
             <span>Show interface</span>
         </div>
         <div class='toolbar-item'>
             <Vue3ToggleButton 
                 v-model:isActive="config.showLabels"
-                handleColor="var(--builderControlBG)" />
+                trackActiveColor="var(--builderControlBG)"
+                trackHeight="20px"
+                handleDiameter="18px"
+                handleDistance="52px" />
             <span>Show labels</span>
         </div>
         <div class='toolbar-item'>
