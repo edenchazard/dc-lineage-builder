@@ -2,7 +2,7 @@
 <ul id="lineage">
     <li>
         <div>
-            <img src="src/assets/placeholder.png" alt="result placeholder" />
+            <img src="../assets/placeholder.png" alt="result placeholder" />
             <label>Result</label>
         </div>
         <ul
