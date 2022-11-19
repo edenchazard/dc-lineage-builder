@@ -6,7 +6,7 @@ const breedTable = breeds as BreedEntry[];
 
 function isNocturneActive(){
     const hours = getDCTime().getHours();
-    return hours > 18 || hours < 6;
+    return hours >= 18 || hours < 6;
 }
 
 // In the daytime, nocturnes
