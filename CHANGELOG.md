@@ -32,6 +32,7 @@ Massive changes.
   - Usability improvements - Tiles no longer reset when options are changed.
   - Mobile - Page doesn't break on smaller screens.
 - New feature: Onsite Preview: utility that allows you to preview two existing onsite lineages.
+- More salts - added Spatio's glystere, pitfires and erador.
 
 ## 4.5.0
 
