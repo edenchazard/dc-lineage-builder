@@ -475,6 +475,8 @@
         "genderOnly": "m",
         "tags": ["Valentine"],
         "group": "Standard",
-        "sprites": "8HLh"
+        "sprites": {
+            "Salt Spatio": "8HLh"
+        }
     }
 }
