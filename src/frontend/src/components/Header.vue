@@ -12,6 +12,7 @@
                 <li><router-link to="/">Build</router-link></li>
                 <li><router-link to="/checkers">Checker Generator</router-link></li>
                 <li><router-link to="/ghost-breeds">Ghost Breeds</router-link></li>
+                <li><router-link to="/onsite-preview">Onsite Preview</router-link></li>
                 <li><router-link to="/how-to">How To Use</router-link></li>
                 <li><router-link to="/disclaimer">Disclaimer</router-link></li>
                 <li><a href="https://dragcave.net/">DragCave</a></li>

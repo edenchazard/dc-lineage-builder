@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { DragonType, LineageRoot } from "./types";
 
 interface APIResponse {
-    errors: Array<{ type: 1 | 2, msg: string }>,
+    errors: Array<{ type: "Warning" | "Error", message: string }>,
     data: null | Object
 }
 

@@ -204,3 +204,15 @@ export function createLineageLink(hash: string){
     const mountPath = import.meta.env.VITE_APP_URL;
     return `${origin}${mountPath}view/${hash}`;
 }
+
+// Solution from https://stackoverflow.com/a/40774906
+export function groupBy<T, K extends keyof T>(arr: Array<T>, key: K){
+    const result: {
+        [x: string | number | symbol]: Array<T>
+    } = arr.reduce((r, a) => {
+        r[a[key]] = r[a[key]] || [];
+        r[a[key]].push(a);
+        return r;
+    }, Object.create(null));
+    return result;
+}
