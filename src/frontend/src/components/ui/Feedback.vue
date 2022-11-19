@@ -2,32 +2,35 @@
 <Transition>
     <div
         v-if="!hidden" 
-        class="container"
-        :class="className">
-        <div class="split">
-            <div class="icon-portion">
-                <font-awesome-icon class="icon" :icon="Feedbacks[state.type]" />
-            </div>
-            <div class="message-portion">
-                {{ state.message }}
-            </div>
-            <div
-                v-if="state.showDismiss"
-                class="close-portion">
-                <button
-                    type="button"
-                    class="close-button"
-                    title="Dismiss"
-                    @click="close">
-                    <font-awesome-icon icon="times" />
-                </button>
+        class="container">
+        <div
+            v-for="feedback, index in stack"
+            :class="getFeedbackClass(feedback.type)">
+            <div class="split">
+                <div class="icon-portion">
+                    <font-awesome-icon class="icon" :icon="Feedbacks[feedback.type]" />
+                </div>
+                <div class="message-portion">
+                    {{ feedback.message }}
+                </div>
+                <div
+                    v-if="feedback.showDismiss"
+                    class="close-portion">
+                    <button
+                        type="button"
+                        class="close-button"
+                        title="Dismiss"
+                        @click="dismiss(index)">
+                        <font-awesome-icon icon="times" />
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </Transition>
 </template>
 <script setup lang="ts">
-import { onBeforeUnmount, PropType, reactive, ref, computed } from 'vue';
+import { onBeforeUnmount, PropType, ref } from 'vue';
 
 const Feedbacks = {
     "None": 'none',
@@ -62,57 +65,72 @@ const defaults: Readonly<Properties> = {
     showDismiss: true
 };
 
-const initialState = { ...defaults, ...props.globalSettings };
-const state = reactive<Properties>({ ...initialState });
+//const initialState = { ...defaults, ...props.globalSettings };
+const stack = ref<Properties[]>([]);
 const hidden = ref(true);
-const className = computed(() => state.type in Feedbacks ? state.type : "None");
-let timeoutId: ReturnType<typeof setTimeout>;
+const autoCloseTimeouts = ref<Array<ReturnType<typeof setTimeout>>>([]);
 
 onBeforeUnmount(cleanUp);
+
+function getFeedbackClass(type: string){
+    return type in Feedbacks ? type : "None"
+}
 
 function convertToFeedbackProps(feedback: Feedback | string){
     return typeof feedback === "string" ? { message: feedback } : feedback;
 }
 
-function update(feedback: Feedback | string){
-    feedback = convertToFeedbackProps(feedback);
-
-    const combinedProps = {
-        ...defaults,
-        ...props.globalSettings, // override with global
-        ...feedback // override and apply the settings from this instance
-    };
-
-    if(!(combinedProps.type in Feedbacks))
-        throw new Error("Invalid feedback type: " + combinedProps.type);
-
-    hidden.value = false;
-    mergeState(combinedProps);
-
+function update(feedback: Feedback[] | Feedback | string){
     // clear previous if active
     cleanUp();
 
-    if(combinedProps.autoClose > -1)
-        timeoutId = setTimeout(close, combinedProps.autoClose);
+    let messages: Array<Feedback | string> = [];
+
+    if(!Array.isArray(feedback))
+        messages = [ feedback ];
+    else
+        messages = feedback;
+
+    stack.value = messages.map((fd, index) => {
+        const combinedProps = {
+            ...defaults,
+            ...props.globalSettings, // override with global
+            ...convertToFeedbackProps(fd) // override and apply the settings from this instance
+        };
+
+        if(!(combinedProps.type in Feedbacks))
+            throw new Error("Invalid feedback type: " + combinedProps.type);
+
+        if(combinedProps.autoClose > -1)
+            autoCloseTimeouts.value.push(setTimeout(() => dismiss(index), combinedProps.autoClose));
+
+        return combinedProps;
+    });
+
+    hidden.value = false;
+}
+
+function dismiss(index: number){
+    stack.value.splice(index, 1);
+
+    if(stack.value.length === 0)
+        close();
 }
 
 function close(){
     hidden.value = true;
-    mergeState({ ...initialState });
-}
-
-function mergeState(newState: Feedback){
-    Object.assign(state, newState);
+    stack.value = [];
 }
 
 function cleanUp(){
-    clearTimeout(timeoutId);
+    // clear all timeouts and empty array
+    autoCloseTimeouts.value.forEach(id => clearTimeout(id));
+    autoCloseTimeouts.value = [];
 }
 
 const createShortcut = (forType: FeedbackTypes) => {
     return function(feedback: Feedback | string){
-        feedback = convertToFeedbackProps(feedback);
-        update({ ...feedback, type: forType });
+        update({ ...convertToFeedbackProps(feedback), type: forType });
     }
 }
 
