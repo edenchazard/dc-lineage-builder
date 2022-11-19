@@ -68,6 +68,5 @@ onMounted(() => {
     }
 
     file.value = JSON.stringify(exportedTree);
-    console.log(file.value)
 });
 </script>
