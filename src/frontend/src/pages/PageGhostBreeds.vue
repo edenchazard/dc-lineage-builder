@@ -15,7 +15,7 @@
           <input type="text" id="name" name="name" v-model="name" />
         </div>
         <div>
-          <span>Gender availability:</span>
+          <span class='field-label'>Gender availability:</span>
           <input type="radio" v-model='genderAvailability' id="avail_both" value="b" />
           <label for="avail_both">Both</label>
           <input type="radio" v-model='genderAvailability' id="avail_male" value="m" />
@@ -24,35 +24,21 @@
           <label for="avail_female">Female-only</label>
         </div>
         <div>
-          <span class='field-label'>Tile</span>
-          <div v-if="genderAvailability === 'b'" id='tile-upload'>
-            <div>
+          <span class='field-label'>Tiles</span>
+          <div id="tile-upload">
+            <div v-show="['b', 'm'].includes(genderAvailability)">
+              <label for="male">Male</label>
               <GhostBreedUpload
+                label="male"
                 @tileChosen = "(base64) => portraitSelected('m', base64)"
                 @uploadError = "uploadError" />
-              <span class='field-label'>Male</span>
             </div>
-            <div>
+            <div v-show="['b', 'f'].includes(genderAvailability)">
+              <label for="female">Female</label>
               <GhostBreedUpload
+                label="female"
                 @tileChosen = "(base64) => portraitSelected('f', base64)"
                 @uploadError = "uploadError" />
-              <span class='field-label'>Female</span>
-            </div>
-          </div>
-          <div v-if="genderAvailability === 'm'">
-            <div>
-              <GhostBreedUpload
-                @tileChosen = "(base64) => portraitSelected('m', base64)"
-                @uploadError = "uploadError" />
-              <span class='field-label'>Male</span>
-            </div>
-          </div>
-          <div v-if="genderAvailability === 'f'">
-            <div>
-              <GhostBreedUpload
-                @tileChosen = "(base64) => portraitSelected('f', base64)"
-                @uploadError = "uploadError" />
-              <span class='field-label'>Female</span>
             </div>
           </div>
         </div>
@@ -63,7 +49,7 @@
 </template>
   
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue';
+import { reactive, ref } from 'vue';
 
 import { BreedEntry, Gender } from '../app/types';
 import { addBreed } from '../app/utils';
@@ -81,12 +67,6 @@ const status = reactive({
   level: 0,
   message: "",
   title: ""
-});
-
-// reset when availability changes
-watch(genderAvailability, () => {
-  femaleBase64.value = "";
-  maleBase64.value = "";
 });
 
 function portraitSelected(gender: Gender, base64: string){
@@ -162,8 +142,10 @@ function addToEntries(e: Event){
 .field-label{
   font-weight: bold;
 }
+
 #tile-upload{
   display: flex;
   flex-direction: row;
+  text-align: center;
 }
 </style>
