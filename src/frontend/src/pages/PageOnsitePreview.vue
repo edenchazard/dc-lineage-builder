@@ -118,17 +118,14 @@ async function fetchLineage(e: Event){
     status.value.info({ message: "Contacting server...", showDismiss: false });
     const response = await getOnSitePreview(mCode, fCode, doChecks.value);
 
-    // error
+    // Deal with problems
     if(response.data.errors.length > 0){
-        const error = response.data.errors[0];
-        if(error.type === 1)
-            status.value.warn(error.msg);
-        else {
-            status.value.error(error.msg);
+        status.value.update(response.data.errors);
+        if(response.data.errors.some(e => e.type === "Error"))
             return;
-        }
     }
-    else status.value.close();
+    else
+        status.value.close();
 
     const { male, female } = response.data.data.dragons;
 

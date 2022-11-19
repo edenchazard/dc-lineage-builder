@@ -114,7 +114,7 @@ router.post('/onsite-preview', async (ctx) => {
 
     // validate both are valid code syntax
     if(!codesAsArray.every(validators.code)){
-        body.errors.push({ type: 2, msg: "A code has an invalid format." });
+        body.errors.push({ type: "Error", message: "A code has an invalid format." });
         ctx.body = body;
         return;
     }
@@ -125,9 +125,9 @@ router.post('/onsite-preview', async (ctx) => {
             const genderChecks = await checkDragonsMatchGender(codesAsArray);
             genderChecks.forEach(dragon => {
                 if(dragon.correct === false)
-                    body.errors.push({ type: 1, msg: `Dragon ${dragon.code} is not the correct gender.` });
+                    body.errors.push({ type: "Warning", message: `Dragon ${dragon.code} is not the correct gender.` });
                 else if(dragon.correct === null)
-                    body.errors.push({ type: 2, msg: `Dragon ${dragon.code} couldn't be looked at for gender check. It may not exist.` });
+                    body.errors.push({ type: "Error", message: `Dragon ${dragon.code} couldn't be looked at for gender check. It may not exist.` });
             });
         }
 
@@ -138,7 +138,7 @@ router.post('/onsite-preview', async (ctx) => {
             // handle error'd dragon
             if(dragon instanceof OnsiteError){
                 // add the error
-                body.errors.push({ type: 1, msg: dragon.message });
+                body.errors.push({ type: "Warning", message: dragon.message });
                 // nullify dragon data
                 body.data.dragons[gender] = null;
             }
@@ -152,7 +152,7 @@ router.post('/onsite-preview', async (ctx) => {
     // all other errors
     catch(ex){
         console.log(ex)
-        body.errors.push({ type: 2, msg: GLOBALS.default_error });
+        body.errors.push({ type: "Error", message: GLOBALS.default_error });
     }
     finally {
         ctx.body = body;
