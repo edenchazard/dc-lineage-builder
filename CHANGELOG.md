@@ -29,6 +29,8 @@ Massive changes.
 - Ghost breeds:
   - Upload limit upped to 20kb.
   - Tiles will now be resized to fit the box. This prevents 72w96h images acting funky.
+  - Usability improvements - Tiles no longer reset when options are changed.
+  - Mobile - Page doesn't break on smaller screens.
 - New feature: Onsite Preview: utility that allows you to preview two existing onsite lineages.
 
 ## 4.5.0
