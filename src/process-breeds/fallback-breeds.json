@@ -730,7 +730,7 @@
         "genderOnly": false,
         "tags": ["Regular"],
         "group": "Standard",
-        "sprites": ["3rrhN", "-1", "0", "48", "OrTHo", "-2", "-15", "48"]
+        "sprites": ["3rrhN", "-1", "-1", "48", "OrTHo", "-16", "-1", "48"]
     },
     "Ochredrake": {
         "genderOnly": false,
