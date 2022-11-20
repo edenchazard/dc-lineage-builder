@@ -79,7 +79,7 @@ const maleCode = ref("");
 const femaleCode = ref("");
 const doChecks = ref(true);
 const generations = ref(0);
-const cutoff = ref(13);
+const cutoff = 12;
 const fixRightmostColumn = ref(true);
 const status = ref<InstanceType<typeof Feedback>>();
 
@@ -140,10 +140,10 @@ async function fetchLineage(e: Event){
         // fix 5th column tile sizes, if we have to
         getTilesNDeep(5).forEach(el => el.style.width = "24px");
 
-        // remove the 13th column which appears when both lineages
-        // are combined into one
+        // remove everything after the cut off column, which appears
+        // when both lineages are combined into one
         if(fixRightmostColumn.value){
-            getColumn(13).forEach(el => {
+            getColumn(cutoff + 1).forEach(el => {
                 const ul = el.parentNode as HTMLUListElement;
                 ul?.parentNode?.removeChild(ul);
             });
