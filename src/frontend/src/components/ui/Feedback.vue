@@ -10,8 +10,7 @@
                 <div class="icon-portion">
                     <font-awesome-icon class="icon" :icon="Feedbacks[feedback.type]" />
                 </div>
-                <div class="message-portion">
-                    {{ feedback.message }}
+                <div class="message-portion" v-html="feedback.message">
                 </div>
                 <div
                     v-if="feedback.showDismiss"
