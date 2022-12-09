@@ -191,7 +191,7 @@ export function filterTags(enabledTags: FilterTag[]){
 }
 
 export function debounce(callback: Function, timeout = 300){
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
 
     return (...args: any) => {
         clearTimeout(timer);
