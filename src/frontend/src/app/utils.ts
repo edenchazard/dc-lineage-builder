@@ -216,3 +216,12 @@ export function groupBy<T, K extends keyof T>(arr: Array<T>, key: K){
     }, Object.create(null));
     return result;
 }
+
+// formats a list of strings and transforms them into a html list for use with
+// feedback component
+export function makeError(items: string[]){
+    const failedHTML = items
+        .map(item => `<li>${item}</li>`)
+        .join("");
+    return `<ul class='feedback-list'>${failedHTML}</ul>`;
+}

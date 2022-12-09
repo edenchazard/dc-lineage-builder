@@ -1,5 +1,6 @@
 <template>
-<Transition>
+<Transition
+    @afterLeave="closed">
     <div
         v-if="!hidden" 
         class="container">
@@ -56,6 +57,12 @@ const props = defineProps({
         required: false
     }
 });
+
+const emit = defineEmits<{
+    (e: "closed"): void
+}>();
+
+let onCloseHandler: () => void;
 
 const defaults: Readonly<Properties> = {
     message: "",
@@ -116,9 +123,18 @@ function dismiss(index: number){
         close();
 }
 
-function close(){
+function closed(){
+    onCloseHandler && onCloseHandler();
+}
+
+// [TODO] I don't like that this doesn't work as a promise but I
+// don't have time to sort it.
+function close(whenClosed?: () => void){
     hidden.value = true;
     stack.value = [];
+    if(whenClosed){
+        onCloseHandler = whenClosed;
+    }
 }
 
 function cleanUp(){

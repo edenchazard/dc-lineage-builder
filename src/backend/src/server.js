@@ -16,10 +16,15 @@ app.use(async (ctx, next) => {
     try {
         await next();
     }
-    catch(err) {
-        console.log(err.status)
-        ctx.status = err.status || 500;
-        ctx.body = err.message;
+    // catch all for errors that aren't handled in the routes
+    catch(ex) {
+        console.log(ex);
+        ctx.body = {
+            // give default error
+            errors: [
+                { type: "Error", message: GLOBALS.default_error }
+            ]
+        }
     }
 });
 

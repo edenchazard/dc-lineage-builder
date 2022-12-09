@@ -1,6 +1,6 @@
 <template>
   <div class='central-block'>
-    <Information :info="status" />
+    <Feedback ref="status" />
     <section>
       <p>On this page you can upload custom breeds, aka "ghost breeds", to Lineage Builder. This can be useful if you have breed you've created and want to see what it looks like in lineages. All you have to do is upload the lineage tile and fill in the settings.</p>
       <p>Ghost breeds will be added under the "Standard" and "Regular" tags and will only be active for the <strong>duration of the session</strong>. As soon as you exit the page they will be automatically deleted! The whole process takes place client-side, they are <strong>not uploaded</strong> to the server which means it doesn't break DC's artist agreement for sharing unreleased breeds.</p>
@@ -49,13 +49,13 @@
 </template>
   
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 
 import { BreedEntry, Gender } from '../app/types';
 import { addBreed } from '../app/utils';
 import settings from '../app/settings';
 import GhostBreedUpload from "../components/GhostBreedUpload.vue";
-import Information from '../components/ui/Information.vue';
+import Feedback from '../components/ui/Feedback.vue';
 type Availability = "b" | Gender;
 
 const name = ref("");
@@ -63,11 +63,7 @@ const name = ref("");
 const genderAvailability = ref<Availability>("b");
 const femaleBase64 = ref("");
 const maleBase64 = ref("");
-const status = reactive({
-  level: 0,
-  message: "",
-  title: ""
-});
+const status = ref<InstanceType<typeof Feedback>>();
 
 function portraitSelected(gender: Gender, base64: string){
   if(gender === 'm')
@@ -77,17 +73,15 @@ function portraitSelected(gender: Gender, base64: string){
 }
 
 function uploadError(){
-  Object.assign(status, {
-    level: 3,
-    title: "",
-    message: `An error occurred adding the breed. Please check the
-    limitations and try again.`
-  });
+  if(!status.value) return;
+  status.value.error("Upload error.");
 }
 
 function addToEntries(e: Event){
   // don't submit form
   e.preventDefault();
+
+  if(!status.value) return;
 
   // returns a set of specific properties depending
   // on the availability option selected
@@ -121,19 +115,10 @@ function addToEntries(e: Event){
 
   if(addBreed(breed)){
     // successfully added
-    Object.assign(status, {
-      level: 1,
-      title: "",
-      message: "Breed successfully added: "+name.value
-    });
+    status.value.success(`Ghost breed "${name.value}" has been added.`);
   }
   else{
-    Object.assign(status, {
-      level: 3,
-      title: "",
-      message: `An error occurred adding the breed. Please check the
-      limitations and try again.`
-    });
+    status.value.error(`There was a problem adding the ghost breed. Please check that the name is valid and isn't already in use.`);
   }
 }
 </script>

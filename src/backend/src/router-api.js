@@ -9,19 +9,31 @@ const router = new Router({
     prefix: config.apiPath
 });
 
-router.get('/', (ctx) => {
-    ctx.body = "REST API for the lineage builder. You shouldn't be here!";
+router.use(async (ctx, next) => {
+    ctx.body = {
+        errors: [],
+        data: { }
+    };
+
+    await next();
+});
+
+router.get('/', async (ctx) => {
+    ctx.body.errors.push({ type: "Warning", message: ":)" });
+    ctx.body.data.message = "REST API for the lineage builder. You shouldn't be here!"
 });
 
 // return a lineage
 router.get('/lineage/:hash', async (ctx) => {
+    ctx.body.data.lineage = {};
+
+    const hashCode = ctx.params.hash;
+    if(!validators.isLineageHash(hashCode)){
+        ctx.body.errors.push({ type: "Error", message: "The lineage could not be found." });
+        return;
+    }
+
     try {
-        const hashCode = ctx.params.hash;
-        if(!validators.isLineageHash(hashCode)){
-            ctx.status = 404;
-            ctx.body = "This lineage could not be found.";
-            return; //break out early
-        }
         const con = await GLOBALS.pool.getConnection();
         const [row] = await con.execute(
             `SELECT content, last_view
@@ -41,18 +53,16 @@ router.get('/lineage/:hash', async (ctx) => {
                 [hashCode]);
 
             const jsonContent = row[0].content;
-            ctx.body = { status: 1, dragon: JSON.parse(jsonContent) };
+            ctx.body.data.lineage = JSON.parse(jsonContent);
         }
         else{
-            ctx.status = 404;
-            ctx.body = "This lineage could not be found.";
+            ctx.body.errors.push({ type: "Error", message: "This lineage could not be found." });
         }
         con.release();
     }
-    catch(err){
-        console.log(err);
-        ctx.status = 500;
-        ctx.body = GLOBALS.default_error;
+    // bubble up stack
+    catch(ex){
+        throw ex;
     }
 });
 
@@ -63,8 +73,7 @@ router.post('/lineage/create', async (ctx) => {
         any json they want */
         const dragon = ctx.request.body;
         if(!validators.verifyIntegrity(dragon) || !validators.meetsSaveRequirements(dragon)){
-            ctx.status = 500;
-            ctx.body = GLOBALS.default_error;
+            ctx.body.errors.push({ type: "Error", message: "Lineage doesn't meet requirements." });
             return;
         }
 
@@ -88,46 +97,33 @@ router.post('/lineage/create', async (ctx) => {
         }
 
         con.release();
-        ctx.body = { status: 1, "hash": hashCode };
+        ctx.body.data.hash = hashCode;
     }
-    catch(err){
-        console.log(err);
-        ctx.status = 500;
-        ctx.body = GLOBALS.default_error;
+    catch(ex){
+        throw ex;
     }
 });
 
-/*
-    errors
-    1: warning
-    2: attention
-*/
 router.post('/onsite-preview', async (ctx) => {
     const doChecks = !!ctx.request.body.doChecks;
     const codesAsArray = [ctx.request.body.male, ctx.request.body.female];
-    const body = {
-        errors: [],
-        data: {
-            dragons: { }
+
+    try{
+        ctx.body.data.dragons = { };
+
+        // validate both are valid code syntax
+        if(!codesAsArray.every(validators.code)){
+            ctx.body.errors.push({ type: "Error", message: "A code has an invalid format." });
+            return;
         }
-    };
-
-    // validate both are valid code syntax
-    if(!codesAsArray.every(validators.code)){
-        body.errors.push({ type: "Error", message: "A code has an invalid format." });
-        ctx.body = body;
-        return;
-    }
-
-    try {
-         // do our checks, such as ensuring the dragons match the gender
+        // do our checks, such as ensuring the dragons match the gender
         if(doChecks){
             const genderChecks = await checkDragonsMatchGender(codesAsArray);
             genderChecks.forEach(dragon => {
                 if(dragon.correct === false)
-                    body.errors.push({ type: "Warning", message: `Dragon ${dragon.code} is not the correct gender.` });
+                    ctx.body.errors.push({ type: "Warning", message: `Dragon ${dragon.code} is not the correct gender.` });
                 else if(dragon.correct === null)
-                    body.errors.push({ type: "Error", message: `Dragon ${dragon.code} couldn't be looked at for gender check. It may not exist.` });
+                    ctx.body.errors.push({ type: "Error", message: `Dragon ${dragon.code} couldn't be looked at for gender check. It may not exist.` });
             });
         }
 
@@ -138,24 +134,19 @@ router.post('/onsite-preview', async (ctx) => {
             // handle error'd dragon
             if(dragon instanceof OnsiteError){
                 // add the error
-                body.errors.push({ type: "Warning", message: dragon.message });
+                ctx.body.errors.push({ type: "Warning", message: dragon.message });
                 // nullify dragon data
-                body.data.dragons[gender] = null;
+                ctx.body.data.dragons[gender] = null;
             }
             else
-                body.data.dragons[gender] = dragon;
+                ctx.body.data.dragons[gender] = dragon;
         };
 
         action(dragons.male, 'male');
         action(dragons.female, 'female');
     }
-    // all other errors
     catch(ex){
-        console.log(ex)
-        body.errors.push({ type: "Error", message: GLOBALS.default_error });
-    }
-    finally {
-        ctx.body = body;
+        throw ex;
     }
 });
 

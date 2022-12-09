@@ -4,6 +4,7 @@
           Import lineage
         </template>
         <template v-slot:body>
+          <Feedback ref="status" :globalSettings="{ showDismiss: false }" />
           <p>Paste the export text and click 'import'.</p>
           <p>Please note if you have a lineage in progress, importing a new lineage will overwrite it.</p>
           <div>
@@ -12,7 +13,6 @@
               placeholder="Paste your import text here"
               type='textarea'/>
           </div>
-          <Information :info="status" />
         </template>
         <template v-slot:footer>
           <button @click="importLineage">Import</button>
@@ -20,15 +20,15 @@
     </Dialog>
 </template>
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 
 import { verifyIntegrity } from '../../app/validators';
-import { forEveryDragon } from "../../app/utils";
+import { forEveryDragon, makeError } from "../../app/utils";
 import { LineageRoot } from '../../app/types';
 
 import Dialog from "../Dialog.vue";
 import Textbox from '../ui/Textbox.vue';
-import Information from "../ui/Information.vue";
+import Feedback from '../ui/Feedback.vue';
 
 const emit = defineEmits<{
     (e: "close"): void,
@@ -36,22 +36,18 @@ const emit = defineEmits<{
 }>();
 
 const file = ref("");
-const status = reactive({
-  level: 0,
-  message: ""
-});
+const status = ref<InstanceType<typeof Feedback>>();
 
 function importLineage(){
+  if(!status.value) return;
+
   try{
     const importedTree = JSON.parse(file.value.trim());
     const { failed, failedTests } = verifyIntegrity(importedTree);
   
     if(failed){
-        Object.assign(status, {
-          level: 3,
-          message: `Error reading export code. Tests failed: ${failedTests.join(', ')}`
-        });
-        return;
+      status.value.error(`Error reading export code. Tests failed: ${makeError(failedTests)}`);
+      return;
     }
 
     // add selection data
@@ -61,10 +57,7 @@ function importLineage(){
     emit('close');
   }
   catch {
-    Object.assign(status, {
-      level: 3,
-      message: `Error reading export code. JSON is possibly malformed.`
-    });
+    status.value.error(`Error reading export code. JSON is possibly malformed.`);
   }
 }
 </script>
