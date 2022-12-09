@@ -1,9 +1,8 @@
 <template>
     <div>
       <div class='central-block'>
-        <div id='status' v-if='status.level > 0'>
-            <h2 v-if='status.level == 2'>{{status.title}}</h2>
-            <p>{{status.message}}</p>
+        <div>
+            <Feedback ref="status" :globalSettings="{ showDismiss: false }"/>
         </div>
         <div v-if="tree != null" id='options'>
           <span class='option'>
@@ -36,45 +35,43 @@ import { createLineageLink } from "../app/utils";
 
 import Lineage from "../components/Lineage/Lineage.vue";
 import Textbox from '../components/ui/Textbox.vue';
+import Feedback from '../components/ui/Feedback.vue';
 
 const route = useRoute();
 const tree = ref<null | LineageRoot>(null);
 const hash = route.params.hash as string;
 const shareLink = createLineageLink(hash);
+const status = ref<InstanceType<typeof Feedback>>();
 const config = reactive<LineageConfig>({
   showInterface: false,
   showLabels: true,
   disabled: true
 });
-const status = reactive({
-  level: 1,
-  message: "Loading lineage... For big lineages, this can sometimes take a moment to load.",
-  title: ""
-});
 
 onBeforeUnmount(() => tree.value = null);
 
 onMounted(async () => {
+  if(!status.value) return;
+
   try {
-    Object.assign(status, {
-      level: 1,
-      message: `Loading lineage... For big lineages, this can sometimes
-      take a moment to load.`
-    });
-    
+    status.value.info(`Loading lineage... For big lineages, this can sometimes take a moment to load.`);
+
     // fetch from server
     const response = await getLineage(hash);
-    tree.value = response.data.dragon;
-    Object.assign(status, { level: 0, message: "" });
-  }
-  catch (error) {
-    const { response } = error;
-    Object.assign(status, {
-      level: 3,
-      title: `${response.status} ${response.statusText}`,
-      message: `Sorry, an error has occurred while loading the lineage.
-      The error is: ${response.status} ${response.data}`
+  
+    // errors
+    if(response.errors.length > 0){
+      status.value.update(response.errors)
+      return;
+    }
+  
+    // ok
+    status.value.close(() => {
+      tree.value = response.data.lineage;
     });
+  }
+  catch (ex) {
+    status.value.error({ message: ex.message });
   }
 });
 </script>

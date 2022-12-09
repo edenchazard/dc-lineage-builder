@@ -1,8 +1,11 @@
 <template>
+<div>
+  <div class='central-block'>
+    <Feedback ref="status" />
+  </div>
   <div
     v-if="appStore.activeTree !== null"
     class="lineage-builder">
-    <Information :info="status" />
     <Toolbar
       :config="config"
       :tree="appStore.activeTree"
@@ -24,6 +27,8 @@
       :config="config"
       @contextmenu="() => false" />
   </div>
+  </div>
+
 </template>
 
 <script setup lang="ts">
@@ -36,8 +41,8 @@ import { LineageRoot, DragonType, DragonDisplay, LineageConfig } from "../app/ty
 
 import Toolbar from './Toolbar/Toolbar.vue';
 import Lineage from './Lineage/Lineage.vue';
-import Information from './ui/Information.vue';
-import { onBeforeUnmount, onMounted, reactive } from "vue";
+import Feedback from '../components/ui/Feedback.vue';
+import { onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
@@ -48,45 +53,44 @@ const config = reactive<LineageConfig>({
   showLabels: true,
   disabled: false
 });
-const status = reactive({
-  level: 0,
-  message: "",
-  title: ""
-});
+const status = ref<InstanceType<typeof Feedback>>();
 
 onMounted(async () => {
+  if(!status.value) return;
+
   const hash = route.query.template as string | undefined;
+  const starterTree = () => appStore.activeTree = dragonBuilder.createDragonProperties();
 
   // No template, so start from scratch
   if(hash === undefined)
-    appStore.activeTree = dragonBuilder.createDragonProperties();
+    starterTree();
   // the user has requested we import from an already built lineage.
   else{
     try {
-      Object.assign(status, {
-        level: 1,
-        message: `Loading lineage... For big lineages, this can sometimes
-        take a moment to load.`
-      });
-
+      status.value.info({ message: `Loading template... For big lineages, this can take a moment to load.`, showDismiss: false });
+  
       // fetch from server
       const response = await getLineage(hash);
-      const savedTree = response.data.dragon;
+
+      // there were errors, display them and default back to an empty lineage.
+      if(response.errors.length > 0){
+        status.value.update(response.errors);
+        starterTree();
+        return;
+      }
+
+      const savedTree = response.data.lineage;
 
       // add selection data
       forEveryDragon(savedTree, dragon => dragon.selected = false);
 
-      appStore.activeTree = savedTree;
-      Object.assign(status, { level: 0, message: "" });
-    }
-    catch (error) {
-      const { response } = error;
-      Object.assign(status, {
-        level: 3,
-        title: `${response.status} ${response.statusText}`,
-        message: `Sorry, an error has occurred while loading the lineage.
-        The error is: ${response.status} ${response.data}`
+      status.value.close(() => {
+        appStore.activeTree = savedTree;
       });
+    }
+    catch (ex) {
+      status.value.error(ex.message);
+      starterTree();
     }
   }
 });

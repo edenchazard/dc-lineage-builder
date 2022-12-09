@@ -4,7 +4,8 @@
             Export lineage
         </template>
         <template v-slot:body>
-            <div v-if="status.level !== 3">
+            <Feedback ref="status" :globalSettings="{ showDismiss: false }" />
+            <div v-if="!isError">
                 <p>Copy and paste this text to a text file to import this lineage later.</p> 
                 <div>
                     <Textbox
@@ -15,7 +16,6 @@
                         :showCopyButton="true" />
                 </div>
             </div>
-            <Information :info="status" />
         </template>
         <template v-slot:footer>
             <button @click="emit('close')">Close</button>
@@ -23,13 +23,13 @@
     </Dialog>
 </template>
 <script setup lang="ts">
-import { onMounted, PropType, reactive, ref } from "vue";
+import { onMounted, PropType, ref } from "vue";
 import { LineageRoot } from "../../app/types";
 import { deepClone, forEveryDragon } from "../../app/utils";
 import { verifyIntegrity } from "../../app/validators";
 
 import Dialog from "../Dialog.vue";
-import Information from "../ui/Information.vue"
+import Feedback from '../ui/Feedback.vue';
 import Textbox from '../ui/Textbox.vue';
 
 const props = defineProps({
@@ -44,12 +44,15 @@ const emit = defineEmits<{
 }>();
 
 const file = ref("");
-const status = reactive({
-    level: 0,
-    message: ""
-});
+const isError = ref(false);
+const status = ref<InstanceType<typeof Feedback>>();
 
 onMounted(() => {
+    if(!status.value) return;
+
+    // reset to false and change if we encounter problems later
+    isError.value = false;
+
     // we do this conversion to discard any getters/setters/proxies
     const exportedTree = deepClone(props.tree);
 
@@ -60,10 +63,8 @@ onMounted(() => {
     const { failed, failedTests } = verifyIntegrity(exportedTree);
   
     if(failed){
-        Object.assign(status, {
-            level: 3,
-            message: `Error creating export code. Tests failed: ${failedTests.join(', ')}`
-        });
+        isError.value = true;
+        status.value.error(`Error creating export code. Tests failed: ${failedTests.join(', ')}`);
         return;
     }
 
