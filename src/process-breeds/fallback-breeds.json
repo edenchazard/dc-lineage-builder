@@ -391,7 +391,7 @@
     },
     "Floral-Crowned": {
         "genderOnly": "m",
-        "tags": ["Regular"],
+        "tags": ["Valentine"],
         "group": "Standard",
         "sprites": ["roll4", "-13", "-1", "47"]
     },
@@ -1620,6 +1620,6 @@
         "genderOnly": false,
         "tags": ["Regular"],
         "group": "Pygmy",
-        "sprites":["8wYsC", "-1", "-1", "48", "chLaD", "0", "0", ""]
+        "sprites":["Y2ULc", "-1", "-1", "48", "chLaD", "0", "0", ""]
     }
 }
