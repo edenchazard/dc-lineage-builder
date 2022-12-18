@@ -5,6 +5,7 @@
 - Improved handling of problems, errors and states and informing the user.
 - Fix: Add "Valentine" tag to Floral-Crowned.
 - Fix: TJ swapped the painted ray tiles, so I had to as well.
+- Add Github and Ko-fi links to header.
 
 ## 5.0.0
 
