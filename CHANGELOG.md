@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.1.0
+
+- Improved handling of problems, errors and states and informing the user.
+- Fix: Add "Valentine" tag to Floral-Crowned.
+- Fix: TJ swapped the painted ray tiles, so I had to as well.
+
 ## 5.0.0
 
 Massive changes.
@@ -33,6 +39,8 @@ Massive changes.
   - Mobile - Page doesn't break on smaller screens.
 - New feature: Onsite Preview: utility that allows you to preview two existing onsite lineages.
 - More salts - added Spatio's glystere, pitfires and erador.
+- Fixed some breed names (off the top of my head that's the magnesium amphiptere.)
+- Fix nocturnes... finally?
 
 ## 4.5.0
 
