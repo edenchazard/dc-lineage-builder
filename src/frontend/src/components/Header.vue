@@ -5,6 +5,18 @@
             <router-link to="/" id="logo"><h1>Lineage Builder</h1></router-link>
             <div class='part-of'>Part of <a href='/dc/tools'>Chazza's DC Tools</a></div>
             <div class='subtitle'>v{{appStore.appVersion}} &copy; eden chazard</div>
+            <div class="icons">
+                <a 
+                    title="Ko-fi donation link"
+                    href="https://ko-fi.com/dctools">
+                    <font-awesome-icon icon='fa-solid fa-mug-hot' size="2x" />
+                </a>
+                <a
+                    title="Github"
+                    href="https://github.com/edenchazard/dc-lineage-builder">
+                    <font-awesome-icon icon='fa-brands fa-github' size="2x" />
+                </a>
+            </div>
         </div>
         <div id='header-right'>
             <nav id="menu">
@@ -59,6 +71,10 @@ onMounted(() => skinStore.setup());
 }
 #header-title{
     text-align: center;
+}
+#header .icons svg{
+    color: #fff;
+    margin:2px;
 }
 #header .part-of a{
   color:#fff;
