@@ -1621,5 +1621,11 @@
         "tags": ["Regular"],
         "group": "Pygmy",
         "sprites":["Y2ULc", "-1", "-1", "48", "chLaD", "0", "0", ""]
+    },
+    "Light Weaver":{
+        "genderOnly": "f",
+        "tags": ["Christmas"],
+        "group": "Standard",
+        "sprites": ["Fstvl", "0", "-1", "48"]
     }
 }
