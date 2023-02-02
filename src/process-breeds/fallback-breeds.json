@@ -755,9 +755,9 @@
         "tags": ["Regular"],
         "group": "Pygmy",
         "sprites": {
-            "Blue": ["k7jXH", "0", "-1", "48", "psKbV", "-1", "-1", "48"],
-            "Green": ["WPYpD", "0", "-1", "48", "OU1uf", "-1", "-1", "48"],
-            "Red": ["aGrdt", "0", "-1", "48", "Vyo2g", "-1", "-1", "48"]
+            "Blue": ["k7jXH", "0", "-1", "48", "ZDaUc", "-1", "-1", "48"],
+            "Green": ["WPYpD", "0", "-1", "48", "VsXXn", "-1", "-1", "48"],
+            "Red": ["qqpMo", "0", "-1", "48", "Vyo2g", "-1", "-1", "48"]
         }
     },
     "Pillow": {
@@ -1614,7 +1614,7 @@
         "genderOnly": false,
         "tags": ["Regular"],
         "group": "Two-headed",
-        "sprites":["ZNJKk", "0", "-1", "48", "zIr9l", "-14", "-1", "48"]
+        "sprites":["ZNJKk", "0", "-1", "48", "S2sEw", "-14", "-1", "48"]
     },
     "Painted Ray Pygmy": {
         "genderOnly": false,
