@@ -31,6 +31,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
+      - APIKey=${APIKey}
     networks:
       - internal
 
