@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.1.2
+
+- Add new breed: Xocoatl.
+- Fix quonebb and pargulus pygmies. TJ time travelled.
+- Update docker commands, readme and settings files.
+
+## 5.1.1
+
+- Add new breed: Light Weaver.
+
 ## 5.1.0
 
 - Improved handling of problems, errors and states and informing the user.
