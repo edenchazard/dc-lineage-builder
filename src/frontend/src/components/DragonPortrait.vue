@@ -1,21 +1,29 @@
 <template>
+  <span
+    v-bind="$attrs"
+    :title="data.name"
+    class="imgbox imgbox-fullsize"
+  >
+    <img
+      v-if="data.metaData.src == 'dc'"
+      :src="'//dragcave.net/image/' + data.image"
+      :class="'fallback d-' + data.image"
+    />
     <span
-        v-bind="$attrs"
-        :title="data.name"
-        class="imgbox imgbox-fullsize">
-        <img
-            v-if="data.metaData.src == 'dc'"
-            :src="'//dragcave.net/image/'+data.image"
-            :class="'fallback d-'+data.image" />
-        <span
-            v-else-if="data.metaData.src === 'local'"
-            :class="'local d-'+data.image" />
-        <img
-            v-else-if="data.metaData.src === 'ghost'"
-            class='ghost'
-            :src="data.image" />
-        <img v-else class="empty" src="/src/assets/placeholder.png" />
-    </span>
+      v-else-if="data.metaData.src === 'local'"
+      :class="'local d-' + data.image"
+    />
+    <img
+      v-else-if="data.metaData.src === 'ghost'"
+      class="ghost"
+      :src="data.image"
+    />
+    <img
+      v-else
+      class="empty"
+      src="/src/assets/placeholder.png"
+    />
+  </span>
 </template>
 
 <script setup lang="ts">
@@ -23,15 +31,15 @@ import { PropType } from 'vue';
 import { PortraitData } from '../app/types';
 
 const props = defineProps({
-    data: {
-        type: Object as PropType<PortraitData>,
-        required: true,
-    },
-    gen: {
-        type: Number,
-        required: false,
-        default: 1
-    }
+  data: {
+    type: Object as PropType<PortraitData>,
+    required: true,
+  },
+  gen: {
+    type: Number,
+    required: false,
+    default: 1,
+  },
 });
 /*,
 computed:{
@@ -62,78 +70,75 @@ computed:{
 }*/
 </script>
 <style scoped>
-
 /* add css for fallbacks */
-@import url("../assets/fallbacks.css");
+@import url('../assets/fallbacks.css');
 
 /* apply the correct spritesheet depending on pixel ratio */
-@import url("../assets/sprites-36x48.css")
-    (-webkit-min-device-pixel-ratio: 0),
-    (-moz-min-device-pixel-ratio: 0),
-    (-o-min-device-pixel-ratio: 0),
-    (min-device-pixel-ratio: 0);
+@import url('../assets/sprites-36x48.css') (-webkit-min-device-pixel-ratio: 0),
+  (-moz-min-device-pixel-ratio: 0), (-o-min-device-pixel-ratio: 0),
+  (min-device-pixel-ratio: 0);
 
-@import url("../assets/sprites-72x96.css")
-    (-webkit-min-device-pixel-ratio: 1.05),
-    (-moz-min-device-pixel-ratio: 1.05),
-    (-o-min-device-pixel-ratio: 21/20),
-    (min-device-pixel-ratio: 1.05);
-.ghost, .local {
-    width: var(--size36x48W);
-    height: var(--size36x48H);
-    background-size: cover;
+@import url('../assets/sprites-72x96.css')
+  (-webkit-min-device-pixel-ratio: 1.05),
+  (-moz-min-device-pixel-ratio: 1.05), (-o-min-device-pixel-ratio: 21/20),
+  (min-device-pixel-ratio: 1.05);
+.ghost,
+.local {
+  width: var(--size36x48W);
+  height: var(--size36x48H);
+  background-size: cover;
 }
-.local{
-    margin:-1px -1px;
-    display: inline-block;
+.local {
+  margin: -1px -1px;
+  display: inline-block;
 }
 
 .imgbox {
-    margin: 0px;
-    border: var(--dragonPortraitStyle);
-    overflow: hidden;
-    display: inline-block;
-    user-select: none;
+  margin: 0px;
+  border: var(--dragonPortraitStyle);
+  overflow: hidden;
+  display: inline-block;
+  user-select: none;
 }
-.imgbox-fullsize{
-    /* this needs adjusting by 2px in either directon */
-    width: calc(var(--size36x48W) - 2px);
-    height: calc(var(--size36x48H) - 2px);
+.imgbox-fullsize {
+  /* this needs adjusting by 2px in either directon */
+  width: calc(var(--size36x48W) - 2px);
+  height: calc(var(--size36x48H) - 2px);
 }
-.imgbox-twothirds{
-    width: 24px;
-    height: 32px;
+.imgbox-twothirds {
+  width: 24px;
+  height: 32px;
 }
-.fallback{
-    position: relative;
-    image-rendering:-webkit-optimize-contrast;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
+.fallback {
+  position: relative;
+  image-rendering: -webkit-optimize-contrast;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
     supported by Chrome, Edge, Opera and Firefox */
-    -webkit-touch-callout:none;
-    pointer-events: none;
+  -webkit-touch-callout: none;
+  pointer-events: none;
 }
-.ghost{
-    margin:-1px -1px;
+.ghost {
+  margin: -1px -1px;
 }
 /* mods */
 /* nocturne */
-.d-OrTHo_day{
-    top:-1px;
-    left:0px;
-    height:48px
+.d-OrTHo_day {
+  top: -1px;
+  left: 0px;
+  height: 48px;
 }
 </style>
 <style>
 /* need a way of referencing these to the ones in the settings file */
-:root{
-    --size36x48W: 36px;
-    --size36x48H: 48px;
-    --size24x32W: 24px;
-    --size24x32H: 32px;
+:root {
+  --size36x48W: 36px;
+  --size36x48H: 48px;
+  --size24x32W: 24px;
+  --size24x32H: 32px;
 }
 </style>

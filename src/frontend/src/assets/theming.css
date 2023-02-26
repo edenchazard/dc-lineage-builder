@@ -1,36 +1,32 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');*/
 
 @font-face {
-  font-family: "fq";
+  font-family: 'fq';
   font-display: auto;
-  src:
-    local("fq"),
-    url(fonts/fq.woff2) format("woff2");
-  font-style:normal;
+  src: local('fq'), url(fonts/fq.woff2) format('woff2');
+  font-style: normal;
 }
 
 @font-face {
-  font-family:"din";
+  font-family: 'din';
   font-display: auto;
-  src:
-    local("din"),
-    url(fonts/din.woff2) format("woff2");
-  font-style:normal;
+  src: local('din'), url(fonts/din.woff2) format('woff2');
+  font-style: normal;
 }
 
-.skin-default{
+.skin-default {
   --colourBG: #ebdbba;
   --colourFG: #44300b;
-  --lineageLineStyle: 1px solid rgba(123,94,40,0.5);
-  --lineageFont: "fq";
-  --lineageGenColour: rgba(123,94,40,0.5);
-  --dragonPortraitStyle: 1px solid rgba(123,94,40,0.5);
+  --lineageLineStyle: 1px solid rgba(123, 94, 40, 0.5);
+  --lineageFont: 'fq';
+  --lineageGenColour: rgba(123, 94, 40, 0.5);
+  --dragonPortraitStyle: 1px solid rgba(123, 94, 40, 0.5);
   --builderBG: #ebdbba url(backgrounds/default-bg.png) repeat fixed;
   --builderControlBG: #44300b;
   --builderControlFG: #fff;
   --linkColour: #44300b;
   --headerBG: #000;
-  --lineageToolColour: rgba(68,48,11,0.5);
+  --lineageToolColour: rgba(68, 48, 11, 0.5);
   --breedDropDownColourFG: #44300b;
   --modalBG: #fff;
   --modalFG: #44300b;
@@ -40,51 +36,51 @@
   --modalFooterBtnFG: #fff;
 }
 
-.skin-portal2{
+.skin-portal2 {
   --colourBG: #000;
-  --colourFG: #DDD;
-  --lineageLineStyle: 1px dotted rgba(192,192,192,0.5);
-  --lineageFont: "din";
-  --lineageGenColour: rgba(192,192,192,0.5);
-  --dragonPortraitStyle: 1px solid rgba(192,192,192,0.5);
+  --colourFG: #ddd;
+  --lineageLineStyle: 1px dotted rgba(192, 192, 192, 0.5);
+  --lineageFont: 'din';
+  --lineageGenColour: rgba(192, 192, 192, 0.5);
+  --dragonPortraitStyle: 1px solid rgba(192, 192, 192, 0.5);
   --builderBG: #000 url(backgrounds/portal2-contentbg2.png) repeat-x fixed;
-  --builderControlBG: #DDD;
+  --builderControlBG: #ddd;
   --builderControlFG: #000;
-  --linkColour:#2db2e6;
+  --linkColour: #2db2e6;
   --headerBG: transparent;
-  --lineageToolColour: rgba(221,221,221,0.5);
+  --lineageToolColour: rgba(221, 221, 221, 0.5);
   --breedDropDownColourFG: #000;
   --modalBG: #fff;
   --modalFG: #000;
-  --modalHeaderBG: #DDD;
+  --modalHeaderBG: #ddd;
   --modalHeaderFG: #000;
   --modalFooterBtnBG: #000;
   --modalFooterBtnFG: #fff;
 }
 
-.skin-portal2-light{
-  --colourBG: #DDD;
+.skin-portal2-light {
+  --colourBG: #ddd;
   --colourFG: #000;
-  --lineageLineStyle: 2px dotted #52A5C6;
-  --lineageFont: "din";
-  --lineageGenColour: #52A5C6;
+  --lineageLineStyle: 2px dotted #52a5c6;
+  --lineageFont: 'din';
+  --lineageGenColour: #52a5c6;
   --dragonPortraitStyle: 1px solid #2db2e6;
   --builderBG: #dcdedf url(backgrounds/portal2-light-wt.png) repeat fixed;
   --builderControlBG: #000;
   --builderControlFG: #fff;
-  --linkColour:#2db2e6;
+  --linkColour: #2db2e6;
   --headerBG: #2e2e2d;
-  --lineageToolColour: rgba(0,0,0,0.5);
+  --lineageToolColour: rgba(0, 0, 0, 0.5);
   --breedDropDownColourFG: #000;
   --modalBG: #fff;
   --modalFG: #000;
-  --modalHeaderBG: #DDD;
+  --modalHeaderBG: #ddd;
   --modalHeaderFG: #000;
   --modalFooterBtnBG: #000;
   --modalFooterBtnFG: #fff;
 }
 
-.skin-mobile-dark{
+.skin-mobile-dark {
   --colourBG: rgba(19, 21, 26, 1);
   --colourFG: rgb(169, 184, 203);
   --lineageLineStyle: 1px solid rgba(68, 78, 94, 1);
@@ -94,9 +90,9 @@
   --builderBG: rgba(19, 21, 26, 1);
   --builderControlBG: #5f9aff;
   --builderControlFG: #fff;
-  --linkColour:#5f9aff;
+  --linkColour: #5f9aff;
   --headerBG: #21252d;
-  --lineageToolColour: rgba(169,184,203,0.5);
+  --lineageToolColour: rgba(169, 184, 203, 0.5);
   --breedDropDownColourFG: #13151a;
   --modalBG: #fff;
   --modalFG: rgba(19, 21, 26, 1);
@@ -108,21 +104,20 @@
 
 /* Fixes. Mobile dark skin needs some adjustments
 and I can't be arsed to change things properly with the variables. */
-.skin-mobile-dark .tile-portrait{
-  background: rgba(43,48,58,1);
+.skin-mobile-dark .tile-portrait {
+  background: rgba(43, 48, 58, 1);
 }
-.skin-mobile-dark .generation{
+.skin-mobile-dark .generation {
   color: rgb(147, 161, 179) !important;
 }
-.skin-mobile-dark .dragon-label label{
+.skin-mobile-dark .dragon-label label {
   margin-top: -3px !important;
 }
 
-
-strong{
+strong {
   font-weight: bold;
 }
 
 p {
-  margin-top:10px;
+  margin-top: 10px;
 }

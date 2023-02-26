@@ -1,15 +1,15 @@
 import { FontAwesomeIcon } from './app/fontawesome';
 
 import { createApp } from 'vue';
-import router from "./router/router";
+import router from './router/router';
 
-import { createPinia } from 'pinia'
-import App from "./App.vue";
+import { createPinia } from 'pinia';
+import App from './App.vue';
 
 createApp(App)
-    .use(createPinia())
-    .use(router)
-    //.use(bubblePlugin)
-    // components
-    .component('font-awesome-icon', FontAwesomeIcon)
-    .mount('#app');
+  .use(createPinia())
+  .use(router)
+  //.use(bubblePlugin)
+  // components
+  .component('font-awesome-icon', FontAwesomeIcon)
+  .mount('#app');

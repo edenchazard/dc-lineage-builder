@@ -1,63 +1,71 @@
 <template>
-    <Dialog @close="emit('close')">
-        <template v-slot:header>
-          Import lineage
-        </template>
-        <template v-slot:body>
-          <Feedback ref="status" :globalSettings="{ showDismiss: false }" />
-          <p>Paste the export text and click 'import'.</p>
-          <p>Please note if you have a lineage in progress, importing a new lineage will overwrite it.</p>
-          <div>
-            <Textbox
-              v-model="file"
-              placeholder="Paste your import text here"
-              type='textarea'/>
-          </div>
-        </template>
-        <template v-slot:footer>
-          <button @click="importLineage">Import</button>
-        </template>
-    </Dialog>
+  <Dialog @close="emit('close')">
+    <template v-slot:header> Import lineage </template>
+    <template v-slot:body>
+      <Feedback
+        ref="status"
+        :globalSettings="{ showDismiss: false }"
+      />
+      <p>Paste the export text and click 'import'.</p>
+      <p>
+        Please note if you have a lineage in progress, importing a new lineage
+        will overwrite it.
+      </p>
+      <div>
+        <Textbox
+          v-model="file"
+          placeholder="Paste your import text here"
+          type="textarea"
+        />
+      </div>
+    </template>
+    <template v-slot:footer>
+      <button @click="importLineage">Import</button>
+    </template>
+  </Dialog>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
 
 import { verifyIntegrity } from '../../app/validators';
-import { forEveryDragon, makeError } from "../../app/utils";
+import { forEveryDragon, makeError } from '../../app/utils';
 import { LineageRoot } from '../../app/types';
 
-import Dialog from "../Dialog.vue";
+import Dialog from '../Dialog.vue';
 import Textbox from '../ui/Textbox.vue';
 import Feedback from '../ui/Feedback.vue';
 
 const emit = defineEmits<{
-    (e: "close"): void,
-    (e: "onImport", tree: LineageRoot): void
+  (e: 'close'): void;
+  (e: 'onImport', tree: LineageRoot): void;
 }>();
 
-const file = ref("");
+const file = ref('');
 const status = ref<InstanceType<typeof Feedback>>();
 
-function importLineage(){
-  if(!status.value) return;
+function importLineage() {
+  if (!status.value) return;
 
-  try{
+  try {
     const importedTree = JSON.parse(file.value.trim());
     const { failed, failedTests } = verifyIntegrity(importedTree);
-  
-    if(failed){
-      status.value.error(`Error reading export code. Tests failed: ${makeError(failedTests)}`);
+
+    if (failed) {
+      status.value.error(
+        `Error reading export code. Tests failed: ${makeError(failedTests)}`,
+      );
       return;
     }
 
     // add selection data
-    forEveryDragon(importedTree, dragon => dragon.selected = false);
+    forEveryDragon(importedTree, (dragon) => (dragon.selected = false));
 
     emit('onImport', importedTree);
     emit('close');
-  }
-  catch {
-    status.value.error(`Error reading export code. JSON is possibly malformed.`);
+  } catch {
+    status.value.error(
+      `Error reading export code. JSON is possibly malformed.`,
+    );
   }
 }
 </script>
