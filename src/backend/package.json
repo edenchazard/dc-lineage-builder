@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/server.js",
-    "prod": "node server.js"
+    "prod": "node server.js",
+    "format": "prettier .  --write"
   },
   "keywords": [],
   "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
@@ -16,7 +17,8 @@
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "mysql2": "^2.3.2",
-    "node-html-parser": "^6.1.1"
+    "node-html-parser": "^6.1.1",
+    "prettier": "^2.8.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

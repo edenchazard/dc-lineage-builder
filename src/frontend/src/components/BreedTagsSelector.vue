@@ -1,7 +1,8 @@
 <template>
-<TagList
-    v-model="tagStore.tags" 
-    :atLeastOneEnabled="true" />
+  <TagList
+    v-model="tagStore.tags"
+    :atLeastOneEnabled="true"
+  />
 </template>
 
 <script setup lang="ts">
