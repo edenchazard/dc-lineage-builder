@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section id='lineage-builder'>
+    <section id="lineage-builder">
       <LineageBuilder />
     </section>
   </div>

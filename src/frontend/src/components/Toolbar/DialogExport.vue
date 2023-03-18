@@ -1,73 +1,79 @@
 <template>
-    <Dialog @close="emit('close')">
-        <template v-slot:header>
-            Export lineage
-        </template>
-        <template v-slot:body>
-            <Feedback ref="status" :globalSettings="{ showDismiss: false }" />
-            <div v-if="!isError">
-                <p>Copy and paste this text to a text file to import this lineage later.</p> 
-                <div>
-                    <Textbox
-                        v-model="file"
-                        placeholder="Export code"
-                        type="textarea"
-                        readonly
-                        :showCopyButton="true" />
-                </div>
-            </div>
-        </template>
-        <template v-slot:footer>
-            <button @click="emit('close')">Close</button>
-        </template>
-    </Dialog>
+  <Dialog @close="emit('close')">
+    <template v-slot:header> Export lineage </template>
+    <template v-slot:body>
+      <Feedback
+        ref="status"
+        :globalSettings="{ showDismiss: false }"
+      />
+      <div v-if="!isError">
+        <p>
+          Copy and paste this text to a text file to import this lineage later.
+        </p>
+        <div>
+          <Textbox
+            v-model="file"
+            placeholder="Export code"
+            type="textarea"
+            readonly
+            :showCopyButton="true"
+          />
+        </div>
+      </div>
+    </template>
+    <template v-slot:footer>
+      <button @click="emit('close')">Close</button>
+    </template>
+  </Dialog>
 </template>
 <script setup lang="ts">
-import { onMounted, PropType, ref } from "vue";
-import { LineageRoot } from "../../app/types";
-import { deepClone, forEveryDragon } from "../../app/utils";
-import { verifyIntegrity } from "../../app/validators";
+import { onMounted, PropType, ref } from 'vue';
+import { LineageRoot } from '../../app/types';
+import { deepClone, forEveryDragon } from '../../app/utils';
+import { verifyIntegrity } from '../../app/validators';
 
-import Dialog from "../Dialog.vue";
+import Dialog from '../Dialog.vue';
 import Feedback from '../ui/Feedback.vue';
 import Textbox from '../ui/Textbox.vue';
 
 const props = defineProps({
-    tree: {
-        type: Object as PropType<LineageRoot>,
-        required: true
-    }
+  tree: {
+    type: Object as PropType<LineageRoot>,
+    required: true,
+  },
 });
 
 const emit = defineEmits<{
-    (e: "close"): void
+  (e: 'close'): void;
 }>();
 
-const file = ref("");
+const file = ref('');
 const isError = ref(false);
 const status = ref<InstanceType<typeof Feedback>>();
 
 onMounted(() => {
-    if(!status.value) return;
+  if (!status.value) return;
 
-    // reset to false and change if we encounter problems later
-    isError.value = false;
+  // reset to false and change if we encounter problems later
+  isError.value = false;
 
-    // we do this conversion to discard any getters/setters/proxies
-    const exportedTree = deepClone(props.tree);
+  // we do this conversion to discard any getters/setters/proxies
+  const exportedTree = deepClone(props.tree);
 
-    // todo but doesn't affect runtime
-    // @ts-ignore
-    forEveryDragon(exportedTree, dragon => delete dragon.selected);
+  // todo but doesn't affect runtime
+  // @ts-ignore
+  forEveryDragon(exportedTree, (dragon) => delete dragon.selected);
 
-    const { failed, failedTests } = verifyIntegrity(exportedTree);
-  
-    if(failed){
-        isError.value = true;
-        status.value.error(`Error creating export code. Tests failed: ${failedTests.join(', ')}`);
-        return;
-    }
+  const { failed, failedTests } = verifyIntegrity(exportedTree);
 
-    file.value = JSON.stringify(exportedTree);
+  if (failed) {
+    isError.value = true;
+    status.value.error(
+      `Error creating export code. Tests failed: ${failedTests.join(', ')}`,
+    );
+    return;
+  }
+
+  file.value = JSON.stringify(exportedTree);
 });
 </script>
