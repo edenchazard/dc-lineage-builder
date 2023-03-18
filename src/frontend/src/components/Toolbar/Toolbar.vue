@@ -60,6 +60,15 @@
           @click="dialogs.showGenerateDialog = true"
         />
       </div>
+      <div>
+        <div class="toolbar-item">
+          <ToolbarButton
+            title="Toggle fullscreen"
+            icon="maximize"
+            @click="emit('fullscreen')"
+          />
+        </div>
+      </div>
     </div>
     <div class="selection-tools">
       <div>
@@ -200,6 +209,7 @@ const emit = defineEmits<{
   (e: 'changeBreed', value: string): void;
   (e: 'selectCriteria', key: string, value: any): void;
   (e: 'selectCriteria', predicate: (dragon: DragonType) => boolean): void;
+  (e: 'fullscreen'): void;
 }>();
 
 const treeSelectedContains = (tree: LineageRoot) => {
