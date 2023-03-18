@@ -41,7 +41,8 @@
     </FocusableDialog>
 </template>
 <script setup lang="ts">
-import { onMounted, PropType, ref } from 'vue';
+import { PropType, ref } from 'vue';
+import { onStartTyping } from "@vueuse/core";
 import { useTagStore } from '../store/tags';
 import { Gender, PortraitData } from '../app/types';
 import BreedDropdownResults from './BreedDropdownResults.vue';
@@ -71,12 +72,11 @@ const tagStore = useTagStore();
 const searchString = ref("");
 const mateSearchEl = ref<HTMLInputElement>();
 
-onMounted(() => {
-    // automatically focus the search bar if desktop
-    // on mobile I personally find it annoying for the 
-    // keyboard to immediately pop up
-    if(mateSearchEl.value && 'ontouchstart' in document.documentElement === false)
-        mateSearchEl.value.$el.focus(); // todo fix
+// focus search bar when begin typing
+onStartTyping(() => {
+  if (!mateSearchEl.value) return;
+  if (document.activeElement !== mateSearchEl.value.$el)
+    mateSearchEl.value.$el.focus();
 });
 
 function breedSelected(breed: PortraitData){
