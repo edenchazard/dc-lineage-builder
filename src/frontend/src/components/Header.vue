@@ -34,8 +34,7 @@
             Skin: 
             <select
                 title="Skin"
-                :value="skinStore.activeSkin"
-                @change="(e: Event) => skinStore.setSkin((e.target as HTMLSelectElement).value)">
+                v-model="skinStore.activeSkin">
                 <option
                   v-for="skin in skinStore.availableSkins"
                   :value="skin.cssName"
@@ -49,14 +48,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import { useAppStore } from '../store/app';
 import { useSkinStore } from '../store/skin';
 
 const appStore = useAppStore();
 const skinStore = useSkinStore();
-
-onMounted(() => skinStore.setup());
 </script>
 <style scoped>
 #top{

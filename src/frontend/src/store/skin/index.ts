@@ -1,47 +1,45 @@
-import { reactive, ref } from 'vue';
+import { computed } from 'vue';
 import { defineStore } from 'pinia';
+import { useLocalStorage } from '@vueuse/core';
+
+type Skin = { cssName: string, prettyName: string };
 
 export const useSkinStore = defineStore('skinStore', () => {
-    const ls = localStorage;
+    const skinKey = 'skin';
     const defaultSkinName = 'skin-default';
+    const _activeSkinName = useLocalStorage(skinKey, defaultSkinName);
 
-    const availableSkins = reactive([
+    const availableSkins: Skin[] = [
         { cssName: defaultSkinName, prettyName: 'Default' },
         { cssName: 'skin-portal2', prettyName: 'Portal 2' },
         { cssName: 'skin-portal2-light', prettyName: 'Portal 2 Light' },
         { cssName: "skin-mobile-dark", prettyName: "Mobile/Tablet Dark" }
-    ]);
+    ];
 
-    const activeSkin = ref(defaultSkinName);
-    
-    // provide a skin name to set to
-    // or provide no argument to run the default setup
-    // this needs to be called before any modifications
-    function setup(){
-        // setup with localstorage skin or otherwise default
-        setSkin(ls.getItem('skin') || defaultSkinName);
+    function skinExists(skinName: Skin['cssName']){
+        return !!availableSkins.find(skin => skin.cssName === skinName);
     }
 
-    // Use this to change the skin, it's important to keep
-    // it in sync with localstorage
-    function setSkin(to: string){
-        // if the skin stored in local storage doesn't exist
-        // in our skin selection (for example, if ls has been
-        // tampered with), we'll default to the regular skin
-        if(!availableSkins.find(skin => skin.cssName === to)){
-            setSkin(defaultSkinName);
-            return;
+    const activeSkin = computed({
+        get: () => {
+            // If the skin isn't valid for some reason,
+            // we'll fall back to the default.
+            if(!skinExists(_activeSkinName.value))
+                return defaultSkinName;
+            return _activeSkinName.value;
+        },
+        set: (skinName: Skin['cssName']) => {
+            // this should never happen under normal operation
+            // but if it does...
+            if(!skinExists(skinName))
+                throw new Error(`Skin ${skinName} doesn't exist`);
+            _activeSkinName.value = skinName;
         }
-        
-        ls.setItem('skin', to);
-        activeSkin.value = to;
-    }
-
+    });
+    
     return {
         defaultSkinName,
         availableSkins,
-        activeSkin,
-        setup,
-        setSkin
+        activeSkin
     }
 });
