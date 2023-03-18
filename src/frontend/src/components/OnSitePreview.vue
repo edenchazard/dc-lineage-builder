@@ -3,7 +3,7 @@
     <li>
       <div>
         <img
-          src="../assets/placeholder.png"
+          src="../assets/images/placeholder.png"
           alt="result placeholder"
         />
         <label>Result</label>
