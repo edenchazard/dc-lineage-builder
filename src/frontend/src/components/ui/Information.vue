@@ -1,45 +1,47 @@
 <template>
-    <div class="container central-block" :class="getClass">
-        <p>{{info.message}}</p>
-    </div>
+  <div
+    class="container central-block"
+    :class="getClass"
+  >
+    <p>{{ info.message }}</p>
+  </div>
 </template>
 <script>
-
 export default {
-    name: 'Information',
-    components: {  },
-    props: {
-        info: Object
+  name: 'Information',
+  components: {},
+  props: {
+    info: Object,
+  },
+  computed: {
+    getClass() {
+      const classes = ['hidden', 'information', 'success', 'error'];
+      return classes[this.info.level];
     },
-    computed:{
-        getClass(){
-            const classes = ['hidden', 'information', 'success', 'error'];
-            return classes[this.info.level];
-        }
-    },
-    data(){
-        return {  }
-    }
+  },
+  data() {
+    return {};
+  },
 };
 </script>
 <style scoped>
-.container{
-    padding:5px;
-    font-weight: bold;
+.container {
+  padding: 5px;
+  font-weight: bold;
 }
-.hidden{
-    display: none;
+.hidden {
+  display: none;
 }
-.information{
-    background: #78b7f7;
-    color:#fff;
+.information {
+  background: #78b7f7;
+  color: #fff;
 }
-.error{
+.error {
   background: #cd5c5c;
-  color:#fff;
+  color: #fff;
 }
-.success{
+.success {
   background: #40791a;
-  color:#fff;
+  color: #fff;
 }
 </style>
