@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    ref="builder"
+    class="builder-container"
+  >
     <div class="central-block">
       <Feedback ref="status" />
     </div>
@@ -21,6 +24,7 @@
         @deleteAncestors="selectionDeleteAncestors"
         @addParents="selectionAddParents"
         @switchParents="selectionSwitchParents"
+        @fullscreen="toggleFullScreen"
       />
       <Lineage
         class="builder"
@@ -50,10 +54,12 @@ import Lineage from './Lineage/Lineage.vue';
 import Feedback from '../components/ui/Feedback.vue';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useFullscreen } from '@vueuse/core';
 
 const route = useRoute();
 const appStore = useAppStore();
-
+const builder = ref(null);
+const { toggle: toggleFullScreen } = useFullscreen(builder);
 const config = reactive<LineageConfig>({
   showInterface: true,
   showLabels: true,
@@ -195,6 +201,9 @@ function selectBy(condition: (dragon: DragonType) => boolean) {
 </script>
 
 <style scoped>
+.builder-container:fullscreen {
+  background: var(--builderBG);
+}
 .builder {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

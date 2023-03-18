@@ -27,6 +27,7 @@ import {
   faCheck,
   faInfoCircle,
   faMugHot,
+  faMaximize,
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
@@ -58,6 +59,7 @@ library.add(
   faCheck,
   faInfoCircle,
   faMugHot,
+  faMaximize,
 );
 
 library.add(faGithub);
