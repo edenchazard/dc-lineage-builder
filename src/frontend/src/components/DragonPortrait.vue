@@ -71,14 +71,15 @@ computed:{
 </script>
 <style scoped>
 /* add css for fallbacks */
-@import url('../assets/fallbacks.css');
+@import url('../assets/tile-rendering/fallbacks.css');
 
 /* apply the correct spritesheet depending on pixel ratio */
-@import url('../assets/sprites-36x48.css') (-webkit-min-device-pixel-ratio: 0),
+@import url('../assets/tile-rendering/sprites-36x48.css')
+  (-webkit-min-device-pixel-ratio: 0),
   (-moz-min-device-pixel-ratio: 0), (-o-min-device-pixel-ratio: 0),
   (min-device-pixel-ratio: 0);
 
-@import url('../assets/sprites-72x96.css')
+@import url('../assets/tile-rendering/sprites-72x96.css')
   (-webkit-min-device-pixel-ratio: 1.05),
   (-moz-min-device-pixel-ratio: 1.05), (-o-min-device-pixel-ratio: 21/20),
   (min-device-pixel-ratio: 1.05);

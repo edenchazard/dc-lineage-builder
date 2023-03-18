@@ -35,16 +35,16 @@ import fallbackJSON from "./fallback-breeds.json" assert { type: "json" };
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function getBreedsTable(){
+function getBreedsTable() {
     let table = fallbackBreedTable(fallbackJSON).concat(localBreedTable(localJSON));
     table.sort((a, b) => a.name.localeCompare(b.name));
 
     return table;
 }
 
-async function main(){
-    try{
-        const            
+async function main() {
+    try {
+        const
             definitionsJSON = "breed-definitions.json",
             breeds = getBreedsTable(),
             json = JSON.stringify(breeds),
@@ -55,7 +55,7 @@ async function main(){
 
         const spritesMissing = await missingSprites([sprites72, sprites36]);
 
-        if(spritesMissing){
+        if (spritesMissing) {
             console.log("Script cancelled: sprites missing.");
             process.exit(1);
         }
@@ -64,35 +64,35 @@ async function main(){
             // where to find the sprites
             locTiles: sprites72,
             // where to save the finished spritesheet
-            locSpriteSheet: "../frontend/src/assets/breed-tiles-72x96.png",
+            locSpriteSheet: "../frontend/src/assets/tile-rendering/breed-tiles-72x96.png",
             // where to save the css file
-            locCSSFile: '../frontend/src/assets/sprites-72x96.css',
-            sizing: { width: 72, height: 96, spacing: 0},
+            locCSSFile: '../frontend/src/assets/tile-rendering/sprites-72x96.css',
+            sizing: { width: 72, height: 96, spacing: 0 },
             CSSStep: 36
         });
 
         // 36 x 48 
         await createResolutionSet({
             locTiles: sprites36,
-            locSpriteSheet: "../frontend/src/assets/breed-tiles-36x48.png",
-            locCSSFile: '../frontend/src/assets/sprites-36x48.css',
+            locSpriteSheet: "../frontend/src/assets/tile-rendering/breed-tiles-36x48.png",
+            locCSSFile: '../frontend/src/assets/tile-rendering/sprites-36x48.css',
             sizing: { width: 36, height: 48, spacing: 0 },
             CSSStep: 36
         });
 
         // make and save the definition file to frontend and backend
         await Promise.all([
-            fs.writeFile('../frontend/src/'+definitionsJSON, json, 'utf8'),
-            fs.writeFile('../backend/src/'+definitionsJSON, json, 'utf8')
+            fs.writeFile('../frontend/src/' + definitionsJSON, json, 'utf8'),
+            fs.writeFile('../backend/src/' + definitionsJSON, json, 'utf8')
         ]);
         console.log("... copied breed definitions to SPA and Server.");
 
         // make and save the fallbacks stylesheet
-        await fs.writeFile('../frontend/src/assets/fallbacks.css', makeCSSStyleSheet(fallbackJSON), 'utf8');
+        await fs.writeFile('../frontend/src/assets/tile-rendering/fallbacks.css', makeCSSStyleSheet(fallbackJSON), 'utf8');
         console.log("... saved fallbacks css.");
         console.log("SCRIPT COMPLETE");
     }
-    catch(err){
+    catch (err) {
         console.log(err);
     }
 }
