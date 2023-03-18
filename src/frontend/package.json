@@ -13,6 +13,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.2",
+    "@vueuse/core": "^9.13.0",
     "axios": "^0.24.0",
     "pinia": "2.0.22",
     "reset-css": "^5.0.1",
