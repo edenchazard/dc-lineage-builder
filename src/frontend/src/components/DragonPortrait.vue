@@ -21,7 +21,7 @@
     <img
       v-else
       class="empty"
-      src="/src/assets/placeholder.png"
+      src="/src/assets/images/placeholder.png"
     />
   </span>
 </template>
