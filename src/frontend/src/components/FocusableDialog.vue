@@ -35,9 +35,7 @@ const rootEl = ref<HTMLDivElement>();
 // and, we'd also like to prevent overscroll happening.
 const scrollLock = useScrollLock(document.documentElement, true);
 
-onClickOutside(rootEl, () => {
-  emit('close');
-});
+onClickOutside(rootEl, close);
 
 function close() {
   scrollLock.value = false;
