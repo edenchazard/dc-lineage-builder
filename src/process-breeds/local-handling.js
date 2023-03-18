@@ -1,10 +1,10 @@
 import { promises as fs } from 'fs';
 import imagesLib from "images";
 
-export function getBreedTable(json){
+export function getBreedTable(json) {
     let entries = [];
 
-    const createEntry = function(name, breed, spritedata){
+    const createEntry = function (name, breed, spritedata) {
         let entry = {
             name: name,
             genderOnly: breed.genderOnly,
@@ -15,15 +15,15 @@ export function getBreedTable(json){
             }
         };
 
-        if(breed.dimorphism){
+        if (breed.dimorphism) {
             entry.male = spritedata[0];
             entry.female = spritedata[1];
         }
-        else{
-            if(!breed.genderOnly){
+        else {
+            if (!breed.genderOnly) {
                 entry.male = entry.female = spritedata;
             }
-            else{
+            else {
                 const gender = breed.genderOnly == 'm' ? 'male' : 'female';
                 entry[gender] = spritedata;
             }
@@ -32,12 +32,12 @@ export function getBreedTable(json){
         return entry;
     }
 
-    for(let breedname in json){
+    for (let breedname in json) {
         const breed = json[breedname];
         const has_alts = Object.getPrototypeOf(breed.sprites) === Object.prototype;
 
-        if(has_alts){
-            for(let altname in breed.sprites){
+        if (has_alts) {
+            for (let altname in breed.sprites) {
                 const altdata = breed.sprites[altname];
                 let entry = createEntry(breedname + " " + altname, breed, altdata);
                 entries.push(entry);
@@ -52,12 +52,12 @@ export function getBreedTable(json){
     return entries;
 }
 
-async function getTilesInFolder(dir){
+async function getTilesInFolder(dir) {
     return fs.readdir(dir);
 }
 
 // combines multiple tiles into a single spritesheet to be used by CSS
-function makeSpriteSheet(tiles, sizing, dir){
+function makeSpriteSheet(tiles, sizing, dir) {
     const
         { width, height, spacing } = sizing,
         sheetWidth = width * tiles.length;
@@ -66,7 +66,7 @@ function makeSpriteSheet(tiles, sizing, dir){
 
     let x = 0;
 
-    for(let image of tiles){
+    for (let image of tiles) {
         spritesheet.draw(imagesLib(dir + image), x, 0);
         x += width + spacing;
     }
@@ -82,16 +82,16 @@ function makeSpriteSheet(tiles, sizing, dir){
     return `${classes}{${css}}`;
 }*/
 
-function makeCSSSprites(tiles, width, spacing){
-/*    const mods = [
-        ['9IM3', () => "image-rendering: pixelated"]
-    ];
-*/
+function makeCSSSprites(tiles, width, spacing) {
+    /*    const mods = [
+            ['9IM3', () => "image-rendering: pixelated"]
+        ];
+    */
     let
         css = '',
         x = 0; // positioning x-axis
 
-    for(let image of tiles){
+    for (let image of tiles) {
         const fileWithoutPNG = image.slice(0, -4);
 
         css += `.d-${fileWithoutPNG}{background-position-x:${x}px}`;
@@ -102,7 +102,7 @@ function makeCSSSprites(tiles, width, spacing){
     return css;
 }
 
-export async function createResolutionSet({CSSStep, locTiles, locSpriteSheet, locCSSFile, sizing}){
+export async function createResolutionSet({ CSSStep, locTiles, locSpriteSheet, locCSSFile, sizing }) {
     const
         tiles = await getTilesInFolder(locTiles),
         { width, height, spacing } = sizing;
@@ -118,14 +118,14 @@ export async function createResolutionSet({CSSStep, locTiles, locSpriteSheet, lo
 
     // make and save CSS file
     let css = makeCSSSprites(tiles, CSSStep, spacing);
-    css += `.local{background-image: url(../assets/breed-tiles-${width}x${height}.png);}`;
+    css += `.local{background-image: url(./breed-tiles-${width}x${height}.png);}`;
 
     await fs.writeFile(locCSSFile, css, 'utf8');
     console.log("... saved css stylesheet.");
     console.log("Done.")
 }
 
-export async function missingSprites(folderList){
+export async function missingSprites(folderList) {
     const folders = await Promise.all(folderList.map(async folder => ({
         files: await getTilesInFolder(folder),
         location: folder,
@@ -141,7 +141,7 @@ export async function missingSprites(folderList){
     // it contains each code
     uniqueFiles.forEach(code => {
         folders.forEach(folder => {
-            if(folder.files.indexOf(code) === -1){
+            if (folder.files.indexOf(code) === -1) {
                 folder.missing.push(code)
             }
         })
@@ -151,7 +151,7 @@ export async function missingSprites(folderList){
 
     let fail = false;
     folders.forEach(folder => {
-        if(folder.missing.length > 0){
+        if (folder.missing.length > 0) {
             console.log(`Missing sprites in ${folder.location}:`);
             console.log(folder.missing.join(', '));
             fail = true;
