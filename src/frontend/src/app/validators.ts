@@ -11,6 +11,9 @@ import {
 } from './types';
 import { createTester } from './minitester';
 
+const NAMEREGEXP = /^(?! )[a-zA-Z0-9 '-]{0,32}(?<! )$/;
+const CODEREGEXP = /^[a-zA-Z0-9]{4,5}$/;
+
 function validateGenderFitsBreed(dragon: DragonType) {
   const breed = getBreedData(dragon.breed);
 
@@ -24,15 +27,11 @@ function validateGenderFitsBreed(dragon: DragonType) {
 }
 
 function validateName(str: string) {
-  return (
-    !str.endsWith(' ') &&
-    !str.startsWith(' ') &&
-    /^[a-zA-Z0-9 '-]{0,32}$/.test(str)
-  );
+  return NAMEREGEXP.test(str);
 }
 
 function validateCode(str: string) {
-  return /^[a-zA-Z0-9]{4,5}$/.test(str);
+  return CODEREGEXP.test(str);
 }
 
 function validateDisplay(value: DragonDisplay) {
@@ -201,6 +200,8 @@ function verifyIntegrity(root: LineageRoot, supressReasoning = false) {
 }
 
 export {
+  NAMEREGEXP,
+  CODEREGEXP,
   validateCode,
   validateName,
   validateBreed,
