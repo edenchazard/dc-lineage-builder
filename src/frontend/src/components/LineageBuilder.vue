@@ -24,7 +24,9 @@
         @deleteAncestors="selectionDeleteAncestors"
         @addParents="selectionAddParents"
         @switchParents="selectionSwitchParents"
-        @fullscreen="toggleFullScreen"
+        @fullscreen="fullscreen.toggle"
+        @undo="appStore.treeHistory.undo"
+        @redo="appStore.treeHistory.redo"
       />
       <Lineage
         class="builder"
@@ -59,7 +61,7 @@ import { useFullscreen } from '@vueuse/core';
 const route = useRoute();
 const appStore = useAppStore();
 const builder = ref(null);
-const { toggle: toggleFullScreen } = useFullscreen(builder);
+const fullscreen = useFullscreen(builder);
 const config = reactive<LineageConfig>({
   showInterface: true,
   showLabels: true,
@@ -71,8 +73,10 @@ onMounted(async () => {
   if (!status.value) return;
 
   const hash = route.query.template as string | undefined;
-  const starterTree = () =>
-    (appStore.activeTree = dragonBuilder.createDragonProperties());
+  const starterTree = () => {
+    appStore.activeTree = dragonBuilder.createDragonProperties();
+    appStore.treeHistory.clear();
+  };
 
   // No template, so start from scratch
   if (hash === undefined) starterTree();

@@ -3,10 +3,12 @@ import { defineStore } from 'pinia';
 import { LineageRoot, PartialLineage } from '../../app/types';
 import { createDragonProperties } from '../../app/dragonBuilder';
 import { countBreeds, forEveryDragon } from '../../app/utils';
+import { useTreeHistory } from './useTreeHistory';
 
 export const useAppStore = defineStore('appStore', () => {
   const appVersion = import.meta.env.VITE_APP_VERSION;
   const activeTree = ref<null | LineageRoot>(null);
+  const treeHistory = useTreeHistory(activeTree, 5);
 
   // When the tree is modified, we need to update our breed counts
   // and selection count
@@ -56,5 +58,6 @@ export const useAppStore = defineStore('appStore', () => {
     selectionCount,
     addDescendant,
     replaceRoot,
+    treeHistory,
   };
 });
