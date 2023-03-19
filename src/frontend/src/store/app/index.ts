@@ -1,33 +1,13 @@
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import { LineageRoot, PartialLineage } from '../../app/types';
 import { createDragonProperties } from '../../app/dragonBuilder';
-import { countBreeds, forEveryDragon } from '../../app/utils';
-import { useTreeHistory } from './useTreeHistory';
+import { useTreeAnalyser } from './useTreeAnalyser';
 
 export const useAppStore = defineStore('appStore', () => {
   const appVersion = import.meta.env.VITE_APP_VERSION;
   const activeTree = ref<null | LineageRoot>(null);
-  const treeHistory = useTreeHistory(activeTree, 5);
-
-  // When the tree is modified, we need to update our breed counts
-  // and selection count
-  const usedBreeds = computed(() =>
-    activeTree.value === null
-      ? new Map<string, number>()
-      : countBreeds(activeTree.value),
-  );
-
-  const selectionCount = computed(() => {
-    if (activeTree.value === null) return null;
-
-    let selected = 0;
-    forEveryDragon(activeTree.value, (dragon) => {
-      if (dragon.selected) selected++;
-    });
-
-    return selected;
-  });
+  const analytics = useTreeAnalyser(activeTree, 5);
 
   // These two functions have to be in the store so that the
   // Dragon components can call them. I would prefer them in
@@ -54,10 +34,10 @@ export const useAppStore = defineStore('appStore', () => {
   return {
     appVersion,
     activeTree,
-    usedBreeds,
-    selectionCount,
+    usedBreeds: analytics.usedBreeds,
+    selectionCount: analytics.selectionCount,
     addDescendant,
     replaceRoot,
-    treeHistory,
+    treeHistory: analytics.history,
   };
 });
