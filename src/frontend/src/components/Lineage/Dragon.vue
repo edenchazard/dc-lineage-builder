@@ -58,13 +58,6 @@
           @click="addAncestors"
         />
       </div>
-      <span
-        class="labelWarning"
-        v-if="labelWarning"
-        title="Warning: Label does not meet DC requirements"
-      >
-        <font-awesome-icon icon="exclamation-triangle" />
-      </span>
       <DragonLabelField
         :value="data.display === 1 ? data.code : data.name"
         :display="data.display"
@@ -131,7 +124,6 @@ import {
   expandGender,
   hasParents,
 } from '../../app/utils';
-import { validateCode, validateName } from '../../app/validators';
 import { switchParents, createDragonProperties } from '../../app/dragonBuilder';
 import { useAppStore } from '../../store/app';
 
@@ -189,12 +181,6 @@ const getImage = computed(() => {
   const portrait = breedEntryToPortrait(entry, expandGender(props.data.gender));
 
   return portrait;
-});
-
-const labelWarning = computed(() => {
-  return !(props.data.display === 1
-    ? validateCode(props.data.code)
-    : validateName(props.data.name));
 });
 
 function swapParents() {
@@ -401,11 +387,9 @@ li::after {
   right: 0px;
   top: 21px;
 }
-.hideEdit .labelWarning,
 .hideEdit .control,
 .hideLabels .dragon-label,
-.hideLabels .switchLabel,
-.hideLabels .labelWarning {
+.hideLabels .switchLabel {
   display: none;
 }
 </style>

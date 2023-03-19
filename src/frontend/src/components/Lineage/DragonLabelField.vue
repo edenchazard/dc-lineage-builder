@@ -1,38 +1,47 @@
 <template>
-  <span class="dragon-label">
+  <div
+    :class="[
+      'dragon-label',
+      display === 1 ? 'code' : 'name',
+      { invalid: warnInvalid && !editing },
+    ]"
+    :title="warnInvalid ? 'Warning: Label does not meet DC requirements' : ''"
+    tabindex="0"
+    @focus="click"
+    @click="click"
+  >
+    <input
+      v-if="editing"
+      ref="inputEl"
+      class="input"
+      type="text"
+      placeholder="enter label"
+      :pattern="
+        (display === 1 ? CODEREGEXP : NAMEREGEXP).toString().slice(2, -2)
+      "
+      :title="`enter new ${display === 1 ? 'code' : 'name'}`"
+      :value="value"
+      spellcheck="false"
+      @keydown.enter="finishedEditing"
+      @blur="finishedEditing"
+    />
     <label
-      v-if="!editing"
+      v-else
       class="label"
     >
-      <span
-        v-if="display === 1"
-        @click="clicked"
-        class="code"
-        >({{ value }})</span
-      >
-      <span
-        v-else
-        @click="clicked"
-        class="name"
-        >{{ value }}</span
-      >
+      {{ value }}
     </label>
-    <span v-else>
-      <input
-        ref="inputel"
-        :value="value"
-        @keydown.enter="finishedEditing"
-        @blur="finishedEditing"
-        type="text"
-        class="input"
-        placeholder="label"
-      />
-    </span>
-  </span>
+  </div>
 </template>
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import { generateName, generateCode } from '../../app/dragonBuilder';
+import {
+  validateCode,
+  validateName,
+  CODEREGEXP,
+  NAMEREGEXP,
+} from '../../app/validators';
 
 const props = defineProps({
   value: {
@@ -57,7 +66,15 @@ const emit = defineEmits<{
 const editing = ref(false);
 const inputEl = ref<HTMLInputElement>();
 
-function clicked() {
+function validate() {
+  const validator = props.display === 1 ? validateCode : validateName;
+  return !validator(props.value);
+}
+
+const warnInvalid = computed(validate);
+
+function click() {
+  // don't act when disabled
   if (props.disabled) return;
 
   editing.value = true;
@@ -81,33 +98,50 @@ function finishedEditing(e: Event) {
 <style scoped>
 .dragon-label {
   width: 120px;
-}
-.code {
-  font-style: italic;
-}
-.label {
-  display: block;
-  word-wrap: break-word;
+  padding: 0px;
   position: relative;
   top: -4px;
-  border-collapse: collapse;
+}
+.label {
+  word-wrap: break-word;
   white-space: break-spaces;
 }
-.input {
-  border: 1px dashed #44300b;
-  text-align: center;
-  width: 114px;
-  font-family: var(--lineageFont);
-  font-size: 14px;
+.code .label,
+.code .input {
+  font-style: italic;
 }
-
-.input:focus {
-  border: 1px dashed #44300b;
-  background: transparent;
-  color: var(--colourFG);
-  border-color: inherit;
-  -webkit-box-shadow: none;
+.code .label::before {
+  content: '(';
+}
+.code .label::after {
+  content: ')';
+}
+.input {
+  /* we'd like to emulate the styles so most of these need
+  to inherit */
+  background: inherit;
+  font-family: inherit;
+  color: inherit;
+  text-align: center;
+  border: 0px none;
   box-shadow: none;
-  outline: none;
+  margin: 0px;
+  padding: 0px;
+  /* it just needs to be a little smaller to prevent layout shifts */
+  font-size: inherit;
+  width: 100%;
+  outline: 1px dashed #44300b;
+  outline-style: dashed;
+  outline-color: #44300b;
+}
+.input,
+.invalid {
+  outline-width: 1px;
+  outline-offset: 1px;
+}
+.input:invalid,
+.invalid {
+  outline-style: solid;
+  outline-color: red;
 }
 </style>
