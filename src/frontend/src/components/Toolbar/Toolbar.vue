@@ -60,14 +60,28 @@
           @click="dialogs.showGenerateDialog = true"
         />
       </div>
-      <div>
-        <div class="toolbar-item">
-          <ToolbarButton
-            title="Toggle fullscreen"
-            icon="maximize"
-            @click="emit('fullscreen')"
-          />
-        </div>
+      <div class="toolbar-item">
+        <ToolbarButton
+          title="Toggle fullscreen"
+          icon="maximize"
+          @click="emit('fullscreen')"
+        />
+      </div>
+      <div class="toolbar-item">
+        <ToolbarButton
+          title="Undo"
+          icon="undo"
+          @click="emit('undo')"
+          :disabled="appStore.treeHistory.canUndo === false"
+        />
+      </div>
+      <div class="toolbar-item">
+        <ToolbarButton
+          title="Redo"
+          icon="redo"
+          @click="emit('redo')"
+          :disabled="appStore.treeHistory.canRedo === false"
+        />
       </div>
     </div>
     <div class="selection-tools">
@@ -210,6 +224,8 @@ const emit = defineEmits<{
   (e: 'selectCriteria', key: string, value: any): void;
   (e: 'selectCriteria', predicate: (dragon: DragonType) => boolean): void;
   (e: 'fullscreen'): void;
+  (e: 'undo'): void;
+  (e: 'redo'): void;
 }>();
 
 const treeSelectedContains = (tree: LineageRoot) => {
