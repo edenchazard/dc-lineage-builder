@@ -69,6 +69,9 @@ const emit = defineEmits<{
   width: 30px;
   height: 30px;
 }
+.control[disabled] {
+  opacity: 0.5;
+}
 .control svg {
   padding: 0px;
 }
