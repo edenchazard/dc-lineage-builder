@@ -40,20 +40,20 @@
 
 <script setup lang="ts">
 //todo fix @updateConfig="(key, value) => config[key] = value"
-import * as dragonBuilder from '../app/dragonBuilder';
-import { forEveryDragon, hasParents } from '../app/utils';
-import { getLineage } from '../app/api';
-import { useAppStore } from '../store/app';
+import * as dragonBuilder from '../../app/dragonBuilder';
+import { forEveryDragon, hasParents } from '../../app/utils';
+import { getLineage } from '../../app/api';
+import { useAppStore } from '../../store/app';
 import {
   LineageRoot,
   DragonType,
   DragonDisplay,
   LineageConfig,
-} from '../app/types';
+} from '../../app/types';
 
-import Toolbar from './Toolbar/Toolbar.vue';
-import Lineage from './Lineage/Lineage.vue';
-import Feedback from '../components/ui/Feedback.vue';
+import Toolbar from '../../components/Toolbar/Toolbar.vue';
+import Lineage from '../../components/Lineage/Lineage.vue';
+import Feedback from '../../components/UI/Feedback.vue';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useFullscreen } from '@vueuse/core';

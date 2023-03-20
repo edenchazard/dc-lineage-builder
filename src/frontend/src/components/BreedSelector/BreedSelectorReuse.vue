@@ -16,10 +16,10 @@
 </template>
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
-import { BreedEntry, Gender, PortraitData } from '../app/types';
-import { getBreedData, filterBreedTableByGender } from '../app/utils';
-import { useAppStore } from '../store/app';
-import BreedGrid from './BreedGrid.vue';
+import { BreedEntry, Gender, PortraitData } from '../../app/types';
+import { getBreedData, filterBreedTableByGender } from '../../app/utils';
+import { useAppStore } from '../../store/app';
+import BreedGrid from '../BreedFiltering/BreedGrid.vue';
 
 const props = defineProps({
   filterByGender: {

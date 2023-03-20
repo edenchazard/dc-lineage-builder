@@ -1,5 +1,5 @@
 <template>
-  <FocusableDialog
+  <BreedSelectorWrapper
     aria-label="Choose a breed"
     aria-description="Select a breed."
     @close="close"
@@ -10,7 +10,7 @@
     <template v-slot:content>
       <section class="recently-used">
         <h3>Breeds already in lineage</h3>
-        <BreedDropdownReuse
+        <BreedSelectorReuse
           :filterByGender="genderFilter"
           @breedSelected="breedSelected"
         />
@@ -34,7 +34,7 @@
             @update="(search) => (searchString = search)"
           />
         </div>
-        <BreedDropdownResults
+        <FilteredBreedList
           :search="searchString"
           :breeds="breeds"
           :tags="tagStore.enabledTags"
@@ -44,19 +44,19 @@
         />
       </section>
     </template>
-  </FocusableDialog>
+  </BreedSelectorWrapper>
 </template>
 <script setup lang="ts">
 import { PropType, ref } from 'vue';
 import { onStartTyping } from '@vueuse/core';
-import { useTagStore } from '../store/tags';
-import { Gender, PortraitData } from '../app/types';
-import BreedDropdownResults from './BreedDropdownResults.vue';
-import BreedDropdownReuse from './BreedDropdownReuse.vue';
-import FocusableDialog from './FocusableDialog.vue';
-import BreedTagsSelector from './BreedTagsSelector.vue';
-import BreedGroupsTagSelector from './BreedGroupsTagSelector.vue';
-import BreedSearchControl from './BreedSearchControl.vue';
+import { useTagStore } from '../../store/tags';
+import { Gender, PortraitData } from '../../app/types';
+import FilteredBreedList from '../BreedFiltering/FilteredBreedList.vue';
+import BreedSelectorReuse from './BreedSelectorReuse.vue';
+import BreedSelectorWrapper from './BreedSelectorWrapper.vue';
+import BreedTagsSelector from '../BreedFiltering/BreedTagsSelector.vue';
+import BreedGroupsTagSelector from '../BreedFiltering/BreedGroupsTagSelector.vue';
+import BreedSearchControl from '../BreedFiltering/BreedSearchControl.vue';
 
 const props = defineProps({
   breeds: {

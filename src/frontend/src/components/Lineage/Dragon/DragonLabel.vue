@@ -35,13 +35,13 @@
 </template>
 <script setup lang="ts">
 import { computed, nextTick, ref } from 'vue';
-import { generateName, generateCode } from '../../app/dragonBuilder';
+import { generateName, generateCode } from '../../../app/dragonBuilder';
 import {
   validateCode,
   validateName,
   CODEREGEXP,
   NAMEREGEXP,
-} from '../../app/validators';
+} from '../../../app/validators';
 
 const props = defineProps({
   value: {

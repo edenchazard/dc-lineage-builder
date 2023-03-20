@@ -82,7 +82,7 @@
       <section id="breeds">
         <div>
           <label>Male breed</label>
-          <BreedDropdownResults
+          <FilteredBreedList
             :search="query"
             :breeds="GLOBALS.breeds.males"
             :tags="tagStore.enabledTags"
@@ -93,7 +93,7 @@
         </div>
         <div>
           <label>Female breed</label>
-          <BreedDropdownResults
+          <FilteredBreedList
             :search="query"
             :breeds="GLOBALS.breeds.females"
             :tags="tagStore.enabledTags"
@@ -117,20 +117,20 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import { PortraitData, Gender } from '../app/types';
-import GLOBALS from '../app/globals';
-import { createDragonProperties } from '../app/dragonBuilder';
-import { getBreedData } from '../app/utils';
-import { useTagStore } from '../store/tags';
+import { PortraitData, Gender } from '../../app/types';
+import GLOBALS from '../../app/globals';
+import { createDragonProperties } from '../../app/dragonBuilder';
+import { getBreedData } from '../../app/utils';
+import { useTagStore } from '../../store/tags';
 
-import Lineage from '../components/Lineage/Lineage.vue';
-import BreedDropdownResults from '../components/BreedDropdownResults.vue';
-import BreedTagsSelector from '../components/BreedTagsSelector.vue';
-import BreedGroupsTagSelector from '../components/BreedGroupsTagSelector.vue';
-import DialogExport from '../components/Toolbar/DialogExport.vue';
-import DialogGenerate from '../components/Toolbar/DialogGenerate.vue';
-import ToolbarButton from '../components/Toolbar/ToolbarButton.vue';
-import BreedSearchControl from '../components/BreedSearchControl.vue';
+import Lineage from '../../components/Lineage/Lineage.vue';
+import FilteredBreedList from '../../components/BreedFiltering/FilteredBreedList.vue';
+import BreedTagsSelector from '../../components/BreedFiltering/BreedTagsSelector.vue';
+import BreedGroupsTagSelector from '../../components/BreedFiltering/BreedGroupsTagSelector.vue';
+import DialogExport from '../../components/Toolbar/DialogExport.vue';
+import DialogGenerate from '../../components/Toolbar/DialogGenerate.vue';
+import ToolbarButton from '../../components/Toolbar/ToolbarButton.vue';
+import BreedSearchControl from '../../components/BreedFiltering/BreedSearchControl.vue';
 
 const tree = ref(createDragonProperties());
 const tagStore = useTagStore();

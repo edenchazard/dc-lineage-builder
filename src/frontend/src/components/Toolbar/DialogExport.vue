@@ -32,9 +32,9 @@ import { LineageRoot } from '../../app/types';
 import { deepClone, forEveryDragon } from '../../app/utils';
 import { verifyIntegrity } from '../../app/validators';
 
-import Dialog from '../Dialog.vue';
-import Feedback from '../ui/Feedback.vue';
-import Textbox from '../ui/Textbox.vue';
+import Dialog from '../UI/Dialog.vue';
+import Feedback from '../UI/Feedback.vue';
+import Textbox from '../UI/Textbox.vue';
 
 const props = defineProps({
   tree: {

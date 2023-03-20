@@ -26,7 +26,7 @@ import { computed, PropType } from 'vue';
 import { LineageConfig, LineageRoot } from '../../app/types';
 import { countGenerations } from '../../app/utils';
 
-import Dragon from './Dragon.vue';
+import Dragon from './Dragon/Dragon.vue';
 import LineageGenerationCounter from './LineageGenerationCounter.vue';
 
 const props = defineProps({

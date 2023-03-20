@@ -92,11 +92,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { BreedEntry, Gender } from '../app/types';
-import { addBreed } from '../app/utils';
-import settings from '../app/settings';
-import GhostBreedUpload from '../components/GhostBreedUpload.vue';
-import Feedback from '../components/ui/Feedback.vue';
+import { BreedEntry, Gender } from '../../app/types';
+import { addBreed } from '../../app/utils';
+import settings from '../../app/settings';
+import GhostBreedUpload from './GhostBreedUpload.vue';
+import Feedback from '../../components/UI/Feedback.vue';
 type Availability = 'b' | Gender;
 
 const name = ref('');

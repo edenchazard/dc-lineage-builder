@@ -18,8 +18,8 @@
 </template>
 <script setup lang="ts">
 import { nextTick, PropType, watch, computed, ref } from 'vue';
-import { FilterTag, EggGroupTag, PortraitData } from '../app/types';
-import { filterEggGroups, filterTags } from '../app/utils';
+import { FilterTag, EggGroupTag, PortraitData } from '../../app/types';
+import { filterEggGroups, filterTags } from '../../app/utils';
 import BreedGrid from './BreedGrid.vue';
 
 const props = defineProps({

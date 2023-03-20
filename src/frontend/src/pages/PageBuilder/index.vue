@@ -15,5 +15,5 @@
           </section>
         </section>
         */
-import LineageBuilder from '../components/LineageBuilder.vue';
+import LineageBuilder from './LineageBuilder.vue';
 </script>
