@@ -53,7 +53,7 @@ nano .env.production
 From the project root directory, use the command:
 
 ```sh
-docker-compose --env-file .env.development up vue api db
+docker-compose --env-file .env.development up vue
 ```
 
 ### Production
