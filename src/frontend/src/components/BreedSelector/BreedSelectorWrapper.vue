@@ -33,12 +33,13 @@ const rootEl = ref<HTMLDivElement>();
 
 // we want to hide the scroll bar when the popup is open,
 // and, we'd also like to prevent overscroll happening.
-const scrollLock = useScrollLock(document.documentElement, true);
+const scrollLockDoc = useScrollLock(document.documentElement, true);
+const scrollLockBody = useScrollLock(document.body, true);
 
 onClickOutside(rootEl, close);
 
 function close() {
-  scrollLock.value = false;
+  scrollLockDoc.value = scrollLockBody.value = false;
   emit('close');
 }
 </script>

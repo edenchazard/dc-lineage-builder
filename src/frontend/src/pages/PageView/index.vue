@@ -43,13 +43,13 @@
 import { reactive, ref, onBeforeUnmount, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { getLineage } from '../app/api';
-import { LineageConfig, LineageRoot } from '../app/types';
-import { createLineageLink } from '../app/utils';
+import { getLineage } from '../../app/api';
+import { LineageConfig, LineageRoot } from '../../app/types';
+import { createLineageLink } from '../../app/utils';
 
-import Lineage from '../components/Lineage/Lineage.vue';
-import Textbox from '../components/ui/Textbox.vue';
-import Feedback from '../components/ui/Feedback.vue';
+import Lineage from '../../components/Lineage/Lineage.vue';
+import Textbox from '../../components/UI/Textbox.vue';
+import Feedback from '../../components/UI/Feedback.vue';
 
 const route = useRoute();
 const tree = ref<null | LineageRoot>(null);

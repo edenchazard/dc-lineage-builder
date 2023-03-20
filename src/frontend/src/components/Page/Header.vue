@@ -72,8 +72,8 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '../store/app';
-import { useSkinStore } from '../store/skin';
+import { useAppStore } from '../../store/app';
+import { useSkinStore } from '../../store/skin';
 
 const appStore = useAppStore();
 const skinStore = useSkinStore();

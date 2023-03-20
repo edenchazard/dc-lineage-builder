@@ -15,7 +15,7 @@ import 'reset-css';
 import { useRoute } from 'vue-router';
 
 import './assets/theming.css';
-import Header from './components/Header.vue';
+import Header from './components/Page/Header.vue';
 import { useSkinStore } from './store/skin';
 
 const route = useRoute();

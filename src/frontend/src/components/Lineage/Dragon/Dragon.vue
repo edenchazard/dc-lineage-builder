@@ -2,7 +2,7 @@
   <li>
     <div class="tile">
       <div>
-        <BreedDropdownv2
+        <BreedSelector
           v-if="!disabled && showBreedSelector === true"
           :breeds="availableMates"
           :genderFilter="data.gender"
@@ -58,7 +58,7 @@
           @click="addAncestors"
         />
       </div>
-      <DragonLabelField
+      <DragonLabel
         :value="data.display === 1 ? data.code : data.name"
         :display="data.display"
         @changed="labelChanged"
@@ -114,7 +114,7 @@
 notes for meself
 label warning is a bit hacky and needs improving
 */
-import GLOBALS from '../../app/globals';
+import GLOBALS from '../../../app/globals';
 import {
   getBreedData,
   deepClone,
@@ -123,22 +123,25 @@ import {
   breedEntryToPortrait,
   expandGender,
   hasParents,
-} from '../../app/utils';
-import { switchParents, createDragonProperties } from '../../app/dragonBuilder';
-import { useAppStore } from '../../store/app';
+} from '../../../app/utils';
+import {
+  switchParents,
+  createDragonProperties,
+} from '../../../app/dragonBuilder';
+import { useAppStore } from '../../../store/app';
 
-import DragonLabelField from './DragonLabelField.vue';
-import BreedDropdownv2 from '../BreedDropdownv2.vue';
-import DragonPortrait from '../DragonPortrait.vue';
+import DragonLabel from './DragonLabel.vue';
+import BreedSelector from '../../BreedSelector/BreedSelector.vue';
+import DragonPortrait from './DragonPortrait.vue';
 import DragonButton from './DragonButton.vue';
 import {
   BreedEntry,
   DragonParents,
   DragonType,
   PortraitData,
-} from '../../app/types';
+} from '../../../app/types';
 
-import vLongPress from '../../directives/long-press/vue-3-long-press';
+import vLongPress from '../../../directives/long-press/vue-3-long-press';
 import { computed, PropType, ref } from 'vue';
 
 const props = defineProps({

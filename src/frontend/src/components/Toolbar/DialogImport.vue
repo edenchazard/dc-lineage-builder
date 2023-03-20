@@ -31,9 +31,9 @@ import { verifyIntegrity } from '../../app/validators';
 import { forEveryDragon, makeError } from '../../app/utils';
 import { LineageRoot } from '../../app/types';
 
-import Dialog from '../Dialog.vue';
-import Textbox from '../ui/Textbox.vue';
-import Feedback from '../ui/Feedback.vue';
+import Dialog from '../UI/Dialog.vue';
+import Textbox from '../UI/Textbox.vue';
+import Feedback from '../UI/Feedback.vue';
 
 const emit = defineEmits<{
   (e: 'close'): void;
