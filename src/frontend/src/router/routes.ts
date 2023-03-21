@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/how-to',
     name: 'How to Use',
-    component: () => import('../pages/PageTutorial/index.vue'),
+    redirect: '/tutorial',
   },
   {
     path: '/disclaimer',
@@ -40,6 +40,11 @@ const routes: RouteRecordRaw[] = [
     path: '/onsite-preview',
     name: 'Onsite Preview',
     component: () => import('../pages/PageOnsitePreview/index.vue'),
+  },
+  {
+    path: '/tutorial',
+    name: 'Tutorial',
+    component: () => import('../pages/PageTutorial/index.vue'),
   },
 ];
 
