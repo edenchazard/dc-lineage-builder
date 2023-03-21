@@ -207,6 +207,9 @@ function selectBy(condition: (dragon: DragonType) => boolean) {
 <style scoped>
 .builder-container:fullscreen {
   background: var(--builderBG);
+  height: 100vh;
+  width: 100vh;
+  overflow: auto;
 }
 .builder {
   -webkit-touch-callout: none; /* iOS Safari */
