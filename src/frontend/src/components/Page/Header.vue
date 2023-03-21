@@ -46,7 +46,7 @@
             <li>
               <router-link to="/onsite-preview">Onsite Preview</router-link>
             </li>
-            <li><router-link to="/how-to">How To Use</router-link></li>
+            <li><router-link to="/tutorial">Tutorial</router-link></li>
             <li><router-link to="/disclaimer">Disclaimer</router-link></li>
             <li><a href="https://dragcave.net/">DragCave</a></li>
           </ul>
