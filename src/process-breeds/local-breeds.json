@@ -487,5 +487,12 @@
     "tags": ["Valentine"],
     "group": "Standard",
     "sprites": "8X4I"
+  },
+  "Algarre": {
+    "genderOnly": false,
+    "dimorphism": false,
+    "tags": ["Regular"],
+    "group": "Standard",
+    "sprites": "81de"
   }
 }
