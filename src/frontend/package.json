@@ -16,6 +16,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.2",
     "@vueuse/core": "^9.13.0",
     "axios": "^0.24.0",
+    "object.hasown": "^1.1.2",
     "pinia": "2.0.22",
     "reset-css": "^5.0.1",
     "unique-names-generator": "^4.7.1",

@@ -11,7 +11,7 @@ import {
 } from './types';
 import { createTester } from './minitester';
 
-const NAMEREGEXP = /^(?! )[a-zA-Z0-9 '-]{0,32}(?<! )$/;
+const NAMEREGEXP = /^^[a-zA-Z0-9]([a-zA-Z0-9 '-]{1,32})[a-zA-Z0-9]$/;
 const CODEREGEXP = /^[a-zA-Z0-9]{4,5}$/;
 
 function validateGenderFitsBreed(dragon: DragonType) {
