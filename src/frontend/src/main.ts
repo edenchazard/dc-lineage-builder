@@ -1,4 +1,4 @@
-import * as compat from './compatibility';
+import './compatibility';
 import { FontAwesomeIcon } from './app/fontawesome';
 import { createApp } from 'vue';
 import router from './router/router';
