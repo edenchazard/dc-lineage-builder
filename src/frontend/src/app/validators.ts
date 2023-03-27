@@ -74,7 +74,7 @@ function hasAllKeys(dragon: DragonType) {
     return false;
 
   // run a test to check undefined for each key
-  const tests = dragonKeys.map((key) => Object.hasOwn(dragon, key));
+  const tests = dragonKeys.map((key) => key in dragon);
   return !tests.includes(false);
 }
 
