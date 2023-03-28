@@ -1,18 +1,18 @@
 <template>
   <span
-    v-bind="$attrs"
     :title="data.name"
     class="imgbox imgbox-fullsize"
+    role="img"
   >
     <img
-      v-if="data.metaData.src == 'dc'"
+      v-if="data.metaData.src === 'dc'"
       :src="'//dragcave.net/image/' + data.image"
       :class="'fallback d-' + data.image"
     />
     <span
       v-else-if="data.metaData.src === 'local'"
       :class="'local d-' + data.image"
-    />
+    ></span>
     <img
       v-else-if="data.metaData.src === 'ghost'"
       class="ghost"
@@ -20,7 +20,6 @@
     />
     <img
       v-else
-      class="empty"
       src="/src/assets/images/placeholder.png"
     />
   </span>
