@@ -67,7 +67,7 @@ docker-compose --env-file .env.production -f docker-compose.prod.yml up -d --bui
 
 ## Breed processing
 
-The process-breeds script will parse both local and fallback breed tables, create the relevant json, images and css files and place them in the correct locations.
+The process-breeds script will parse both local and fallback breed tables, create the relevant json, and css files and place them in the correct locations.
 
 Run it from the project root directory using the command:
 

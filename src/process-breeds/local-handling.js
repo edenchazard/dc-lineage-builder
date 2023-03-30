@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import imagesLib from "images";
+// import imagesLib from "images";
 
 export function getBreedTable(json) {
     let entries = [];
@@ -56,8 +56,8 @@ async function getTilesInFolder(dir) {
     return fs.readdir(dir);
 }
 
-// combines multiple tiles into a single spritesheet to be used by CSS
-function makeSpriteSheet(tiles, sizing, dir) {
+/* // combines multiple tiles into a single spritesheet to be used by CSS
+function _makeSpriteSheet(tiles, sizing, dir) {
     const
         { width, height, spacing } = sizing,
         sheetWidth = width * tiles.length;
@@ -72,7 +72,7 @@ function makeSpriteSheet(tiles, sizing, dir) {
     }
 
     return spritesheet;
-}
+} */
 
 /*function CSSMods(mods){
     const
@@ -82,27 +82,55 @@ function makeSpriteSheet(tiles, sizing, dir) {
     return `${classes}{${css}}`;
 }*/
 
-function makeCSSSprites(tiles, width, spacing) {
+/* function _makeCSSSprites(tiles, width, spacing) {
     /*    const mods = [
             ['9IM3', () => "image-rendering: pixelated"]
         ];
-    */
-    let
-        css = '',
-        x = 0; // positioning x-axis
+    
+let
+    css = '',
+    x = 0; // positioning x-axis
 
-    for (let image of tiles) {
-        const fileWithoutPNG = image.slice(0, -4);
+for (let image of tiles) {
+    const fileWithoutPNG = image.slice(0, -4);
 
-        css += `.d-${fileWithoutPNG}{background-position-x:${x}px}`;
-        x -= width - spacing;
-    }
-
-    //css += CSSMods(mods);
-    return css;
+    css += `.d-${fileWithoutPNG}{background-position-x:${x}px}`;
+    x -= width - spacing;
 }
 
-export async function createResolutionSet({ CSSStep, locTiles, locSpriteSheet, locCSSFile, sizing }) {
+//css += CSSMods(mods);
+return css;
+} */
+
+async function makeCSS(tiles, locTiles) {
+    const base64 = await Promise.all(tiles.map(async (tile) => {
+        const code = tile.slice(0, -4);
+        return { code, base64: await fs.readFile(locTiles + tile, { encoding: 'base64' }) };
+    }));
+
+    const stylesheet = base64.map(tile => {
+        return `.d-${tile.code}{background:url('data:image/png;base64,${tile.base64}')}`;
+    }).join('');
+
+    // console.log(stylesheet)
+    return stylesheet;
+}
+
+export async function saveResolutionStylesheet({ locTiles, locCSSFile, sizing }) {
+    const
+        tiles = await getTilesInFolder(locTiles),
+        { width, height } = sizing;
+
+    console.log(`Creating with sizes: ${width}w x ${height}h.`);
+    console.log(`Found ${tiles.length} sprites in folder ${locTiles}`);
+    const stylesheet = await makeCSS(tiles, locTiles);
+
+    await fs.writeFile(locCSSFile, stylesheet, 'utf8');
+    console.log("... saved css stylesheet.");
+    console.log("Done.")
+}
+
+/* export async function _createResolutionSet({ CSSStep, locTiles, locSpriteSheet, locCSSFile, sizing }) {
     const
         tiles = await getTilesInFolder(locTiles),
         { width, height, spacing } = sizing;
@@ -123,7 +151,7 @@ export async function createResolutionSet({ CSSStep, locTiles, locSpriteSheet, l
     await fs.writeFile(locCSSFile, css, 'utf8');
     console.log("... saved css stylesheet.");
     console.log("Done.")
-}
+} */
 
 export async function missingSprites(folderList) {
     const folders = await Promise.all(folderList.map(async folder => ({
