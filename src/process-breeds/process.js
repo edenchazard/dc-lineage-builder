@@ -6,19 +6,19 @@
     2)  fallbacks.css
         File containing left, top and height css data for breeds
         rendered with the fallback method (dc src)
-    3)  breed-tiles-36x48.png
-        CSS spritesheet for locally rendered breeds.
-    4)  sprites-36x48.css
-        File with CSS information for the spritesheet.
-    5)  There's also a 72x96 resolution format for the two files above
-        intended for higher DPI screens.
+    3)  sprites-36x48.css
+        CSS spritesheet for locally rendered breeds, individual images are inline
+        using base64 data uris.
+
+        3.1) sprites-72x96.css
+            72x96 high definition sprite set.
 */
 import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 import {
-    createResolutionSet,
+    saveResolutionStylesheet,
     missingSprites,
     getBreedTable as localBreedTable
 } from "./local-handling.js";
@@ -59,25 +59,19 @@ async function main() {
             console.log("Script cancelled: sprites missing.");
             process.exit(1);
         }
+
         // 72 x 96 high dpi
-        await createResolutionSet({
-            // where to find the sprites
+        await saveResolutionStylesheet({
             locTiles: sprites72,
-            // where to save the finished spritesheet
-            locSpriteSheet: "../frontend/src/assets/tile-rendering/breed-tiles-72x96.png",
-            // where to save the css file
             locCSSFile: '../frontend/src/assets/tile-rendering/sprites-72x96.css',
-            sizing: { width: 72, height: 96, spacing: 0 },
-            CSSStep: 36
+            sizing: { width: 72, height: 96 }
         });
 
         // 36 x 48 
-        await createResolutionSet({
+        await saveResolutionStylesheet({
             locTiles: sprites36,
-            locSpriteSheet: "../frontend/src/assets/tile-rendering/breed-tiles-36x48.png",
             locCSSFile: '../frontend/src/assets/tile-rendering/sprites-36x48.css',
-            sizing: { width: 36, height: 48, spacing: 0 },
-            CSSStep: 36
+            sizing: { width: 36, height: 48 }
         });
 
         // make and save the definition file to frontend and backend
