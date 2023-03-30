@@ -490,9 +490,9 @@
   },
   "Algarre": {
     "genderOnly": false,
-    "dimorphism": false,
+    "dimorphism": true,
     "tags": ["Regular"],
     "group": "Standard",
-    "sprites": "81de"
+    "sprites": ["nsL4", "BHUz"]
   }
 }
