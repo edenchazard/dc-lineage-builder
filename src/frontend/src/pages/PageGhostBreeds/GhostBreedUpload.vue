@@ -44,7 +44,7 @@ const fileInput = ref<HTMLInputElement>();
 const dragon = reactive<PortraitData>({
   // copy placeholder properties and replace what we need
   ...GLOBALS.placeholder,
-  image: '/src/assets/images/placeholder.png',
+  image: new URL('/src/assets/images/placeholder.png', import.meta.url).href,
   metaData: {
     src: 'ghost',
     group: 'Standard',
