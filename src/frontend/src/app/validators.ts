@@ -13,6 +13,7 @@ import { createTester } from './minitester';
 
 const NAMEREGEXP = /^^[a-zA-Z0-9]([a-zA-Z0-9 '-]{1,32})[a-zA-Z0-9]$/;
 const CODEREGEXP = /^[a-zA-Z0-9]{4,5}$/;
+const BREEDNAMEREGEXP = /^[a-zA-Z0-9 ]{1,32}$/;
 
 function validateGenderFitsBreed(dragon: DragonType) {
   const breed = getBreedData(dragon.breed);
@@ -202,6 +203,7 @@ function verifyIntegrity(root: LineageRoot, supressReasoning = false) {
 export {
   NAMEREGEXP,
   CODEREGEXP,
+  BREEDNAMEREGEXP,
   validateCode,
   validateName,
   validateBreed,

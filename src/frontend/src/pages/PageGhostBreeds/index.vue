@@ -23,97 +23,134 @@
       </p>
     </section>
     <section>
-      <form @submit="addToEntries">
-        <div>
-          <label for="name">Breed name: </label>
+      <form
+        id="add-ghost-breed"
+        @submit="addToEntries"
+      >
+        <div class="grid">
+          <label
+            class="field-label"
+            for="name"
+            >Breed name</label
+          >
           <input
+            v-model="name"
             type="text"
             id="name"
             name="name"
-            v-model="name"
+            required
+            title="Breed name must be alphanumeric and 1-32 characters long."
+            :pattern="BREEDNAMEREGEXP.toString().slice(2, -2)"
           />
-        </div>
-        <div>
-          <span class="field-label">Gender availability:</span>
-          <input
-            type="radio"
-            v-model="genderAvailability"
-            id="avail_both"
-            value="b"
-          />
-          <label for="avail_both">Both</label>
-          <input
-            type="radio"
-            v-model="genderAvailability"
-            id="avail_male"
-            value="m"
-          />
-          <label for="avail_male">Male-only</label>
-          <input
-            type="radio"
-            v-model="genderAvailability"
-            id="avail_female"
-            value="f"
-          />
-          <label for="avail_female">Female-only</label>
-        </div>
-        <div>
+          <span class="field-label">Gender availability</span>
+          <div class="column">
+            <label
+              ><input
+                type="radio"
+                v-model="genderAvailability"
+                id="avail_both"
+                value="b"
+              />
+              Both</label
+            >
+            <label
+              ><input
+                type="radio"
+                v-model="genderAvailability"
+                id="avail_male"
+                value="m"
+              />
+              Male-only</label
+            >
+            <label
+              ><input
+                type="radio"
+                v-model="genderAvailability"
+                id="avail_female"
+                value="f"
+              />
+              Female-only</label
+            >
+          </div>
           <span class="field-label">Tiles</span>
-          <div id="tile-upload">
-            <div v-show="['b', 'm'].includes(genderAvailability)">
-              <label for="male">Male</label>
+          <div class="row tiles">
+            <div
+              class="column"
+              v-if="['b', 'm'].includes(genderAvailability)"
+            >
               <GhostBreedUpload
+                ref="maleTile"
                 label="male"
+                aria-required="true"
+                :class="{ invalid: maleBase64 === '' }"
                 @tileChosen="(base64) => portraitSelected('m', base64)"
                 @uploadError="uploadError"
               />
+              <label for="male">Male </label>
             </div>
-            <div v-show="['b', 'f'].includes(genderAvailability)">
-              <label for="female">Female</label>
+            <div
+              class="column"
+              v-if="['b', 'f'].includes(genderAvailability)"
+            >
               <GhostBreedUpload
+                ref="femaleTile"
                 label="female"
+                aria-required="true"
+                :class="{ invalid: femaleBase64 === '' }"
                 @tileChosen="(base64) => portraitSelected('f', base64)"
                 @uploadError="uploadError"
               />
+              <label for="female">Female</label>
             </div>
           </div>
         </div>
-        <button
-          class="themed-button"
-          type="submit"
-        >
-          Add breed
-        </button>
+        <div class="row form-buttons">
+          <button
+            class="themed-button"
+            type="submit"
+          >
+            Add breed
+          </button>
+        </div>
       </form>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 import { BreedEntry, Gender } from '../../app/types';
 import { addBreed } from '../../app/utils';
 import settings from '../../app/settings';
 import GhostBreedUpload from './GhostBreedUpload.vue';
 import Feedback from '../../components/UI/Feedback.vue';
+import { BREEDNAMEREGEXP } from '../../app/validators';
+
 type Availability = 'b' | Gender;
 
-const name = ref('');
+const name = ref('Ghost Breed');
 // b for both
 const genderAvailability = ref<Availability>('b');
 const femaleBase64 = ref('');
 const maleBase64 = ref('');
+const femaleTile = ref<InstanceType<typeof GhostBreedUpload>>();
+const maleTile = ref<InstanceType<typeof GhostBreedUpload>>();
 const status = ref<InstanceType<typeof Feedback>>();
+
+// reset when availability changes
+watch(genderAvailability, () => {
+  maleBase64.value = femaleBase64.value = '';
+});
 
 function portraitSelected(gender: Gender, base64: string) {
   if (gender === 'm') maleBase64.value = base64;
   else if (gender === 'f') femaleBase64.value = base64;
 }
 
-function uploadError() {
+function uploadError(error: string) {
   if (!status.value) return;
-  status.value.error('Upload error.');
+  status.value.error(`Upload error: ${error}.`);
 }
 
 function addToEntries(e: Event) {
@@ -143,8 +180,19 @@ function addToEntries(e: Event) {
     femaleBase64.value,
   );
 
-  // there was an issue creating the props
-  if (!genderProps) return;
+  // Error when a tile is missing based on gender props
+  // and focus the appropriate element.
+  if (genderProps?.male === '') {
+    status.value.error(`The male tile is missing.`);
+    setTimeout(() => maleTile.value?.focus(), 100);
+    return;
+  }
+
+  if (genderProps?.female === '') {
+    status.value.error(`The female tile is missing.`);
+    setTimeout(() => femaleTile.value?.focus(), 100);
+    return;
+  }
 
   // add the breed
   const breed: BreedEntry = {
@@ -174,13 +222,30 @@ function addToEntries(e: Event) {
 </script>
 
 <style scoped>
+.grid {
+  grid-template-columns: 1fr;
+  gap: 5px;
+}
+.tiles > .column {
+  margin: 5px;
+  align-items: center;
+}
 .field-label {
   font-weight: bold;
 }
+.field-label::after {
+  content: ':';
+}
 
-#tile-upload {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
+@media (min-width: 320px) {
+  #add-ghost-breed {
+    max-width: 400px;
+  }
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .form-buttons {
+    justify-content: right;
+  }
 }
 </style>

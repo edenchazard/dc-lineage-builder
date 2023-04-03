@@ -1,22 +1,24 @@
 <template>
-  <div class="breed-upload">
-    <div
-      v-if="dragon.image !== null"
-      @click="fileInput?.click()"
-    >
-      <DragonPortrait
-        class="tile-portrait disabled"
-        :data="dragon"
-      />
-    </div>
-    <input
-      :id="label"
-      ref="fileInput"
-      type="file"
-      accept="image/png, image/gif"
-      @change="imageChanged"
-    />
-  </div>
+  <DragonPortrait
+    ref="tile"
+    class="pointer"
+    v-bind="$attrs"
+    :data="dragon"
+    @click.prevent="openDialog"
+    @keyup.space.enter="openDialog"
+    role="button"
+    :tabindex="disabled ? -1 : 0"
+    :aria-disabled="disabled"
+  />
+  <input
+    :id="label"
+    ref="fileInput"
+    type="file"
+    accept="image/png, image/gif"
+    aria-hidden="true"
+    tabindex="-1"
+    @change="imageChanged"
+  />
 </template>
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
@@ -25,19 +27,26 @@ import settings from '../../app/settings';
 import { PortraitData } from '../../app/types';
 import DragonPortrait from '../../components/Lineage/Dragon/DragonPortrait.vue';
 
-defineProps({
+const props = defineProps({
   label: {
     type: String,
     required: true,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
 });
 
 const emit = defineEmits<{
   (e: 'tileChosen', base64Data: string): void;
-  (e: 'uploadError'): void;
+  (e: 'uploadError', reasoning: string): void;
 }>();
 
+defineExpose({ focus });
+
 const fileInput = ref<HTMLInputElement>();
+const tile = ref<InstanceType<typeof DragonPortrait>>();
 
 // We have to use a "dummy" dragon to display the portrait
 // unfortunately
@@ -66,12 +75,23 @@ function imageChanged(e: Event) {
           const data = reader.result;
           dragon.image = data;
           emit('tileChosen', data);
-        } else emit('uploadError');
+        } else emit('uploadError', "File isn't string");
       });
 
       reader.readAsDataURL(file);
-    } else emit('uploadError');
+    } else emit('uploadError', 'Incorrect size');
   }
+}
+
+function openDialog() {
+  if (props.disabled) return;
+  if (fileInput.value === undefined) return;
+  fileInput.value.click();
+}
+
+function focus() {
+  if (props.disabled) return;
+  tile.value?.$el.focus();
 }
 </script>
 <style scoped>
