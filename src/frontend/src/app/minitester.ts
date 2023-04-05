@@ -1,4 +1,5 @@
 import { DragonType } from './types';
+import { hasParents } from './utils';
 
 class MiniTester {
   supressReasoning: boolean;
@@ -43,18 +44,32 @@ class MiniTester {
   }
 }
 
+interface context {
+  failedDragon: null | DragonType;
+}
 //failureCallback: (test: string) => void
-function createTester(supressReasoning = false): [MiniTester, string[]] {
+function createTester(
+  supressReasoning = false,
+): [MiniTester, string[], context] {
   const tester = new MiniTester(supressReasoning);
   const failedTests: string[] = [];
+  const context: context = {
+    failedDragon: null,
+  };
 
   // fails the integrity check and gives reasoning
-  tester.setFailHandler((testName, dragon: DragonType) => {
-    console.warn(`Test '${testName}' failed`, dragon);
+  tester.setFailHandler((testName, value: any) => {
+    console.warn(`Test '${testName}' failed`, value);
+
+    // this is a bit hackish, but we only want to provide
+    // a failed dragon context when we're... actually testing dragons
+    if (typeof value === 'object' && 'code' in value) {
+      context.failedDragon = value;
+    }
     failedTests.push(testName);
   });
 
-  return [tester, failedTests];
+  return [tester, failedTests, context];
 }
 
 export { MiniTester, createTester };
