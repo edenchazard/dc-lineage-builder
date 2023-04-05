@@ -22,6 +22,10 @@
           :showCopyButton="true"
         />
       </div>
+      <div v-if="problemDragon">
+        The problem dragon is:
+        <DragonFormattingBlock :dragon="problemDragon" />
+      </div>
     </template>
     <template v-slot:footer>
       <button @click="emit('close')">Close</button>
@@ -42,7 +46,8 @@ import { saveLineage } from '../../app/api';
 import Dialog from '../UI/Dialog.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
-import { LineageRoot } from '../../app/types';
+import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
+import { DragonType, LineageRoot } from '../../app/types';
 import settings from '../../app/settings';
 
 const props = defineProps({
@@ -57,6 +62,7 @@ const emit = defineEmits<{
 }>();
 
 const isLoadedAndOk = ref(false);
+const problemDragon = ref<DragonType>();
 const status = ref<InstanceType<typeof Feedback>>();
 
 const viewLink = ref('');
@@ -76,22 +82,26 @@ onMounted(async () => {
   // integrity check should never fail, but better to check anyway
   const integrity = verifyIntegrity(exportedTree);
   if (integrity.failed) {
-    status.value.error(`Error reading lineage.<br />
+    status.value.error(`Error saving lineage.<br />
         Integrity tests failed: ${makeError(integrity.failedTests)}`);
+    if (integrity.context.failedDragon !== null) {
+      problemDragon.value = integrity.context.failedDragon;
+    }
     return;
   }
 
   // make sure lineages fits our requirement for saving on the server
   const saveReqs = meetsSaveRequirements(exportedTree);
   if (saveReqs.failed) {
-    status.value.error(`To save on the server, lineages must be between ${
-      settings.gens.min
+    status.value.error(`To save on the server, lineages must be between
+    ${settings.gens.min} and ${
+      settings.gens.max
+    } generations long inclusively. There must also be no ghost breeds.<br /> Save requirements failed: ${makeError(
+      saveReqs.failedTests,
+    )}`);
+    if (saveReqs.context.failedDragon !== null) {
+      problemDragon.value = saveReqs.context.failedDragon;
     }
-            and ${
-              settings.gens.max
-            } generations long inclusively. There must also be
-            no ghost breeds.<br />
-            Save requirements failed: ${makeError(saveReqs.failedTests)}`);
     return;
   }
 

@@ -20,6 +20,10 @@
           />
         </div>
       </div>
+      <div v-if="problemDragon">
+        The problem dragon is:
+        <DragonFormattingBlock :dragon="problemDragon" />
+      </div>
     </template>
     <template v-slot:footer>
       <button @click="emit('close')">Close</button>
@@ -28,13 +32,14 @@
 </template>
 <script setup lang="ts">
 import { onMounted, PropType, ref } from 'vue';
-import { LineageRoot } from '../../app/types';
+import { DragonType, LineageRoot } from '../../app/types';
 import { deepClone, forEveryDragon } from '../../app/utils';
 import { verifyIntegrity } from '../../app/validators';
 
 import Dialog from '../UI/Dialog.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
+import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
 
 const props = defineProps({
   tree: {
@@ -49,6 +54,7 @@ const emit = defineEmits<{
 
 const file = ref('');
 const isError = ref(false);
+const problemDragon = ref<DragonType>();
 const status = ref<InstanceType<typeof Feedback>>();
 
 onMounted(() => {
@@ -64,13 +70,19 @@ onMounted(() => {
   // @ts-ignore
   forEveryDragon(exportedTree, (dragon) => delete dragon.selected);
 
-  const { failed, failedTests } = verifyIntegrity(exportedTree);
+  const { failed, failedTests, context } = verifyIntegrity(exportedTree);
 
   if (failed) {
     isError.value = true;
+
+    if (context.failedDragon !== null) {
+      problemDragon.value = context.failedDragon;
+    }
+
     status.value.error(
       `Error creating export code. Tests failed: ${failedTests.join(', ')}`,
     );
+
     return;
   }
 

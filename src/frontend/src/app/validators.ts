@@ -95,7 +95,7 @@ function isLineageHash(str: string) {
     It assumes an integrity check has been run first.
 */
 function meetsSaveRequirements(root: LineageRoot, supressReasoning = false) {
-  const [tester, failedTests] = createTester(supressReasoning);
+  const [tester, failedTests, context] = createTester(supressReasoning);
 
   // fetch ghosties 👻
   const ghostList = GLOBALS.breeds.entire.filter(
@@ -135,6 +135,7 @@ function meetsSaveRequirements(root: LineageRoot, supressReasoning = false) {
   return {
     failed: tester.failed,
     failedTests: failedTests,
+    context,
   };
 }
 
@@ -143,7 +144,7 @@ function meetsSaveRequirements(root: LineageRoot, supressReasoning = false) {
 // it means we failed a check somewhere and should stop
 // checking.
 function verifyIntegrity(root: LineageRoot, supressReasoning = false) {
-  const [tester, failedTests] = createTester(supressReasoning);
+  const [tester, failedTests, context] = createTester(supressReasoning);
 
   // basic tests
   const tests: Array<(dragon: DragonType) => boolean> = [
@@ -197,6 +198,7 @@ function verifyIntegrity(root: LineageRoot, supressReasoning = false) {
   return {
     failed: tester.failed,
     failedTests: failedTests,
+    context,
   };
 }
 
