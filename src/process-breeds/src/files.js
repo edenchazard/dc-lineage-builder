@@ -1,10 +1,7 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-
 import { KnownDevices } from 'puppeteer';
+import { getFileAndDirName } from './utils.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const { __dirname } = getFileAndDirName();
 
 export const ignoreFile = __dirname + '/breed-ignore';
 
