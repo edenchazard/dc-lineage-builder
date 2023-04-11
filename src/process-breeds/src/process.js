@@ -15,7 +15,9 @@
 */
 import { promises as fs } from 'fs';
 
+import { getFileAndDirName, prettyPrintJSONFile } from './utils.js';
 import { cache36, cache72, ignoreFile } from './files.js';
+import { portraitCache } from './cache.js';
 
 import {
     saveResolutionStylesheet,
@@ -31,7 +33,8 @@ import {
 } from "./fallback-handling.js";
 
 import fallbackJSON from "./fallback-breeds.json" assert { type: "json" };
-import { portraitCache } from './cache.js';
+
+const { __dirname, __filename } = getFileAndDirName();
 
 function getBreedsTable() {
     let table = fallbackBreedTable(fallbackJSON).concat(localBreedTable(localJSON));
@@ -51,6 +54,12 @@ async function main() {
     const [driver36, driver72] = await Promise.all([
         portraitCache.load(cache36.folder),
         portraitCache.load(cache72.folder),
+    ]);
+
+    // prettify our json files
+    await Promise.all([
+        prettyPrintJSONFile(__dirname + '/local-breeds.json'),
+        prettyPrintJSONFile(__dirname + '/fallback-breeds.json')
     ]);
 
     // 36 x 48 
