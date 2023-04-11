@@ -67,12 +67,24 @@ docker-compose --env-file .env.production -f docker-compose.prod.yml up -d --bui
 
 ## Breed processing
 
-The process-breeds script will parse both local and fallback breed tables, create the relevant json, and css files and place them in the correct locations.
+These utilities are for automating our breed table, css and json files, as well as putting them in the correct locations. Local images will be fetched automatically if they aren't already in the caches.
 
-Run it from the project root directory using the command:
+The file "breed-ignore" is to be used for ignoring particular images. Codes in this list will not be handled by the process script and must be handled manually (mainly through the download script). This is mostly useful for time-based sprites, where the lineage portrait can change based on the time of day.
+
+### process
+
+This script is to be run whenever breed data has been changed.
 
 ```sh
-docker-compose run --rm process-breeds
+docker-compose run --rm breeds npm run process
+```
+
+### download
+
+This script will fetch the lineage portraits at the time of running it. If these images are already in the cache, they will be replaced. Specify multiple codes as a list:
+
+```sh
+docker-compose run --rm breeds npm run download code1 code2 code3
 ```
 
 ## TODO

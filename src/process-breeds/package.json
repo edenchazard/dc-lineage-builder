@@ -4,10 +4,13 @@
   "type": "module",
   "description": "",
   "scripts": {
-    "process-breeds": "node --experimental-json-modules process.js"
+    "download": "node --experimental-json-modules ./src/download.js",
+    "process": "node --experimental-json-modules ./src/process.js"
   },
   "keywords": [],
   "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "puppeteer": "19.8.5"
+  }
 }
