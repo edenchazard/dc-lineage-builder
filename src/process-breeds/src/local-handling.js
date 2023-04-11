@@ -41,7 +41,8 @@ export function getBreedTable(json) {
         if (has_alts) {
             for (let altname in breed.sprites) {
                 const altdata = breed.sprites[altname];
-                let entry = createEntry(breedname + " " + altname, breed, altdata);
+                const fullName = altname === '__regular__' ? breedname : breedname + " " + altname;
+                let entry = createEntry(fullName, breed, altdata);
                 entries.push(entry);
             }
         }
