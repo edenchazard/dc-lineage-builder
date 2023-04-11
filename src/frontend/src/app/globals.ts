@@ -25,8 +25,8 @@ if (!isNocturneActive()) {
 
 const placeholder: BreedEntry = {
   name: 'Placeholder',
-  male: 'aabb',
-  female: 'aabb',
+  male: 'place',
+  female: 'place',
   genderOnly: false,
   metaData: {
     group: '*',
