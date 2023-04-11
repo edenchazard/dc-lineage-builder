@@ -37,9 +37,9 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Regular": ["ck9p3","W63P1"],
       "Salt Nirami": ["gjt5P","DPgK5"],
-      "Salt TCA": ["84555","wHITK"]
+      "Salt TCA": ["84555","wHITK"],
+      "__regular__": ["ck9p3","W63P1"]
     },
     "tags": ["Halloween"]
   },
@@ -100,8 +100,8 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": {
-      "Regular": ["7kiVA","zag1a"],
-      "Salt Odeen": ["GtvMN","iyKgt"]
+      "Salt Odeen": ["GtvMN","iyKgt"],
+      "__regular__": ["7kiVA","zag1a"]
     },
     "tags": ["Halloween"]
   },
@@ -140,8 +140,8 @@
     "genderOnly": "f",
     "group": "Standard",
     "sprites": {
-      "Regular": "38Wem",
-      "Salt Odeen": "4CMLL"
+      "Salt Odeen": "4CMLL",
+      "__regular__": "38Wem"
     },
     "tags": ["Christmas"]
   },
@@ -475,8 +475,8 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Regular": ["P37TJ","89Y6e"],
-      "Salt Odeen": ["ncCdI","HJrHd"]
+      "Salt Odeen": ["ncCdI","HJrHd"],
+      "__regular__": ["P37TJ","89Y6e"]
     },
     "tags": ["Halloween"]
   },
@@ -492,7 +492,7 @@
     "genderOnly": "f",
     "group": "Standard",
     "sprites": {
-      "Regular": "W10PC"
+      "__regular__": "W10PC"
     },
     "tags": ["Valentine"]
   }
