@@ -5,12 +5,6 @@
     "sprites": ["LYPZ7","-5","-1","48","Kn66X","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Aeria Gloris": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["0lKtx","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Albino": {
     "genderOnly": false,
     "group": "Standard",
@@ -155,23 +149,11 @@
     "sprites": ["vfRcS","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Blancblack": {
-    "genderOnly": false,
-    "group": "Two-headed",
-    "sprites": ["sOAHa","-10","-1","48","F5keC","-3","-1","48"],
-    "tags": ["Regular"]
-  },
   "Bleeding Moon": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["UilCo","-1","-1","48","H4vT8","-1","-1","48"],
     "tags": ["Regular"]
-  },
-  "Blizzard Wizard": {
-    "genderOnly": "m",
-    "group": "Standard",
-    "sprites": ["sDfIZ","-2","-1","48"],
-    "tags": ["Christmas"]
   },
   "Blue-Banded": {
     "genderOnly": false,
@@ -213,12 +195,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["Nn6jX","-16","-1","48","LgbSx","0","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Candelabra": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["rSFpm","0","-1","48"],
     "tags": ["Regular"]
   },
   "Canopy": {
@@ -263,15 +239,6 @@
     "group": "Standard",
     "sprites": ["USnsv","-15","-1","48","VsB9U","0","-1","48"],
     "tags": ["Halloween"]
-  },
-  "Ciriax Lindwyrm": {
-    "genderOnly": false,
-    "group": "Two-headed",
-    "sprites": {
-      "Blue": ["vXZFK","-15","-1","48","mCqbc","0","-1","48"],
-      "Green": ["FBOAh","-15","-1","48","w6zKo","0","-1","48"]
-    },
-    "tags": ["Regular"]
   },
   "Cloudplume": {
     "genderOnly": false,
@@ -373,21 +340,6 @@
     "group": "Pygmy",
     "sprites": ["HIWV5","-1","6","","sALdr","0","1",""],
     "tags": ["Hybrid"]
-  },
-  "Electric": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Regular": ["vUQM","-22","-1","48","rgM6","-10","-1","47"],
-      "Stunned": ["rB84m","-22","-1","48","VFCGT","-10","-1","47"]
-    },
-    "tags": ["Regular"]
-  },
-  "Elux Lucis": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["cSxFL","0","-1","48"],
-    "tags": ["Regular"]
   },
   "Ember": {
     "genderOnly": false,
@@ -516,12 +468,6 @@
     "sprites": ["I7I5K","0","-1","48","6CRd","-37","-1","48"],
     "tags": ["Hybrid"]
   },
-  "Ghanser": {
-    "genderOnly": false,
-    "group": "Two-headed",
-    "sprites": ["bZeHE","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Glaucus Drake": {
     "genderOnly": false,
     "group": "Drake",
@@ -647,12 +593,6 @@
     "sprites": ["MzNTU","-16","-1","48","5CsPF","-17","-1","48"],
     "tags": ["Regular"]
   },
-  "Hydrophidius": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["7PwuT","-4","-1","48"],
-    "tags": ["Regular"]
-  },
   "Ice": {
     "genderOnly": false,
     "group": "Standard",
@@ -665,18 +605,6 @@
     "sprites": ["jeuAc","0","-1","48","onrpD","-23","-1","48"],
     "tags": ["Regular"]
   },
-  "Iridichi": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["Eyee","-16.5","-1","48","Shrom","0","-1","48"],
-    "tags": ["Halloween"]
-  },
-  "Jester": {
-    "genderOnly": false,
-    "group": "Two-headed",
-    "sprites": ["uHDvQ","-14","-1","48","BbJhr","0","-1","48"],
-    "tags": ["Hybrid"]
-  },
   "Kingcrowne": {
     "genderOnly": false,
     "group": "Standard",
@@ -687,18 +615,6 @@
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": ["Kc90V","-3","0",""],
-    "tags": ["Regular"]
-  },
-  "Kyanite Pygmy": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["vmUEb","0","3",""],
-    "tags": ["Regular"]
-  },
-  "Labradorite": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["u5iXx","0","-1","48","AvNIN","0","-1","48"],
     "tags": ["Regular"]
   },
   "Lacula": {
@@ -729,12 +645,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["3NvWW","0","-1","48","rphkc","-2","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Luminox Wyvern": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["KlLTw","0","-1","48","Ww65x","-23","-1","48"],
     "tags": ["Regular"]
   },
   "Lunar Herald": {
@@ -929,15 +839,6 @@
     "sprites": ["fYqIQ","-8","-1","48","iaAWK","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Pitfire": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Reborn": ["tmnkW","0","-1","48","HOfAD","0","-1","48"],
-      "Standard": ["VTThe","-31","-1","48","Lostt","0","-1","48"]
-    },
-    "tags": ["Halloween"]
-  },
   "Plated Colossus": {
     "genderOnly": false,
     "group": "Standard",
@@ -1002,22 +903,10 @@
     "sprites": ["btrZS","-12","-1","48"],
     "tags": ["Valentine"]
   },
-  "Razorcrest Wyvern": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["eLltq","-19","-1","48"],
-    "tags": ["Regular"]
-  },
   "Red": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["WnAo","-26","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Red-Tailed Pygmy Wyrm": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["T8T3h","-3","-1","48"],
     "tags": ["Regular"]
   },
   "Ribbon Dancer": {
@@ -1033,12 +922,6 @@
       "Purple": ["pbMTv","-7","-1","48","jBBoq","-28","-1","48"],
       "Tan": ["vYWmo","-7","-1","48","zjGLw","-28","-1","48"]
     },
-    "tags": ["Regular"]
-  },
-  "Rift Wyrm": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["RUSOI","0","-1","48","IKtGa","-8","-1","48"],
     "tags": ["Regular"]
   },
   "Risensong": {
@@ -1070,12 +953,6 @@
     "group": "Standard",
     "sprites": ["o9ykg","-16","-1","48","OEZ0I","0","-1","47.5"],
     "tags": ["Hybrid"]
-  },
-  "Sabertooth Bull Drake": {
-    "genderOnly": false,
-    "group": "Drake",
-    "sprites": ["ywZKC","0","-1","48"],
-    "tags": ["Regular"]
   },
   "Sakuhana Wyvern": {
     "genderOnly": "f",
@@ -1109,12 +986,6 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": ["ny65H","-4","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Script": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["2Kjdn","0","-1","48"],
     "tags": ["Regular"]
   },
   "Seasonal (Autumn)": {
@@ -1255,15 +1126,6 @@
     "sprites": ["jnbh6","-3","-1","48","Susy4","-11","-1","48"],
     "tags": ["Regular"]
   },
-  "Spinel Wyvern": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Green": ["tFK4g","-18","-1","48","0f2CT","0","-1","48"],
-      "Red": ["vvQrJ","-18","-1","48","FR4Wa","0","-1","48"]
-    },
-    "tags": ["Regular"]
-  },
   "Spirit Ward": {
     "genderOnly": false,
     "group": "Standard",
@@ -1374,12 +1236,6 @@
       "Pink": ["voFHL","0","-1","48"]
     },
     "tags": ["Valentine"]
-  },
-  "Temple Wyrm": {
-    "genderOnly": false,
-    "group": "Two-headed",
-    "sprites": ["YuMVF","0","-1","48"],
-    "tags": ["Regular"]
   },
   "Tercorn": {
     "genderOnly": false,
