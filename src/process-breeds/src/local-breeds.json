@@ -447,7 +447,7 @@
     "sprites": "B6Q0m",
     "tags": ["Regular"]
   },
-  "Red-Tailed Pygmy Wyrm": {
+  "Red-Tailed Wyrm": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Pygmy",
@@ -530,7 +530,7 @@
     "group": "Standard",
     "sprites": {
       "Green": ["qA36V","0gpYC"],
-      "Red": ["i3TBl","5wnHq"]
+      "Violet": ["i3TBl","5wnHq"]
     },
     "tags": ["Regular"]
   },
