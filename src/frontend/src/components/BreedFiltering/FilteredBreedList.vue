@@ -88,6 +88,7 @@ watch(container, () => {
 .results {
   padding: 0px;
   flex: 1;
+  overflow-y: auto;
 }
 .no-results {
   font-style: italic;
