@@ -8,6 +8,7 @@ import {
   PortraitData,
   PartialLineage,
 } from './types';
+import { BREEDNAMEREGEXP } from './validators';
 
 function validGenderForBreed(gender: Gender, breed: BreedEntry): boolean {
   // if the genderonly attribute is not false,
@@ -137,21 +138,22 @@ export function isBreedInList(list: BreedEntry[], breedName: string) {
 export function addBreed(breedObj: BreedEntry, resort: boolean = true) {
   const breedTable = GLOBALS.breeds.entire;
 
-  // Reject empty names
-  if (breedObj.name.trim() === '') return false;
+  // trim whitespace from name
+  const newBreed = { ...breedObj, name: breedObj.name.trim() };
+
+  // Reject bad names
+  if (!newBreed.name.match(BREEDNAMEREGEXP)) return false;
 
   // There's already a breed matching this name
-  if (isBreedInList(breedTable, breedObj.name)) return false;
+  if (isBreedInList(breedTable, newBreed.name)) return false;
 
   // TODO: We should add some tests to check metadata etc
 
-  breedTable.push(breedObj);
+  breedTable.push(newBreed);
 
   if (resort) {
     // if required retain our alphabetical sort
-    const sort = (breed1: BreedEntry, breed2: BreedEntry) =>
-      breed1.name.localeCompare(breed2.name);
-    breedTable.sort(sort);
+    breedTable.sort((b1, b2) => b1.name.localeCompare(b2.name));
   }
   // update gender tables
   GLOBALS.breeds.males = filterBreedTableByGender(breedTable, 'm');

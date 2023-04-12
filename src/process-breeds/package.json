@@ -1,15 +1,13 @@
 {
-    "name": "dc-lineage-builder",
-    "version": "x",
-    "type": "module",
-    "description": "",
-    "scripts": {
-        "process-breeds": "node --experimental-json-modules process.js"
-    },
-    "keywords": [],
-    "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
-    "license": "MIT",
-    "dependencies": {
-        "images": "^3.2.4"
-    }
+  "name": "dc-lineage-builder",
+  "version": "x",
+  "type": "module",
+  "description": "",
+  "scripts": {
+    "process-breeds": "node --experimental-json-modules process.js"
+  },
+  "keywords": [],
+  "author": "Charley Reeson <neon.fortytwo@gmail.com> (https://chazza.me)",
+  "license": "MIT",
+  "dependencies": {}
 }

@@ -86,6 +86,7 @@ computed:{
 .local {
   width: var(--size36x48W);
   height: var(--size36x48H);
+  background-repeat: no-repeat;
   background-size: cover;
 }
 .local {
