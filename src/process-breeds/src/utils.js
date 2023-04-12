@@ -7,7 +7,6 @@ import { promises as fs } from 'fs';
 export function getFileAndDirName() {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
-    console.log(import.meta.url, __dirname)
     return { __filename, __dirname };
 }
 
