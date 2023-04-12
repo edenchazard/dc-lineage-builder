@@ -11,4 +11,4 @@ createApp(App)
   //.use(bubblePlugin)
   // components
   .component('font-awesome-icon', FontAwesomeIcon)
-  .mount('#app');
+  .mount('#app-container');
