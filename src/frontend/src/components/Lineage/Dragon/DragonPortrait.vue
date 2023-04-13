@@ -8,6 +8,7 @@
       v-if="data.metaData.src === 'dc'"
       :src="'//dragcave.net/image/' + data.image"
       :class="'fallback d-' + data.image"
+      :alt="data.name"
     />
     <span
       v-else-if="data.metaData.src === 'local'"
@@ -17,6 +18,7 @@
       v-else-if="data.metaData.src === 'ghost'"
       class="ghost"
       :src="data.image"
+      :alt="data.name"
     />
     <img
       v-else
