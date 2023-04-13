@@ -88,6 +88,7 @@ computed:{
   height: var(--size36x48H);
   background-repeat: no-repeat;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .local {
   margin: -1px -1px;
