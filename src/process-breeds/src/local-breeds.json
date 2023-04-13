@@ -554,7 +554,12 @@
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": "taE9n",
+    "sprites": {
+      "Dawn": "wLJ9V",
+      "Day": "taE9n",
+      "Dusk": "20uav",
+      "Night": "IFpVR"
+    },
     "tags": ["Regular"]
   },
   "Tarantula Hawk Drake": {
