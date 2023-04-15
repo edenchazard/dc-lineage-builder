@@ -79,7 +79,6 @@ function close() {
 @media only screen and (min-width: 501px) {
   .focusable-dialog {
     width: 500px;
-    -webkit-box-shadow: 0px 0px 200px 0px #000000;
     box-shadow: 0px 0px 200px 0px #000000;
     margin-left: -250px;
     left: 50%;
@@ -92,7 +91,6 @@ function close() {
     /* https://stackoverflow.com/questions/2005954/center-a-positionfixed-element */
     margin-top: -250px;
     top: 50%;
-    -webkit-box-shadow: 0px 0px 200px 0px #000000;
     box-shadow: 0px 0px 200px 0px #000000;
   }
 }
