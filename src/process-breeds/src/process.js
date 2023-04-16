@@ -37,10 +37,34 @@ import fallbackJSON from "./fallback-breeds.json" assert { type: "json" };
 const { __dirname, __filename } = getFileAndDirName();
 
 function getBreedsTable() {
-    let table = fallbackBreedTable(fallbackJSON).concat(localBreedTable(localJSON));
-    table.sort((a, b) => a.name.localeCompare(b.name));
+    // check for duplicate breed name keys in both sets, and warn
+    // if they exist.
+    const mapNames = breed => breed.name;
+    const fallbacks = fallbackBreedTable(fallbackJSON);
+    const locals = localBreedTable(localJSON);
+    const fallbackNames = fallbacks.map(mapNames)
+    const localNames = locals.map(mapNames);
+    const uniqueNames = new Set([...fallbackNames, ...localNames]);
 
-    return table;
+    uniqueNames.forEach(uniqueName => {
+        // check if the fully computed name exists in both lists
+        if (fallbackNames.includes(uniqueName) && localNames.includes(uniqueName)) {
+            throw new Error(`Err: Breed name ${uniqueName} exists in both lists.`);
+        }
+        const dupeCheck = name => name === uniqueName;
+
+        // check for dupes of each computed name in lists
+        if (fallbackNames.filter(dupeCheck).length > 1) {
+            throw new Error(`Err: Duplicate name in fallback list: ${uniqueName}`);
+        }
+
+        if (localNames.filter(dupeCheck).length > 1) {
+            throw new Error(`Err: Duplicate name in local list: ${uniqueName}`);
+        }
+    });
+
+    // return our full breed table sorted alphabetically
+    return [...fallbacks, ...locals].sort((a, b) => a.name.localeCompare(b.name));
 }
 
 async function main() {
