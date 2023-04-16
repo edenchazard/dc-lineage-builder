@@ -1339,12 +1339,6 @@
     "sprites": ["W1ij4","0","-1","48","cGDvs","-23","-1","48"],
     "tags": ["Regular"]
   },
-  "Vermeil": {
-    "genderOnly": "m",
-    "group": "Standard",
-    "sprites": ["Messy","0","-1","48"],
-    "tags": ["Valentine"]
-  },
   "Vremya Drake": {
     "genderOnly": false,
     "group": "Drake",
