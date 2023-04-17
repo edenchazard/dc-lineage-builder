@@ -437,6 +437,14 @@
     "sprites": "rnTk",
     "tags": ["Regular"]
   },
+  "Mistletoe": {
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Salt Pixxelation": "e5OlA"
+    },
+    "tags": ["Christmas"]
+  },
   "Monarch": {
     "dimorphism": true,
     "genderOnly": false,
@@ -885,6 +893,7 @@
     "genderOnly": "f",
     "group": "Standard",
     "sprites": {
+      "Salt Schenanigans": "yfweC",
       "__regular__": "W10PC"
     },
     "tags": ["Valentine"]
