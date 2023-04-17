@@ -1,10 +1,4 @@
 {
-  "Aeon Wyvern": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["LYPZ7","-5","-1","48","Kn66X","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Albino": {
     "genderOnly": false,
     "group": "Standard",
@@ -56,23 +50,11 @@
     "sprites": ["NuOVp","-6","-1","48","j9tBc","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Aria": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["BR4HC","-19","-1","48","6QLw","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Arsani": {
     "genderOnly": "f",
     "group": "Standard",
     "sprites": ["jFbDs","-16","-1","48"],
     "tags": ["Valentine"]
-  },
-  "Ash": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["23chF","-1","-1","48"],
-    "tags": ["Regular"]
   },
   "Astaarus": {
     "genderOnly": false,
@@ -165,12 +147,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["aAwxC","-3","-1","48","WzRMQ","-2","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Bolt": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["1nAoA","0","-1","48"],
     "tags": ["Regular"]
   },
   "Boreal": {
@@ -313,12 +289,6 @@
     "group": "Standard",
     "sprites": ["dgqt","0","-1","48"],
     "tags": ["Regular"]
-  },
-  "Desipis": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["wIRsV","-22","-1","48","F2PHf","-1","-1","48"],
-    "tags": ["Halloween"]
   },
   "Dorsal": {
     "genderOnly": false,
@@ -468,12 +438,6 @@
     "sprites": ["I7I5K","0","-1","48","6CRd","-37","-1","48"],
     "tags": ["Hybrid"]
   },
-  "Glaucus Drake": {
-    "genderOnly": false,
-    "group": "Drake",
-    "sprites": ["fIEj6","-9","-1","48","8PZ1h","-4","-1","48"],
-    "tags": ["Regular"]
-  },
   "Glowback Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
@@ -526,24 +490,6 @@
     "group": "Standard",
     "sprites": ["beEo3","-4","-1","48"],
     "tags": ["Regular"]
-  },
-  "Guardian Avatar (Change)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["yAGEz","-6","-1","48"],
-    "tags": ["Hybrid"]
-  },
-  "Guardian Avatar (Creation)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["A1S1h","-12","-1","48"],
-    "tags": ["Hybrid"]
-  },
-  "Guardian Avatar (Destruction)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["ByE1r","-14","-1","48"],
-    "tags": ["Hybrid"]
   },
   "Guardian Of Nature": {
     "genderOnly": false,
@@ -760,12 +706,6 @@
     "sprites": ["184Wv","0","-1","48","WmmUO","-41","-1","48"],
     "tags": ["Regular"]
   },
-  "Nhiostrife Wyvern": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["efc7o","-4","-1","48"],
-    "tags": ["Regular"]
-  },
   "Nilia Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
@@ -897,12 +837,6 @@
     "sprites": ["ZNJKk","0","-1","48","S2sEw","-14","-1","48"],
     "tags": ["Regular"]
   },
-  "Radiant Angel": {
-    "genderOnly": "m",
-    "group": "Standard",
-    "sprites": ["btrZS","-12","-1","48"],
-    "tags": ["Valentine"]
-  },
   "Red": {
     "genderOnly": false,
     "group": "Standard",
@@ -923,12 +857,6 @@
       "Tan": ["vYWmo","-7","-1","48","zjGLw","-28","-1","48"]
     },
     "tags": ["Regular"]
-  },
-  "Risensong": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["tqdB0","0","-1","48"],
-    "tags": ["Hybrid"]
   },
   "Rosebud": {
     "genderOnly": "f",
@@ -1023,12 +951,6 @@
     "group": "Standard",
     "sprites": ["tUNDG","0","-1px","47.5","lRrQO","-8","-1","48"],
     "tags": ["Regular"]
-  },
-  "Setsong": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["cGR6f","-11","-1","48"],
-    "tags": ["Hybrid"]
   },
   "Shadow Walker": {
     "genderOnly": false,
@@ -1369,90 +1291,6 @@
     "sprites": ["C8Xt","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Wintertide": {
-    "genderOnly": "m",
-    "group": "Standard",
-    "sprites": ["fstvs","-13","-1","48"],
-    "tags": ["Christmas"]
-  },
-  "Xenowyrm (Aquilo)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["ozrG6","-4","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Aso)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["Jqa4B","0","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Astrapi)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["2nWSK","0","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Chrono)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["qe37v","-13","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Gaia)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["X724Q","0","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Ke'Maro)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["Tt6qZ","0","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Mageia)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["ruGDk","-9","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Obidar)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["rAs5K","-18","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Pharos)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["0Wy3D","0","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Pyro)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["PIovw","-9","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Staterae)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["X3n7X","-1","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Thalassa)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["Yp8rK","-1","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Xenowyrm (Umbra)": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["k0dty","-13","-1","48"],
-    "tags": ["Regular"]
-  },
   "Xol": {
     "genderOnly": false,
     "group": "Standard",
@@ -1473,18 +1311,5 @@
     "group": "Standard",
     "sprites": ["RSrR","-1","-1","48"],
     "tags": ["Christmas"]
-  },
-  "Zyumorph": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Black": ["pwdtd","-17","-1","47"],
-      "Blue": ["ES3dS","-14","-1","48"],
-      "Pink": ["DvHH0","0","-1","48"],
-      "Red": ["XPSro","0","-1","48"],
-      "White": ["xbgwg","-14","-1","48"],
-      "Yellow": ["xtxX2","0","-1","48"]
-    },
-    "tags": ["Regular"]
   }
 }
