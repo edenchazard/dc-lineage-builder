@@ -5,11 +5,20 @@
     "group": "Standard",
     "sprites": {
       "Enraged": "ywZvy",
+      "Enraged Salt Birdzgoboom": "ejzkS",
       "Enraged Salt Odeen": "w4wVZ",
       "Neutral": "yDpqg",
+      "Neutral Salt Birdzgoboom": "qjn78",
       "Neutral Salt Odeen": "SuORy"
     },
     "tags": ["Christmas"]
+  },
+  "Aeon Wyvern": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["lRVeO","pAako"],
+    "tags": ["Regular"]
   },
   "Aeria Gloris": {
     "dimorphism": false,
@@ -49,6 +58,20 @@
       "__regular__": ["ck9p3","W63P1"]
     },
     "tags": ["Halloween"]
+  },
+  "Aria": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["EhfrQ","GJF56"],
+    "tags": ["Regular"]
+  },
+  "Ash": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "jFX3Q",
+    "tags": ["Regular"]
   },
   "Avin Pygmy": {
     "dimorphism": true,
@@ -94,6 +117,13 @@
     "group": "Standard",
     "sprites": "TjcoW",
     "tags": ["Christmas"]
+  },
+  "Bolt": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "sHE0e",
+    "tags": ["Regular"]
   },
   "Caligene": {
     "dimorphism": true,
@@ -148,7 +178,9 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Pixxelation": ["s0n9m","VtdtJ"]
+      "Salt Birdzgoboom": ["uZ9hS","Es9FU"],
+      "Salt Pixxelation": ["s0n9m","VtdtJ"],
+      "__regular__": ["Qn1Pw","iYHtV"]
     },
     "tags": ["Halloween"]
   },
@@ -237,6 +269,13 @@
     "sprites": ["ku0VO","oBuNq"],
     "tags": ["Regular"]
   },
+  "Glaucus Drake": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Drake",
+    "sprites": ["VqdZ6","0v08H"],
+    "tags": ["Regular"]
+  },
   "Glystere Wyrm": {
     "dimorphism": false,
     "genderOnly": "m",
@@ -252,6 +291,27 @@
     "group": "Standard",
     "sprites": ["tcA6d","D6hAp"],
     "tags": ["Halloween"]
+  },
+  "Guardian Avatar (Change)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "1uCIH",
+    "tags": ["Hybrid"]
+  },
+  "Guardian Avatar (Creation)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "zsQD6",
+    "tags": ["Hybrid"]
+  },
+  "Guardian Avatar (Destruction)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "FHW2y",
+    "tags": ["Hybrid"]
   },
   "Heartstealing": {
     "dimorphism": false,
@@ -405,6 +465,22 @@
     "sprites": ["ZHvg5","3SK3A"],
     "tags": ["Regular"]
   },
+  "Nhiostrife Wyvern": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "pK6SX",
+    "tags": ["Regular"]
+  },
+  "Omen Wyrm": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Salt Birdzgoboom": ["40Fe4","v9OgZ"]
+    },
+    "tags": ["Halloween"]
+  },
   "Pink": {
     "dimorphism": true,
     "genderOnly": false,
@@ -440,6 +516,16 @@
     },
     "tags": ["Regular"]
   },
+  "Radiant Angel": {
+    "dimorphism": false,
+    "genderOnly": "m",
+    "group": "Standard",
+    "sprites": {
+      "Salt Birdzgoboom": "lTI33",
+      "__regular__": "ykiII"
+    },
+    "tags": ["Valentine"]
+  },
   "Razorcrest Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
@@ -460,6 +546,13 @@
     "group": "Standard",
     "sprites": ["tZSi2","zGmc1"],
     "tags": ["Regular"]
+  },
+  "Risensong": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "1sJdX",
+    "tags": ["Hybrid"]
   },
   "Sabertooth Bull Drake": {
     "dimorphism": false,
@@ -495,6 +588,13 @@
     "group": "Pygmy",
     "sprites": "woK0s",
     "tags": ["Regular"]
+  },
+  "Setsong": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "BiRHM",
+    "tags": ["Hybrid"]
   },
   "Shumoga": {
     "dimorphism": false,
@@ -615,7 +715,10 @@
     "genderOnly": false,
     "group": "Other",
     "sprites": {
+      "Amphiptere": "BYU52",
       "Drake": "12sKN",
+      "Eastern": "4OvtJ",
+      "Leviathan": "gY7aJ",
       "Lindwyrm": "dD16c",
       "Pygmy Eastern": "zwt63",
       "Pygmy Lindwyrm": "t8cWP",
@@ -629,6 +732,7 @@
       "Two-headed wyrm": "faMiw",
       "Western": "Fnva",
       "Wingless": "V8anY",
+      "Wyrm": "vzzRG",
       "Wyvern": "hs7vp"
     },
     "tags": ["Regular"]
@@ -651,6 +755,15 @@
     "group": "Standard",
     "sprites": "K1GT",
     "tags": ["Regular"]
+  },
+  "Wintertide": {
+    "dimorphism": false,
+    "genderOnly": "m",
+    "group": "Standard",
+    "sprites": {
+      "__regular__": "2Dmsy"
+    },
+    "tags": ["Christmas"]
   },
   "Wisteria": {
     "dimorphism": false,
@@ -676,6 +789,97 @@
     "sprites": "2pong",
     "tags": ["Christmas"]
   },
+  "Xenowyrm (Aquilo)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "fxnVu",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Aso)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "yAPFc",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Astrapi)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "5yOn5",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Chrono)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "aikmX",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Gaia)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "XpP8V",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Ke'Maro)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "FTmNo",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Mageia)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "yxJTI",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Obidar)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "jyn5w",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Pharos)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "dDDQ3",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Pyro)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "grsFX",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Staterae)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "WP5Jo",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Thalassa)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "K3VVG",
+    "tags": ["Regular"]
+  },
+  "Xenowyrm (Umbra)": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "wtlPt",
+    "tags": ["Regular"]
+  },
   "Xocoatl": {
     "dimorphism": false,
     "genderOnly": "f",
@@ -684,5 +888,19 @@
       "__regular__": "W10PC"
     },
     "tags": ["Valentine"]
+  },
+  "Zyumorph": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Black": "XQVBK",
+      "Blue": "XCLln",
+      "Pink": "PoUWp",
+      "Red": "Vwp95",
+      "White": "YRSBw",
+      "Yellow": "o2YNK"
+    },
+    "tags": ["Regular"]
   }
 }
