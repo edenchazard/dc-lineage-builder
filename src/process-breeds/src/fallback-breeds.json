@@ -329,19 +329,6 @@
     "sprites": ["Png8A","0","-1","48","uUYCh","-6","-1","48"],
     "tags": ["Regular"]
   },
-  "False-Headed Hydra": {
-    "genderOnly": false,
-    "group": "Two-headed",
-    "sprites": {
-      "Alpine": ["5blvT","0","0","48","F3Nz1","-18","-1","48"],
-      "Coast": ["dEBMJ","0","0","48","5G9TY","-18","-1","48"],
-      "Desert": ["a8J5I","0","0","48","hsEoA","-18","-1","48"],
-      "Forest": ["svHQy","0","0","48","xdUHc","-18","-1","48"],
-      "Jungle": ["3xuhb","0","0","48","0QRgZ","-18","-1","48"],
-      "Volcano": ["bfRHB","0","0","48","rmAKv","-18","-1","48"]
-    },
-    "tags": ["Regular"]
-  },
   "Fanalea": {
     "genderOnly": false,
     "group": "Standard",
@@ -412,12 +399,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["Whfs7","0","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Furor Pygmy": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["ntFiu","-15","-1","48"],
     "tags": ["Regular"]
   },
   "Galvanic Wyvern": {
@@ -751,12 +732,6 @@
     "sprites": ["7DY50","-14","-1","47.5","IRESi","-7","-1","48"],
     "tags": ["Regular"]
   },
-  "Painted Ray Pygmy": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["Y2ULc","-1","-1","48","chLaD","0","0",""],
-    "tags": ["Regular"]
-  },
   "Pargulus Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
@@ -938,12 +913,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["9VS4","0","-1","47.5","urpl","-15","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Seawyrm Pygmy": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["AkVSK","-13","3","","dTV3","0","0",""],
     "tags": ["Regular"]
   },
   "Serrati Wyvern": {
