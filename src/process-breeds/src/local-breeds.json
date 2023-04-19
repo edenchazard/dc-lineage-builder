@@ -129,7 +129,10 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["jQ06C","qhbIi"],
+    "sprites": {
+      "Salt Infinis": ["SRP5l","2w8nP"],
+      "__regular__": ["jQ06C","qhbIi"]
+    },
     "tags": ["Halloween"]
   },
   "Candelabra": {
@@ -302,6 +305,7 @@
     "genderOnly": "m",
     "group": "Standard",
     "sprites": {
+      "Salt Infinis": "hXdBd",
       "Salt Spatio": "m00OD"
     },
     "tags": ["Christmas"]
@@ -397,7 +401,10 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["GKebv","pC2D8"],
+    "sprites": {
+      "Salt Infinis": ["y4dL5","sazrx"],
+      "__regular__": ["GKebv","pC2D8"]
+    },
     "tags": ["Halloween"]
   },
   "Kyanite Pygmy": {
@@ -484,7 +491,10 @@
     "dimorphism": false,
     "genderOnly": "m",
     "group": "Standard",
-    "sprites": "pxCOk",
+    "sprites": {
+      "Salt Infinis": "5ikD8",
+      "__regular__": "pxCOk"
+    },
     "tags": ["Valentine"]
   },
   "Nexus": {
@@ -541,6 +551,15 @@
     },
     "tags": ["Halloween"]
   },
+  "Pryanost Lindwyrm": {
+    "dimorphism": false,
+    "genderOnly": "f",
+    "group": "Standard",
+    "sprites": {
+      "Salt Infinis": "1N3R6"
+    },
+    "tags": ["Christmas"]
+  },
   "Pyropellis Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
@@ -561,6 +580,7 @@
     "group": "Standard",
     "sprites": {
       "Salt Birdzgoboom": "lTI33",
+      "Salt Infinis": "pHVvj",
       "__regular__": "ykiII"
     },
     "tags": ["Valentine"]
@@ -656,7 +676,10 @@
     "dimorphism": false,
     "genderOnly": "m",
     "group": "Standard",
-    "sprites": "ViiiL",
+    "sprites": {
+      "Salt Infinis": "SPqh3",
+      "__regular__": "ViiiL"
+    },
     "tags": ["Christmas"]
   },
   "Solstice": {
