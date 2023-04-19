@@ -224,11 +224,32 @@
     },
     "tags": ["Valentine"]
   },
+  "False-Headed Hydra": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Two-headed",
+    "sprites": {
+      "Alpine": ["fmV9V","d5fEg"],
+      "Coast": ["TVRZx","bM4IJ"],
+      "Desert": ["GqRZg","09hSs"],
+      "Forest": ["hyIgz","9NijL"],
+      "Jungle": ["SR3RM","7zEdp"],
+      "Volcano": ["CdgGh","pb7Bo"]
+    },
+    "tags": ["Regular"]
+  },
   "Fell": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["FnHwj","1Hyq5"],
+    "tags": ["Regular"]
+  },
+  "Furor Pygmy": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": "KVM4T",
     "tags": ["Regular"]
   },
   "Garland": {
@@ -489,6 +510,16 @@
     },
     "tags": ["Halloween"]
   },
+  "Painted Ray Pygmy": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": {
+      "Metachrosis": ["422Bx","vatB9"],
+      "__regular__": ["Y2ULc","acP7t"]
+    },
+    "tags": ["Regular"]
+  },
   "Pink": {
     "dimorphism": true,
     "genderOnly": false,
@@ -595,6 +626,13 @@
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": "woK0s",
+    "tags": ["Regular"]
+  },
+  "Seawyrm Pygmy": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": ["WZn25","cH9U1"],
     "tags": ["Regular"]
   },
   "Setsong": {
@@ -731,6 +769,7 @@
       "Pygmy Eastern": "zwt63",
       "Pygmy Lindwyrm": "t8cWP",
       "Pygmy Western": "ApbPX",
+      "Pygmy Wingless": "NOJou",
       "Pygmy Wyrm": "2pW6J",
       "Pygmy Wyvern": "xgW6e",
       "Two-headed Eastern": "FeT6A",
