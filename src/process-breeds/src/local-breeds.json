@@ -146,7 +146,10 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["5mbRb","whJ3b"],
+    "sprites": {
+      "Corporeal": ["My6XH","vkTQ2"],
+      "Incorporeal": ["5mbRb","whJ3b"]
+    },
     "tags": ["Regular"]
   },
   "Ceriuth": {
