@@ -562,12 +562,6 @@
     "sprites": ["bITER","-14","-1","48","yaigm","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Lihnseyre": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["5IOZj","-1","-1","48"],
-    "tags": ["Regular"]
-  },
   "Lumina": {
     "genderOnly": false,
     "group": "Standard",
@@ -1222,12 +1216,6 @@
     "genderOnly": false,
     "group": "Other",
     "sprites": ["Ivh5","0","-1","47","MXv75","0","-1","47"],
-    "tags": ["Regular"]
-  },
-  "Venturis": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["W1ij4","0","-1","48","cGDvs","-23","-1","48"],
     "tags": ["Regular"]
   },
   "Vremya Drake": {

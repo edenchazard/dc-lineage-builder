@@ -437,6 +437,13 @@
     },
     "tags": ["Christmas"]
   },
+  "Lihnseyre": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "PkHwb",
+    "tags": ["Regular"]
+  },
   "Lotaan": {
     "dimorphism": false,
     "genderOnly": false,
@@ -805,6 +812,13 @@
       "Wyrm": "vzzRG",
       "Wyvern": "hs7vp"
     },
+    "tags": ["Regular"]
+  },
+  "Venturis": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["gMPNF","cp4l7"],
     "tags": ["Regular"]
   },
   "Vermeil": {
