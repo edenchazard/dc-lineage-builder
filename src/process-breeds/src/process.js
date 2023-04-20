@@ -68,12 +68,13 @@ function getBreedsTable() {
 }
 
 async function main() {
-    const
-        definitionsJSON = "breed-definitions.json",
-        breeds = getBreedsTable(),
-        json = JSON.stringify(breeds);
+    const definitionsJSON = "breed-definitions.json";
+    const breeds = getBreedsTable();
+    const json = JSON.stringify(breeds);
+    const localNumber = breeds.filter(breed => breed.metaData.src === "local").length;
+    const fallbackNumber = breeds.filter(breed => breed.metaData.src === "dc").length;
 
-    console.log(`Found ${breeds.length} breed entries.`);
+    console.log(`Found ${breeds.length} total breed entries (${localNumber} local and ${fallbackNumber} fallbacks.)`);
 
     const [driver36, driver72] = await Promise.all([
         portraitCache.load(cache36.folder),
