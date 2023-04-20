@@ -61,7 +61,15 @@ async function getTileFullPaths(dir) {
 
 async function getIgnoredBreeds(ignoreFile) {
     const content = (await fs.readFile(ignoreFile, { encoding: 'utf8' })).trim();
-    return content.replace(/\r\n/g, '\n').split('\n');
+    return content
+        // standardise line endings
+        .replace(/\r\n/g, '\n')
+        // split by line
+        .split('\n')
+        // trim whitespaces for each line
+        .map(line => line.trim())
+        // filter out any line that isn't a code
+        .filter(line => line.match(/^[a-z0-9]{4,5}$/i));
 }
 
 export async function checkCache(
