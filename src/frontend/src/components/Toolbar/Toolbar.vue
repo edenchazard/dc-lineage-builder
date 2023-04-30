@@ -15,144 +15,85 @@
       :tree="tree"
       @close="dialogs.showGenerateDialog = false"
     />
-
-    <div class="toolbar">
-      <div class="toolbar-item">
-        <Vue3ToggleButton
-          v-model:isActive="config.showInterface"
-          trackActiveColor="var(--builderControlBG)"
-          trackHeight="20px"
-          handleDiameter="18px"
-          handleDistance="52px"
-        />
-        <span>Show interface</span>
+    <div
+      class="toolbar"
+      role="toolbar"
+    >
+      <div
+        class="settings"
+        aria-label="Settings toolbar"
+      >
+        <label>
+          <input
+            type="checkbox"
+            v-model="config.showInterface"
+          />Show interface
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            v-model="config.showLabels"
+          />Show labels
+        </label>
       </div>
-      <div class="toolbar-item">
-        <Vue3ToggleButton
-          v-model:isActive="config.showLabels"
-          trackActiveColor="var(--builderControlBG)"
-          trackHeight="20px"
-          handleDiameter="18px"
-          handleDistance="52px"
-        />
-        <span>Show labels</span>
-      </div>
-      <div class="toolbar-item">
+      <div
+        class="functions"
+        aria-label="Functions toolbar"
+      >
         <ToolbarButton
-          title="Export dragon"
-          icon="save"
-          label="Export"
-          @click="dialogs.showExportDialog = true"
-        />
-        <br />
-        <ToolbarButton
-          title="Import dragon"
-          icon="file-code"
-          label="Import"
-          @click="dialogs.showImportDialog = true"
-        />
-      </div>
-      <div class="toolbar-item">
-        <ToolbarButton
-          title="Get Link"
-          icon="link"
-          label="Get Link"
-          @click="dialogs.showGenerateDialog = true"
-        />
-      </div>
-      <div class="toolbar-item">
-        <ToolbarButton
-          title="Toggle fullscreen"
-          icon="maximize"
-          @click="emit('fullscreen')"
-        />
-      </div>
-      <div class="toolbar-item">
-        <ToolbarButton
-          title="Undo"
-          icon="undo"
-          @click="emit('undo')"
-          :disabled="appStore.treeHistory.canUndo === false"
-        />
-      </div>
-      <div class="toolbar-item">
-        <ToolbarButton
-          title="Redo"
-          icon="redo"
-          @click="emit('redo')"
-          :disabled="appStore.treeHistory.canRedo === false"
-        />
-      </div>
-    </div>
-    <div class="selection-tools">
-      <div>
-        Select:
-        <ToolbarButton
-          title="Select all males"
-          icon="mars"
-          @click="emit('selectCriteria', 'gender', 'm')"
-        />
-        <ToolbarButton
-          title="Select all females"
-          icon="venus"
-          @click="emit('selectCriteria', 'gender', 'f')"
-        />
-        <ToolbarButton
-          title="More options"
-          icon="caret-down"
-          :options="selectionOptions"
-          @optionSelected="
-            ({ value: [crit, value] }) => emit('selectCriteria', crit, value)
-          "
-        />
-        <ToolbarButton
-          :class="{
-            invisible: !itemsSelected,
-          }"
-          title="Unselect all"
-          icon="times"
-          @click="emit('unselectAll')"
+          v-for="button in generalFunctions"
+          :key="button.label"
+          v-bind="button"
+          @click="button.click"
         />
       </div>
       <div
-        class="selection-apply"
-        :class="{
-          invisible: !itemsSelected,
-        }"
+        class="selection-tools"
+        aria-label="Selection toolbar"
       >
-        <div class="selection-apply-left">
+        <ToolbarGroup>
           <ToolbarButton
-            title="Display names"
-            icon="font"
-            @click="emit('displayNames')"
+            title="Select all males"
+            :icon="{ icon: 'mars' }"
+            @click="emit('selectCriteria', 'gender', 'm')"
           />
           <ToolbarButton
-            title="Display codes"
-            icon="italic"
-            @click="emit('displayCodes')"
+            :icon="{ icon: 'venus' }"
+            title="Select all females"
+            @click="emit('selectCriteria', 'gender', 'f')"
           />
+          <ToolbarDropDownMenu
+            title="More options"
+            :icon="{ icon: 'caret-down' }"
+          >
+            <ToolbarDropDownMenuItem
+              v-for="option in selectionOptions"
+              @click="emit('selectCriteria', option.key, option.criteria)"
+            >
+              {{ option.label }}
+            </ToolbarDropDownMenuItem>
+          </ToolbarDropDownMenu>
           <ToolbarButton
-            title="Randomize visible label"
-            icon="random"
-            @click="emit('randomizeLabels')"
+            :hidden="itemsSelected === 0"
+            title="Unselect all"
+            :icon="{ icon: 'times' }"
+            @click="emit('unselectAll')"
           />
+          <template #legend>Select</template>
+        </ToolbarGroup>
+        <ToolbarGroup
+          :hidden="itemsSelected === 0"
+          v-for="group in selectionActions"
+        >
           <ToolbarButton
-            title="Delete Parents and Ancestors"
-            icon="minus"
-            @click="emit('deleteAncestors')"
+            v-for="button in group.buttons"
+            :key="button.label"
+            v-bind="button"
+            @click="button.click"
           />
-          <ToolbarButton
-            title="Add Parents"
-            icon="arrow-right"
-            @click="emit('addParents')"
-          />
-          <ToolbarButton
-            title="Switch Parents"
-            icon="sync-alt"
-            @click="emit('switchParents')"
-          />
-        </div>
-        <div class="selection-apply-breed">
+          <template #legend>{{ group.name }}</template>
+        </ToolbarGroup>
+        <ToolbarGroup :hidden="itemsSelected === 0">
           <select
             class="selection-apply-breed-dropdown"
             v-model="selectedBreed"
@@ -165,25 +106,16 @@
               {{ breed }}
             </option>
           </select>
-          ({{ itemsSelected }})
-        </div>
+          <span title="Dragons selected">({{ itemsSelected }})</span>
+          <template #legend>Breed</template>
+        </ToolbarGroup>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-/*
-                <ToolbarButton title='Choose tags' icon="tag">
-                    <template #dropdown>
-                        <BreedTags />
-                    </template>
-                </ToolbarButton> */
 import { computed, PropType, reactive, ref } from 'vue';
-
-import { Vue3ToggleButton } from 'vue3-toggle-button';
-import '../../../node_modules/vue3-toggle-button/dist/style.css';
-
 import GLOBALS from '../../app/globals';
 import { forEveryDragon, filterEggGroups, filterTags } from '../../app/utils';
 import { useAppStore } from '../../store/app';
@@ -198,7 +130,139 @@ import DialogExport from './DialogExport.vue';
 import DialogImport from './DialogImport.vue';
 import DialogGenerate from './DialogGenerate.vue';
 import ToolbarButton from './ToolbarButton.vue';
+import ToolbarDropDownMenu from './ToolbarDropDownMenu/ToolbarDropDownMenu.vue';
+import ToolbarDropDownMenuItem from './ToolbarDropDownMenu/ToolbarDropDownMenuItem.vue';
+import ToolbarGroup from './ToolbarGroup.vue';
 import { useTagStore } from '../../store/tags';
+
+type ToolbarButtonProps = Required<
+  Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {
+    click: () => void;
+  } //todo why! & Partial<ButtonHTMLAttributes>
+>;
+function t() {
+  console.log('click');
+}
+const tagStore = useTagStore();
+const appStore = useAppStore();
+
+const generalFunctions = reactive<ToolbarButtonProps[]>(
+  [
+    {
+      title: 'Export dragon',
+      icon: 'save',
+      label: 'Export',
+      click: () => (dialogs.showExportDialog = true),
+    },
+    {
+      title: 'Import dragon',
+      icon: 'file-code',
+      label: 'Import',
+      click: () => (dialogs.showImportDialog = true),
+    },
+    {
+      title: 'Get Link',
+      icon: 'link',
+      label: 'Get Link',
+      click: () => (dialogs.showGenerateDialog = true),
+    },
+    {
+      title: 'Toggle fullscreen',
+      icon: 'maximize',
+      label: 'Fullscreen',
+      click: () => emit('fullscreen'),
+    },
+    {
+      title: 'Undo',
+      icon: 'undo',
+      label: 'Undo',
+      click: () => emit('undo'),
+      disabled: computed(() => !appStore.treeHistory.canUndo),
+    },
+    {
+      title: 'Redo',
+      icon: 'redo',
+      label: 'Redo',
+      click: () => emit('redo'),
+      disabled: computed(() => !appStore.treeHistory.canRedo),
+    },
+    // convert the string names to actual font awesome props
+  ].map((button) => convertToToolbarButtonProps(button, '2x')),
+);
+
+const selectionActions = reactive<
+  Array<{
+    name: string;
+    buttons: Array<ToolbarButtonProps>;
+  }>
+>(
+  [
+    {
+      name: 'Labels',
+      buttons: [
+        {
+          title: 'Show names',
+          icon: 'font',
+          label: 'Names',
+          click: () => emit('displayNames'),
+        },
+        {
+          title: 'Display codes',
+          icon: 'italic',
+          label: 'Codes',
+          click: () => emit('displayCodes'),
+        },
+        {
+          title: 'Randomise visible label',
+          icon: 'random',
+          label: 'Randomise label',
+          click: () => emit('randomizeLabels'),
+        },
+      ],
+    },
+    {
+      name: 'Parents',
+      buttons: [
+        {
+          title: 'Delete Parents and Ancestors',
+          icon: 'minus',
+          label: 'Delete Parents',
+          click: () => emit('deleteAncestors'),
+        },
+        {
+          title: 'Add parents',
+          icon: 'arrow-right',
+          label: 'Add parents',
+          click: () => emit('addParents'),
+        },
+        {
+          title: 'Switch parents',
+          icon: 'sync-alt',
+          label: 'switch parents',
+          click: () => emit('switchParents'),
+        },
+      ],
+    },
+  ].map((group) => ({
+    name: group.name,
+    buttons: group.buttons.map((button) =>
+      convertToToolbarButtonProps(button, '1x'),
+    ),
+  })),
+);
+const selectionOptions = reactive<
+  { label: string; key: keyof DragonType; criteria: any }[]
+>([
+  { label: 'All with code', key: 'display', criteria: 1 },
+  { label: 'All with name', key: 'display', criteria: 0 },
+  { label: 'All with placeholder', key: 'breed', criteria: 'Placeholder' },
+]);
+
+const dialogs = reactive({
+  showImportDialog: false,
+  showExportDialog: false,
+  showGenerateDialog: false,
+});
 
 const props = defineProps({
   tree: {
@@ -241,21 +305,6 @@ const treeSelectedContains = (tree: LineageRoot) => {
   return { male, female };
 };
 
-const tagStore = useTagStore();
-const appStore = useAppStore();
-
-const selectionOptions = reactive<
-  { label: string; value: [keyof DragonType, any] }[]
->([
-  { label: 'All with code', value: ['display', 1] },
-  { label: 'All with name', value: ['display', 0] },
-  { label: 'All with placeholder', value: ['breed', 'Placeholder'] },
-]);
-const dialogs = reactive({
-  showImportDialog: false,
-  showExportDialog: false,
-  showGenerateDialog: false,
-});
 // default to placeholder
 const selectedBreed = ref(GLOBALS.placeholder.name);
 
@@ -305,78 +354,88 @@ const availableBreeds = computed(() => {
 function importLineage(tree: LineageRoot) {
   emit('importTree', tree);
 }
+
+function convertToToolbarButtonProps(
+  button: {
+    icon: string;
+    label: string;
+    click: () => void;
+    title: string;
+  },
+  size: ToolbarButtonProps['icon']['size'] = '2x',
+) {
+  return {
+    ...button,
+    title: capitalise(button.title),
+    label: capitalise(button.label),
+    icon: {
+      size: size,
+      icon: button.icon,
+    },
+  } as ToolbarButtonProps;
+}
+
+// capitalise the first letter of each word
+function capitalise(string: string) {
+  return string
+    .split(' ')
+    .map((substr) => substr[0].toUpperCase() + substr.slice(1))
+    .join(' ');
+}
 </script>
 
 <style scoped>
 .toolbar {
-  margin: 20px auto;
+  margin: 5px auto;
   max-width: 800px;
+}
+.settings,
+.functions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
+  column-gap: 8px;
+  row-gap: 5px;
 }
-.toolbar-item {
-  margin: 5px;
-  text-align: center;
+.settings {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  margin-bottom: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(115px, auto));
 }
-.toolbar-item span {
-  margin: 5px;
+.settings label {
+  padding: 5px;
 }
-.toolbar-item .control {
-  width: 100%;
+.settings label:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+.functions {
+  grid-template-columns: repeat(auto-fit, minmax(90px, auto));
+  justify-content: center;
 }
 .selection-tools {
   margin: 5px auto;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.selection-apply {
-  display: flex;
-  flex-direction: column;
-  display: inline-block;
-  border-top: 2px solid var(--builderControlBG);
-}
-.selection-apply-left .control:first-child {
-  margin-left: 0px;
-}
-.selection-apply-breed {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  /*background: var(--builderControlBG);*/
+  justify-content: center;
+  align-items: space-between;
+  flex-wrap: wrap;
 }
-.selection-tools .control {
+.selection-tools :deep(.control .label) {
+  display: none;
+}
+.selection-tools :deep(.control) {
   margin: 4px;
+  width: 26px;
+  height: 26px;
 }
-.invisible {
+[hidden] {
   visibility: hidden;
 }
 .selection-apply-breed-dropdown {
   max-width: 170px;
 }
+
 @media only screen and (min-width: 768px) {
-  .toolbar {
-    padding: 0px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
 }
 @media only screen and (min-width: 470px) {
-  .toolbar {
-    padding: 0px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-  .selection-apply {
-    margin-left: 5px;
-    padding-left: 5px;
-    border-left: 2px solid var(--builderControlBG);
-    border-top: 0px none;
-  }
-  .selection-tools {
-    flex-direction: row;
-  }
 }
 </style>

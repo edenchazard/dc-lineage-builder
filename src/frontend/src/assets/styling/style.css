@@ -16,3 +16,6 @@
 .column {
   flex-direction: column;
 }
+:focus {
+  outline: 2px solid lightblue;
+}
