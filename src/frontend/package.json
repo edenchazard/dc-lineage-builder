@@ -26,7 +26,10 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
+    "@vitejs/plugin-legacy": "^4.0.2",
     "@vitejs/plugin-vue": "^4.1.0",
+    "autoprefixer": "^10.4.14",
+    "browserslist": "^4.21.5",
     "prettier": "^2.8.7",
     "typescript": "^4.8.4",
     "vite": "^4.2.1",
@@ -45,8 +48,5 @@
       "vue/multi-word-component-names": "off",
       "vue/no-mutating-props": "off"
     }
-  },
-  "browserslist": [
-    "defaults"
-  ]
+  }
 }

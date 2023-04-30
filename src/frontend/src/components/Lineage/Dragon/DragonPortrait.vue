@@ -76,14 +76,10 @@ computed:{
 
 /* apply the correct spritesheet depending on pixel ratio */
 @import url('../../../assets/tile-rendering/sprites-36x48.css')
-  (-webkit-min-device-pixel-ratio: 0),
-  (-moz-min-device-pixel-ratio: 0), (-o-min-device-pixel-ratio: 0),
-  (min-device-pixel-ratio: 0);
+(min-resolution: 0dppx);
 
 @import url('../../../assets/tile-rendering/sprites-72x96.css')
-  (-webkit-min-device-pixel-ratio: 1.05),
-  (-moz-min-device-pixel-ratio: 1.05), (-o-min-device-pixel-ratio: 21/20),
-  (min-device-pixel-ratio: 1.05);
+(min-resolution: 1.01dppx);
 .ghost,
 .local {
   width: var(--size36x48W);
@@ -117,13 +113,7 @@ computed:{
   position: relative;
   image-rendering: -webkit-optimize-contrast;
   -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-    supported by Chrome, Edge, Opera and Firefox */
-  -webkit-touch-callout: none;
+  user-select: none;
   pointer-events: none;
 }
 .ghost {
