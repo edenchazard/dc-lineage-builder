@@ -211,6 +211,9 @@ function selectBy(condition: (dragon: DragonType) => boolean) {
   width: 100vh;
   overflow: auto;
 }
+.lineage-builder {
+  font-family: var(--lineageFont);
+}
 .builder {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

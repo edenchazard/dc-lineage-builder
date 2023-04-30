@@ -2,53 +2,34 @@
   <button
     type="button"
     class="control"
-    :class="{
-      dropdown: options,
-    }"
-    :title="title"
     @click="emit('click')"
   >
-    <font-awesome-icon :icon="icon" /> {{ label }}
-    <div
-      v-if="options"
-      class="options"
+    <font-awesome-icon
+      v-bind="icon"
+      class="icon"
+    />
+    <span
+      class="label"
+      v-if="label"
+      >{{ label }}</span
     >
-      <ul>
-        <li
-          v-for="option in options"
-          class="option"
-          :key="option.label"
-          @click="emit('optionSelected', option)"
-        >
-          {{ option.label }}
-        </li>
-      </ul>
-    </div>
-    <div
-      v-else-if="$slots.dropdown"
-      class="options"
-    >
-      <slot name="dropdown"> </slot>
-    </div>
   </button>
 </template>
 
 <script setup lang="ts">
+import { FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
+import { PropType } from 'vue';
+
 const p = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
   icon: {
-    type: String,
-    required: true,
+    type: Object as PropType<FontAwesomeIconProps>,
+    default: {
+      icon: 'dragon',
+    },
   },
   label: {
     type: String,
     default: '',
-  },
-  options: {
-    type: Array<{ label: string; value: any }>,
   },
 });
 
@@ -60,42 +41,41 @@ const emit = defineEmits<{
 
 <style scoped>
 .control {
-  margin: 2px 0px;
+  padding: 5px 0px 0px 0px;
   cursor: pointer;
-  padding: 8px;
-  color: var(--builderControlFG);
-  background: var(--builderControlBG);
+  color: var(--builderControlBG);
+  background: transparent;
   border: none;
-  width: 30px;
-  height: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
 }
-.control[disabled] {
-  opacity: 0.5;
+.control:enabled:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
-.control svg {
-  padding: 0px;
+.control:disabled {
+  opacity: 0.3;
 }
-.dropdown {
-  position: relative;
-  z-index: 50;
-}
-.dropdown .options {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  color: var(--builderControlFG);
+.label {
   background: var(--builderControlBG);
-  right: 0px;
-  min-width: 50px;
-  padding: 5px;
-}
-.dropdown:focus .options {
+  color: var(--builderControlFG);
   display: block;
-  min-width: 140px;
+  width: 100%;
+  border-radius: 0px 0px 5px 5px;
   padding: 5px;
-  text-align: left;
+  box-sizing: border-box;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .option {
   padding: 5px;
+}
+.icon {
+  margin-bottom: 8px;
+  display: block;
+  padding: 0px;
 }
 </style>
