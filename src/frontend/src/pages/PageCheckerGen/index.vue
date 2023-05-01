@@ -41,6 +41,26 @@
           </div>
         </div>
         <div class="right">
+          <ToolbarGroup>
+            <ToolbarButton
+              title="Get Link"
+              :icon="{ icon: 'link', size: '2x' }"
+              label="Get Link"
+              @click="showGenerateDialog = true"
+            />
+            <ToolbarButton
+              title="Export dragon"
+              :icon="{ icon: 'save', size: '2x' }"
+              label="Export"
+              @click="showExportDialog = true"
+            />
+            <ToolbarButton
+              title="Switch breeds"
+              :icon="{ icon: 'exchange-alt', size: '2x' }"
+              label="Switch breeds"
+              @click="switchBreeds"
+            />
+          </ToolbarGroup>
           <div>
             <label for="generations">Generations: </label>
             <select
@@ -56,26 +76,6 @@
                 {{ index + 1 }}
               </option>
             </select>
-          </div>
-          <div class="buttons">
-            <ToolbarButton
-              title="Get Link"
-              icon="link"
-              label="Get Link"
-              @click="showGenerateDialog = true"
-            />
-            <ToolbarButton
-              title="Export dragon"
-              icon="save"
-              label="Export"
-              @click="showExportDialog = true"
-            />
-            <ToolbarButton
-              title="Switch breeds"
-              icon="exchange-alt"
-              label="Switch breeds"
-              @click="switchBreeds"
-            />
           </div>
         </div>
       </section>
@@ -129,6 +129,7 @@ import BreedTagsSelector from '../../components/BreedFiltering/BreedTagsSelector
 import BreedGroupsTagSelector from '../../components/BreedFiltering/BreedGroupsTagSelector.vue';
 import DialogExport from '../../components/Toolbar/DialogExport.vue';
 import DialogGenerate from '../../components/Toolbar/DialogGenerate.vue';
+import ToolbarGroup from '../../components/Toolbar/ToolbarGroup.vue';
 import ToolbarButton from '../../components/Toolbar/ToolbarButton.vue';
 import BreedSearchControl from '../../components/BreedFiltering/BreedSearchControl.vue';
 
@@ -235,7 +236,8 @@ label {
 }
 .right {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
 }
 .buttons {
   margin: 5px 0px 0px 0px;
