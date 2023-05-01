@@ -3,7 +3,11 @@
     <div class="buttons">
       <slot></slot>
     </div>
-    <span class="legend"><slot name="legend"></slot></span>
+    <span
+      class="legend"
+      v-if="$slots.legend"
+      ><slot name="legend"></slot
+    ></span>
   </div>
 </template>
 

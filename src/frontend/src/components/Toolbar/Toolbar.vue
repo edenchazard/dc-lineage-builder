@@ -18,6 +18,7 @@
     <div
       class="toolbar"
       role="toolbar"
+      ref="toolbar"
     >
       <div
         class="settings"
@@ -134,17 +135,28 @@ import ToolbarDropDownMenu from './ToolbarDropDownMenu/ToolbarDropDownMenu.vue';
 import ToolbarDropDownMenuItem from './ToolbarDropDownMenu/ToolbarDropDownMenuItem.vue';
 import ToolbarGroup from './ToolbarGroup.vue';
 import { useTagStore } from '../../store/tags';
+import { useRovingTabIndex } from './useRovingTabIndex';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {
     click: () => void;
   } //todo why! & Partial<ButtonHTMLAttributes>
 >;
-function t() {
-  console.log('click');
-}
+
 const tagStore = useTagStore();
 const appStore = useAppStore();
+const toolbar = ref();
+
+const { focusControl } = useRovingTabIndex(toolbar, {
+  onInteraction(payload) {
+    console.log(payload);
+  },
+  onSelectedChanged(current, prev) {
+    console.log(current, prev);
+  },
+});
+
+//window.setTimeout(() => focusControl(5), 1000);
 
 const generalFunctions = reactive<ToolbarButtonProps[]>(
   [
