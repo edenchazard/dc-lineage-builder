@@ -75,29 +75,28 @@
             </ToolbarDropDownMenuItem>
           </ToolbarDropDownMenu>
           <ToolbarButton
-            :hidden="itemsSelected === 0"
             title="Unselect all"
             :icon="{ icon: 'times' }"
+            :disabled="itemsSelected === 0"
             @click="emit('unselectAll')"
           />
           <template #legend>Select</template>
         </ToolbarGroup>
-        <ToolbarGroup
-          :hidden="itemsSelected === 0"
-          v-for="group in selectionActions"
-        >
+        <ToolbarGroup v-for="group in selectionActions">
           <ToolbarButton
             v-for="button in group.buttons"
             :key="button.label"
             v-bind="button"
+            :disabled="itemsSelected === 0"
             @click="button.click"
           />
           <template #legend>{{ group.name }}</template>
         </ToolbarGroup>
-        <ToolbarGroup :hidden="itemsSelected === 0">
+        <ToolbarGroup>
           <select
             class="selection-apply-breed-dropdown"
             v-model="selectedBreed"
+            :disabled="itemsSelected === 0"
             @change="emit('changeBreed', selectedBreed)"
           >
             <option
@@ -135,7 +134,6 @@ import ToolbarDropDownMenu from './ToolbarDropDownMenu/ToolbarDropDownMenu.vue';
 import ToolbarDropDownMenuItem from './ToolbarDropDownMenu/ToolbarDropDownMenuItem.vue';
 import ToolbarGroup from './ToolbarGroup.vue';
 import { useTagStore } from '../../store/tags';
-import { useRovingTabIndex } from './useRovingTabIndex';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {
@@ -146,17 +144,6 @@ type ToolbarButtonProps = Required<
 const tagStore = useTagStore();
 const appStore = useAppStore();
 const toolbar = ref();
-
-const { focusControl } = useRovingTabIndex(toolbar, {
-  onInteraction(payload) {
-    console.log(payload);
-  },
-  onSelectedChanged(current, prev) {
-    console.log(current, prev);
-  },
-});
-
-//window.setTimeout(() => focusControl(5), 1000);
 
 const generalFunctions = reactive<ToolbarButtonProps[]>(
   [
