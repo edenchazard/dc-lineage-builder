@@ -411,12 +411,12 @@ function capitalise(string: string) {
   justify-content: center;
 }
 .selection-tools {
-  margin: 5px auto;
+  margin: 10px auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: space-between;
   flex-wrap: wrap;
+  gap: 10px;
 }
 .selection-tools :deep(.control .label) {
   display: none;
