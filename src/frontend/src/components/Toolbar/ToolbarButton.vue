@@ -42,7 +42,6 @@ const emit = defineEmits<{
 <style scoped>
 .control {
   padding: 5px 0px 0px 0px;
-  cursor: pointer;
   color: var(--builderControlBG);
   background: transparent;
   border: none;
@@ -51,6 +50,10 @@ const emit = defineEmits<{
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
+  box-shadow: 0px 2px 2px var(--builderControlBG);
+}
+.control:enabled {
+  cursor: pointer;
 }
 .control:enabled:hover {
   background: rgba(255, 255, 255, 0.3);

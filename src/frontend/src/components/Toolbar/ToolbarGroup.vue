@@ -18,8 +18,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px;
-  justify-content: space-between;
+  justify-content: end;
+  gap: 3px;
 }
 .legend {
   display: block;
