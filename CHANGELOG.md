@@ -1,5 +1,38 @@
 # Changelog
 
+## 5.4.0
+
+- Add new breeds: Sonata and Occulri Pygmy.
+- Fix ghost breeds placeholder image not found bug.
+- improvements to ghost breeds: accessibility and page layout.
+- improve user error feedback when generating/exporting lineages.
+- Improved browser compatibility: Added autoprefixer, browserlist config and updated transpilation and polyfills.
+- Fixed blurry ghost and localised images.
+- Add alt text for dc and ghost images.
+- Improved localised tile grabbing.
+- Localised many breeds.
+- Added more zombies.
+- Added more salts. Loads of 'em.
+- Stratos now has all 4 variants.
+- Corporeal celestials added.
+- Improved toolbar UI to be cleaner and smaller while retaining accessibility (which has also been improved in some places.)
+- Name changes:
+  - Arcana Regular -> Arcana
+  - Crypt Regular -> Crypt
+  - Garland Regular -> Garland
+  - Pitfire Regular -> Pitfire
+  - Pitfire Regular Reborn -> Pitfire Reborn
+  - Witchlight Regular -> Witchlight
+  - Xocoatl Regular -> Xocoatl
+  - Electric Regular -> Electric
+  - Vermeil Regular -> Vermeil
+  - Spinel Wyvern Red -> Spinel Wyvern Violet
+  - Red-Tailed Pygmy Wyrm -> Red-Tailed Wyrm
+  - Stratos -> Stratos Day
+  - Celestial -> Celestial Incorporeal
+
+## 5.3.0
+
 ## 5.1.2
 
 - Add new breed: Xocoatl.
@@ -189,7 +222,7 @@ Massive changes.
 Mainly a few tidbits.
 
 - Name changes. Some typos fixed, these are Ciriax Lindwurm -> Ciriax Lindwyrm, Blusang Lindwurm -> Blusang Lindwyrm, Magnesium Amphipteres -> Magnesium Amphiptere.
-Any lineages with these breeds saved on the server will be changed but if you've got an export code with them you'll have to open it in Notepad and do a replace all! Oops.
+  Any lineages with these breeds saved on the server will be changed but if you've got an export code with them you'll have to open it in Notepad and do a replace all! Oops.
 - Pyranost Lindwyrm added.
 - Some compatibility settings have been changed.
 
@@ -220,7 +253,7 @@ Minor changes:
 - Background for default skin now matches DC's.
 - Behind the scenes changes to the menu links.
 - Styling updates: Buttons on editor look nicer and all 'interactive elements' e.g. the dragon images now display a hand pointer.
-Local images are now handled differently. Instead of loading a separate image for each sprite, they're all downloaded as one massive image and manipulated. This means a slightly longer loading time initially, but after that it's faster. Saves my poor server anyway.
+  Local images are now handled differently. Instead of loading a separate image for each sprite, they're all downloaded as one massive image and manipulated. This means a slightly longer loading time initially, but after that it's faster. Saves my poor server anyway.
 - The super cool breed dropdown is now even cooler. The styling is improved, but the biggest change appears when your search query is narrowed to 5 or less results, at which point it'll display the dragons as a list with names.
 
 ## 0.4.1
@@ -243,7 +276,7 @@ Just some minor things.
 Minor bug fixes:
 
 - Background doesn't break anymore when editing width-breaking lineages.
-The click box for the buttons under the dragons are now all the same size.
+  The click box for the buttons under the dragons are now all the same size.
 - Labels were a bit wonky, some names would word-wrap onto the next line, appearing dissimilar to the same lineage on DragCave.
 
 ## 0.3.0

@@ -703,6 +703,17 @@
     },
     "tags": ["Christmas"]
   },
+  "Sonata": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Blue": "DgNpY",
+      "Gold": "jQG9b",
+      "Silver": "w1cT9"
+    },
+    "tags": ["Regular"]
+  },
   "Spinel Wyvern": {
     "dimorphism": true,
     "genderOnly": false,

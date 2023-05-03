@@ -702,6 +702,12 @@
     "sprites": ["3rrhN","-1","-1","48","OrTHo","-16","-1","48"],
     "tags": ["Regular"]
   },
+  "Occulri Pygmy": {
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": ["OJoUD","0","-1","48","syo4v","-10","-1","48"],
+    "tags": ["Regular"]
+  },
   "Ochredrake": {
     "genderOnly": false,
     "group": "Drake",
