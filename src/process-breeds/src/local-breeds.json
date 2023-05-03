@@ -566,7 +566,8 @@
     "genderOnly": "f",
     "group": "Standard",
     "sprites": {
-      "Salt Infinis": "1N3R6"
+      "Salt Infinis": "1N3R6",
+      "Salt MoonShark": "iZTHk"
     },
     "tags": ["Christmas"]
   },
