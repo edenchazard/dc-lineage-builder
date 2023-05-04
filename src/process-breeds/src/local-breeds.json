@@ -41,6 +41,13 @@
     "sprites": ["mQCP6","We7TE"],
     "tags": ["Regular"]
   },
+  "Amalthean": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["jQItl","JOKAw"],
+    "tags": ["Hybrid"]
+  },
   "Aranoa": {
     "dimorphism": false,
     "genderOnly": false,
@@ -308,8 +315,13 @@
     "genderOnly": "m",
     "group": "Standard",
     "sprites": {
+      "Multi-color": "HxQ3G",
+      "Red-green": "4VIcp",
+      "Red-yellow": "6L2BZ",
+      "Salt Haze": "CFUCk",
       "Salt Infinis": "hXdBd",
-      "Salt Spatio": "m00OD"
+      "Salt Spatio": "m00OD",
+      "Yellow": "42Flu"
     },
     "tags": ["Christmas"]
   },
@@ -521,6 +533,13 @@
     "sprites": "pK6SX",
     "tags": ["Regular"]
   },
+  "Nobleshield": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["wPwLI","GeK5M"],
+    "tags": ["Hybrid"]
+  },
   "Omen Wyrm": {
     "dimorphism": true,
     "genderOnly": false,
@@ -585,6 +604,13 @@
     },
     "tags": ["Regular"]
   },
+  "Pyrrhichios": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "AGD87",
+    "tags": ["Regular"]
+  },
   "Radiant Angel": {
     "dimorphism": false,
     "genderOnly": "m",
@@ -622,6 +648,13 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "1sJdX",
+    "tags": ["Hybrid"]
+  },
+  "Royal Eminence": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["lTktE","F7TMe"],
     "tags": ["Hybrid"]
   },
   "Sabertooth Bull Drake": {
@@ -664,6 +697,13 @@
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": ["WZn25","cH9U1"],
+    "tags": ["Regular"]
+  },
+  "Serrati Wyvern": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["xhtpE","VtfDa"],
     "tags": ["Regular"]
   },
   "Setsong": {
@@ -737,7 +777,9 @@
     "genderOnly": "f",
     "group": "Standard",
     "sprites": {
-      "Salt Nirami": "GudBJ"
+      "Salt Haze": "HomO0",
+      "Salt Nirami": "GudBJ",
+      "__regular__": "0KKor"
     },
     "tags": ["Christmas"]
   },
