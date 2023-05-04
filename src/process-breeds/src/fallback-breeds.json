@@ -20,12 +20,6 @@
     "sprites": ["KOxsP","-1","-1","48"],
     "tags": ["Regular"]
   },
-  "Amalthean": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["Ns3Oy","-13","-1","48","07lJ8","0","-1","48"],
-    "tags": ["Hybrid"]
-  },
   "Amarignis": {
     "genderOnly": "f",
     "group": "Standard",
@@ -425,17 +419,6 @@
     "sprites": ["NMEFa","-1","-1","47","vwCkh","-9","0",""],
     "tags": ["Regular"]
   },
-  "Glystere Wyrm": {
-    "genderOnly": "m",
-    "group": "Standard",
-    "sprites": {
-      "Multi-color": ["HxQ3G","-11","-1","48"],
-      "Red-green": ["4VIcp","-11","-1","48"],
-      "Red-yellow": ["6L2BZ","-11","-1","48"],
-      "Yellow": ["42Flu","-11","-1","48"]
-    },
-    "tags": ["Christmas"]
-  },
   "Gold": {
     "genderOnly": false,
     "group": "Standard",
@@ -690,12 +673,6 @@
     },
     "tags": ["Regular"]
   },
-  "Nobleshield": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["ShO0V","-14","-1","48","VbcW9","0","-1","48"],
-    "tags": ["Hybrid"]
-  },
   "Nocturne": {
     "genderOnly": false,
     "group": "Standard",
@@ -800,12 +777,6 @@
     "sprites": ["fbPUK","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Pyrrhichios": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["zVQLQ","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Quonebb": {
     "genderOnly": false,
     "group": "Two-headed",
@@ -850,12 +821,6 @@
     "group": "Standard",
     "sprites": ["mEGXD","0","-1","48"],
     "tags": ["Regular"]
-  },
-  "Royal Eminence": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["o9ykg","-16","-1","48","OEZ0I","0","-1","47.5"],
-    "tags": ["Hybrid"]
   },
   "Sakuhana Wyvern": {
     "genderOnly": "f",
@@ -913,12 +878,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["9VS4","0","-1","47.5","urpl","-15","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Serrati Wyvern": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["tUNDG","0","-1px","47.5","lRrQO","-8","-1","48"],
     "tags": ["Regular"]
   },
   "Shadow Walker": {
@@ -1040,12 +999,6 @@
     "group": "Standard",
     "sprites": ["d968n","-30","-1","48"],
     "tags": ["Regular"]
-  },
-  "Starsinger": {
-    "genderOnly": "f",
-    "group": "Standard",
-    "sprites": ["snoow","-6","-1","48"],
-    "tags": ["Christmas"]
   },
   "Stone": {
     "genderOnly": false,
