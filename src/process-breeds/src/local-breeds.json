@@ -73,6 +73,13 @@
     "sprites": ["EhfrQ","GJF56"],
     "tags": ["Regular"]
   },
+  "Arrakyma": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["yukAh","lNIXS"],
+    "tags": ["Regular"]
+  },
   "Ash": {
     "dimorphism": false,
     "genderOnly": false,
@@ -258,6 +265,16 @@
     "sprites": ["FnHwj","1Hyq5"],
     "tags": ["Regular"]
   },
+  "Flare-Tail Pygmy": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": {
+      "Blue": "HorMh",
+      "Red": "uXL9J"
+    },
+    "tags": ["Regular"]
+  },
   "Furor Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
@@ -381,6 +398,13 @@
     "sprites": ["gWZmB","rjQfl"],
     "tags": ["Regular"]
   },
+  "Hunter": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "1kr4a",
+    "tags": ["Regular"]
+  },
   "Hydrophidius": {
     "dimorphism": false,
     "genderOnly": false,
@@ -452,6 +476,13 @@
     },
     "tags": ["Christmas"]
   },
+  "Lightstreak": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "DKgwS",
+    "tags": ["Regular"]
+  },
   "Lihnseyre": {
     "dimorphism": false,
     "genderOnly": false,
@@ -478,6 +509,13 @@
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": "rsJSZ",
+    "tags": ["Regular"]
+  },
+  "Marocephalic": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "Iac9u",
     "tags": ["Regular"]
   },
   "Mint": {
@@ -723,6 +761,13 @@
     },
     "tags": ["Regular"]
   },
+  "Silvershade Wyvern": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "6ImMt",
+    "tags": ["Regular"]
+  },
   "Snow": {
     "dimorphism": false,
     "genderOnly": "m",
@@ -782,6 +827,13 @@
       "__regular__": "0KKor"
     },
     "tags": ["Christmas"]
+  },
+  "Stellarum Wyrm": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "X2hRu",
+    "tags": ["Regular"]
   },
   "Stratos": {
     "dimorphism": false,
