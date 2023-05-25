@@ -341,12 +341,6 @@
     },
     "tags": ["Regular"]
   },
-  "Freckled": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["H3C5S","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Frilled": {
     "genderOnly": false,
     "group": "Standard",
