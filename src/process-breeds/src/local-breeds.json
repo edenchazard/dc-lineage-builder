@@ -323,6 +323,13 @@
     },
     "tags": ["Valentine"]
   },
+  "Freckled": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "rc1lV",
+    "tags": ["Regular"]
+  },
   "Furor Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
