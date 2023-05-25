@@ -111,6 +111,13 @@
     "sprites": "WZRxc",
     "tags": ["Regular"]
   },
+  "Blacktip": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "Ux4sg",
+    "tags": ["Regular"]
+  },
   "Blancblack": {
     "dimorphism": true,
     "genderOnly": false,
@@ -132,11 +139,25 @@
     "sprites": "TjcoW",
     "tags": ["Christmas"]
   },
+  "Blue-Banded": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "q5WZY",
+    "tags": ["Regular"]
+  },
   "Bolt": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "sHE0e",
+    "tags": ["Regular"]
+  },
+  "Boreal": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "BgX4W",
     "tags": ["Regular"]
   },
   "Caligene": {
@@ -155,6 +176,23 @@
     "group": "Standard",
     "sprites": "fSAGq",
     "tags": ["Regular"]
+  },
+  "Carmine Wyvern": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "omj3Y",
+    "tags": ["Regular"]
+  },
+  "Cavern Lurker": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Salt JOTB": ["rFI9v","mqFhV"],
+      "__regular__": ["EspR4","Wm1pn"]
+    },
+    "tags": ["Halloween"]
   },
   "Celestial": {
     "dimorphism": true,
@@ -275,6 +313,16 @@
     },
     "tags": ["Regular"]
   },
+  "Floral-Crowned": {
+    "dimorphism": false,
+    "genderOnly": "m",
+    "group": "Standard",
+    "sprites": {
+      "Salt JOTB": "QPPUG",
+      "__regular__": "vdc7L"
+    },
+    "tags": ["Valentine"]
+  },
   "Furor Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
@@ -342,12 +390,26 @@
     },
     "tags": ["Christmas"]
   },
+  "Gold-Horned Tangar": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["MGNSJ","UenUs"],
+    "tags": ["Regular"]
+  },
   "Grave": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["tcA6d","D6hAp"],
     "tags": ["Halloween"]
+  },
+  "Greater Spotted Drake": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Drake",
+    "sprites": "bTfDM",
+    "tags": ["Regular"]
   },
   "Guardian Avatar (Change)": {
     "dimorphism": false,
@@ -369,6 +431,13 @@
     "group": "Standard",
     "sprites": "FHW2y",
     "tags": ["Hybrid"]
+  },
+  "Harvest": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["vI1DF","MORbO"],
+    "tags": ["Regular"]
   },
   "Heartstealing": {
     "dimorphism": false,
@@ -578,6 +647,13 @@
     "sprites": ["wPwLI","GeK5M"],
     "tags": ["Hybrid"]
   },
+  "Olive": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["hivSK","4kTAq"],
+    "tags": ["Regular"]
+  },
   "Omen Wyrm": {
     "dimorphism": true,
     "genderOnly": false,
@@ -640,6 +716,13 @@
       "Orange": "CeGqv",
       "Purple": "X6kh6"
     },
+    "tags": ["Regular"]
+  },
+  "Pyrovar": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "44jeg",
     "tags": ["Regular"]
   },
   "Pyrrhichios": {
@@ -810,6 +893,13 @@
     },
     "tags": ["Regular"]
   },
+  "Spotted Greenwing": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "oG8fr",
+    "tags": ["Regular"]
+  },
   "Spotted Teal Drake": {
     "dimorphism": false,
     "genderOnly": false,
@@ -845,6 +935,13 @@
       "Dusk": "20uav",
       "Night": "IFpVR"
     },
+    "tags": ["Regular"]
+  },
+  "Striped River": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "7sNC0",
     "tags": ["Regular"]
   },
   "Tarantula Hawk Drake": {
@@ -894,6 +991,13 @@
       "Volcano": "PAa3D"
     },
     "tags": ["Regular"]
+  },
+  "Ultraviolet": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["FOQe5","uuc66"],
+    "tags": ["Hybrid"]
   },
   "Undead": {
     "dimorphism": false,
@@ -1082,6 +1186,13 @@
       "__regular__": "W10PC"
     },
     "tags": ["Valentine"]
+  },
+  "Yellow-Crowned": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["QmCa9","NvRwS"],
+    "tags": ["Regular"]
   },
   "Zyumorph": {
     "dimorphism": false,
