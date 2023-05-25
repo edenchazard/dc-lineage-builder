@@ -119,34 +119,16 @@
     "sprites": ["2ISNc","-13","-1","48"],
     "tags": ["Regular"]
   },
-  "Blacktip": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["vfRcS","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Bleeding Moon": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["UilCo","-1","-1","48","H4vT8","-1","-1","48"],
     "tags": ["Regular"]
   },
-  "Blue-Banded": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["8vdAA","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Blusang Lindwurm": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["aAwxC","-3","-1","48","WzRMQ","-2","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Boreal": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["b5V2S","-10","-1","48"],
     "tags": ["Regular"]
   },
   "Bright-Breasted Wyvern": {
@@ -192,23 +174,11 @@
     "sprites": ["FVU6w","0","-1","48","m4JIp","-17","-1","48"],
     "tags": ["Hybrid"]
   },
-  "Carmine Wyvern": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["kn0Pd","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Cassare": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["0wXI7","0","-1","48"],
     "tags": ["Regular"]
-  },
-  "Cavern Lurker": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["USnsv","-15","-1","48","VsB9U","0","-1","48"],
-    "tags": ["Halloween"]
   },
   "Cloudplume": {
     "genderOnly": false,
@@ -351,12 +321,6 @@
     "sprites": ["hGua","-15","-1","48","7hsk","-6","-1","48"],
     "tags": ["Regular"]
   },
-  "Floral-Crowned": {
-    "genderOnly": "m",
-    "group": "Standard",
-    "sprites": ["roll4","-13","-1","47"],
-    "tags": ["Valentine"]
-  },
   "Floret Wyvern Alstroemeria": {
     "genderOnly": false,
     "group": "Standard",
@@ -425,22 +389,10 @@
     "sprites": ["3iKre","-33","-1","48","huQIl","-10","-1","48"],
     "tags": ["Regular"]
   },
-  "Gold-Horned Tangar": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["O91YN","-21","-1","48","7Zv1X","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Golden Wyvern": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["Eb0nc","-9","-1","48","amvgQ","-13","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Greater Spotted Drake": {
-    "genderOnly": false,
-    "group": "Drake",
-    "sprites": ["6Qpow","0","-1","48"],
     "tags": ["Regular"]
   },
   "Green": {
@@ -460,12 +412,6 @@
     "group": "Standard",
     "sprites": ["k3PF","-7","-1","48"],
     "tags": ["CB"]
-  },
-  "Harvest": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["qDMoS","0","-1","48","RN3kt","-29","-1","48"],
-    "tags": ["Regular"]
   },
   "Heartseeker": {
     "genderOnly": "m",
@@ -691,12 +637,6 @@
     "sprites": ["k2gGG","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Olive": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["ZUpFv","-61","2","","rZN9b","0","1",""],
-    "tags": ["Regular"]
-  },
   "Omen Wyrm": {
     "genderOnly": false,
     "group": "Standard",
@@ -769,12 +709,6 @@
       "Pyrope": ["31Iya","0","-1","48"],
       "Spessartine": ["xq4Yl","0","-1","48"]
     },
-    "tags": ["Regular"]
-  },
-  "Pyrovar": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["fbPUK","0","-1","48"],
     "tags": ["Regular"]
   },
   "Quonebb": {
@@ -994,12 +928,6 @@
     "sprites": ["00To3","0","-1","48","yqSe","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Spotted Greenwing": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["d968n","-30","-1","48"],
-    "tags": ["Regular"]
-  },
   "Stone": {
     "genderOnly": false,
     "group": "Standard",
@@ -1028,12 +956,6 @@
       "Red": ["EE65C","-1","-1","48","qTuvY","0","-1","48"],
       "White": ["h9aDK","-1","-1","48","RJ8i","0","-1","48"]
     },
-    "tags": ["Regular"]
-  },
-  "Striped River": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["ifRT3","0","-1","48"],
     "tags": ["Regular"]
   },
   "Sunbeam Drake": {
@@ -1141,12 +1063,6 @@
     "sprites": ["nCSM","-2","-1","48","YUauj","-7","-1","48"],
     "tags": ["Hybrid"]
   },
-  "Ultraviolet": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["h98vU","-10","-1","48","2KPDn","-7","-1","48"],
-    "tags": ["Hybrid"]
-  },
   "Undine": {
     "genderOnly": false,
     "group": "Standard",
@@ -1214,12 +1130,6 @@
       "Blue": ["kmDB5","0","-1","48","RRDqa","-4","-1","48"],
       "Red": ["g1g0x","0","-1","48","jGaBm","-4","-1","48"]
     },
-    "tags": ["Regular"]
-  },
-  "Yellow-Crowned": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["NlyPE","0","-1","48","w9DUx","-23","-1","48"],
     "tags": ["Regular"]
   },
   "Yulebuck": {
