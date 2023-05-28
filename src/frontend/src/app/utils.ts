@@ -97,6 +97,10 @@ export function forEveryDragon(
   root: PartialLineage,
   callback: (Dragon: DragonType) => void,
 ) {
+  // for performance reasons, we create a completely new clone,
+  // mutate and return it. Trees with vue reactive proxies
+  // have a massive performance cost because we touch so many properties.
+  const raw = deepClone(root);
   const analyse = (dragon: DragonType) => {
     callback(dragon);
     if (hasParents(dragon)) {
@@ -105,7 +109,8 @@ export function forEveryDragon(
     }
   };
 
-  analyse(root);
+  analyse(raw);
+  return raw;
 }
 
 // count breeds in the tree recursively
