@@ -98,10 +98,12 @@ onMounted(async () => {
         return;
       }
 
-      const savedTree = response.data.lineage;
+      const savedTree = forEveryDragon(
+        response.data.lineage,
 
-      // add selection data
-      forEveryDragon(savedTree, (dragon) => (dragon.selected = false));
+        // add selection data
+        (dragon) => (dragon.selected = false),
+      );
 
       status.value.close(() => {
         appStore.activeTree = savedTree;
@@ -117,6 +119,17 @@ onMounted(async () => {
 // tree can be a large memory hog, and gc doesn't always get to it immediately.
 onBeforeUnmount(() => (appStore.activeTree = null));
 
+/**
+ * Updates the tree
+ * @param callback Callback to perform on each dragon node
+ */
+function updateTree(callback: (dragon: DragonType) => void): void {
+  appStore.activeTree = forEveryDragon(
+    appStore.activeTree as LineageRoot,
+    callback,
+  );
+}
+
 // Accepts a callback
 // Or a key and the value to change it to
 function applyToSelected(callback: (dragon: DragonType) => void): void;
@@ -127,12 +140,12 @@ function applyToSelected(
 ) {
   if (typeof keyOrCallback === 'string') {
     const key = keyOrCallback.toString();
-    forEveryDragon(appStore.activeTree as LineageRoot, (dragon) => {
+    updateTree((dragon) => {
       if (dragon.selected) dragon[key] = value;
     });
   } else if (typeof keyOrCallback === 'function') {
     const callback = keyOrCallback;
-    forEveryDragon(appStore.activeTree as LineageRoot, (dragon) => {
+    updateTree((dragon) => {
       if (dragon.selected) callback(dragon);
     });
   }
@@ -154,7 +167,7 @@ function selectionCriteria(
 }
 
 function selectionChangeBreed(breedName: string) {
-  forEveryDragon(appStore.activeTree as LineageRoot, (dragon) => {
+  updateTree((dragon) => {
     if (dragon.selected) dragon.breed = breedName;
   });
 }
@@ -198,7 +211,7 @@ function unselectAll() {
 }
 
 function selectBy(condition: (dragon: DragonType) => boolean) {
-  forEveryDragon(appStore.activeTree as LineageRoot, (dragon: DragonType) => {
+  updateTree((dragon: DragonType) => {
     if (!dragon.selected && condition(dragon)) dragon.selected = true;
   });
 }
