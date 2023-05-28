@@ -102,8 +102,9 @@ computed:{
 }
 .imgbox-fullsize {
   /* this needs adjusting by 2px in either directon */
-  width: calc(var(--size36x48W) - 2px);
-  height: calc(var(--size36x48H) - 2px);
+  width: var(--size36x48-w-adjust);
+  height: var(--size36x48-h-adjust);
+  contain: layout size paint;
 }
 .imgbox-twothirds {
   width: 24px;
@@ -134,5 +135,7 @@ computed:{
   --size36x48H: 48px;
   --size24x32W: 24px;
   --size24x32H: 32px;
+  --size36x48-w-adjust: calc(var(--size36x48W) - 2px);
+  --size36x48-h-adjust: calc(var(--size36x48H) - 2px);
 }
 </style>
