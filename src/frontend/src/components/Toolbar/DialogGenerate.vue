@@ -73,11 +73,9 @@ onMounted(async () => {
   // reset to false and change when ready
   isLoadedAndOk.value = false;
 
-  // we do this conversion to discard any getters/setters/proxies
-  const exportedTree = deepClone(props.tree);
-
-  // @ts-ignore todo but doesn't affect runtime
-  forEveryDragon(exportedTree, (dragon) => delete dragon.selected);
+  // todo but doesn't affect runtime
+  // @ts-ignore
+  const exportedTree = forEveryDragon(props.tree, (dragon) => delete dragon.selected);
 
   // integrity check should never fail, but better to check anyway
   const integrity = verifyIntegrity(exportedTree);
