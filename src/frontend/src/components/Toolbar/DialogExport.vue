@@ -63,13 +63,11 @@ onMounted(() => {
   // reset to false and change if we encounter problems later
   isError.value = false;
 
-  // we do this conversion to discard any getters/setters/proxies
-  const exportedTree = deepClone(props.tree);
-
   // todo but doesn't affect runtime
   // @ts-ignore
-  forEveryDragon(exportedTree, (dragon) => delete dragon.selected);
+  const exportedTree = forEveryDragon(props.tree, (dragon) => delete dragon.selected);
 
+console.log(exportedTree)
   const { failed, failedTests, context } = verifyIntegrity(exportedTree);
 
   if (failed) {
