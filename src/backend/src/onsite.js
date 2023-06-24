@@ -53,7 +53,7 @@ async function grabHTML(code, filter = true) {
   // root: the root returned by fetchDragon()
   // filter: whether to replace whitespace and fix urls
   const getHTML = (root, filter) => {
-    const baseULTag = root.querySelector('._2y_j ul');
+    const baseULTag = root.querySelector('ul');
 
     if (baseULTag === null)
       throw new OnsiteError(`Could not find ul tag. Dragon: ${code}`);
@@ -74,19 +74,19 @@ async function grabHTML(code, filter = true) {
   };
 
   const getGen = (root) => {
-    const genNodes = root.querySelector('._2y_r');
-    if (genNodes === null)
+    const genNode = root.querySelector('span > span:first-child');
+    if (genNode === null)
       throw new OnsiteError(`Couldn't find lineage tag. Dragon: ${code}`);
 
     // we use the text property instead of counting the childnodes length
     // because it could be a lineage > 13 gens
-    return parseInt(genNodes.childNodes[0].toString());
+    return parseInt(genNode.textContent);
   };
 
   try {
     const response = await fetchDragon(code);
     //const a = performance.now();
-    const root = nodeHTMLParser.parse(response);
+    const root = nodeHTMLParser.parse(response).querySelector(`a[href='/view/${code}']`).closest('div > ul').parentNode;
 
     //const b = performance.now();
     //console.log(`parse complete in ${(b-a)} for ${code}`);
