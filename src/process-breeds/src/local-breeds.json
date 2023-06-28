@@ -488,6 +488,13 @@
     "sprites": "oXtku",
     "tags": ["Regular"]
   },
+  "Incense": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["s5fGo","iA4YL"],
+    "tags": ["Hybrid"]
+  },
   "Iridichi": {
     "dimorphism": true,
     "genderOnly": false,
@@ -1052,6 +1059,16 @@
       "__regular__": "42TLi"
     },
     "tags": ["Valentine"]
+  },
+  "Vespine Drake": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Drake",
+    "sprites": {
+      "White": "SDRMX",
+      "Yellow": "Pbxw6"
+    },
+    "tags": ["Regular"]
   },
   "White": {
     "dimorphism": false,
