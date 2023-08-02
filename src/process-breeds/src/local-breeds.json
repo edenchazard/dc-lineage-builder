@@ -87,6 +87,23 @@
     "sprites": "jFX3Q",
     "tags": ["Regular"]
   },
+  "Astrael": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Age of Aquarius": "xyy33",
+      "Archangel": "wauuv",
+      "Barbie Mermaid Princess": "lhzR3",
+      "Boho Headdress": "FMYaA",
+      "Forest Fae": "ktDW5",
+      "Greek Goddess": "rXw4U",
+      "Vampire Nightclub": "rXw4U",
+      "Vintage Chic": "e7Mp5",
+      "the OG": "S99uD"
+    },
+    "tags": ["Regular"]
+  },
   "Avin Pygmy": {
     "dimorphism": true,
     "genderOnly": false,
