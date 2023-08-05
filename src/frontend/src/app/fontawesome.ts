@@ -30,6 +30,9 @@ import {
   faMaximize,
   faUndo,
   faRedo,
+  faBars,
+  faExternalLink,
+  faPalette,
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
@@ -64,6 +67,9 @@ library.add(
   faMaximize,
   faUndo,
   faRedo,
+  faBars,
+  faExternalLink,
+  faPalette,
 );
 
 library.add(faGithub);
