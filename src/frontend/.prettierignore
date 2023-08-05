@@ -1,4 +1,7 @@
-src/assets/fallbacks.css
-src/assets/sprites-36x48.css
-src/assets/sprites-72x96.css
-src/breed-definitions.json
+node_modules
+**/fallbacks.css
+**/sprites-36x48.css
+**/sprites-72x96.css
+**/breed-definitions.json
+package.json
+package-lock.json

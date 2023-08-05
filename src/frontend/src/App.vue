@@ -45,7 +45,11 @@ html {
   width: 100vw;
 }
 body {
-  font: 14px/19.6px 'PT Serif', 'Times New Roman', 'Times', serif;
+  font:
+    14px/19.6px 'PT Serif',
+    'Times New Roman',
+    'Times',
+    serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 19.6px;
