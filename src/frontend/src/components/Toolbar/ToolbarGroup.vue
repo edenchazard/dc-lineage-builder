@@ -4,8 +4,8 @@
       <slot></slot>
     </div>
     <span
-      class="legend"
       v-if="$slots.legend"
+      class="legend"
       ><slot name="legend"></slot
     ></span>
   </div>

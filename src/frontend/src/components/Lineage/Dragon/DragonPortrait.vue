@@ -31,7 +31,7 @@
 import { PropType } from 'vue';
 import { PortraitData } from '../../../app/types';
 
-const props = defineProps({
+defineProps({
   data: {
     type: Object as PropType<PortraitData>,
     required: true,

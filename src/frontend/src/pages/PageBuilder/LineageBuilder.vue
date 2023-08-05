@@ -13,17 +13,17 @@
       <Toolbar
         :config="config"
         :tree="appStore.activeTree"
-        @updateConfig="(key, value) => (config[key] = value)"
-        @importTree="(newTree) => (appStore.activeTree = newTree)"
-        @unselectAll="unselectAll"
-        @changeBreed="selectionChangeBreed"
-        @displayNames="selectionSwitchLabel(0)"
-        @displayCodes="selectionSwitchLabel(1)"
-        @selectCriteria="selectionCriteria"
-        @randomizeLabels="selectionRandomizeLabels"
-        @deleteAncestors="selectionDeleteAncestors"
-        @addParents="selectionAddParents"
-        @switchParents="selectionSwitchParents"
+        @update-config="(key, value) => (config[key] = value)"
+        @import-tree="(newTree) => (appStore.activeTree = newTree)"
+        @unselect-all="unselectAll"
+        @change-breed="selectionChangeBreed"
+        @display-names="selectionSwitchLabel(0)"
+        @display-codes="selectionSwitchLabel(1)"
+        @select-criteria="selectionCriteria"
+        @randomize-labels="selectionRandomizeLabels"
+        @delete-ancestors="selectionDeleteAncestors"
+        @add-parents="selectionAddParents"
+        @switch-parents="selectionSwitchParents"
         @fullscreen="fullscreen.toggle"
         @undo="appStore.treeHistory.undo"
         @redo="appStore.treeHistory.redo"
@@ -133,10 +133,10 @@ function updateTree(callback: (dragon: DragonType) => void): void {
 // Accepts a callback
 // Or a key and the value to change it to
 function applyToSelected(callback: (dragon: DragonType) => void): void;
-function applyToSelected(key: keyof DragonType, value: any): void;
+function applyToSelected(key: keyof DragonType, value: unknown): void;
 function applyToSelected(
   keyOrCallback: keyof DragonType | ((dragon: DragonType) => void),
-  value?: any,
+  value?: unknown,
 ) {
   if (typeof keyOrCallback === 'string') {
     const key = keyOrCallback.toString();
@@ -152,10 +152,10 @@ function applyToSelected(
 }
 
 function selectionCriteria(callback: (dragon: DragonType) => boolean): void;
-function selectionCriteria(key: keyof DragonType, value: any): void;
+function selectionCriteria(key: keyof DragonType, value: unknown): void;
 function selectionCriteria(
   keyOrCallback: keyof DragonType | ((dragon: DragonType) => boolean),
-  value?: any,
+  value?: unknown,
 ) {
   if (typeof keyOrCallback === 'string') {
     const key = keyOrCallback.toString();

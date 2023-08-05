@@ -4,7 +4,7 @@
       v-if="recentlyUsed.length > 0"
       :list="recentlyUsed.map((breed) => ({ data: breed }))"
       :compact="true"
-      @breedSelected="(breed) => emit('breedSelected', breed)"
+      @breed-selected="(breed) => emit('breedSelected', breed)"
     />
     <p
       v-else

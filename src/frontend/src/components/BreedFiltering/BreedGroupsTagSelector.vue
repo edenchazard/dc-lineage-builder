@@ -1,7 +1,7 @@
 <template>
   <TagList
     v-model="tagStore.groups"
-    :atLeastOneEnabled="true"
+    :at-least-one-enabled="true"
   />
 </template>
 <script setup lang="ts">

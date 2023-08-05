@@ -5,8 +5,8 @@
         <BreedSelector
           v-if="!disabled && showBreedSelector === true"
           :breeds="availableMates"
-          :genderFilter="data.gender"
-          @breedSelected="changeBreed"
+          :gender-filter="data.gender"
+          @breed-selected="changeBreed"
           @close="showBreedSelector = false"
         />
         <DragonButton
@@ -61,8 +61,8 @@
       <DragonLabel
         :value="data.display === 1 ? data.code : data.name"
         :display="data.display"
-        @changed="labelChanged"
         :disabled="disabled"
+        @changed="labelChanged"
       />
       <DragonButton
         v-if="nodesFromRoot === 0 && data.gender === 'm'"
@@ -97,12 +97,12 @@
     <ul v-if="hasAncestry">
       <Dragon
         :data="data.parents.m"
-        :nodesFromRoot="nodesFromRoot + 1"
+        :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
       />
       <Dragon
         :data="data.parents.f"
-        :nodesFromRoot="nodesFromRoot + 1"
+        :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
       />
     </ul>
@@ -110,10 +110,7 @@
 </template>
 
 <script setup lang="ts">
-/*
-notes for meself
-label warning is a bit hacky and needs improving
-*/
+/* eslint-disable vue/no-mutating-props */
 import GLOBALS from '../../../app/globals';
 import {
   getBreedData,
@@ -173,14 +170,7 @@ const availableMates = computed(() => getTable(props.data.gender));
 
 const getImage = computed(() => {
   // return the breed data for this breed name or if no match, the placeholder
-  let entry = getBreedData(props.data.breed);
-
-  if (!entry) {
-    // if unavailable, replace with placeholder
-    props.data.breed = GLOBALS.placeholder.name;
-    entry = getBreedData(props.data.breed) as BreedEntry;
-  }
-
+  const entry = getBreedData(props.data.breed) as BreedEntry;
   const portrait = breedEntryToPortrait(entry, expandGender(props.data.gender));
 
   return portrait;
@@ -239,7 +229,7 @@ function pasteBranch() {
 
 function copyBranch() {
   // Do nothing if no parents
-  if (!hasAncestry) return;
+  if (!hasAncestry.value) return;
 
   const noSelect = deepClone({ parents: props.data.parents });
 

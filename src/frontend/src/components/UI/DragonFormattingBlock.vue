@@ -16,12 +16,10 @@ const props = defineProps({
 function format() {
   // the data we show the user for context needs to be modified slightly.
   // omit selected and parents types
-  const { selected, parents, ...temp } = props.dragon;
-  // replace parent tree with "{ ... }"
   const display: Omit<DragonType, 'selected' | 'parents'> & {
     parents: string;
   } = {
-    ...temp,
+    ...props.dragon,
     parents: hasParents(props.dragon) ? '{ ... }' : 'none',
   };
   return JSON.stringify(display, null, 4);

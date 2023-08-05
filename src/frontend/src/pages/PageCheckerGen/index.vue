@@ -36,7 +36,7 @@
             <BreedSearchControl
               id="search"
               placeholder="Search breeds"
-              @update="(search: string) => query = search"
+              @update="(search: string) => (query = search)"
             />
           </div>
         </div>
@@ -65,13 +65,13 @@
             <label for="generations">Generations: </label>
             <select
               id="generations"
-              title="Generations"
               v-model="genCount"
+              title="Generations"
             >
               <option
                 v-for="index in 6"
-                :value="index + 1"
                 :key="index"
+                :value="index + 1"
               >
                 {{ index + 1 }}
               </option>
@@ -87,8 +87,8 @@
             :breeds="GLOBALS.breeds.males"
             :tags="tagStore.enabledTags"
             :groups="tagStore.enabledEggGroups"
-            @breedSelected="selectMale"
             class="results"
+            @breed-selected="selectMale"
           />
         </div>
         <div>
@@ -98,8 +98,8 @@
             :breeds="GLOBALS.breeds.females"
             :tags="tagStore.enabledTags"
             :groups="tagStore.enabledEggGroups"
-            @breedSelected="selectFemale"
             class="results"
+            @breed-selected="selectFemale"
           />
         </div>
       </section>

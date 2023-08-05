@@ -1,10 +1,10 @@
 <template>
   <Dialog @close="emit('close')">
-    <template v-slot:header> Import lineage </template>
-    <template v-slot:body>
+    <template #header> Import lineage </template>
+    <template #body>
       <Feedback
         ref="status"
-        :globalSettings="{ showDismiss: false }"
+        :global-settings="{ showDismiss: false }"
       />
       <p>Paste the export text and click 'import'.</p>
       <p>
@@ -19,7 +19,7 @@
         />
       </div>
     </template>
-    <template v-slot:footer>
+    <template #footer>
       <button @click="importLineage">Import</button>
     </template>
   </Dialog>

@@ -4,7 +4,7 @@
       <div>
         <Feedback
           ref="status"
-          :globalSettings="{ showDismiss: false }"
+          :global-settings="{ showDismiss: false }"
         />
       </div>
       <div
@@ -25,7 +25,7 @@
           <Textbox
             v-model="shareLink"
             type="input"
-            :showCopyButton="true"
+            :show-copy-button="true"
           />
         </span>
       </div>

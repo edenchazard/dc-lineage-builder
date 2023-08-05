@@ -4,11 +4,11 @@
     class="pointer"
     v-bind="$attrs"
     :data="dragon"
-    @click.prevent="openDialog"
-    @keyup.space.enter="openDialog"
     role="button"
     :tabindex="disabled ? -1 : 0"
     :aria-disabled="disabled"
+    @click.prevent="openDialog"
+    @keyup.space.enter="openDialog"
   />
   <input
     :id="label"
