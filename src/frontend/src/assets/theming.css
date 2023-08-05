@@ -3,14 +3,18 @@
 @font-face {
   font-family: 'fq';
   font-display: auto;
-  src: local('fq'), url(fonts/fq.woff2) format('woff2');
+  src:
+    local('fq'),
+    url(fonts/fq.woff2) format('woff2');
   font-style: normal;
 }
 
 @font-face {
   font-family: 'din';
   font-display: auto;
-  src: local('din'), url(fonts/din.woff2) format('woff2');
+  src:
+    local('din'),
+    url(fonts/din.woff2) format('woff2');
   font-style: normal;
 }
 

@@ -10,7 +10,7 @@
     "ts:check": "tsc --noEmit",
     "lint": "eslint . --ext .vue,.ts",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write .",
+    "fmt": "prettier --write .",
     "fix": "npm run lint:fix && npm run format"
   },
   "dependencies": {
