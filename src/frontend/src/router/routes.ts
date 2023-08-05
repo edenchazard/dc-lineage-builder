@@ -4,17 +4,17 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/:pathMatch(.*)*',
     name: 'Error',
-    component: () => import('../pages/PageErrors/PageError404.vue'),
+    component: () => import('../pages/errors/404.vue'),
   },
   {
     path: '/',
     name: 'Build',
-    component: () => import('../pages/PageBuilder/index.vue'),
+    component: () => import('../pages/Builder.vue'),
   },
   {
     path: '/view/:hash',
     name: 'Viewing Lineage',
-    component: () => import('../pages/PageView/index.vue'),
+    component: () => import('../pages/View.vue'),
   },
   {
     path: '/how-to',
@@ -24,27 +24,27 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/disclaimer',
     name: 'Disclaimer',
-    component: () => import('../pages/PageDisclaimer/index.vue'),
+    component: () => import('../pages/Disclaimer.vue'),
   },
   {
     path: '/checkers',
     name: 'Checker Generator',
-    component: () => import('../pages/PageCheckerGen/index.vue'),
+    component: () => import('../pages/CheckerGenerator.vue'),
   },
   {
     path: '/ghost-breeds',
     name: 'Ghost Breeds',
-    component: () => import('../pages/PageGhostBreeds/index.vue'),
+    component: () => import('../pages/GhostBreeds.vue'),
   },
   {
     path: '/onsite-preview',
     name: 'Onsite Preview',
-    component: () => import('../pages/PageOnsitePreview/index.vue'),
+    component: () => import('../pages/OnsitePreview.vue'),
   },
   {
     path: '/tutorial',
     name: 'Tutorial',
-    component: () => import('../pages/PageTutorial/index.vue'),
+    component: () => import('../pages/Tutorial.vue'),
   },
 ];
 
