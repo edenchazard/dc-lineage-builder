@@ -1,17 +1,16 @@
 import { DragonType } from './types';
-import { hasParents } from './utils';
 
 class MiniTester {
   supressReasoning: boolean;
   failed: boolean | null = null;
-  failHandler: Function | null = null;
+  failHandler: ((testName: string, ...args: unknown[]) => void) | null = null;
   running: boolean = false;
 
   constructor(supressReasoning = false) {
     this.supressReasoning = supressReasoning;
   }
 
-  setFailHandler(func: (testName: string, ...args: any) => void) {
+  setFailHandler(func: (testName: string, ...args: unknown[]) => void) {
     this.failHandler = func;
   }
 
@@ -28,13 +27,13 @@ class MiniTester {
     this.failed = null;
   }
 
-  testFail(testName: string, ...args: any) {
+  testFail(testName: string, ...args: unknown[]) {
     this.failed = true;
     if (!this.supressReasoning && this.failHandler)
       this.failHandler(testName, ...args);
   }
 
-  runTest(func: (...args: any) => boolean, ...args: any) {
+  runTest(func: (...args: unknown[]) => boolean, ...args: unknown[]) {
     // ignore test if tester isn't running
     if (!this.running) return;
 
@@ -47,7 +46,7 @@ class MiniTester {
 interface context {
   failedDragon: null | DragonType;
 }
-//failureCallback: (test: string) => void
+
 function createTester(
   supressReasoning = false,
 ): [MiniTester, string[], context] {
@@ -58,13 +57,13 @@ function createTester(
   };
 
   // fails the integrity check and gives reasoning
-  tester.setFailHandler((testName, value: any) => {
+  tester.setFailHandler((testName, value) => {
     console.warn(`Test '${testName}' failed`, value);
 
     // this is a bit hackish, but we only want to provide
     // a failed dragon context when we're... actually testing dragons
-    if (typeof value === 'object' && 'code' in value) {
-      context.failedDragon = value;
+    if (typeof value === 'object' && 'code' in (value as DragonType)) {
+      context.failedDragon = value as DragonType;
     }
     failedTests.push(testName);
   });

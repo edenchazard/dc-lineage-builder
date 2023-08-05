@@ -3,7 +3,7 @@ import { DragonType, LineageRoot } from './types';
 
 interface APIResponse {
   errors: Array<{ type: 'Warning' | 'Error'; message: string }>;
-  data: null | Object;
+  data: null | Record<string, unknown>;
 }
 
 const http = axios.create({

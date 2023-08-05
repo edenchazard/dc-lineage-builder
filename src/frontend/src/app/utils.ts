@@ -213,10 +213,13 @@ export function filterTags(enabledTags: FilterTag[]) {
   };
 }
 
-export function debounce(callback: Function, timeout = 300) {
+export function debounce(
+  callback: (...args: unknown[]) => unknown,
+  timeout = 300,
+) {
   let timer: ReturnType<typeof setTimeout>;
 
-  return (...args: any) => {
+  return (...args: unknown[]) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       callback.apply(window, args);
