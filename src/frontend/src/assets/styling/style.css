@@ -19,3 +19,6 @@
 :focus {
   outline: 2px solid lightblue;
 }
+.svg-inline--fa {
+  margin: 0rem 0.5rem;
+}

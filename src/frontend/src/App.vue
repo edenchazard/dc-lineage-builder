@@ -16,7 +16,7 @@ import { useRoute } from 'vue-router';
 
 import './assets/theming.css';
 import './assets/styling/style.css';
-import Header from './components/Page/Header.vue';
+import Header from './components/Page/Header/Header.vue';
 import { useSkinStore } from './store/skin';
 
 const route = useRoute();
@@ -34,13 +34,13 @@ const skinStore = useSkinStore();
 
 /* global css */
 :root {
-  --maxwidth: 1000px;
+  --maxwidth: 1100px;
   --desktop: 1024px;
   --mobile: 768px;
 }
 html {
   height: 100%;
-  /* fixes bug with the layout not stretching for big lineages */
+  /* fixes bug with the layout7 not stretching for big lineages */
   overflow-x: hidden;
   width: 100vw;
 }
