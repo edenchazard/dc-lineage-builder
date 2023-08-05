@@ -120,12 +120,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import { BreedEntry, Gender } from '../../app/types';
-import { addBreed } from '../../app/utils';
-import settings from '../../app/settings';
-import GhostBreedUpload from './GhostBreedUpload.vue';
-import Feedback from '../../components/UI/Feedback.vue';
-import { BREEDNAMEREGEXP } from '../../app/validators';
+import { BreedEntry, Gender } from '../app/types';
+import { addBreed } from '../app/utils';
+import settings from '../app/settings';
+import GhostBreedUpload from '../components/GhostBreedUpload.vue';
+import Feedback from '../components/UI/Feedback.vue';
+import { BREEDNAMEREGEXP } from '../app/validators';
 
 type Availability = 'b' | Gender;
 

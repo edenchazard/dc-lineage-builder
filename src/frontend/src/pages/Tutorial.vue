@@ -165,7 +165,7 @@
 </template>
 
 <script setup lang="ts">
-import settings from '../../app/settings';
+import settings from '../app/settings';
 </script>
 
 <style scoped>

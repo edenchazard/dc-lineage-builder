@@ -117,21 +117,21 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import { PortraitData, Gender } from '../../app/types';
-import GLOBALS from '../../app/globals';
-import { createDragonProperties } from '../../app/dragonBuilder';
-import { getBreedData } from '../../app/utils';
-import { useTagStore } from '../../store/tags';
+import { PortraitData, Gender } from '../app/types';
+import GLOBALS from '../app/globals';
+import { createDragonProperties } from '../app/dragonBuilder';
+import { getBreedData } from '../app/utils';
+import { useTagStore } from '../store/tags';
 
-import Lineage from '../../components/Lineage/Lineage.vue';
-import FilteredBreedList from '../../components/BreedFiltering/FilteredBreedList.vue';
-import BreedTagsSelector from '../../components/BreedFiltering/BreedTagsSelector.vue';
-import BreedGroupsTagSelector from '../../components/BreedFiltering/BreedGroupsTagSelector.vue';
-import DialogExport from '../../components/Toolbar/DialogExport.vue';
-import DialogGenerate from '../../components/Toolbar/DialogGenerate.vue';
-import ToolbarGroup from '../../components/Toolbar/ToolbarGroup.vue';
-import ToolbarButton from '../../components/Toolbar/ToolbarButton.vue';
-import BreedSearchControl from '../../components/BreedFiltering/BreedSearchControl.vue';
+import Lineage from '../components/Lineage/Lineage.vue';
+import FilteredBreedList from '../components/BreedFiltering/FilteredBreedList.vue';
+import BreedTagsSelector from '../components/BreedFiltering/BreedTagsSelector.vue';
+import BreedGroupsTagSelector from '../components/BreedFiltering/BreedGroupsTagSelector.vue';
+import DialogExport from '../components/Toolbar/DialogExport.vue';
+import DialogGenerate from '../components/Toolbar/DialogGenerate.vue';
+import ToolbarGroup from '../components/Toolbar/ToolbarGroup.vue';
+import ToolbarButton from '../components/Toolbar/ToolbarButton.vue';
+import BreedSearchControl from '../components/BreedFiltering/BreedSearchControl.vue';
 
 const tree = ref(createDragonProperties());
 const tagStore = useTagStore();

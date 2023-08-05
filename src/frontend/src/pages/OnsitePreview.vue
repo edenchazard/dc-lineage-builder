@@ -79,11 +79,11 @@
     <label for="doRightmostFix">Fix rightmost column on 13+ lineages</label>
 </div> */
 import { ref, nextTick } from 'vue';
-import { getOnSitePreview } from '../../app/api';
-import { validateCode } from '../../app/validators';
-import OnSitePreview from './OnSitePreview.vue';
-import LineageGenerationCounter from '../../components/Lineage/LineageGenerationCounter.vue';
-import Feedback from '../../components/UI/Feedback.vue';
+import { getOnSitePreview } from '../app/api';
+import { validateCode } from '../app/validators';
+import OnSitePreview from '../components/OnsitePreview.vue';
+import LineageGenerationCounter from '../components/Lineage/LineageGenerationCounter.vue';
+import Feedback from '../components/UI/Feedback.vue';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');
