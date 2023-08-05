@@ -8,7 +8,7 @@
     <DialogImport
       v-if="dialogs.showImportDialog"
       @close="dialogs.showImportDialog = false"
-      @onImport="importLineage"
+      @on-import="importLineage"
     />
     <DialogGenerate
       v-if="dialogs.showGenerateDialog"
@@ -16,9 +16,9 @@
       @close="dialogs.showGenerateDialog = false"
     />
     <div
+      ref="toolbar"
       class="toolbar"
       role="toolbar"
-      ref="toolbar"
     >
       <div
         class="settings"
@@ -26,14 +26,14 @@
       >
         <label>
           <input
-            type="checkbox"
             v-model="config.showInterface"
+            type="checkbox"
           />Show interface
         </label>
         <label>
           <input
-            type="checkbox"
             v-model="config.showLabels"
+            type="checkbox"
           />Show labels
         </label>
       </div>
@@ -69,6 +69,7 @@
           >
             <ToolbarDropDownMenuItem
               v-for="option in selectionOptions"
+              :key="option.key"
               @click="emit('selectCriteria', option.key, option.criteria)"
             >
               {{ option.label }}
@@ -82,7 +83,10 @@
           />
           <template #legend>Select</template>
         </ToolbarGroup>
-        <ToolbarGroup v-for="group in selectionActions">
+        <ToolbarGroup
+          v-for="group in selectionActions"
+          :key="group.name"
+        >
           <ToolbarButton
             v-for="button in group.buttons"
             :key="button.label"
@@ -94,8 +98,8 @@
         </ToolbarGroup>
         <ToolbarGroup>
           <select
-            class="selection-apply-breed-dropdown"
             v-model="selectedBreed"
+            class="selection-apply-breed-dropdown"
             :disabled="itemsSelected === 0"
             @change="emit('changeBreed', selectedBreed)"
           >
@@ -250,7 +254,7 @@ const selectionActions = reactive<
   })),
 );
 const selectionOptions = reactive<
-  { label: string; key: keyof DragonType; criteria: any }[]
+  { label: string; key: keyof DragonType; criteria: string | number }[]
 >([
   { label: 'All with code', key: 'display', criteria: 1 },
   { label: 'All with name', key: 'display', criteria: 0 },
@@ -284,7 +288,7 @@ const emit = defineEmits<{
   (e: 'deleteAncestors'): void;
   (e: 'importTree', tree: LineageRoot): void;
   (e: 'changeBreed', value: string): void;
-  (e: 'selectCriteria', key: string, value: any): void;
+  (e: 'selectCriteria', key: string, value: unknown): void;
   (e: 'selectCriteria', predicate: (dragon: DragonType) => boolean): void;
   (e: 'fullscreen'): void;
   (e: 'undo'): void;
@@ -316,7 +320,7 @@ const itemsSelected = computed(() => appStore.selectionCount);
 
 const availableBreeds = computed(() => {
   // no tree, ignore. prevents exception when switching routes
-  if (!props.tree || !itemsSelected) return [];
+  if (!props.tree || !itemsSelected.value) return [];
 
   // should we list males, females or both
   const { male, female } = treeSelectedContains(props.tree);

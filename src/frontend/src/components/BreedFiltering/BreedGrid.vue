@@ -2,13 +2,13 @@
   <VirtualCollection
     v-if="compact && list.length > 0"
     class="mates-compact"
-    :cellSizeAndPositionGetter="cellSizeAndPositionGetter"
+    :cell-size-and-position-getter="cellSizeAndPositionGetter"
     :collection="list"
     :height="sizeH"
     :width="sizeW"
-    :sectionSize="size"
+    :section-size="size"
   >
-    <template v-slot:cell="{ data: breed }">
+    <template #cell="{ data: breed }">
       <DragonPortrait
         :data="breed"
         @click="emit('breedSelected', breed)"
@@ -36,7 +36,7 @@ import { getCurrentInstance, onMounted, ref } from 'vue';
 import { PortraitData } from '../../app/types';
 import DragonPortrait from '../Lineage/Dragon/DragonPortrait.vue';
 
-const props = defineProps({
+defineProps({
   compact: {
     type: Boolean,
     required: true,

@@ -1,10 +1,10 @@
 <template>
   <Dialog @close="emit('close')">
-    <template v-slot:header> Export lineage </template>
-    <template v-slot:body>
+    <template #header> Export lineage </template>
+    <template #body>
       <Feedback
         ref="status"
-        :globalSettings="{ showDismiss: false }"
+        :global-settings="{ showDismiss: false }"
       />
       <div v-if="!isError">
         <p>
@@ -16,7 +16,7 @@
             placeholder="Export code"
             type="textarea"
             readonly
-            :showCopyButton="true"
+            :show-copy-button="true"
           />
         </div>
       </div>
@@ -25,7 +25,7 @@
         <DragonFormattingBlock :dragon="problemDragon" />
       </div>
     </template>
-    <template v-slot:footer>
+    <template #footer>
       <button @click="emit('close')">Close</button>
     </template>
   </Dialog>
@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { onMounted, PropType, ref } from 'vue';
 import { DragonType, LineageRoot } from '../../app/types';
-import { deepClone, forEveryDragon } from '../../app/utils';
+import { forEveryDragon } from '../../app/utils';
 import { verifyIntegrity } from '../../app/validators';
 
 import Dialog from '../UI/Dialog.vue';
@@ -65,9 +65,12 @@ onMounted(() => {
 
   // todo but doesn't affect runtime
   // @ts-ignore
-  const exportedTree = forEveryDragon(props.tree, (dragon) => delete dragon.selected);
+  const exportedTree = forEveryDragon(
+    props.tree,
+    (dragon) => delete dragon.selected,
+  );
 
-console.log(exportedTree)
+  console.log(exportedTree);
   const { failed, failedTests, context } = verifyIntegrity(exportedTree);
 
   if (failed) {

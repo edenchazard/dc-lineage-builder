@@ -1,12 +1,12 @@
 <template>
   <div class="results">
     <BreedGrid
-      ref="container"
       v-if="filteredBreeds.length > 0"
+      ref="container"
       :list="filteredBreeds.map((breed) => ({ data: breed }))"
       :compact="filteredBreeds.length > 5"
       v-bind="$attrs"
-      @breedSelected="(breed) => emit('breedSelected', breed)"
+      @breed-selected="(breed) => emit('breedSelected', breed)"
     />
     <div
       v-else

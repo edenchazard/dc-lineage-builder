@@ -1,9 +1,9 @@
 <template>
   <span class="generation-counter">
     <span
-      class="generation"
       v-for="gen in gens"
       :key="gen"
+      class="generation"
     >
       {{ gen }}
     </span>

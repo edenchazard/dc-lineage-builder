@@ -59,7 +59,7 @@ onBeforeUnmount(() => {
 // move focus to first menu item
 function focusFirstMenuItem() {
   if (menu.value)
-    menu.value.querySelector<HTMLButtonElement>(':not(\[disabled])')?.focus();
+    menu.value.querySelector<HTMLButtonElement>(':not([disabled])')?.focus();
 }
 
 function showMenu() {

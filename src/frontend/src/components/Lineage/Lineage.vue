@@ -14,7 +14,7 @@
       >
         <Dragon
           :data="root"
-          :nodesFromRoot="0"
+          :nodes-from-root="0"
           :disabled="config.disabled"
         />
       </ul>
@@ -38,11 +38,11 @@ const props = defineProps({
   config: {
     type: Object as PropType<LineageConfig>,
     required: false,
-    default: {
+    default: () => ({
       showLabels: true,
       showInterface: false,
       disabled: true,
-    },
+    }),
   },
 });
 

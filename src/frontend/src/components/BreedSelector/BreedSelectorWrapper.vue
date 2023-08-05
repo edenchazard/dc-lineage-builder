@@ -1,9 +1,9 @@
 <template>
   <div
+    ref="rootEl"
     class="focusable-dialog"
     role="dialog"
     aria-modal="true"
-    ref="rootEl"
   >
     <div id="modal-header">
       <slot name="title"> Dialog Title </slot>

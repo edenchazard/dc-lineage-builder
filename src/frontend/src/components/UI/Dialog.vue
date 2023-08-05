@@ -11,8 +11,8 @@
         <button
           type="button"
           class="btn-close"
-          @click="close"
           aria-label="Close modal"
+          @click="close"
         >
           x
         </button>
@@ -28,8 +28,8 @@
           <button
             type="button"
             class="btn-close"
-            @click="close"
             aria-label="Close modal"
+            @click="close"
           >
             Close
           </button>

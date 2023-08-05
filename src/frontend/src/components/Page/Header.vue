@@ -6,8 +6,8 @@
     >
       <div id="header-title">
         <router-link
-          to="/"
           id="logo"
+          to="/"
           ><h1>Lineage Builder</h1></router-link
         >
         <div class="part-of">
@@ -54,13 +54,13 @@
         <div>
           Skin:
           <select
-            title="Skin"
             v-model="skinStore.activeSkin"
+            title="Skin"
           >
             <option
               v-for="skin in skinStore.availableSkins"
-              :value="skin.cssName"
               :key="skin.cssName"
+              :value="skin.cssName"
             >
               {{ skin.prettyName }}
             </option>

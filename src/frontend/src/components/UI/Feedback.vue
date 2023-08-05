@@ -1,11 +1,13 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
-  <Transition @afterLeave="closed">
+  <Transition @after-leave="closed">
     <div
       v-if="!hidden"
       class="container"
     >
       <div
         v-for="(feedback, index) in stack"
+        :key="index"
         :class="getFeedbackClass(feedback.type)"
       >
         <div class="split">
@@ -18,7 +20,7 @@
           <div
             class="message-portion"
             v-html="feedback.message"
-          ></div>
+          />
           <div
             v-if="feedback.showDismiss"
             class="close-portion"
@@ -63,10 +65,11 @@ const props = defineProps({
   globalSettings: {
     type: Object as PropType<Feedback>,
     required: false,
+    default: () => {},
   },
 });
 
-const emit = defineEmits<{
+defineEmits<{
   (e: 'closed'): void;
 }>();
 

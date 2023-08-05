@@ -25,26 +25,26 @@
           <div>
             <label for="male">Male: </label>
             <input
+              id="male"
+              v-model="maleCode"
               type="text"
               min="4"
               max="5"
-              id="male"
-              v-model="maleCode"
             />
             <label for="female">Female: </label>
             <input
+              id="female"
+              v-model="femaleCode"
               type="text"
               min="4"
               max="5"
-              id="female"
-              v-model="femaleCode"
             />
           </div>
           <div>
             <input
-              type="checkbox"
               id="doChecks"
               v-model="doChecks"
+              type="checkbox"
             />
             <label for="doChecks">Check genders</label>
           </div>
@@ -63,7 +63,7 @@
           :count="generations"
           :limit="cutoff"
         />
-        <OnSitePreview :htmlPreview="htmlPreview" />
+        <OnSitePreview :html-preview="htmlPreview" />
       </div>
     </section>
   </div>

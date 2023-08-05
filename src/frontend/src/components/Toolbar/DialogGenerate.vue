@@ -1,10 +1,10 @@
 <template>
   <Dialog @close="emit('close')">
-    <template v-slot:header> Save lineage </template>
-    <template v-slot:body>
+    <template #header> Save lineage </template>
+    <template #body>
       <Feedback
         ref="status"
-        :globalSettings="{ showDismiss: false }"
+        :global-settings="{ showDismiss: false }"
       />
       <div v-if="isLoadedAndOk">
         <p>
@@ -19,7 +19,7 @@
           v-model="viewLink"
           type="input"
           placeholder="link"
-          :showCopyButton="true"
+          :show-copy-button="true"
         />
       </div>
       <div v-if="problemDragon">
@@ -27,7 +27,7 @@
         <DragonFormattingBlock :dragon="problemDragon" />
       </div>
     </template>
-    <template v-slot:footer>
+    <template #footer>
       <button @click="emit('close')">Close</button>
     </template>
   </Dialog>
@@ -35,12 +35,7 @@
 <script setup lang="ts">
 import { onMounted, PropType, ref } from 'vue';
 import { verifyIntegrity, meetsSaveRequirements } from '../../app/validators';
-import {
-  createLineageLink,
-  deepClone,
-  forEveryDragon,
-  makeError,
-} from '../../app/utils';
+import { createLineageLink, forEveryDragon, makeError } from '../../app/utils';
 import { saveLineage } from '../../app/api';
 
 import Dialog from '../UI/Dialog.vue';
@@ -75,7 +70,10 @@ onMounted(async () => {
 
   // todo but doesn't affect runtime
   // @ts-ignore
-  const exportedTree = forEveryDragon(props.tree, (dragon) => delete dragon.selected);
+  const exportedTree = forEveryDragon(
+    props.tree,
+    (dragon) => delete dragon.selected,
+  );
 
   // integrity check should never fail, but better to check anyway
   const integrity = verifyIntegrity(exportedTree);

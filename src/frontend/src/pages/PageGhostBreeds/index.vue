@@ -34,9 +34,9 @@
             >Breed name</label
           >
           <input
+            id="name"
             v-model="name"
             type="text"
-            id="name"
             name="name"
             required
             title="Breed name must be alphanumeric and 1-32 characters long."
@@ -46,27 +46,27 @@
           <div class="column">
             <label
               ><input
-                type="radio"
-                v-model="genderAvailability"
                 id="avail_both"
+                v-model="genderAvailability"
+                type="radio"
                 value="b"
               />
               Both</label
             >
             <label
               ><input
-                type="radio"
-                v-model="genderAvailability"
                 id="avail_male"
+                v-model="genderAvailability"
+                type="radio"
                 value="m"
               />
               Male-only</label
             >
             <label
               ><input
-                type="radio"
-                v-model="genderAvailability"
                 id="avail_female"
+                v-model="genderAvailability"
+                type="radio"
                 value="f"
               />
               Female-only</label
@@ -75,30 +75,30 @@
           <span class="field-label">Tiles</span>
           <div class="row tiles">
             <div
-              class="column"
               v-if="['b', 'm'].includes(genderAvailability)"
+              class="column"
             >
               <GhostBreedUpload
                 ref="maleTile"
                 label="male"
                 aria-required="true"
                 :class="{ invalid: maleBase64 === '' }"
-                @tileChosen="(base64) => portraitSelected('m', base64)"
-                @uploadError="uploadError"
+                @tile-chosen="(base64) => portraitSelected('m', base64)"
+                @upload-error="uploadError"
               />
               <label for="male">Male </label>
             </div>
             <div
-              class="column"
               v-if="['b', 'f'].includes(genderAvailability)"
+              class="column"
             >
               <GhostBreedUpload
                 ref="femaleTile"
                 label="female"
                 aria-required="true"
                 :class="{ invalid: femaleBase64 === '' }"
-                @tileChosen="(base64) => portraitSelected('f', base64)"
-                @uploadError="uploadError"
+                @tile-chosen="(base64) => portraitSelected('f', base64)"
+                @upload-error="uploadError"
               />
               <label for="female">Female</label>
             </div>

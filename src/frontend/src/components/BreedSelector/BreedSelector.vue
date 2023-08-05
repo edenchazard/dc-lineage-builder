@@ -4,15 +4,15 @@
     aria-description="Select a breed."
     @close="close"
   >
-    <template v-slot:title>
+    <template #title>
       <h2>Choose a breed</h2>
     </template>
-    <template v-slot:content>
+    <template #content>
       <section class="recently-used">
         <h3>Breeds already in lineage</h3>
         <BreedSelectorReuse
-          :filterByGender="genderFilter"
-          @breedSelected="breedSelected"
+          :filter-by-gender="genderFilter"
+          @breed-selected="breedSelected"
         />
       </section>
       <section class="breeds">
@@ -39,8 +39,8 @@
           :breeds="breeds"
           :tags="tagStore.enabledTags"
           :groups="tagStore.enabledEggGroups"
-          noResultsText="There are no breeds that match this criteria."
-          @breedSelected="breedSelected"
+          no-results-text="There are no breeds that match this criteria."
+          @breed-selected="breedSelected"
         />
       </section>
     </template>
@@ -58,7 +58,7 @@ import BreedTagsSelector from '../BreedFiltering/BreedTagsSelector.vue';
 import BreedGroupsTagSelector from '../BreedFiltering/BreedGroupsTagSelector.vue';
 import BreedSearchControl from '../BreedFiltering/BreedSearchControl.vue';
 
-const props = defineProps({
+defineProps({
   breeds: {
     type: Array<PortraitData>,
     required: true,

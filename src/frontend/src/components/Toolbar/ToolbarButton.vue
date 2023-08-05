@@ -9,8 +9,8 @@
       class="icon"
     />
     <span
-      class="label"
       v-if="label"
+      class="label"
       >{{ label }}</span
     >
   </button>
@@ -20,12 +20,12 @@
 import { FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
 import { PropType } from 'vue';
 
-const p = defineProps({
+defineProps({
   icon: {
     type: Object as PropType<FontAwesomeIconProps>,
-    default: {
+    default: () => ({
       icon: 'dragon',
-    },
+    }),
   },
   label: {
     type: String,
@@ -35,7 +35,7 @@ const p = defineProps({
 
 const emit = defineEmits<{
   (e: 'click'): void;
-  (e: 'optionSelected', option: { label: string; value: any }): void;
+  (e: 'optionSelected', option: { label: string; value: unknown }): void;
 }>();
 </script>
 

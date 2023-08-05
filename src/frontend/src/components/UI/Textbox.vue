@@ -58,7 +58,7 @@ const props = defineProps({
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void;
   (e: 'copySuccess'): void;
-  (e: 'copyFail', reason: any): void;
+  (e: 'copyFail'): void;
 }>();
 
 const tooltip = ref<null | string>(null);
@@ -74,7 +74,7 @@ async function copy() {
     emit('copySuccess');
   } catch (ex) {
     tooltip.value = 'Error copying';
-    emit('copyFail', ex);
+    emit('copyFail');
   }
 
   setTimeout(() => (tooltip.value = null), props.tooltipTimeout);
