@@ -1,17 +1,20 @@
 <template>
   <div>
     <DialogExport
-      v-if="dialogs.showExportDialog"
+      id="dialog-export"
+      :open="dialogs.showExportDialog"
       :tree="tree"
       @close="dialogs.showExportDialog = false"
     />
     <DialogImport
-      v-if="dialogs.showImportDialog"
+      id="dialog-import"
+      :open="dialogs.showImportDialog"
       @close="dialogs.showImportDialog = false"
       @on-import="importLineage"
     />
     <DialogGenerate
-      v-if="dialogs.showGenerateDialog"
+      id="dialog-generate"
+      :open="dialogs.showGenerateDialog"
       :tree="tree"
       @close="dialogs.showGenerateDialog = false"
     />
@@ -130,9 +133,9 @@ import {
   LineageRoot,
   PortraitData,
 } from '../../app/types';
-import DialogExport from './DialogExport.vue';
-import DialogImport from './DialogImport.vue';
-import DialogGenerate from './DialogGenerate.vue';
+import DialogExport from '../dialogs/DialogExport.vue';
+import DialogImport from '../dialogs/DialogImport.vue';
+import DialogGenerate from '../dialogs/DialogGenerate.vue';
 import ToolbarButton from './ToolbarButton.vue';
 import ToolbarDropDownMenu from './ToolbarDropDownMenu/ToolbarDropDownMenu.vue';
 import ToolbarDropDownMenuItem from './ToolbarDropDownMenu/ToolbarDropDownMenuItem.vue';
