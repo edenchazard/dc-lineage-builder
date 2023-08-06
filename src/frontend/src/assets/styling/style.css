@@ -16,7 +16,7 @@
 .column {
   flex-direction: column;
 }
-:focus {
+:focus-visible {
   outline: 2px solid lightblue;
 }
 .svg-inline--fa {
