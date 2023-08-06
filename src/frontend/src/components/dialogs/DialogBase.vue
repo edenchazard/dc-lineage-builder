@@ -1,0 +1,299 @@
+<template>
+  <div v-if="open">
+    <A11yDialog
+      :id="id"
+      close-button-position="none"
+      dialog-root="#app"
+      @dialog-ref="assignDialogRef"
+    >
+      <Transition
+        name="pull"
+        mode="in-out"
+      >
+        <div
+          v-if="open"
+          class="dialog"
+        >
+          <header class="dialog-header">
+            <h1 class="dialog-header-title">
+              <slot name="title">Dialog title Quick Brown Fox</slot>
+            </h1>
+
+            <div class="dialog-buttons">
+              <button
+                class="dialog-header-button close-button"
+                type="button"
+                data-a11y-dialog-hide
+                aria-label="Close dialog"
+                title="Close dialog"
+              >
+                <FontAwesomeIcon
+                  size="2x"
+                  icon="times"
+                />
+              </button>
+            </div>
+          </header>
+          <main class="dialog-main">
+            <slot
+              name="default"
+              :dialog="exposeMethods"
+              >Default content</slot
+            >
+          </main>
+          <footer
+            v-if="$slots.footer"
+            class="dialog-footer"
+          >
+            <slot name="footer">Footer </slot>
+          </footer>
+        </div>
+      </Transition>
+    </A11yDialog>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { watch } from 'vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { A11yDialog } from 'vue-a11y-dialog';
+
+// tod, very basic, hacky type to keep TS quiet.
+type A11yDialogDOMEvent = 'hide' | 'show' | 'destroy' | 'create';
+
+interface A11yDialogDOM {
+  show: () => void;
+  hide: () => void;
+  on: (event: A11yDialogDOMEvent, callback: (element: Element) => void) => void;
+}
+
+const emit = defineEmits(['instance', 'dialogMounted', 'close', 'open']);
+
+const props = defineProps({
+  open: {
+    type: Boolean,
+    required: true,
+  },
+  id: {
+    type: String,
+    required: true,
+  },
+});
+
+let instance: null | A11yDialogDOM;
+
+watch(
+  () => props.open,
+  (value) => {
+    setTimeout(() => {
+      if (instance) instance[value ? 'show' : 'hide']();
+    }, 50);
+  },
+);
+
+function assignDialogRef(dia: A11yDialogDOM) {
+  instance = dia;
+
+  if (!instance) return;
+
+  emit('dialogMounted');
+
+  // watch dialog reference for updates and sync with vue
+  instance.on('show', () => {
+    emit('open');
+  });
+
+  instance.on('hide', () => {
+    emit('close', false);
+  });
+}
+
+const exposeMethods = {
+  hide() {
+    instance?.hide();
+  },
+};
+</script>
+
+<style lang="postcss">
+.dialog {
+}
+/* I don't like the way the title's been implemented, it makes the css
+a little difficult, so we're opting to provide the info it needs but
+hide it visually, while recreating it inside the actual dialog slot, where we
+have more control */
+.dialog-title {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+/* dialog size constraints */
+@media (min-width: 500px) {
+  .dialog-content {
+    max-width: 500px;
+    max-height: 490px;
+  }
+
+  /* aesthetics: our buttons will peek outside the dialog
+  if we have enough space */
+  .dialog-buttons {
+    position: relative;
+    top: -1.5rem;
+  }
+}
+
+.dialog-container {
+  z-index: 1000;
+  display: flex;
+}
+.dialog-container,
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.dialog-overlay {
+  z-index: 1002;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 1s;
+  opacity: 0;
+}
+
+.dialog-content {
+  margin: auto;
+  z-index: 1004;
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+}
+
+.dialog-header,
+.dialog-main {
+  padding: 0.5rem;
+}
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #44300b;
+  color: #fff;
+  border-radius: 0.3rem 0.3rem 0 0;
+  padding: 0.5rem 1rem;
+}
+.dialog-header-title {
+  font-size: 1.5em;
+  margin: 0px;
+}
+.dialog-header-button.close-button {
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  border-radius: 50%;
+  position: absolute;
+  top: -1.5rem;
+  left: -0.5rem;
+}
+.close-button {
+  border: none;
+  background: lightcoral;
+  color: #fff;
+}
+.dialog-main {
+  background: #fff;
+}
+
+.dialog-footer {
+  text-align: right;
+  background: #fff;
+  border-radius: 0 0 0.3rem 0.3rem;
+  padding: 0.5rem;
+}
+.dialog-footer-button {
+  padding: 0.5rem 1rem;
+  background: #44300b;
+  border: none;
+  color: #fff;
+  border-radius: 0.3rem;
+}
+/* animations */
+.dialog {
+  opacity: 0;
+  transform: translateY(20%);
+  transition:
+    transform 0.5s linear 0.5s,
+    opacity 0.5s linear 0.5s;
+}
+.dialog-container[aria-hidden='true'] {
+  .dialog {
+  }
+  /*   > .dialog-overlay {
+    animation: fade-out 0.5s;
+  } */
+  > .dialog-content {
+  }
+}
+
+.dialog-container:not([aria-hidden]) {
+  > .dialog-overlay {
+    /* display: block; */
+    opacity: 1;
+  }
+  & .dialog-content {
+  }
+  .dialog {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .dialog-container > .dialog-overlay {
+    animation: none;
+  }
+  .dialog-container > .dialog-content {
+    animation: none;
+  }
+}
+/* .pull-enter-from { */
+/*   display: block; */
+/*   transform: translateY(0%); */
+/* }
+.pull-enter-active,
+.pull-leave-active {
+  transform: translateY(10%);
+  transition: transform 2s;
+}
+.pull-enter,
+.pull-leave-to { */
+/*   transform: translateY(0%); */
+/* }
+ */
+/* .fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+} */
+</style>
