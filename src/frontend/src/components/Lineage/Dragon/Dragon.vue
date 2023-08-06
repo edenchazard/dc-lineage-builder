@@ -23,19 +23,23 @@
           icon="cut"
           @click="removeDescendants"
         />
-        <DragonPortrait
+        <button
           v-longPress="{
             click: click,
             longPress: longPress,
           }"
-          class="tile-portrait"
-          :class="{
-            active: !disabled,
-            disabled: disabled,
-            selected: data.selected,
-          }"
-          :data="getImage"
-        />
+          class="dragon-breed-picker-button"
+        >
+          <DragonPortrait
+            :data="getImage"
+            :class="{
+              active: !disabled,
+              disabled: disabled,
+              selected: data.selected,
+            }"
+          />
+        </button>
+
         <DragonButton
           v-if="hasAncestry"
           class="dragon-right"
@@ -353,6 +357,11 @@ li::after {
   border-top: var(--lineageLineStyle);
 }
 /* end of dc styling */
+.dragon-breed-picker-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
 .active {
   cursor: pointer;
 }
