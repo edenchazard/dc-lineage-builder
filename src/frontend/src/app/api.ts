@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { DragonType, LineageRoot } from './types';
 
 interface APIResponse {
@@ -19,14 +19,13 @@ async function callAPI<T>(url: string, options: AxiosRequestConfig = {}) {
     // url comes last to prevent it being overwritten via options
     return await http.request<T>({ ...options, url });
   } catch (ex) {
-    const standardResponse = `Sorry, an error has occurred while contacting the server.`;
+    let error = `Sorry, an error has occurred while contacting the server.`;
     // server responded with error
-    if (ex.response)
-      throw new Error(
-        `${standardResponse} Error: ${ex.response.status} ${ex.response.statusText}`,
-      );
+    if (ex instanceof AxiosError && typeof ex.response === 'object') {
+      error += ` Error: ${ex.response.status} ${ex.response.statusText}`;
+    }
     // other
-    throw new Error(standardResponse);
+    throw new Error(error);
   }
 }
 

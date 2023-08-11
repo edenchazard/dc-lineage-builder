@@ -8,7 +8,5 @@ import App from './App.vue';
 createApp(App)
   .use(createPinia())
   .use(router)
-  //.use(bubblePlugin)
-  // components
   .component('font-awesome-icon', FontAwesomeIcon)
   .mount('#app-container');

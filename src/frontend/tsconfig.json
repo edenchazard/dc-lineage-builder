@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "jsx": "preserve",
+    "target": "ES2021",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -13,19 +13,9 @@
     "skipLibCheck": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "strictBindCallApply": true,
-    "strictFunctionTypes": true
+    "strict": true,
+    "types": ["vite/client"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "src/app/api.js",
-    "src/app/api.js",
-    "src/app/api.js"
-  ],
+  "include": ["./src/**/*.ts", "**/*.d.ts", "./src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
