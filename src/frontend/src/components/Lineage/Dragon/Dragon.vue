@@ -3,7 +3,7 @@
     <div class="tile">
       <div>
         <BreedSelector
-          v-if="!disabled && showBreedSelector === true"
+          v-if="showBreedSelector"
           :breeds="availableMates"
           :gender-filter="data.gender"
           @breed-selected="changeBreed"
@@ -23,19 +23,24 @@
           icon="cut"
           @click="removeDescendants"
         />
-        <DragonPortrait
-          v-longPress="{
-            click: click,
-            longPress: longPress,
+        <button
+          v-on-long-press="{
+            wait: 300,
+            onClick: handleClick,
+            onLongPress: handleLongPress,
           }"
-          class="tile-portrait"
+          class="dragon-breed-picker-button"
+          :disabled="disabled"
           :class="{
             active: !disabled,
             disabled: disabled,
             selected: data.selected,
           }"
-          :data="getImage"
-        />
+          type="button"
+        >
+          <DragonPortrait :data="getImage" />
+        </button>
+
         <DragonButton
           v-if="hasAncestry"
           class="dragon-right"
@@ -111,6 +116,8 @@
 
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
+import { computed, PropType, ref } from 'vue';
+import vOnLongPress from '../../../directives/long-press/vue-3-long-press';
 import GLOBALS from '../../../app/globals';
 import {
   getBreedData,
@@ -137,9 +144,6 @@ import {
   DragonType,
   PortraitData,
 } from '../../../app/types';
-
-import vLongPress from '../../../directives/long-press/vue-3-long-press';
-import { computed, PropType, ref } from 'vue';
 
 const props = defineProps({
   // Dragon properties
@@ -275,17 +279,23 @@ function switchLabel() {
   props.data.display = props.data.display === 1 ? 0 : 1;
 }
 
-function longPress() {
-  if (props.disabled) return;
-  if (!appStore.selectionCount) {
-    if (!props.data.selected) props.data.selected = true;
-  } else click();
+function handleLongPress() {
+  if (appStore.selectionCount === 0) {
+    if (!props.data.selected) {
+      props.data.selected = true;
+    }
+  } else {
+    props.data.selected = !props.data.selected;
+  }
 }
 
-function click() {
-  if (props.disabled) return;
-  if (appStore.selectionCount) props.data.selected = !props.data.selected;
-  else showBreedSelector.value = true;
+function handleClick() {
+  // if selection mode is active, we should add to the selection
+  if (appStore.selectionCount > 0) {
+    props.data.selected = !props.data.selected;
+  } else {
+    showBreedSelector.value = true;
+  }
 }
 </script>
 
@@ -353,12 +363,18 @@ li::after {
   border-top: var(--lineageLineStyle);
 }
 /* end of dc styling */
+.dragon-breed-picker-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
 .active {
   cursor: pointer;
 }
 .selected {
   background: #89cff0;
-  border: 1px dashed #246bce;
+  outline: 1px dashed #246bce;
+  outline-offset: 2px;
 }
 </style>
 <style>
