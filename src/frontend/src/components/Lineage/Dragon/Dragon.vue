@@ -1,105 +1,107 @@
 <template>
-  <li>
+  <li class="tile-container">
+    <BreedSelector
+      v-if="showBreedSelector"
+      :breeds="availableMates"
+      :gender-filter="data.gender"
+      @breed-selected="changeBreed"
+      @close="showBreedSelector = false"
+    />
     <div class="tile">
-      <div>
-        <BreedSelector
-          v-if="showBreedSelector"
-          :breeds="availableMates"
-          :gender-filter="data.gender"
-          @breed-selected="changeBreed"
-          @close="showBreedSelector = false"
-        />
-        <DragonButton
-          v-if="nodesFromRoot === 0"
-          class="dragon-left"
-          title="Add descendant"
-          icon="arrow-left"
-          @click="addDescendant"
-        />
-        <DragonButton
-          v-if="nodesFromRoot > 0"
-          class="dragon-left"
-          title="Remove descendants"
-          icon="cut"
-          @click="removeDescendants"
-        />
-        <button
-          v-on-long-press="{
-            wait: 300,
-            onClick: handleClick,
-            onLongPress: handleLongPress,
-          }"
-          class="dragon-breed-picker-button"
-          :disabled="disabled"
-          :class="{
-            active: !disabled,
-            disabled: disabled,
-            selected: data.selected,
-          }"
-          type="button"
-        >
-          <DragonPortrait :data="getImage" />
-        </button>
-
-        <DragonButton
-          v-if="hasAncestry"
-          class="dragon-right"
-          title="Remove ancestors"
-          icon="minus"
-          @click="deleteAncestors"
-        />
-        <DragonButton
-          v-if="hasAncestry"
-          class="dragon-right2"
-          title="Switch parents"
-          icon="sync-alt"
-          @click="swapParents"
-        />
-        <DragonButton
-          v-if="!hasAncestry"
-          class="dragon-right"
-          title="Add ancestors"
-          icon="arrow-right"
-          @click="addAncestors"
-        />
-      </div>
+      <DragonButton
+        v-if="nodesFromRoot === 0"
+        class="tile-control-left"
+        title="Add descendant"
+        icon="arrow-left"
+        @click="addDescendant"
+      />
+      <DragonButton
+        v-if="nodesFromRoot > 0"
+        class="tile-control-left tile-control-remove-desc"
+        title="Remove descendants"
+        icon="cut"
+        @click="removeDescendants"
+      />
+      <button
+        v-on-long-press="{
+          wait: 300,
+          onClick: handleClick,
+          onLongPress: handleLongPress,
+        }"
+        class="dragon-breed-picker-button"
+        :disabled="disabled"
+        :class="{
+          active: !disabled,
+          disabled: disabled,
+          selected: data.selected,
+        }"
+        type="button"
+      >
+        <DragonPortrait :data="getImage" />
+      </button>
+      <DragonButton
+        v-if="hasAncestry"
+        class="tile-control-right"
+        title="Remove ancestors"
+        icon="minus"
+        @click="deleteAncestors"
+      />
+      <DragonButton
+        v-if="!hasAncestry"
+        class="tile-control-right"
+        title="Add ancestors"
+        icon="arrow-right"
+        @click="addAncestors"
+      />
       <DragonLabel
         :value="data.display === 1 ? data.code : data.name"
         :display="data.display"
         :disabled="disabled"
         @changed="labelChanged"
       />
-      <DragonButton
-        v-if="nodesFromRoot === 0 && data.gender === 'm'"
-        title="Switch gender to female"
-        icon="mars"
-        @click="switchGender"
-      />
-      <DragonButton
-        v-else-if="nodesFromRoot === 0 && data.gender === 'f'"
-        title="Switch gender to male"
-        icon="venus"
-        @click="switchGender"
-      />
-      <DragonButton
-        class="switchLabel"
-        title="Switch label"
-        icon="font"
-        @click="switchLabel"
-      />
-      <DragonButton
-        v-if="hasAncestry"
-        title="Copy ancestors"
-        icon="clone"
-        @click="copyBranch"
-      />
-      <DragonButton
-        title="Paste ancestors"
-        icon="paste"
-        @click="pasteBranch"
-      />
+      <div class="tile-bottom-controls">
+        <DragonButton
+          v-if="nodesFromRoot === 0 && data.gender === 'm'"
+          title="Switch gender to female"
+          icon="mars"
+          @click="switchGender"
+        />
+        <DragonButton
+          v-else-if="nodesFromRoot === 0 && data.gender === 'f'"
+          title="Switch gender to male"
+          icon="venus"
+          @click="switchGender"
+        />
+        <DragonButton
+          class="switchLabel"
+          title="Switch label"
+          icon="font"
+          @click="switchLabel"
+        />
+        <DragonButton
+          v-if="hasAncestry"
+          title="Copy ancestors"
+          icon="clone"
+          @click="copyBranch"
+        />
+        <DragonButton
+          title="Paste ancestors"
+          icon="paste"
+          @click="pasteBranch"
+        />
+        <DragonButton
+          v-if="hasAncestry"
+          class="tile-control-right2"
+          title="Switch parents"
+          icon="sync-alt"
+          @click="swapParents"
+        />
+      </div>
     </div>
-    <ul v-if="hasAncestry">
+    <ul
+      v-if="hasAncestry"
+      class="tile-parents"
+    >
       <Dragon
         :data="data.parents.m"
         :nodes-from-root="nodesFromRoot + 1"
@@ -299,68 +301,99 @@ function handleClick() {
 }
 </script>
 
-<style scoped>
-.hideEdit li .tile::after {
-  content: '';
-  position: absolute;
-  top: calc(50% - 12px);
-  right: 0;
-  border-top: var(--lineageLineStyle);
-  width: 24px;
-  height: 0;
+<style lang="postcss">
+.tile-container,
+.tile-parents {
+  padding: 0px;
+  margin: 0px;
 }
-li .tile:only-child::after {
-  display: none;
-}
-li {
+
+.tile-container {
   position: relative;
   list-style-type: none;
   border-spacing: 1px;
   border-collapse: collapse;
-}
-ul,
-li {
-  padding: 0;
-  margin: 0;
-}
-li:first-child::before,
-li:last-child::after {
-  display: none;
-}
-li::before,
-li::after {
-  content: '';
-  display: block;
-  border-left: var(--lineageLineStyle);
-  border-bottom: var(--lineageLineStyle);
-  width: 24px;
-  position: absolute;
-  height: 50%;
-  bottom: calc(50% + 12px);
-  left: 0;
-}
-li:last-child > * {
-  padding-bottom: 0;
-}
-li:first-child > * {
-  padding-top: 0;
-}
-li > * {
-  display: table-cell;
-  vertical-align: middle;
-}
-div {
-  text-align: center;
-  position: relative;
-  width: 120px;
-  padding: 0 4px;
-  box-sizing: border-box;
-}
-li::after {
-  top: calc(50% - 14px);
-  bottom: auto;
-  border-bottom: 0 none;
-  border-top: var(--lineageLineStyle);
+
+  &:first-child::before,
+  &:last-child::after {
+    border-width: 0px;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    width: 24px;
+    position: absolute;
+    height: 50%;
+    left: 0;
+    border-left: var(--lineage-line-style);
+  }
+  &::before {
+    bottom: calc(50% + 12px);
+    border-bottom: var(--lineage-line-style);
+  }
+  &::after {
+    top: calc(50% - 14px);
+    bottom: auto;
+    border-bottom: 0 none;
+    border-top: var(--lineage-line-style);
+  }
+
+  &:last-child > * {
+    padding-bottom: 0px;
+  }
+  &:first-child > * {
+    padding-top: 0px;
+  }
+
+  > .tile {
+    text-align: center;
+    position: relative;
+    padding: 0 4px;
+    box-sizing: border-box;
+    /* prevents the tile-container ::after line from
+    obscuring button click area */
+    z-index: 1;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: calc(50% - 12px);
+      right: 0;
+      border-top: var(--lineage-line-style);
+      width: 24px;
+      height: 0;
+    }
+    &:only-child::after {
+      display: none;
+    }
+
+    > .tile-control-left,
+    > .tile-control-right {
+      position: absolute;
+    }
+
+    > .tile-bottom-controls {
+      width: 120px;
+    }
+    /* position the controls left and right of the tile */
+    > .tile-control-right {
+      margin-top: 10px;
+      margin-left: 15px;
+    }
+
+    > .tile-control-left {
+      margin-left: -42px;
+      margin-top: 10px;
+    }
+  }
+
+  > .tile,
+  > .tile-parents {
+    display: table-cell;
+    vertical-align: middle;
+  }
 }
 /* end of dc styling */
 .dragon-breed-picker-button {
@@ -377,28 +410,26 @@ li::after {
   outline-offset: 2px;
 }
 </style>
-<style>
-.dragon-right,
-.dragon-left,
-.dragon-right2 {
-  position: absolute;
-  z-index: 5;
-}
-.dragon-left {
-  left: 0px;
-  top: 0px;
-}
-.dragon-right {
-  right: 0px;
-  top: 0px;
-}
-.dragon-right2 {
-  right: 0px;
-  top: 21px;
-}
-.hideEdit .control,
-.hideLabels .dragon-label,
-.hideLabels .switchLabel {
-  display: none;
+<style lang="postcss">
+.lineage-view {
+  --lineage-line-colour: rgba(123, 94, 40, 0.5);
+  --lineage-line-style: 1px solid var(--lineage-line-colour);
+  color: #44300b;
+
+  &[data-show-editor-interface='false'] .control {
+    display: none;
+  }
+
+  &[data-show-editor-interface='true'] {
+    .tile-container > .tile::after {
+      display: none;
+    }
+  }
+
+  &[data-show-labels='false'] {
+    .dragon-label {
+      display: none;
+    }
+  }
 }
 </style>
