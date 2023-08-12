@@ -3,7 +3,7 @@
     <div class="tile">
       <div>
         <BreedSelector
-          v-if="!disabled && showBreedSelector === true"
+          v-if="showBreedSelector"
           :breeds="availableMates"
           :gender-filter="data.gender"
           @breed-selected="changeBreed"
@@ -24,20 +24,21 @@
           @click="removeDescendants"
         />
         <button
-          v-longPress="{
-            click: click,
-            longPress: longPress,
+          v-on-long-press="{
+            wait: 300,
+            onClick: handleClick,
+            onLongPress: handleLongPress,
           }"
           class="dragon-breed-picker-button"
+          :disabled="disabled"
+          :class="{
+            active: !disabled,
+            disabled: disabled,
+            selected: data.selected,
+          }"
+          type="button"
         >
-          <DragonPortrait
-            :data="getImage"
-            :class="{
-              active: !disabled,
-              disabled: disabled,
-              selected: data.selected,
-            }"
-          />
+          <DragonPortrait :data="getImage" />
         </button>
 
         <DragonButton
@@ -115,6 +116,8 @@
 
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
+import { computed, PropType, ref } from 'vue';
+import vOnLongPress from '../../../directives/long-press/vue-3-long-press';
 import GLOBALS from '../../../app/globals';
 import {
   getBreedData,
@@ -141,9 +144,6 @@ import {
   DragonType,
   PortraitData,
 } from '../../../app/types';
-
-import vLongPress from '../../../directives/long-press/vue-3-long-press';
-import { computed, PropType, ref } from 'vue';
 
 const props = defineProps({
   // Dragon properties
@@ -279,17 +279,23 @@ function switchLabel() {
   props.data.display = props.data.display === 1 ? 0 : 1;
 }
 
-function longPress() {
-  if (props.disabled) return;
-  if (!appStore.selectionCount) {
-    if (!props.data.selected) props.data.selected = true;
-  } else click();
+function handleLongPress() {
+  if (appStore.selectionCount === 0) {
+    if (!props.data.selected) {
+      props.data.selected = true;
+    }
+  } else {
+    props.data.selected = !props.data.selected;
+  }
 }
 
-function click() {
-  if (props.disabled) return;
-  if (appStore.selectionCount) props.data.selected = !props.data.selected;
-  else showBreedSelector.value = true;
+function handleClick() {
+  // if selection mode is active, we should add to the selection
+  if (appStore.selectionCount > 0) {
+    props.data.selected = !props.data.selected;
+  } else {
+    showBreedSelector.value = true;
+  }
 }
 </script>
 
@@ -367,7 +373,8 @@ li::after {
 }
 .selected {
   background: #89cff0;
-  border: 1px dashed #246bce;
+  outline: 1px dashed #246bce;
+  outline-offset: 2px;
 }
 </style>
 <style>

@@ -97,7 +97,7 @@ computed:{
   margin: 0px;
   border: var(--dragonPortraitStyle);
   overflow: hidden;
-  display: inline-block;
+  display: block;
   user-select: none;
 }
 .imgbox-fullsize {
