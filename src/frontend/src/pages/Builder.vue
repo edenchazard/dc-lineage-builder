@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <section id="lineage-builder">
-      <LineageBuilder />
-    </section>
-  </div>
+  <LineageBuilder />
 </template>
 
 <script setup lang="ts">

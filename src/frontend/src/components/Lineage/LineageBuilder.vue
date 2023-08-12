@@ -3,38 +3,34 @@
     ref="builder"
     class="builder-container"
   >
+    <Toolbar
+      v-if="appStore.activeTree !== null"
+      :config="config"
+      :tree="appStore.activeTree"
+      @update-config="(key, value) => (config[key] = value)"
+      @import-tree="(newTree) => (appStore.activeTree = newTree)"
+      @unselect-all="unselectAll"
+      @change-breed="selectionChangeBreed"
+      @display-names="selectionSwitchLabel(0)"
+      @display-codes="selectionSwitchLabel(1)"
+      @select-criteria="selectionCriteria"
+      @randomize-labels="selectionRandomizeLabels"
+      @delete-ancestors="selectionDeleteAncestors"
+      @add-parents="selectionAddParents"
+      @switch-parents="selectionSwitchParents"
+      @fullscreen="fullscreen.toggle"
+      @undo="appStore.treeHistory.undo"
+      @redo="appStore.treeHistory.redo"
+    />
     <div class="central-block">
       <Feedback ref="status" />
     </div>
-    <div
+    <Lineage
       v-if="appStore.activeTree !== null"
-      class="lineage-builder"
-    >
-      <Toolbar
-        :config="config"
-        :tree="appStore.activeTree"
-        @update-config="(key, value) => (config[key] = value)"
-        @import-tree="(newTree) => (appStore.activeTree = newTree)"
-        @unselect-all="unselectAll"
-        @change-breed="selectionChangeBreed"
-        @display-names="selectionSwitchLabel(0)"
-        @display-codes="selectionSwitchLabel(1)"
-        @select-criteria="selectionCriteria"
-        @randomize-labels="selectionRandomizeLabels"
-        @delete-ancestors="selectionDeleteAncestors"
-        @add-parents="selectionAddParents"
-        @switch-parents="selectionSwitchParents"
-        @fullscreen="fullscreen.toggle"
-        @undo="appStore.treeHistory.undo"
-        @redo="appStore.treeHistory.redo"
-      />
-      <Lineage
-        class="builder"
-        :root="appStore.activeTree"
-        :config="config"
-        @contextmenu="() => false"
-      />
-    </div>
+      :root="appStore.activeTree"
+      :config="config"
+      @contextmenu="() => false"
+    />
   </div>
 </template>
 
@@ -217,18 +213,21 @@ function selectBy(condition: (dragon: DragonType) => boolean) {
 }
 </script>
 
-<style scoped>
-.builder-container:fullscreen {
-  background: var(--builderBG);
-  height: 100vh;
-  width: 100vh;
-  overflow: auto;
-}
-.lineage-builder {
-  font-family: var(--lineageFont);
-}
-.builder {
+<style scoped lang="postcss">
+.builder-container {
   -webkit-touch-callout: none; /* iOS Safari */
   user-select: none;
+  align-items: stretch;
+  flex-direction: column;
+  display: flex;
+  gap: 0.5rem;
+  background: var(--builder-bg);
+
+  &:fullscreen {
+    background: var(--builder-bg);
+    height: 100vh !important;
+    width: 100vh !important;
+    overflow: auto;
+  }
 }
 </style>

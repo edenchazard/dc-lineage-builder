@@ -1,24 +1,20 @@
 <template>
-  <div class="lineage-container">
-    <div
-      class="lineage-view"
-      :class="{
-        hideLabels: !config.showLabels,
-        hideEdit: !config.showInterface,
-      }"
+  <div
+    class="lineage-view"
+    :data-show-labels="config.showLabels"
+    :data-show-editor-interface="config.showInterface"
+  >
+    <LineageGenerationCounter :count="generations" />
+    <ul
+      v-if="root !== null"
+      class="lineage-root"
     >
-      <LineageGenerationCounter :count="generations" />
-      <ul
-        v-if="root !== null"
-        class="lineage-root"
-      >
-        <Dragon
-          :data="root"
-          :nodes-from-root="0"
-          :disabled="config.disabled"
-        />
-      </ul>
-    </div>
+      <Dragon
+        :data="root"
+        :nodes-from-root="0"
+        :disabled="config.disabled"
+      />
+    </ul>
   </div>
 </template>
 <script setup lang="ts">
@@ -53,10 +49,6 @@ const generations = computed(() => {
 </script>
 
 <style scoped>
-.lineage-container {
-  overflow: auto;
-  margin: 0px 3px;
-}
 .lineage-view {
   margin: 0px auto;
   font-family: var(--lineageFont);
@@ -64,11 +56,12 @@ const generations = computed(() => {
   line-height: 19.6px;
   display: flex;
   flex-direction: column;
+  overflow-x: auto;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 .lineage-root {
-  padding: 1px;
-  background: inherit;
-  display: flex;
   margin: 0px auto;
 }
 </style>
