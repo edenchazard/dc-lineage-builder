@@ -54,7 +54,7 @@ function close() {
   right: 0;
   width: 100vw;
   height: 100%;
-  margin: 0px;
+  margin: 0;
   max-height: 500px;
   display: flex;
   flex-direction: column;

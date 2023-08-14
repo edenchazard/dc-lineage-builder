@@ -11,31 +11,27 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
-
 <style scoped>
 .group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: end;
-  gap: 3px;
+  flex: 1;
 }
 .legend {
-  display: block;
-  width: 100%;
-  background: var(--builderControlBG);
-  color: var(--builderControlFG);
+  align-self: stretch;
+  background: var(--ui-builder-toolbar-selection-group-bg);
+  color: var(--ui-builder-toolbar-selection-group-fg);
   text-align: center;
-  border-radius: 0px 0px 5px 5px;
-  padding: 3px;
-  box-sizing: border-box;
+  border-radius: 0 0 0.25rem 0.25rem;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-size: 12px;
+  font-size: 0.8em;
 }
 .buttons {
   display: flex;
+  align-items: center;
+  flex: 1;
 }
 </style>

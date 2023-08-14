@@ -50,10 +50,10 @@ const generations = computed(() => {
 
 <style scoped>
 .lineage-view {
-  margin: 0px auto;
-  font-family: var(--lineageFont);
-  background: inherit;
-  line-height: 19.6px;
+  margin: 0 auto;
+  font: var(--dc-lineage-font);
+  background: var(--dc-background);
+  color: var(--dc-lineage-colour);
   display: flex;
   flex-direction: column;
   overflow-x: auto;
@@ -62,6 +62,6 @@ const generations = computed(() => {
   box-sizing: border-box;
 }
 .lineage-root {
-  margin: 0px auto;
+  margin: 0 auto;
 }
 </style>

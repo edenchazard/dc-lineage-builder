@@ -86,7 +86,7 @@ watch(container, () => {
 
 <style scoped>
 .results {
-  padding: 0px;
+  padding: 0;
   flex: 1;
   overflow-y: auto;
 }

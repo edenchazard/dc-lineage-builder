@@ -215,16 +215,13 @@ function selectBy(condition: (dragon: DragonType) => boolean) {
 
 <style scoped lang="postcss">
 .builder-container {
-  -webkit-touch-callout: none; /* iOS Safari */
-  user-select: none;
   align-items: stretch;
   flex-direction: column;
   display: flex;
   gap: 0.5rem;
-  background: var(--builder-bg);
 
   &:fullscreen {
-    background: var(--builder-bg);
+    background: var(--dc-background);
     height: 100vh !important;
     width: 100vh !important;
     overflow: auto;

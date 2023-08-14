@@ -1,7 +1,7 @@
 <template>
   <div
+    class="dragon-label"
     :class="[
-      'dragon-label',
       display === 1 ? 'code' : 'name',
       { invalid: warnInvalid && !editing },
     ]"
@@ -98,7 +98,7 @@ function finishedEditing(e: Event) {
 <style scoped>
 .dragon-label {
   width: 120px;
-  padding: 0px;
+  padding: 0;
   position: relative;
   top: -4px;
 }
@@ -125,8 +125,8 @@ function finishedEditing(e: Event) {
   text-align: center;
   border: 0px none;
   box-shadow: none;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   /* it just needs to be a little smaller to prevent layout shifts */
   font-size: inherit;
   width: 100%;

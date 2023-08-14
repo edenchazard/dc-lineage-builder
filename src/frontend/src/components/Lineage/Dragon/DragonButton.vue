@@ -27,15 +27,15 @@ const emit = defineEmits<{
 <style scoped>
 .control {
   border: 0px none;
-  color: var(--lineageToolColour);
+  color: var(--ui-builder-tile-action-color, inherit);
   background: transparent;
   font-size: 18px;
   cursor: pointer;
-  padding: 0px;
+  padding: 0;
   width: 30px;
   height: 29.38px;
 }
 .control svg {
-  padding: 0px;
+  padding: 0;
 }
 </style>

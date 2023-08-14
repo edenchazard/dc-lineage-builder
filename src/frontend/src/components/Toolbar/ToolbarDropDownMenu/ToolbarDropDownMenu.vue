@@ -7,17 +7,23 @@
     v-bind="$attrs"
     @click="showMenu"
   />
-  <div
-    ref="menu"
-    role="menu"
-    class="menu"
-    :style="position"
-    :hidden="!visible"
-    @keydown="navigateMenu"
-    @click="visible = false"
+  <Transition
+    name="fade"
+    mode="out-in"
   >
-    <slot> </slot>
-  </div>
+    <div
+      v-if="visible"
+      ref="menu"
+      role="menu"
+      class="menu"
+      :style="position"
+      :aria-hidden="!visible"
+      @keydown="navigateMenu"
+      @click="visible = false"
+    >
+      <slot />
+    </div>
+  </Transition>
 </template>
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, reactive, ref, watch } from 'vue';
@@ -25,8 +31,8 @@ import ToolbarButton from '../ToolbarButton.vue';
 
 const visible = ref(false);
 const position = reactive({
-  top: '0px',
-  left: '0px',
+  top: '-1000px',
+  left: '-10000px',
 });
 
 const button = ref<InstanceType<typeof ToolbarButton>>();
@@ -107,22 +113,21 @@ function navigateMenu(e: KeyboardEvent) {
 </script>
 <style scoped>
 .selected {
-  color: var(--builderControlFG);
-  background: var(--builderControlBG);
-  box-shadow: 0px 0px 2px 2px #000 inset;
+  color: var(--ui-builder-toolbar-menu-fg);
+  background: var(--ui-builder-toolbar-menu-bg);
 }
 .selected:hover {
   /* the button css conflicts with our selection.
   we want to remove the hover effect when pressed.*/
-  background: var(--builderControlBG) !important;
+  background: var(--ui-builder-toolbar-menu-bg) !important;
 }
 .menu {
-  color: var(--builderControlFG);
-  background: var(--builderControlBG);
+  color: var(--ui-builder-toolbar-menu-fg);
+  background: var(--ui-builder-toolbar-menu-bg);
   min-width: 50px;
   position: absolute;
   z-index: 50;
-  box-shadow: 0px 0px 4px #000;
+  box-shadow: 0 0 4px #000;
   border-radius: 5px;
 }
 .menu:deep(.button) {
@@ -131,7 +136,13 @@ function navigateMenu(e: KeyboardEvent) {
 .menu:deep(.button):last-child {
   border-bottom: none;
 }
-.menu[hidden] {
-  visibility: hidden;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

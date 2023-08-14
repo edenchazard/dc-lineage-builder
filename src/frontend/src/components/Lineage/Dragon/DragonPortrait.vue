@@ -94,11 +94,13 @@ computed:{
 }
 
 .imgbox {
-  margin: 0px;
-  border: var(--dragonPortraitStyle);
+  margin: 0;
+  border: 1px solid var(--dc-lineage-line-colour);
+  background: var(--dc-lineage-tile-background, transparent);
   overflow: hidden;
   display: block;
   user-select: none;
+  -webkit-touch-callout: none; /* iOS Safari */
 }
 .imgbox-fullsize {
   /* this needs adjusting by 2px in either directon */

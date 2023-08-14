@@ -33,6 +33,7 @@ import {
   faBars,
   faExternalLink,
   faPalette,
+  faCog,
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
@@ -70,6 +71,7 @@ library.add(
   faBars,
   faExternalLink,
   faPalette,
+  faCog,
 );
 
 library.add(faGithub);

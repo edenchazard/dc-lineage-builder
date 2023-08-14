@@ -37,7 +37,10 @@
         }"
         type="button"
       >
-        <DragonPortrait :data="getImage" />
+        <DragonPortrait
+          class="portrait"
+          :data="getImage"
+        />
       </button>
       <DragonButton
         v-if="hasAncestry"
@@ -304,8 +307,8 @@ function handleClick() {
 <style lang="postcss">
 .tile-container,
 .tile-parents {
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 
 .tile-container {
@@ -316,7 +319,7 @@ function handleClick() {
 
   &:first-child::before,
   &:last-child::after {
-    border-width: 0px;
+    border-width: 0;
   }
 
   &::before,
@@ -327,17 +330,20 @@ function handleClick() {
     position: absolute;
     height: 50%;
     left: 0;
-    border-left: var(--lineage-line-style);
+    border-left: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
+      var(--dc-lineage-line-colour);
   }
   &::before {
     bottom: calc(50% + 12px);
-    border-bottom: var(--lineage-line-style);
+    border-bottom: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
+      var(--dc-lineage-line-colour);
   }
   &::after {
     top: calc(50% - 14px);
     bottom: auto;
     border-bottom: 0 none;
-    border-top: var(--lineage-line-style);
+    border-top: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
+      var(--dc-lineage-line-colour);
   }
 
   &:last-child > * {
@@ -361,7 +367,8 @@ function handleClick() {
       position: absolute;
       top: calc(50% - 12px);
       right: 0;
-      border-top: var(--lineage-line-style);
+      border-top: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
+        var(--dc-lineage-line-colour);
       width: 24px;
       height: 0;
     }
@@ -404,18 +411,15 @@ function handleClick() {
 .active {
   cursor: pointer;
 }
-.selected {
-  background: #89cff0;
-  outline: 1px dashed #246bce;
-  outline-offset: 2px;
+
+.portrait {
+  &.selected {
+    background: var(--ui-builder-tile-selected-bg);
+  }
 }
 </style>
 <style lang="postcss">
 .lineage-view {
-  --lineage-line-colour: rgba(123, 94, 40, 0.5);
-  --lineage-line-style: 1px solid var(--lineage-line-colour);
-  color: #44300b;
-
   &[data-show-editor-interface='false'] .control {
     display: none;
   }

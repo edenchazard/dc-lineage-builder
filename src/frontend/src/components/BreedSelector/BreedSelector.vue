@@ -134,7 +134,7 @@ h2 {
   font-size: 16px;
 }
 h3 {
-  margin: 0px;
+  margin: 0;
   min-height: 17px;
   position: relative;
   font-size: 11px;

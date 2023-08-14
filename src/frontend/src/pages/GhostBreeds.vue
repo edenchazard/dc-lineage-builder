@@ -1,7 +1,6 @@
 <template>
-  <div class="central-block">
-    <Feedback ref="status" />
-    <section>
+  <div class="constrain-width content">
+    <section class="content-limit">
       <p>
         On this page you can upload custom breeds, aka "ghost breeds", to
         Lineage Builder. This can be useful if you have breed you've created and
@@ -24,95 +23,86 @@
     </section>
     <section>
       <form
-        id="add-ghost-breed"
+        id="form"
+        class="form"
         @submit="addToEntries"
       >
-        <div class="grid">
-          <label
-            class="field-label"
-            for="name"
-            >Breed name</label
-          >
+        <label
+          class="label"
+          for="name"
+          >Breed name</label
+        >
+        <input
+          id="name"
+          v-model="name"
+          type="text"
+          name="name"
+          required
+          title="Breed name must be alphanumeric and 1-32 characters long."
+          :pattern="BREEDNAMEREGEXP.toString().slice(2, -2)"
+        />
+        <span class="label">Gender availability</span>
+        <div id="gender-availability">
           <input
-            id="name"
-            v-model="name"
-            type="text"
-            name="name"
-            required
-            title="Breed name must be alphanumeric and 1-32 characters long."
-            :pattern="BREEDNAMEREGEXP.toString().slice(2, -2)"
+            id="avail_both"
+            v-model="genderAvailability"
+            type="radio"
+            value="b"
           />
-          <span class="field-label">Gender availability</span>
-          <div class="column">
-            <label
-              ><input
-                id="avail_both"
-                v-model="genderAvailability"
-                type="radio"
-                value="b"
-              />
-              Both</label
-            >
-            <label
-              ><input
-                id="avail_male"
-                v-model="genderAvailability"
-                type="radio"
-                value="m"
-              />
-              Male-only</label
-            >
-            <label
-              ><input
-                id="avail_female"
-                v-model="genderAvailability"
-                type="radio"
-                value="f"
-              />
-              Female-only</label
-            >
-          </div>
-          <span class="field-label">Tiles</span>
-          <div class="row tiles">
-            <div
-              v-if="['b', 'm'].includes(genderAvailability)"
-              class="column"
-            >
-              <GhostBreedUpload
-                ref="maleTile"
-                label="male"
-                aria-required="true"
-                :class="{ invalid: maleBase64 === '' }"
-                @tile-chosen="(base64) => portraitSelected('m', base64)"
-                @upload-error="uploadError"
-              />
-              <label for="male">Male </label>
-            </div>
-            <div
-              v-if="['b', 'f'].includes(genderAvailability)"
-              class="column"
-            >
-              <GhostBreedUpload
-                ref="femaleTile"
-                label="female"
-                aria-required="true"
-                :class="{ invalid: femaleBase64 === '' }"
-                @tile-chosen="(base64) => portraitSelected('f', base64)"
-                @upload-error="uploadError"
-              />
-              <label for="female">Female</label>
-            </div>
-          </div>
+          <label for="avail_both">Both</label>
+          <input
+            id="avail_male"
+            v-model="genderAvailability"
+            type="radio"
+            value="m"
+          />
+          <label>Male-only</label>
+          <input
+            id="avail_female"
+            v-model="genderAvailability"
+            type="radio"
+            value="f"
+          />
+          <label>Female-only</label>
         </div>
-        <div class="row form-buttons">
-          <button
-            class="themed-button"
-            type="submit"
-          >
-            Add breed
-          </button>
+        <span class="label">Tiles</span>
+        <div id="tiles">
+          <template v-if="['b', 'm'].includes(genderAvailability)">
+            <GhostBreedUpload
+              ref="maleTile"
+              label="male"
+              aria-required="true"
+              class="select"
+              :class="{ invalid: maleBase64 === '' }"
+              @tile-chosen="(base64) => portraitSelected('m', base64)"
+              @upload-error="uploadError"
+            />
+            <label
+              class="tile-label"
+              for="male"
+              >Male
+            </label>
+          </template>
+          <template v-if="['b', 'f'].includes(genderAvailability)">
+            <GhostBreedUpload
+              ref="femaleTile"
+              class="select"
+              label="female"
+              aria-required="true"
+              :class="{ invalid: femaleBase64 === '' }"
+              @tile-chosen="(base64) => portraitSelected('f', base64)"
+              @upload-error="uploadError"
+            />
+            <label
+              class="tile-label"
+              for="female"
+              >Female</label
+            >
+          </template>
         </div>
+        <button type="submit">Add breed</button>
       </form>
+      <Feedback ref="status" />
     </section>
   </div>
 </template>
@@ -221,31 +211,47 @@ function addToEntries(e: Event) {
 }
 </script>
 
-<style scoped>
-.grid {
-  grid-template-columns: 1fr;
-  gap: 5px;
+<style scoped lang="postcss">
+.content {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
-.tiles > .column {
-  margin: 5px;
+#form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+#gender-availability {
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-}
-.field-label {
-  font-weight: bold;
-}
-.field-label::after {
-  content: ':';
+  gap: 0.5rem;
 }
 
-@media (min-width: 320px) {
-  #add-ghost-breed {
-    max-width: 400px;
+#tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  & :deep(.select) {
+    grid-row: 1;
+    margin: 0 auto;
   }
-  .grid {
-    grid-template-columns: 1fr 1fr;
+  & .tile-label {
+    grid-row: 2;
+    margin: 0 auto;
   }
-  .form-buttons {
-    justify-content: right;
+}
+
+#form button[type='submit'] {
+  grid-column: 2;
+}
+
+@media (min-width: 380px) {
+  #form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1rem;
   }
 }
 </style>

@@ -1,43 +1,42 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <Transition @after-leave="closed">
-    <div
-      v-if="!hidden"
+  <TransitionGroup
+    tag="ul"
+    @after-leave="closed"
+  >
+    <li
+      v-for="(feedback, index) in stack"
+      :key="index"
       class="container"
+      :class="getFeedbackClass(feedback.type)"
     >
-      <div
-        v-for="(feedback, index) in stack"
-        :key="index"
-        :class="getFeedbackClass(feedback.type)"
-      >
-        <div class="split">
-          <div class="icon-portion">
-            <font-awesome-icon
-              class="icon"
-              :icon="Feedbacks[feedback.type]"
-            />
-          </div>
-          <div
-            class="message-portion"
-            v-html="feedback.message"
+      <div class="split">
+        <div class="icon-portion">
+          <font-awesome-icon
+            class="icon"
+            :icon="Feedbacks[feedback.type]"
           />
-          <div
-            v-if="feedback.showDismiss"
-            class="close-portion"
+        </div>
+        <div
+          class="message-portion"
+          v-html="feedback.message"
+        />
+        <div
+          v-if="feedback.showDismiss"
+          class="close-portion"
+        >
+          <button
+            type="button"
+            class="close-button"
+            title="Dismiss"
+            @click="dismiss(index)"
           >
-            <button
-              type="button"
-              class="close-button"
-              title="Dismiss"
-              @click="dismiss(index)"
-            >
-              <font-awesome-icon icon="times" />
-            </button>
-          </div>
+            <font-awesome-icon icon="times" />
+          </button>
         </div>
       </div>
-    </div>
-  </Transition>
+    </li>
+  </TransitionGroup>
 </template>
 <script setup lang="ts">
 import { onBeforeUnmount, PropType, ref } from 'vue';

@@ -1,12 +1,8 @@
-/* top level elements */
+/**
+layout
+**/
 :root {
-  font:
-    87.5%/100% 'PT Serif',
-    'Times New Roman',
-    'Times',
-    serif;
-  line-height: 19.6px;
-  --maxWidth: 1000px;
+  --site-width: 1600px;
   --desktop: 1024px;
   --mobile: 768px;
 }
@@ -29,86 +25,102 @@ body {
   flex: 1;
 }
 
-/* basic elements */
+.constrain-width {
+  max-width: var(--site-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.content-limit {
+  max-width: 800px;
+}
+
+.form {
+  & .label {
+    font-weight: bold;
+    white-space: nowrap;
+
+    &::after {
+      content: ':';
+    }
+  }
+}
+
+/**
+interactive elements
+**/
+input[type='text'],
+input[type='search'],
+textarea,
+select,
+button {
+  border: none;
+  padding: 0.5rem;
+  background: #fff;
+  font-family: var(--base-font);
+  border-radius: 0.4rem;
+}
+
+select,
+button {
+  cursor: pointer;
+}
+
+/**
+typography
+**/
+p + p {
+  margin-top: 0.4em;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  margin: 0.5rem;
+  margin: 0.125em 0;
+  line-height: 1em;
 }
+
 h1 {
   font-size: 4rem;
 }
 h2 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
 }
 h3 {
   font-size: 3rem;
-}
-p {
-  padding: 0.5rem;
 }
 strong {
   font-weight: bold;
 }
 
-input[type='text'],
-input[type='search'],
-textarea,
-select {
-  border: none;
-  padding: 0.5rem;
-  background: #fff;
-  font-family: var(--base-font);
-}
-input[type='text'],
-textarea,
-select,
-button {
-  border-radius: 0.4em;
-}
-button {
-  padding: 0.5rem;
-}
-:enabled {
-  cursor: pointer;
-}
-.themed-button {
-  margin: 2px;
-  cursor: pointer;
-  padding: 8px;
-  color: var(--builderControlFG);
-  background: var(--builderControlBG);
-  border: none;
-}
-
+/**
+utilities
+**/
 .list {
   list-style-type: disc;
-  padding-left: 15px;
+  padding-left: 1rem;
+}
+
+.btn {
+  border: none;
 }
 .pointer {
   cursor: pointer;
 }
 
-.grid {
-  display: grid;
-}
-.row,
-.column {
-  display: flex;
-}
-.row {
-  flex-direction: row;
-}
-.column {
-  flex-direction: column;
-}
-.svg-inline--fa {
-  margin: 0rem 0.5rem;
-}
-
+/**
+accessibility
+**/
 :focus-visible {
   outline: 2px solid lightblue;
+}
+
+/**
+overwrites
+**/
+.svg-inline--fa {
+  margin: 0 0.5rem;
 }
