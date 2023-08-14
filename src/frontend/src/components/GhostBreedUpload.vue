@@ -13,9 +13,9 @@
   <input
     :id="label"
     ref="fileInput"
+    class="file"
     type="file"
     accept="image/png, image/gif"
-    aria-hidden="true"
     tabindex="-1"
     @change="imageChanged"
   />
@@ -95,7 +95,7 @@ function focus() {
 }
 </script>
 <style scoped>
-input[type='file'] {
+.file {
   display: none;
 }
 </style>

@@ -41,17 +41,22 @@ const gens = computed<number[]>(() => {
   line-height: 16px;
   margin: 0px auto;
 }
+.generation,
+.generation::after,
+.generation::before {
+  border-style: var(--dc-lineage-line-style);
+  border-color: var(--dc-lineage-line-colour);
+}
 .generation:first-child {
-  border-left: var(--lineageLineStyle);
+  border-width: 0 var(--dc-lineage-line-width) 0 var(--dc-lineage-line-width);
 }
 .generation {
-  /*display: inline-block;*/
   position: relative;
   width: 128px;
   box-sizing: border-box;
   text-align: center;
-  color: var(--lineageGenColour);
-  border-right: var(--lineageLineStyle);
+  color: var(--dc-lineage-gen-text-colour);
+  border-width: 0 var(--dc-lineage-line-width) 0 0;
 }
 .generation::before {
   left: 0;
@@ -65,6 +70,6 @@ const gens = computed<number[]>(() => {
   position: absolute;
   top: 8px;
   width: 52px;
-  border-top: var(--lineageLineStyle);
+  border-width: var(--dc-lineage-line-width) 0 0 0;
 }
 </style>

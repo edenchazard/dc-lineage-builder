@@ -59,7 +59,7 @@ watch(isOpen, (value) => {
   (value ? activate : deactivate)();
 });
 
-watch(isSwiping, () => {
+/* watch(isSwiping, () => {
   if (window.screen.width >= props.slideThreshold) {
     return;
   }
@@ -69,7 +69,7 @@ watch(isSwiping, () => {
   } else if (direction.value === 'right') {
     emit('change', true);
   }
-});
+}); */
 </script>
 
 <style>

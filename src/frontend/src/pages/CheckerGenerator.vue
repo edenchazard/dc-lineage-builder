@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <DialogExport
-      v-if="showExportDialog"
-      :tree="tree"
-      @close="showExportDialog = false"
-    />
-    <DialogGenerate
-      v-if="showGenerateDialog"
-      :tree="tree"
-      @close="showGenerateDialog = false"
-    />
+  <DialogExport
+    v-if="showExportDialog"
+    :tree="tree"
+    @close="showExportDialog = false"
+  />
+  <DialogGenerate
+    v-if="showGenerateDialog"
+    :tree="tree"
+    @close="showGenerateDialog = false"
+  />
 
-    <div class="central-block">
+  <div class="constrain-width">
+    <div class="content-limit">
       <section>
         <h2>Checker Generator</h2>
         <p>
@@ -21,97 +21,97 @@
           editor.
         </p>
       </section>
-      <section id="checker-controls">
-        <div class="left">
-          <div class="applied-tags">
-            <label>Groups:</label>
-            <BreedGroupsTagSelector />
-          </div>
-          <div class="applied-tags">
-            <label>Showing:</label>
-            <BreedTagsSelector />
-          </div>
-          <div>
-            <label for="search">Search: </label>
-            <BreedSearchControl
-              id="search"
-              placeholder="Search breeds"
-              @update="(search: string) => (query = search)"
-            />
-          </div>
-        </div>
-        <div class="right">
-          <ToolbarGroup>
-            <ToolbarButton
-              title="Get Link"
-              :icon="{ icon: 'link', size: '2x' }"
-              label="Get Link"
-              @click="showGenerateDialog = true"
-            />
-            <ToolbarButton
-              title="Export dragon"
-              :icon="{ icon: 'save', size: '2x' }"
-              label="Export"
-              @click="showExportDialog = true"
-            />
-            <ToolbarButton
-              title="Switch breeds"
-              :icon="{ icon: 'exchange-alt', size: '2x' }"
-              label="Switch breeds"
-              @click="switchBreeds"
-            />
-          </ToolbarGroup>
-          <div>
-            <label for="generations">Generations: </label>
-            <select
-              id="generations"
-              v-model="genCount"
-              title="Generations"
-            >
-              <option
-                v-for="index in 6"
-                :key="index"
-                :value="index + 1"
-              >
-                {{ index + 1 }}
-              </option>
-            </select>
-          </div>
-        </div>
-      </section>
-      <section id="breeds">
-        <div>
-          <label>Male breed</label>
-          <FilteredBreedList
-            :search="query"
-            :breeds="GLOBALS.breeds.males"
-            :tags="tagStore.enabledTags"
-            :groups="tagStore.enabledEggGroups"
-            class="results"
-            @breed-selected="selectMale"
-          />
-        </div>
-        <div>
-          <label>Female breed</label>
-          <FilteredBreedList
-            :search="query"
-            :breeds="GLOBALS.breeds.females"
-            :tags="tagStore.enabledTags"
-            :groups="tagStore.enabledEggGroups"
-            class="results"
-            @breed-selected="selectFemale"
-          />
-        </div>
-      </section>
     </div>
-    <section>
-      <Lineage
-        v-if="tree !== null"
-        :root="tree"
-        :config="{ showInterface: false, showLabels: true, disabled: true }"
-      />
+    <section id="checker-controls">
+      <div class="left">
+        <div class="applied-tags">
+          <label>Groups:</label>
+          <BreedGroupsTagSelector />
+        </div>
+        <div class="applied-tags">
+          <label>Showing:</label>
+          <BreedTagsSelector />
+        </div>
+        <div>
+          <label for="search">Search: </label>
+          <BreedSearchControl
+            id="search"
+            placeholder="Search breeds"
+            @update="(search: string) => (query = search)"
+          />
+        </div>
+      </div>
+      <div class="right">
+        <ToolbarGroup>
+          <ToolbarButton
+            title="Get Link"
+            :icon="{ icon: 'link', size: '2x' }"
+            label="Get Link"
+            @click="showGenerateDialog = true"
+          />
+          <ToolbarButton
+            title="Export dragon"
+            :icon="{ icon: 'save', size: '2x' }"
+            label="Export"
+            @click="showExportDialog = true"
+          />
+          <ToolbarButton
+            title="Switch breeds"
+            :icon="{ icon: 'exchange-alt', size: '2x' }"
+            label="Switch breeds"
+            @click="switchBreeds"
+          />
+        </ToolbarGroup>
+        <div>
+          <label for="generations">Generations: </label>
+          <select
+            id="generations"
+            v-model="genCount"
+            title="Generations"
+          >
+            <option
+              v-for="index in 6"
+              :key="index"
+              :value="index + 1"
+            >
+              {{ index + 1 }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </section>
+    <section id="breeds">
+      <div>
+        <label>Male breed</label>
+        <FilteredBreedList
+          :search="query"
+          :breeds="GLOBALS.breeds.males"
+          :tags="tagStore.enabledTags"
+          :groups="tagStore.enabledEggGroups"
+          class="results"
+          @breed-selected="selectMale"
+        />
+      </div>
+      <div>
+        <label>Female breed</label>
+        <FilteredBreedList
+          :search="query"
+          :breeds="GLOBALS.breeds.females"
+          :tags="tagStore.enabledTags"
+          :groups="tagStore.enabledEggGroups"
+          class="results"
+          @breed-selected="selectFemale"
+        />
+      </div>
     </section>
   </div>
+  <section>
+    <Lineage
+      v-if="tree !== null"
+      :root="tree"
+      :config="{ showInterface: false, showLabels: true, disabled: true }"
+    />
+  </section>
 </template>
 
 <script setup lang="ts">

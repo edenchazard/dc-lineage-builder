@@ -23,7 +23,10 @@
         </button>
       </div>
       <HeaderMenuLinks id="mobile-menu" />
-      <div class="mobile-menu-section">
+      <div
+        id="mobile-menu-skin-section"
+        class="mobile-menu-section"
+      >
         <SkinSwitcher id="mobile-menu-skin-switcher" />
       </div>
       <div id="mobile-menu-external-links">
@@ -47,7 +50,10 @@
       </div>
     </SlideInMenu>
 
-    <div id="header">
+    <div
+      id="header"
+      class="constrain-width"
+    >
       <button
         id="mobile-menu-button"
         class="col-1 menu-button"
@@ -60,12 +66,13 @@
         />
         Menu
       </button>
-      <h1
-        id="site-title"
-        class="col-2"
-      >
-        <router-link to="/">Lineage Builder</router-link>
-      </h1>
+      <span id="site-title">
+        <router-link
+          id="site-title-link"
+          to="/"
+          >Lineage Builder
+        </router-link>
+      </span>
       <HeaderMenuLinks id="desktop-menu" />
       <div class="col-3">
         <div class="skin">
@@ -116,9 +123,11 @@ const menuOpen = ref(false);
 
 <style>
 #top {
-  background: #000;
-  /* restore line-height */
-  line-height: 1em;
+  background: var(--ui-header-bg);
+  color: var(--ui-header-fg);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  /*   padding: 0.25rem 0.5rem; */
 }
 #top a {
   text-decoration: none;
@@ -127,26 +136,22 @@ const menuOpen = ref(false);
 #header {
   display: flex;
   flex-direction: row;
-  padding: 0.5rem 1rem;
   align-items: center;
-  gap: 1rem;
-  color: #fff;
-  /*box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.75);*/
-  max-width: var(--maxwidth);
-  margin: 0px auto;
+  color: inherit;
+  /*   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.75); */
+  margin: 0 auto;
 }
 
 #site-title {
   font-size: 1.8em;
   line-height: 1.8em;
-  flex: 1 0 auto;
-}
-
-#site-title a {
-  color: #fff;
   white-space: nowrap;
+  color: inherit;
+  flex: 1;
 }
-
+#site-title-link {
+  color: inherit;
+}
 .menu-button {
   height: 3rem;
   background: none;
@@ -167,20 +172,19 @@ const menuOpen = ref(false);
 #header .external-links {
   display: flex;
   justify-content: space-evenly;
-  display: flex;
   gap: 0.5rem;
   flex: 1;
   text-align: center;
 }
 #header .external-links a {
-  color: #fff;
+  color: inherit;
 }
 /**
 mobile menu
 */
 #mobile-menu-wrapper {
-  background: #000;
-  color: #fff;
+  background: var(--ui-header-bg);
+  color: var(--ui-header-fg);
   box-shadow: 0px 0px 15px -2px darkgrey;
   display: flex;
   flex-direction: column;
@@ -194,23 +198,28 @@ mobile menu
   text-align: right;
 }
 #mobile-menu a {
+  color: inherit;
   padding: 1rem 0rem 1rem 1rem;
   display: block;
-  color: #fff;
   text-decoration: none;
-  border-bottom: 1px solid #fff;
-  font-size: 1.3em;
+  border-bottom: var(--ui-header-mobile-border);
 }
 
 #mobile-menu a:last-child {
   border: 0px none;
 }
+#mobile-menu-skin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
 #mobile-menu-skin-switcher {
-  padding: 0.5rem;
+  align-self: stretch;
 }
 #mobile-menu-external-links {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
 }
 #mobile-menu-external-links a {
@@ -239,45 +248,10 @@ desktop menu
 }
 
 #desktop-menu a {
-  color: #fff;
+  color: inherit;
   display: flex;
   align-items: center;
   text-decoration: none;
   white-space: nowrap;
-}
-@media (min-width: 458px) {
-  #mobile-menu-wrapper .skin {
-    display: none;
-  }
-  #header .col-3 {
-    display: flex;
-  }
-}
-
-@media (min-width: 1002px) {
-  #top {
-    /* TODO */
-    overflow: hidden;
-  }
-  #mobile-menu-button {
-    display: none;
-  }
-  #desktop-menu {
-    display: flex;
-  }
-  #site-title {
-    flex: 0;
-  }
-}
-
-@media (min-width: 1091px) {
-  #desktop-menu a::after {
-    content: '\00B7';
-    margin-left: 0.5rem;
-  }
-  #desktop-menu a:last-child::after {
-    content: '';
-    margin-left: unset;
-  }
 }
 </style>

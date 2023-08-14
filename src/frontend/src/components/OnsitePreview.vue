@@ -27,7 +27,7 @@ defineProps({
 <style scoped>
 #lineage {
   margin: 0px auto;
-  font-family: var(--lineageFont);
+  font: var(--dc-lineage-font);
   background: inherit;
   line-height: 19.6px;
   display: flex;

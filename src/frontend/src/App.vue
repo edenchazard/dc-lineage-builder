@@ -5,7 +5,7 @@
   >
     <Header />
     <main id="content">
-      <router-view :key="route.fullPath"></router-view>
+      <router-view :key="route.fullPath" />
     </main>
   </div>
 </template>
@@ -13,9 +13,8 @@
 <script setup lang="ts">
 import 'reset-css';
 import { useRoute } from 'vue-router';
-
-import './assets/theming.css';
 import './assets/styling/style.css';
+import './assets/layouts/theming.css';
 import Header from './components/Page/Header/Header.vue';
 import { useSkinStore } from './store/skin';
 
@@ -25,13 +24,18 @@ const skinStore = useSkinStore();
 
 <style>
 #app {
-  color: var(--colourFG);
-  background: var(--builderBG);
+  background: var(--dc-background);
   height: 100%;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 #content {
+  color: var(--ui-content-fg);
+  margin-top: 0.5rem;
   flex: 1;
+  font-size: 1rem;
+  line-height: 1.7em;
 }
 </style>

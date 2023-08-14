@@ -1,56 +1,75 @@
 <template>
-  <div>
-    <DialogExport
-      v-if="dialogs.showExportDialog"
-      :tree="tree"
-      @close="dialogs.showExportDialog = false"
-    />
-    <DialogImport
-      v-if="dialogs.showImportDialog"
-      @close="dialogs.showImportDialog = false"
-      @on-import="importLineage"
-    />
-    <DialogGenerate
-      v-if="dialogs.showGenerateDialog"
-      :tree="tree"
-      @close="dialogs.showGenerateDialog = false"
-    />
+  <DialogExport
+    v-if="dialogs.showExportDialog"
+    :tree="tree"
+    @close="dialogs.showExportDialog = false"
+  />
+  <DialogImport
+    v-if="dialogs.showImportDialog"
+    @close="dialogs.showImportDialog = false"
+    @on-import="importLineage"
+  />
+  <DialogGenerate
+    v-if="dialogs.showGenerateDialog"
+    :tree="tree"
+    @close="dialogs.showGenerateDialog = false"
+  />
+  <div
+    ref="toolbar"
+    class="toolbar"
+    role="toolbar"
+    v-bind="$attrs"
+  >
     <div
-      ref="toolbar"
-      class="toolbar"
-      role="toolbar"
+      class="settings"
+      aria-label="Settings toolbar"
     >
+      <input
+        id="show-interface"
+        v-model="config.showInterface"
+        class="item"
+        type="checkbox"
+      />
+      <label for="show-interface">Show interface </label>
+      <input
+        id="show-labels"
+        v-model="config.showLabels"
+        class="item"
+        type="checkbox"
+      />
+      <label for="show-labels">Show labels </label>
+    </div>
+    <div
+      class="functions"
+      aria-label="Functions toolbar"
+    >
+      <ToolbarButton
+        v-for="button in generalFunctions"
+        :key="button.label"
+        v-bind="button"
+        @click="button.click"
+      />
+    </div>
+    <div
+      ref="selectionTools"
+      class="selection-tools"
+      :class="{
+        'full-width': hideSelectionToolsNavButtons,
+      }"
+      aria-label="Selection toolbar"
+    >
+      <button
+        class="selection-nav left"
+        :class="{
+          invisible: hideSelectionToolsNavButtons,
+        }"
+        type="button"
+        title="Scroll to start"
+        @click="handleScrollLeft"
+      />
       <div
-        class="settings"
-        aria-label="Settings toolbar"
-      >
-        <label>
-          <input
-            v-model="config.showInterface"
-            type="checkbox"
-          />Show interface
-        </label>
-        <label>
-          <input
-            v-model="config.showLabels"
-            type="checkbox"
-          />Show labels
-        </label>
-      </div>
-      <div
-        class="functions"
-        aria-label="Functions toolbar"
-      >
-        <ToolbarButton
-          v-for="button in generalFunctions"
-          :key="button.label"
-          v-bind="button"
-          @click="button.click"
-        />
-      </div>
-      <div
-        class="selection-tools"
-        aria-label="Selection toolbar"
+        ref="selectionToolsScrollArea"
+        class="selection-scrollable"
       >
         <ToolbarGroup>
           <ToolbarButton
@@ -83,6 +102,32 @@
           />
           <template #legend>Select</template>
         </ToolbarGroup>
+        <ToolbarGroup>
+          <div class="selection-apply-breed-container">
+            <select
+              ref="breedSelector"
+              v-model="selectedBreed"
+              title="Apply selected breed"
+              class="breed-dropdown"
+              :disabled="itemsSelected === 0"
+              @change="emit('changeBreed', selectedBreed)"
+            >
+              <option
+                v-for="breed in availableBreeds"
+                :key="breed"
+              >
+                {{ breed }}
+              </option>
+            </select>
+            <span
+              title="Dragons selected"
+              class="count"
+              @click="breedSelector?.focus()"
+              >{{ itemsSelected }}</span
+            >
+          </div>
+          <template #legend>Breed</template>
+        </ToolbarGroup>
         <ToolbarGroup
           v-for="group in selectionActions"
           :key="group.name"
@@ -96,24 +141,16 @@
           />
           <template #legend>{{ group.name }}</template>
         </ToolbarGroup>
-        <ToolbarGroup>
-          <select
-            v-model="selectedBreed"
-            class="selection-apply-breed-dropdown"
-            :disabled="itemsSelected === 0"
-            @change="emit('changeBreed', selectedBreed)"
-          >
-            <option
-              v-for="breed in availableBreeds"
-              :key="breed"
-            >
-              {{ breed }}
-            </option>
-          </select>
-          <span title="Dragons selected">({{ itemsSelected }})</span>
-          <template #legend>Breed</template>
-        </ToolbarGroup>
       </div>
+      <button
+        class="selection-nav right"
+        type="button"
+        title="Scroll to end"
+        :class="{
+          invisible: hideSelectionToolsNavButtons,
+        }"
+        @click="handleScrollRight"
+      />
     </div>
   </div>
 </template>
@@ -138,6 +175,7 @@ import ToolbarDropDownMenu from './ToolbarDropDownMenu/ToolbarDropDownMenu.vue';
 import ToolbarDropDownMenuItem from './ToolbarDropDownMenu/ToolbarDropDownMenuItem.vue';
 import ToolbarGroup from './ToolbarGroup.vue';
 import { useTagStore } from '../../store/tags';
+import { useResizeObserver } from '@vueuse/core';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {
@@ -147,7 +185,20 @@ type ToolbarButtonProps = Required<
 
 const tagStore = useTagStore();
 const appStore = useAppStore();
+
 const toolbar = ref();
+const breedSelector = ref();
+const selectionTools = ref();
+const selectionToolsScrollArea = ref();
+const hideSelectionToolsNavButtons = ref(false);
+
+// determine whether to show the scroll buttons for the selection
+// tools section
+useResizeObserver(selectionTools, (entries) => {
+  const entry = entries[0];
+  hideSelectionToolsNavButtons.value =
+    entry.contentRect.width >= selectionToolsScrollArea.value.scrollWidth;
+});
 
 const generalFunctions = reactive<ToolbarButtonProps[]>(
   [
@@ -188,6 +239,12 @@ const generalFunctions = reactive<ToolbarButtonProps[]>(
       label: 'Redo',
       click: () => emit('redo'),
       disabled: computed(() => !appStore.treeHistory.canRedo),
+    },
+    {
+      title: 'Settings',
+      icon: 'cog',
+      label: 'Settings',
+      click: () => emit('redo'),
     },
     // convert the string names to actual font awesome props
   ].map((button) => convertToToolbarButtonProps(button, '2x')),
@@ -385,60 +442,199 @@ function capitalise(string: string) {
     .map((substr) => substr[0].toUpperCase() + substr.slice(1))
     .join(' ');
 }
+
+function handleScrollLeft() {
+  selectionToolsScrollArea.value.scrollLeft = 0;
+}
+
+function handleScrollRight() {
+  selectionToolsScrollArea.value.scrollLeft =
+    selectionToolsScrollArea.value.scrollWidth;
+}
 </script>
 
 <style scoped>
-.toolbar {
-  margin: 5px auto;
-  max-width: 800px;
-}
-.settings,
-.functions {
-  display: grid;
-  column-gap: 8px;
-  row-gap: 5px;
-}
-.settings {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
-  margin-bottom: 5px;
-  grid-template-columns: repeat(auto-fit, minmax(115px, auto));
-}
-.settings label {
-  padding: 5px;
-}
-.settings label:hover {
-  background: rgba(255, 255, 255, 0.8);
-}
-.functions {
-  grid-template-columns: repeat(auto-fit, minmax(90px, auto));
-  justify-content: center;
-}
-.selection-tools {
-  margin: 10px auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.selection-tools :deep(.control .label) {
+.invisible {
   display: none;
-}
-.selection-tools :deep(.control) {
-  margin: 4px;
-  width: 26px;
-  height: 26px;
-}
-[hidden] {
-  visibility: hidden;
-}
-.selection-apply-breed-dropdown {
-  max-width: 170px;
+  grid-template-columns: 1fr;
 }
 
-@media only screen and (min-width: 768px) {
+:deep(.control > .label) {
+  display: none;
 }
-@media only screen and (min-width: 470px) {
+
+.toolbar {
+  user-select: none;
+  box-sizing: border-box;
+  align-self: center;
+  min-width: 100%;
+  padding: 0;
+  background: var(--ui-builder-toolbar-bg);
+  border-radius: 0;
+  max-width: fit-content;
+  display: grid;
+  grid-template-areas:
+    'functions'
+    'selection';
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+}
+
+.selection-apply-breed-container {
+  position: relative;
+
+  > .breed-dropdown {
+    padding-right: 2.5rem;
+    width: 10rem;
+  }
+
+  > .count {
+    background: var(--ui-builder-toolbar-selection-count-bg);
+    color: var(--ui-builder-toolbar-selection-count-fg);
+    display: block;
+    text-align: center;
+    position: absolute;
+    font-size: 0.7em;
+    right: 1.1rem;
+    top: 3px;
+    bottom: 3px;
+    width: 2.7em;
+    overflow: hidden;
+    border-radius: 0.25rem;
+    text-overflow: ellipsis;
+  }
+}
+
+.functions {
+  grid-area: functions;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1.3rem, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(1.3rem, 1fr));
+  gap: 0.5rem;
+}
+
+.settings {
+  grid-area: settings;
+  display: none;
+}
+
+.selection-tools {
+  grid-area: selection;
+  padding: 0.25rem 0;
+  display: grid;
+  gap: 0.25rem;
+  grid-template-columns: auto 1fr auto;
+  overflow: hidden;
+  box-shadow:
+    inset 0 7px 14px -15px var(--ui-builder-toolbar-selection-shadows),
+    inset 0 -7px 14px -15px var(--ui-builder-toolbar-selection-shadows);
+
+  > .selection-nav {
+    padding: 0.3rem;
+    margin: 0;
+    border: 0;
+    position: relative;
+    z-index: 10;
+    width: 0.5rem;
+    border-radius: 0;
+    background: var(--ui-builder-toolbar-selection-scrolls);
+    box-shadow: 16px 0 18px -20px var(--ui-builder-toolbar-selection-shadows);
+
+    &.left {
+      box-shadow: 0 0 13px -4px var(--ui-builder-toolbar-selection-shadows);
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    &.right {
+      box-shadow: -1px 0 13px -4px var(--ui-builder-toolbar-selection-shadows);
+      border-radius: 0.5rem 0 0 0.5rem;
+    }
+  }
+
+  > .selection-scrollable {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.5rem;
+    scroll-behavior: smooth;
+
+    & :deep(.control) {
+      min-width: 2rem;
+      aspect-ratio: 1;
+      justify-content: center;
+    }
+
+    & :deep(.legend) {
+      display: none;
+    }
+  }
+
+  & :deep(.group) {
+    justify-content: center;
+    border: var(--ui-builder-toolbar-selection-group-border);
+    border-radius: 0.25rem;
+    padding: 0 0.25rem;
+  }
+
+  &.full-width {
+    grid-template-columns: 1fr;
+    padding: 0;
+
+    & :deep(.legend) {
+      display: block;
+    }
+  }
+}
+
+@media (min-width: 445px) {
+  .functions :deep(.label) {
+    display: block;
+  }
+}
+
+@media (min-width: 600px) {
+  .toolbar {
+    border-radius: 0.25rem;
+  }
+
+  .selection-tools {
+    box-shadow: inset 0 7px 14px -15px var(--ui-builder-toolbar-selection-shadows);
+
+    :deep(.group) {
+      justify-content: space-between;
+      border: 0 none;
+      border-radius: 0;
+      padding: 0;
+    }
+  }
+}
+
+@media (min-width: 690px) {
+  .toolbar {
+    --padding: 0.5rem;
+    min-width: 690px;
+    gap: 0.5rem;
+    grid-template-columns: minmax(0, 10rem) 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      'settings functions'
+      'selection selection';
+    padding-top: var(--padding);
+  }
+  .settings {
+    display: grid;
+    align-items: center;
+    grid-template-rows: repeat(auto-fit, minmax(0, 2rem));
+    grid-template-columns: 1.5rem 1fr;
+    padding-left: var(--padding);
+  }
+  .functions {
+    align-items: center;
+    padding-right: var(--padding);
+
+    & [title='Settings'] {
+      display: none;
+    }
+  }
 }
 </style>

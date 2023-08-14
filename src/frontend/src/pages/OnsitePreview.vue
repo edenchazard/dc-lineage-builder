@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="central-block">
+  <div class="constrain-width content">
+    <div class="content-limit">
       <div>
         <Feedback ref="status" />
       </div>
@@ -54,23 +54,24 @@
         </form>
       </section>
     </div>
-    <section id="onsite-preview-result">
-      <div
-        v-if="htmlPreview !== ''"
-        :id="containerID"
-      >
-        <LineageGenerationCounter
-          :count="generations"
-          :limit="cutoff"
-        />
-        <OnSitePreview :html-preview="htmlPreview" />
-      </div>
-    </section>
   </div>
+
+  <section id="onsite-preview-result">
+    <div
+      v-if="htmlPreview !== ''"
+      :id="containerID"
+    >
+      <LineageGenerationCounter
+        :count="generations"
+        :limit="cutoff"
+      />
+      <OnSitePreview :html-preview="htmlPreview" />
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-/* 
+/*
 <div>
     <input
         type="checkbox"

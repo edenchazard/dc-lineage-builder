@@ -1,0 +1,363 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+@font-face {
+  font-family: 'fq';
+  font-display: auto;
+  src:
+    local('fq'),
+    url(./default/fq.woff2) format('woff2');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'din';
+  font-display: auto;
+  src:
+    local('din'),
+    url(./portal2-light/din.woff2) format('woff2');
+  font-style: normal;
+}
+
+.skin-default {
+  --dc-colour-1: #ebdbba;
+  --dc-colour-2: #44300b;
+  --dc-colour-3: rgba(123, 94, 40, 0.5);
+  --dc-colour-4: #fc0;
+  --dc-colour-5: #fff;
+  --dc-colour-6: #000;
+  --dc-colour-7: #7b5e28;
+
+  --dc-lineage-line-width: 1px;
+  --dc-lineage-line-style: solid;
+  --dc-lineage-line-colour: var(--dc-colour-3);
+  --dc-lineage-gen-text-colour: var(--dc-colour-3);
+  --dc-lineage-font: 400 14px/19.6px 'fq', 'Times New Roman', Times, serif;
+  --dc-lineage-colour: var(--dc-colour-2);
+
+  --dc-background: var(--dc-colour-1) url(./default/default-bg.png) repeat fixed;
+  --dc-link-colour: var(--dc-colour-2);
+
+  --ui-builder-colour-1: #000;
+  --ui-builder-colour-2: rgba(123, 94, 40, 0.5);
+  --ui-builder-toolbar-bg: rgb(107 80 31 / 12%);
+  --ui-builder-toolbar-selection-group-bg: #44300b;
+  --ui-builder-toolbar-selection-group-fg: #fff;
+  --ui-builder-toolbar-selection-group-border: 1px dashed #44300b59;
+  --ui-builder-toolbar-selection-scrolls: hsl(24deg 100% 7.1% / 40%);
+  --ui-builder-toolbar-selection-shadows: #000;
+  --ui-builder-toolbar-selection-count-bg: hsl(39 29% 42% / 1);
+  --ui-builder-toolbar-selection-count-fg: #fff;
+  --ui-builder-toolbar-button-bg: transparent;
+  --ui-builder-toolbar-button-fg: #44300b;
+  --ui-builder-toolbar-menu-bg: #2b303a;
+  --ui-builder-toolbar-menu-fg: #fff;
+
+  --ui-builder-tile-action-color: var(--dc-colour-3);
+  --ui-builder-tile-selected-outline: 1px solid #93a1b3;
+  --ui-builder-tile-selected-bg: #93a1b3;
+
+  --ui-header-bg: var(--dc-colour-6);
+  --ui-header-fg: var(--dc-colour-5);
+  --ui-header-mobile-border: 1px solid var(--dc-colour-5);
+  --ui-content-fg: #000;
+
+  --ui-modal-header: #000;
+  --ui-modal-content: #fff;
+  --ui-modal-footer: #000;
+
+  &#app {
+    font:
+      14px/19.6px 'PT Serif',
+      'Times New Roman',
+      'Times',
+      serif;
+  }
+
+  #content a {
+    text-decoration: underline;
+    color: var(--dc-colour-2);
+
+    &:hover {
+      color: var(--dc-colour-7);
+    }
+  }
+
+  & #mobile-menu > a {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+  }
+
+  & #top {
+    font-family: 'fq', 'Times New Roman', 'Times', serif;
+    color: var(--dc-colour-5);
+
+    & a:not(#site-title-link) {
+      font-size: 15px;
+    }
+
+    & a:hover {
+      color: var(--dc-colour-4);
+    }
+
+    @media (min-width: 515px) {
+      #mobile-menu-wrapper .skin {
+        display: none;
+      }
+      #header .col-3 {
+        display: flex;
+      }
+    }
+
+    @media (min-width: 1160px) {
+      #top {
+        overflow: hidden;
+      }
+      #mobile-menu-button {
+        display: none;
+      }
+      #desktop-menu {
+        display: flex;
+      }
+      #site-title {
+        flex: 0;
+      }
+    }
+
+    @media (min-width: 1240px) {
+      #desktop-menu a::after {
+        content: '\00B7';
+        margin-left: 0.5rem;
+      }
+      #desktop-menu a:last-child::after {
+        content: '';
+        margin-left: unset;
+      }
+    }
+  }
+}
+
+.skin-portal2-light {
+  --dc-colour-1: #ddd;
+  --dc-colour-2: #000;
+  --dc-colour-3: #52a5c6;
+  --dc-colour-4: #2db2e6;
+  --dc-colour-5: #ff9315;
+  --dc-colour-6: #fff;
+  --dc-colour-7: #959595;
+
+  --dc-lineage-line-width: 2px;
+  --dc-lineage-line-style: dotted;
+  --dc-lineage-line-colour: var(--dc-colour-4);
+  --dc-lineage-gen-text-colour: var(--dc-colour-3);
+  --dc-lineage-font: 400 14px / normal 'DIN', 'Arial', sans-serif;
+  --dc-lineage-colour: var(--dc-colour-2);
+
+  --dc-background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png)
+    repeat;
+  --dc-link-colour: var(--dc-colour-4);
+
+  --ui-builder-colour-1: #000;
+  --ui-builder-colour-2: #fff;
+  --ui-builder-toolbar-group-bg: #ca5b00;
+  --ui-builder-toolbar-group-fg: #ddd;
+  --ui-builder-tile-action-color: rgb(94, 94, 94, 0.5);
+
+  --ui-header-bg: #2f2f2f;
+  --ui-header-fg: var(--dc-colour-7);
+  --ui-header-mobile-border: 1px solid var(--dc-colour-7);
+  --ui-content-fg: #000;
+
+  --ui-modal-header: #000;
+  --ui-modal-content: #fff;
+  --ui-modal-footer: #000;
+
+  &#app {
+    font:
+      14px / normal 'Arial',
+      sans-serif;
+  }
+
+  & #top {
+    font:
+      700 16px/16px 'DIN',
+      'Arial',
+      sans-serif;
+    text-transform: uppercase;
+
+    & #desktop-menu a {
+      padding: 0 0.5rem;
+    }
+
+    #site-title-link {
+      color: var(--dc-colour-6);
+    }
+
+    & a:not(#site-title-link) {
+      &:nth-child(odd):hover {
+        color: var(--dc-colour-4);
+        text-shadow: 0 -2px 20p0ar (--dc-colour-4);
+      }
+      &:nth-child(even):hover {
+        color: var(--dc-colour-5);
+        text-shadow: 0 -2px 20p0ar (--dc-colour-5);
+      }
+    }
+
+    & #site-title a {
+      color: var(--dc-colour-6);
+    }
+
+    @media (min-width: 565px) {
+      #mobile-menu-wrapper .skin {
+        display: none;
+      }
+      #header .col-3 {
+        display: flex;
+      }
+    }
+
+    @media (min-width: 1570px) {
+      #top {
+        overflow: hidden;
+      }
+      #mobile-menu-button {
+        display: none;
+      }
+      #desktop-menu {
+        display: flex;
+      }
+      #site-title {
+        flex: 0;
+      }
+    }
+  }
+}
+
+.skin-mobile-dark {
+  --dc-colour-1: #2b303a; /* #21252d; */
+  --dc-colour-2: #fff;
+  --dc-colour-3: #444e5e;
+  --dc-colour-4: #2b303a;
+  --dc-colour-5: #fff;
+  --dc-colour-6: #13151a;
+  --dc-colour-7: #93a1b3;
+  --dc-colour-8: #a9b8cb;
+  --dc-colour-9: #5f9aff;
+  --dc-colour-10: #fc0;
+
+  --dc-lineage-line-width: 1px;
+  --dc-lineage-line-style: solid;
+  --dc-lineage-line-colour: var(--dc-colour-3);
+  --dc-lineage-gen-text-colour: var(--dc-colour-7);
+  --dc-lineage-font: 500 14px/16.8px Roboto, Helvetica, Arial, sans-serif;
+  --dc-lineage-colour: var(--dc-colour-8);
+  --dc-lineage-tile-background: var(--dc-colour-4);
+
+  --dc-background: var(--dc-colour-6);
+  --dc-link-colour: var(--dc-colour-2);
+
+  --ui-builder-colour-1: #000;
+  --ui-builder-colour-2: var(--dc-colour-5);
+  --ui-builder-toolbar-bg: #2b303a;
+  --ui-builder-toolbar-selection-group-bg: #24272d;
+  --ui-builder-toolbar-selection-group-fg: var(--dc-colour-5);
+  --ui-builder-toolbar-selection-group-border: 1px dashed #ffffff1c;
+  --ui-builder-toolbar-selection-scrolls: #3f4655;
+  --ui-builder-toolbar-selection-shadows: #000;
+  --ui-builder-toolbar-selection-count-bg: hsl(218 30% 26% / 1);
+  --ui-builder-toolbar-selection-count-fg: #fff;
+  --ui-builder-toolbar-button-bg: transparent;
+  --ui-builder-toolbar-button-fg: #fff;
+  --ui-builder-toolbar-menu-bg: #2b303a;
+  --ui-builder-toolbar-menu-fg: #fff;
+
+  --ui-builder-tile-action-color: rgba(128, 171, 244, 0.5);
+  --ui-builder-tile-selected-outline: 1px solid #93a1b3;
+  --ui-builder-tile-selected-bg: #93a1b3;
+
+  --ui-header-bg: var(--dc-colour-1);
+  --ui-header-fg: var(--dc-colour-2);
+  --ui-header-mobile-border: 1px solid var(--dc-colour-5);
+  --ui-content-fg: #fff;
+
+  --ui-modal-header: #000;
+  --ui-modal-content: #fff;
+  --ui-modal-footer: #000;
+
+  &#app {
+    font:
+      14px/16.8px Roboto,
+      /* -apple-system,  BlinkMacSystemFont, */ Helvetica,
+      Arial,
+      sans-serif;
+    color: var(-dc-colour-5);
+  }
+
+  #content a {
+    text-decoration: none;
+    color: var(--dc-colour-9);
+
+    &:hover {
+      color: var(--dc-colour-10);
+    }
+  }
+
+  & #mobile-menu > a {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+  }
+
+  & #top {
+    color: var(--dc-colour-5);
+
+    & a:not(#site-title-link) {
+      font-size: 15px;
+    }
+
+    @media (min-width: 475px) {
+      #mobile-menu-wrapper .skin {
+        display: none;
+      }
+      #header .col-3 {
+        display: flex;
+      }
+    }
+
+    @media (min-width: 1115px) {
+      #top {
+        overflow: hidden;
+      }
+      #mobile-menu-button {
+        display: none;
+      }
+      #desktop-menu {
+        display: flex;
+      }
+      #site-title {
+        flex: 0;
+      }
+    }
+  }
+}
+
+/* .skin-portal2 {
+  --colourBG: #000;
+  --colourFG: #ddd;
+  --lineageLineStyle: 1px dotted rgba(192, 192, 192, 0.5);
+  --lineageFont: 'din';
+  --lineageGenColour: rgba(192, 192, 192, 0.5);
+  --dragonPortraitStyle: 1px solid rgba(192, 192, 192, 0.5);
+  --builderBG: #000 url(backgrounds/portal2-contentbg2.png) repeat-x fixed;
+  --builderControlBG: #ddd;
+  --builderControlFG: #000;
+  --linkColour: #2db2e6;
+  --headerBG: transparent;
+  --lineageToolColour: rgba(221, 221, 221, 0.5);
+  --breedDropDownColourFG: #000;
+  --modalBG: #fff;
+  --modalFG: #000;
+  --modalHeaderBG: #ddd;
+  --modalHeaderFG: #000;
+  --modalFooterBtnBG: #000;
+  --modalFooterBtnFG: #fff;
+} */

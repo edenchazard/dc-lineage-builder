@@ -1,9 +1,11 @@
 <template>
-  <FontAwesomeIcon icon="palette" />
-  <label
-    v-if="showLabel"
-    :for="id"
-    >Skin:</label
+  <span>
+    <FontAwesomeIcon icon="palette" />
+    <label
+      v-if="showLabel"
+      :for="id"
+      >Skin:</label
+    ></span
   >
   <select
     :id="id"
@@ -42,8 +44,8 @@ defineProps({
   margin-right: 0.5rem;
 }
 .skin-switcher {
-  background: black;
-  color: #fff;
-  border: 0px none;
+  background: var(--ui-header-bg);
+  color: var(--ui-header-fg);
+  border: 0 none;
 }
 </style>

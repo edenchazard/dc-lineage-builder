@@ -41,16 +41,13 @@ const emit = defineEmits<{
 
 <style scoped>
 .control {
-  padding: 5px 0px 0px 0px;
-  color: var(--builderControlBG);
+  color: var(--ui-builder-toolbar-button-fg);
   background: transparent;
   border: none;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 5px;
-  box-shadow: 0px 2px 2px var(--builderControlBG);
 }
 .control:enabled {
   cursor: pointer;
@@ -64,21 +61,16 @@ const emit = defineEmits<{
 .label {
   background: var(--builderControlBG);
   color: var(--builderControlFG);
-  display: block;
-  width: 100%;
-  border-radius: 0px 0px 5px 5px;
   padding: 5px;
   box-sizing: border-box;
   white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
 }
 .option {
   padding: 5px;
 }
 .icon {
-  margin-bottom: 8px;
   display: block;
-  padding: 0px;
+  padding: 0;
 }
 </style>
