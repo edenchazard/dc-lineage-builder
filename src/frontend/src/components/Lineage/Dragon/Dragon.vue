@@ -28,18 +28,15 @@
           onClick: handleClick,
           onLongPress: handleLongPress,
         }"
-        class="dragon-breed-picker-button"
+        class="dragon-breed-picker-button pointer"
         :disabled="disabled"
-        :class="{
-          active: !disabled,
-          disabled: disabled,
-          selected: data.selected,
-        }"
         type="button"
       >
         <DragonPortrait
-          class="portrait"
           :data="getImage"
+          :class="{
+            selected: data.selected,
+          }"
         />
       </button>
       <DragonButton
@@ -304,7 +301,7 @@ function handleClick() {
 }
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 .tile-container,
 .tile-parents {
   padding: 0;
@@ -402,22 +399,18 @@ function handleClick() {
     vertical-align: middle;
   }
 }
-/* end of dc styling */
 .dragon-breed-picker-button {
   padding: 0;
   border: 0;
   background: transparent;
 }
-.active {
-  cursor: pointer;
-}
-
-.portrait {
-  &.selected {
-    background: var(--ui-builder-tile-selected-bg);
-  }
+.selected {
+  background: var(--ui-builder-tile-selected-bg);
+  outline: var(--ui-builder-tile-selected-outline);
+  outline-offset: 2px;
 }
 </style>
+
 <style lang="postcss">
 .lineage-view {
   &[data-show-editor-interface='false'] .control {

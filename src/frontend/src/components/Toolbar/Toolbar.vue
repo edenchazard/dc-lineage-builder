@@ -51,7 +51,6 @@
       />
     </div>
     <div
-      ref="selectionTools"
       class="selection-tools"
       :class="{
         'full-width': hideSelectionToolsNavButtons,
@@ -108,7 +107,7 @@
               ref="breedSelector"
               v-model="selectedBreed"
               title="Apply selected breed"
-              class="breed-dropdown"
+              class="breed-dropdown interactive"
               :disabled="itemsSelected === 0"
               @change="emit('changeBreed', selectedBreed)"
             >
@@ -188,16 +187,15 @@ const appStore = useAppStore();
 
 const toolbar = ref();
 const breedSelector = ref();
-const selectionTools = ref();
 const selectionToolsScrollArea = ref();
 const hideSelectionToolsNavButtons = ref(false);
 
 // determine whether to show the scroll buttons for the selection
 // tools section
-useResizeObserver(selectionTools, (entries) => {
+useResizeObserver(selectionToolsScrollArea, (entries) => {
   const entry = entries[0];
   hideSelectionToolsNavButtons.value =
-    entry.contentRect.width >= selectionToolsScrollArea.value.scrollWidth;
+    entry.target.clientWidth === selectionToolsScrollArea.value.scrollWidth;
 });
 
 const generalFunctions = reactive<ToolbarButtonProps[]>(
@@ -467,11 +465,9 @@ function handleScrollRight() {
   user-select: none;
   box-sizing: border-box;
   align-self: center;
-  min-width: 100%;
   padding: 0;
   background: var(--ui-builder-toolbar-bg);
   border-radius: 0;
-  max-width: fit-content;
   display: grid;
   grid-template-areas:
     'functions'
@@ -586,33 +582,16 @@ function handleScrollRight() {
   }
 }
 
-@media (min-width: 445px) {
+@media (min-width: 28em) {
   .functions :deep(.label) {
     display: block;
   }
 }
 
-@media (min-width: 600px) {
-  .toolbar {
-    border-radius: 0.25rem;
-  }
-
-  .selection-tools {
-    box-shadow: inset 0 7px 14px -15px var(--ui-builder-toolbar-selection-shadows);
-
-    :deep(.group) {
-      justify-content: space-between;
-      border: 0 none;
-      border-radius: 0;
-      padding: 0;
-    }
-  }
-}
-
-@media (min-width: 690px) {
+@media (min-width: 37.5em) {
   .toolbar {
     --padding: 0.5rem;
-    min-width: 690px;
+    border-radius: 0.25rem;
     gap: 0.5rem;
     grid-template-columns: minmax(0, 10rem) 1fr;
     grid-template-rows: 1fr auto;
@@ -621,6 +600,18 @@ function handleScrollRight() {
       'selection selection';
     padding-top: var(--padding);
   }
+
+  .full-width {
+    box-shadow: inset 0 7px 14px -15px var(--ui-builder-toolbar-selection-shadows);
+
+    & :deep(.group) {
+      justify-content: space-between;
+      border: 0 none;
+      border-radius: 0;
+      padding: 0;
+    }
+  }
+
   .settings {
     display: grid;
     align-items: center;
@@ -628,6 +619,7 @@ function handleScrollRight() {
     grid-template-columns: 1.5rem 1fr;
     padding-left: var(--padding);
   }
+
   .functions {
     align-items: center;
     padding-right: var(--padding);

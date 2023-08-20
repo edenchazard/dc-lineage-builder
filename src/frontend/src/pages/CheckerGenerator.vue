@@ -10,64 +10,33 @@
     @close="showGenerateDialog = false"
   />
 
-  <div class="constrain-width">
+  <div class="constrain-width content">
     <div class="content-limit">
       <section>
         <h2>Checker Generator</h2>
         <p>
-          On this page you can build checkers quickly. Simply select the male
-          breed (top), the female breed (bottom) and how many generations you
-          want it to be. You can then export it and import it for use with the
-          editor.
+          On this page you can build checkers quickly. Simply select how many
+          generations you want it to be, the male breed (top) and the female
+          breed (bottom).
         </p>
+        <p>You can then export it and import it for use with the editor.</p>
       </section>
     </div>
-    <section id="checker-controls">
-      <div class="left">
-        <div class="applied-tags">
-          <label>Groups:</label>
-          <BreedGroupsTagSelector />
-        </div>
-        <div class="applied-tags">
-          <label>Showing:</label>
-          <BreedTagsSelector />
-        </div>
-        <div>
-          <label for="search">Search: </label>
-          <BreedSearchControl
-            id="search"
-            placeholder="Search breeds"
-            @update="(search: string) => (query = search)"
-          />
-        </div>
-      </div>
-      <div class="right">
-        <ToolbarGroup>
-          <ToolbarButton
-            title="Get Link"
-            :icon="{ icon: 'link', size: '2x' }"
-            label="Get Link"
-            @click="showGenerateDialog = true"
-          />
-          <ToolbarButton
-            title="Export dragon"
-            :icon="{ icon: 'save', size: '2x' }"
-            label="Export"
-            @click="showExportDialog = true"
-          />
-          <ToolbarButton
-            title="Switch breeds"
-            :icon="{ icon: 'exchange-alt', size: '2x' }"
-            label="Switch breeds"
-            @click="switchBreeds"
-          />
-        </ToolbarGroup>
-        <div>
+    <div>
+      <section
+        id="checker-controls"
+        class="content-limit"
+      >
+        <form
+          id="form"
+          class="form"
+        >
           <label for="generations">Generations: </label>
           <select
             id="generations"
             v-model="genCount"
             title="Generations"
+            class="interactive pointer"
           >
             <option
               v-for="index in 6"
@@ -77,12 +46,48 @@
               {{ index + 1 }}
             </option>
           </select>
-        </div>
-      </div>
-    </section>
-    <section id="breeds">
-      <div>
-        <label>Male breed</label>
+          <fieldset id="filter">
+            <legend class="legend">Search and filter</legend>
+            <div
+              id="filter-controls"
+              class="form"
+            >
+              <label for="enabled-groups">Groups:</label>
+              <BreedGroupsTagSelector id="enabled-groups" />
+              <label for="enabled-tags">Showing:</label>
+              <BreedTagsSelector id="enabled-tags" />
+              <label for="search">Search: </label>
+              <BreedSearchControl
+                id="search"
+                class="interactive pointer"
+                placeholder="Search breeds"
+                @update="(search: string) => (query = search)"
+              />
+            </div>
+          </fieldset>
+          <div id="controls">
+            <ToolbarButton
+              title="Get Link"
+              :icon="{ icon: 'link', size: '2x' }"
+              label="Get Link"
+              @click="showGenerateDialog = true"
+            />
+            <ToolbarButton
+              title="Export dragon"
+              :icon="{ icon: 'save', size: '2x' }"
+              label="Export"
+              @click="showExportDialog = true"
+            />
+            <ToolbarButton
+              title="Switch breeds"
+              :icon="{ icon: 'exchange-alt', size: '2x' }"
+              label="Switch breeds"
+              @click="switchBreeds"
+            />
+          </div>
+        </form>
+      </section>
+      <section id="breeds">
         <FilteredBreedList
           :search="query"
           :breeds="GLOBALS.breeds.males"
@@ -91,9 +96,18 @@
           class="results"
           @breed-selected="selectMale"
         />
-      </div>
-      <div>
-        <label>Female breed</label>
+        <div id="mini-preview">
+          <DragonPortrait
+            :data="male"
+            class="tile"
+          />
+          <label>Male breed</label>
+          <DragonPortrait
+            :data="male"
+            class="tile"
+          />
+          <label>Female breed</label>
+        </div>
         <FilteredBreedList
           :search="query"
           :breeds="GLOBALS.breeds.females"
@@ -102,25 +116,25 @@
           class="results"
           @breed-selected="selectFemale"
         />
-      </div>
-    </section>
+      </section>
+      <section>
+        <Lineage
+          v-if="tree !== null"
+          :root="tree"
+          :config="{ showInterface: false, showLabels: true, disabled: true }"
+        />
+      </section>
+    </div>
   </div>
-  <section>
-    <Lineage
-      v-if="tree !== null"
-      :root="tree"
-      :config="{ showInterface: false, showLabels: true, disabled: true }"
-    />
-  </section>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
-import { PortraitData, Gender } from '../app/types';
+import { PortraitData, Gender, BreedEntry } from '../app/types';
 import GLOBALS from '../app/globals';
 import { createDragonProperties } from '../app/dragonBuilder';
-import { getBreedData } from '../app/utils';
+import { breedEntryToPortrait, expandGender, getBreedData } from '../app/utils';
 import { useTagStore } from '../store/tags';
 
 import Lineage from '../components/Lineage/Lineage.vue';
@@ -129,18 +143,29 @@ import BreedTagsSelector from '../components/BreedFiltering/BreedTagsSelector.vu
 import BreedGroupsTagSelector from '../components/BreedFiltering/BreedGroupsTagSelector.vue';
 import DialogExport from '../components/Toolbar/DialogExport.vue';
 import DialogGenerate from '../components/Toolbar/DialogGenerate.vue';
-import ToolbarGroup from '../components/Toolbar/ToolbarGroup.vue';
 import ToolbarButton from '../components/Toolbar/ToolbarButton.vue';
 import BreedSearchControl from '../components/BreedFiltering/BreedSearchControl.vue';
+import DragonPortrait from '../components/Lineage/Dragon/DragonPortrait.vue';
 
 const tree = ref(createDragonProperties());
 const tagStore = useTagStore();
 const maleBreed = ref(GLOBALS.placeholder.name);
+const hoverMaleBreed = ref(GLOBALS.placeholder.name);
 const femaleBreed = ref(GLOBALS.placeholder.name);
 const genCount = ref(2);
 const query = ref('');
 const showExportDialog = ref(false);
 const showGenerateDialog = ref(false);
+
+function portraitFor(which, gender: Gender) {
+  // return the breed data for this breed name or if no match, the placeholder
+  const entry = getBreedData(which) as BreedEntry;
+  const portrait = breedEntryToPortrait(entry, expandGender(gender));
+
+  return portrait;
+}
+
+const male = computed(() => portraitFor(hoverMaleBreed.value, 'm'));
 
 // whenever the gen count changes, the tree should update to reflect it
 watch(genCount, () => updateTree(tree.value.gender));
@@ -205,53 +230,66 @@ function switchBreeds() {
 }
 </script>
 <style scoped>
-#checker-controls {
+.content {
   display: flex;
   flex-direction: column;
 }
-#checker-controls .left > div {
-  margin-bottom: 5px;
+#form {
+  --label-width: 8rem;
+  display: grid;
+  column-gap: 1rem;
+  grid-template-columns: var(--label-width) 1fr 1fr;
+  align-items: center;
 }
+
+#filter {
+  grid-column: 1/3;
+  border-top: 1px solid;
+}
+
+#filter-controls {
+  display: grid;
+  grid-template-columns: var(--label-width) 1fr;
+  column-gap: 1rem;
+}
+
+#filter .legend {
+  font-weight: bold;
+  padding-right: 1rem;
+}
+
+#controls {
+  grid-row: 1/3;
+  display: grid;
+  grid-auto-columns: min-content;
+  grid-column-start: 3;
+}
+
 #breeds {
   display: flex;
-  margin: 10px 0px;
+  flex-direction: column;
+  gap: 1rem;
 }
-#breeds > div {
-  width: 100%;
+
+#mini-preview {
+  align-self: center;
   text-align: center;
 }
-.breed-list {
-  overflow: auto;
-  height: 300px;
+.tile {
+  margin: 0 auto;
 }
-label {
-  font-weight: bold;
+.breed-list {
 }
 .results {
-  height: 30vh;
+  min-height: 15rem;
+  width: 100%;
+  max-width: 40rem;
+  flex: 1;
 }
-.applied-tags {
-  display: flex;
-  align-items: center;
-}
-.right {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.buttons {
-  margin: 5px 0px 0px 0px;
-}
-.buttons button {
-  width: unset;
-  margin: 2px;
-}
-@media only screen and (min-width: 700px) {
-  #checker-controls {
+
+@media (min-width: 62.5em) {
+  #breeds {
     flex-direction: row;
-  }
-  .right {
-    margin-left: 10px;
   }
 }
 </style>

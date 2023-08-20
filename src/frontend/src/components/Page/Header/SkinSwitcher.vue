@@ -1,27 +1,31 @@
 <template>
-  <span>
-    <FontAwesomeIcon icon="palette" />
+  <div>
+    <FontAwesomeIcon
+      icon="palette"
+      class="margin"
+    />
     <label
       v-if="showLabel"
       :for="id"
+      class="margin"
       >Skin:</label
-    ></span
-  >
-  <select
-    :id="id"
-    v-model="skinStore.activeSkin"
-    class="skin-switcher"
-    title="Skin"
-    v-bind="$attrs"
-  >
-    <option
-      v-for="skin in skinStore.availableSkins"
-      :key="skin.cssName"
-      :value="skin.cssName"
     >
-      {{ skin.prettyName }}
-    </option>
-  </select>
+    <select
+      :id="id"
+      v-model="skinStore.activeSkin"
+      class="skin-switcher pointer interactive"
+      title="Skin"
+      v-bind="$attrs"
+    >
+      <option
+        v-for="skin in skinStore.availableSkins"
+        :key="skin.cssName"
+        :value="skin.cssName"
+      >
+        {{ skin.prettyName }}
+      </option>
+    </select>
+  </div>
 </template>
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';

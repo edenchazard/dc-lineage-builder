@@ -5,7 +5,7 @@
     :cell-size-and-position-getter="cellSizeAndPositionGetter"
     :collection="list"
     :height="sizeH"
-    :width="sizeW"
+    :width="containerWidth"
     :section-size="size"
   >
     <template #cell="{ data: breed }">
@@ -32,9 +32,14 @@
 
 <script setup lang="ts">
 import VirtualCollection from 'vue-virtual-collection/src/VirtualCollection.vue';
-import { getCurrentInstance, onMounted, ref } from 'vue';
+import { onMounted, ref, getCurrentInstance, computed, watch } from 'vue';
 import { PortraitData } from '../../app/types';
 import DragonPortrait from '../Lineage/Dragon/DragonPortrait.vue';
+import { useElementSize } from '@vueuse/core';
+
+const emit = defineEmits<{
+  (e: 'breedSelected', breed: PortraitData): void;
+}>();
 
 defineProps({
   compact: {
@@ -51,68 +56,40 @@ defineProps({
   },
 });
 
-const obs: {
-  func: (() => void) | null;
-  observer: ResizeObserver | null;
-} = {
-  func: null,
-  observer: null,
-};
-
-const emit = defineEmits<{
-  (e: 'breedSelected', breed: PortraitData): void;
-}>();
-
-const sizeH = ref(0);
-const sizeW = ref(0);
-
-// We want our grid to be fluid, which means we have to employ a somewhat
-// hacky solution to ensure it takes up the parent container's space
-// once on initiation and there again when it's resized
+const parent = ref();
+const { height: sizeH, width: containerWidth } = useElementSize(parent);
+const portraitWidth = 36;
+const portraitHeight = 48;
+const margin = 2;
+const columns = computed(() =>
+  Math.floor(containerWidth.value / (portraitWidth + margin)),
+);
+const sizeW = computed(() => containerWidth.value);
+watch(containerWidth, () => {
+  console.log(sizeW.value, containerWidth.value);
+});
 onMounted(() => {
   const instance = getCurrentInstance();
-  const parent = instance?.parent?.proxy?.$el;
-
-  if (!parent) return;
-
-  obs.func = () => {
-    if (!parent) return;
-
-    // the breed grid should expand to fill the space of the parent,
-    // so we have to manually calculate the width and height
-    const { width, height } = (parent as HTMLElement).getBoundingClientRect();
-    sizeW.value = width;
-    sizeH.value = height;
-  };
-
-  // once on initiation
-  obs.func();
-
-  // and again when the parent is resized
-  obs.observer = new ResizeObserver(() => {
-    if (obs.func) obs.func();
-  });
-  obs.observer.observe(parent);
+  parent.value = instance?.parent?.proxy?.$el;
 });
 
 function cellSizeAndPositionGetter(item: PortraitData, index: number) {
-  const containerWidth = sizeW.value,
-    portraitWidth = 36,
-    portraitHeight = 48,
-    margin = 2,
-    columns = Math.floor(containerWidth / (portraitWidth + margin * 2));
-
   // compute size and position
   return {
     width: portraitWidth,
     height: portraitHeight,
-    x: (index % columns) * (portraitWidth + margin),
-    y: Math.floor(index / columns) * (portraitHeight + margin),
+    x: (index % columns.value) * (portraitWidth + margin),
+    y: Math.floor(index / columns.value) * (portraitHeight + margin),
   };
 }
 </script>
 
 <style scoped>
+.grid {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
 .mates {
   list-style-type: none;
   margin: 0 auto;

@@ -2,7 +2,6 @@
 layout
 **/
 :root {
-  --site-width: 1600px;
   --desktop: 1024px;
   --mobile: 768px;
 }
@@ -11,6 +10,7 @@ html {
   overflow: hidden auto;
   height: 100%;
   width: 100%;
+  font-size: 100%;
 }
 
 body {
@@ -21,18 +21,14 @@ body {
   flex-direction: column;
 }
 
-#app-container {
-  flex: 1;
-}
-
 .constrain-width {
-  max-width: var(--site-width);
+  max-width: 110rem;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
 .content-limit {
-  max-width: 800px;
+  max-width: 100ch;
 }
 
 .form {
@@ -49,21 +45,12 @@ body {
 /**
 interactive elements
 **/
-input[type='text'],
-input[type='search'],
-textarea,
-select,
-button {
+.interactive {
   border: none;
   padding: 0.5rem;
   background: #fff;
   font-family: var(--base-font);
   border-radius: 0.4rem;
-}
-
-select,
-button {
-  cursor: pointer;
 }
 
 /**
@@ -102,10 +89,6 @@ utilities
 .list {
   list-style-type: disc;
   padding-left: 1rem;
-}
-
-.btn {
-  border: none;
 }
 .pointer {
   cursor: pointer;

@@ -1,41 +1,102 @@
 <template>
-  <div
-    id="app"
+  <Header :class="skinStore.activeSkin" />
+  <main
+    id="content"
     :class="skinStore.activeSkin"
   >
-    <Header />
-    <main id="content">
-      <router-view :key="route.fullPath" />
-    </main>
-  </div>
+    <router-view :key="route.fullPath" />
+  </main>
+  <footer
+    id="bottom"
+    :class="skinStore.activeSkin"
+  >
+    <div
+      id="footer"
+      class="constrain-width"
+    >
+      <div id="footer-external-links">
+        <a href="https://ko-fi.com/dctools">
+          <FontAwesomeIcon
+            icon="fa-solid fa-mug-hot"
+            size="2x"
+          />Donation link
+        </a>
+        <a href="https://github.com/edenchazard/dc-lineage-builder">
+          <FontAwesomeIcon
+            icon="fa-brands fa-github"
+            size="2x"
+          />Github
+        </a>
+      </div>
+      v{{ appStore.appVersion }} &copy; eden chazard
+      <SkinSwitcher
+        id="desktop-menu-skin-switcher"
+        show-label
+      />
+    </div>
+  </footer>
 </template>
 
 <script setup lang="ts">
 import 'reset-css';
 import { useRoute } from 'vue-router';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './assets/styling/style.css';
 import './assets/layouts/theming.css';
-import Header from './components/Page/Header/Header.vue';
+import { useAppStore } from './store/app';
 import { useSkinStore } from './store/skin';
+import Header from './components/Page/Header/Header.vue';
+import SkinSwitcher from './components/Page/Header/SkinSwitcher.vue';
 
 const route = useRoute();
 const skinStore = useSkinStore();
+const appStore = useAppStore();
 </script>
 
 <style>
-#app {
-  background: var(--dc-background);
-  height: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
 #content {
   color: var(--ui-content-fg);
-  margin-top: 0.5rem;
   flex: 1;
   font-size: 1rem;
   line-height: 1.7em;
+  background: var(--dc-background);
+  padding-top: 1rem;
+}
+
+#bottom {
+  background-color: var(--ui-footer-bg);
+  color: var(--ui-footer-fg);
+  text-align: center;
+  padding: 0.5rem;
+}
+
+#footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#footer-external-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#footer-external-links a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  text-align: center;
+  color: inherit;
+  white-space: nowrap;
+}
+
+@media (min-width: 38em) {
+  #footer {
+    flex-direction: row;
+  }
 }
 </style>

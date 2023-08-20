@@ -94,7 +94,6 @@ computed:{
 }
 
 .imgbox {
-  margin: 0;
   border: 1px solid var(--dc-lineage-line-colour);
   background: var(--dc-lineage-tile-background, transparent);
   overflow: hidden;

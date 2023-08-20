@@ -37,6 +37,7 @@
           v-model="name"
           type="text"
           name="name"
+          class="interactive"
           required
           title="Breed name must be alphanumeric and 1-32 characters long."
           :pattern="BREEDNAMEREGEXP.toString().slice(2, -2)"
@@ -56,14 +57,14 @@
             type="radio"
             value="m"
           />
-          <label>Male-only</label>
+          <label for="avail_male">Male-only</label>
           <input
             id="avail_female"
             v-model="genderAvailability"
             type="radio"
             value="f"
           />
-          <label>Female-only</label>
+          <label for="avail_female">Female-only</label>
         </div>
         <span class="label">Tiles</span>
         <div id="tiles">

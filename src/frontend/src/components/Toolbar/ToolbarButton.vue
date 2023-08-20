@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    class="control"
+    class="control interactive"
     @click="emit('click')"
   >
     <font-awesome-icon

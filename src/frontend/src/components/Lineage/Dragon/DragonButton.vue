@@ -1,6 +1,6 @@
 <template>
   <button
-    class="control"
+    class="control pointer"
     type="button"
     :title="title"
     @click="emit('click')"
@@ -26,16 +26,12 @@ const emit = defineEmits<{
 </script>
 <style scoped>
 .control {
-  border: 0px none;
+  border: 0 none;
   color: var(--ui-builder-tile-action-color, inherit);
   background: transparent;
   font-size: 18px;
-  cursor: pointer;
   padding: 0;
   width: 30px;
   height: 29.38px;
-}
-.control svg {
-  padding: 0;
 }
 </style>
