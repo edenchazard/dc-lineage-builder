@@ -11,7 +11,7 @@
         class="mobile-menu-section"
       >
         <button
-          class="menu-button"
+          class="menu-button pointer"
           type="button"
           @click="menuOpen = false"
         >
@@ -23,31 +23,6 @@
         </button>
       </div>
       <HeaderMenuLinks id="mobile-menu" />
-      <div
-        id="mobile-menu-skin-section"
-        class="mobile-menu-section"
-      >
-        <SkinSwitcher id="mobile-menu-skin-switcher" />
-      </div>
-      <div id="mobile-menu-external-links">
-        <a href="https://ko-fi.com/dctools">
-          <FontAwesomeIcon
-            icon="fa-solid fa-mug-hot"
-            size="2x"
-          />
-          Donation link
-        </a>
-        <a href="https://github.com/edenchazard/dc-lineage-builder">
-          <FontAwesomeIcon
-            icon="fa-brands fa-github"
-            size="2x"
-          />
-          Github
-        </a>
-      </div>
-      <div id="mobile-menu-footer">
-        v{{ appStore.appVersion }} &copy; eden chazard
-      </div>
     </SlideInMenu>
 
     <div
@@ -56,7 +31,7 @@
     >
       <button
         id="mobile-menu-button"
-        class="col-1 menu-button"
+        class="col-1 menu-button pointer"
         type="button"
         @click="menuOpen = !menuOpen"
       >
@@ -74,34 +49,6 @@
         </router-link>
       </span>
       <HeaderMenuLinks id="desktop-menu" />
-      <div class="col-3">
-        <div class="skin">
-          <SkinSwitcher
-            id="desktop-menu-skin-switcher"
-            :show-label="false"
-          />
-        </div>
-        <div class="external-links">
-          <a
-            title="Github"
-            href="https://github.com/edenchazard/dc-lineage-builder"
-          >
-            <FontAwesomeIcon
-              icon="fa-brands fa-github"
-              size="2x"
-            />
-          </a>
-          <a
-            title="Ko-fi donation link"
-            href="https://ko-fi.com/dctools"
-          >
-            <FontAwesomeIcon
-              icon="fa-solid fa-mug-hot"
-              size="2x"
-            />
-          </a>
-        </div>
-      </div>
     </div>
   </header>
 </template>
@@ -110,14 +57,11 @@
 import { ref } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { onKeyDown } from '@vueuse/core';
-import { useAppStore } from '../../../store/app';
 import HeaderMenuLinks from './HeaderMenuLinks.vue';
-import SkinSwitcher from './SkinSwitcher.vue';
 import SlideInMenu from './SlideInMenu.vue';
 
 onKeyDown('Escape', () => (menuOpen.value = false));
 
-const appStore = useAppStore();
 const menuOpen = ref(false);
 </script>
 
@@ -129,8 +73,13 @@ const menuOpen = ref(false);
   padding-bottom: 0.5rem;
   /*   padding: 0.25rem 0.5rem; */
 }
+
 #top a {
   text-decoration: none;
+}
+
+#mobile-menu-button {
+  align-self: stretch;
 }
 
 #header {
@@ -140,6 +89,7 @@ const menuOpen = ref(false);
   color: inherit;
   /*   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.75); */
   margin: 0 auto;
+  gap: 0.5rem;
 }
 
 #site-title {
@@ -148,12 +98,15 @@ const menuOpen = ref(false);
   white-space: nowrap;
   color: inherit;
   flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #site-title-link {
   color: inherit;
 }
+
 .menu-button {
-  height: 3rem;
+  padding: 1rem 0.25rem;
   background: none;
   color: #fff;
   text-transform: uppercase;
@@ -165,19 +118,6 @@ const menuOpen = ref(false);
   display: none;
   flex-direction: column;
   gap: 0.5rem;
-}
-#header .skin {
-  white-space: nowrap;
-}
-#header .external-links {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 0.5rem;
-  flex: 1;
-  text-align: center;
-}
-#header .external-links a {
-  color: inherit;
 }
 /**
 mobile menu
@@ -207,32 +147,6 @@ mobile menu
 
 #mobile-menu a:last-child {
   border: 0px none;
-}
-#mobile-menu-skin-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-}
-#mobile-menu-skin-switcher {
-  align-self: stretch;
-}
-#mobile-menu-external-links {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-#mobile-menu-external-links a {
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex: 1;
-  text-align: center;
-}
-#mobile-menu-footer {
-  text-align: center;
-  padding: 1rem 0rem;
 }
 
 /**
