@@ -74,12 +74,6 @@ computed:{
 /* add css for fallbacks */
 @import url('../../../assets/tile-rendering/fallbacks.css');
 
-/* apply the correct spritesheet depending on pixel ratio */
-@import url('../../../assets/tile-rendering/sprites-36x48.css')
-(min-resolution: 0dppx);
-
-@import url('../../../assets/tile-rendering/sprites-72x96.css')
-(min-resolution: 1.01dppx);
 .ghost,
 .local {
   width: var(--size36x48W);

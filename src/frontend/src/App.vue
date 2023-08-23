@@ -18,9 +18,27 @@ import './assets/theming.css';
 import './assets/styling/style.css';
 import Header from './components/Page/Header/Header.vue';
 import { useSkinStore } from './store/skin';
+import { useDevicePixelRatio } from '@vueuse/core';
+import { watch } from 'vue';
 
 const route = useRoute();
 const skinStore = useSkinStore();
+
+const { pixelRatio } = useDevicePixelRatio();
+
+/* dynamically load and apply the correct spritesheet depending on
+ pixel ratio */
+watch(
+  pixelRatio,
+  () => {
+    if (pixelRatio.value <= 1) {
+      import('./assets/tile-rendering/sprites-36x48.css');
+    } else {
+      import('./assets/tile-rendering/sprites-72x96.css');
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <style>
