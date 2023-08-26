@@ -64,7 +64,7 @@ const appStore = useAppStore();
 }
 
 #bottom {
-  background-color: var(--ui-footer-bg);
+  background: var(--ui-footer-bg);
   color: var(--ui-footer-fg);
   text-align: center;
   padding: 0.5rem;
