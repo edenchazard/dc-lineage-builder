@@ -1,10 +1,12 @@
 <template>
   <button
+    data-dragscroll
     type="button"
     class="control interactive"
-    @click="emit('click')"
+    :aria-disabled="disabled"
+    :tabindex="disabled ? -1 : 0"
   >
-    <font-awesome-icon
+    <FontAwesomeIcon
       v-bind="icon"
       class="icon"
     />
@@ -17,7 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from '@fortawesome/vue-fontawesome';
 import { PropType } from 'vue';
 
 defineProps({
@@ -31,12 +36,11 @@ defineProps({
     type: String,
     default: '',
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
-
-const emit = defineEmits<{
-  (e: 'click'): void;
-  (e: 'optionSelected', option: { label: string; value: unknown }): void;
-}>();
 </script>
 
 <style scoped>
@@ -48,26 +52,28 @@ const emit = defineEmits<{
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  &[aria-disabled='false'] {
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  &[aria-disabled='true'] {
+    opacity: 0.3;
+    pointer-events: none;
+  }
 }
-.control:enabled {
-  cursor: pointer;
-}
-.control:enabled:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-.control:disabled {
-  opacity: 0.3;
-}
+
 .label {
   background: var(--builderControlBG);
   color: var(--builderControlFG);
-  padding: 5px;
+  margin: 0.2rem;
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
-}
-.option {
-  padding: 5px;
 }
 .icon {
   display: block;
