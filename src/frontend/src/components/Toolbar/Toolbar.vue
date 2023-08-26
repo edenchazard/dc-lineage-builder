@@ -111,6 +111,8 @@
               v-model="selectedBreed"
               title="Apply selected breed"
               class="breed-dropdown interactive"
+              data-no-dragscroll
+              :disabled="itemsSelected === 0"
               @change="emit('changeBreed', selectedBreed)"
             >
               <option
