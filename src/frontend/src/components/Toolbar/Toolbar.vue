@@ -587,6 +587,10 @@ function capitalise(string: string) {
     grid-template-columns: 1fr;
     padding: 0;
 
+    & .selection-scrollable {
+      cursor: unset;
+    }
+
     & :deep(.legend) {
       display: block;
     }
