@@ -88,46 +88,6 @@
         color: var(--dc-colour-4);
       }
     }
-
-    @media (min-width: 32.2em) {
-      #site-title {
-        overflow: unset;
-        text-overflow: unset;
-      }
-
-      #mobile-menu-wrapper .skin {
-        display: none;
-      }
-      #header .col-3 {
-        display: flex;
-      }
-    }
-
-    @media (min-width: 72.5em) {
-      #top {
-        overflow: hidden;
-      }
-      #mobile-menu-button {
-        display: none;
-      }
-      #desktop-menu {
-        display: flex;
-      }
-      #site-title {
-        flex: 0;
-      }
-    }
-
-    @media (min-width: 77.5em) {
-      #desktop-menu a::after {
-        content: '\00B7';
-        margin-left: 0.5rem;
-      }
-      #desktop-menu a:last-child::after {
-        content: '';
-        margin-left: unset;
-      }
-    }
   }
 
   & #site-title {
@@ -153,6 +113,43 @@
 
     &:hover {
       color: var(--dc-colour-7);
+    }
+  }
+
+  @media (min-width: 32.2em) {
+    #site-title {
+      overflow: unset;
+      text-overflow: unset;
+    }
+
+    #mobile-menu-wrapper .skin {
+      display: none;
+    }
+    #header .col-3 {
+      display: flex;
+    }
+  }
+
+  @media (min-width: 62em) {
+    #mobile-menu-button {
+      display: none;
+    }
+    #desktop-menu {
+      display: flex;
+    }
+    #site-title {
+      flex: 0;
+    }
+  }
+
+  @media (min-width: 67em) {
+    #desktop-menu a::after {
+      content: '\00B7';
+      margin-left: 0.5rem;
+    }
+    #desktop-menu a:last-child::after {
+      content: '';
+      margin-left: unset;
     }
   }
 }
@@ -316,39 +313,12 @@
 
   &#top {
     color: var(--dc-colour-5);
-
-    @media (min-width: 30em) {
-      #site-title {
-        overflow: unset;
-        text-overflow: unset;
-      }
-      #mobile-menu-wrapper .skin {
-        display: none;
-      }
-      #header .col-3 {
-        display: flex;
-      }
-    }
-
-    @media (min-width: 65em) {
-      #top {
-        overflow: hidden;
-      }
-      #mobile-menu-button {
-        display: none;
-      }
-      #desktop-menu {
-        display: flex;
-      }
-      #site-title {
-        flex: 0;
-      }
-    }
   }
 
-  & #site-title {
+  #site-title-link {
     font-size: 1.25rem;
     line-height: 1.25rem;
+    font-weight: 500;
   }
 
   & #mobile-menu {
@@ -369,6 +339,22 @@
 
     &:hover {
       color: var(--dc-colour-10);
+    }
+  }
+
+  @media (min-width: 54em) {
+    #site-title {
+      overflow: unset;
+      text-overflow: unset;
+    }
+    #mobile-menu-button {
+      display: none;
+    }
+    #desktop-menu {
+      display: flex;
+    }
+    #site-title {
+      flex: 0;
     }
   }
 }
