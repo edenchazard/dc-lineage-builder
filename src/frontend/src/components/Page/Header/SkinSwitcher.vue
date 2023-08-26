@@ -48,8 +48,7 @@ defineProps({
   margin-right: 0.5rem;
 }
 .skin-switcher {
-  background: var(--ui-header-bg);
-  color: var(--ui-header-fg);
-  border: 0 none;
+  background: inherit;
+  color: inherit;
 }
 </style>

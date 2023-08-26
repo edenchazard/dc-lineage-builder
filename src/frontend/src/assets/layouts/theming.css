@@ -62,6 +62,8 @@
   --ui-header-fg: var(--dc-colour-5);
   --ui-header-mobile-border: 1px solid var(--dc-colour-5);
   --ui-content-fg: #000;
+  --ui-footer-bg: var(--dc-background);
+  --ui-footer-fg: #000;
 
   --ui-modal-header: #000;
   --ui-modal-content: #fff;
