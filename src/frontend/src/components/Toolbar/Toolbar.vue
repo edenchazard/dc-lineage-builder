@@ -68,7 +68,10 @@
       />
       <div
         ref="selectionToolsScrollArea"
+        v-dragscroll.x
         class="selection-scrollable"
+        @dragscrollstart="isDragScrollingSelectionTools = true"
+        @dragscrollend="isDragScrollingSelectionTools = false"
       >
         <ToolbarGroup>
           <ToolbarButton
@@ -108,7 +111,6 @@
               v-model="selectedBreed"
               title="Apply selected breed"
               class="breed-dropdown interactive"
-              :disabled="itemsSelected === 0"
               @change="emit('changeBreed', selectedBreed)"
             >
               <option
@@ -156,6 +158,7 @@
 
 <script setup lang="ts">
 import { computed, PropType, reactive, ref } from 'vue';
+import { useResizeObserver } from '@vueuse/core';
 import GLOBALS from '../../app/globals';
 import { forEveryDragon, filterEggGroups, filterTags } from '../../app/utils';
 import { useAppStore } from '../../store/app';
@@ -174,7 +177,6 @@ import ToolbarDropDownMenu from './ToolbarDropDownMenu/ToolbarDropDownMenu.vue';
 import ToolbarDropDownMenuItem from './ToolbarDropDownMenu/ToolbarDropDownMenuItem.vue';
 import ToolbarGroup from './ToolbarGroup.vue';
 import { useTagStore } from '../../store/tags';
-import { useResizeObserver } from '@vueuse/core';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {
@@ -182,13 +184,42 @@ type ToolbarButtonProps = Required<
   } //todo why! & Partial<ButtonHTMLAttributes>
 >;
 
-const tagStore = useTagStore();
-const appStore = useAppStore();
+const props = defineProps({
+  tree: {
+    type: Object as PropType<LineageRoot>,
+    required: true,
+  },
+  config: {
+    type: Object as PropType<LineageConfig>,
+    required: true,
+  },
+});
+
+const emit = defineEmits<{
+  (e: 'addParents'): void;
+  (e: 'switchParents'): void;
+  (e: 'unselectAll'): void;
+  (e: 'displayNames'): void;
+  (e: 'displayCodes'): void;
+  (e: 'randomizeLabels'): void;
+  (e: 'deleteAncestors'): void;
+  (e: 'importTree', tree: LineageRoot): void;
+  (e: 'changeBreed', value: string): void;
+  (e: 'selectCriteria', key: string, value: unknown): void;
+  (e: 'selectCriteria', predicate: (dragon: DragonType) => boolean): void;
+  (e: 'fullscreen'): void;
+  (e: 'undo'): void;
+  (e: 'redo'): void;
+}>();
 
 const toolbar = ref();
 const breedSelector = ref();
 const selectionToolsScrollArea = ref();
 const hideSelectionToolsNavButtons = ref(false);
+const isDragScrollingSelectionTools = ref(false);
+
+const tagStore = useTagStore();
+const appStore = useAppStore();
 
 // determine whether to show the scroll buttons for the selection
 // tools section
@@ -197,6 +228,11 @@ useResizeObserver(selectionToolsScrollArea, (entries) => {
   hideSelectionToolsNavButtons.value =
     entry.target.clientWidth === selectionToolsScrollArea.value.scrollWidth;
 });
+
+// seems to cause slowness on touch so disabled for now
+/* watch(isDragScrollingSelectionTools, (cur) => {
+  document.body.style.cursor = cur ? 'w-resize' : '';
+}); */
 
 const generalFunctions = reactive<ToolbarButtonProps[]>(
   [
@@ -322,34 +358,6 @@ const dialogs = reactive({
   showGenerateDialog: false,
 });
 
-const props = defineProps({
-  tree: {
-    type: Object as PropType<LineageRoot>,
-    required: true,
-  },
-  config: {
-    type: Object as PropType<LineageConfig>,
-    required: true,
-  },
-});
-
-const emit = defineEmits<{
-  (e: 'addParents'): void;
-  (e: 'switchParents'): void;
-  (e: 'unselectAll'): void;
-  (e: 'displayNames'): void;
-  (e: 'displayCodes'): void;
-  (e: 'randomizeLabels'): void;
-  (e: 'deleteAncestors'): void;
-  (e: 'importTree', tree: LineageRoot): void;
-  (e: 'changeBreed', value: string): void;
-  (e: 'selectCriteria', key: string, value: unknown): void;
-  (e: 'selectCriteria', predicate: (dragon: DragonType) => boolean): void;
-  (e: 'fullscreen'): void;
-  (e: 'undo'): void;
-  (e: 'redo'): void;
-}>();
-
 const treeSelectedContains = (tree: LineageRoot) => {
   let male = false,
     female = false;
@@ -413,6 +421,19 @@ function importLineage(tree: LineageRoot) {
   emit('importTree', tree);
 }
 
+function handleScrollLeft() {
+  selectionToolsScrollArea.value.scrollLeft = 0;
+}
+
+function handleScrollRight() {
+  selectionToolsScrollArea.value.scrollLeft =
+    selectionToolsScrollArea.value.scrollWidth;
+}
+
+/**
+ * helpers
+ */
+
 function convertToToolbarButtonProps(
   button: {
     icon: string;
@@ -439,15 +460,6 @@ function capitalise(string: string) {
     .split(' ')
     .map((substr) => substr[0].toUpperCase() + substr.slice(1))
     .join(' ');
-}
-
-function handleScrollLeft() {
-  selectionToolsScrollArea.value.scrollLeft = 0;
-}
-
-function handleScrollRight() {
-  selectionToolsScrollArea.value.scrollLeft =
-    selectionToolsScrollArea.value.scrollWidth;
 }
 </script>
 
@@ -520,7 +532,6 @@ function handleScrollRight() {
   display: grid;
   gap: 0.25rem;
   grid-template-columns: auto 1fr auto;
-  overflow: hidden;
   box-shadow:
     inset 0 7px 14px -15px var(--ui-builder-toolbar-selection-shadows),
     inset 0 -7px 14px -15px var(--ui-builder-toolbar-selection-shadows);
@@ -550,9 +561,9 @@ function handleScrollRight() {
   > .selection-scrollable {
     display: flex;
     flex-direction: row;
-    overflow-x: auto;
+    overflow-x: hidden;
     gap: 0.5rem;
-    scroll-behavior: smooth;
+    cursor: w-resize;
 
     & :deep(.control) {
       min-width: 2rem;
