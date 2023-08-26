@@ -5,7 +5,6 @@
       class="margin"
     />
     <label
-      v-if="showLabel"
       :for="id"
       class="margin"
       >Skin:</label
@@ -14,7 +13,6 @@
       :id="id"
       v-model="skinStore.activeSkin"
       class="skin-switcher pointer interactive"
-      title="Skin"
       v-bind="$attrs"
     >
       <option
@@ -33,10 +31,6 @@ import { useSkinStore } from '../../../store/skin';
 const skinStore = useSkinStore();
 
 defineProps({
-  showLabel: {
-    type: Boolean,
-    default: true,
-  },
   id: {
     type: String,
     required: true,
@@ -48,7 +42,8 @@ defineProps({
   margin-right: 0.5rem;
 }
 .skin-switcher {
-  background: inherit;
-  color: inherit;
+  background: var(--ui-footer-bg);
+  color: var(--ui-footer-fg);
+  border: 1px solid var(--ui-footer-fg);
 }
 </style>

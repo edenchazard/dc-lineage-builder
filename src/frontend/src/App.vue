@@ -29,10 +29,7 @@
         </a>
       </div>
       v{{ appStore.appVersion }} &copy; eden chazard
-      <SkinSwitcher
-        id="desktop-menu-skin-switcher"
-        show-label
-      />
+      <SkinSwitcher id="desktop-menu-skin-switcher" />
     </div>
   </footer>
 </template>
