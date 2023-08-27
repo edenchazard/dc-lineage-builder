@@ -2,28 +2,27 @@
   <span
     :title="data.name"
     class="imgbox imgbox-fullsize"
-    role="img"
   >
     <img
       v-if="data.metaData.src === 'dc'"
       :src="'//dragcave.net/image/' + data.image"
       :class="'fallback d-' + data.image"
-      :alt="data.name"
     />
     <span
       v-else-if="data.metaData.src === 'local'"
       :class="'local d-' + data.image"
-    ></span>
+      role="img"
+    />
     <img
       v-else-if="data.metaData.src === 'ghost'"
       class="ghost"
       :src="data.image"
-      :alt="data.name"
     />
     <img
       v-else
       src="/src/assets/images/placeholder.png"
     />
+    <span class="sr-only label">{{ data.name }}</span>
   </span>
 </template>
 
@@ -81,6 +80,13 @@ computed:{
 @import url('../../../assets/tile-rendering/sprites-72x96.css')
 (min-resolution: 1.01dppx);
 .ghost,
+.local,
+.fallback {
+  pointer-events: none;
+  user-select: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+}
+.ghost,
 .local {
   width: var(--size36x48W);
   height: var(--size36x48H);
@@ -98,8 +104,6 @@ computed:{
   background: var(--dc-lineage-tile-background, transparent);
   overflow: hidden;
   display: block;
-  user-select: none;
-  -webkit-touch-callout: none; /* iOS Safari */
 }
 .imgbox-fullsize {
   /* this needs adjusting by 2px in either directon */
@@ -114,12 +118,12 @@ computed:{
 .fallback {
   position: relative;
   image-rendering: -webkit-optimize-contrast;
-  -webkit-touch-callout: none; /* iOS Safari */
-  user-select: none;
-  pointer-events: none;
 }
 .ghost {
   margin: -1px -1px;
+}
+.label {
+  user-select: text;
 }
 /* mods */
 /* nocturne */

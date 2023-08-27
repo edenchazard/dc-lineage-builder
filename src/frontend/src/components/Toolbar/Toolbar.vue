@@ -30,7 +30,7 @@
         class="item"
         type="checkbox"
       />
-      <label for="show-interface">Show interface </label>
+      <label for="show-interface">Show controls </label>
       <input
         id="show-labels"
         v-model="config.showLabels"

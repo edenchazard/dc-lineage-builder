@@ -97,7 +97,8 @@ utilities
 accessibility
 **/
 :focus-visible {
-  outline: 2px solid lightblue;
+  outline: 3px solid var(--ui-focus-colour, blue);
+  border-radius: 0.25em;
 }
 
 /**

@@ -10,14 +10,14 @@
     <div class="tile">
       <DragonButton
         v-if="nodesFromRoot === 0"
-        class="tile-control-left"
+        class="tile-button-left tile-button-add-desc"
         title="Add descendant"
         icon="arrow-left"
         @click="addDescendant"
       />
       <DragonButton
         v-if="nodesFromRoot > 0"
-        class="tile-control-left tile-control-remove-desc"
+        class="tile-button-left tile-button-remove-desc"
         title="Remove descendants"
         icon="cut"
         @click="removeDescendants"
@@ -39,16 +39,23 @@
           }"
         />
       </button>
+      <FontAwesomeIcon
+        icon="warning"
+        :class="{ visible: problems.length > 0 }"
+        class="label-warning"
+        :title="problems"
+        :aria-label="problems"
+      />
       <DragonButton
         v-if="hasAncestry"
-        class="tile-control-right"
+        class="tile-button-right"
         title="Remove ancestors"
         icon="minus"
         @click="deleteAncestors"
       />
       <DragonButton
-        v-if="!hasAncestry"
-        class="tile-control-right"
+        v-else
+        class="tile-button-right"
         title="Add ancestors"
         icon="arrow-right"
         @click="addAncestors"
@@ -59,7 +66,7 @@
         :disabled="disabled"
         @changed="labelChanged"
       />
-      <div class="tile-bottom-controls">
+      <div class="tile-bottom-controls tile-button-group">
         <DragonButton
           v-if="nodesFromRoot === 0 && data.gender === 'm'"
           title="Switch gender to female"
@@ -89,13 +96,6 @@
           icon="paste"
           @click="pasteBranch"
         />
-        <DragonButton
-          v-if="hasAncestry"
-          class="tile-control-right2"
-          title="Switch parents"
-          icon="sync-alt"
-          @click="swapParents"
-        />
       </div>
     </div>
     <ul
@@ -119,6 +119,7 @@
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
 import { computed, PropType, ref } from 'vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import vOnLongPress from '../../../directives/long-press/vue-3-long-press';
 import GLOBALS from '../../../app/globals';
 import {
@@ -135,11 +136,12 @@ import {
   createDragonProperties,
 } from '../../../app/dragonBuilder';
 import { useAppStore } from '../../../store/app';
+import { validateCode, validateName } from '../../../app/validators';
 
 import DragonLabel from './DragonLabel.vue';
 import BreedSelector from '../../BreedSelector/BreedSelector.vue';
 import DragonPortrait from './DragonPortrait.vue';
-import DragonButton from './DragonButton.vue';
+import DragonButton from './TileButton.vue';
 import {
   BreedEntry,
   DragonParents,
@@ -182,9 +184,14 @@ const getImage = computed(() => {
   return portrait;
 });
 
-function swapParents() {
-  props.data.parents = switchParents(props.data.parents);
-}
+const problems = computed(() => {
+  const errs = [];
+
+  if (!validateCode(props.data.code)) errs.push('Code is invalid.');
+  if (!validateName(props.data.name)) errs.push('Name is invalid.');
+
+  return errs.join('');
+});
 
 function switchGender() {
   const invertedGender = props.data.gender === 'f' ? 'm' : 'f';
@@ -373,8 +380,8 @@ function handleClick() {
       display: none;
     }
 
-    > .tile-control-left,
-    > .tile-control-right {
+    > .tile-button-left,
+    > .tile-button-right {
       position: absolute;
     }
 
@@ -382,14 +389,14 @@ function handleClick() {
       width: 120px;
     }
     /* position the controls left and right of the tile */
-    > .tile-control-right {
+    > .tile-button-right {
       margin-top: 10px;
-      margin-left: 15px;
+      right: 5px;
     }
 
-    > .tile-control-left {
-      margin-left: -42px;
+    > .tile-button-left {
       margin-top: 10px;
+      left: 6px;
     }
   }
 
@@ -409,24 +416,35 @@ function handleClick() {
   outline: var(--ui-builder-tile-selected-outline);
   outline-offset: 2px;
 }
-</style>
 
-<style lang="postcss">
-.lineage-view {
-  &[data-show-editor-interface='false'] .control {
-    display: none;
+.label-warning {
+  position: absolute;
+  color: var(--ui-builder-tile-label-warning);
+  padding: 3px;
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--ui-builder-tile-label-warning);
+  opacity: 0;
+  z-index: -1;
+  margin-top: -10px;
+  right: 28px;
+}
+.visible {
+  animation: scale 0.5s ease-in forwards;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0);
+    z-index: 2;
   }
 
-  &[data-show-editor-interface='true'] {
-    .tile-container > .tile::after {
-      display: none;
-    }
-  }
-
-  &[data-show-labels='false'] {
-    .dragon-label {
-      display: none;
-    }
+  100% {
+    transform: scale(1);
+    transform-origin: bottom left;
+    opacity: 1;
+    z-index: 3;
   }
 }
 </style>
