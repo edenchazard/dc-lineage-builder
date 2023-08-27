@@ -1,15 +1,20 @@
 <template>
   <button
-    class="control pointer"
+    class="tile-button pointer"
     type="button"
     :title="title"
     @click="emit('click')"
   >
-    <font-awesome-icon :icon="icon" />
+    <FontAwesomeIcon
+      :icon="icon"
+      class="graphic"
+    />
   </button>
 </template>
 
 <script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 defineProps({
   title: {
     type: String,
@@ -24,14 +29,27 @@ const emit = defineEmits<{
   (e: 'click'): void;
 }>();
 </script>
-<style scoped>
-.control {
+
+<style scoped lang="postcss">
+.tile-button {
   border: 0 none;
   color: var(--ui-builder-tile-action-color, inherit);
   background: transparent;
-  font-size: 18px;
   padding: 0;
-  width: 30px;
-  height: 29.38px;
+  width: 18px;
+  height: 18px;
+
+  > .graphic {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
+</style>
+
+<style lang="postcss">
+.tile-button-group > .tile-button {
+  margin: 5px;
 }
 </style>

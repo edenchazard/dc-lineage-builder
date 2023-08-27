@@ -11,5 +11,5 @@ createApp(App)
   .use(createPinia())
   .use(router)
   .use(VueDragscroll)
-  .component('font-awesome-icon', FontAwesomeIcon)
+  .component('FontAwesomeIcon', FontAwesomeIcon)
   .mount('body');

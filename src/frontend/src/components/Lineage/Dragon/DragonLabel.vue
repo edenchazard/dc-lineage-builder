@@ -1,47 +1,34 @@
 <template>
+  <textarea
+    v-if="editing"
+    ref="inputEl"
+    class="label-block input"
+    :class="classes"
+    :placeholder="`Enter new ${display === 1 ? 'code' : 'name'}`"
+    :value="value"
+    spellcheck="false"
+    rows="1"
+    @focus="validate"
+    @input="validate"
+    @keydown.enter="finishedEditing"
+    @blur="finishedEditing"
+  />
   <div
-    class="dragon-label"
-    :class="[
-      display === 1 ? 'code' : 'name',
-      { invalid: warnInvalid && !editing },
-    ]"
-    :title="warnInvalid ? 'Warning: Label does not meet DC requirements' : ''"
-    tabindex="0"
-    @focus="click"
+    v-else
+    class="label-block label"
+    :class="classes"
+    role="button"
+    :tabindex="disabled ? -1 : 0"
+    @keyup.space.enter="click"
     @click="click"
   >
-    <input
-      v-if="editing"
-      ref="inputEl"
-      class="input"
-      type="text"
-      placeholder="enter label"
-      :pattern="
-        (display === 1 ? CODEREGEXP : NAMEREGEXP).toString().slice(2, -2)
-      "
-      :title="`enter new ${display === 1 ? 'code' : 'name'}`"
-      :value="value"
-      spellcheck="false"
-      @keydown.enter="finishedEditing"
-      @blur="finishedEditing"
-    />
-    <label
-      v-else
-      class="label"
-    >
-      {{ value }}
-    </label>
+    {{ display === 1 ? `(${value})` : value }}
   </div>
 </template>
 <script setup lang="ts">
 import { computed, nextTick, ref } from 'vue';
 import { generateName, generateCode } from '../../../app/dragonBuilder';
-import {
-  validateCode,
-  validateName,
-  CODEREGEXP,
-  NAMEREGEXP,
-} from '../../../app/validators';
+import { validateCode, validateName } from '../../../app/validators';
 
 const props = defineProps({
   value: {
@@ -65,13 +52,20 @@ const emit = defineEmits<{
 
 const editing = ref(false);
 const inputEl = ref<HTMLInputElement>();
+const classes = computed(() => [props.display === 1 ? 'code' : 'name']);
 
 function validate() {
-  const validator = props.display === 1 ? validateCode : validateName;
-  return !validator(props.value);
-}
+  const target = inputEl.value;
+  if (!(target instanceof HTMLTextAreaElement)) return;
 
-const warnInvalid = computed(validate);
+  const validator = props.display === 1 ? validateCode : validateName;
+  const invalid = !validator(target.value);
+
+  target.style.height = 'auto';
+  target.style.height = target.scrollHeight + 'px';
+
+  target.classList[invalid ? 'add' : 'remove']('bad');
+}
 
 function click() {
   // don't act when disabled
@@ -84,7 +78,7 @@ function click() {
 }
 
 function finishedEditing(e: Event) {
-  let value = (e.target as HTMLInputElement).value;
+  let value = (e.target as HTMLTextAreaElement).value;
 
   // if a blank string is given, we'll generate a new name or code
   if (value === '')
@@ -96,52 +90,47 @@ function finishedEditing(e: Event) {
 </script>
 
 <style scoped>
-.dragon-label {
+.label-block {
+  display: block;
   width: 120px;
   padding: 0;
   position: relative;
   top: -4px;
+  height: auto;
 }
 .label {
   word-wrap: break-word;
   white-space: break-spaces;
 }
-.code .label,
-.code .input {
-  font-style: italic;
-}
-.code .label::before {
-  content: '(';
-}
-.code .label::after {
-  content: ')';
+.code {
+  font-style: italic !important;
 }
 .input {
   /* we'd like to emulate the styles so most of these need
   to inherit */
   background: inherit;
-  font-family: inherit;
   color: inherit;
   text-align: center;
-  border: 0px none;
+  border: 0 none;
   box-shadow: none;
   margin: 0;
   padding: 0;
-  /* it just needs to be a little smaller to prevent layout shifts */
-  font-size: inherit;
-  width: 100%;
-  outline: 1px dashed #44300b;
-  outline-style: dashed;
-  outline-color: #44300b;
-}
-.input,
-.invalid {
-  outline-width: 1px;
-  outline-offset: 1px;
-}
-.input:invalid,
-.invalid {
-  outline-style: solid;
-  outline-color: red;
+  font: inherit;
+  height: auto;
+  font-size: inherit !important;
+
+  resize: none;
+
+  /* prevents buggy textarea autosizing */
+  overflow: hidden;
+
+  /* helps prevent layout shifts */
+  appearance: none;
+
+  &.bad {
+    background-color: var(
+      --ui-builder-tile-label-invalid
+    ); /*  rgb(255 193 7 / 10%); */
+  }
 }
 </style>

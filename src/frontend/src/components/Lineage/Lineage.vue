@@ -65,3 +65,23 @@ const generations = computed(() => {
   margin: 0 auto;
 }
 </style>
+
+<style lang="postcss">
+.lineage-view {
+  &[data-show-editor-interface='false'] .tile-button {
+    display: none;
+  }
+
+  &[data-show-editor-interface='true'] {
+    .tile-container > .tile::after {
+      display: none;
+    }
+  }
+
+  &[data-show-labels='false'] {
+    .label-block {
+      display: none;
+    }
+  }
+}
+</style>
