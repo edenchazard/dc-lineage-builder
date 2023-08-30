@@ -87,7 +87,6 @@ const appStore = useAppStore();
   gap: 0.5rem;
   flex: 1;
   text-align: center;
-  color: inherit;
   white-space: nowrap;
 }
 
