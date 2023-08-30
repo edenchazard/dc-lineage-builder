@@ -522,6 +522,13 @@
     },
     "tags": ["Halloween"]
   },
+  "Jaw Splitter Wyrm": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["tLO7i","mEAbR"],
+    "tags": ["Regular"]
+  },
   "Jester": {
     "dimorphism": true,
     "genderOnly": false,
@@ -702,6 +709,13 @@
       "Metachrosis": ["422Bx","vatB9"],
       "__regular__": ["Y2ULc","acP7t"]
     },
+    "tags": ["Regular"]
+  },
+  "Peach Pied": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "qgX9o",
     "tags": ["Regular"]
   },
   "Pink": {
