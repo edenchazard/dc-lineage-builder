@@ -112,7 +112,7 @@
     }
   }
 
-  & #content a {
+  &#content a {
     text-decoration: underline;
     color: var(--dc-colour-2);
 
@@ -342,7 +342,7 @@
     }
   }
 
-  & #content a {
+  &#content a {
     text-decoration: none;
     color: var(--dc-colour-9);
 
