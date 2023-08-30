@@ -33,7 +33,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
-import { useSwipe } from '@vueuse/core';
+//import { useSwipe } from '@vueuse/core';
 
 const emit = defineEmits<{
   (e: 'change', open: boolean): void;
@@ -53,13 +53,13 @@ const props = defineProps({
 const isOpen = computed(() => props.open);
 const mobileMenu = ref<HTMLDivElement>();
 const { activate, deactivate } = useFocusTrap(mobileMenu);
-const { isSwiping, direction } = useSwipe(document.body);
+//const { isSwiping, direction } = useSwipe(document.body);
 
 watch(isOpen, (value) => {
   (value ? activate : deactivate)();
 });
 
-watch(isSwiping, () => {
+/* watch(isSwiping, () => {
   if (window.screen.width >= props.slideThreshold) {
     return;
   }
@@ -69,7 +69,7 @@ watch(isSwiping, () => {
   } else if (direction.value === 'right') {
     emit('change', true);
   }
-});
+}); */
 </script>
 
 <style>
