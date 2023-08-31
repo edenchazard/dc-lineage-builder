@@ -19,11 +19,11 @@ export const useSkinStore = defineStore('skinStore', () => {
       prettyName: 'Default',
       //file: () => import(`../../assets/layouts/default/index.css`),
     },
-    /*     {
+    {
       cssName: 'skin-portal2',
       prettyName: 'Portal 2',
-      file:  () => import(`../../assets/layouts/portal2-light/index.css`),
-    }, */
+      //file:  () => import(`../../assets/layouts/portal2-light/index.css`),
+    },
     {
       cssName: 'skin-portal2-light',
       prettyName: 'Portal 2 Light',

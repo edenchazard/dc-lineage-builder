@@ -375,6 +375,96 @@
   }
 }
 
+.skin-portal2 {
+  --dc-colour-1: #000;
+  --dc-colour-2: #ddd;
+  --dc-colour-3: #24b2e580;
+  --dc-colour-4: #2db2e6;
+  --dc-colour-5: #ff9315;
+  --dc-colour-6: #fff;
+  --dc-colour-7: #959595;
+
+  --dc-lineage-line-width: 1px;
+  --dc-lineage-line-style: dotted;
+  --dc-lineage-line-colour: var(--dc-colour-7);
+  --dc-lineage-gen-text-colour: var(--dc-colour-7);
+  --dc-lineage-font: 14px 'DIN', 'Arial', sans-serif;
+  --dc-lineage-colour: var(--dc-colour-2);
+
+  --dc-background: var(--dc-colour-1) url(./portal2/portal2.png)
+    repeat fixed;
+
+  --ui-header-bg: #000;
+  --ui-footer-bg: #000;
+  --ui-footer-fg: #fff;
+
+  font:
+    0.875rem / normal 'Arial',
+    sans-serif;
+
+  &#top {
+    font:
+      700 1rem/1rem 'DIN',
+      'Arial',
+      sans-serif;
+    text-transform: uppercase;
+
+    & a:not(#site-title-link) {
+      color: var(--dc-colour-7);
+
+      &:nth-child(odd):hover {
+        color: var(--dc-colour-4);
+        text-shadow: 0 -2px 20px var(--dc-colour-4);
+      }
+      &:nth-child(even):hover {
+        color: var(--dc-colour-5);
+        text-shadow: 0 -2px 20px var(--dc-colour-5);
+      }
+    }
+  }
+
+  & #site-title {
+    color: var(--dc-colour-6);
+
+    &:hover {
+      color: var(--dc-colour-5);
+    }
+  }
+
+  & #mobile-menu {
+    font-size: 0.875rem;
+    line-height: 0.875rem;
+
+    > a {
+      font-size: 1rem;
+      line-height: 1.125rem;
+      color: #fff;
+    }
+  }
+
+  & #desktop-menu a {
+    padding: 0 0.5rem;
+  }
+
+  @media (min-width: 86.5em) {
+    #mobile-menu-button {
+      display: none;
+    }
+    #desktop-menu {
+      display: flex;
+    }
+    #site-title {
+      flex: 0;
+      overflow: unset;
+      text-overflow: unset;
+    }
+  }
+
+  & #footer-external-links a {
+    color: #fff;
+  }
+}
+
 /* .skin-portal2 {
   --colourBG: #000;
   --colourFG: #ddd;
