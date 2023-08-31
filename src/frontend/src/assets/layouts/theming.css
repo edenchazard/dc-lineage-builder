@@ -391,8 +391,7 @@
   --dc-lineage-font: 14px 'DIN', 'Arial', sans-serif;
   --dc-lineage-colour: var(--dc-colour-2);
 
-  --dc-background: var(--dc-colour-1) url(./portal2/portal2.png)
-    repeat fixed;
+  --dc-background: transparent;
 
   --ui-header-bg: #000;
   --ui-footer-bg: #000;
@@ -446,6 +445,14 @@
     padding: 0 0.5rem;
   }
 
+  &#content {
+    background: var(--dc-colour-1) url(/src/assets/layouts/portal2/portal2.png)
+      repeat-x fixed;
+  }
+  & #footer-external-links a {
+    color: #fff;
+  }
+
   @media (min-width: 86.5em) {
     #mobile-menu-button {
       display: none;
@@ -458,10 +465,6 @@
       overflow: unset;
       text-overflow: unset;
     }
-  }
-
-  & #footer-external-links a {
-    color: #fff;
   }
 }
 
