@@ -510,28 +510,30 @@
   & .toolbar {
     box-shadow: 0 3px 5px var(--semi-black);
     border: 1px solid var(--semi-black);
-  }
 
-  & .functions {
-    background-color: var(--semi-black);
-    padding: 0.3rem;
-    border-radius: 10px;
-    margin-right: 0.5rem;
-  }
+    & .functions {
+      background-color: var(--semi-black);
+      padding: 0.3rem;
+      border-radius: 10px;
+      margin-right: 0.5rem;
+    }
 
-  /* & .group .buttons {
-    background-color: var(--ui-builder-toolbar-bg);
-    padding: 5px;
-    border-radius: 10px;
-  } */
+    & .selection-scrollable {
+      margin: 0 0.5rem;
+      margin-bottom: 0.5rem;
+    }
 
-  & .selection-tools {
-    margin: 0 0.5rem;
-  }
+    & .selection-scrollable .group {
+      background-color: var(--semi-black);
+      border-radius: 10px;
+      & .buttons {
+        padding: 0.3rem;
+      }
 
-  & .legend[data-v-2fcb7d2a] {
-    border-radius: 5px 5px 0 0;
-    margin-top: 0.3rem;
+      & .legend {
+        border-radius: 0 0 10px 10px;
+      }
+    }
   }
 
   @media (min-width: 86.5em) {
