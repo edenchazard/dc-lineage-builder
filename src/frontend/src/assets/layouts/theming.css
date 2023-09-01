@@ -247,6 +247,20 @@
 
   & #desktop-menu a {
     padding: 0 0.5rem;
+    position: relative;
+    &:hover::before, &:hover::after {
+      position: absolute;
+      font-size: 1.5rem;
+      color: white;
+    }
+    &:hover::before {
+      left: -0.2rem;
+      content: '[';
+    }
+    &:hover::after {
+      right: -0.2rem;
+      content: ']';
+    }
   }
 
   @media (min-width: 86.5em) {
@@ -397,6 +411,8 @@
 
   --ui-builder-toolbar-bg: var(--semi-black);
   --ui-builder-toolbar-selection-group-bg: var(--semi-black);
+  --ui-builder-tile-selected-bg: var(--dc-colour-3);
+  --ui-builder-tile-selected-outline: 1px solid var(--dc-colour-4);
 
   --ui-header-bg: #000;
   --ui-footer-bg: #000;
@@ -448,6 +464,20 @@
 
   & #desktop-menu a {
     padding: 0 0.5rem;
+    position: relative;
+    &:hover::before, &:hover::after {
+      position: absolute;
+      font-size: 1.5rem;
+      color: white;
+    }
+    &:hover::before {
+      left: -0.2rem;
+      content: '[';
+    }
+    &:hover::after {
+      right: -0.2rem;
+      content: ']';
+    }
   }
 
   &#content {
@@ -484,9 +514,9 @@
 
   & .functions {
     background-color: var(--semi-black);
-    padding: 5px;
+    padding: 0.3rem;
     border-radius: 10px;
-    margin-right: 8px;
+    margin-right: 0.5rem;
   }
 
   /* & .group .buttons {
@@ -496,12 +526,12 @@
   } */
 
   & .selection-tools {
-    margin: 0 8px;
+    margin: 0 0.5rem;
   }
 
   & .legend[data-v-2fcb7d2a] {
     border-radius: 5px 5px 0 0;
-    margin-top: 5px;
+    margin-top: 0.3rem;
   }
 
   @media (min-width: 86.5em) {
