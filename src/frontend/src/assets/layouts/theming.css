@@ -384,6 +384,8 @@
   --dc-colour-6: #fff;
   --dc-colour-7: #959595;
 
+  --semi-black: rgba(0,0,0,0.25);
+
   --dc-lineage-line-width: 1px;
   --dc-lineage-line-style: dotted;
   --dc-lineage-line-colour: var(--dc-colour-7);
@@ -392,6 +394,9 @@
   --dc-lineage-colour: var(--dc-colour-2);
 
   --dc-background: transparent;
+
+  --ui-builder-toolbar-bg: var(--semi-black);
+  --ui-builder-toolbar-selection-group-bg: var(--semi-black);
 
   --ui-header-bg: #000;
   --ui-footer-bg: #000;
@@ -448,9 +453,55 @@
   &#content {
     background: var(--dc-colour-1) url(/src/assets/layouts/portal2/portal2.png)
       repeat-x fixed;
+    color: var(--dc-colour-2);
+    & a {
+      color: var(--dc-colour-6);
+      &:hover {
+        color: var(--dc-colour-4);
+      }
+    }
   }
   & #footer-external-links a {
     color: #fff;
+  }
+
+  & .content-limit {
+    text-shadow: 0 2px 2px var(--semi-black);
+  }
+
+  & .focusable-dialog {
+    color: var(--dc-colour-1);
+  }
+
+  & button.tag-active {
+    background-color: var(--dc-colour-4);
+  }
+
+  & .toolbar {
+    box-shadow: 0 3px 5px var(--semi-black);
+    border: 1px solid var(--semi-black);
+  }
+
+  & .functions {
+    background-color: var(--semi-black);
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 8px;
+  }
+
+  /* & .group .buttons {
+    background-color: var(--ui-builder-toolbar-bg);
+    padding: 5px;
+    border-radius: 10px;
+  } */
+
+  & .selection-tools {
+    margin: 0 8px;
+  }
+
+  & .legend[data-v-2fcb7d2a] {
+    border-radius: 5px 5px 0 0;
+    margin-top: 5px;
   }
 
   @media (min-width: 86.5em) {
