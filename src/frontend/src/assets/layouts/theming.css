@@ -160,21 +160,18 @@
   --dc-lineage-font: 400 14px / normal 'DIN', 'Arial', sans-serif;
   --dc-lineage-colour: var(--dc-colour-2);
 
-  --dc-background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png)
-    repeat;
-
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: #fff;
-  --ui-builder-toolbar-bg: rgb(107 80 31 / 12%);
-  --ui-builder-toolbar-selection-group-bg: #44300b;
+  --ui-builder-toolbar-bg: var(--ui-header-bg);
+  /* --ui-builder-toolbar-selection-group-bg: #44300b; */
   --ui-builder-toolbar-selection-group-fg: #fff;
   --ui-builder-toolbar-selection-group-border: 1px dashed #44300b59;
   --ui-builder-toolbar-selection-scrolls: hsl(24deg 100% 7.1% / 40%);
-  --ui-builder-toolbar-selection-shadows: #000;
-  --ui-builder-toolbar-selection-count-bg: hsl(39 29% 42% / 1);
+  /* --ui-builder-toolbar-selection-shadows: #000; */
+  --ui-builder-toolbar-selection-count-bg: var(--dc-colour-3);
   --ui-builder-toolbar-selection-count-fg: #fff;
   --ui-builder-toolbar-button-bg: transparent;
-  --ui-builder-toolbar-button-fg: #44300b;
+  --ui-builder-toolbar-button-fg: var(--dc-colour-1);
   --ui-builder-toolbar-menu-bg: #2b303a;
   --ui-builder-toolbar-menu-fg: #fff;
   --ui-builder-tile-action-color: rgb(94, 94, 94, 0.5);
@@ -202,13 +199,19 @@
   --ui-focus-colour: rgba(255, 102, 0, 0.5);
 
   --semi-black: rgba(0,0,0,0.5);
+  --tile-shade: rgba(0,0,0,0.4);
+  --shading: 0 3px 5px var(--semi-black), inset 0 0 5px var(--semi-black);
 
   font:
     0.875rem / normal 'Arial',
     sans-serif;
 
+  &#content, &#bottom {
+    background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png) repeat;
+  }
+
   &#top {
-    box-shadow: 0 3px 5px var(--semi-black);
+    box-shadow: var(--shading);
     z-index: 1;
     font:
       700 1rem/1rem 'DIN',
@@ -264,6 +267,37 @@
     &:hover::after {
       right: -0.2rem;
       content: ']';
+    }
+  }
+
+  & .toolbar {
+    margin-bottom: 0.5rem;
+    box-shadow: var(--shading);
+    color: var(--dc-colour-1);
+    border-radius: 0px!important;
+    /* "important" is not great i know, but the border-radius rule was set in
+       Toolbar.vue and i felt reluctant to go there and edit it, especially since
+       that file seems to affect all themes */
+    & .selection-tools {
+      padding: 0 0.3rem;
+      box-shadow: 0 1px 3px var(--tile-shade) inset, 0 -1px 3px var(--tile-shade);
+    }
+
+    & .selection-scrollable {
+      gap: 0!important;
+      /* same here. here, i needed to close the gap to replicate portal light's tiling effect */
+    }
+
+    & .buttons {
+      padding: 0.3rem;
+    }
+
+    & select {
+      margin: 0 0.3rem;
+    }
+
+    & .group + .group {
+      box-shadow: 1px 0 3px var(--tile-shade) inset, -1px 0 3px var(--tile-shade);
     }
   }
 
