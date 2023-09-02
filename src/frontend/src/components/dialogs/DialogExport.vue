@@ -1,13 +1,18 @@
 <template>
-  <Dialog @close="emit('close')">
-    <template #header> Export lineage </template>
-    <template #body>
+  <Dialog
+    :id="id"
+    :open="open"
+    @close="emit('close')"
+  >
+    <template #title> Export lineage </template>
+    <template #default>
       <Feedback
         ref="status"
         :global-settings="{ showDismiss: false }"
       />
       <div v-if="!isError">
         <p>
+          {{ file }}
           Copy and paste this text to a text file to import this lineage later.
         </p>
         <div>
@@ -26,22 +31,34 @@
       </div>
     </template>
     <template #footer>
-      <button @click="emit('close')">Close</button>
+      <button
+        class="dialog-footer-button"
+        @click="emit('close')"
+      >
+        Close
+      </button>
     </template>
   </Dialog>
 </template>
 <script setup lang="ts">
-import { onMounted, PropType, ref } from 'vue';
+import { onUpdated, PropType, ref } from 'vue';
 import { DragonType, LineageRoot } from '../../app/types';
 import { forEveryDragon } from '../../app/utils';
 import { verifyIntegrity } from '../../app/validators';
-
-import Dialog from '../UI/Dialog.vue';
+import Dialog from './DialogBase.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
 import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
 
 const props = defineProps({
+  open: {
+    type: Boolean,
+    required: true,
+  },
+  id: {
+    type: String,
+    required: true,
+  },
   tree: {
     type: Object as PropType<LineageRoot>,
     required: true,
@@ -57,7 +74,7 @@ const isError = ref(false);
 const problemDragon = ref<DragonType>();
 const status = ref<InstanceType<typeof Feedback>>();
 
-onMounted(() => {
+onUpdated(() => {
   if (!status.value) return;
 
   // reset to false and change if we encounter problems later
@@ -65,12 +82,10 @@ onMounted(() => {
 
   // todo but doesn't affect runtime
   // @ts-ignore
-  const exportedTree = forEveryDragon(
-    props.tree,
-    (dragon) => delete dragon.selected,
-  );
+  const exportedTree = props.tree;
 
   console.log(exportedTree);
+
   const { failed, failedTests, context } = verifyIntegrity(exportedTree);
 
   if (failed) {
@@ -80,7 +95,7 @@ onMounted(() => {
       problemDragon.value = context.failedDragon;
     }
 
-    status.value.error(
+    status?.value.error(
       `Error creating export code. Tests failed: ${failedTests.join(', ')}`,
     );
 

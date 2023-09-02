@@ -1,16 +1,19 @@
 <template>
   <DialogExport
-    v-if="dialogs.showExportDialog"
+    id="dialog-export"
+    :open="dialogs.showExportDialog"
     :tree="tree"
     @close="dialogs.showExportDialog = false"
   />
   <DialogImport
-    v-if="dialogs.showImportDialog"
+    id="dialog-import"
+    :open="dialogs.showImportDialog"
     @close="dialogs.showImportDialog = false"
     @on-import="importLineage"
   />
   <DialogGenerate
-    v-if="dialogs.showGenerateDialog"
+    id="dialog-generate"
+    :open="dialogs.showGenerateDialog"
     :tree="tree"
     @close="dialogs.showGenerateDialog = false"
   />
@@ -30,14 +33,14 @@
         class="item"
         type="checkbox"
       />
-      <label for="show-interface">Show controls </label>
+      <label for="show-interface">Show controls</label>
       <input
         id="show-labels"
         v-model="config.showLabels"
         class="item"
         type="checkbox"
       />
-      <label for="show-labels">Show labels </label>
+      <label for="show-labels">Show labels</label>
     </div>
     <div
       class="functions"
@@ -171,9 +174,9 @@ import {
   LineageRoot,
   PortraitData,
 } from '../../app/types';
-import DialogExport from './DialogExport.vue';
-import DialogImport from './DialogImport.vue';
-import DialogGenerate from './DialogGenerate.vue';
+import DialogExport from '../dialogs/DialogExport.vue';
+import DialogImport from '../dialogs/DialogImport.vue';
+import DialogGenerate from '../dialogs/DialogGenerate.vue';
 import ToolbarButton from './ToolbarButton.vue';
 import ToolbarDropDownMenu from './ToolbarDropDownMenu/ToolbarDropDownMenu.vue';
 import ToolbarDropDownMenuItem from './ToolbarDropDownMenu/ToolbarDropDownMenuItem.vue';
