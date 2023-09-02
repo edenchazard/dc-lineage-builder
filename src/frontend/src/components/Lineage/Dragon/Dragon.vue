@@ -101,12 +101,12 @@
     </div>
     <ul v-if="hasAncestry">
       <Dragon
-        :data="data.parents.m"
+        :data="data.parents.m as DragonTypeWithMetadata"
         :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
       />
       <Dragon
-        :data="data.parents.f"
+        :data="data.parents.f as DragonTypeWithMetadata"
         :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
       />
@@ -121,17 +121,12 @@ import vOnLongPress from '../../../directives/long-press/vue-3-long-press';
 import GLOBALS from '../../../app/globals';
 import {
   getBreedData,
-  deepClone,
-  forEveryDragon,
   getTable,
   breedEntryToPortrait,
   expandGender,
   hasParents,
 } from '../../../app/utils';
-import {
-  switchParents,
-  createDragonProperties,
-} from '../../../app/dragonBuilder';
+import { switchParents } from '../../../app/dragonBuilder';
 import { useAppStore } from '../../../store/app';
 
 import DragonLabel from './DragonLabel.vue';
@@ -140,15 +135,16 @@ import DragonPortrait from './DragonPortrait.vue';
 import DragonButton from './DragonButton.vue';
 import {
   BreedEntry,
-  DragonParents,
-  DragonType,
+  DragonTypeWithMetadata,
+  PartialLineageWithMetadata,
   PortraitData,
 } from '../../../app/types';
+import Lineage, { DragonBuilder } from '../../../app/dragon';
 
 const props = defineProps({
   // Dragon properties
   data: {
-    type: Object as PropType<DragonType>,
+    type: Object as PropType<PartialLineageWithMetadata>,
     required: true,
   },
   // Whether to disable the click
@@ -181,7 +177,8 @@ const getImage = computed(() => {
 });
 
 function swapParents() {
-  props.data.parents = switchParents(props.data.parents);
+  const switched = switchParents(props.data.parents);
+  props.data.parents = switched.parents;
 }
 
 function switchGender() {
@@ -235,15 +232,16 @@ function copyBranch() {
   // Do nothing if no parents
   if (!hasAncestry.value) return;
 
-  const noSelect = deepClone({ parents: props.data.parents });
+  const raw = Lineage(props.data).raw();
 
-  // We have to make sure we deselect all of them, or they'll
-  // be copied as selected lol
-  const cb = (dragon: DragonType) => (dragon.selected = false);
-  forEveryDragon(noSelect.parents!.f, cb);
-  forEveryDragon(noSelect.parents!.m, cb);
-
-  ls.setItem('clipboard', JSON.stringify({ ...noSelect.parents }));
+  if (!hasParents(raw)) return;
+  ls.setItem(
+    'clipboard',
+    JSON.stringify({
+      m: Lineage(raw.parents.m).withoutMetadata(),
+      f: Lineage(raw.parents.f).withoutMetadata(),
+    }),
+  );
 }
 
 // this is a bit stupid. basically, we have to make a new root node
@@ -258,11 +256,10 @@ function addDescendant() {
 
 // adds a new node to the tree
 function addAncestors() {
-  const parents: DragonParents = {
-    m: createDragonProperties({ gender: 'm' }),
-    f: createDragonProperties({ gender: 'f' }),
+  props.data.parents = {
+    m: DragonBuilder.create({ gender: 'm' }),
+    f: DragonBuilder.create({ gender: 'f' }),
   };
-  props.data.parents = parents;
 }
 
 // deletes this node and ancestors

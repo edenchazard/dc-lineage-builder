@@ -24,10 +24,10 @@
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
 import { LineageConfig, LineageRoot } from '../../app/types';
-import { countGenerations } from '../../app/utils';
 
 import Dragon from './Dragon/Dragon.vue';
 import LineageGenerationCounter from './LineageGenerationCounter.vue';
+import Lineage from '../../app/dragon';
 
 const props = defineProps({
   root: {
@@ -47,8 +47,7 @@ const props = defineProps({
 });
 
 const generations = computed(() => {
-  if (props.root === null) return 0;
-  return countGenerations(props.root);
+  return props.root ? Lineage(props.root).generations() : 0;
 });
 </script>
 

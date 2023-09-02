@@ -16,14 +16,14 @@
 </template>
 <script setup lang="ts">
 import { computed, PropType } from 'vue';
-import { BreedEntry, Gender, PortraitData } from '../../app/types';
+import { BreedEntry, DragonGender, PortraitData } from '../../app/types';
 import { getBreedData, filterBreedTableByGender } from '../../app/utils';
 import { useAppStore } from '../../store/app';
 import BreedGrid from '../BreedFiltering/BreedGrid.vue';
 
 const props = defineProps({
   filterByGender: {
-    type: String as PropType<Gender>,
+    type: String as PropType<DragonGender>,
     required: true,
   },
 });

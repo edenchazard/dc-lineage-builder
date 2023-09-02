@@ -35,19 +35,20 @@
 <script setup lang="ts">
 import { onMounted, PropType, ref } from 'vue';
 import { verifyIntegrity, meetsSaveRequirements } from '../../app/validators';
-import { createLineageLink, forEveryDragon, makeError } from '../../app/utils';
+import { createLineageLink, makeError } from '../../app/utils';
 import { saveLineage } from '../../app/api';
 
 import Dialog from '../UI/Dialog.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
 import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
-import { DragonType, LineageRoot } from '../../app/types';
+import { DragonType, PartialLineageWithMetadata } from '../../app/types';
 import settings from '../../app/settings';
+import Lineage from '../../app/dragon';
 
 const props = defineProps({
   tree: {
-    type: Object as PropType<LineageRoot>,
+    type: Object as PropType<PartialLineageWithMetadata>,
     required: true,
   },
 });
@@ -69,14 +70,11 @@ onMounted(async () => {
   isLoadedAndOk.value = false;
 
   // todo but doesn't affect runtime
-  // @ts-ignore
-  const exportedTree = forEveryDragon(
-    props.tree,
-    (dragon) => delete dragon.selected,
-  );
+  const exportedTree = Lineage(props.tree).withoutMetadata();
 
-  // integrity check should never fail, but better to check anyway
+  // integrity check should never fail, but best to check anyway
   const integrity = verifyIntegrity(exportedTree);
+
   if (integrity.failed) {
     status.value.error(`Error saving lineage.<br />
         Integrity tests failed: ${makeError(integrity.failedTests)}`);

@@ -2,7 +2,7 @@
   <div>
     <DialogExport
       v-if="dialogs.showExportDialog"
-      :tree="tree"
+      :tree="appStore.activeTree"
       @close="dialogs.showExportDialog = false"
     />
     <DialogImport
@@ -12,7 +12,7 @@
     />
     <DialogGenerate
       v-if="dialogs.showGenerateDialog"
-      :tree="tree"
+      :tree="appStore.activeTree"
       @close="dialogs.showGenerateDialog = false"
     />
     <div
@@ -121,13 +121,14 @@
 <script setup lang="ts">
 import { computed, PropType, reactive, ref } from 'vue';
 import GLOBALS from '../../app/globals';
-import { forEveryDragon, filterEggGroups, filterTags } from '../../app/utils';
+import { filterEggGroups, filterTags } from '../../app/utils';
+import Lineage from '../../app/dragon';
 import { useAppStore } from '../../store/app';
 import {
   BreedEntry,
-  DragonType,
+  DragonTypeWithMetadata,
   LineageConfig,
-  LineageRoot,
+  PartialLineageWithMetadata,
   PortraitData,
 } from '../../app/types';
 import DialogExport from './DialogExport.vue';
@@ -254,7 +255,11 @@ const selectionActions = reactive<
   })),
 );
 const selectionOptions = reactive<
-  { label: string; key: keyof DragonType; criteria: string | number }[]
+  {
+    label: string;
+    key: keyof DragonTypeWithMetadata;
+    criteria: unknown;
+  }[]
 >([
   { label: 'All with code', key: 'display', criteria: 1 },
   { label: 'All with name', key: 'display', criteria: 0 },
@@ -267,11 +272,7 @@ const dialogs = reactive({
   showGenerateDialog: false,
 });
 
-const props = defineProps({
-  tree: {
-    type: Object as PropType<LineageRoot>,
-    required: true,
-  },
+defineProps({
   config: {
     type: Object as PropType<LineageConfig>,
     required: true,
@@ -286,20 +287,27 @@ const emit = defineEmits<{
   (e: 'displayCodes'): void;
   (e: 'randomizeLabels'): void;
   (e: 'deleteAncestors'): void;
-  (e: 'importTree', tree: LineageRoot): void;
+  (e: 'importTree', tree: PartialLineageWithMetadata): void;
   (e: 'changeBreed', value: string): void;
-  (e: 'selectCriteria', key: string, value: unknown): void;
-  (e: 'selectCriteria', predicate: (dragon: DragonType) => boolean): void;
+  (
+    e: 'selectCriteria',
+    key: keyof DragonTypeWithMetadata,
+    value: DragonTypeWithMetadata[typeof key],
+  ): void;
+  (
+    e: 'selectCriteria',
+    predicate: (dragon: DragonTypeWithMetadata) => boolean,
+  ): void;
   (e: 'fullscreen'): void;
   (e: 'undo'): void;
   (e: 'redo'): void;
 }>();
 
-const treeSelectedContains = (tree: LineageRoot) => {
+const treeSelectedContains = (tree: ReturnType<typeof Lineage>) => {
   let male = false,
     female = false;
 
-  forEveryDragon(tree, (dragon) => {
+  tree.every((dragon) => {
     if (!dragon.selected) return;
     if (dragon.gender === 'm') male = true;
     else if (dragon.gender === 'f') female = true;
@@ -320,10 +328,10 @@ const itemsSelected = computed(() => appStore.selectionCount);
 
 const availableBreeds = computed(() => {
   // no tree, ignore. prevents exception when switching routes
-  if (!props.tree || !itemsSelected.value) return [];
+  if (!itemsSelected.value) return [];
 
   // should we list males, females or both
-  const { male, female } = treeSelectedContains(props.tree);
+  const { male, female } = treeSelectedContains(appStore.lineage);
 
   const breedTable = GLOBALS.breeds.entire
     // filter the group
@@ -354,7 +362,7 @@ const availableBreeds = computed(() => {
   return breedTable.filter(filter).map((breed) => breed.name);
 });
 
-function importLineage(tree: LineageRoot) {
+function importLineage(tree: PartialLineageWithMetadata) {
   emit('importTree', tree);
 }
 

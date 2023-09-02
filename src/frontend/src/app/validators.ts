@@ -1,15 +1,17 @@
-import { isBreedInList, countGenerations, getBreedData } from './utils';
+import { isBreedInList, getBreedData } from './utils';
 import GLOBALS from './globals';
 import settings from './settings';
 import {
   DragonDisplay,
   DragonParents,
   DragonType,
-  Gender,
-  LineageRoot,
-  EmptyParents,
+  DragonGender,
+  MaybePartialLineageWithMetadata,
+  PartialLineage,
+  NoDragonParents,
 } from './types';
 import { createTester } from './minitester';
+import dragon from './dragon';
 
 const NAMEREGEXP = /^^[a-zA-Z0-9]([a-zA-Z0-9 '-]{1,32})[a-zA-Z0-9]$/;
 const CODEREGEXP = /^[a-zA-Z0-9]{4,5}$/;
@@ -39,11 +41,11 @@ function validateDisplay(value: DragonDisplay) {
   return value === 0 || value === 1;
 }
 
-function validateGender(value: Gender) {
+function validateGender(value: DragonGender) {
   return value === 'm' || value === 'f';
 }
 
-function hasEmptyParents(parents: DragonParents | EmptyParents) {
+function hasEmptyParents(parents: DragonParents | NoDragonParents) {
   return Object.keys(parents).length === 0;
 }
 
@@ -52,7 +54,7 @@ function validateBreed(breed: string) {
   return !!getBreedData(breed);
 }
 
-function hasBothParents(parents: DragonParents | EmptyParents) {
+function hasBothParents(parents: DragonParents | NoDragonParents) {
   if (Object.keys(parents).length === 2 && 'f' in parents && 'm' in parents) {
     //check the dragon objects for each parent actually match
     return parents.m.gender === 'm' && parents.f.gender === 'f';
@@ -94,7 +96,10 @@ function isLineageHash(str: string) {
     a lineage can be saved to the server.
     It assumes an integrity check has been run first.
 */
-function meetsSaveRequirements(root: LineageRoot, supressReasoning = false) {
+function meetsSaveRequirements(
+  root: MaybePartialLineageWithMetadata,
+  supressReasoning = false,
+) {
   const [tester, failedTests, context] = createTester(supressReasoning);
 
   // fetch ghosties 👻
@@ -125,7 +130,7 @@ function meetsSaveRequirements(root: LineageRoot, supressReasoning = false) {
   tester.begin();
 
   // gen count check
-  tester.runTest(genRange, countGenerations(root));
+  tester.runTest(genRange, dragon(root).generations());
 
   // If everything is ok generation wise,
   // then we can proceed to analysing the lineage
@@ -143,7 +148,7 @@ function meetsSaveRequirements(root: LineageRoot, supressReasoning = false) {
 // variable every phase and if it's false,
 // it means we failed a check somewhere and should stop
 // checking.
-function verifyIntegrity(root: LineageRoot, supressReasoning = false) {
+function verifyIntegrity(root: PartialLineage, supressReasoning = false) {
   const [tester, failedTests, context] = createTester(supressReasoning);
 
   // basic tests

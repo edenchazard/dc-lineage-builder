@@ -117,7 +117,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import { PortraitData, Gender } from '../app/types';
+import { PortraitData, DragonGender } from '../app/types';
 import GLOBALS from '../app/globals';
 import { createDragonProperties } from '../app/dragonBuilder';
 import { getBreedData } from '../app/utils';
@@ -155,7 +155,7 @@ function selectFemale(breed: PortraitData) {
   updateTree('f');
 }
 
-function updateTree(finalGenGender?: Gender) {
+function updateTree(finalGenGender?: DragonGender) {
   const createParents = (gen: number) => {
     const branch = {
       m: createDragonProperties({
@@ -177,7 +177,7 @@ function updateTree(finalGenGender?: Gender) {
 
   // The breed and gender of the final dragon (meaning) the highest gen
   // should always be the last selected
-  const final: { gender: Gender; breed: string } =
+  const final: { gender: DragonGender; breed: string } =
     finalGenGender === 'f'
       ? { gender: 'f', breed: femaleBreed.value }
       : // defaults to male
