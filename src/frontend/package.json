@@ -27,6 +27,7 @@
     "unique-names-generator": "^4.7.1",
     "vue": "^3.3.4",
     "vue-dragscroll": "^4.0.5",
+    "vue-a11y-dialog": "^1.1.2",
     "vue-router": "^4.1.6",
     "vue-virtual-collection": "^1.5.0"
   },

@@ -26,6 +26,7 @@
       <Feedback ref="status" />
     </div>
     <Lineage
+      class="builder"
       v-if="appStore.activeTree !== null"
       :root="appStore.activeTree"
       :config="config"
@@ -218,13 +219,16 @@ function selectBy(condition: (dragon: DragonType) => boolean) {
   align-items: stretch;
   flex-direction: column;
   display: flex;
-  gap: 0.5rem;
 
   &:fullscreen {
     background: var(--dc-background);
     height: 100vh !important;
     width: 100vh !important;
     overflow: auto;
+  }
+
+  & > .builder {
+    margin-top: 0.5rem;
   }
 }
 </style>

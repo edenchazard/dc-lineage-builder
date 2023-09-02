@@ -1,44 +1,49 @@
 <template>
-  <Dialog @close="emit('close')">
-    <template #header> Save lineage </template>
-    <template #body>
-      <Feedback
-        ref="status"
-        :global-settings="{ showDismiss: false }"
+  <Dialog
+    :id="id"
+    :open="open"
+    @close="emit('close')"
+  >
+    <template #title>Save lineage</template>
+    <Feedback
+      ref="status"
+      :global-settings="{ showDismiss: false }"
+    />
+    <div v-if="isLoadedAndOk">
+      <p>
+        To share this lineage with other people, copy and paste the link below.
+      </p>
+      <p>
+        Please note if this link is not viewed in 2 months, it will be deleted
+        from the server.
+      </p>
+      <Textbox
+        v-model="viewLink"
+        type="input"
+        placeholder="link"
+        :show-copy-button="true"
       />
-      <div v-if="isLoadedAndOk">
-        <p>
-          To share this lineage with other people, copy and paste the link
-          below.
-        </p>
-        <p>
-          Please note if this link is not viewed in 2 months, it will be deleted
-          from the server.
-        </p>
-        <Textbox
-          v-model="viewLink"
-          type="input"
-          placeholder="link"
-          :show-copy-button="true"
-        />
-      </div>
-      <div v-if="problemDragon">
-        The problem dragon is:
-        <DragonFormattingBlock :dragon="problemDragon" />
-      </div>
-    </template>
+    </div>
+    <div v-else-if="problemDragon">
+      The problem dragon is:
+      <DragonFormattingBlock :dragon="problemDragon" />
+    </div>
     <template #footer>
-      <button @click="emit('close')">Close</button>
+      <button
+        class="dialog-footer-button"
+        @click="emit('close')"
+      >
+        Close
+      </button>
     </template>
   </Dialog>
 </template>
 <script setup lang="ts">
-import { onMounted, PropType, ref } from 'vue';
+import { onMounted, onUpdated, PropType, ref, watch } from 'vue';
 import { verifyIntegrity, meetsSaveRequirements } from '../../app/validators';
 import { createLineageLink, forEveryDragon, makeError } from '../../app/utils';
 import { saveLineage } from '../../app/api';
-
-import Dialog from '../UI/Dialog.vue';
+import Dialog from './DialogBase.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
 import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
@@ -46,6 +51,14 @@ import { DragonType, LineageRoot } from '../../app/types';
 import settings from '../../app/settings';
 
 const props = defineProps({
+  open: {
+    type: Boolean,
+    required: true,
+  },
+  id: {
+    type: String,
+    required: true,
+  },
   tree: {
     type: Object as PropType<LineageRoot>,
     required: true,
@@ -62,7 +75,10 @@ const status = ref<InstanceType<typeof Feedback>>();
 
 const viewLink = ref('');
 
-onMounted(async () => {
+watch(isLoadedAndOk, () => console.log(isLoadedAndOk.value));
+watch(problemDragon, () => console.log(problemDragon.value));
+
+onUpdated(async () => {
   if (!status.value) return;
 
   // reset to false and change when ready
