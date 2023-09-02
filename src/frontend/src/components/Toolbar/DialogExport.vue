@@ -32,18 +32,18 @@
 </template>
 <script setup lang="ts">
 import { onMounted, PropType, ref } from 'vue';
-import { DragonType, LineageRoot } from '../../app/types';
-import { forEveryDragon } from '../../app/utils';
+import { DragonType, PartialLineageWithMetadata } from '../../app/types';
 import { verifyIntegrity } from '../../app/validators';
 
 import Dialog from '../UI/Dialog.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
 import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
+import Lineage from '../../app/dragon';
 
 const props = defineProps({
   tree: {
-    type: Object as PropType<LineageRoot>,
+    type: Object as PropType<PartialLineageWithMetadata>,
     required: true,
   },
 });
@@ -63,14 +63,7 @@ onMounted(() => {
   // reset to false and change if we encounter problems later
   isError.value = false;
 
-  // todo but doesn't affect runtime
-  // @ts-ignore
-  const exportedTree = forEveryDragon(
-    props.tree,
-    (dragon) => delete dragon.selected,
-  );
-
-  console.log(exportedTree);
+  const exportedTree = Lineage(props.tree).withoutMetadata();
   const { failed, failedTests, context } = verifyIntegrity(exportedTree);
 
   if (failed) {

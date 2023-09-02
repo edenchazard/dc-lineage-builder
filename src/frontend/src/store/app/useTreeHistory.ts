@@ -1,8 +1,11 @@
 import { useDebouncedRefHistory } from '@vueuse/core';
 import { computed, Ref } from 'vue';
-import { LineageRoot } from '../../app/types';
+import { PartialLineageWithMetadata } from '../../app/types';
 
-function useTreeHistory(activeTree: Ref<LineageRoot | null>, capacity = 5) {
+function useTreeHistory(
+  activeTree: Ref<PartialLineageWithMetadata>,
+  capacity = 5,
+) {
   // track history of the tree
   const history = useDebouncedRefHistory(activeTree, {
     deep: true,

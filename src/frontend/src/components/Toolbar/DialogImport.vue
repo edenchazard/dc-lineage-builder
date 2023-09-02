@@ -26,18 +26,17 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-
 import { verifyIntegrity } from '../../app/validators';
-import { forEveryDragon, makeError } from '../../app/utils';
-import { LineageRoot } from '../../app/types';
 
 import Dialog from '../UI/Dialog.vue';
 import Textbox from '../UI/Textbox.vue';
 import Feedback from '../UI/Feedback.vue';
+import Lineage from '../../app/dragon';
+import { DragonTypeWithMetaData, PartialLineage } from '../../app/types';
 
 const emit = defineEmits<{
   (e: 'close'): void;
-  (e: 'onImport', tree: LineageRoot): void;
+  (e: 'onImport', tree: PartialLineage<DragonTypeWithMetaData>): void;
 }>();
 
 const file = ref('');
@@ -47,8 +46,8 @@ function importLineage() {
   if (!status.value) return;
 
   try {
-    const importedTree = JSON.parse(file.value.trim());
-    const { failed, failedTests } = verifyIntegrity(importedTree);
+    const importedTree = Lineage(file.value, true);
+    const { failed, failedTests } = verifyIntegrity(importedTree.raw());
 
     if (failed) {
       status.value.error(
@@ -57,10 +56,7 @@ function importLineage() {
       return;
     }
 
-    // add selection data
-    forEveryDragon(importedTree, (dragon) => (dragon.selected = false));
-
-    emit('onImport', importedTree);
+    emit('onImport', importedTree.raw());
     emit('close');
   } catch {
     status.value.error(

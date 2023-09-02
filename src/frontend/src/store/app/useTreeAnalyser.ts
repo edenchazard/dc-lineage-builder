@@ -1,8 +1,8 @@
 import { ref, Ref, watch } from 'vue';
 import GLOBALS from '../../app/globals';
 import { LineageRoot } from '../../app/types';
-import { forEveryDragon } from '../../app/utils';
 import { useTreeHistory } from './useTreeHistory';
+import dragon from '../../app/dragon';
 /*
     basically a way we can:
     - calculate used breeds
@@ -30,7 +30,7 @@ function useTreeAnalyser(activeTree: Ref<LineageRoot | null>, capacity = 5) {
       // selection count
       let selected = 0;
 
-      forEveryDragon(activeTree.value, (dragon) => {
+      dragon(activeTree.value).every((dragon) => {
         breeds.set(dragon.breed, (breeds.get(dragon.breed) ?? 0) + 1);
 
         if (dragon.selected) selected++;

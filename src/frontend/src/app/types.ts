@@ -16,27 +16,52 @@ const eggGroups = [
 ] as const;
 type FilterTag = (typeof filterTags)[number];
 type EggGroupTag = (typeof eggGroups)[number];
+
 interface TagListOption {
   name: string;
   active: boolean;
 }
 
-interface DragonType {
-  code: string;
-  name: string;
-  parents: DragonParents | EmptyParents;
-  gender: Gender;
-  breed: string;
-  //disabled: Boolean,
-  display: DragonDisplay;
+//= Record<never,never>
+
+interface DragonParents {
+  m?: DragonType;
+  f?: DragonType;
+}
+
+type NoDragonParents = Record<string, never>;
+
+interface DragonMetadata {
   selected: boolean;
 }
-interface DragonParents {
-  m: DragonType;
-  f: DragonType;
+
+interface DragonType {
+  [x: string]: unknown;
+  code: string;
+  name: string;
+  parents: DragonParents;
+  gender: DragonGender;
+  breed: string;
+  display: DragonDisplay;
 }
-type EmptyParents = Record<string, never>;
-type Gender = 'm' | 'f';
+
+type DragonTypeWithMetadata = DragonType &
+  DragonMetadata & {
+    parents: DragonParents & {
+      m?: DragonTypeWithMetadata;
+      f?: DragonTypeWithMetadata;
+    };
+  };
+
+type PartialLineage = DragonType;
+type PartialLineageWithMetadata = DragonTypeWithMetadata;
+
+type MaybePartialLineageWithMetadata =
+  | PartialLineage
+  | PartialLineageWithMetadata;
+
+type DragonGender = 'm' | 'f';
+
 type DragonDisplay = 0 | 1;
 
 interface BreedEntry {
@@ -46,7 +71,7 @@ interface BreedEntry {
   genderOnly: GenderOnly;
   metaData: MetaData;
 }
-type GenderOnly = Gender | false;
+type GenderOnly = DragonGender | false;
 interface MetaData {
   group: EggGroupTag;
   tags: FilterTag[];
@@ -60,9 +85,6 @@ interface PortraitData {
   metaData: MetaData;
 }
 
-type LineageRoot = DragonType;
-type PartialLineage = DragonType | LineageRoot;
-
 interface LineageConfig {
   showLabels: boolean;
   showInterface: boolean;
@@ -71,20 +93,23 @@ interface LineageConfig {
 
 export type {
   GenderOnly,
+  DragonMetadata,
   DragonParents,
-  EmptyParents,
+  NoDragonParents,
+  DragonGender,
+  DragonDisplay,
   DragonType,
+  DragonTypeWithMetadata,
+  PartialLineage,
+  PartialLineageWithMetadata,
+  MaybePartialLineageWithMetadata,
   TagListOption,
   BreedEntry,
-  Gender,
   MetaData,
-  LineageRoot,
   LineageConfig,
-  DragonDisplay,
   PortraitData,
   FilterTag,
   EggGroupTag,
-  PartialLineage,
 };
 
 export { filterTags, eggGroups };

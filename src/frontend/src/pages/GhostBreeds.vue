@@ -42,7 +42,7 @@
             title="Breed name must be alphanumeric and 1-32 characters long."
             :pattern="BREEDNAMEREGEXP.toString().slice(2, -2)"
           />
-          <span class="field-label">Gender availability</span>
+          <span class="field-label">DragonGender availability</span>
           <div class="column">
             <label
               ><input
@@ -120,14 +120,14 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import { BreedEntry, Gender } from '../app/types';
+import { BreedEntry, DragonGender } from '../app/types';
 import { addBreed } from '../app/utils';
 import settings from '../app/settings';
 import GhostBreedUpload from '../components/GhostBreedUpload.vue';
 import Feedback from '../components/UI/Feedback.vue';
 import { BREEDNAMEREGEXP } from '../app/validators';
 
-type Availability = 'b' | Gender;
+type Availability = 'b' | DragonGender;
 
 const name = ref('Ghost Breed');
 // b for both
@@ -143,7 +143,7 @@ watch(genderAvailability, () => {
   maleBase64.value = femaleBase64.value = '';
 });
 
-function portraitSelected(gender: Gender, base64: string) {
+function portraitSelected(gender: DragonGender, base64: string) {
   if (gender === 'm') maleBase64.value = base64;
   else if (gender === 'f') femaleBase64.value = base64;
 }

@@ -1,16 +1,16 @@
 import GLOBALS from './globals';
 import {
   BreedEntry,
-  DragonType,
+  DragonTypeWithMetadata,
   FilterTag,
-  Gender,
+  DragonGender,
   EggGroupTag,
   PortraitData,
-  PartialLineage,
+  MaybePartialLineageWithMetadata,
 } from './types';
 import { BREEDNAMEREGEXP } from './validators';
 
-function validGenderForBreed(gender: Gender, breed: BreedEntry): boolean {
+function validGenderForBreed(gender: DragonGender, breed: BreedEntry): boolean {
   // if the genderonly attribute is not false,
   // it means the breed is male only or female only
   // and will be specified in the value
@@ -35,7 +35,7 @@ export function breedEntryToPortrait(
   gender: 'male' | 'female',
 ) {
   if (!breed[gender])
-    throw new Error(`Gender isn't available for ${breed.name}`);
+    throw new Error(`DragonGender isn't available for ${breed.name}`);
 
   const data: PortraitData = {
     name: breed.name,
@@ -47,7 +47,7 @@ export function breedEntryToPortrait(
 }
 
 // Expands m or f to male/female
-export function expandGender(gender: Gender) {
+export function expandGender(gender: DragonGender) {
   return gender === 'm' ? 'male' : 'female';
 }
 
@@ -55,74 +55,29 @@ export function portraitToBreedEntry(data: PortraitData) {
   return getBreedData(data.name);
 }
 
-export function getTable(gender: Gender): PortraitData[] {
+export function getTable(gender: DragonGender): PortraitData[] {
   return gender === 'm' ? GLOBALS.breeds.males : GLOBALS.breeds.females;
 }
 
-export function hasParents(dragon: DragonType) {
-  return 'f' in dragon.parents && 'm' in dragon.parents;
+export function hasParents(
+  dragon: MaybePartialLineageWithMetadata,
+): dragon is DragonTypeWithMetadata & {
+  parents: { m: DragonTypeWithMetadata; f: DragonTypeWithMetadata };
+} {
+  return (
+    typeof dragon.parents.f === 'object' && typeof dragon.parents.m === 'object'
+  );
 }
 // Returns a list of breed entries filtered by gender
-export function filterBreedTableByGender(breeds: BreedEntry[], gender: Gender) {
+export function filterBreedTableByGender(
+  breeds: BreedEntry[],
+  gender: DragonGender,
+) {
   const expandedGender = expandGender(gender);
 
   return breeds
     .filter((breed) => validGenderForBreed(gender, breed))
     .map((breed) => breedEntryToPortrait(breed, expandedGender));
-}
-
-export function countGenerations(root: PartialLineage): number {
-  // find the furthest gen back by scanning the tree
-  let max = 1;
-  const scan = (dragon: DragonType, x: number) => {
-    if (hasParents(dragon)) {
-      scan(dragon.parents.m, x + 1);
-      scan(dragon.parents.f, x + 1);
-    }
-    // end of branch
-    else if (x > max) max = x;
-  };
-  scan(root, 1);
-  return max;
-}
-
-export function countDragons(root: PartialLineage) {
-  let count = 0;
-  forEveryDragon(root, () => count++);
-
-  return count;
-}
-
-export function forEveryDragon(
-  root: PartialLineage,
-  callback: (Dragon: DragonType) => void,
-) {
-  // for performance reasons, we create a completely new clone,
-  // mutate and return it. Trees with vue reactive proxies
-  // have a massive performance cost because we touch so many properties.
-  const raw = deepClone(root);
-  const analyse = (dragon: DragonType) => {
-    callback(dragon);
-    if (hasParents(dragon)) {
-      analyse(dragon.parents.f);
-      analyse(dragon.parents.m);
-    }
-  };
-
-  analyse(raw);
-  return raw;
-}
-
-// count breeds in the tree recursively
-export function countBreeds(root: PartialLineage) {
-  const breeds = new Map<string, number>();
-  forEveryDragon(root, (dragon) =>
-    breeds.set(dragon.breed, (breeds.get(dragon.breed) ?? 0) + 1),
-  );
-
-  // exclude placeholder
-  breeds.delete(GLOBALS.placeholder.name);
-  return breeds;
 }
 
 export function isPlaceholder(str: string) {
@@ -174,15 +129,6 @@ export function getDCTime() {
 
 export function deepClone<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj));
-}
-
-export function countSelected(root: PartialLineage) {
-  let count = 0;
-  forEveryDragon(root, async (dragon) => {
-    if (dragon.selected) count++;
-  });
-
-  return count;
 }
 
 // These two functions return filter functions for the group and the tags when
