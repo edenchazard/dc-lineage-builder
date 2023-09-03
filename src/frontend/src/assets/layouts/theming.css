@@ -163,16 +163,16 @@
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: #fff;
   --ui-builder-toolbar-bg: var(--ui-header-bg);
-  /* --ui-builder-toolbar-selection-group-bg: #44300b; */
+  --ui-builder-toolbar-selection-group-bg: rgba(0,0,0,0.25);
   --ui-builder-toolbar-selection-group-fg: #fff;
-  --ui-builder-toolbar-selection-group-border: 1px dashed #44300b59;
+  /* --ui-builder-toolbar-selection-group-border: 1px dashed #44300b59; */
   --ui-builder-toolbar-selection-scrolls: hsl(24deg 100% 7.1% / 40%);
   /* --ui-builder-toolbar-selection-shadows: #000; */
   --ui-builder-toolbar-selection-count-bg: var(--dc-colour-3);
   --ui-builder-toolbar-selection-count-fg: #fff;
   --ui-builder-toolbar-button-bg: transparent;
   --ui-builder-toolbar-button-fg: var(--dc-colour-1);
-  --ui-builder-toolbar-menu-bg: #2b303a;
+  --ui-builder-toolbar-menu-bg: #222;
   --ui-builder-toolbar-menu-fg: #fff;
   --ui-builder-tile-action-color: rgb(94, 94, 94, 0.5);
   --ui-builder-tile-selected-outline: 1px solid #93a1b3;
@@ -187,7 +187,7 @@
 
   --ui-header-bg: url(./portal2-light/darktile.png) repeat;
   --ui-header-fg: #fff;
-  --ui-header-mobile-border: 1px solid #fff;
+  --ui-header-mobile-border: 1px solid var(--dc-colour-7);
   --ui-content-fg: #000;
   --ui-footer-bg: var(--dc-background);
   --ui-footer-fg: #000;
@@ -212,7 +212,7 @@
 
   &#top {
     box-shadow: var(--shading);
-    z-index: 1;
+    z-index: 999;
     font:
       700 1rem/1rem 'DIN',
       'Arial',
@@ -289,7 +289,7 @@
     }
 
     & .buttons {
-      padding: 0.3rem;
+      padding: 0.5rem;
     }
 
     & select {
@@ -299,6 +299,15 @@
     & .group + .group {
       box-shadow: 1px 0 3px var(--tile-shade) inset, -1px 0 3px var(--tile-shade);
     }
+
+    & .legend {
+      margin: 0 0.5rem;
+      border-radius: 5px 5px 0 0;
+    }
+  }
+
+  & .tile-button:hover {
+    color: #000;
   }
 
   @media (min-width: 86.5em) {
@@ -451,6 +460,8 @@
   --ui-builder-toolbar-selection-group-bg: var(--semi-black);
   --ui-builder-tile-selected-bg: var(--dc-colour-3);
   --ui-builder-tile-selected-outline: 1px solid var(--dc-colour-4);
+  --ui-builder-toolbar-selection-count-bg: var(--dc-colour-3);
+  --ui-builder-toolbar-selection-count-fg: #000;
 
   --ui-header-bg: #000;
   --ui-footer-bg: #000;
@@ -466,6 +477,8 @@
       'Arial',
       sans-serif;
     text-transform: uppercase;
+    box-shadow: 0 3px 5px var(--semi-black);
+    z-index: 999;
 
     & a:not(#site-title-link) {
       color: var(--dc-colour-7);
@@ -542,7 +555,7 @@
   }
 
   & button.tag-active {
-    background-color: var(--dc-colour-4);
+    background-color: var(--dc-colour-3);
   }
 
   & .toolbar {
@@ -553,7 +566,7 @@
       background-color: var(--semi-black);
       padding: 0.3rem;
       border-radius: 10px;
-      margin-right: 0.5rem;
+      margin: 0 0.5rem;
     }
 
     & .selection-scrollable {
@@ -572,6 +585,14 @@
         border-radius: 0 0 10px 10px;
       }
     }
+  }
+
+  & .tile-button:hover {
+    color: #fff;
+  }
+
+  & span.selected {
+    outline-offset: -1px;
   }
 
   @media (min-width: 86.5em) {
