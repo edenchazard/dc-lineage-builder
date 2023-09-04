@@ -5,12 +5,20 @@
       :key="label"
       :to="url"
     >
-      {{ label }}
+      <span class="link-text">
+        {{ label }}
+      </span>
     </RouterLink>
-    <a href="https://chazza.me/dc/tools">More tools</a>
-    <a href="https://dragcave.net/"
-      >Dragcave.net
-      <FontAwesomeIcon icon="external-link" />
+    <a href="https://chazza.me/dc/tools">
+      <span class="link-text">
+        More tools
+      </span>
+    </a>
+    <a href="https://dragcave.net/">
+      <span class="link-text">
+        Dragcave.net
+        <FontAwesomeIcon icon="external-link" />
+      </span>
     </a>
   </nav>
 </template>
