@@ -45,6 +45,10 @@ const emit = defineEmits<{
     padding: 0;
     margin: 0;
   }
+
+  &:hover {
+    color: var(--ui-builder-tile-action-hover-color, inherit);
+  }
 }
 </style>
 
