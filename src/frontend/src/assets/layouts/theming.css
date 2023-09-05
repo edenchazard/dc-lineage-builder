@@ -77,6 +77,13 @@
 
   --ui-focus-colour: rgb(0 0 0 / 50%);
 
+  --dialog-header-bg: var(--dc-colour-7);
+  /* --dialog-header-fg:
+  --dialog-header-font:
+  --dialog-header-closebutton-bg:
+  --dialog-body-bg:
+  --dialog-body-fg: */
+
   font:
     0.875rem / 1.225rem 'PT Serif',
     'Times New Roman',
