@@ -163,9 +163,12 @@ const exposeMethods = {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  background: #44300b;
-  color: #fff;
-  border-radius: 0.3rem 0.3rem 0 0;
+  /* background: #44300b; */
+  background: var(--dialog-header-bg);
+  /* color: #fff; */
+  color: var(--dialog-header-fg);
+  font: var(--dialog-header-font);
+  /* border-radius: 0.3rem 0.3rem 0 0; */
   padding: 0.5rem 1rem;
 }
 
@@ -193,20 +196,23 @@ const exposeMethods = {
 
     &.close-button {
       border: none;
-      background: lightcoral;
+      /* background: lightcoral; */
+      background: var(--dialog-header-closebutton-bg);
       color: #fff;
     }
   }
 }
 
 .dialog-main {
-  background: #fff;
+  /* background: #fff; */
+  background: var(--dialog-body-bg);
+  color: var(--dialog-body-fg);
 }
 
 .dialog-footer {
   text-align: right;
-  background: #fff;
-  border-radius: 0 0 0.3rem 0.3rem;
+  background: var(--dialog-body-bg);
+  /* border-radius: 0 0 0.3rem 0.3rem; */
   padding: 0.5rem;
 
   &.dialog-footer-button {
