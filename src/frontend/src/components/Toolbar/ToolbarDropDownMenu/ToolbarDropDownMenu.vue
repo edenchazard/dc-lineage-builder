@@ -129,6 +129,7 @@ function navigateMenu(e: KeyboardEvent) {
   z-index: 50;
   box-shadow: 0 0 4px #000;
   border-radius: 5px;
+  overflow: hidden;
 }
 .menu:deep(.button) {
   border-bottom: 1px solid var(--builderControlFG);

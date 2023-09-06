@@ -20,10 +20,6 @@
   font-style: normal;
 }
 
-& .menu {
-  overflow: hidden;
-}
-
 .skin-default {
   --dc-colour-1: #ebdbba;
   --dc-colour-2: #44300b;
@@ -77,15 +73,17 @@
 
   --ui-focus-colour: rgb(0 0 0 / 50%);
 
-  --dialog-header-bg: var(--dc-colour-7);
-  /* --dialog-header-fg:
-  --dialog-header-font:
-  --dialog-header-closebutton-bg:
-  --dialog-body-bg:
-  --dialog-body-fg: */
+  --dialog-header-bg: var(--dc-colour-2);
+  --dialog-header-fg: #fff;
+  --dialog-header-font: 0.875rem 'fq';
+  --dialog-header-closebutton-bg: var(--dc-colour-8);
+  --dialog-body-bg: var(--dc-background);
+  --dialog-body-fg: #000;
+  --dialog-footer-button-bg: var(--dc-colour-2);
+  --dialog-footer-button-fg: #fff;
 
   font:
-    0.875rem / 1.225rem 'PT Serif',
+    0.875rem / 1.225rem  'PT Serif',
     'Times New Roman',
     'Times',
     serif;
@@ -215,9 +213,23 @@
   --tile-shade: rgba(0,0,0,0.4);
   --shading: 0 3px 5px var(--semi-black), inset 0 0 5px var(--semi-black);
 
+  --dialog-header-bg: var(--ui-header-bg);
+  --dialog-header-fg: var(--dc-colour-1);
+  --dialog-header-font: 0.875rem 'din';
+  --dialog-header-closebutton-bg: var(--dc-colour-4);
+  --dialog-body-bg: url(./portal2-light/lighttile.png) repeat;
+  --dialog-body-fg: #000;
+  --dialog-footer-button-bg: var(--dc-colour-4);
+  --dialog-footer-button-fg: #fff;
+
   font:
     0.875rem / normal 'Arial',
     sans-serif;
+
+  & .dialog-header {
+    box-shadow: inset 0 0 5px var(--semi-black);
+    text-transform: uppercase;
+  }
 
   &#content, &#bottom {
     background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png) repeat;
@@ -410,12 +422,33 @@
 
   --ui-focus-colour: rgba(193, 198, 255, 0.8);
 
+  --dialog-header-bg: var(--dc-colour-4);
+  --dialog-header-fg: #fff;
+  --dialog-header-font: 0.875rem Roboto, Helvetica, Arial, sans-serif;
+  --dialog-header-closebutton-bg: var(--dc-colour-9);
+  --dialog-body-bg: var(--dc-colour-3);
+  --dialog-body-fg: #fff;
+  --dialog-footer-button-bg: var(--dc-colour-9);
+  --dialog-footer-button-fg: #fff;
+
   font:
     0.875rem/1.138rem Roboto,
     Helvetica,
     Arial,
     sans-serif;
   color: var(-dc-colour-5);
+
+  & .dialog-header {
+    border-radius: 5px 5px 0 0;
+  }
+
+  & .dialog {
+    border-radius: 5px;
+  }
+
+  & .dialog-footer {
+    border-radius: 0 0 5px 5px;
+  }
 
   &#top {
     color: var(--dc-colour-5);
@@ -501,9 +534,32 @@
   --ui-footer-bg: #000;
   --ui-footer-fg: #fff;
 
+  --dialog-header-bg: #000;
+  --dialog-header-fg: #fff;
+  --dialog-header-font: 0.875rem 'din';
+  --dialog-header-closebutton-bg: var(--dc-colour-4);
+  --dialog-body-bg: rgba(0,0,0,0.75);
+  --dialog-body-fg: #fff;
+  --dialog-footer-button-bg: var(--dc-colour-4);
+  --dialog-footer-button-fg: #fff;
+
   font:
     0.875rem / normal 'Arial',
     sans-serif;
+
+    & .dialog-header {
+      text-transform: uppercase;
+      border-radius: 5px 5px 0 0;
+    }
+
+    & .dialog {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 5px;
+    }
+
+    & .dialog-footer {
+      border-radius: 0 0 5px 5px;
+    }
 
   &#top {
     font:
