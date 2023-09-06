@@ -25,10 +25,18 @@
         <font-awesome-icon icon="copy" />
         <span
           v-show="tooltip"
-          class="tooltip"
-          >{{ tooltip }}</span
+          :class="tooltip ? 'tooltip sliding-tooltip' : 'tooltip'"
+          >
+            <font-awesome-icon icon="check" />
+          </span
         >
       </button>
+      <span
+          v-show="tooltip"
+          :class="tooltip && 'tooltip-copy-success'"
+        >
+          {{ tooltip }}
+        </span>
     </span>
   </div>
 </template>
@@ -47,7 +55,7 @@ const props = defineProps({
   },
   tooltipTimeout: {
     type: Number,
-    default: 1000,
+    default: 2000,
   },
   showCopyButton: {
     type: Boolean,
@@ -90,38 +98,116 @@ div {
 }
 .text {
   flex: 1;
-  padding: 5px;
-  padding-right: 25px;
+  padding: 10px;
+  padding-right: 35px;
+  font-family: monospace;
 }
 
 span:has(.copy-button) {
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: 7px;
+  top: 7px;
 }
 .copy-button {
-  border: 0px none;
+  border: 0 none;
+  width: 25px;
+  height: 25px;
   /* padding: 5px; */
-  background: inherit;
-  color: var(--colourFG);
+  /* background: inherit; */
+  /* color: var(--colourFG); */
+  background: black;
+  color: white;
+  border-radius: 5px;
+  overflow: hidden;
   position: relative;
   > svg {
     margin: 0;
+    padding: 0;
   }
 }
 .tooltip {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  background: var(--colourFG);
-  color: var(--colourBG);
-  padding: 5px;
-  right: 0px;
-  top: -39px;
+  /* background: var(--colourFG);
+  color: var(--colourBG); */
+  background: crimson;
+  color: white;
+  width: 25px;
+  height: 25px;
+  right: 0;
+  top: 0;
+  /* border-radius: 5px; */
+  > svg {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    top: -30px;
+    opacity: 0;
+  }
+  25% {
+    top: -40px;
+    opacity: 1;
+  }
+  75% {
+    top: -40px;
+    opacity: 1;
+  }
+  100% {
+    top: -50px;
+    opacity: 0;
+  }
+}
+
+.tooltip-copy-success {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  &::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    /* border-right: 5px solid transparent; */
+    border-top: 8px solid black;
+    bottom: -8px;
+    right: 12px;
+  }
+  animation: floatUp 2s ease-in-out;
+}
+
+
+@keyframes slideUp {
+  0% {
+    top: 25px;
+  }
+  25% {
+    top: 0;
+  }
+  75% {
+    top: 0;
+  }
+  100% {
+    top: -25px;
+  }
+}
+.sliding-tooltip {
+  animation: slideUp 2s ease-in-out;
 }
 .copy-button:hover {
   cursor: pointer;
 }
-.tooltip:after {
+/* .tooltip:after {
   content: '';
   display: block;
   position: absolute;
@@ -131,5 +217,5 @@ span:has(.copy-button) {
   border-width: 10px;
   border-style: solid;
   border-color: var(--colourFG) transparent transparent transparent;
-}
+} */
 </style>
