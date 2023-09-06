@@ -218,4 +218,10 @@ span:has(.copy-button) {
   border-style: solid;
   border-color: var(--colourFG) transparent transparent transparent;
 } */
+
+@media (prefers-reduced-motion) {
+  .sliding-tooltip, .tooltip-copy-success {
+    animation: none;
+  }
+}
 </style>
