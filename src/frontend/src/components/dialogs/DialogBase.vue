@@ -149,12 +149,13 @@ const exposeMethods = {
       transition:
         transform 0.5s linear 0.5s,
         opacity 0.5s linear 0.5s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.5);
     }
   }
 }
 .dialog-header,
 .dialog-main {
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 .dialog-header {
@@ -178,7 +179,7 @@ const exposeMethods = {
 }
 
 .dialog-buttons {
-  right: 0;
+  right: 5px;
   position: absolute;
   top: -1.5rem;
 
@@ -215,12 +216,14 @@ const exposeMethods = {
   /* border-radius: 0 0 0.3rem 0.3rem; */
   padding: 0.5rem;
 
-  &.dialog-footer-button {
+  & .dialog-footer-button {
     padding: 0.5rem 1rem;
-    background: #44300b;
+    /* background: #44300b; */
+    background: var(--dialog-footer-button-bg);
     border: none;
-    color: #fff;
-    border-radius: 0.3rem;
+    /* color: #fff; */
+    color: var(--dialog-footer-button-fg);
+    /* border-radius: 0.3rem; */
   }
 }
 

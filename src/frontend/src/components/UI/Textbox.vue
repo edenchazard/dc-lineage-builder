@@ -2,7 +2,7 @@
   <div>
     <input
       v-if="type === 'input'"
-      class="text"
+      class="text text-to-copy"
       type="text"
       v-bind="$attrs"
       :value="modelValue"
@@ -10,7 +10,7 @@
     />
     <textarea
       v-else-if="type === 'textarea'"
-      class="text"
+      class="text text-to-copy"
       v-bind="$attrs"
       :value="modelValue"
       @input="(e) => update((e.target as HTMLTextAreaElement).value)"
@@ -22,7 +22,7 @@
         type="button"
         @click="copy"
       >
-        <font-awesome-icon icon="copy" /> Copy
+        <font-awesome-icon icon="copy" />
         <span
           v-show="tooltip"
           class="tooltip"
@@ -85,15 +85,29 @@ div {
   display: flex;
   border-radius: 5px;
   align-items: center;
+  width: 100%;
+  position: relative;
 }
 .text {
   flex: 1;
+  padding: 5px;
+  padding-right: 25px;
+}
+
+span:has(.copy-button) {
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 .copy-button {
   border: 0px none;
+  /* padding: 5px; */
   background: inherit;
   color: var(--colourFG);
   position: relative;
+  > svg {
+    margin: 0;
+  }
 }
 .tooltip {
   display: block;

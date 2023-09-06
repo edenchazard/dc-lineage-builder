@@ -1,5 +1,5 @@
 <template>
-  <div id="dialogs"></div>
+  <div id="dialogs" :class="skinStore.activeSkin"></div>
   <Header :class="skinStore.activeSkin" />
   <main
     id="content"
