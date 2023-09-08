@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="text-box">
     <input
       v-if="type === 'input'"
-      class="text text-to-copy"
+      class="text interactive"
       type="text"
       v-bind="$attrs"
       :value="modelValue"
@@ -10,38 +10,51 @@
     />
     <textarea
       v-else-if="type === 'textarea'"
-      class="text text-to-copy"
+      class="text interactive"
       v-bind="$attrs"
       :value="modelValue"
       @input="(e) => update((e.target as HTMLTextAreaElement).value)"
     >
     </textarea>
-    <span v-if="showCopyButton">
+    <template v-if="showCopyButton">
       <button
-        class="copy-button"
+        title="Copy text"
+        class="copy pointer"
+        :class="{
+          success: tooltipState && showTooltip,
+          fail: !tooltipState && showTooltip,
+          visible: tooltipState,
+        }"
         type="button"
         @click="copy"
       >
-        <font-awesome-icon icon="copy" />
-        <span
-          v-show="tooltip"
-          :class="tooltip ? 'tooltip sliding-tooltip' : 'tooltip'"
-          >
-            <font-awesome-icon icon="check" />
-          </span
-        >
+        <FontAwesomeIcon
+          icon="copy"
+          class="icon"
+        />
       </button>
       <span
-          v-show="tooltip"
-          :class="tooltip && 'tooltip-copy-success'"
-        >
-          {{ tooltip }}
-        </span>
-    </span>
+        v-if="showTooltip"
+        class="tooltip"
+        :class="{
+          success: tooltipState && showTooltip,
+          fail: !tooltipState && showTooltip,
+          visible: tooltipState,
+        }"
+      >
+        {{ tooltipState ? 'Copied!' : 'Error :(' }}
+      </span>
+    </template>
   </div>
 </template>
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { PropType, computed, ref } from 'vue';
+import { debounce } from '../../app/utils';
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const props = defineProps({
   modelValue: {
@@ -62,6 +75,7 @@ const props = defineProps({
     default: false,
   },
 });
+const timeout = computed(() => props.tooltipTimeout);
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void;
@@ -69,159 +83,148 @@ const emit = defineEmits<{
   (e: 'copyFail'): void;
 }>();
 
-const tooltip = ref<null | string>(null);
+const tooltipState = ref<boolean>(false);
+const showTooltip = ref<boolean>(false);
 
 function update(newValue: string) {
   emit('update:modelValue', newValue);
 }
 
+const resetTooltip = debounce(() => {
+  showTooltip.value = false;
+  tooltipState.value = false;
+}, timeout.value);
+
 async function copy() {
+  showTooltip.value = true;
+  resetTooltip();
   try {
     await navigator.clipboard.writeText(props.modelValue);
-    tooltip.value = 'Copied!';
+    tooltipState.value = true;
     emit('copySuccess');
   } catch (ex) {
-    tooltip.value = 'Error copying';
+    tooltipState.value = false;
     emit('copyFail');
   }
-
-  setTimeout(() => (tooltip.value = null), props.tooltipTimeout);
 }
 </script>
 <style scoped>
-div {
-  display: flex;
-  border-radius: 5px;
-  align-items: center;
-  width: 100%;
+.text-box {
   position: relative;
 }
 .text {
-  flex: 1;
-  padding: 10px;
-  padding-right: 35px;
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: 2.2rem;
   font-family: monospace;
 }
 
-span:has(.copy-button) {
+.copy {
   position: absolute;
-  right: 7px;
-  top: 7px;
-}
-.copy-button {
+  right: 0.2rem;
+  top: 0.2rem;
   border: 0 none;
-  width: 25px;
-  height: 25px;
-  /* padding: 5px; */
-  /* background: inherit; */
-  /* color: var(--colourFG); */
-  background: black;
-  color: white;
-  border-radius: 5px;
-  overflow: hidden;
-  position: relative;
-  > svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: inherit;
+  border-radius: 0.4rem;
+  background: transparent;
+
+  &.visible {
+    color: #ffffff00;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    transform: scale(0);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      transform 0.3s,
+      color 0.32s 0.3s;
+    background: white;
+    color: #ffffff00;
+  }
+
+  &.success::before {
+    content: '✔';
+    transform: scale(1);
+    color: var(--fg);
+    background: var(--bg);
+  }
+
+  &.fail::before {
+    content: '✖';
+    transform: scale(1);
+    color: var(--fg);
+    background: var(--bg);
+  }
+
+  & .icon {
     margin: 0;
     padding: 0;
   }
 }
+
 .tooltip {
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  /* background: var(--colourFG);
-  color: var(--colourBG); */
-  background: crimson;
-  color: white;
-  width: 25px;
-  height: 25px;
   right: 0;
-  top: 0;
-  /* border-radius: 5px; */
-  > svg {
-    margin: 0;
-    padding: 0;
-  }
-}
+  top: -1em;
+  background: var(--bg);
+  color: var(--fg);
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  opacity: 0;
+  transition:
+    margin-top 1.5s ease-in-out,
+    opacity 1.5s ease-in-out;
 
-@keyframes floatUp {
-  0% {
-    top: -30px;
-    opacity: 0;
-  }
-  25% {
-    top: -40px;
-    opacity: 1;
-  }
-  75% {
-    top: -40px;
-    opacity: 1;
-  }
-  100% {
-    top: -50px;
-    opacity: 0;
-  }
-}
-
-.tooltip-copy-success {
-  position: absolute;
-  top: -40px;
-  right: 0;
-  background-color: black;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
   &::after {
     position: absolute;
     content: '';
     width: 0;
     height: 0;
-    border-left: 8px solid transparent;
-    /* border-right: 5px solid transparent; */
-    border-top: 8px solid black;
-    bottom: -8px;
-    right: 12px;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-top: 0.5rem solid var(--bg);
+    bottom: -0.5rem;
+    right: 0.8rem;
   }
-  animation: floatUp 2s ease-in-out;
+
+  &.visible {
+    margin-top: -2em;
+    opacity: 1;
+  }
+
+  > .icon {
+    margin: 0;
+    padding: 0;
+  }
 }
 
+.success {
+  --fg: #ffffffff;
+  --bg: green;
+}
 
-@keyframes slideUp {
-  0% {
-    top: 25px;
-  }
-  25% {
-    top: 0;
-  }
-  75% {
-    top: 0;
-  }
-  100% {
-    top: -25px;
-  }
+.fail {
+  --fg: #ffffffff;
+  --bg: red;
 }
-.sliding-tooltip {
-  animation: slideUp 2s ease-in-out;
-}
-.copy-button:hover {
-  cursor: pointer;
-}
-/* .tooltip:after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 25px;
-  left: 50%;
-  margin-left: -10px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: var(--colourFG) transparent transparent transparent;
-} */
 
 @media (prefers-reduced-motion) {
-  .sliding-tooltip, .tooltip-copy-success {
-    animation: none;
+  .tooltip {
+    transition: none;
   }
 }
 </style>
