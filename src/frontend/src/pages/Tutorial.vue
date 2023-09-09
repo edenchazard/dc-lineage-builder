@@ -12,14 +12,14 @@
           appear in the cave. Use it for previewing new combinations and
           planning your code/lyrical lineages!
         </p>
-        <h3>How to use</h3>
-        <h4>Using the builder</h4>
+        <h2>How to use</h2>
+        <h3>Using the builder</h3>
         <p>
           To change a dragon's breed picture, click their portrait to bring up
           the breed selector. You can use the textbox to search names or filter
           results by egg group and tag.
         </p>
-        <h5 id="controls">Controls</h5>
+        <h4 id="controls">Controls</h4>
         <p>
           Controls can be accessed via individual dragons or by
           <a href="#selection-tools">selecting</a> them and using the toolbar.
@@ -67,7 +67,7 @@
             </li>
           </ul>
         </div>
-        <h5>Other icons</h5>
+        <h4>Other icons</h4>
         <ul class="buttons-list">
           <li>
             <FontAwesomeIcon icon="exclamation-triangle" />
@@ -76,7 +76,7 @@
             they're not checked for availability.
           </li>
         </ul>
-        <h5 id="selection-tools">Selection tools</h5>
+        <h4 id="selection-tools">Selection tools</h4>
         <p>Lineage builder supports applying actions to multiple dragons.</p>
         <img
           src="../assets/tutorial/toolbar.png"
@@ -105,13 +105,13 @@
           />
           button.
         </p>
-        <h4>Saving</h4>
+        <h3>Saving</h3>
         <p>Lineage Builder has two methods of saving.</p>
         <img
           class="float-right image"
           src="../assets/tutorial/save.png"
         />
-        <h5>Online</h5>
+        <h4>Online</h4>
         <p>
           You can save lineages online with Lineage Builder and share them with
           others but this does come with some limitations. These are:
@@ -128,13 +128,13 @@
           be removed from the site. For this reason, it's recommended you view
           it before 2 months is up to reset the timer.
         </p>
-        <h5>Offline (Export/Import)</h5>
+        <h4>Offline (Export/Import)</h4>
         <p>
           If your lineage is longer than
           {{ settings.gens.max }} generations, you can save the tree to a text
           file by using the export button and importing it that way.
         </p>
-        <h4>Changing the skin</h4>
+        <h3>Changing the skin</h3>
         <img
           class="float-right image"
           src="../assets/tutorial/skin.png"

@@ -13,7 +13,7 @@
   <div class="constrain-width content">
     <div class="content-limit">
       <section>
-        <h2>Checker Generator</h2>
+        <h1>Checker Generator</h1>
         <p>
           On this page you can build checkers quickly. Simply select how many
           generations you want it to be, the male breed (top) and the female
