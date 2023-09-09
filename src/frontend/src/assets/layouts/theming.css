@@ -289,18 +289,20 @@
     }
   }
 
-  & #desktop-menu .link-text, & #mobile-menu .link-text {
-    position: relative;
-    &:hover::before, &:hover::after {
+  & #desktop-menu a, & #mobile-menu a {
+    & .link-text {
+      position: relative;
+    }
+    &:hover .link-text::before, &:hover .link-text::after {
       position: absolute;
       font-size: 1.5rem;
       color: white;
     }
-    &:hover::before {
+    &:hover .link-text::before {
       left: -0.2rem;
       content: '[';
     }
-    &:hover::after {
+    &:hover .link-text::after {
       right: -0.2rem;
       content: ']';
     }
@@ -627,18 +629,20 @@
     }
   }
 
-  & #desktop-menu .link-text, & #mobile-menu .link-text {
-    position: relative;
-    &:hover::before, &:hover::after {
+  & #desktop-menu a, & #mobile-menu a {
+    & .link-text {
+      position: relative;
+    }
+    &:hover .link-text::before, &:hover .link-text::after {
       position: absolute;
       font-size: 1.5rem;
       color: white;
     }
-    &:hover::before {
+    &:hover .link-text::before {
       left: -0.2rem;
       content: '[';
     }
-    &:hover::after {
+    &:hover .link-text::after {
       right: -0.2rem;
       content: ']';
     }
