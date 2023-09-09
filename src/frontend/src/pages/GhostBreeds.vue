@@ -1,6 +1,7 @@
 <template>
   <div class="constrain-width content">
     <section class="content-limit">
+      <h1>Ghost Breeds</h1>
       <p>
         On this page you can upload custom breeds, aka "ghost breeds", to
         Lineage Builder. This can be useful if you have breed you've created and

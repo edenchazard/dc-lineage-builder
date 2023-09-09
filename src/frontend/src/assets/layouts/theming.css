@@ -168,6 +168,7 @@
   --dc-colour-5: #ff9315;
   --dc-colour-6: #fff;
   --dc-colour-7: #959595;
+  --dc-colour-9: #468FAC;
 
   --dc-lineage-line-width: 2px;
   --dc-lineage-line-style: dotted;
@@ -237,6 +238,37 @@
   font:
     0.875rem / normal 'Arial',
     sans-serif;
+
+  & h1, h2, h3, h4, h5 {
+    font-family: 'DIN', Arial, Helvetica, sans-serif;
+  }
+
+  & h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  & h2 {
+    text-transform: uppercase;
+    background-color: #52A5C6;
+    border: 1px solid var(--dc-colour-9);
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 2rem;
+    letter-spacing: -0.05rem;
+    padding: 0.8rem 0.5rem;
+    width: max-content;
+    margin-bottom: 0.5rem;
+    margin-top: 0.8rem;
+  }
+
+  & h4 {
+    font-style: italic;
+  }
+
+  & section a {
+    color: var(--dc-colour-9);
+  }
 
   & .dialog-header {
     box-shadow: inset 0 0 5px var(--semi-black);
@@ -572,6 +604,34 @@
   font:
     0.875rem / normal 'Arial',
     sans-serif;
+
+    & h1, h2, h3, h4, h5 {
+      font-family: 'DIN', Arial, Helvetica, sans-serif;
+    }
+
+    & h1 {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    & h2 {
+      text-transform: uppercase;
+      background-color: rgba(48, 151, 191, 0.8);
+      border: 1px solid rgba(68, 138, 165, 0.8);
+      text-shadow: none;
+      color: #fff;
+      font-size: 2.5rem;
+      line-height: 2rem;
+      letter-spacing: -0.05rem;
+      padding: 0.8rem 0.5rem;
+      width: max-content;
+      margin-bottom: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    & h4 {
+      font-style: italic;
+    }
 
     & .dialog-header {
       text-transform: uppercase;

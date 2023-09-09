@@ -6,7 +6,7 @@
       </div>
       <section id="information">
         <div>
-          <h2>Onsite Preview</h2>
+          <h1>Onsite Preview</h1>
           <p>
             This utility allows you to select two dragons and combine both of
             their lineages to see the result.
