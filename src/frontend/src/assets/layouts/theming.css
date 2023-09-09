@@ -504,6 +504,9 @@
 
   &#top {
     color: var(--dc-colour-5);
+    & a:hover {
+      color: var(--dc-colour-10);
+    }
   }
 
   #site-title-link {

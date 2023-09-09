@@ -69,8 +69,8 @@ const menuOpen = ref(false);
 #top {
   background: var(--ui-header-bg);
   color: var(--ui-header-fg);
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  /* padding-top: 0.5rem;
+  padding-bottom: 0.5rem; */
   /*   padding: 0.25rem 0.5rem; */
 }
 
@@ -90,6 +90,7 @@ const menuOpen = ref(false);
   /*   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.75); */
   margin: 0 auto;
   gap: 0.5rem;
+
 }
 
 #site-title {
@@ -100,6 +101,8 @@ const menuOpen = ref(false);
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 #site-title-link {
   color: inherit;
@@ -159,6 +162,8 @@ desktop menu
   justify-content: stretch;
   align-self: stretch;
   flex: 1;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 #desktop-menu a {
