@@ -209,6 +209,7 @@ function select() {
   & .icon {
     margin: 0;
     padding: 0;
+    color: var(--copy-icon);
   }
 }
 .copy {
@@ -290,13 +291,17 @@ function select() {
 }
 
 .success {
-  --fg: #ffffffff;
-  --bg: green;
+  /* --fg: #ffffffff;
+  --bg: green; */
+  --fg: var(--copy-success-fg);
+  --bg: var(--copy-success-bg);
 }
 
 .fail {
-  --fg: #ffffffff;
-  --bg: red;
+  /* --fg: #ffffffff;
+  --bg: red; */
+  --fg: var(--copy-fail-fg);
+  --bg: var(--copy-fail-bg);
 }
 
 @media (prefers-reduced-motion) {
