@@ -82,6 +82,12 @@
   --dialog-footer-button-bg: var(--dc-colour-2);
   --dialog-footer-button-fg: #fff;
 
+  --copy-icon: var(--dc-colour-7);
+  --copy-success-fg: var(--dc-colour-1);
+  --copy-success-bg: var(--dc-colour-7);
+  --copy-fail-fg: #fff;
+  --copy-fail-bg: var(--dc-colour-8);
+
   font:
     0.875rem / 1.225rem  'PT Serif',
     'Times New Roman',
@@ -221,6 +227,12 @@
   --dialog-body-fg: #000;
   --dialog-footer-button-bg: var(--dc-colour-4);
   --dialog-footer-button-fg: #fff;
+
+  --copy-icon: var(--dc-colour-4);
+  --copy-success-fg: #fff;
+  --copy-success-bg: var(--dc-colour-4);
+  --copy-fail-fg: #fff;
+  --copy-fail-bg: var(--dc-colour-5);
 
   font:
     0.875rem / normal 'Arial',
@@ -431,6 +443,12 @@
   --dialog-footer-button-bg: var(--dc-colour-9);
   --dialog-footer-button-fg: #fff;
 
+  --copy-icon: var(--dc-colour-9);
+  --copy-success-fg: #fff;
+  --copy-success-bg: var(--dc-colour-9);
+  --copy-fail-fg: #fff;
+  --copy-fail-bg: crimson;
+
   font:
     0.875rem/1.138rem Roboto,
     Helvetica,
@@ -542,6 +560,12 @@
   --dialog-body-fg: #fff;
   --dialog-footer-button-bg: var(--dc-colour-4);
   --dialog-footer-button-fg: #fff;
+
+  --copy-icon: var(--dc-colour-4);
+  --copy-success-fg: #fff;
+  --copy-success-bg: var(--dc-colour-4);
+  --copy-fail-fg: #fff;
+  --copy-fail-bg: var(--dc-colour-5);
 
   font:
     0.875rem / normal 'Arial',
