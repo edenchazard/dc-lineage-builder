@@ -2,20 +2,24 @@
   <div class="text-box">
     <input
       v-if="type === 'input'"
+      ref="input"
       class="text interactive"
       :class="{ 'two-button': showCopyButton && showShareButton }"
       type="text"
       v-bind="$attrs"
       :value="modelValue"
       @input="(e) => update((e.target as HTMLInputElement).value)"
+      @focus="select"
     />
     <textarea
       v-else-if="type === 'textarea'"
+      ref="input"
       class="text interactive"
       :class="{ 'two-button': showCopyButton && showShareButton }"
       v-bind="$attrs"
       :value="modelValue"
       @input="(e) => update((e.target as HTMLTextAreaElement).value)"
+      @focus="select"
     >
     </textarea>
     <div class="buttons">
@@ -113,11 +117,16 @@ const props = defineProps({
     type: String,
     default: 'Copy text',
   },
+  selectAllOnFocus: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const { share, isSupported: shareIsSupported } = useShare();
 const tooltipState = ref<boolean>(false);
 const showTooltip = ref<boolean>(false);
+const input = ref<HTMLInputElement | HTMLTextAreaElement>();
 const timeout = computed(() => props.tooltipTimeout);
 
 // merge with defaults
@@ -156,6 +165,12 @@ function startShare() {
     text: shareSettings.value.text,
     url: props.modelValue,
   });
+}
+
+function select() {
+  if (props.selectAllOnFocus && input.value) {
+    input.value.setSelectionRange(0, input.value.value.length);
+  }
 }
 </script>
 
