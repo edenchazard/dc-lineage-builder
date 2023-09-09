@@ -19,10 +19,12 @@
       </p>
       <Textbox
         v-model="viewLink"
+        readonly
         type="input"
         placeholder="link"
         show-copy-button
         show-share-button
+        select-all-on-focus
         copy-button-title="Copy lineage link"
         :share-params="{
           buttonTitle: 'Share lineage',
