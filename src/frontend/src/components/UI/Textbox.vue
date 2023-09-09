@@ -3,6 +3,7 @@
     <input
       v-if="type === 'input'"
       class="text interactive"
+      :class="{ 'two-button': showCopyButton && showShareButton }"
       type="text"
       v-bind="$attrs"
       :value="modelValue"
@@ -11,50 +12,72 @@
     <textarea
       v-else-if="type === 'textarea'"
       class="text interactive"
+      :class="{ 'two-button': showCopyButton && showShareButton }"
       v-bind="$attrs"
       :value="modelValue"
       @input="(e) => update((e.target as HTMLTextAreaElement).value)"
     >
     </textarea>
-    <template v-if="showCopyButton">
+    <div class="buttons">
       <button
-        title="Copy text"
-        class="copy pointer"
-        :class="{
-          success: tooltipState && showTooltip,
-          fail: !tooltipState && showTooltip,
-          visible: tooltipState,
-        }"
+        v-if="showShareButton && shareIsSupported"
+        :title="shareSettings.buttonTitle"
+        class="button share pointer"
         type="button"
-        @click="copy"
+        @click="startShare"
       >
         <FontAwesomeIcon
-          icon="copy"
+          icon="share"
           class="icon"
         />
       </button>
-      <span
-        v-if="showTooltip"
-        class="tooltip"
-        :class="{
-          success: tooltipState && showTooltip,
-          fail: !tooltipState && showTooltip,
-          visible: tooltipState,
-        }"
-      >
-        {{ tooltipState ? 'Copied!' : 'Error :(' }}
-      </span>
-    </template>
+      <template v-if="showCopyButton">
+        <button
+          :title="copyButtonTitle"
+          class="button copy pointer"
+          :class="{
+            success: tooltipState && showTooltip,
+            fail: !tooltipState && showTooltip,
+            visible: tooltipState,
+          }"
+          type="button"
+          @click="copy"
+        >
+          <FontAwesomeIcon
+            icon="copy"
+            class="icon"
+          />
+        </button>
+        <span
+          v-if="showTooltip"
+          class="tooltip"
+          :class="{
+            success: tooltipState && showTooltip,
+            fail: !tooltipState && showTooltip,
+            visible: tooltipState,
+          }"
+        >
+          {{ tooltipState ? 'Copied!' : 'Error :(' }}
+        </span>
+      </template>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { PropType, computed, ref } from 'vue';
+import { useShare } from '@vueuse/core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { debounce } from '../../app/utils';
 
 defineOptions({
   inheritAttrs: false,
 });
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void;
+  (e: 'copySuccess'): void;
+  (e: 'copyFail'): void;
+}>();
 
 const props = defineProps({
   modelValue: {
@@ -74,17 +97,36 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  showShareButton: {
+    type: Boolean,
+    default: false,
+  },
+  shareParams: {
+    type: Object as PropType<{
+      title?: string;
+      text?: string;
+      buttonTitle?: string;
+    }>,
+    default: () => ({}),
+  },
+  copyButtonTitle: {
+    type: String,
+    default: 'Copy text',
+  },
 });
-const timeout = computed(() => props.tooltipTimeout);
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-  (e: 'copySuccess'): void;
-  (e: 'copyFail'): void;
-}>();
-
+const { share, isSupported: shareIsSupported } = useShare();
 const tooltipState = ref<boolean>(false);
 const showTooltip = ref<boolean>(false);
+const timeout = computed(() => props.tooltipTimeout);
+
+// merge with defaults
+const shareSettings = computed(() => ({
+  title: '',
+  text: '',
+  buttonTitle: 'Share text',
+  ...props.shareParams,
+}));
 
 function update(newValue: string) {
   emit('update:modelValue', newValue);
@@ -107,7 +149,16 @@ async function copy() {
     emit('copyFail');
   }
 }
+
+function startShare() {
+  share({
+    title: shareSettings.value.title,
+    text: shareSettings.value.text,
+    url: props.modelValue,
+  });
+}
 </script>
+
 <style scoped>
 .text-box {
   position: relative;
@@ -117,12 +168,22 @@ async function copy() {
   width: 100%;
   padding-right: 2.2rem;
   font-family: monospace;
+
+  &.two-button {
+    padding-right: 4rem;
+  }
 }
 
-.copy {
+.buttons {
   position: absolute;
   right: 0.2rem;
   top: 0.2rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.button {
   border: 0 none;
   height: 1.5rem;
   width: 1.5rem;
@@ -130,6 +191,12 @@ async function copy() {
   border-radius: 0.4rem;
   background: transparent;
 
+  & .icon {
+    margin: 0;
+    padding: 0;
+  }
+}
+.copy {
   &.visible {
     color: #ffffff00;
   }
@@ -165,11 +232,6 @@ async function copy() {
     transform: scale(1);
     color: var(--fg);
     background: var(--bg);
-  }
-
-  & .icon {
-    margin: 0;
-    padding: 0;
   }
 }
 

@@ -21,7 +21,14 @@
         v-model="viewLink"
         type="input"
         placeholder="link"
-        :show-copy-button="true"
+        show-copy-button
+        show-share-button
+        copy-button-title="Copy lineage link"
+        :share-params="{
+          buttonTitle: 'Share lineage',
+          title: 'View my lineage',
+          text: 'View my DragCave lineage on Lineage Builder',
+        }"
       />
     </div>
     <div v-else-if="problemDragon">
