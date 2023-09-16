@@ -89,12 +89,12 @@
   --copy-fail-bg: var(--dc-colour-8);
 
   font:
-    0.875rem / 1.225rem  'PT Serif',
+    0.875rem / 1.225rem 'PT Serif',
     'Times New Roman',
     'Times',
     serif;
 
-  &#top {
+  > #top {
     font-family: 'fq', 'Times New Roman', 'Times', serif;
     color: var(--dc-colour-5);
 
@@ -168,7 +168,7 @@
   --dc-colour-5: #ff9315;
   --dc-colour-6: #fff;
   --dc-colour-7: #959595;
-  --dc-colour-9: #468FAC;
+  --dc-colour-9: #468fac;
 
   --dc-lineage-line-width: 2px;
   --dc-lineage-line-style: dotted;
@@ -180,7 +180,7 @@
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: #fff;
   --ui-builder-toolbar-bg: var(--ui-header-bg);
-  --ui-builder-toolbar-selection-group-bg: rgba(0,0,0,0.25);
+  --ui-builder-toolbar-selection-group-bg: rgba(0, 0, 0, 0.25);
   --ui-builder-toolbar-selection-group-fg: #fff;
   /* --ui-builder-toolbar-selection-group-border: 1px dashed #44300b59; */
   --ui-builder-toolbar-selection-scrolls: hsl(24deg 100% 7.1% / 40%);
@@ -216,8 +216,8 @@
 
   --ui-focus-colour: rgba(255, 102, 0, 0.5);
 
-  --semi-black: rgba(0,0,0,0.5);
-  --tile-shade: rgba(0,0,0,0.4);
+  --semi-black: rgba(0, 0, 0, 0.5);
+  --tile-shade: rgba(0, 0, 0, 0.4);
   --shading: 0 3px 5px var(--semi-black), inset 0 0 5px var(--semi-black);
 
   --dialog-header-bg: var(--ui-header-bg);
@@ -239,7 +239,11 @@
     0.875rem / normal 'Arial',
     sans-serif;
 
-  & h1, h2, h3, h4, h5 {
+  & h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-family: 'DIN', Arial, Helvetica, sans-serif;
   }
 
@@ -250,7 +254,7 @@
 
   & h2 {
     text-transform: uppercase;
-    background-color: #52A5C6;
+    background-color: #52a5c6;
     border: 1px solid var(--dc-colour-9);
     color: #fff;
     font-size: 2.5rem;
@@ -275,11 +279,13 @@
     text-transform: uppercase;
   }
 
-  &#content, &#bottom {
-    background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png) repeat;
+  > #content,
+  > #bottom {
+    background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png)
+      repeat;
   }
 
-  &#top {
+  > #top {
     box-shadow: var(--shading);
     z-index: 999;
     font:
@@ -321,11 +327,13 @@
     }
   }
 
-  & #desktop-menu a, & #mobile-menu a {
+  & #desktop-menu a,
+  & #mobile-menu a {
     & .link-text {
       position: relative;
     }
-    &:hover .link-text::before, &:hover .link-text::after {
+    &:hover .link-text::before,
+    &:hover .link-text::after {
       position: absolute;
       font-size: 1.5rem;
       color: white;
@@ -345,24 +353,26 @@
   }
 
   & #mobile-menu .link-text {
-    padding: 0 0.5rem
+    padding: 0 0.5rem;
   }
 
   & .toolbar {
     margin-bottom: 0.5rem;
     box-shadow: var(--shading);
     color: var(--dc-colour-1);
-    border-radius: 0px!important;
+    border-radius: 0px !important;
     /* "important" is not great i know, but the border-radius rule was set in
        Toolbar.vue and i felt reluctant to go there and edit it, especially since
        that file seems to affect all themes */
     & .selection-tools {
       padding: 0 0.3rem;
-      box-shadow: 0 1px 3px var(--tile-shade) inset, 0 -1px 3px var(--tile-shade);
+      box-shadow:
+        0 1px 3px var(--tile-shade) inset,
+        0 -1px 3px var(--tile-shade);
     }
 
     & .selection-scrollable {
-      gap: 0!important;
+      gap: 0 !important;
       /* same here. here, i needed to close the gap to replicate portal light's tiling effect */
     }
 
@@ -375,7 +385,9 @@
     }
 
     & .group + .group {
-      box-shadow: 1px 0 3px var(--tile-shade) inset, -1px 0 3px var(--tile-shade);
+      box-shadow:
+        1px 0 3px var(--tile-shade) inset,
+        -1px 0 3px var(--tile-shade);
     }
 
     & .legend {
@@ -488,7 +500,7 @@
     Helvetica,
     Arial,
     sans-serif;
-  color: var(-dc-colour-5);
+  color: var(--dc-colour-5);
 
   & .dialog-header {
     border-radius: 5px 5px 0 0;
@@ -502,14 +514,14 @@
     border-radius: 0 0 5px 5px;
   }
 
-  &#top {
+  > #top {
     color: var(--dc-colour-5);
     & a:hover {
       color: var(--dc-colour-10);
     }
   }
 
-  #site-title-link {
+  & #site-title-link {
     font-size: 1.25rem;
     line-height: 1.25rem;
     font-weight: 500;
@@ -562,7 +574,7 @@
   --dc-colour-6: #fff;
   --dc-colour-7: #959595;
 
-  --semi-black: rgba(0,0,0,0.25);
+  --semi-black: rgba(0, 0, 0, 0.25);
 
   --dc-lineage-line-width: 1px;
   --dc-lineage-line-style: dotted;
@@ -593,7 +605,7 @@
   --dialog-header-fg: #fff;
   --dialog-header-font: 0.875rem 'din';
   --dialog-header-closebutton-bg: var(--dc-colour-4);
-  --dialog-body-bg: rgba(0,0,0,0.75);
+  --dialog-body-bg: rgba(0, 0, 0, 0.75);
   --dialog-body-fg: #fff;
   --dialog-footer-button-bg: var(--dc-colour-4);
   --dialog-footer-button-fg: #fff;
@@ -608,49 +620,53 @@
     0.875rem / normal 'Arial',
     sans-serif;
 
-    & h1, h2, h3, h4, h5 {
-      font-family: 'DIN', Arial, Helvetica, sans-serif;
-    }
+  & h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'DIN', Arial, Helvetica, sans-serif;
+  }
 
-    & h1 {
-      text-transform: uppercase;
-      font-weight: bold;
-    }
+  & h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 
-    & h2 {
-      text-transform: uppercase;
-      background-color: rgba(48, 151, 191, 0.8);
-      border: 1px solid rgba(68, 138, 165, 0.8);
-      text-shadow: none;
-      color: #fff;
-      font-size: 2.5rem;
-      line-height: 2rem;
-      letter-spacing: -0.05rem;
-      padding: 0.8rem 0.5rem;
-      width: max-content;
-      margin-bottom: 0.5rem;
-      margin-top: 0.8rem;
-    }
+  & h2 {
+    text-transform: uppercase;
+    background-color: rgba(48, 151, 191, 0.8);
+    border: 1px solid rgba(68, 138, 165, 0.8);
+    text-shadow: none;
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 2rem;
+    letter-spacing: -0.05rem;
+    padding: 0.8rem 0.5rem;
+    width: max-content;
+    margin-bottom: 0.5rem;
+    margin-top: 0.8rem;
+  }
 
-    & h4 {
-      font-style: italic;
-    }
+  & h4 {
+    font-style: italic;
+  }
 
-    & .dialog-header {
-      text-transform: uppercase;
-      border-radius: 5px 5px 0 0;
-    }
+  & .dialog-header {
+    text-transform: uppercase;
+    border-radius: 5px 5px 0 0;
+  }
 
-    & .dialog {
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 5px;
-    }
+  & .dialog {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+  }
 
-    & .dialog-footer {
-      border-radius: 0 0 5px 5px;
-    }
+  & .dialog-footer {
+    border-radius: 0 0 5px 5px;
+  }
 
-  &#top {
+  > #top {
     font:
       700 1rem/1rem 'DIN',
       'Arial',
@@ -692,11 +708,13 @@
     }
   }
 
-  & #desktop-menu a, & #mobile-menu a {
+  & #desktop-menu a,
+  & #mobile-menu a {
     & .link-text {
       position: relative;
     }
-    &:hover .link-text::before, &:hover .link-text::after {
+    &:hover .link-text::before,
+    &:hover .link-text::after {
       position: absolute;
       font-size: 1.5rem;
       color: white;
@@ -716,10 +734,10 @@
   }
 
   & #mobile-menu .link-text {
-    padding: 0 0.5rem
+    padding: 0 0.5rem;
   }
 
-  &#content {
+  > #content {
     background: var(--dc-colour-1) url(/src/assets/layouts/portal2/portal2.png)
       repeat-x fixed;
     color: var(--dc-colour-2);

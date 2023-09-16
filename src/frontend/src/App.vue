@@ -1,16 +1,10 @@
 <template>
-  <div id="dialogs" :class="skinStore.activeSkin"></div>
-  <Header :class="skinStore.activeSkin" />
-  <main
-    id="content"
-    :class="skinStore.activeSkin"
-  >
+  <div id="dialogs"></div>
+  <Header />
+  <main id="content">
     <router-view :key="route.fullPath" />
   </main>
-  <footer
-    id="bottom"
-    :class="skinStore.activeSkin"
-  >
+  <footer id="bottom">
     <div
       id="footer"
       class="constrain-width"
@@ -42,12 +36,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './assets/styling/style.css';
 import './assets/layouts/theming.css';
 import { useAppStore } from './store/app';
-import { useSkinStore } from './store/skin';
 import Header from './components/Page/Header/Header.vue';
 import SkinSwitcher from './components/Page/Header/SkinSwitcher.vue';
 
 const route = useRoute();
-const skinStore = useSkinStore();
 const appStore = useAppStore();
 </script>
 
