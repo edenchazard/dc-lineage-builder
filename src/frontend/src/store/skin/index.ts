@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { defineStore } from 'pinia';
 import { useLocalStorage } from '@vueuse/core';
 
@@ -59,6 +59,13 @@ export const useSkinStore = defineStore('skinStore', () => {
     },
   });
 
+  watch(
+    activeSkin,
+    () => {
+      document.body.className = activeSkin.value;
+    },
+    { immediate: true },
+  );
   return {
     defaultSkinName,
     availableSkins,

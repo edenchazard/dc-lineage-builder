@@ -52,6 +52,34 @@
         v-bind="button"
         @click="button.click"
       />
+      <ToolbarDropDownMenu
+        :icon="{ icon: 'cog', size: '2x' }"
+        title="Settings"
+        label="Settings"
+      >
+        <ToolbarDropDownMenuItem
+          as="other"
+          @click.self="config.showInterface = !config.showInterface"
+        >
+          <input
+            id="show-interface2"
+            v-model="config.showInterface"
+            type="checkbox"
+          />
+          <label for="show-interface2">Show controls</label>
+        </ToolbarDropDownMenuItem>
+        <ToolbarDropDownMenuItem
+          as="other"
+          @click.self="config.showLabels = !config.showLabels"
+        >
+          <input
+            id="show-labels2"
+            :value="config.showLabels"
+            type="checkbox"
+          />
+          <label for="show-labels2">Show labels</label>
+        </ToolbarDropDownMenuItem>
+      </ToolbarDropDownMenu>
     </div>
     <div
       class="selection-tools"
@@ -278,12 +306,6 @@ const generalFunctions = reactive<ToolbarButtonProps[]>(
       label: 'Redo',
       click: () => emit('redo'),
       disabled: computed(() => !appStore.treeHistory.canRedo),
-    },
-    {
-      title: 'Settings',
-      icon: 'cog',
-      label: 'Settings',
-      click: () => emit('redo'),
     },
     // convert the string names to actual font awesome props
   ].map((button) => convertToToolbarButtonProps(button, '2x')),
@@ -644,7 +666,7 @@ function capitalise(string: string) {
     align-items: center;
     padding-right: var(--padding);
 
-    & [title='Settings'] {
+    & :deep(.control[title='Settings']) {
       display: none;
     }
   }

@@ -1,19 +1,30 @@
 <template>
-  <button
-    type="button"
+  <component
+    :is="as === 'button' ? 'button' : 'div'"
+    :type="as === 'button' ? 'button' : null"
     v-bind="$attrs"
-    class="button"
+    class="menu-item"
     role="menuitem"
-    tabindex="-1"
   >
-    <slot></slot>
-  </button>
+    <slot />
+  </component>
 </template>
+
+<script setup lang="ts">
+import { PropType } from 'vue';
+
+defineProps({
+  as: {
+    type: String as PropType<'button' | 'other'>,
+    default: 'button',
+  },
+});
+</script>
+
 <style scoped>
-.button {
+.menu-item {
   border: none;
   display: block;
-  width: 100%;
   background: inherit;
   color: inherit;
   text-align: left;
@@ -22,8 +33,9 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-}
-.button:hover {
-  background: rgba(255, 255, 255, 0.5);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
 }
 </style>

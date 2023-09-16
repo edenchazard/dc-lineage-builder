@@ -14,6 +14,7 @@
     "fix": "npm run lint:fix && npm run format"
   },
   "dependencies": {
+    "@floating-ui/vue": "^1.0.2",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
@@ -26,8 +27,8 @@
     "reset-css": "^5.0.1",
     "unique-names-generator": "^4.7.1",
     "vue": "^3.3.4",
-    "vue-dragscroll": "^4.0.5",
     "vue-a11y-dialog": "^1.1.2",
+    "vue-dragscroll": "^4.0.5",
     "vue-router": "^4.1.6",
     "vue-virtual-collection": "^1.5.0"
   },
