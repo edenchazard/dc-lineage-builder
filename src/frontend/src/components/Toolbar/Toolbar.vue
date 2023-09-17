@@ -589,10 +589,16 @@ function capitalise(string: string) {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
+    scrollbar-width: none;
     gap: 0.5rem;
     cursor: w-resize;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
+
+    &::-webkit-scrollbar {
+      display: none;
+      /* ... or should this be kept visible for accessibility? */
+    }
 
     & :deep(.control) {
       min-width: 2rem;

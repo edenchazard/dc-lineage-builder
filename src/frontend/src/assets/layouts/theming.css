@@ -183,7 +183,7 @@
   --ui-builder-toolbar-selection-group-bg: rgba(0, 0, 0, 0.25);
   --ui-builder-toolbar-selection-group-fg: #fff;
   /* --ui-builder-toolbar-selection-group-border: 1px dashed #44300b59; */
-  --ui-builder-toolbar-selection-scrolls: hsl(24deg 100% 7.1% / 40%);
+  --ui-builder-toolbar-selection-scrolls: rgba(0,0,0,0.5);
   /* --ui-builder-toolbar-selection-shadows: #000; */
   --ui-builder-toolbar-selection-count-bg: var(--dc-colour-3);
   --ui-builder-toolbar-selection-count-fg: #fff;
@@ -374,6 +374,14 @@
     & .selection-scrollable {
       gap: 0 !important;
       /* same here. here, i needed to close the gap to replicate portal light's tiling effect */
+    }
+
+    & .selection-nav.left {
+      margin-left: -0.3rem;
+    }
+
+    & .selection-nav.right {
+      margin-right: -0.3rem;
     }
 
     & .buttons {
@@ -589,9 +597,11 @@
   --ui-builder-toolbar-selection-group-bg: var(--semi-black);
   --ui-builder-tile-selected-bg: var(--dc-colour-3);
   --ui-builder-tile-selected-outline: 1px solid var(--dc-colour-4);
+  --ui-builder-toolbar-selection-scrolls: rgba(0,0,0,0.5);
   --ui-builder-toolbar-selection-count-bg: var(--dc-colour-3);
   --ui-builder-toolbar-selection-count-fg: #000;
   --ui-builder-toolbar-menu-bg: #000;
+  --ui-builder-toolbar-menu-fg: #fff;
   --ui-builder-tile-label-warning: #cf2427;
   --ui-builder-tile-label-invalid: #bf20233a;
 
