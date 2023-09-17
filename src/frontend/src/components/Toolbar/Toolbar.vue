@@ -588,9 +588,11 @@ function capitalise(string: string) {
   > .selection-scrollable {
     display: flex;
     flex-direction: row;
-    overflow-x: hidden;
+    overflow-x: auto;
     gap: 0.5rem;
     cursor: w-resize;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
 
     & :deep(.control) {
       min-width: 2rem;
