@@ -989,6 +989,13 @@
     "sprites": "7sNC0",
     "tags": ["Regular"]
   },
+  "Tangledrakin": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Two-headed",
+    "sprites": ["NE6Xz"],
+    "tags": ["Regular"]
+  },
   "Tarantula Hawk Drake": {
     "dimorphism": false,
     "genderOnly": false,

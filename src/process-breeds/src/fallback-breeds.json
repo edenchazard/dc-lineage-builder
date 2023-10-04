@@ -1087,6 +1087,12 @@
     "sprites": ["Ivh5","0","-1","47","MXv75","0","-1","47"],
     "tags": ["Regular"]
   },
+  "Vilvoor": {
+    "genderOnly": false,
+    "group": "Two-headed",
+    "sprites": ["p7OCb","-19","-1","48","KPT8S","0","-1","48"],
+    "tags": ["Regular"]
+  },
   "Vremya Drake": {
     "genderOnly": false,
     "group": "Drake",
