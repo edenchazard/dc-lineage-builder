@@ -1090,7 +1090,7 @@
   "Vilvoor": {
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["p7OCb","-19","-1","48","KPT8S","0","-1","48"],
+    "sprites": ["KPT8S","0","-1","48","p7OCb","-19","-1","48"],
     "tags": ["Regular"]
   },
   "Vremya Drake": {
