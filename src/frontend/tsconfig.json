@@ -14,8 +14,10 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strict": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "verbatimModuleSyntax": true
   },
-  "include": ["./src/**/*.ts", "**/*.d.ts", "./src/**/*.vue"],
+  "include": ["./src/**/*.ts", "./src/**/*.vue"],
+  "files": ["vue-shim.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

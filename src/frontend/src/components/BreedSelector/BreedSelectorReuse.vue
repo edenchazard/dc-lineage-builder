@@ -15,8 +15,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
-import { BreedEntry, DragonGender, PortraitData } from '../../app/types';
+import { computed } from 'vue';
+import type { PropType } from 'vue';
+import type { BreedEntry, DragonGender, PortraitData } from '../../app/types';
 import { getBreedData, filterBreedTableByGender } from '../../app/utils';
 import { useAppStore } from '../../store/app';
 import BreedGrid from '../BreedFiltering/BreedGrid.vue';

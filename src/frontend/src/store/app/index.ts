@@ -1,8 +1,9 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
-import { PartialLineageWithMetadata } from '../../app/types';
+import type { PartialLineageWithMetadata } from '../../app/types';
 import { useTreeAnalyser } from './useTreeAnalyser';
-import Lineage, { DragonBuilder } from '../../app/dragon';
+import { DragonBuilder } from '../../app/dragonBuilder';
+import { Lineage } from '../../app/lineageHandler';
 
 export const useAppStore = defineStore('appStore', () => {
   const appVersion = import.meta.env.VITE_APP_VERSION;
@@ -25,8 +26,14 @@ export const useAppStore = defineStore('appStore', () => {
     const newTree = Lineage().raw();
     newTree.parents =
       activeTree.value.gender === 'f'
-        ? { f: activeTree.value, m: DragonBuilder.create({ gender: 'm' }) }
-        : { f: DragonBuilder.create({ gender: 'f' }), m: activeTree.value };
+        ? {
+            f: activeTree.value,
+            m: DragonBuilder.createWithMetadata({ gender: 'm' }),
+          }
+        : {
+            f: DragonBuilder.createWithMetadata({ gender: 'f' }),
+            m: activeTree.value,
+          };
 
     // replace the existing root with the new tree.
     activeTree.value = newTree;

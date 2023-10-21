@@ -28,8 +28,8 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { PortraitData } from '../../../app/types';
+import type { PropType } from 'vue';
+import type { PortraitData } from '../../../app/types';
 
 defineProps({
   data: {

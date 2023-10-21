@@ -31,15 +31,15 @@
   </Dialog>
 </template>
 <script setup lang="ts">
-import { onMounted, PropType, ref } from 'vue';
-import { DragonType, PartialLineageWithMetadata } from '../../app/types';
-import { verifyIntegrity } from '../../app/validators';
+import { onMounted, ref } from 'vue';
+import type { PropType } from 'vue';
+import type { DragonType, PartialLineageWithMetadata } from '../../app/types';
+import { Lineage } from '../../app/lineageHandler';
 
 import Dialog from '../UI/Dialog.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
 import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
-import Lineage from '../../app/dragon';
 
 const props = defineProps({
   tree: {
@@ -83,3 +83,4 @@ onMounted(() => {
   file.value = JSON.stringify(exportedTree);
 });
 </script>
+../../app/lineageHandler

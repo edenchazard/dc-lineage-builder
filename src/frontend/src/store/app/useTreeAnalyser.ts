@@ -1,8 +1,10 @@
-import { ref, Ref, watch } from 'vue';
+import { ref, watch } from 'vue';
+import type { Ref } from 'vue';
 import GLOBALS from '../../app/globals';
-import { LineageRoot } from '../../app/types';
+import type { PartialLineageWithMetadata } from '../../app/types';
 import { useTreeHistory } from './useTreeHistory';
-import dragon from '../../app/dragon';
+import { Lineage } from '../../app/lineageHandler';
+
 /*
     basically a way we can:
     - calculate used breeds
@@ -13,7 +15,10 @@ import dragon from '../../app/dragon';
     in one foreverydragon pass instead of doing multiple passes.
     It's messy, and I'm not the biggest fan of it, but it improves performance.
 */
-function useTreeAnalyser(activeTree: Ref<LineageRoot | null>, capacity = 5) {
+function useTreeAnalyser(
+  activeTree: Ref<PartialLineageWithMetadata>,
+  capacity = 5,
+) {
   const history = useTreeHistory(activeTree, capacity);
   const selectionCount = ref(0);
   const usedBreeds = ref(new Map<string, number>());
@@ -30,7 +35,7 @@ function useTreeAnalyser(activeTree: Ref<LineageRoot | null>, capacity = 5) {
       // selection count
       let selected = 0;
 
-      dragon(activeTree.value).every((dragon) => {
+      Lineage(activeTree.value).every((dragon) => {
         breeds.set(dragon.breed, (breeds.get(dragon.breed) ?? 0) + 1);
 
         if (dragon.selected) selected++;

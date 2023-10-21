@@ -116,10 +116,8 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-
-import { PortraitData, DragonGender } from '../app/types';
+import type { PortraitData, DragonGender } from '../app/types';
 import GLOBALS from '../app/globals';
-import { createDragonProperties } from '../app/dragonBuilder';
 import { getBreedData } from '../app/utils';
 import { useTagStore } from '../store/tags';
 
@@ -132,8 +130,9 @@ import DialogGenerate from '../components/Toolbar/DialogGenerate.vue';
 import ToolbarGroup from '../components/Toolbar/ToolbarGroup.vue';
 import ToolbarButton from '../components/Toolbar/ToolbarButton.vue';
 import BreedSearchControl from '../components/BreedFiltering/BreedSearchControl.vue';
+import { DragonBuilder } from '../app/dragonBuilder';
 
-const tree = ref(createDragonProperties());
+const tree = ref(DragonBuilder.createWithMetadata());
 const tagStore = useTagStore();
 const maleBreed = ref(GLOBALS.placeholder.name);
 const femaleBreed = ref(GLOBALS.placeholder.name);
@@ -158,11 +157,11 @@ function selectFemale(breed: PortraitData) {
 function updateTree(finalGenGender?: DragonGender) {
   const createParents = (gen: number) => {
     const branch = {
-      m: createDragonProperties({
+      m: DragonBuilder.createWithMetadata({
         gender: 'm',
         breed: maleBreed.value,
       }),
-      f: createDragonProperties({
+      f: DragonBuilder.createWithMetadata({
         gender: 'f',
         breed: femaleBreed.value,
       }),
@@ -184,7 +183,7 @@ function updateTree(finalGenGender?: DragonGender) {
         { gender: 'm', breed: maleBreed.value };
 
   // update our tree
-  tree.value = createDragonProperties({
+  tree.value = DragonBuilder.createWithMetadata({
     ...final,
     parents: createParents(2),
   });

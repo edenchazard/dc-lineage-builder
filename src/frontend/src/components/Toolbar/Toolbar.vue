@@ -119,18 +119,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType, reactive, ref } from 'vue';
-import GLOBALS from '../../app/globals';
-import { filterEggGroups, filterTags } from '../../app/utils';
-import Lineage from '../../app/dragon';
-import { useAppStore } from '../../store/app';
-import {
+import { computed, reactive, ref } from 'vue';
+import type { PropType } from 'vue';
+import type {
   BreedEntry,
   DragonTypeWithMetadata,
   LineageConfig,
   PartialLineageWithMetadata,
   PortraitData,
 } from '../../app/types';
+import GLOBALS from '../../app/globals';
+import { filterEggGroups, filterTags } from '../../app/utils';
+import { Lineage } from '../../app/lineageHandler';
+import { useAppStore } from '../../store/app';
 import DialogExport from './DialogExport.vue';
 import DialogImport from './DialogImport.vue';
 import DialogGenerate from './DialogGenerate.vue';
@@ -450,3 +451,4 @@ function capitalise(string: string) {
 @media only screen and (min-width: 470px) {
 }
 </style>
+../../app/lineageHandler

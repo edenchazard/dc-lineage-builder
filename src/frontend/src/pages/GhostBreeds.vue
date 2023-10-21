@@ -120,12 +120,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import { BreedEntry, DragonGender } from '../app/types';
+import type { BreedEntry, DragonGender } from '../app/types';
 import { addBreed } from '../app/utils';
 import settings from '../app/settings';
 import GhostBreedUpload from '../components/GhostBreedUpload.vue';
 import Feedback from '../components/UI/Feedback.vue';
-import { BREEDNAMEREGEXP } from '../app/validators';
+import { BREEDNAMEREGEXP } from '../../../../trash/validators';
 
 type Availability = 'b' | DragonGender;
 
@@ -249,3 +249,4 @@ function addToEntries(e: Event) {
   }
 }
 </style>
+../app/validation
