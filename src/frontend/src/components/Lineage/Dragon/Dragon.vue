@@ -116,8 +116,16 @@
 
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
-import { computed, PropType, ref } from 'vue';
+import { computed, ref } from 'vue';
+import type { PropType } from 'vue';
 import vOnLongPress from '../../../directives/long-press/vue-3-long-press';
+import type {
+  BreedEntry,
+  DragonParents,
+  DragonTypeWithMetadata,
+  PartialLineageWithMetadata,
+  PortraitData,
+} from '../../../app/types';
 import GLOBALS from '../../../app/globals';
 import {
   getBreedData,
@@ -126,20 +134,13 @@ import {
   expandGender,
   hasParents,
 } from '../../../app/utils';
-import { switchParents } from '../../../app/dragonBuilder';
 import { useAppStore } from '../../../store/app';
-
 import DragonLabel from './DragonLabel.vue';
 import BreedSelector from '../../BreedSelector/BreedSelector.vue';
 import DragonPortrait from './DragonPortrait.vue';
 import DragonButton from './DragonButton.vue';
-import {
-  BreedEntry,
-  DragonTypeWithMetadata,
-  PartialLineageWithMetadata,
-  PortraitData,
-} from '../../../app/types';
-import Lineage, { DragonBuilder } from '../../../app/dragon';
+import { Lineage } from '../../../app/lineageHandler';
+import { DragonBuilder } from '../../../app/dragonBuilder';
 
 const props = defineProps({
   // Dragon properties
@@ -177,7 +178,7 @@ const getImage = computed(() => {
 });
 
 function swapParents() {
-  const switched = switchParents(props.data.parents);
+  const switched = DragonBuilder.switchParents(props.data.parents);
   props.data.parents = switched.parents;
 }
 
@@ -257,8 +258,8 @@ function addDescendant() {
 // adds a new node to the tree
 function addAncestors() {
   props.data.parents = {
-    m: DragonBuilder.create({ gender: 'm' }),
-    f: DragonBuilder.create({ gender: 'f' }),
+    m: DragonBuilder.createWithMetadata({ gender: 'm' }),
+    f: DragonBuilder.createWithMetadata({ gender: 'f' }),
   };
 }
 

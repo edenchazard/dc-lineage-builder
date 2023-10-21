@@ -1,17 +1,12 @@
-import {
-  uniqueNamesGenerator,
-  names,
-  colors,
-  animals,
-} from 'unique-names-generator';
 import GLOBALS from './globals';
-import {
+import type {
   PartialLineage,
   PartialLineageWithMetadata,
   MaybePartialLineageWithMetadata,
   DragonTypeWithMetadata,
 } from './types';
 import { deepClone, hasParents } from './utils';
+import { DragonBuilder } from './dragonBuilder';
 
 /**
  * Returns a handler tries to json parse the passed treeref
@@ -47,44 +42,6 @@ function Lineage(
     treeRef as PartialLineageWithMetadata,
     addMissingMetadata,
   );
-}
-
-export default Lineage;
-
-export class DragonBuilder {
-  public static create(
-    attributes: Partial<DragonTypeWithMetadata> = {},
-  ): PartialLineageWithMetadata {
-    return {
-      code: this.generateCode(),
-      name: this.generateName(),
-      parents: {},
-      breed: GLOBALS.placeholder.name,
-      gender: 'm',
-      display: 1,
-      selected: false,
-      ...attributes,
-    };
-  }
-
-  public static generateCode(): string {
-    const characters =
-      '1234567890ABCDEFGHIJKLMNOPQRTUVWXYZabcdefghijklmnopqrstuvwyz';
-    let str = '';
-    for (let i = 0; i < 5; ++i) {
-      str += characters[~~(Math.random() * characters.length)];
-    }
-    return str;
-  }
-
-  public static generateName(): string {
-    return uniqueNamesGenerator({
-      dictionaries: [names, colors, animals],
-      length: 2,
-      separator: ' ',
-      style: 'capital',
-    });
-  }
 }
 
 class LineageHandler {
@@ -206,3 +163,5 @@ class LineageHandler {
     return max;
   }
 }
+
+export { Lineage };

@@ -1,5 +1,5 @@
 import GLOBALS from './globals';
-import {
+import type {
   BreedEntry,
   DragonTypeWithMetadata,
   FilterTag,
@@ -8,7 +8,7 @@ import {
   PortraitData,
   MaybePartialLineageWithMetadata,
 } from './types';
-import { BREEDNAMEREGEXP } from './validators';
+import { BREEDNAMEREGEXP } from './validation';
 
 function validGenderForBreed(gender: DragonGender, breed: BreedEntry): boolean {
   // if the genderonly attribute is not false,

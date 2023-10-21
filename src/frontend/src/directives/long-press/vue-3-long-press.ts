@@ -1,27 +1,35 @@
 import type { DirectiveBinding } from 'vue';
 import './style.css';
 
+type LongPressEvent<T extends Event = Event> = T;
+
 const noSelectClass = 'long-press-no-select';
 
 let timeout: number;
 let longPressActivated: boolean = false;
 
-const prevent = (event: Event) => event.preventDefault();
-
-function isRightMouseButton(e: Event) {
-  return (
-    'pointerType' in e &&
-    e.pointerType === 'mouse' &&
-    'button' in e &&
-    e.button === 2
-  );
+function prevent(event: Event) {
+  event.preventDefault();
 }
+
+function isRightMouseButton(e: PointerEvent): boolean {
+  return e.pointerType === 'mouse' && e.button === 2;
+}
+
+function clearPress() {
+  clearTimeout(timeout);
+  longPressActivated = false;
+}
+
 export default {
   beforeMount(
     el: HTMLElement,
     binding: DirectiveBinding<{
       wait?: number;
       disableRightClickMenu?: boolean;
+      onLongPress?: (e: LongPressEvent) => void;
+      onClick?: (e: LongPressEvent) => void;
+      onPress?: (e: LongPressEvent) => void;
     }>,
   ) {
     const {
@@ -37,9 +45,7 @@ export default {
     function handleDown<T extends Event>(e: T) {
       longPressActivated = false;
 
-      if (isRightMouseButton(e)) {
-        return;
-      }
+      if (e instanceof PointerEvent && isRightMouseButton(e)) return;
 
       timeout = window.setTimeout(() => {
         longPressActivated = true;
@@ -54,9 +60,7 @@ export default {
     }
 
     function handleUp<T extends Event>(e: T) {
-      if (isRightMouseButton(e)) {
-        return;
-      }
+      if (e instanceof PointerEvent && isRightMouseButton(e)) return;
 
       // it's a click if the threshold for a long press hasn't been
       // activated
@@ -67,29 +71,16 @@ export default {
       }
     }
 
-    const events = [
-      ['pointerdown', handleDown<PointerEvent>],
-      ['pointerup', handleUp<PointerEvent>],
-      [
-        'pointerout',
-        () => {
-          clearTimeout(timeout);
-          longPressActivated = false;
-        },
-      ],
-      [
-        'keyup',
-        (e: KeyboardEvent) => {
-          if (e.code === 'Space') handleUp<KeyboardEvent>(e);
-        },
-      ],
-    ];
+    el.addEventListener('pointerdown', handleDown);
+    el.addEventListener('pointerup', handleUp);
+    el.addEventListener('pointerout', clearPress);
+    el.addEventListener('keyup', (e: KeyboardEvent) => {
+      if (e.code === 'Space') handleUp<KeyboardEvent>(e);
+    });
 
     if (disableRightClickMenu) {
-      events.push(['contextmenu', prevent]);
+      el.addEventListener('contextmenu', prevent);
     }
-
-    events.forEach((event) => el.addEventListener(...event));
 
     el.classList.add(noSelectClass);
   },

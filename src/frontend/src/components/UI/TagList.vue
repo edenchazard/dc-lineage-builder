@@ -12,8 +12,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, PropType } from 'vue';
-import { TagListOption } from '../../app/types';
+import { ref } from 'vue';
+import type { PropType } from 'vue';
+import type { TagListOption } from '../../app/types';
 import { deepClone } from '../../app/utils';
 const props = defineProps({
   // Accepts a mixed array of { name, active }

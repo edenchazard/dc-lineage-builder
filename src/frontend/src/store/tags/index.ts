@@ -1,13 +1,9 @@
-import { computed, ComputedRef, ref, WritableComputedRef } from 'vue';
+import { computed, ref } from 'vue';
+import type { ComputedRef, WritableComputedRef } from 'vue';
 import { defineStore } from 'pinia';
 import { deepClone } from '../../app/utils';
-import {
-  TagListOption,
-  filterTags,
-  eggGroups,
-  FilterTag,
-  EggGroupTag,
-} from '../../app/types';
+import type { TagListOption, FilterTag, EggGroupTag } from '../../app/types';
+import { filterTags, eggGroups } from '../../app/types';
 
 interface SessionTagSet {
   key: string;

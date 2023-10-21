@@ -17,8 +17,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { nextTick, PropType, watch, computed, ref } from 'vue';
-import { FilterTag, EggGroupTag, PortraitData } from '../../app/types';
+import { nextTick, watch, computed, ref } from 'vue';
+import type { PropType } from 'vue';
+import type { FilterTag, EggGroupTag, PortraitData } from '../../app/types';
 import { filterEggGroups, filterTags } from '../../app/utils';
 import BreedGrid from './BreedGrid.vue';
 

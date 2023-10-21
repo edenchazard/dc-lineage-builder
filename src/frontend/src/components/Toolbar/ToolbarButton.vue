@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import { FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
-import { PropType } from 'vue';
+import type { FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
+import type { PropType } from 'vue';
 
 defineProps({
   icon: {

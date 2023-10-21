@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import VirtualCollection from 'vue-virtual-collection/src/VirtualCollection.vue';
 import { getCurrentInstance, onMounted, ref } from 'vue';
-import { PortraitData } from '../../app/types';
+import type { PortraitData } from '../../app/types';
 import DragonPortrait from '../Lineage/Dragon/DragonPortrait.vue';
 
 defineProps({

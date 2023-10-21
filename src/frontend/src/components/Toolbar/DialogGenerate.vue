@@ -33,8 +33,9 @@
   </Dialog>
 </template>
 <script setup lang="ts">
-import { onMounted, PropType, ref } from 'vue';
-import { verifyIntegrity, meetsSaveRequirements } from '../../app/validators';
+import { onMounted, ref } from 'vue';
+import type { PropType } from 'vue';
+import type { DragonType, PartialLineageWithMetadata } from '../../app/types';
 import { createLineageLink, makeError } from '../../app/utils';
 import { saveLineage } from '../../app/api';
 
@@ -42,9 +43,8 @@ import Dialog from '../UI/Dialog.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
 import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
-import { DragonType, PartialLineageWithMetadata } from '../../app/types';
 import settings from '../../app/settings';
-import Lineage from '../../app/dragon';
+import { Lineage } from '../../app/lineageHandler';
 
 const props = defineProps({
   tree: {
@@ -115,3 +115,4 @@ onMounted(async () => {
   }
 });
 </script>
+../../app/lineageHandler

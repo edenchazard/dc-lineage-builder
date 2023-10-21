@@ -41,23 +41,24 @@
 <script setup lang="ts">
 /* eslint-disable no-redeclare */
 //todo fix @updateConfig="(key, value) => config[key] = value"
-import { hasParents } from '../../app/utils';
-import { getLineage } from '../../app/api';
-import { useAppStore } from '../../store/app';
-import {
+import { onMounted, reactive, ref } from 'vue';
+import { onBeforeRouteLeave, useRoute } from 'vue-router';
+import { useFullscreen } from '@vueuse/core';
+import type {
   DragonType,
   DragonDisplay,
   LineageConfig,
   DragonTypeWithMetadata,
 } from '../../app/types';
 
+import { hasParents } from '../../app/utils';
+import { getLineage } from '../../app/api';
+import { useAppStore } from '../../store/app';
 import Toolbar from '../../components/Toolbar/Toolbar.vue';
 import Lineage from '../../components/Lineage/Lineage.vue';
-import LineageHandler, { DragonBuilder } from '../../app/dragon';
 import Feedback from '../../components/UI/Feedback.vue';
-import { onMounted, reactive, ref } from 'vue';
-import { onBeforeRouteLeave, useRoute } from 'vue-router';
-import { useFullscreen } from '@vueuse/core';
+import { Lineage as LineageHandler } from '../../app/lineageHandler';
+import { DragonBuilder } from '../../app/dragonBuilder';
 
 const route = useRoute();
 const appStore = useAppStore();
@@ -174,8 +175,8 @@ function selectionAddParents() {
   applyToSelected((dragon) => {
     if (!hasParents(dragon)) {
       dragon.parents = {
-        m: DragonBuilder.create({ gender: 'm' }),
-        f: DragonBuilder.create({ gender: 'f' }),
+        m: DragonBuilder.createWithMetadata({ gender: 'm' }),
+        f: DragonBuilder.createWithMetadata({ gender: 'f' }),
       };
     }
   });
@@ -226,3 +227,4 @@ function selectBy(condition: (dragon: DragonType) => boolean) {
   user-select: none;
 }
 </style>
+../../app/lineageHandler

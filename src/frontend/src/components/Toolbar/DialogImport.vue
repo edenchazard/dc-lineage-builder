@@ -26,17 +26,16 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-import { verifyIntegrity } from '../../app/validators';
+import type { PartialLineageWithMetadata } from '../../app/types';
 
 import Dialog from '../UI/Dialog.vue';
 import Textbox from '../UI/Textbox.vue';
 import Feedback from '../UI/Feedback.vue';
-import Lineage from '../../app/dragon';
-import { DragonTypeWithMetaData, PartialLineage } from '../../app/types';
+import { Lineage } from '../../app/lineageHandler';
 
 const emit = defineEmits<{
   (e: 'close'): void;
-  (e: 'onImport', tree: PartialLineage<DragonTypeWithMetaData>): void;
+  (e: 'onImport', tree: PartialLineageWithMetadata): void;
 }>();
 
 const file = ref('');

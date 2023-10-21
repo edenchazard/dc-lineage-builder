@@ -3,9 +3,9 @@
     :class="[
       'dragon-label',
       display === 1 ? 'code' : 'name',
-      { invalid: warnInvalid && !editing },
+      { invalid: !isInvalid && !editing },
     ]"
-    :title="warnInvalid ? 'Warning: Label does not meet DC requirements' : ''"
+    :title="isInvalid ? 'Warning: Label does not meet DC requirements' : ''"
     tabindex="0"
     @focus="click"
     @click="click"
@@ -34,14 +34,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
-import {
-  validateCode,
-  validateName,
-  CODEREGEXP,
-  NAMEREGEXP,
-} from '../../../app/validators';
-import { DragonBuilder } from '../../../app/dragon';
+import { nextTick, ref, watchEffect } from 'vue';
+import { reach } from 'yup';
+import { dragonSchema, CODEREGEXP, NAMEREGEXP } from '../../../app/validation';
+import { DragonBuilder } from '../../../app/dragonBuilder';
 
 const props = defineProps({
   value: {
@@ -66,12 +62,22 @@ const emit = defineEmits<{
 const editing = ref(false);
 const inputEl = ref<HTMLInputElement>();
 
-function validate() {
-  const validator = props.display === 1 ? validateCode : validateName;
-  return !validator(props.value);
+const isInvalid = ref<boolean>(false);
+
+async function validate(value: string) {
+  const result = await reach(
+    dragonSchema,
+    props.display === 1 ? 'name' : 'code',
+  ).isValid(value);
+  console.log(props.value, !result);
+  return !result;
 }
 
-const warnInvalid = computed(validate);
+// can't use async computed apparently.
+watchEffect(async () => {
+  console.log(props.value);
+  isInvalid.value = await validate(props.value);
+});
 
 function click() {
   // don't act when disabled

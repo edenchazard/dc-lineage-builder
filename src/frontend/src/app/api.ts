@@ -1,5 +1,6 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { DragonType, PartialLineage } from './types';
+import axios, { AxiosError } from 'axios';
+import type { AxiosRequestConfig } from 'axios';
+import type { DragonType, PartialLineage } from './types';
 
 interface APIResponse {
   errors: Array<{ type: 'Warning' | 'Error'; message: string }>;
