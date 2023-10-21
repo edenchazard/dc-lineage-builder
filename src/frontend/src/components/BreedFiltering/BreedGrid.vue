@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import VirtualCollection from 'vue-virtual-collection/src/VirtualCollection.vue';
 import { onMounted, ref, getCurrentInstance, computed, watch } from 'vue';
-import { PortraitData } from '../../app/types';
+import type { PortraitData } from '../../app/types';
 import DragonPortrait from '../Lineage/Dragon/DragonPortrait.vue';
 import { useElementSize } from '@vueuse/core';
 

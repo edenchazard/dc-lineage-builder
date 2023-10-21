@@ -1,31 +1,39 @@
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
-import { LineageRoot, PartialLineage } from '../../app/types';
-import { createDragonProperties } from '../../app/dragonBuilder';
+import type { PartialLineageWithMetadata } from '../../app/types';
 import { useTreeAnalyser } from './useTreeAnalyser';
+import { DragonBuilder } from '../../app/dragonBuilder';
+import { Lineage } from '../../app/lineageHandler';
 
 export const useAppStore = defineStore('appStore', () => {
   const appVersion = import.meta.env.VITE_APP_VERSION;
-  const activeTree = ref<null | LineageRoot>(null);
+  const activeTree = ref<PartialLineageWithMetadata>(Lineage().raw());
+  const lineage = computed(() => Lineage(activeTree.value));
   const analytics = useTreeAnalyser(activeTree, 5);
 
   // These two functions have to be in the store so that the
   // Dragon components can call them. I would prefer them in
   // The builder component but we can't have everything...
-  function replaceRoot(node: PartialLineage) {
+  function replaceRoot(node: PartialLineageWithMetadata) {
     // replace the tree
-    activeTree.value = node;
+    activeTree.value = Lineage(node, true).raw();
   }
 
   function addDescendant() {
     // check current root if exists
     if (activeTree.value === null) return;
 
-    const newTree = createDragonProperties();
+    const newTree = Lineage().raw();
     newTree.parents =
       activeTree.value.gender === 'f'
-        ? { f: activeTree.value, m: createDragonProperties({ gender: 'm' }) }
-        : { f: createDragonProperties({ gender: 'f' }), m: activeTree.value };
+        ? {
+            f: activeTree.value,
+            m: DragonBuilder.createWithMetadata({ gender: 'm' }),
+          }
+        : {
+            f: DragonBuilder.createWithMetadata({ gender: 'f' }),
+            m: activeTree.value,
+          };
 
     // replace the existing root with the new tree.
     activeTree.value = newTree;
@@ -39,5 +47,6 @@ export const useAppStore = defineStore('appStore', () => {
     addDescendant,
     replaceRoot,
     treeHistory: analytics.history,
+    lineage,
   };
 });

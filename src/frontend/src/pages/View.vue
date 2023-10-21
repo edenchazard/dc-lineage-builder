@@ -43,8 +43,8 @@
 import { reactive, ref, onBeforeUnmount, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
+import type { LineageConfig, PartialLineage } from '../app/types';
 import { getLineage } from '../app/api';
-import { LineageConfig, LineageRoot } from '../app/types';
 import { createLineageLink } from '../app/utils';
 
 import Lineage from '../components/Lineage/Lineage.vue';
@@ -52,7 +52,7 @@ import Textbox from '../components/UI/Textbox.vue';
 import Feedback from '../components/UI/Feedback.vue';
 
 const route = useRoute();
-const tree = ref<null | LineageRoot>(null);
+const tree = ref<null | PartialLineage>(null);
 const hash = route.params.hash as string;
 const shareLink = createLineageLink(hash);
 const status = ref<InstanceType<typeof Feedback>>();

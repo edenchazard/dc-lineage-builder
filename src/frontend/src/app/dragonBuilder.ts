@@ -4,76 +4,95 @@ import {
   colors,
   animals,
 } from 'unique-names-generator';
-
 import GLOBALS from './globals';
-import { DragonParents, DragonType, EmptyParents } from './types';
-import { getBreedData } from './utils';
+import type {
+  PartialLineageWithMetadata,
+  MaybePartialLineageWithMetadata,
+  DragonTypeWithMetadata,
+  DragonType,
+} from './types';
+import { getBreedData, hasParents } from './utils';
 
-export function generateCode() {
-  const characters =
-    '1234567890ABCDEFGHIJKLMNOPQRTUVWXYZabcdefghijklmnopqrstuvwyz';
-  let str = '';
-  for (let i = 0; i < 5; ++i) {
-    str += characters[~~(Math.random() * characters.length)];
+export class DragonBuilder {
+  public static createWithMetadata(
+    attributes: Partial<DragonTypeWithMetadata> = {},
+  ): PartialLineageWithMetadata {
+    return {
+      ...this.create(),
+      selected: false,
+      ...attributes,
+    } as DragonTypeWithMetadata;
   }
-  return str;
-}
 
-export function generateName() {
-  return uniqueNamesGenerator({
-    dictionaries: [names, colors, animals],
-    length: 2,
-    separator: ' ',
-    style: 'capital',
-  });
-}
+  public static create(attributes: Partial<DragonType> = {}) {
+    return {
+      code: this.generateCode(),
+      name: this.generateName(),
+      parents: {},
+      breed: GLOBALS.placeholder.name,
+      gender: 'm',
+      display: 1,
+      ...attributes,
+    } as DragonType;
+  }
 
-export function createDragonProperties(changes?: Partial<DragonType>) {
-  const defaults: DragonType = {
-    code: generateCode(),
-    name: generateName(),
-    parents: {},
-    breed: GLOBALS.placeholder.name,
-    gender: 'm',
-    display: 1,
-    selected: false,
-  };
+  public static generateCode(): string {
+    const characters =
+      '1234567890ABCDEFGHIJKLMNOPQRTUVWXYZabcdefghijklmnopqrstuvwyz';
+    let str = '';
+    for (let i = 0; i < 5; ++i) {
+      str += characters[~~(Math.random() * characters.length)];
+    }
+    return str;
+  }
 
-  return changes === undefined ? defaults : { ...defaults, ...changes };
-}
+  public static generateName(): string {
+    return uniqueNamesGenerator({
+      dictionaries: [names, colors, animals],
+      length: 2,
+      separator: ' ',
+      style: 'capital',
+    });
+  }
 
-export function cloneDragon(dragon: DragonType) {
-  return {
-    ...dragon,
-    selected: false,
-  };
-}
+  public static clone(dragon: DragonType) {
+    return {
+      ...dragon,
+      selected: false,
+    };
+  }
 
-// Takes a parents object and switches the two
-// If null, returns null
-export function switchParents(parents: DragonParents | EmptyParents) {
-  // check it has parents
-  if (parents === null) return {};
+  // Takes a parents object and switches the two
+  // If null, returns null
+  public static switchParents(
+    dragon: MaybePartialLineageWithMetadata,
+  ): MaybePartialLineageWithMetadata {
+    // check it has parents
+    if (!hasParents(dragon)) return dragon;
 
-  const switchGender = (dragon: DragonType) => {
-    const newGender = dragon.gender === 'f' ? 'm' : 'f';
+    const switched = (
+      dragon: MaybePartialLineageWithMetadata,
+    ): MaybePartialLineageWithMetadata => {
+      const newGender = dragon.gender === 'f' ? 'm' : 'f';
 
-    const breed = getBreedData(dragon.breed);
+      const breed = getBreedData(dragon.breed);
 
-    // todo
-    if (breed!.genderOnly) dragon.breed = GLOBALS.placeholder.name;
+      // todo
+      if (breed!.genderOnly) dragon.breed = GLOBALS.placeholder.name;
 
-    dragon.gender = newGender;
-  };
+      Object.assign(dragon.gender, newGender);
+      return dragon;
+    };
 
-  // make a new branch with the parents switched
-  const newParents: DragonParents = {
-    m: parents.f,
-    f: parents.m,
-  };
+    // make a new branch with the parents switched
+    const newParents = {
+      ...dragon,
+      parents: {
+        m: switched(dragon.parents.f),
+        f: switched(dragon.parents.m),
+      },
+    };
 
-  switchGender(newParents.m);
-  switchGender(newParents.f);
-
-  return newParents;
+    return newParents;
+  }
 }

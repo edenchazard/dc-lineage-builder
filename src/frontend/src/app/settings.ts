@@ -1,8 +1,8 @@
 interface TileSize {
   width: number;
   height: number;
-  widthpx: string;
-  heightpx: string;
+  widthPX: string;
+  heightPX: string;
 }
 interface Settings {
   ghostBreedSize: number;
@@ -15,20 +15,20 @@ interface Settings {
   };
 }
 
-function createTilesize(w: number, h: number): TileSize {
+function createTileSize(w: number, h: number): TileSize {
   return {
     width: w,
     height: h,
-    widthpx: `${w}px`,
-    heightpx: `${h}px`,
+    widthPX: `${w}px`,
+    heightPX: `${h}px`,
   };
 }
 
 const settings: Settings = {
   ghostBreedSize: 20000,
   tileSizes: {
-    fullSize: createTilesize(36, 48),
-    twoThirds: createTilesize(24, 32),
+    fullSize: createTileSize(36, 48),
+    twoThirds: createTileSize(24, 32),
   },
   // inclusive
   gens: {

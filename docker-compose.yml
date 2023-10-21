@@ -5,6 +5,7 @@ services:
     build:
       context: ./src/frontend
       dockerfile: ./df.Dockerfile
+    command: tail -F anything
     volumes:
       - ./src/frontend:/app
       - /app/node_modules

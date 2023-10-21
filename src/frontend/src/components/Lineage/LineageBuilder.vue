@@ -36,24 +36,26 @@
 </template>
 
 <script setup lang="ts">
+/* eslint-disable no-redeclare */
 //todo fix @updateConfig="(key, value) => config[key] = value"
-import * as dragonBuilder from '../../app/dragonBuilder';
-import { forEveryDragon, hasParents } from '../../app/utils';
-import { getLineage } from '../../app/api';
-import { useAppStore } from '../../store/app';
-import {
-  LineageRoot,
+import { onMounted, reactive, ref } from 'vue';
+import { onBeforeRouteLeave, useRoute } from 'vue-router';
+import { useFullscreen } from '@vueuse/core';
+import type {
   DragonType,
   DragonDisplay,
   LineageConfig,
+  DragonTypeWithMetadata,
 } from '../../app/types';
 
+import { hasParents } from '../../app/utils';
+import { getLineage } from '../../app/api';
+import { useAppStore } from '../../store/app';
 import Toolbar from '../../components/Toolbar/Toolbar.vue';
 import Lineage from '../../components/Lineage/Lineage.vue';
 import Feedback from '../../components/UI/Feedback.vue';
-import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { useFullscreen } from '@vueuse/core';
+import { Lineage as LineageHandler } from '../../app/lineageHandler';
+import { DragonBuilder } from '../../app/dragonBuilder';
 
 const route = useRoute();
 const appStore = useAppStore();
@@ -70,15 +72,9 @@ onMounted(async () => {
   if (!status.value) return;
 
   const hash = route.query.template as string | undefined;
-  const starterTree = () => {
-    appStore.activeTree = dragonBuilder.createDragonProperties();
-    appStore.treeHistory.clear();
-  };
 
-  // No template, so start from scratch
-  if (hash === undefined) starterTree();
-  // the user has requested we import from an already built lineage.
-  else {
+  // the user has requested we import from a stored built lineage.
+  if (hash !== undefined)
     try {
       status.value.info({
         message: `Loading template... For big lineages, this can take a moment to load.`,
@@ -91,58 +87,57 @@ onMounted(async () => {
       // there were errors, display them and default back to an empty lineage.
       if (response.errors.length > 0) {
         status.value.update(response.errors);
-        starterTree();
         return;
       }
 
-      const savedTree = forEveryDragon(
-        response.data.lineage,
-
-        // add selection data
-        (dragon) => (dragon.selected = false),
-      );
-
       status.value.close(() => {
-        appStore.activeTree = savedTree;
+        appStore.activeTree = LineageHandler(response.data.lineage).raw();
       });
-    } catch (ex) {
-      status.value.error(ex.message);
-      starterTree();
+    } catch (ex: unknown) {
+      if (ex instanceof Error) {
+        status.value.error(ex.message);
+      }
     }
-  }
 });
 
-// reset stuff
+// reset stuff on leave
 // tree can be a large memory hog, and gc doesn't always get to it immediately.
-onBeforeUnmount(() => (appStore.activeTree = null));
+onBeforeRouteLeave(() => {
+  const x = LineageHandler();
+  appStore.replaceRoot(x.tree);
+});
 
 /**
  * Updates the tree
  * @param callback Callback to perform on each dragon node
  */
-function updateTree(callback: (dragon: DragonType) => void): void {
-  appStore.activeTree = forEveryDragon(
-    appStore.activeTree as LineageRoot,
-    callback,
-  );
+function updateTree(callback: (dragon: DragonTypeWithMetadata) => void): void {
+  appStore.activeTree = appStore.lineage.every(callback);
 }
 
 // Accepts a callback
 // Or a key and the value to change it to
-function applyToSelected(callback: (dragon: DragonType) => void): void;
-function applyToSelected(key: keyof DragonType, value: unknown): void;
 function applyToSelected(
-  keyOrCallback: keyof DragonType | ((dragon: DragonType) => void),
+  callback: (dragon: DragonTypeWithMetadata) => void,
+): void;
+function applyToSelected(
+  key: keyof DragonTypeWithMetadata,
+  value: unknown,
+): void;
+function applyToSelected(
+  keyOrCallback:
+    | keyof DragonTypeWithMetadata
+    | ((dragon: DragonTypeWithMetadata) => void),
   value?: unknown,
 ) {
   if (typeof keyOrCallback === 'string') {
     const key = keyOrCallback.toString();
-    updateTree((dragon) => {
-      if (dragon.selected) dragon[key] = value;
+    appStore.activeTree = appStore.lineage.every((dragon) => {
+      if (dragon.selected && key in dragon) dragon[key] = value;
     });
   } else if (typeof keyOrCallback === 'function') {
     const callback = keyOrCallback;
-    updateTree((dragon) => {
+    appStore.activeTree = appStore.lineage.every((dragon) => {
       if (dragon.selected) callback(dragon);
     });
   }
@@ -177,8 +172,8 @@ function selectionAddParents() {
   applyToSelected((dragon) => {
     if (!hasParents(dragon)) {
       dragon.parents = {
-        m: dragonBuilder.createDragonProperties({ gender: 'm' }),
-        f: dragonBuilder.createDragonProperties({ gender: 'f' }),
+        m: DragonBuilder.createWithMetadata({ gender: 'm' }),
+        f: DragonBuilder.createWithMetadata({ gender: 'f' }),
       };
     }
   });
@@ -188,14 +183,14 @@ function selectionSwitchParents() {
   applyToSelected((dragon) => {
     // no parents, ignore
     if (!hasParents(dragon)) return;
-    dragon.parents = dragonBuilder.switchParents(dragon.parents);
+    //dragon.parents = dragonBuilder.switchParents(dragon.parents);
   });
 }
 
 function selectionRandomizeLabels() {
   applyToSelected((dragon) => {
-    if (dragon.display === 0) dragon.name = dragonBuilder.generateName();
-    else dragon.code = dragonBuilder.generateCode();
+    if (dragon.display === 0) dragon.name = DragonBuilder.generateName();
+    else dragon.code = DragonBuilder.generateCode();
   });
 }
 
@@ -232,3 +227,4 @@ function selectBy(condition: (dragon: DragonType) => boolean) {
   }
 }
 </style>
+../../app/lineageHandler

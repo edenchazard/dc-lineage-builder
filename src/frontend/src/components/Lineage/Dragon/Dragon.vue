@@ -8,14 +8,14 @@
       @close="showBreedSelector = false"
     />
     <div class="tile">
-      <DragonButton
+      <TileButton
         v-if="nodesFromRoot === 0"
         class="tile-button-left tile-button-add-desc"
         title="Add descendant"
         icon="arrow-left"
         @click="addDescendant"
       />
-      <DragonButton
+      <TileButton
         v-if="nodesFromRoot > 0"
         class="tile-button-left tile-button-remove-desc"
         title="Remove descendants"
@@ -46,14 +46,14 @@
         :title="problems"
         :aria-label="problems"
       />
-      <DragonButton
+      <TileButton
         v-if="hasAncestry"
         class="tile-button-right"
         title="Remove ancestors"
         icon="minus"
         @click="deleteAncestors"
       />
-      <DragonButton
+      <TileButton
         v-else
         class="tile-button-right"
         title="Add ancestors"
@@ -67,31 +67,31 @@
         @changed="labelChanged"
       />
       <div class="tile-bottom-controls tile-button-group">
-        <DragonButton
+        <TileButton
           v-if="nodesFromRoot === 0 && data.gender === 'm'"
           title="Switch gender to female"
           icon="mars"
           @click="switchGender"
         />
-        <DragonButton
+        <TileButton
           v-else-if="nodesFromRoot === 0 && data.gender === 'f'"
           title="Switch gender to male"
           icon="venus"
           @click="switchGender"
         />
-        <DragonButton
+        <TileButton
           class="switchLabel"
           title="Switch label"
           icon="font"
           @click="switchLabel"
         />
-        <DragonButton
+        <TileButton
           v-if="hasAncestry"
           title="Copy ancestors"
           icon="clone"
           @click="copyBranch"
         />
-        <DragonButton
+        <TileButton
           title="Paste ancestors"
           icon="paste"
           @click="pasteBranch"
@@ -103,12 +103,12 @@
       class="tile-parents"
     >
       <Dragon
-        :data="data.parents.m"
+        :data="data.parents.m as DragonTypeWithMetadata"
         :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
       />
       <Dragon
-        :data="data.parents.f"
+        :data="data.parents.f as DragonTypeWithMetadata"
         :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
       />
@@ -118,41 +118,38 @@
 
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
-import { computed, PropType, ref } from 'vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { computed, ref } from 'vue';
+import type { PropType } from 'vue';
 import vOnLongPress from '../../../directives/long-press/vue-3-long-press';
+import type {
+  BreedEntry,
+  DragonParents,
+  DragonTypeWithMetadata,
+  PartialLineageWithMetadata,
+  PortraitData,
+} from '../../../app/types';
 import GLOBALS from '../../../app/globals';
 import {
   getBreedData,
-  deepClone,
-  forEveryDragon,
   getTable,
   breedEntryToPortrait,
   expandGender,
   hasParents,
 } from '../../../app/utils';
-import {
-  switchParents,
-  createDragonProperties,
-} from '../../../app/dragonBuilder';
 import { useAppStore } from '../../../store/app';
-import { validateCode, validateName } from '../../../app/validators';
-
 import DragonLabel from './DragonLabel.vue';
 import BreedSelector from '../../BreedSelector/BreedSelector.vue';
 import DragonPortrait from './DragonPortrait.vue';
-import DragonButton from './TileButton.vue';
-import {
-  BreedEntry,
-  DragonParents,
-  DragonType,
-  PortraitData,
-} from '../../../app/types';
+import TileButton from './TileButton.vue';
+import { Lineage } from '../../../app/lineageHandler';
+import { DragonBuilder } from '../../../app/dragonBuilder';
+import { dragonSchema } from '../../../app/validation';
+import { reach } from 'yup';
 
 const props = defineProps({
   // Dragon properties
   data: {
-    type: Object as PropType<DragonType>,
+    type: Object as PropType<PartialLineageWithMetadata>,
     required: true,
   },
   // Whether to disable the click
@@ -187,8 +184,13 @@ const getImage = computed(() => {
 const problems = computed(() => {
   const errs = [];
 
-  if (!validateCode(props.data.code)) errs.push('Code is invalid.');
-  if (!validateName(props.data.name)) errs.push('Name is invalid.');
+  /*   if ((await reach(dragonSchema, 'name').isValid(props.data.name)) === false) {
+    errs.push('Name is invalid.');
+  }
+
+  if ((await reach(dragonSchema, 'code').isValid(props.data.code)) === false) {
+    errs.push('Code is invalid.');
+  } */
 
   return errs.join('');
 });
@@ -244,15 +246,16 @@ function copyBranch() {
   // Do nothing if no parents
   if (!hasAncestry.value) return;
 
-  const noSelect = deepClone({ parents: props.data.parents });
+  const raw = Lineage(props.data).raw();
 
-  // We have to make sure we deselect all of them, or they'll
-  // be copied as selected lol
-  const cb = (dragon: DragonType) => (dragon.selected = false);
-  forEveryDragon(noSelect.parents!.f, cb);
-  forEveryDragon(noSelect.parents!.m, cb);
-
-  ls.setItem('clipboard', JSON.stringify({ ...noSelect.parents }));
+  if (!hasParents(raw)) return;
+  ls.setItem(
+    'clipboard',
+    JSON.stringify({
+      m: Lineage(raw.parents.m).withoutMetadata(),
+      f: Lineage(raw.parents.f).withoutMetadata(),
+    }),
+  );
 }
 
 // this is a bit stupid. basically, we have to make a new root node
@@ -267,11 +270,10 @@ function addDescendant() {
 
 // adds a new node to the tree
 function addAncestors() {
-  const parents: DragonParents = {
-    m: createDragonProperties({ gender: 'm' }),
-    f: createDragonProperties({ gender: 'f' }),
+  props.data.parents = {
+    m: DragonBuilder.createWithMetadata({ gender: 'm' }),
+    f: DragonBuilder.createWithMetadata({ gender: 'f' }),
   };
-  props.data.parents = parents;
 }
 
 // deletes this node and ancestors

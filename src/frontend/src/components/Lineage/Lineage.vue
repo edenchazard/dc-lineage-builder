@@ -18,16 +18,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
-import { LineageConfig, LineageRoot } from '../../app/types';
-import { countGenerations } from '../../app/utils';
+import { computed } from 'vue';
+import type { PropType } from 'vue';
+import type {
+  LineageConfig,
+  PartialLineageWithMetadata,
+} from '../../app/types';
 
 import Dragon from './Dragon/Dragon.vue';
 import LineageGenerationCounter from './LineageGenerationCounter.vue';
+import { Lineage } from '../../app/lineageHandler';
 
 const props = defineProps({
   root: {
-    type: Object as PropType<LineageRoot> | null,
+    type: Object as PropType<PartialLineageWithMetadata> | null,
     required: true,
     default: null,
   },
@@ -43,8 +47,7 @@ const props = defineProps({
 });
 
 const generations = computed(() => {
-  if (props.root === null) return 0;
-  return countGenerations(props.root);
+  return props.root ? Lineage(props.root).generations() : 0;
 });
 </script>
 

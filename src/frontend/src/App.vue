@@ -31,6 +31,8 @@
 
 <script setup lang="ts">
 import 'reset-css';
+import { watch } from 'vue';
+import { useDevicePixelRatio } from '@vueuse/core';
 import { useRoute } from 'vue-router';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './assets/styling/style.css';
@@ -41,6 +43,22 @@ import SkinSwitcher from './components/Page/Header/SkinSwitcher.vue';
 
 const route = useRoute();
 const appStore = useAppStore();
+
+const { pixelRatio } = useDevicePixelRatio();
+
+/* dynamically load and apply the correct spritesheet depending on
+ pixel ratio */
+watch(
+  pixelRatio,
+  () => {
+    if (pixelRatio.value <= 1) {
+      import('./assets/tile-rendering/sprites-36x48.css');
+    } else {
+      import('./assets/tile-rendering/sprites-72x96.css');
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <style>

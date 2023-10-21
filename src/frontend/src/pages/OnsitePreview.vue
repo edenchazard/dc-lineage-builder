@@ -81,7 +81,7 @@
 </div> */
 import { ref, nextTick } from 'vue';
 import { getOnSitePreview } from '../app/api';
-import { validateCode } from '../app/validators';
+import { validateCode } from '../../../../trash/validators';
 import OnSitePreview from '../components/OnsitePreview.vue';
 import LineageGenerationCounter from '../components/Lineage/LineageGenerationCounter.vue';
 import Feedback from '../components/UI/Feedback.vue';
@@ -175,3 +175,4 @@ async function fetchLineage(e: Event) {
   overflow-x: auto;
 }
 </style>
+../app/validation

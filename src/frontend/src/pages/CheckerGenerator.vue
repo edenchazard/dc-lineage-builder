@@ -129,11 +129,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-
-import { PortraitData, Gender, BreedEntry } from '../app/types';
+import { ref, watch } from 'vue';
+import type { PortraitData, DragonGender, BreedEntry } from '../app/types';
 import GLOBALS from '../app/globals';
-import { createDragonProperties } from '../app/dragonBuilder';
 import { breedEntryToPortrait, expandGender, getBreedData } from '../app/utils';
 import { useTagStore } from '../store/tags';
 
@@ -146,8 +144,9 @@ import DialogGenerate from '../components/dialogs/DialogGenerate.vue';
 import ToolbarButton from '../components/Toolbar/ToolbarButton.vue';
 import BreedSearchControl from '../components/BreedFiltering/BreedSearchControl.vue';
 import DragonPortrait from '../components/Lineage/Dragon/DragonPortrait.vue';
+import { DragonBuilder } from '../app/dragonBuilder';
 
-const tree = ref(createDragonProperties());
+const tree = ref(DragonBuilder.createWithMetadata());
 const tagStore = useTagStore();
 const maleBreed = ref(GLOBALS.placeholder.name);
 const hoverMaleBreed = ref(GLOBALS.placeholder.name);
@@ -180,14 +179,14 @@ function selectFemale(breed: PortraitData) {
   updateTree('f');
 }
 
-function updateTree(finalGenGender?: Gender) {
+function updateTree(finalGenGender?: DragonGender) {
   const createParents = (gen: number) => {
     const branch = {
-      m: createDragonProperties({
+      m: DragonBuilder.createWithMetadata({
         gender: 'm',
         breed: maleBreed.value,
       }),
-      f: createDragonProperties({
+      f: DragonBuilder.createWithMetadata({
         gender: 'f',
         breed: femaleBreed.value,
       }),
@@ -202,14 +201,14 @@ function updateTree(finalGenGender?: Gender) {
 
   // The breed and gender of the final dragon (meaning) the highest gen
   // should always be the last selected
-  const final: { gender: Gender; breed: string } =
+  const final: { gender: DragonGender; breed: string } =
     finalGenGender === 'f'
       ? { gender: 'f', breed: femaleBreed.value }
       : // defaults to male
         { gender: 'm', breed: maleBreed.value };
 
   // update our tree
-  tree.value = createDragonProperties({
+  tree.value = DragonBuilder.createWithMetadata({
     ...final,
     parents: createParents(2),
   });

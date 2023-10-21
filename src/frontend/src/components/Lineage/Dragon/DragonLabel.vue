@@ -26,9 +26,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
-import { generateName, generateCode } from '../../../app/dragonBuilder';
-import { validateCode, validateName } from '../../../app/validators';
+import { nextTick, ref, watchEffect, computed } from 'vue';
+import { reach } from 'yup';
+import { dragonSchema, CODEREGEXP, NAMEREGEXP } from '../../../app/validation';
+import { DragonBuilder } from '../../../app/dragonBuilder';
 
 const props = defineProps({
   value: {
@@ -82,7 +83,10 @@ function finishedEditing(e: Event) {
 
   // if a blank string is given, we'll generate a new name or code
   if (value === '')
-    value = props.display === 1 ? generateCode() : generateName();
+    value =
+      props.display === 1
+        ? DragonBuilder.generateCode()
+        : DragonBuilder.generateName();
 
   emit('changed', value);
   editing.value = false;

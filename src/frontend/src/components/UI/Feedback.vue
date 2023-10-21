@@ -39,7 +39,8 @@
   </TransitionGroup>
 </template>
 <script setup lang="ts">
-import { onBeforeUnmount, PropType, ref } from 'vue';
+import { onBeforeUnmount, ref } from 'vue';
+import type { PropType } from 'vue';
 
 const Feedbacks = {
   None: 'none',

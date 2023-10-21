@@ -1,6 +1,12 @@
-import { isBreedInList, countGenerations, getBreedData } from './utils';
-import GLOBALS from './globals';
-import settings from './settings';
+import { object, string, number, date, InferType, mixed } from "yup";
+import type { ObjectSchema } from "yup";
+import {
+  isBreedInList,
+  countGenerations,
+  getBreedData,
+} from "../src/frontend/src/app/utils";
+import GLOBALS from "../src/frontend/src/app/globals";
+import settings from "../src/frontend/src/app/settings";
 import {
   DragonDisplay,
   DragonParents,
@@ -8,12 +14,24 @@ import {
   Gender,
   LineageRoot,
   EmptyParents,
-} from './types';
-import { createTester } from './minitester';
+  DragonTypeWithMetadata,
+} from "../src/frontend/src/app/types";
+import { createTester } from "../src/frontend/src/app/minitester";
+import dragon from "../src/frontend/src/app/dragon";
 
 const NAMEREGEXP = /^^[a-zA-Z0-9]([a-zA-Z0-9 '-]{1,32})[a-zA-Z0-9]$/;
 const CODEREGEXP = /^[a-zA-Z0-9]{4,5}$/;
 const BREEDNAMEREGEXP = /^[a-zA-Z0-9 ]{1,32}$/;
+
+const dragonSchema: ObjectSchema<DragonType> = object({
+  name: string().required().matches(NAMEREGEXP),
+  code: string().required().matches(CODEREGEXP),
+  display: number().min(0).max(1),
+  breed: string(),
+  createdOn: date().default(() => new Date()),
+  gender: string().is(["m", "f"]),
+  parents: object().nullable(),
+});
 
 function validateGenderFitsBreed(dragon: DragonType) {
   const breed = getBreedData(dragon.breed);
@@ -40,7 +58,7 @@ function validateDisplay(value: DragonDisplay) {
 }
 
 function validateGender(value: Gender) {
-  return value === 'm' || value === 'f';
+  return value === "m" || value === "f";
 }
 
 function hasEmptyParents(parents: DragonParents | EmptyParents) {
@@ -53,23 +71,21 @@ function validateBreed(breed: string) {
 }
 
 function hasBothParents(parents: DragonParents | EmptyParents) {
-  if (Object.keys(parents).length === 2 && 'f' in parents && 'm' in parents) {
+  if (Object.keys(parents).length === 2 && "f" in parents && "m" in parents) {
     //check the dragon objects for each parent actually match
-    return parents.m.gender === 'm' && parents.f.gender === 'f';
+    return parents.m.gender === "m" && parents.f.gender === "f";
   }
   return false;
 }
 
-// The dragon MUST be supplied without the vue-specific keys applied
-// such as selected, disabled
 function hasAllKeys(dragon: DragonType) {
   const dragonKeys: string[] = [
-    'parents',
-    'name',
-    'code',
-    'display',
-    'gender',
-    'breed',
+    "parents",
+    "name",
+    "code",
+    "display",
+    "gender",
+    "breed",
   ];
   if (Object.getOwnPropertyNames(dragon).length !== dragonKeys.length)
     return false;
@@ -94,12 +110,15 @@ function isLineageHash(str: string) {
     a lineage can be saved to the server.
     It assumes an integrity check has been run first.
 */
-function meetsSaveRequirements(root: LineageRoot, supressReasoning = false) {
+function meetsSaveRequirements(
+  root: MaybePartialLineageWithMetadata,
+  supressReasoning = false
+) {
   const [tester, failedTests, context] = createTester(supressReasoning);
 
   // fetch ghosties 👻
   const ghostList = GLOBALS.breeds.entire.filter(
-    (breed) => breed.metaData.src === 'ghost',
+    (breed) => breed.metaData.src === "ghost"
   );
 
   function notGhost(breed: string) {
@@ -143,7 +162,7 @@ function meetsSaveRequirements(root: LineageRoot, supressReasoning = false) {
 // variable every phase and if it's false,
 // it means we failed a check somewhere and should stop
 // checking.
-function verifyIntegrity(root: LineageRoot, supressReasoning = false) {
+function verifyIntegrity(root: PartialLineage, supressReasoning = false) {
   const [tester, failedTests, context] = createTester(supressReasoning);
 
   // basic tests
@@ -189,7 +208,7 @@ function verifyIntegrity(root: LineageRoot, supressReasoning = false) {
       analyseDragon(dragon.parents.f);
     }
     // parents are not empty OR doesn't contain both parent keys
-    else return tester.testFail('parents', dragon);
+    else return tester.testFail("parents", dragon);
   };
 
   tester.begin();
@@ -206,6 +225,7 @@ export {
   NAMEREGEXP,
   CODEREGEXP,
   BREEDNAMEREGEXP,
+  dragonSchema,
   validateCode,
   validateName,
   validateBreed,

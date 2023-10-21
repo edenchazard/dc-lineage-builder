@@ -68,21 +68,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PropType, computed, ref } from 'vue';
+import { ref ,computed} from 'vue';
+import type { PropType } from 'vue';
 import { useShare } from '@vueuse/core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { debounce } from '../../app/utils';
-
-defineOptions({
-  inheritAttrs: false,
-});
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-  (e: 'copySuccess'): void;
-  (e: 'copyFail'): void;
-}>();
-
 const props = defineProps({
   modelValue: {
     type: String,

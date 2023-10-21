@@ -27,8 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { PortraitData } from '../../../app/types';
+import type { PropType } from 'vue';
+import type { PortraitData } from '../../../app/types';
 
 defineProps({
   data: {
@@ -73,12 +73,6 @@ computed:{
 /* add css for fallbacks */
 @import url('../../../assets/tile-rendering/fallbacks.css');
 
-/* apply the correct spritesheet depending on pixel ratio */
-@import url('../../../assets/tile-rendering/sprites-36x48.css')
-(min-resolution: 0dppx);
-
-@import url('../../../assets/tile-rendering/sprites-72x96.css')
-(min-resolution: 1.01dppx);
 .ghost,
 .local,
 .fallback {
