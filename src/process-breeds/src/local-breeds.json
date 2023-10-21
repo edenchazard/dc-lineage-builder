@@ -320,6 +320,13 @@
     "sprites": ["FnHwj","1Hyq5"],
     "tags": ["Regular"]
   },
+  "Fever Wyvern": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "id8od",
+    "tags": ["Regular"]
+  },
   "Flare-Tail Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
@@ -716,6 +723,13 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "qgX9o",
+    "tags": ["Regular"]
+  },
+  "Pillow": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["Po3tS","fIIG"],
     "tags": ["Regular"]
   },
   "Pink": {

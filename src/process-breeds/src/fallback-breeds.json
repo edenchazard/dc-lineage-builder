@@ -299,12 +299,6 @@
     "sprites": ["JQjm9","-18","-1","48"],
     "tags": ["Regular"]
   },
-  "Fever Wyvern": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["AO5F4","-8","-1","48"],
-    "tags": ["Regular"]
-  },
   "Fire Gem": {
     "genderOnly": false,
     "group": "Standard",
@@ -651,12 +645,6 @@
       "Green": ["WPYpD","0","-1","48","VsXXn","-1","-1","48"],
       "Red": ["qqpMo","0","-1","48","Vyo2g","-1","-1","48"]
     },
-    "tags": ["Regular"]
-  },
-  "Pillow": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["XDeUI","0","-1","48","vPck9","-20","-1","48"],
     "tags": ["Regular"]
   },
   "Pipio Pygmy": {
