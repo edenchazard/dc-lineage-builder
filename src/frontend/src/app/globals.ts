@@ -1,6 +1,6 @@
 import breeds from '../breed-definitions.json';
+import type { BreedEntry } from './types';
 import { getDCTime, filterBreedTableByGender } from './utils';
-import { BreedEntry } from './types';
 
 const breedTable = breeds as BreedEntry[];
 

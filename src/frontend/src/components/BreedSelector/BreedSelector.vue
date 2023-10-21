@@ -47,10 +47,11 @@
   </BreedSelectorWrapper>
 </template>
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
+import { ref } from 'vue';
+import type { PropType } from 'vue';
 import { onStartTyping } from '@vueuse/core';
+import type { DragonGender, PortraitData } from '../../app/types';
 import { useTagStore } from '../../store/tags';
-import { Gender, PortraitData } from '../../app/types';
 import FilteredBreedList from '../BreedFiltering/FilteredBreedList.vue';
 import BreedSelectorReuse from './BreedSelectorReuse.vue';
 import BreedSelectorWrapper from './BreedSelectorWrapper.vue';
@@ -64,7 +65,7 @@ defineProps({
     required: true,
   },
   genderFilter: {
-    type: String as PropType<Gender>,
+    type: String as PropType<DragonGender>,
     required: true,
   },
 });

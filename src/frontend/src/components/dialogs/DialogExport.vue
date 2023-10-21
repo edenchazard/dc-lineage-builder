@@ -41,10 +41,9 @@
   </Dialog>
 </template>
 <script setup lang="ts">
-import { onUpdated, PropType, ref } from 'vue';
-import { DragonType, LineageRoot } from '../../app/types';
-import { forEveryDragon } from '../../app/utils';
-import { verifyIntegrity } from '../../app/validators';
+import { onUpdated, ref } from 'vue';
+import type { PropType } from 'vue';
+import type { DragonType, PartialLineage } from '../../app/types';
 import Dialog from './DialogBase.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
@@ -60,7 +59,7 @@ const props = defineProps({
     required: true,
   },
   tree: {
-    type: Object as PropType<LineageRoot>,
+    type: Object as PropType<PartialLineage>,
     required: true,
   },
 });

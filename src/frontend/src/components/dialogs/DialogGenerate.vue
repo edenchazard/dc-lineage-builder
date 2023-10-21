@@ -48,15 +48,15 @@
   </Dialog>
 </template>
 <script setup lang="ts">
-import { onMounted, onUpdated, PropType, ref, watch } from 'vue';
-import { verifyIntegrity, meetsSaveRequirements } from '../../app/validators';
-import { createLineageLink, forEveryDragon, makeError } from '../../app/utils';
+import { onMounted, onUpdated, ref, watch } from 'vue';
+import type { PropType } from 'vue';
+import type { DragonType, LineageRoot } from '../../app/types';
+import { createLineageLink } from '../../app/utils';
 import { saveLineage } from '../../app/api';
 import Dialog from './DialogBase.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
 import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
-import { DragonType, LineageRoot } from '../../app/types';
 import settings from '../../app/settings';
 
 const props = defineProps({

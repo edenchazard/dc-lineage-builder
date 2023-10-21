@@ -1,5 +1,6 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { DragonType, LineageRoot } from './types';
+import axios, { AxiosError } from 'axios';
+import type { AxiosRequestConfig } from 'axios';
+import type { DragonType, PartialLineage } from './types';
 
 interface APIResponse {
   errors: Array<{ type: 'Warning' | 'Error'; message: string }>;
@@ -43,7 +44,7 @@ interface LineageGenerationResponse extends APIResponse {
     hash: string;
   };
 }
-async function saveLineage(tree: LineageRoot) {
+async function saveLineage(tree: PartialLineage) {
   return (
     await callAPI<LineageGenerationResponse>('/lineage/create', {
       method: 'post',

@@ -2,8 +2,8 @@
   <pre class="dragon-formatting-block">{{ format() }}</pre>
 </template>
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { DragonType } from '../../app/types';
+import type { PropType } from 'vue';
+import type { DragonType } from '../../app/types';
 import { hasParents } from '../../app/utils';
 
 const props = defineProps({

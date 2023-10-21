@@ -1,13 +1,14 @@
+import { ArgumentsType } from '@vueuse/core';
 import { DragonType } from './types';
 
 class MiniTester {
-  supressReasoning: boolean;
+  suppressReasoning: boolean;
   failed: boolean | null = null;
   failHandler: ((testName: string, ...args: unknown[]) => void) | null = null;
   running: boolean = false;
 
-  constructor(supressReasoning = false) {
-    this.supressReasoning = supressReasoning;
+  constructor(suppressReasoning = false) {
+    this.suppressReasoning = suppressReasoning;
   }
 
   setFailHandler(func: (testName: string, ...args: unknown[]) => void) {
@@ -29,11 +30,14 @@ class MiniTester {
 
   testFail(testName: string, ...args: unknown[]) {
     this.failed = true;
-    if (!this.supressReasoning && this.failHandler)
+    if (!this.suppressReasoning && this.failHandler)
       this.failHandler(testName, ...args);
   }
 
-  runTest(func: (...args: unknown[]) => boolean, ...args: unknown[]) {
+  runTest(
+    func: (...args: unknown[]) => boolean,
+    ...args: ArgumentsType<typeof func>
+  ) {
     // ignore test if tester isn't running
     if (!this.running) return;
 
@@ -48,9 +52,9 @@ interface context {
 }
 
 function createTester(
-  supressReasoning = false,
+  suppressReasoning = false,
 ): [MiniTester, string[], context] {
-  const tester = new MiniTester(supressReasoning);
+  const tester = new MiniTester(suppressReasoning);
   const failedTests: string[] = [];
   const context: context = {
     failedDragon: null,

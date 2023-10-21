@@ -5,9 +5,11 @@ import { createApp } from 'vue';
 import router from './router/router';
 
 import { createPinia } from 'pinia';
-import App from './App.vue';
+import Application from './App.vue';
 
-createApp(App)
+const app = createApp(Application);
+
+app
   .use(createPinia())
   .use(router)
   .use(VueDragscroll)

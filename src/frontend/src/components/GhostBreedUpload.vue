@@ -22,9 +22,9 @@
 </template>
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import type { PortraitData } from '../app/types';
 import GLOBALS from '../app/globals';
 import settings from '../app/settings';
-import { PortraitData } from '../app/types';
 import DragonPortrait from './Lineage/Dragon/DragonPortrait.vue';
 
 const props = defineProps({
