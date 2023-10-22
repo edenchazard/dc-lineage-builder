@@ -1,33 +1,77 @@
 <template>
-  <pre class="dragon-formatting-block">{{ format() }}</pre>
+  <div class="dragon-formatting-block">
+    <ul class="node">
+      <li
+        v-for="(value, field) in Lineage(dragon).withoutMetadata().raw()"
+        class="node-line"
+      >
+        <div
+          class="key-value"
+          :class="{ highlighted: field === highlight }"
+        >
+          {{ field }}:
+          {{ field === 'parents' && hasParents(dragon) ? '{ ... }' : value }}
+        </div>
+        <div
+          class="error"
+          v-if="field === highlight"
+        >
+          {{ error }}
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
+
 <script setup lang="ts">
 import type { PropType } from 'vue';
 import type { DragonType } from '../../app/types';
 import { hasParents } from '../../app/utils';
+import { Lineage } from '../../app/lineageHandler';
 
 const props = defineProps({
   dragon: {
     type: Object as PropType<DragonType>,
     required: true,
   },
-});
 
-function format() {
-  // the data we show the user for context needs to be modified slightly.
-  // omit selected and parents types
-  const display: Omit<DragonType, 'selected' | 'parents'> & {
-    parents: string;
-  } = {
-    ...props.dragon,
-    parents: hasParents(props.dragon) ? '{ ... }' : 'none',
-  };
-  return JSON.stringify(display, null, 4);
-}
+  highlight: {
+    type: String,
+    required: false,
+    default: '',
+  },
+
+  error: {
+    type: String,
+    required: false,
+    default: '',
+  },
+});
 </script>
 <style scoped>
 .dragon-formatting-block {
   background: #e5e5e5;
-  padding: 5px;
+  font-family: monospace;
+  padding: 0.5rem 0;
+}
+
+.node {
+}
+.node-line {
+  margin: 0;
+  line-height: 1.5rem;
+}
+.key-value {
+  padding: 0 1rem 0 1rem;
+}
+.highlighted {
+  background: rgba(255, 34, 34, 0.5);
+  font-weight: bold;
+}
+
+.error {
+  font-size: 0.7rem;
+  padding: 0 1rem 0 2rem;
+  background: rgba(255, 34, 34, 0.2);
 }
 </style>

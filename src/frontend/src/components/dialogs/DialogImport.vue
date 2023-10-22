@@ -2,7 +2,7 @@
   <Dialog
     :id="id"
     :open="open"
-    @close="emit('close')"
+    @close="close"
   >
     <template #title> Import lineage </template>
     <Feedback
@@ -33,16 +33,16 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { PartialLineageWithMetadata } from '../../app/types';
-
+import type { PartialLineage } from '../../app/types';
 import Dialog from './DialogBase.vue';
 import Textbox from '../UI/Textbox.vue';
 import Feedback from '../UI/Feedback.vue';
+import { dragonSchema } from '../../app/validation';
 import { Lineage } from '../../app/lineageHandler';
 
 const emit = defineEmits<{
   (e: 'close'): void;
-  (e: 'onImport', tree: PartialLineageWithMetadata): void;
+  (e: 'onImport', tree: PartialLineage): void;
 }>();
 
 defineProps({
@@ -59,22 +59,21 @@ defineProps({
 const file = ref('');
 const status = ref<InstanceType<typeof Feedback>>();
 
-function importLineage() {
+function close() {
+  file.value = '';
+  emit('close');
+}
+
+async function importLineage() {
   if (!status.value) return;
 
   try {
-    const importedTree = Lineage(file.value, true);
-    const { failed, failedTests } = verifyIntegrity(importedTree.raw());
-
-    if (failed) {
-      status.value.error(
-        `Error reading export code. Tests failed: ${makeError(failedTests)}`,
-      );
-      return;
-    }
-
-    emit('onImport', importedTree.raw());
-    emit('close');
+    const importedTree = (await dragonSchema
+      .json()
+      .validate(file.value)) as PartialLineage;
+    console.log(importedTree);
+    emit('onImport', Lineage(importedTree).tree);
+    close();
   } catch {
     status.value.error(
       `Error reading export code. JSON is possibly malformed.`,

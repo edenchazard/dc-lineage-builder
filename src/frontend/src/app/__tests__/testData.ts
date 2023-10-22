@@ -237,15 +237,32 @@ export const dragonGen2 = {
   display: 1,
 };
 
-export const dragonWithGhostBreedName = {
+export const dragonGen3 = {
   code: 'uIfWm',
   name: 'Corry Indigo',
   parents: {
     m: {
       code: 'WuTUL',
       name: 'Rakel Orange',
-      parents: {},
-      breed: 'ABCD TEST XYZ',
+      parents: {
+        m: {
+          code: 'WuTUL',
+          name: 'Red Blue',
+          parents: {},
+          breed: 'Placeholder',
+          gender: 'm',
+          display: 1,
+        },
+        f: {
+          code: 'Vqfvy',
+          name: 'White Star',
+          parents: {},
+          breed: 'Placeholder',
+          gender: 'f',
+          display: 1,
+        },
+      },
+      breed: 'Placeholder',
       gender: 'm',
       display: 1,
     },
