@@ -3,10 +3,16 @@ import type {
   PartialLineage,
   PartialLineageWithMetadata,
   MaybePartialLineageWithMetadata,
-  DragonTypeWithMetadata,
+  DragonGender,
+  DragonType,
 } from './types';
-import { deepClone, hasParents } from './utils';
+import { createLineageLink, deepClone, hasParents } from './utils';
 import { DragonBuilder } from './dragonBuilder';
+import { dragonSchema, validateGenerationCount } from './validation';
+import settings from './settings';
+import { saveLineage } from './api';
+
+type MaybeDragonTypeWithMetaData<T extends DragonType = DragonType> = T;
 
 /**
  * Returns a handler tries to json parse the passed treeref
@@ -44,14 +50,14 @@ function Lineage(
   );
 }
 
-class LineageHandler {
-  public tree: PartialLineageWithMetadata;
+class LineageHandler<T extends PartialLineage = PartialLineageWithMetadata> {
+  public tree: T;
 
   constructor(
     treeRef: MaybePartialLineageWithMetadata,
     addMissingMetadata = false,
   ) {
-    this.tree = treeRef as PartialLineageWithMetadata;
+    this.tree = treeRef as T;
     if (addMissingMetadata) this.every((dragon) => (dragon.selected = false));
   }
 
@@ -73,6 +79,7 @@ class LineageHandler {
       }
       count++;
     });
+
     return count;
   }
 
@@ -80,16 +87,15 @@ class LineageHandler {
    * Recursively iterate through each dragon in the lineage.
    * @param callback Callback to execute on each dragon.
    */
-  every(
-    callback: (Dragon: DragonTypeWithMetadata) => void,
-  ): PartialLineageWithMetadata {
+  every(callback: (Dragon: MaybeDragonTypeWithMetaData) => void): T {
     // for performance reasons, we create a completely new clone,
     // mutate and return it. Trees with vue reactive proxies
     // have a massive performance cost because we touch so many properties.
     const raw = this.raw();
 
-    const analyse = (dragon: DragonTypeWithMetadata) => {
+    const analyse = (dragon: MaybeDragonTypeWithMetaData) => {
       callback(dragon);
+
       if (hasParents(dragon)) {
         analyse(dragon.parents.f);
         analyse(dragon.parents.m);
@@ -97,6 +103,7 @@ class LineageHandler {
     };
 
     analyse(raw);
+
     return raw;
   }
 
@@ -112,21 +119,24 @@ class LineageHandler {
 
     // exclude placeholder
     breeds.delete(GLOBALS.placeholder.name);
+
     return breeds;
   }
 
   /**
    * Get raw lineage without getters or setters.
    */
-  raw(): PartialLineageWithMetadata {
+  raw(): T {
     return deepClone(this.tree);
   }
 
   /**
    * Get the lineage with metadata excluded e.g. selected
    */
-  withoutMetadata(): PartialLineage {
-    const get = function (dragon: DragonTypeWithMetadata) {
+  withoutMetadata(): LineageHandler {
+    const get = function (
+      dragon: MaybePartialLineageWithMetadata,
+    ): PartialLineage {
       const { code, name, breed, gender, display } = dragon;
 
       let parents = {};
@@ -141,7 +151,7 @@ class LineageHandler {
       return { code, name, parents, breed, gender, display };
     };
 
-    return get(this.tree);
+    return Lineage(get(this.tree));
   }
 
   /**
@@ -151,7 +161,7 @@ class LineageHandler {
     // find the furthest gen back by scanning the tree
     let max = 1;
 
-    const scan = (dragon: DragonTypeWithMetadata, x: number) => {
+    const scan = (dragon: MaybeDragonTypeWithMetaData, x: number) => {
       if (hasParents(dragon)) {
         scan(dragon.parents.m, x + 1);
         scan(dragon.parents.f, x + 1);
@@ -159,9 +169,54 @@ class LineageHandler {
       // end of branch
       else if (x > max) max = x;
     };
+
     scan(this.tree, 1);
+
     return max;
+  }
+
+  getAtPath(path: string): LineageHandler | undefined {
+    if (path === '') return this;
+
+    const p = path.split('.').filter((v) => v !== 'parents');
+
+    let node = this.tree;
+
+    for (let i = 0; i < p.length; ++i) {
+      const parentGender = p[i] as DragonGender;
+      if (!['m', 'f'].includes(parentGender)) {
+        throw new Error(`bad gender: ${parentGender}`);
+      }
+
+      if (parentGender in node.parents) {
+        node = node.parents[parentGender];
+      } else {
+        return undefined;
+      }
+    }
+
+    return Lineage(node);
+  }
+
+  async saveToServer(): Promise<string> {
+    const gens = this.generations();
+
+    const legit = (await dragonSchema
+      .test(
+        'generation-count',
+        ({
+          value,
+        }) => `This lineage is ${gens}. To save on the server, lineages must
+        be between ${settings.gens.min} and ${settings.gens.max}
+        generations long inclusively.`,
+        () => validateGenerationCount(gens),
+      )
+      .validate(this.withoutMetadata().raw())) as PartialLineage;
+
+    const response = await saveLineage(legit);
+
+    return createLineageLink(response.data.hash);
   }
 }
 
-export { Lineage };
+export { Lineage, LineageHandler };

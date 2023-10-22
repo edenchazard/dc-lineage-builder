@@ -12,7 +12,6 @@
       />
       <div v-if="!isError">
         <p>
-          {{ file }}
           Copy and paste this text to a text file to import this lineage later.
         </p>
         <div>
@@ -22,6 +21,7 @@
             type="textarea"
             readonly
             :show-copy-button="true"
+            select-all-on-focus
           />
         </div>
       </div>
@@ -43,11 +43,15 @@
 <script setup lang="ts">
 import { onUpdated, ref } from 'vue';
 import type { PropType } from 'vue';
-import type { DragonType, PartialLineage } from '../../app/types';
+import type {
+  DragonType,
+  MaybePartialLineageWithMetadata,
+} from '../../app/types';
 import Dialog from './DialogBase.vue';
 import Feedback from '../UI/Feedback.vue';
 import Textbox from '../UI/Textbox.vue';
 import DragonFormattingBlock from '../UI/DragonFormattingBlock.vue';
+import { Lineage } from '../../app/lineageHandler';
 
 const props = defineProps({
   open: {
@@ -59,7 +63,7 @@ const props = defineProps({
     required: true,
   },
   tree: {
-    type: Object as PropType<PartialLineage>,
+    type: Object as PropType<MaybePartialLineageWithMetadata>,
     required: true,
   },
 });
@@ -73,34 +77,20 @@ const isError = ref(false);
 const problemDragon = ref<DragonType>();
 const status = ref<InstanceType<typeof Feedback>>();
 
-onUpdated(() => {
-  if (!status.value) return;
-
-  // reset to false and change if we encounter problems later
+function reset() {
   isError.value = false;
+}
 
-  // todo but doesn't affect runtime
-  // @ts-ignore
-  const exportedTree = props.tree;
+onUpdated(async () => {
+  if (!status.value) return;
+  reset();
 
-  console.log(exportedTree);
-
-  const { failed, failedTests, context } = verifyIntegrity(exportedTree);
-
-  if (failed) {
-    isError.value = true;
-
-    if (context.failedDragon !== null) {
-      problemDragon.value = context.failedDragon;
-    }
-
-    status?.value.error(
-      `Error creating export code. Tests failed: ${failedTests.join(', ')}`,
+  try {
+    file.value = JSON.stringify(Lineage(props.tree).withoutMetadata().raw());
+  } catch (e) {
+    status.value.error(
+      `Sorry, an error has occurred while trying to export this lineage.`,
     );
-
-    return;
   }
-
-  file.value = JSON.stringify(exportedTree);
 });
 </script>

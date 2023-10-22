@@ -143,12 +143,7 @@ import DragonPortrait from './DragonPortrait.vue';
 import TileButton from './TileButton.vue';
 import { Lineage } from '../../../app/lineageHandler';
 import { DragonBuilder } from '../../../app/dragonBuilder';
-import {
-  dragonSchema,
-  validateCode,
-  validateName,
-} from '../../../app/validation';
-import { reach } from 'yup';
+import { validateCode, validateName } from '../../../app/validation';
 
 const props = defineProps({
   // Dragon properties
