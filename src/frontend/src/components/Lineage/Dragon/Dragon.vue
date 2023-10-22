@@ -143,7 +143,11 @@ import DragonPortrait from './DragonPortrait.vue';
 import TileButton from './TileButton.vue';
 import { Lineage } from '../../../app/lineageHandler';
 import { DragonBuilder } from '../../../app/dragonBuilder';
-import { dragonSchema } from '../../../app/validation';
+import {
+  dragonSchema,
+  validateCode,
+  validateName,
+} from '../../../app/validation';
 import { reach } from 'yup';
 
 const props = defineProps({
@@ -184,13 +188,13 @@ const getImage = computed(() => {
 const problems = computed(() => {
   const errs = [];
 
-  /*   if ((await reach(dragonSchema, 'name').isValid(props.data.name)) === false) {
+  if (!validateName(props.data.name)) {
     errs.push('Name is invalid.');
   }
 
-  if ((await reach(dragonSchema, 'code').isValid(props.data.code)) === false) {
+  if (!validateCode(props.data.code)) {
     errs.push('Code is invalid.');
-  } */
+  }
 
   return errs.join('');
 });

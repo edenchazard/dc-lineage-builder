@@ -26,9 +26,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { nextTick, ref, watchEffect, computed } from 'vue';
-import { reach } from 'yup';
-import { dragonSchema, CODEREGEXP, NAMEREGEXP } from '../../../app/validation';
+import { nextTick, ref, computed } from 'vue';
+import { validateCode, validateName } from '../../../app/validation';
 import { DragonBuilder } from '../../../app/dragonBuilder';
 
 const props = defineProps({

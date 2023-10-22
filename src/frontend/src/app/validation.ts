@@ -11,22 +11,18 @@ import settings from './settings';
 import GLOBALS from './globals';
 import { DragonBuilder } from './dragonBuilder';
 
-export const NAMEREGEXP = /^^[a-zA-Z0-9]([a-zA-Z0-9 '-]{1,31})[a-zA-Z0-9]$/;
-export const CODEREGEXP = /^[a-zA-Z0-9]{4,5}$/;
-export const BREEDNAMEREGEXP = /^[a-zA-Z0-9 ]{1,32}$/;
+export const NAMEREGEXP = /^[a-zA-Z0-9]([a-zA-Z0-9 '-]+)[a-zA-Z0-9]$/;
+export const CODEREGEXP = /[a-zA-Z0-9]+/;
+export const BREEDNAMEREGEXP = /[a-zA-Z0-9 ]{1,32}/;
 
 export const dragonSchema: ObjectSchema<DragonType> = object().shape({
   name: string()
     .required()
-    .min(1)
-    .max(32)
-    .matches(NAMEREGEXP)
+    .test('name', validateName)
     .default(DragonBuilder.generateName()),
   code: string()
     .required()
-    .min(4)
-    .max(5)
-    .matches(CODEREGEXP)
+    .test('code', validateCode)
     .default(DragonBuilder.generateCode()),
   display: number<DragonDisplay>().required().min(0).max(1).default(0),
   breed: lazy(() =>
@@ -46,6 +42,14 @@ export const dragonSchema: ObjectSchema<DragonType> = object().shape({
     .default({})
     .required(),
 });
+
+export function validateName(name: string) {
+  return NAMEREGEXP.test(name) && name.length >= 1 && name.length <= 32;
+}
+
+export function validateCode(code: string) {
+  return NAMEREGEXP.test(code) && code.length >= 4 && code.length <= 5;
+}
 
 export function validateGenerationCount(count: number): boolean {
   return count >= settings.gens.min && count <= settings.gens.max;

@@ -129,7 +129,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import type { PortraitData, DragonGender, BreedEntry } from '../app/types';
 import GLOBALS from '../app/globals';
 import { breedEntryToPortrait, expandGender, getBreedData } from '../app/utils';
@@ -156,7 +156,7 @@ const query = ref('');
 const showExportDialog = ref(false);
 const showGenerateDialog = ref(false);
 
-function portraitFor(which, gender: Gender) {
+function portraitFor(which, gender: DragonGender) {
   // return the breed data for this breed name or if no match, the placeholder
   const entry = getBreedData(which) as BreedEntry;
   const portrait = breedEntryToPortrait(entry, expandGender(gender));
