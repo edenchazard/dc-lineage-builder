@@ -81,10 +81,10 @@
 </div> */
 import { ref, nextTick } from 'vue';
 import { getOnSitePreview } from '../app/api';
-import { validateCode } from '../../../../trash/validators';
 import OnSitePreview from '../components/OnsitePreview.vue';
 import LineageGenerationCounter from '../components/Lineage/LineageGenerationCounter.vue';
 import Feedback from '../components/UI/Feedback.vue';
+import { validateCode } from '../app/validation';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');

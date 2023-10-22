@@ -41,7 +41,7 @@
           class="interactive"
           required
           title="Breed name must be alphanumeric and 1-32 characters long."
-          :pattern="BREEDNAMEREGEXP.toString().slice(2, -2)"
+          :pattern="BREEDNAMEREGEXP.toString().slice(1, -1)"
         />
         <span class="label">Gender availability</span>
         <div id="gender-availability">
@@ -114,10 +114,10 @@ import { ref, watch } from 'vue';
 
 import type { BreedEntry, DragonGender } from '../app/types';
 import { addBreed } from '../app/utils';
+import { BREEDNAMEREGEXP } from '../app/validation';
 import settings from '../app/settings';
 import GhostBreedUpload from '../components/GhostBreedUpload.vue';
 import Feedback from '../components/UI/Feedback.vue';
-import { BREEDNAMEREGEXP } from '../../../../trash/validators';
 
 type Availability = 'b' | DragonGender;
 
