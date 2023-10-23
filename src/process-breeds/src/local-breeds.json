@@ -244,6 +244,7 @@
     "group": "Two-headed",
     "sprites": {
       "Salt Odeen": ["GtvMN","iyKgt"],
+      "Salt Rwyvern": ["1waIt","3jSzN"],
       "__regular__": ["7kiVA","zag1a"]
     },
     "tags": ["Halloween"]
@@ -1087,6 +1088,7 @@
       "Two-headed Sea Serpent": "d2wFv",
       "Two-headed Western": "cGgSH",
       "Two-headed Wyvern": "Dm18d",
+      "Two-headed wingless": "YkTcF",
       "Two-headed wyrm": "faMiw",
       "Western": "Fnva",
       "Wingless": "V8anY",
