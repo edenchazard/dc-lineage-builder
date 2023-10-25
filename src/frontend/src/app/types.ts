@@ -25,8 +25,8 @@ interface TagListOption {
 //= Record<never,never>
 
 interface DragonParents {
-  m?: DragonType;
-  f?: DragonType;
+  m?: PartialLineage;
+  f?: PartialLineage;
 }
 
 type NoDragonParents = Record<string, never>;
@@ -35,8 +35,24 @@ interface DragonMetadata {
   selected: boolean;
 }
 
-interface DragonType {
-  [x: string]: unknown;
+/* interface DragonType {
+  code: string;
+  name: string;
+  parents: DragonParents;
+  gender: DragonGender;
+  breed: string;
+  display: DragonDisplay;
+} */
+
+type PartialLineageWithMetadata = PartialLineage &
+  DragonMetadata & {
+    parents: DragonParents & {
+      m?: PartialLineageWithMetadata;
+      f?: PartialLineageWithMetadata;
+    };
+  };
+
+interface PartialLineage {
   code: string;
   name: string;
   parents: DragonParents;
@@ -45,20 +61,11 @@ interface DragonType {
   display: DragonDisplay;
 }
 
-type DragonTypeWithMetadata = DragonType &
-  DragonMetadata & {
-    parents: DragonParents & {
-      m?: DragonTypeWithMetadata;
-      f?: DragonTypeWithMetadata;
-    };
-  };
+//interface PartialLineageWithMetadata extends PartialLineage {}
 
-type PartialLineage = DragonType;
-type PartialLineageWithMetadata = DragonTypeWithMetadata;
+type MaybePartialLineageWithMetadata = PartialLineage & Partial<DragonMetadata>;
 
-type MaybePartialLineageWithMetadata =
-  | PartialLineage
-  | PartialLineageWithMetadata;
+//type MaybeDragonTypeWithMetaData = DragonType & Partial<DragonTypeWithMetadata>;
 
 type DragonGender = 'm' | 'f';
 
@@ -98,11 +105,12 @@ export type {
   NoDragonParents,
   DragonGender,
   DragonDisplay,
-  DragonType,
-  DragonTypeWithMetadata,
+  //DragonType,
+  //DragonTypeWithMetadata,
   PartialLineage,
   PartialLineageWithMetadata,
   MaybePartialLineageWithMetadata,
+  //MaybeDragonTypeWithMetaData,
   TagListOption,
   BreedEntry,
   MetaData,

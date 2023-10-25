@@ -1,9 +1,9 @@
-import { ref, watch } from 'vue';
+import { ref, unref, watch, watchEffect } from 'vue';
 import type { Ref } from 'vue';
 import GLOBALS from '../../app/globals';
 import type { PartialLineageWithMetadata } from '../../app/types';
 import { useTreeHistory } from './useTreeHistory';
-import { Lineage } from '../../app/lineageHandler';
+import { Lineage, LineageHandler } from '../../app/lineageHandler';
 
 /*
     basically a way we can:
@@ -15,41 +15,38 @@ import { Lineage } from '../../app/lineageHandler';
     in one foreverydragon pass instead of doing multiple passes.
     It's messy, and I'm not the biggest fan of it, but it improves performance.
 */
-function useTreeAnalyser(
-  activeTree: Ref<PartialLineageWithMetadata>,
+export function useTreeAnalyser(
+  tree: Ref<PartialLineageWithMetadata>,
+  handler: Ref<LineageHandler<PartialLineageWithMetadata>>,
   capacity = 5,
 ) {
-  const history = useTreeHistory(activeTree, capacity);
+  const history = useTreeHistory(tree, capacity);
   const selectionCount = ref(0);
   const usedBreeds = ref(new Map<string, number>());
 
   // do magic whenever the tree changes
-  watch(
-    activeTree,
-    () => {
-      if (activeTree.value === null) return;
+  watchEffect(() => {
+    if (tree.value === null) return;
 
-      // breed count
-      const breeds = new Map<string, number>();
+    // breed count
+    const breeds = new Map<string, number>();
 
-      // selection count
-      let selected = 0;
+    // selection count
+    let selected = 0;
 
-      Lineage(activeTree.value).every((dragon) => {
-        breeds.set(dragon.breed, (breeds.get(dragon.breed) ?? 0) + 1);
+    unref(handler).every((dragon) => {
+      breeds.set(dragon.breed, (breeds.get(dragon.breed) ?? 0) + 1);
 
-        if (dragon.selected) selected++;
-      });
+      if (dragon.selected) selected++;
+    });
 
-      // exclude placeholder
-      breeds.delete(GLOBALS.placeholder.name);
+    // exclude placeholder
+    breeds.delete(GLOBALS.placeholder.name);
 
-      // update values
-      usedBreeds.value = breeds;
-      selectionCount.value = selected;
-    },
-    { deep: true },
-  );
+    // update values
+    usedBreeds.value = breeds;
+    selectionCount.value = selected;
+  });
 
   return {
     history,
@@ -57,5 +54,3 @@ function useTreeAnalyser(
     selectionCount,
   };
 }
-
-export { useTreeAnalyser };

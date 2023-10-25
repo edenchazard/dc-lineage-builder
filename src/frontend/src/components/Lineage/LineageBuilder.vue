@@ -42,10 +42,9 @@ import { onMounted, reactive, ref } from 'vue';
 import { onBeforeRouteLeave, useRoute } from 'vue-router';
 import { useFullscreen } from '@vueuse/core';
 import type {
-  DragonType,
+  PartialLineageWithMetadata,
   DragonDisplay,
   LineageConfig,
-  DragonTypeWithMetadata,
 } from '../../app/types';
 
 import { hasParents } from '../../app/utils';
@@ -91,7 +90,9 @@ onMounted(async () => {
       }
 
       status.value.close(() => {
-        appStore.activeTree = LineageHandler(response.data.lineage).raw();
+        appStore.activeTree = LineageHandler(response.data.lineage)
+          .withMetadata()
+          .raw();
       });
     } catch (ex: unknown) {
       if (ex instanceof Error) {
@@ -103,50 +104,58 @@ onMounted(async () => {
 // reset stuff on leave
 // tree can be a large memory hog, and gc doesn't always get to it immediately.
 onBeforeRouteLeave(() => {
-  const x = LineageHandler();
-  appStore.replaceRoot(x.tree);
+  appStore.replaceRoot(DragonBuilder.createWithMetadata());
 });
 
 /**
  * Updates the tree
  * @param callback Callback to perform on each dragon node
  */
-function updateTree(callback: (dragon: DragonTypeWithMetadata) => void): void {
-  appStore.activeTree = appStore.lineage.every(callback);
+function updateTree(
+  callback: (dragon: PartialLineageWithMetadata) => void,
+): void {
+  appStore.activeTree = appStore.activeLineage.every(callback);
 }
 
 // Accepts a callback
 // Or a key and the value to change it to
 function applyToSelected(
-  callback: (dragon: DragonTypeWithMetadata) => void,
+  callback: (dragon: PartialLineageWithMetadata) => void,
 ): void;
 function applyToSelected(
-  key: keyof DragonTypeWithMetadata,
+  key: keyof PartialLineageWithMetadata,
   value: unknown,
 ): void;
 function applyToSelected(
   keyOrCallback:
-    | keyof DragonTypeWithMetadata
-    | ((dragon: DragonTypeWithMetadata) => void),
+    | keyof PartialLineageWithMetadata
+    | ((dragon: PartialLineageWithMetadata) => void),
   value?: unknown,
 ) {
   if (typeof keyOrCallback === 'string') {
     const key = keyOrCallback.toString();
-    appStore.activeTree = appStore.lineage.every((dragon) => {
+    appStore.activeTree = appStore.activeLineage.every((dragon) => {
       if (dragon.selected && key in dragon) dragon[key] = value;
     });
   } else if (typeof keyOrCallback === 'function') {
     const callback = keyOrCallback;
-    appStore.activeTree = appStore.lineage.every((dragon) => {
+    appStore.activeTree = appStore.activeLineage.every((dragon) => {
       if (dragon.selected) callback(dragon);
     });
   }
 }
 
-function selectionCriteria(callback: (dragon: DragonType) => boolean): void;
-function selectionCriteria(key: keyof DragonType, value: unknown): void;
 function selectionCriteria(
-  keyOrCallback: keyof DragonType | ((dragon: DragonType) => boolean),
+  callback: (dragon: PartialLineageWithMetadata) => boolean,
+): void;
+function selectionCriteria(
+  key: keyof PartialLineageWithMetadata,
+  value: unknown,
+): void;
+function selectionCriteria(
+  keyOrCallback:
+    | keyof PartialLineageWithMetadata
+    | ((dragon: PartialLineageWithMetadata) => boolean),
   value?: unknown,
 ) {
   if (typeof keyOrCallback === 'string') {
@@ -202,8 +211,8 @@ function unselectAll() {
   applyToSelected('selected', false);
 }
 
-function selectBy(condition: (dragon: DragonType) => boolean) {
-  updateTree((dragon: DragonType) => {
+function selectBy(condition: (dragon: PartialLineageWithMetadata) => boolean) {
+  updateTree((dragon: PartialLineageWithMetadata) => {
     if (!dragon.selected && condition(dragon)) dragon.selected = true;
   });
 }

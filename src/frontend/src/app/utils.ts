@@ -1,12 +1,12 @@
 import GLOBALS from './globals';
 import type {
   BreedEntry,
-  DragonTypeWithMetadata,
   FilterTag,
   DragonGender,
   EggGroupTag,
   PortraitData,
   MaybePartialLineageWithMetadata,
+  PartialLineageWithMetadata,
 } from './types';
 import { BREEDNAMEREGEXP } from './validation';
 
@@ -61,8 +61,8 @@ export function getTable(gender: DragonGender): PortraitData[] {
 
 export function hasParents(
   dragon: MaybePartialLineageWithMetadata,
-): dragon is DragonTypeWithMetadata & {
-  parents: { m: DragonTypeWithMetadata; f: DragonTypeWithMetadata };
+): dragon is PartialLineageWithMetadata & {
+  parents: { m: PartialLineageWithMetadata; f: PartialLineageWithMetadata };
 } {
   return (
     typeof dragon.parents.f === 'object' && typeof dragon.parents.m === 'object'
