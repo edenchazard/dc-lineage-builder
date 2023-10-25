@@ -103,12 +103,12 @@
       class="tile-parents"
     >
       <Dragon
-        :data="data.parents.m as DragonTypeWithMetadata"
+        :data="data.parents.m as PartialLineageWithMetadata"
         :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
       />
       <Dragon
-        :data="data.parents.f as DragonTypeWithMetadata"
+        :data="data.parents.f as PartialLineageWithMetadata"
         :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
       />
@@ -123,8 +123,6 @@ import type { PropType } from 'vue';
 import vOnLongPress from '../../../directives/long-press/vue-3-long-press';
 import type {
   BreedEntry,
-  DragonParents,
-  DragonTypeWithMetadata,
   PartialLineageWithMetadata,
   PortraitData,
 } from '../../../app/types';
@@ -243,16 +241,13 @@ function pasteBranch() {
 
 function copyBranch() {
   // Do nothing if no parents
-  if (!hasAncestry.value) return;
+  if (!hasAncestry.value || !hasParents(props.data)) return;
 
-  const raw = Lineage(props.data).raw();
-
-  if (!hasParents(raw)) return;
   ls.setItem(
     'clipboard',
     JSON.stringify({
-      m: Lineage(raw.parents.m).withoutMetadata(),
-      f: Lineage(raw.parents.f).withoutMetadata(),
+      m: Lineage(props.data.parents.m).withoutMetadata().raw(),
+      f: Lineage(props.data.parents.f).withoutMetadata().raw(),
     }),
   );
 }

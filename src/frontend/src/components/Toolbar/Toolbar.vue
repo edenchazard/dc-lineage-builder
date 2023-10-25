@@ -203,7 +203,7 @@ import type {
 } from '../../app/types';
 import GLOBALS from '../../app/globals';
 import { filterEggGroups, filterTags } from '../../app/utils';
-import { Lineage } from '../../app/lineageHandler';
+import { Lineage, LineageHandler } from '../../app/lineageHandler';
 import { useAppStore } from '../../store/app';
 import DialogExport from '../dialogs/DialogExport.vue';
 import DialogImport from '../dialogs/DialogImport.vue';
@@ -399,11 +399,11 @@ const emit = defineEmits<{
   (e: 'redo'): void;
 }>();
 
-const treeSelectedContains = (tree: ReturnType<typeof Lineage>) => {
+const treeSelectedContains = (handler: LineageHandler) => {
   let male = false,
     female = false;
 
-  tree.every((dragon) => {
+  handler.every((dragon) => {
     if (!dragon.selected) return;
     if (dragon.gender === 'm') male = true;
     else if (dragon.gender === 'f') female = true;
@@ -427,7 +427,7 @@ const availableBreeds = computed(() => {
   if (!itemsSelected.value) return [];
 
   // should we list males, females or both
-  const { male, female } = treeSelectedContains(appStore.lineage);
+  const { male, female } = treeSelectedContains(appStore.activeLineage);
 
   const breedTable = GLOBALS.breeds.entire
     // filter the group

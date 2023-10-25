@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import type { AxiosRequestConfig } from 'axios';
-import type { DragonType, PartialLineage } from './types';
+import type { PartialLineage } from './types';
 
 interface APIResponse {
   errors: Array<{ type: 'Warning' | 'Error'; message: string }>;
@@ -32,7 +32,7 @@ async function callAPI<T>(url: string, options: AxiosRequestConfig = {}) {
 
 interface LineageResponse extends APIResponse {
   data: {
-    lineage: DragonType;
+    lineage: PartialLineage;
   };
 }
 async function getLineage(hash: string) {

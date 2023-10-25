@@ -4,8 +4,9 @@ import type {
   BreedEntry,
   DragonDisplay,
   DragonGender,
-  DragonType,
+  //DragonType,
   NoDragonParents,
+  PartialLineage,
 } from './types';
 import settings from './settings';
 import GLOBALS from './globals';
@@ -15,7 +16,7 @@ export const NAMEREGEXP = /^[a-zA-Z0-9]([a-zA-Z0-9 '-]+)[a-zA-Z0-9]$/;
 export const CODEREGEXP = /[a-zA-Z0-9]+/;
 export const BREEDNAMEREGEXP = /[a-zA-Z0-9 ]{1,32}/;
 
-export const dragonSchema: ObjectSchema<DragonType> = object()
+export const dragonSchema: ObjectSchema<PartialLineage> = object()
   .shape({
     name: string()
       .required()

@@ -3,37 +3,40 @@ import { defineStore } from 'pinia';
 import type { PartialLineageWithMetadata } from '../../app/types';
 import { useTreeAnalyser } from './useTreeAnalyser';
 import { DragonBuilder } from '../../app/dragonBuilder';
-import { Lineage } from '../../app/lineageHandler';
+import { LineageHandler } from '../../app/lineageHandler';
 
 export const useAppStore = defineStore('appStore', () => {
   const appVersion = import.meta.env.VITE_APP_VERSION;
-  const activeTree = ref<PartialLineageWithMetadata>(Lineage().raw());
-  const lineage = computed(() => Lineage(activeTree.value));
-  const analytics = useTreeAnalyser(activeTree, 5);
+  const activeTree = ref(DragonBuilder.createWithMetadata());
+  const activeLineage = computed(
+    () => new LineageHandler<PartialLineageWithMetadata>(activeTree.value),
+  );
+  const analytics = useTreeAnalyser(activeTree, activeLineage, 5);
 
   // These two functions have to be in the store so that the
   // Dragon components can call them. I would prefer them in
   // The builder component but we can't have everything...
   function replaceRoot(node: PartialLineageWithMetadata) {
     // replace the tree
-    activeTree.value = Lineage(node, true).raw();
+    activeTree.value = node;
   }
 
   function addDescendant() {
     // check current root if exists
     if (activeTree.value === null) return;
 
-    const newTree = Lineage().raw();
-    newTree.parents =
-      activeTree.value.gender === 'f'
-        ? {
-            f: activeTree.value,
-            m: DragonBuilder.createWithMetadata({ gender: 'm' }),
-          }
-        : {
-            f: DragonBuilder.createWithMetadata({ gender: 'f' }),
-            m: activeTree.value,
-          };
+    const newTree = DragonBuilder.createWithMetadata({
+      parents:
+        activeTree.value.gender === 'f'
+          ? {
+              f: activeTree.value,
+              m: DragonBuilder.createWithMetadata({ gender: 'm' }),
+            }
+          : {
+              f: DragonBuilder.createWithMetadata({ gender: 'f' }),
+              m: activeTree.value,
+            },
+    });
 
     // replace the existing root with the new tree.
     activeTree.value = newTree;
@@ -47,6 +50,6 @@ export const useAppStore = defineStore('appStore', () => {
     addDescendant,
     replaceRoot,
     treeHistory: analytics.history,
-    lineage,
+    activeLineage: activeLineage,
   };
 });
