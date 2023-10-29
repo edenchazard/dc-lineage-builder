@@ -48,6 +48,13 @@
     "sprites": ["jQItl","JOKAw"],
     "tags": ["Hybrid"]
   },
+  "Aqualis": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["NuOVp","j9tBc"],
+    "tags": ["Regular"]
+  },
   "Aranoa": {
     "dimorphism": false,
     "genderOnly": false,
@@ -485,6 +492,16 @@
     "sprites": ["vI1DF","MORbO"],
     "tags": ["Regular"]
   },
+  "Heartseeker": {
+    "dimorphism": false,
+    "genderOnly": "m",
+    "group": "Standard",
+    "sprites": {
+      "Salt LadyLyzar": "hmSAC",
+      "__regular__": "iPfaV"
+    },
+    "tags": ["Valentine"]
+  },
   "Heartstealing": {
     "dimorphism": false,
     "genderOnly": "f",
@@ -504,6 +521,13 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": ["y8TNS","d21pP"],
+    "tags": ["Regular"]
+  },
+  "Horse": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["MzNTU","5CsPF"],
     "tags": ["Regular"]
   },
   "Howler Drake": {
@@ -631,6 +655,18 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["NO0i0","BmFLn"],
+    "tags": ["Regular"]
+  },
+  "Lunar Herald": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Bronze": "WGJTW",
+      "Gold": "tKt64",
+      "Indigo": "fMTLl",
+      "Silver": "Zcyy7"
+    },
     "tags": ["Regular"]
   },
   "Magelight Pygmy Wyvern": {
@@ -775,6 +811,13 @@
     },
     "tags": ["Halloween"]
   },
+  "Plated Colossus": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["7bzCd","lEpYM"],
+    "tags": ["Regular"]
+  },
   "Pryanost Lindwyrm": {
     "dimorphism": false,
     "genderOnly": "f",
@@ -846,6 +889,26 @@
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": "HQcbA",
+    "tags": ["Regular"]
+  },
+  "Ribbon Dancer": {
+    "dimorphism": false,
+    "genderOnly": "f",
+    "group": "Standard",
+    "sprites": {
+      "Salt LadyLyzar": "Hg2k",
+      "__regular__": "2PIc"
+    },
+    "tags": ["Christmas"]
+  },
+  "Ridgewing": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Purple": ["pbMTv","jBBoq"],
+      "Tan": ["vYWmo","zjGLw"]
+    },
     "tags": ["Regular"]
   },
   "Rift Wyrm": {
@@ -1047,6 +1110,20 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "7sNC0",
+    "tags": ["Regular"]
+  },
+  "Sunrise": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["dJ2C","R6N5"],
+    "tags": ["Regular"]
+  },
+  "Sunset": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["Hp0F","G4t5R"],
     "tags": ["Regular"]
   },
   "Sunstone": {

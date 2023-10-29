@@ -38,12 +38,6 @@
     "sprites": ["XhlnK","0","-1","48","4s3jH","-27","-1","48"],
     "tags": ["Regular"]
   },
-  "Aqualis": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["NuOVp","-6","-1","48","j9tBc","0","-1","48"],
-    "tags": ["Regular"]
-  },
   "Arsani": {
     "genderOnly": "f",
     "group": "Standard",
@@ -389,12 +383,6 @@
     "sprites": ["k3PF","-7","-1","48"],
     "tags": ["CB"]
   },
-  "Heartseeker": {
-    "genderOnly": "m",
-    "group": "Standard",
-    "sprites": ["iPfaV","-14","-1","48"],
-    "tags": ["Valentine"]
-  },
   "Hellfire Wyvern": {
     "genderOnly": false,
     "group": "Standard",
@@ -417,12 +405,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["TIOUK","-20","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Horse": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["MzNTU","-16","-1","48","5CsPF","-17","-1","48"],
     "tags": ["Regular"]
   },
   "Ice": {
@@ -471,17 +453,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["3NvWW","0","-1","48","rphkc","-2","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Lunar Herald": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Bronze": ["WGJTW","-15","-1","48"],
-      "Gold": ["tKt64","-15","-1","48"],
-      "Indigo": ["fMTLl","-15","-1","48"],
-      "Silver": ["Zcyy7","-15","-1","48"]
-    },
     "tags": ["Regular"]
   },
   "Magi": {
@@ -635,12 +606,6 @@
     "sprites": ["fYqIQ","-8","-1","48","iaAWK","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Plated Colossus": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["7bzCd","-12","-1","48","lEpYM","-13","-1","48"],
-    "tags": ["Regular"]
-  },
   "Pryanost Lindwyrm": {
     "genderOnly": "f",
     "group": "Standard",
@@ -679,21 +644,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["WnAo","-26","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Ribbon Dancer": {
-    "genderOnly": "f",
-    "group": "Standard",
-    "sprites": ["2PIc","-12","-1","48"],
-    "tags": ["Christmas"]
-  },
-  "Ridgewing": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Purple": ["pbMTv","-7","-1","48","jBBoq","-28","-1","48"],
-      "Tan": ["vYWmo","-7","-1","48","zjGLw","-28","-1","48"]
-    },
     "tags": ["Regular"]
   },
   "Rosebud": {
@@ -908,18 +858,6 @@
     "genderOnly": false,
     "group": "Drake",
     "sprites": ["kErGP","-6","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Sunrise": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["dJ2C","-13","-1","48","R6N5","-14","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Sunset": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["Hp0F","-12","-1","48","G4t5R","-1","-1","48"],
     "tags": ["Regular"]
   },
   "Sunsong Amphiptere": {
