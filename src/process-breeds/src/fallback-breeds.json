@@ -395,12 +395,6 @@
     "sprites": ["QklUl","-14","-1","48","ZtlTu","-14","-1","48"],
     "tags": ["Hybrid"]
   },
-  "Holly": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["y82Nx","-8","-1","48"],
-    "tags": ["Christmas"]
-  },
   "Hooded Murkling": {
     "genderOnly": false,
     "group": "Standard",
@@ -638,12 +632,6 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": ["ZNJKk","0","-1","48","S2sEw","-14","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Red": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["WnAo","-26","-1","48"],
     "tags": ["Regular"]
   },
   "Rosebud": {
