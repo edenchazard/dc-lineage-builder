@@ -1,4 +1,11 @@
 {
+  "Abyss Watcher": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["crvng","pmpkn"],
+    "tags": ["Halloween"]
+  },
   "Aegis": {
     "dimorphism": false,
     "genderOnly": "m",
