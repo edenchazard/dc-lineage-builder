@@ -377,12 +377,6 @@
     "sprites": ["beEo3","-4","-1","48"],
     "tags": ["Regular"]
   },
-  "Guardian Of Nature": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["k3PF","-7","-1","48"],
-    "tags": ["CB"]
-  },
   "Hellfire Wyvern": {
     "genderOnly": false,
     "group": "Standard",
@@ -474,12 +468,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["ja4AL","0","-1","48","0GCyQ","-22","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Mimic Pygmy": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["SwdTI","-1","-1","48","vVqnW","0","-1",""],
     "tags": ["Regular"]
   },
   "Mirisia Amphiptere": {
@@ -616,16 +604,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["VdVa","-11","-1","48","9QQ4i","0","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Pyralspite": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Almandine": ["AtPm1","0","-1","48"],
-      "Pyrope": ["31Iya","0","-1","48"],
-      "Spessartine": ["xq4Yl","0","-1","48"]
-    },
     "tags": ["Regular"]
   },
   "Quonebb": {
