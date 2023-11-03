@@ -388,6 +388,7 @@
     "genderOnly": "f",
     "group": "Standard",
     "sprites": {
+      "Salt Fiona": "tSKlj",
       "Salt Odeen": "4CMLL",
       "__regular__": "38Wem"
     },
@@ -484,6 +485,13 @@
     "group": "Standard",
     "sprites": "FHW2y",
     "tags": ["Hybrid"]
+  },
+  "Guardian Of Nature": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "k3PF",
+    "tags": ["CB"]
   },
   "Harvest": {
     "dimorphism": true,
@@ -697,6 +705,13 @@
     "sprites": "Iac9u",
     "tags": ["Regular"]
   },
+  "Mimic Pygmy": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": ["SwdTI","vVqnW"],
+    "tags": ["Regular"]
+  },
   "Mint": {
     "dimorphism": false,
     "genderOnly": false,
@@ -844,6 +859,17 @@
       "__regular__": "hEqW"
     },
     "tags": ["Halloween"]
+  },
+  "Pyralspite": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Almandine": "AtPm1",
+      "Pyrope": "31Iya",
+      "Spessartine": "xq4Yl"
+    },
+    "tags": ["Regular"]
   },
   "Pyropellis Wyvern": {
     "dimorphism": false,
@@ -1001,6 +1027,15 @@
     "group": "Standard",
     "sprites": "BiRHM",
     "tags": ["Hybrid"]
+  },
+  "Shadow Walker": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Salt Fiona": "p9ukA"
+    },
+    "tags": ["Halloween"]
   },
   "Shallow Water": {
     "dimorphism": true,
