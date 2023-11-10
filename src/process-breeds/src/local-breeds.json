@@ -3,7 +3,11 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["crvng","pmpkn"],
+    "sprites": {
+      "Salt MoonShark": ["abqwu","RYMEj"],
+      "Salt Schenanigans": ["35HjT","FrN6z"],
+      "__regular__": ["crvng","pmpkn"]
+    },
     "tags": ["Halloween"]
   },
   "Aegis": {
@@ -354,6 +358,17 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "id8od",
+    "tags": ["Regular"]
+  },
+  "Fire Gem": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Blue": ["mgV3Z","BhGzi"],
+      "Green": ["5feXv","o0S8K"],
+      "Red": ["KCpfA","Sk6wd"]
+    },
     "tags": ["Regular"]
   },
   "Flare-Tail Pygmy": {
@@ -791,7 +806,9 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Birdzgoboom": ["40Fe4","v9OgZ"]
+      "Salt Birdzgoboom": ["40Fe4","v9OgZ"],
+      "Salt Process": ["Qfyao","1fPdz"],
+      "__regular__": ["vortx","JwLvz"]
     },
     "tags": ["Halloween"]
   },
@@ -1068,6 +1085,20 @@
     "sprites": "6ImMt",
     "tags": ["Regular"]
   },
+  "Sinomorph": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "TfmjY",
+    "tags": ["CB"]
+  },
+  "Skysilk": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "RN88M",
+    "tags": ["Regular"]
+  },
   "Snow": {
     "dimorphism": false,
     "genderOnly": "m",
@@ -1215,6 +1246,13 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": "NFTkm",
+    "tags": ["Regular"]
+  },
+  "Thundersnow": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "3vp64",
     "tags": ["Regular"]
   },
   "Tinsel": {
