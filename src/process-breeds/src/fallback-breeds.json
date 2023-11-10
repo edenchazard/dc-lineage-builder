@@ -281,16 +281,6 @@
     "sprites": ["JQjm9","-18","-1","48"],
     "tags": ["Regular"]
   },
-  "Fire Gem": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Blue": ["mgV3Z","-15","-1","48","BhGzi","0","-1","48"],
-      "Green": ["5feXv","-14","-1","48","o0S8K","-5","-1","48"],
-      "Red": ["KCpfA","-12","-1","48","Sk6wd","0","-1","48"]
-    },
-    "tags": ["Regular"]
-  },
   "Flamingo Wyvern": {
     "genderOnly": false,
     "group": "Standard",
@@ -560,12 +550,6 @@
     "sprites": ["k2gGG","0","-1","48"],
     "tags": ["Regular"]
   },
-  "Omen Wyrm": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["vortx","0","-1","48","JwLvz","-13","-1","48"],
-    "tags": ["Halloween"]
-  },
   "Oracle Wyrm": {
     "genderOnly": false,
     "group": "Standard",
@@ -716,12 +700,6 @@
     "sprites": ["Yh0jg","0","-1","48","ez0Bl","-20","-1","48"],
     "tags": ["Regular"]
   },
-  "Sinomorph": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["TfmjY","-11","-1","48"],
-    "tags": ["CB"]
-  },
   "Siyat": {
     "genderOnly": false,
     "group": "Standard",
@@ -730,12 +708,6 @@
       "Green": ["n1G53","-1","-1","48"],
       "Purple": ["sa6Zc","-1","-1","48"]
     },
-    "tags": ["Regular"]
-  },
-  "Skysilk": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["RN88M","0","-1","48"],
     "tags": ["Regular"]
   },
   "Skystrider": {
@@ -869,12 +841,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["fQBUi","0","-1","48"],
-    "tags": ["Regular"]
-  },
-  "Thundersnow": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["3vp64","-14","-1","48"],
     "tags": ["Regular"]
   },
   "Tideweaver Lindwyrm": {
