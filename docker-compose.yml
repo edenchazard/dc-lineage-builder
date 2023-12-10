@@ -1,34 +1,17 @@
 name: dc-lb_dev
 services:
-  vue:
-    container_name: dc-lb-dev-vue
+  app:
+    container_name: app
     build:
-      context: ./src/frontend
-      dockerfile: ./df.Dockerfile
+      context: .
+      dockerfile: ./frontend/Dockerfile
     command: tail -F anything
     volumes:
-      - ./src/frontend:/app
+      - .:/app
       - /app/node_modules
     ports:
-      - "5173:5173"
-    depends_on:
-      - db
-      - api
-    networks:
-      - internal
-
-  api:
-    container_name: dc-lb-dev-api
-    build:
-      context: ./src/backend
-      dockerfile: ./df.Dockerfile
-    depends_on:
-      - db
-    volumes:
-      - ./src/backend:/app
-      - /app/node_modules
-    ports:
-      - "8000:8000"
+      - '5173:5173'
+      - '3000:3000'
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
@@ -36,6 +19,8 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
       - APIKey=${APIKey}
+    depends_on:
+      - db
     networks:
       - internal
 
@@ -44,10 +29,10 @@ services:
     image: mariadb:10
     tty: true
     volumes:
-      - ./src/db/dev:/docker-entrypoint-initdb.d
+      - ./db/dev:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - '3306:3306'
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -56,29 +41,18 @@ services:
     networks:
       - internal
 
-  # only for development
-  adminer:
-    container_name: dc-lb-dev-adminer
-    image: adminer:latest
-    environment:
-      ADMINER_DEFAULT_SERVER: ${MYSQL_DATABASE}
-    ports:
-      - 82:8080
-    networks:
-      - internal
-
-  breeds:
-    container_name: dc-lb-dev-process-breeds
-    build:
-      context: .
-      dockerfile: ./src/process-breeds/df.Dockerfile
-    cap_add:
-      - SYS_ADMIN
-    volumes:
-      - ./src/backend:/backend
-      - ./src/frontend:/frontend
-      - ./src/process-breeds:/app
-      - /app/node_modules
+#  breeds:
+#    container_name: dc-lb-dev-process-breeds
+#    build:
+#      context: .
+#      dockerfile: ./src/process-breeds/df.Dockerfile
+#    cap_add:
+#      - SYS_ADMIN
+#    volumes:
+#      - ./src/backend:/backend
+#      - ./src/frontend:/frontend
+#      - ./src/process-breeds:/app
+#      - /app/node_modules
 
 volumes:
   dbdata:
