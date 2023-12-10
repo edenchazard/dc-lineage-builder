@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "lib": ["ESNext", "DOM"],
+    "types": ["vite/client"]
+  },
+  "include": ["./**/*.vue", "./**/*.ts"],
+  "files": ["vue-shim.d.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

@@ -1,0 +1,4 @@
+build
+dist
+public
+src/vite-env.d.ts
