@@ -3,7 +3,7 @@ import { mergeConfig, defineConfig, configDefaults } from 'vitest/config';
 import viteConfig from './vite.config';
 
 export default mergeConfig(
-  viteConfig({ mode: 'dev', command: 'serve' }),
+  viteConfig({ mode: 'dev' }),
   defineConfig({
     test: {
       globals: true,

@@ -18,5 +18,11 @@
     "paths": {
       "@shared/*": ["./shared/*"]
     }
-  }
+  },
+  "exclude": [
+    "node_modules/**",
+    "coverage/**",
+    // TODO, typescript the process breeds shit lol
+    "process-breeds/**"
+  ]
 }
