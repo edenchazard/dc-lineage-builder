@@ -11,18 +11,18 @@ import crypto from 'crypto';
 import { OnsiteError, getDataForPair, checkDragonsMatchGender } from './onsite';
 import pool from './pool';
 
-const router = new Router({
-  prefix: config.apiPath,
-});
-
 interface RequestBody {
-  errors: string[];
+  errors: { type: 'Warning' | 'Error'; message: string }[];
   data: Record<string, any>;
 }
 
 interface RequestContext extends Context {
   body: RequestBody;
 }
+
+const router = new Router({
+  prefix: config.apiPath,
+});
 
 router.use(async (ctx, next) => {
   ctx.body = {
@@ -33,14 +33,14 @@ router.use(async (ctx, next) => {
   await next();
 });
 
-router.get('/', async (ctx) => {
+router.get('/', async (ctx: RequestContext) => {
   ctx.body.errors.push({ type: 'Warning', message: ':)' });
   ctx.body.data.message =
     "REST API for the lineage builder. You shouldn't be here!";
 });
 
 // return a lineage
-router.get('/lineage/:hash', async (ctx) => {
+router.get('/lineage/:hash', async (ctx: RequestContext) => {
   ctx.body.data.lineage = {};
 
   const hashCode = ctx.params.hash;
@@ -131,7 +131,7 @@ router.post('/lineage/create', async (ctx) => {
 });
 
 router.post('/onsite-preview', async (ctx) => {
-  const doChecks = !!ctx.request.body.doChecks;
+  const doChecks = ctx.request.body?.doChecks ?? false;
   const codesAsArray = [ctx.request.body.male, ctx.request.body.female];
 
   try {
