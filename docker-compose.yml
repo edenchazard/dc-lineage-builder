@@ -4,7 +4,7 @@ services:
     container_name: app
     build:
       context: .
-      dockerfile: ./frontend/Dockerfile
+      dockerfile: ./Dockerfile
     command: tail -F anything
     volumes:
       - .:/app
@@ -12,6 +12,10 @@ services:
     ports:
       - '5173:5173'
       - '3000:3000'
+    depends_on:
+      - db
+    networks:
+      - internal
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
@@ -19,8 +23,17 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
       - APIKey=${APIKey}
-    depends_on:
-      - db
+      - VITE_APP_URL=${VITE_APP_URL}
+
+  testapp:
+    container_name: testapp
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: tail -F anything
+    volumes:
+      - .:/app
+      - /app/node_modules
     networks:
       - internal
 
@@ -41,18 +54,18 @@ services:
     networks:
       - internal
 
-#  breeds:
-#    container_name: dc-lb-dev-process-breeds
-#    build:
-#      context: .
-#      dockerfile: ./src/process-breeds/df.Dockerfile
-#    cap_add:
-#      - SYS_ADMIN
-#    volumes:
-#      - ./src/backend:/backend
-#      - ./src/frontend:/frontend
-#      - ./src/process-breeds:/app
-#      - /app/node_modules
+  # breeds:
+  #   container_name: dc-lb-dev-process-breeds
+  #   build:
+  #     context: .
+  #     dockerfile: ./[rocess-breeds/Dockerfile
+  #   cap_add:
+  #     - SYS_ADMIN
+  #   volumes:
+  #     - ./app/backend:/backend
+  #     - ./src/frontend:/frontend
+  #     - ./src/process-breeds:/app
+  #     - /app/node_modules
 
 volumes:
   dbdata:
