@@ -1,6 +1,17 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import nodeHTMLParser from 'node-html-parser';
 import { getDragonsByCode } from './dcapi';
+
+interface DragonOnsite {
+  code: string;
+  html: string;
+  gen: number;
+}
+
+interface DragonPair {
+  male: DragonOnsite;
+  female: DragonOnsite;
+}
 
 class OnsiteError extends Error {
   constructor(message: string) {
@@ -9,7 +20,9 @@ class OnsiteError extends Error {
   }
 }
 
-async function checkDragonsMatchGender(codes: [string, string]) {
+async function checkDragonsMatchGender(
+  codes: [string, string],
+): Promise<{ code: string; correct: boolean | null }[]> {
   const apiDragons = await getDragonsByCode(codes);
   const [male, female] = codes;
 
@@ -27,12 +40,12 @@ async function checkDragonsMatchGender(codes: [string, string]) {
   ];
 }
 
-async function grabHTML(code: string, filter = true) {
+async function grabHTML(code: string, filter = true): Promise<DragonOnsite> {
   const fetchDragon = async (code: string) => {
     try {
       return (await axios.get(`https://dragcave.net/lineage/${code}`)).data;
-    } catch (err) {
-      if (err.response) {
+    } catch (err: unknown) {
+      if (err instanceof AxiosError && err.response) {
         if (err.response.status === 404)
           throw new OnsiteError(
             `Dragon not found. Possibly fogged or doesn't exist. Dragon: ${code}`,
@@ -90,7 +103,7 @@ async function grabHTML(code: string, filter = true) {
     const root = nodeHTMLParser
       .parse(response)
       .querySelector(`a[href='/view/${code}']`)
-      ?.closest('div > ul').parentNode;
+      ?.closest('div > ul').parentNode as unknown as HTMLElement;
 
     if (!root) throw new OnsiteError(`Couldn't find root. Dragon: ${code}`);
 
@@ -102,12 +115,12 @@ async function grabHTML(code: string, filter = true) {
       html: getHTML(root, filter),
       gen: getGen(root),
     };
-  } catch (ex) {
+  } catch (ex: unknown) {
     return ex;
   }
 }
 
-async function getDataForPair(codes: [string, string]) {
+async function getDataForPair(codes: [string, string]): Promise<DragonPair> {
   const dragons = await Promise.all(codes.map((code) => grabHTML(code)));
 
   const [male, female] = dragons.map((dragon) => {
