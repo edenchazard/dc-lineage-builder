@@ -20,6 +20,10 @@ class OnsiteError extends Error {
   }
 }
 
+/**
+ * Check a pair of dragons are male and female
+ * @param codes Format: [male, female]
+ */
 async function checkDragonsMatchGender(
   codes: [string, string],
 ): Promise<{ code: string; correct: boolean | null }[]> {
@@ -40,6 +44,12 @@ async function checkDragonsMatchGender(
   ];
 }
 
+/**
+ *
+ * @param code
+ * @param filter Whether to replace whitespace and fix urls
+ * @returns
+ */
 async function grabHTML(code: string, filter = true): Promise<DragonOnsite> {
   const fetchDragon = async (code: string) => {
     try {
@@ -64,9 +74,8 @@ async function grabHTML(code: string, filter = true): Promise<DragonOnsite> {
   /**
    * @param root The root returned by fetchDragon()
    * @param filter Whether to replace whitespace and fix urls
-   * @returns
    */
-  const getHTML = (root: HTMLElement, filter: boolean) => {
+  const getHTML = (root: HTMLElement, filter: boolean): string => {
     const baseULTag = root.querySelector('ul');
 
     if (baseULTag === null)
@@ -87,7 +96,10 @@ async function grabHTML(code: string, filter = true): Promise<DragonOnsite> {
     return html;
   };
 
-  const getGen = (root: HTMLElement) => {
+  /**
+   * Returns the generation of a dragon
+   */
+  const getGen = (root: HTMLElement): number => {
     const genNode = root.querySelector('span > span:first-child');
     if (genNode === null)
       throw new OnsiteError(`Couldn't find lineage tag. Dragon: ${code}`);
@@ -120,6 +132,9 @@ async function grabHTML(code: string, filter = true): Promise<DragonOnsite> {
   }
 }
 
+/**
+ * Returns data for a male and female pair of dragons
+ */
 async function getDataForPair(codes: [string, string]): Promise<DragonPair> {
   const dragons = await Promise.all(codes.map((code) => grabHTML(code)));
 
