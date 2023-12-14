@@ -4,7 +4,7 @@
   "private": true,
   "author": "Charley Reeson (https://chazza.me)",
   "scripts": {
-    "server:start": "tsx ./app/backend/server.ts --watch",
+    "server:start": "tsx watch ./app/backend/server.ts",
     "vue:start": "vite --host",
     "vue:build": "vite build",
     "vue:preview": "vite preview",
@@ -67,7 +67,7 @@
     "prettier": "^3.0.1",
     "tsx": "^3.14.0",
     "typescript": "^5.1.6",
-    "vite": "^5.0.8",
+    "vite": "^4.2.1",
     "vitest": "^0.34.6",
     "vue-tsc": "^1.0.9"
   }
