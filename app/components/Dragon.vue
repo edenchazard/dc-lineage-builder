@@ -8,14 +8,14 @@
       @close="showBreedSelector = false"
     />
     <div class="tile">
-      <TileButton
+      <DragonButton
         v-if="nodesFromRoot === 0"
         class="tile-button-left tile-button-add-desc"
         title="Add descendant"
         icon="arrow-left"
         @click="addDescendant"
       />
-      <TileButton
+      <DragonButton
         v-if="nodesFromRoot > 0"
         class="tile-button-left tile-button-remove-desc"
         title="Remove descendants"
@@ -46,14 +46,14 @@
         :title="problems"
         :aria-label="problems"
       />
-      <TileButton
+      <DragonButton
         v-if="hasAncestry"
         class="tile-button-right"
         title="Remove ancestors"
         icon="minus"
         @click="deleteAncestors"
       />
-      <TileButton
+      <DragonButton
         v-else
         class="tile-button-right"
         title="Add ancestors"
@@ -67,31 +67,31 @@
         @changed="labelChanged"
       />
       <div class="tile-bottom-controls tile-button-group">
-        <TileButton
+        <DragonButton
           v-if="nodesFromRoot === 0 && data.gender === 'm'"
           title="Switch gender to female"
           icon="mars"
           @click="switchGender"
         />
-        <TileButton
+        <DragonButton
           v-else-if="nodesFromRoot === 0 && data.gender === 'f'"
           title="Switch gender to male"
           icon="venus"
           @click="switchGender"
         />
-        <TileButton
+        <DragonButton
           class="switchLabel"
           title="Switch label"
           icon="font"
           @click="switchLabel"
         />
-        <TileButton
+        <DragonButton
           v-if="hasAncestry"
           title="Copy ancestors"
           icon="clone"
           @click="copyBranch"
         />
-        <TileButton
+        <DragonButton
           title="Paste ancestors"
           icon="paste"
           @click="pasteBranch"
@@ -136,7 +136,7 @@ import { useAppStore } from '../store/useAppStore';
 import DragonLabel from './DragonLabel.vue';
 import BreedSelector from './BreedSelector.vue';
 import DragonPortrait from './DragonPortrait.vue';
-import TileButton from './TileButton.vue';
+import DragonButton from './DragonButton.vue';
 import { Lineage } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder';
 import { validateCode, validateName } from '../shared/validation';
