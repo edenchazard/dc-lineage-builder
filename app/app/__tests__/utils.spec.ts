@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, expectTypeOf } from 'vitest';
 import {
   breedEntryToPortrait,
   createLineageLink,
@@ -6,7 +6,7 @@ import {
   getBreedData,
   validGenderForBreed,
 } from '../utils';
-import type { BreedEntry } from 'app/shared/types';
+import type { BreedEntry, PortraitData } from 'app/shared/types';
 
 describe('utils', () => {
   describe('#validGenderForBreed', () => {
@@ -52,15 +52,15 @@ describe('utils', () => {
 
   describe('#breedEntryToPortrait', () => {
     it('returns the portrait for breed available as male with male wanted', () => {
-      expect(
+      expectTypeOf(
         breedEntryToPortrait(getBreedData('Aria') as BreedEntry, 'male'),
-      ).to.have.all.keys('name', 'image', 'metaData');
+      ).toMatchTypeOf<PortraitData>();
     });
 
     it('returns the portrait for breed available as female with female wanted', () => {
-      expect(
+      expectTypeOf(
         breedEntryToPortrait(getBreedData('Aria') as BreedEntry, 'female'),
-      ).to.have.all.keys('name', 'image', 'metaData');
+      ).toMatchTypeOf<PortraitData>();
     });
   });
 

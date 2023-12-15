@@ -11,7 +11,6 @@ describe('dragon builder', () => {
       expect(instance).to.have.property('parents');
       expect(instance).to.have.property('breed');
       expect(instance).to.have.property('gender');
-      expect(instance).to.have.property('gender');
       expect(instance).to.not.have.property('selected');
     });
   });
@@ -24,7 +23,6 @@ describe('dragon builder', () => {
       expect(instance).to.have.property('name');
       expect(instance).to.have.property('parents');
       expect(instance).to.have.property('breed');
-      expect(instance).to.have.property('gender');
       expect(instance).to.have.property('gender');
       expect(instance).to.have.property('selected');
       expect(instance).property('selected').to.be.false;
