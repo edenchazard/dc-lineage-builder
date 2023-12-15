@@ -32,6 +32,8 @@ describe('dragon builder', () => {
   });
 
   describe('#switchParents', () => {
-    it('returns new lineage handler instance', async () => {});
+    it('returns new lineage handler instance', async () => {
+      const instance = DragonBuilder.createWithMetadata();
+    });
   });
 });

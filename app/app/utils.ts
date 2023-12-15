@@ -15,7 +15,10 @@ import type {
 } from '../shared/types';
 import { BREEDNAMEREGEXP } from '../shared/validation';
 
-function validGenderForBreed(gender: DragonGender, breed: BreedEntry): boolean {
+export function validGenderForBreed(
+  gender: DragonGender,
+  breed: BreedEntry,
+): boolean {
   // if the genderonly attribute is not false,
   // it means the breed is male only or female only
   // and will be specified in the value
@@ -27,7 +30,7 @@ export function throwBreedError(name: string) {
 }
 
 // returns undefined if breed isn't in the global list
-export function getBreedData(breedName: string) {
+export function getBreedData(breedName: string): BreedEntry | undefined {
   const entry = listOfBreeds.find((v) => v.name === breedName);
 
   //if(!entry) throwBreedError(breedName);
@@ -51,13 +54,11 @@ export function breedEntryToPortrait(
   return data;
 }
 
-// Expands m or f to male/female
+/**
+ * Expands m or f to male/female
+ */
 export function expandGender(gender: DragonGender) {
   return gender === 'm' ? 'male' : 'female';
-}
-
-export function portraitToBreedEntry(data: PortraitData) {
-  return getBreedData(data.name);
 }
 
 export function getTable(gender: DragonGender): PortraitData[] {
@@ -66,7 +67,7 @@ export function getTable(gender: DragonGender): PortraitData[] {
 
 export function hasParents(
   dragon: MaybePartialLineageWithMetadata,
-): dragon is PartialLineageWithMetadata & {
+): dragon is MaybePartialLineageWithMetadata & {
   parents: { m: PartialLineageWithMetadata; f: PartialLineageWithMetadata };
 } {
   return (

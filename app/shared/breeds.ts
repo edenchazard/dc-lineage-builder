@@ -2,8 +2,6 @@ import _breedList from './breed-definitions.json';
 import type { BreedEntry, PortraitData } from './types';
 import { getDCTime, filterBreedTableByGender } from '../app/utils';
 
-const breedList = _breedList as BreedEntry[];
-
 const placeholder: BreedEntry = {
   name: 'Placeholder',
   male: 'place',
@@ -15,6 +13,13 @@ const placeholder: BreedEntry = {
     tags: [],
   },
 };
+
+const breedList = _breedList as BreedEntry[];
+
+// different breed tables for different needs
+const listOfBreeds = [placeholder, ...breedList];
+const malePortraits: PortraitData[] = [];
+const femalePortraits: PortraitData[] = [];
 
 function syncPortraits() {
   Object.assign(malePortraits, filterBreedTableByGender(listOfBreeds, 'm'));
@@ -39,16 +44,10 @@ function adjustTiles() {
       listOfBreeds[nocturne].female = 'OrTHo_day';
       listOfBreeds[nocturne].male = 'OrTHo_day';
     }
+
     syncPortraits();
   }
 }
-
-// different breed tables for different needs
-const listOfBreeds = [placeholder, ...breedList];
-const malePortraits: PortraitData[] = [];
-const femalePortraits: PortraitData[] = [];
-
-syncPortraits();
 
 export {
   placeholder,
