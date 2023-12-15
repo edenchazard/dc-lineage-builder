@@ -3,6 +3,7 @@
   "version": "3.0.0",
   "private": true,
   "author": "Charley Reeson (https://chazza.me)",
+  "module": "true",
   "scripts": {
     "server:start": "tsx watch ./app/backend/server.ts",
     "vue:start": "vite --host",

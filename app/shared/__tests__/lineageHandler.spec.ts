@@ -4,22 +4,22 @@ import { Lineage, LineageHandler } from '../lineageHandler';
 import { dragonGen3 } from '../../__tests__/testData';
 
 describe('lineage handler', () => {
-  describe('#getAtPath', () => {
-    it('returns new lineage handler instance', () => {
+  describe('#getAtPath', async () => {
+    it('returns new lineage handler instance', async () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       const subTree = theLineage.getAtPath('m.m');
 
       expect(subTree).to.be.instanceOf(LineageHandler);
     });
 
-    it('returns the root dragon when empty path', () => {
+    it('returns the root dragon when empty path', async () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       const subTree = theLineage.getAtPath('');
 
       expect(subTree?.raw()).to.be.eql(dragonGen3);
     });
 
-    it('returns the dragon at a specified path', () => {
+    it('returns the dragon at a specified path', async () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       const subTree = theLineage.getAtPath('m.m');
 
@@ -33,7 +33,7 @@ describe('lineage handler', () => {
       });
     });
 
-    it('returns undefined when specified path not exists', () => {
+    it('returns undefined when specified path not exists', async () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       const subTree = theLineage.getAtPath('m.m.f.f');
 
