@@ -81,4 +81,3 @@ async function importLineage() {
   }
 }
 </script>
-../../../../shared/types ../shared/lineageHandler

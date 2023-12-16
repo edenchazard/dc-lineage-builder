@@ -161,7 +161,7 @@ const props = defineProps({
     required: true,
   },
 });
-const button = ref();
+
 const ls = localStorage;
 const appStore = useAppStore();
 const showBreedSelector = ref(false);

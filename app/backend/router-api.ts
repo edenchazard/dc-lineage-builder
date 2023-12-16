@@ -13,7 +13,7 @@ import pool from './pool';
 
 interface RequestBody {
   errors: { type: 'Warning' | 'Error'; message: string }[];
-  data: Record<string, any>;
+  data: Record<string, unknown>;
 }
 
 interface RequestContext extends Context {
@@ -102,7 +102,7 @@ router.post('/lineage/create', async (ctx) => {
       return;
     }
 
-    let hash = crypto.createHash('sha1');
+    const hash = crypto.createHash('sha1');
     const jsonString = JSON.stringify(dragon);
     hash.update(config.salt + jsonString);
     const hashCode = hash.digest('hex');

@@ -387,7 +387,7 @@ const emit = defineEmits<{
   (e: 'displayCodes'): void;
   (e: 'randomizeLabels'): void;
   (e: 'deleteAncestors'): void;
-  (e: 'importTree', tree: PartialLineageWithMetadata): void;
+  (e: 'importTree', tree: PartialLineage): void;
   (e: 'changeBreed', value: string): void;
   (
     e: 'selectCriteria',
@@ -464,7 +464,7 @@ const availableBreeds = computed(() => {
   return breedTable.filter(filter).map((breed) => breed.name);
 });
 
-function importLineage(tree: PartialLineageWithMetadata) {
+function importLineage(tree: PartialLineage) {
   emit('importTree', tree);
 }
 
