@@ -21,6 +21,9 @@ export default ({ mode }: { mode: string }) => {
     test: {
       environment: 'jsdom',
       exclude: [...configDefaults.exclude, 'e2e/*'],
+      coverage: {
+        reportsDirectory: '../coverage',
+      },
     },
   });
 };
