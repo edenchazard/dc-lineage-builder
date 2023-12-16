@@ -25,7 +25,7 @@ export function validGenderForBreed(
   return breed.genderOnly === false || breed.genderOnly === gender;
 }
 
-export function throwBreedError(name: string) {
+export function throwBreedError(name: string): never {
   throw new Error(`Breed ${name} doesn't exist.`);
 }
 
@@ -85,10 +85,6 @@ export function filterBreedTableByGender(
   return breeds
     .filter((breed) => validGenderForBreed(gender, breed))
     .map((breed) => breedEntryToPortrait(breed, expandedGender));
-}
-
-export function isPlaceholder(str: string) {
-  return str.toLowerCase() === 'placeholder';
 }
 
 export function isBreedInList(list: BreedEntry[], breedName: string) {
