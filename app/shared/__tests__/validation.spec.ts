@@ -147,7 +147,7 @@ describe('dragon validations', () => {
     it('fails if not 0 or 1', async () => {
       const dragon = await dragonSchema.isValid(
         DragonBuilder.create({
-          /* @ts-ignore */
+          /* @ts-expect-error this is supposed to fail */
           display: -1,
         }),
       );
@@ -158,7 +158,7 @@ describe('dragon validations', () => {
     it('fails if not 0 or 1', async () => {
       const dragon = await dragonSchema.isValid(
         DragonBuilder.create({
-          /* @ts-ignore */
+          /* @ts-expect-error this is supposed to fail */
           display: 2,
         }),
       );
@@ -221,7 +221,7 @@ describe('dragon validations', () => {
     it("fails if not 'm' or 'f'", async () => {
       const dragon = await dragonSchema.isValid(
         DragonBuilder.create({
-          /* @ts-ignore */
+          /* @ts-expect-error this is supposed to fail */
           gender: 'x',
         }),
       );

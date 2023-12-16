@@ -14,8 +14,8 @@
     >
       <div
         v-if="open"
-        :style="floatingStyles"
         ref="menu"
+        :style="floatingStyles"
         role="menu"
         class="menu"
         :aria-hidden="!open"

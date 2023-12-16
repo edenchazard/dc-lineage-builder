@@ -7,8 +7,13 @@
       v-if="appStore.activeTree !== null"
       :config="config"
       :tree="appStore.activeTree"
-      @update-config="(key, value) => (config[key] = value)"
-      @import-tree="(newTree) => (appStore.activeTree = newTree)"
+      @update-config="
+        (key: keyof LineageConfig, value: boolean) => (config[key] = value)
+      "
+      @import-tree="
+        (newTree) =>
+          (appStore.activeTree = LineageHandler(newTree).withMetadata())
+      "
       @unselect-all="unselectAll"
       @change-breed="selectionChangeBreed"
       @display-names="selectionSwitchLabel(0)"
@@ -26,8 +31,8 @@
       <Feedback ref="status" />
     </div>
     <Lineage
-      class="builder"
       v-if="appStore.activeTree !== null"
+      class="builder"
       :root="appStore.activeTree"
       :config="config"
       @contextmenu="() => false"

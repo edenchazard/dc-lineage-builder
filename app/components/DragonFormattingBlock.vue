@@ -3,6 +3,7 @@
     <ul class="node">
       <li
         v-for="(value, field) in Lineage(dragon).withoutMetadata().raw()"
+        :key="field"
         class="node-line"
       >
         <div
@@ -13,8 +14,8 @@
           {{ field === 'parents' && hasParents(dragon) ? '{ ... }' : value }}
         </div>
         <div
-          class="error"
           v-if="field === highlight"
+          class="error"
         >
           {{ error }}
         </div>
@@ -29,7 +30,7 @@ import type { MaybePartialLineageWithMetadata } from '../shared/types';
 import { hasParents } from '../app/utils';
 import { Lineage } from '../shared/lineageHandler';
 
-const props = defineProps({
+defineProps({
   dragon: {
     type: Object as PropType<MaybePartialLineageWithMetadata>,
     required: true,
