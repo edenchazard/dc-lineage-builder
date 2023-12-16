@@ -35,7 +35,7 @@ cd dc-lineage-builder
 # set up development settings
 cp .env.example .env.development
 
-# edit with your favorite text editor
+# edit with your favourite text editor
 # and change the settings. you will need to
 # insert your DragCave API key.
 nano .env.development
@@ -53,8 +53,25 @@ nano .env.production
 From the project root directory, use the command:
 
 ```sh
-docker-compose --env-file .env.development up vue
+docker-compose up app -d
+docker-compose exec app sh
+npm i
+npm run dev
 ```
+
+You can access the project at [http://localhost:5173](http://localhost:5173).
+
+### Testing
+
+To run the tests, you should be in the `testapp` container.
+
+```sh
+docker-compose up test -d
+docker-compose exec testapp sh
+npm run test:unit
+```
+
+Tests are run via Vitest, and will automatically re-run whenever a file is changed.
 
 ### Production
 
