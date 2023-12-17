@@ -10,9 +10,7 @@
       </span>
     </RouterLink>
     <a href="https://chazza.me/dc/tools">
-      <span class="link-text">
-        More tools
-      </span>
+      <span class="link-text"> More tools </span>
     </a>
     <a href="https://dragcave.net/">
       <span class="link-text">
