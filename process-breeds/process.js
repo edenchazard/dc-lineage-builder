@@ -95,10 +95,10 @@ async function main() {
 
   // 36 x 48
   await checkCache(localJSON, driver36, cache36.device, ignoreFile);
-
+  console.log(__dirname);
   await saveResolutionStylesheet({
     locTiles: cache36.folder,
-    locCSSFile: '../frontend/src/assets/tile-rendering/sprites-36x48.css',
+    locCSSFile: './app/assets/tile-rendering/sprites-36x48.css',
     sizing: { width: 36, height: 48 },
     injectFolder: cache36.inject,
   });
@@ -108,22 +108,19 @@ async function main() {
 
   await saveResolutionStylesheet({
     locTiles: cache72.folder,
-    locCSSFile: '../frontend/src/assets/tile-rendering/sprites-72x96.css',
+    locCSSFile: './app/assets/tile-rendering/sprites-72x96.css',
     sizing: { width: 72, height: 96 },
     injectFolder: cache72.inject,
   });
 
-  // make and save the definition file to frontend and backend
-  await Promise.all([
-    fs.writeFile('../frontend/src/' + definitionsJSON, json, 'utf8'),
-    fs.writeFile('../backend/src/' + definitionsJSON, json, 'utf8'),
-  ]);
+  // make and save the definition file
+  await fs.writeFile('./app/shared/' + definitionsJSON, json, 'utf8');
 
-  console.log('Synced breed definitions to backend and frontend.');
+  console.log('Synced breed definitions.');
 
   // make and save the fallbacks stylesheet
   await fs.writeFile(
-    '../frontend/src/assets/tile-rendering/fallbacks.css',
+    './app/assets/tile-rendering/fallbacks.css',
     makeCSSStyleSheet(fallbackJSON),
     'utf8',
   );
