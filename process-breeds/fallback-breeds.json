@@ -2,332 +2,332 @@
   "Albino": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["zZ7E","0","-1","48"],
+    "sprites": ["zZ7E", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Alcedine Wyvern": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Blue": ["2LTzD","-15","-1","48"],
-      "Brown": ["CNsfX","-16","-1","48"]
+      "Blue": ["2LTzD", "-15", "-1", "48"],
+      "Brown": ["CNsfX", "-16", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Almerald": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["KOxsP","-1","-1","48"],
+    "sprites": ["KOxsP", "-1", "-1", "48"],
     "tags": ["Regular"]
   },
   "Amarignis": {
     "genderOnly": "f",
     "group": "Standard",
-    "sprites": ["CastA","-14","-1","48"],
+    "sprites": ["CastA", "-14", "-1", "48"],
     "tags": ["Valentine"]
   },
   "Anagallis": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["3zNLA","-27","-1","48","BvQnr","0","-1","48"],
+    "sprites": ["3zNLA", "-27", "-1", "48", "BvQnr", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Antarean": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["XhlnK","0","-1","48","4s3jH","-27","-1","48"],
+    "sprites": ["XhlnK", "0", "-1", "48", "4s3jH", "-27", "-1", "48"],
     "tags": ["Regular"]
   },
   "Aqualis": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["NuOVp","-6","-1","48","j9tBc","0","-1","48"],
+    "sprites": ["NuOVp", "-6", "-1", "48", "j9tBc", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Arsani": {
     "genderOnly": "f",
     "group": "Standard",
-    "sprites": ["jFbDs","-16","-1","48"],
+    "sprites": ["jFbDs", "-16", "-1", "48"],
     "tags": ["Valentine"]
   },
   "Astaarus": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["LMtdH","-8","-1","48","jUPLO","-8","-1","48"],
+    "sprites": ["LMtdH", "-8", "-1", "48", "jUPLO", "-8", "-1", "48"],
     "tags": ["Regular"]
   },
   "Astralophyne": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["EKXWG","-18","-1","48"],
+    "sprites": ["EKXWG", "-18", "-1", "48"],
     "tags": ["Regular"]
   },
   "Avea Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["mKkIO","-9","6","","Pg3V8","0","2",""],
+    "sprites": ["mKkIO", "-9", "6", "", "Pg3V8", "0", "2", ""],
     "tags": ["Regular"]
   },
   "Azure Glacewing": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Jj9wo","-16","-1","48"],
+    "sprites": ["Jj9wo", "-16", "-1", "48"],
     "tags": ["Regular"]
   },
   "Balloon": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["TP9t","0","-1","48"],
+    "sprites": ["TP9t", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Bauta": {
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["pWW5i","-15","-1","48"],
+    "sprites": ["pWW5i", "-15", "-1", "48"],
     "tags": ["Regular"]
   },
   "Black": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Alt.": ["bktN","-15","-1","48","S1tr","-4","-1","48"],
-      "Regular": ["75LV","-20","-1","48","5CMC","0","-1","48"]
+      "Alt.": ["bktN", "-15", "-1", "48", "S1tr", "-4", "-1", "48"],
+      "Regular": ["75LV", "-20", "-1", "48", "5CMC", "0", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Black Capped Teimarr": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["xRG9g","-24","-1","48","Gtagr","0","-1","48"],
+    "sprites": ["xRG9g", "-24", "-1", "48", "Gtagr", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Black Marrow": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["jsLv","0","-1","48","F04k","-2","-1","48"],
+    "sprites": ["jsLv", "0", "-1", "48", "F04k", "-2", "-1", "48"],
     "tags": ["Halloween"]
   },
   "Black Tea": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["PNxhP","-10","-1","48","yVi55","-6","-1","48"],
+    "sprites": ["PNxhP", "-10", "-1", "48", "yVi55", "-6", "-1", "48"],
     "tags": ["Regular"]
   },
   "Black Truffle": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["2ISNc","-13","-1","48"],
+    "sprites": ["2ISNc", "-13", "-1", "48"],
     "tags": ["Regular"]
   },
   "Bleeding Moon": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["UilCo","-1","-1","48","H4vT8","-1","-1","48"],
+    "sprites": ["UilCo", "-1", "-1", "48", "H4vT8", "-1", "-1", "48"],
     "tags": ["Regular"]
   },
   "Blusang Lindwurm": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["aAwxC","-3","-1","48","WzRMQ","-2","-1","48"],
+    "sprites": ["aAwxC", "-3", "-1", "48", "WzRMQ", "-2", "-1", "48"],
     "tags": ["Regular"]
   },
   "Bright-Breasted Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["RCa3","-20","-1","48","X48YN","-1","-1","48"],
+    "sprites": ["RCa3", "-20", "-1", "48", "X48YN", "-1", "-1", "48"],
     "tags": ["Regular"]
   },
   "Brimstone": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["iQ2ML","0","-1","48"],
+    "sprites": ["iQ2ML", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Brute": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Nn6jX","-16","-1","48","LgbSx","0","-1","48"],
+    "sprites": ["Nn6jX", "-16", "-1", "48", "LgbSx", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Canopy": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["EQNPr","-26","-1","48","WScX","0","7",""],
+    "sprites": ["EQNPr", "-26", "-1", "48", "WScX", "0", "7", ""],
     "tags": ["Regular"]
   },
   "Cantormaris": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Iratus": ["l8AyC","-14","-1","48"],
-      "Itus": ["t3iNN","-14","-1","48"],
-      "Motus": ["Trzoj","-14","-1","48"],
-      "Mundus": ["TdVYK","-14","-1","48"],
-      "Sophos": ["gVJON","-14","-1","48"],
-      "Tutela": ["A1EtF","-14","-1","48"]
+      "Iratus": ["l8AyC", "-14", "-1", "48"],
+      "Itus": ["t3iNN", "-14", "-1", "48"],
+      "Motus": ["Trzoj", "-14", "-1", "48"],
+      "Mundus": ["TdVYK", "-14", "-1", "48"],
+      "Sophos": ["gVJON", "-14", "-1", "48"],
+      "Tutela": ["A1EtF", "-14", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Carina": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["FVU6w","0","-1","48","m4JIp","-17","-1","48"],
+    "sprites": ["FVU6w", "0", "-1", "48", "m4JIp", "-17", "-1", "48"],
     "tags": ["Hybrid"]
   },
   "Cassare": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["0wXI7","0","-1","48"],
+    "sprites": ["0wXI7", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Cloudplume": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["rbsCL","0","-1","48"],
+    "sprites": ["rbsCL", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Coastal Waverunner": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["LiAJc","-9","-1","48"],
+    "sprites": ["LiAJc", "-9", "-1", "48"],
     "tags": ["Regular"]
   },
   "Common Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["le4nV","-2","-3","","JWOk","0","7",""],
+    "sprites": ["le4nV", "-2", "-3", "", "JWOk", "0", "7", ""],
     "tags": ["Regular"]
   },
   "Copper": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Liver of Sulfur": ["veGbV","0","-1","47","fiyl6","-2","-1","48"],
-      "Pennybright": ["Rflp3","0","-1","47","mg3a4","-2","-1","48"],
-      "Rainbow": ["B9E5e","0","-1","47","YvBle","-2","-1","48"],
-      "Verdigris": ["vT4Zt","0","-1","47","tRfe4","-2","-1","48"]
+      "Liver of Sulfur": ["veGbV", "0", "-1", "47", "fiyl6", "-2", "-1", "48"],
+      "Pennybright": ["Rflp3", "0", "-1", "47", "mg3a4", "-2", "-1", "48"],
+      "Rainbow": ["B9E5e", "0", "-1", "47", "YvBle", "-2", "-1", "48"],
+      "Verdigris": ["vT4Zt", "0", "-1", "47", "tRfe4", "-2", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Coral Pygmy Wyvern": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["76SLL","0","4","","4GlYB","-17","4",""],
+    "sprites": ["76SLL", "0", "4", "", "4GlYB", "-17", "4", ""],
     "tags": ["Regular"]
   },
   "Crimson Flare Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["Btwff","-2","7",""],
+    "sprites": ["Btwff", "-2", "7", ""],
     "tags": ["Regular"]
   },
   "Crystalline": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["U54cN","-26","-1","48","N78NT","-3","-1","48"],
+    "sprites": ["U54cN", "-26", "-1", "48", "N78NT", "-3", "-1", "48"],
     "tags": ["Regular"]
   },
   "Dark Green": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Alt.": ["F3EP","0","-1","48"],
-      "Regular": ["qdvf","-15","-1","48"]
+      "Alt.": ["F3EP", "0", "-1", "48"],
+      "Regular": ["qdvf", "-15", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Dark Lumina": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Sw8fG","0","-1","48","yWz0A","0","-1","48"],
+    "sprites": ["Sw8fG", "0", "-1", "48", "yWz0A", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Daydream": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["NN1V","0","-1","48","dSjh","0","-1","48"],
+    "sprites": ["NN1V", "0", "-1", "48", "dSjh", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Deep Sea": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["dgqt","0","-1","48"],
+    "sprites": ["dgqt", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Dorsal": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Purple": ["mfnIj","-28","-1","48"],
-      "Red": ["k6Pw","-28","-1","48"]
+      "Purple": ["mfnIj", "-28", "-1", "48"],
+      "Red": ["k6Pw", "-28", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Duotone": {
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["Umm0u","-14","-1","48","Jib3s","-12","-1","48"],
+    "sprites": ["Umm0u", "-14", "-1", "48", "Jib3s", "-12", "-1", "48"],
     "tags": ["Regular"]
   },
   "Dusk Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["HIWV5","-1","6","","sALdr","0","1",""],
+    "sprites": ["HIWV5", "-1", "6", "", "sALdr", "0", "1", ""],
     "tags": ["Hybrid"]
   },
   "Ember": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["TXoK5","0","-1","48","b3mHb","0","-1","48"],
+    "sprites": ["TXoK5", "0", "-1", "48", "b3mHb", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Erador Lindwyrm": {
     "genderOnly": "m",
     "group": "Standard",
-    "sprites": ["yummy","-14","-1","48"],
+    "sprites": ["yummy", "-14", "-1", "48"],
     "tags": ["Valentine"]
   },
   "Falconiform Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Png8A","0","-1","48","uUYCh","-6","-1","48"],
+    "sprites": ["Png8A", "0", "-1", "48", "uUYCh", "-6", "-1", "48"],
     "tags": ["Regular"]
   },
   "Fanalea": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["JQjm9","-18","-1","48"],
+    "sprites": ["JQjm9", "-18", "-1", "48"],
     "tags": ["Regular"]
   },
   "Fever Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["AO5F4","-8","-1","48"],
+    "sprites": ["AO5F4", "-8", "-1", "48"],
     "tags": ["Regular"]
   },
   "Fire Gem": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Blue": ["mgV3Z","-15","-1","48","BhGzi","0","-1","48"],
-      "Green": ["5feXv","-14","-1","48","o0S8K","-5","-1","48"],
-      "Red": ["KCpfA","-12","-1","48","Sk6wd","0","-1","48"]
+      "Blue": ["mgV3Z", "-15", "-1", "48", "BhGzi", "0", "-1", "48"],
+      "Green": ["5feXv", "-14", "-1", "48", "o0S8K", "-5", "-1", "48"],
+      "Red": ["KCpfA", "-12", "-1", "48", "Sk6wd", "0", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Flamingo Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["hGua","-15","-1","48","7hsk","-6","-1","48"],
+    "sprites": ["hGua", "-15", "-1", "48", "7hsk", "-6", "-1", "48"],
     "tags": ["Regular"]
   },
   "Floret Wyvern Alstroemeria": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Gold": ["VxHfL","-8","-1","48","fCaGX","-6","-1","48"],
-      "Pink": ["bwGPg","-8","-1","48","jkyej","-6","-1","48"],
-      "Purple": ["BjJp4","-8","-1","48","4F7UH","-6","-1","48"]
+      "Gold": ["VxHfL", "-8", "-1", "48", "fCaGX", "-6", "-1", "48"],
+      "Pink": ["bwGPg", "-8", "-1", "48", "jkyej", "-6", "-1", "48"],
+      "Purple": ["BjJp4", "-8", "-1", "48", "4F7UH", "-6", "-1", "48"]
     },
     "tags": ["Regular"]
   },
@@ -335,734 +335,734 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Gold": ["E6uF3","0","-1","48","B39nn","-7","-1","47.5"],
-      "Pink": ["k7ye7","0","-1","48","kubb7","-7","-1","47.5"],
-      "Purple": ["ufqA1","0","-1","48","M2Wu9","-7","-1","47.5"]
+      "Gold": ["E6uF3", "0", "-1", "48", "B39nn", "-7", "-1", "47.5"],
+      "Pink": ["k7ye7", "0", "-1", "48", "kubb7", "-7", "-1", "47.5"],
+      "Purple": ["ufqA1", "0", "-1", "48", "M2Wu9", "-7", "-1", "47.5"]
     },
     "tags": ["Regular"]
   },
   "Frilled": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["t73t","-1","-1","48","kcaS","-15","-1","47"],
+    "sprites": ["t73t", "-1", "-1", "48", "kcaS", "-15", "-1", "47"],
     "tags": ["Regular"]
   },
   "Frostbite": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Whfs7","0","-1","48"],
+    "sprites": ["Whfs7", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Galvanic Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["CPQCI","0","-1","48"],
+    "sprites": ["CPQCI", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Geminae": {
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["5NMZB","0","-1","48"],
+    "sprites": ["5NMZB", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Geode": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["I7I5K","0","-1","48","6CRd","-37","-1","48"],
+    "sprites": ["I7I5K", "0", "-1", "48", "6CRd", "-37", "-1", "48"],
     "tags": ["Hybrid"]
   },
   "Glowback Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["NMEFa","-1","-1","47","vwCkh","-9","0",""],
+    "sprites": ["NMEFa", "-1", "-1", "47", "vwCkh", "-9", "0", ""],
     "tags": ["Regular"]
   },
   "Gold": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["3iKre","-33","-1","48","huQIl","-10","-1","48"],
+    "sprites": ["3iKre", "-33", "-1", "48", "huQIl", "-10", "-1", "48"],
     "tags": ["Regular"]
   },
   "Golden Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Eb0nc","-9","-1","48","amvgQ","-13","-1","48"],
+    "sprites": ["Eb0nc", "-9", "-1", "48", "amvgQ", "-13", "-1", "48"],
     "tags": ["Regular"]
   },
   "Green": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["NRSH","0","-1","48"],
+    "sprites": ["NRSH", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Guardian": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["beEo3","-4","-1","48"],
+    "sprites": ["beEo3", "-4", "-1", "48"],
     "tags": ["Regular"]
   },
   "Guardian Of Nature": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["k3PF","-7","-1","48"],
+    "sprites": ["k3PF", "-7", "-1", "48"],
     "tags": ["CB"]
   },
   "Heartseeker": {
     "genderOnly": "m",
     "group": "Standard",
-    "sprites": ["iPfaV","-14","-1","48"],
+    "sprites": ["iPfaV", "-14", "-1", "48"],
     "tags": ["Valentine"]
   },
   "Hellfire Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["8oak","-18","-1","48","FPQ3Q","-14","-1","48"],
+    "sprites": ["8oak", "-18", "-1", "48", "FPQ3Q", "-14", "-1", "48"],
     "tags": ["Regular"]
   },
   "Hellhorse": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["QklUl","-14","-1","48","ZtlTu","-14","-1","48"],
+    "sprites": ["QklUl", "-14", "-1", "48", "ZtlTu", "-14", "-1", "48"],
     "tags": ["Hybrid"]
   },
   "Holly": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["y82Nx","-8","-1","48"],
+    "sprites": ["y82Nx", "-8", "-1", "48"],
     "tags": ["Christmas"]
   },
   "Hooded Murkling": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["TIOUK","-20","-1","48"],
+    "sprites": ["TIOUK", "-20", "-1", "48"],
     "tags": ["Regular"]
   },
   "Horse": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["MzNTU","-16","-1","48","5CsPF","-17","-1","48"],
+    "sprites": ["MzNTU", "-16", "-1", "48", "5CsPF", "-17", "-1", "48"],
     "tags": ["Regular"]
   },
   "Ice": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["DJuWf","-8","-1","48"],
+    "sprites": ["DJuWf", "-8", "-1", "48"],
     "tags": ["Regular"]
   },
   "Imperial Fleshcrowne": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["jeuAc","0","-1","48","onrpD","-23","-1","48"],
+    "sprites": ["jeuAc", "0", "-1", "48", "onrpD", "-23", "-1", "48"],
     "tags": ["Regular"]
   },
   "Kingcrowne": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["jibRe","-19","-1","48"],
+    "sprites": ["jibRe", "-19", "-1", "48"],
     "tags": ["Regular"]
   },
   "Kovos Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["Kc90V","-3","0",""],
+    "sprites": ["Kc90V", "-3", "0", ""],
     "tags": ["Regular"]
   },
   "Lacula": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["72JJG","0","-1","48"],
+    "sprites": ["72JJG", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Light Weaver": {
     "genderOnly": "f",
     "group": "Standard",
-    "sprites": ["Fstvl","0","-1","48"],
+    "sprites": ["Fstvl", "0", "-1", "48"],
     "tags": ["Christmas"]
   },
   "Lightning Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["bITER","-14","-1","48","yaigm","0","-1","48"],
+    "sprites": ["bITER", "-14", "-1", "48", "yaigm", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Lumina": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["3NvWW","0","-1","48","rphkc","-2","-1","48"],
+    "sprites": ["3NvWW", "0", "-1", "48", "rphkc", "-2", "-1", "48"],
     "tags": ["Regular"]
   },
   "Lunar Herald": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Bronze": ["WGJTW","-15","-1","48"],
-      "Gold": ["tKt64","-15","-1","48"],
-      "Indigo": ["fMTLl","-15","-1","48"],
-      "Silver": ["Zcyy7","-15","-1","48"]
+      "Bronze": ["WGJTW", "-15", "-1", "48"],
+      "Gold": ["tKt64", "-15", "-1", "48"],
+      "Indigo": ["fMTLl", "-15", "-1", "48"],
+      "Silver": ["Zcyy7", "-15", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Magelight Pygmy Wyvern": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["hQCUw","-7","-1","48","xmgmf","-11","0",""],
+    "sprites": ["hQCUw", "-7", "-1", "48", "xmgmf", "-11", "0", ""],
     "tags": ["Regular"]
   },
   "Magi": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["CSJeS","-36","-1","48"],
+    "sprites": ["CSJeS", "-36", "-1", "48"],
     "tags": ["Regular"]
   },
   "Magma": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["3cut","-12","-1","48"],
+    "sprites": ["3cut", "-12", "-1", "48"],
     "tags": ["Regular"]
   },
   "Magnesium Amphiptere": {
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": {
-      "Desert": ["VPzbi","0","-1","48","890sz","-24","-1","48"],
-      "Volcano": ["Jaqrx","0","-1","48","NDgdL","-24","-1","48"]
+      "Desert": ["VPzbi", "0", "-1", "48", "890sz", "-24", "-1", "48"],
+      "Volcano": ["Jaqrx", "0", "-1", "48", "NDgdL", "-24", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Melismor": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["ja4AL","0","-1","48","0GCyQ","-22","-1","48"],
+    "sprites": ["ja4AL", "0", "-1", "48", "0GCyQ", "-22", "-1", "48"],
     "tags": ["Regular"]
   },
   "Mimic Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["SwdTI","-1","-1","48","vVqnW","0","-1",""],
+    "sprites": ["SwdTI", "-1", "-1", "48", "vVqnW", "0", "-1", ""],
     "tags": ["Regular"]
   },
   "Mirisia Amphiptere": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["dZBE0","-17","-1","48","33KB2","0","-1","48"],
+    "sprites": ["dZBE0", "-17", "-1", "48", "33KB2", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Misfit Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["1ijun","-17","-1","","rhicq","0","5",""],
+    "sprites": ["1ijun", "-17", "-1", "", "rhicq", "0", "5", ""],
     "tags": ["Regular"]
   },
   "Mistlet Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["vOQlC","-13","1","","8tVIh","0","-1",""],
+    "sprites": ["vOQlC", "-13", "1", "", "8tVIh", "0", "-1", ""],
     "tags": ["Regular"]
   },
   "Mistletoe": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["W8Xkj","0","-1","48"],
+    "sprites": ["W8Xkj", "0", "-1", "48"],
     "tags": ["Christmas"]
   },
   "Mistra": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["8zBw4","-14","-1","48","OZ4vC","0","-1","48"],
+    "sprites": ["8zBw4", "-14", "-1", "48", "OZ4vC", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Moonglow Drake": {
     "genderOnly": false,
     "group": "Drake",
-    "sprites": ["KmIoR","-1","-1","47.5"],
+    "sprites": ["KmIoR", "-1", "-1", "47.5"],
     "tags": ["Regular"]
   },
   "Moonstone": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["iGHeF","0","-1","48","4YH05","0","-1","48"],
+    "sprites": ["iGHeF", "0", "-1", "48", "4YH05", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Nebula": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Green-Red": ["6jlEA","0","-1","48","LJVA","-12","-1","48"],
-      "Purple-Blue": ["6lTN","-14","-1","48","RWCrt","-1","-1","48"]
+      "Green-Red": ["6jlEA", "0", "-1", "48", "LJVA", "-12", "-1", "48"],
+      "Purple-Blue": ["6lTN", "-14", "-1", "48", "RWCrt", "-1", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Neglected": {
     "genderOnly": false,
     "group": "Other",
-    "sprites": ["nV5A","0","-1","48","QZvE","0","-1","48"],
+    "sprites": ["nV5A", "0", "-1", "48", "QZvE", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Neotropical": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["184Wv","0","-1","48","WmmUO","-41","-1","48"],
+    "sprites": ["184Wv", "0", "-1", "48", "WmmUO", "-41", "-1", "48"],
     "tags": ["Regular"]
   },
   "Nilia Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": {
-      "Blue": ["kn15d","0","-2","","m8jRE","-38","7",""],
-      "Green": ["oYD13","0","-1","47.5","Az8rw","-5","-1","48"]
+      "Blue": ["kn15d", "0", "-2", "", "m8jRE", "-38", "7", ""],
+      "Green": ["oYD13", "0", "-1", "47.5", "Az8rw", "-5", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Nocturne": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["3rrhN","-1","-1","48","OrTHo","-16","-1","48"],
+    "sprites": ["3rrhN", "-1", "-1", "48", "OrTHo", "-16", "-1", "48"],
     "tags": ["Regular"]
   },
   "Occulri Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["OJoUD","0","-1","48","syo4v","-10","-1","48"],
+    "sprites": ["OJoUD", "0", "-1", "48", "syo4v", "-10", "-1", "48"],
     "tags": ["Regular"]
   },
   "Ochredrake": {
     "genderOnly": false,
     "group": "Drake",
-    "sprites": ["k2gGG","0","-1","48"],
+    "sprites": ["k2gGG", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Omen Wyrm": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["vortx","0","-1","48","JwLvz","-13","-1","48"],
+    "sprites": ["vortx", "0", "-1", "48", "JwLvz", "-13", "-1", "48"],
     "tags": ["Halloween"]
   },
   "Oracle Wyrm": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["7DY50","-14","-1","47.5","IRESi","-7","-1","48"],
+    "sprites": ["7DY50", "-14", "-1", "47.5", "IRESi", "-7", "-1", "48"],
     "tags": ["Regular"]
   },
   "Pargulus Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": {
-      "Blue": ["k7jXH","0","-1","48","ZDaUc","-1","-1","48"],
-      "Green": ["WPYpD","0","-1","48","VsXXn","-1","-1","48"],
-      "Red": ["qqpMo","0","-1","48","Vyo2g","-1","-1","48"]
+      "Blue": ["k7jXH", "0", "-1", "48", "ZDaUc", "-1", "-1", "48"],
+      "Green": ["WPYpD", "0", "-1", "48", "VsXXn", "-1", "-1", "48"],
+      "Red": ["qqpMo", "0", "-1", "48", "Vyo2g", "-1", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Pillow": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["XDeUI","0","-1","48","vPck9","-20","-1","48"],
+    "sprites": ["XDeUI", "0", "-1", "48", "vPck9", "-20", "-1", "48"],
     "tags": ["Regular"]
   },
   "Pipio Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["fYqIQ","-8","-1","48","iaAWK","0","-1","48"],
+    "sprites": ["fYqIQ", "-8", "-1", "48", "iaAWK", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Plated Colossus": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["7bzCd","-12","-1","48","lEpYM","-13","-1","48"],
+    "sprites": ["7bzCd", "-12", "-1", "48", "lEpYM", "-13", "-1", "48"],
     "tags": ["Regular"]
   },
   "Pryanost Lindwyrm": {
     "genderOnly": "f",
     "group": "Standard",
-    "sprites": ["Bread","-10","-1","48"],
+    "sprites": ["Bread", "-10", "-1", "48"],
     "tags": ["Christmas"]
   },
   "Pseudo-wyvern Drake": {
     "genderOnly": false,
     "group": "Drake",
-    "sprites": ["VNOng","0","-1","48"],
+    "sprites": ["VNOng", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Pumpkin": {
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["hEqW","-13","-1","48"],
+    "sprites": ["hEqW", "-13", "-1", "48"],
     "tags": ["Halloween"]
   },
   "Purple": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["VdVa","-11","-1","48","9QQ4i","0","-1","48"],
+    "sprites": ["VdVa", "-11", "-1", "48", "9QQ4i", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Pyralspite": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Almandine": ["AtPm1","0","-1","48"],
-      "Pyrope": ["31Iya","0","-1","48"],
-      "Spessartine": ["xq4Yl","0","-1","48"]
+      "Almandine": ["AtPm1", "0", "-1", "48"],
+      "Pyrope": ["31Iya", "0", "-1", "48"],
+      "Spessartine": ["xq4Yl", "0", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Quonebb": {
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["ZNJKk","0","-1","48","S2sEw","-14","-1","48"],
+    "sprites": ["ZNJKk", "0", "-1", "48", "S2sEw", "-14", "-1", "48"],
     "tags": ["Regular"]
   },
   "Red": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["WnAo","-26","-1","48"],
+    "sprites": ["WnAo", "-26", "-1", "48"],
     "tags": ["Regular"]
   },
   "Ribbon Dancer": {
     "genderOnly": "f",
     "group": "Standard",
-    "sprites": ["2PIc","-12","-1","48"],
+    "sprites": ["2PIc", "-12", "-1", "48"],
     "tags": ["Christmas"]
   },
   "Ridgewing": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Purple": ["pbMTv","-7","-1","48","jBBoq","-28","-1","48"],
-      "Tan": ["vYWmo","-7","-1","48","zjGLw","-28","-1","48"]
+      "Purple": ["pbMTv", "-7", "-1", "48", "jBBoq", "-28", "-1", "48"],
+      "Tan": ["vYWmo", "-7", "-1", "48", "zjGLw", "-28", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Rosebud": {
     "genderOnly": "f",
     "group": "Standard",
-    "sprites": ["bCYm","0","-1","48"],
+    "sprites": ["bCYm", "0", "-1", "48"],
     "tags": ["Valentine"]
   },
   "Royal Blue": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["PacF6","-14","-1","48","QuJTZ","0","-1","48"],
+    "sprites": ["PacF6", "-14", "-1", "48", "QuJTZ", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Royal Crimson": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["mEGXD","0","-1","48"],
+    "sprites": ["mEGXD", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Sakuhana Wyvern": {
     "genderOnly": "f",
     "group": "Standard",
-    "sprites": ["beeMy","0","-1","48"],
+    "sprites": ["beeMy", "0", "-1", "48"],
     "tags": ["Valentine"]
   },
   "Sapo": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["oUgYZ","0","-1","48"],
+    "sprites": ["oUgYZ", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Sapphire": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Blue": ["3Xr0f","0","-1","48"],
-      "Pink": ["BWu29","-11","-1","48"],
-      "Yellow": ["SvYIb","-12","-1","47.5"]
+      "Blue": ["3Xr0f", "0", "-1", "48"],
+      "Pink": ["BWu29", "-11", "-1", "48"],
+      "Yellow": ["SvYIb", "-12", "-1", "47.5"]
     },
     "tags": ["Regular"]
   },
   "Scimitar-Wing Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["uo3jm","-8","-1","48","vxNpR","-14","-1","48"],
+    "sprites": ["uo3jm", "-8", "-1", "48", "vxNpR", "-14", "-1", "48"],
     "tags": ["Regular"]
   },
   "Scourgekeeper": {
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["ny65H","-4","-1","48"],
+    "sprites": ["ny65H", "-4", "-1", "48"],
     "tags": ["Regular"]
   },
   "Seasonal (Autumn)": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["ahsLy","0","-1","47.5","opRc","0","-1","47.5"],
+    "sprites": ["ahsLy", "0", "-1", "47.5", "opRc", "0", "-1", "47.5"],
     "tags": ["Regular"]
   },
   "Seasonal (Spring)": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["zIbq","-13","-1","48","UnAk","-2","-1","47.5"],
+    "sprites": ["zIbq", "-13", "-1", "48", "UnAk", "-2", "-1", "47.5"],
     "tags": ["Regular"]
   },
   "Seasonal (Summer)": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["MwN1D","-6","-1","48","drZi","-8","-1","48"],
+    "sprites": ["MwN1D", "-6", "-1", "48", "drZi", "-8", "-1", "48"],
     "tags": ["Regular"]
   },
   "Seasonal (Winter)": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["9VS4","0","-1","47.5","urpl","-15","-1","48"],
+    "sprites": ["9VS4", "0", "-1", "47.5", "urpl", "-15", "-1", "48"],
     "tags": ["Regular"]
   },
   "Shadow Walker": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["DxTEq","0","-1","48"],
+    "sprites": ["DxTEq", "0", "-1", "48"],
     "tags": ["Halloween"]
   },
   "Shallow Water": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["vkpHc","0","-1","48","JCL1R","-12","-1","48"],
+    "sprites": ["vkpHc", "0", "-1", "48", "JCL1R", "-12", "-1", "48"],
     "tags": ["Hybrid"]
   },
   "Shimmer-Scale": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Bronze": ["KacWt","0","-1","48"],
-      "Gold": ["wTAL8","0","-1","48"],
-      "Silver": ["Adqkz","0","-1","48"]
+      "Bronze": ["KacWt", "0", "-1", "48"],
+      "Gold": ["wTAL8", "0", "-1", "48"],
+      "Silver": ["Adqkz", "0", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Silver": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["1ZrX","0","-1","48","s38LX","-3","-1","48"],
+    "sprites": ["1ZrX", "0", "-1", "48", "s38LX", "-3", "-1", "48"],
     "tags": ["Regular"]
   },
   "Sinii Krai": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Yh0jg","0","-1","48","ez0Bl","-20","-1","48"],
+    "sprites": ["Yh0jg", "0", "-1", "48", "ez0Bl", "-20", "-1", "48"],
     "tags": ["Regular"]
   },
   "Sinomorph": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["TfmjY","-11","-1","48"],
+    "sprites": ["TfmjY", "-11", "-1", "48"],
     "tags": ["CB"]
   },
   "Siyat": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Blue": ["h0bAy","-1","-1","48"],
-      "Green": ["n1G53","-1","-1","48"],
-      "Purple": ["sa6Zc","-1","-1","48"]
+      "Blue": ["h0bAy", "-1", "-1", "48"],
+      "Green": ["n1G53", "-1", "-1", "48"],
+      "Purple": ["sa6Zc", "-1", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Skysilk": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["RN88M","0","-1","48"],
+    "sprites": ["RN88M", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Skystrider": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["MJqMB","0","-1","48","J0j9v","-8","-1","48"],
+    "sprites": ["MJqMB", "0", "-1", "48", "J0j9v", "-8", "-1", "48"],
     "tags": ["Regular"]
   },
   "Skywing": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["qAXD","0","-1","48"],
+    "sprites": ["qAXD", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Snow Angel": {
     "genderOnly": "f",
     "group": "Standard",
     "sprites": {
-      "Full Gold": ["z9nCG","0","-1","48"],
-      "Tri-Colored": ["qiJ3","0","-1","48"],
-      "White-Tipped": ["nnnvZ","0","-1","48"]
+      "Full Gold": ["z9nCG", "0", "-1", "48"],
+      "Tri-Colored": ["qiJ3", "0", "-1", "48"],
+      "White-Tipped": ["nnnvZ", "0", "-1", "48"]
     },
     "tags": ["Christmas"]
   },
   "Sophrosyne": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["2gdz2","-16","-1","47.5","5KfGP","0","-1","48"],
+    "sprites": ["2gdz2", "-16", "-1", "47.5", "5KfGP", "0", "-1", "48"],
     "tags": ["Hybrid"]
   },
   "Soulstone": {
     "genderOnly": "f",
     "group": "Standard",
-    "sprites": ["nKs22","-15","-1","48"],
+    "sprites": ["nKs22", "-15", "-1", "48"],
     "tags": ["Valentine"]
   },
   "Speckle-Throated": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["jnbh6","-3","-1","48","Susy4","-11","-1","48"],
+    "sprites": ["jnbh6", "-3", "-1", "48", "Susy4", "-11", "-1", "48"],
     "tags": ["Regular"]
   },
   "Spirit Ward": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Ddw2a","-30","-1","48","5X7iB","-16","-1","48"],
+    "sprites": ["Ddw2a", "-30", "-1", "48", "5X7iB", "-16", "-1", "48"],
     "tags": ["Regular"]
   },
   "Spitfire": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["MYdtZ","-45","-1","48"],
+    "sprites": ["MYdtZ", "-45", "-1", "48"],
     "tags": ["Regular"]
   },
   "Split": {
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["00To3","0","-1","48","yqSe","0","-1","48"],
+    "sprites": ["00To3", "0", "-1", "48", "yqSe", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Stone": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["T2Hv","0","-1","48"],
+    "sprites": ["T2Hv", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Storm": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["ZQDEZ","0","-1","48","ne5L","0","-1","48"],
+    "sprites": ["ZQDEZ", "0", "-1", "48", "ne5L", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Storm-Rider": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Vqd62","0","-1","48"],
+    "sprites": ["Vqd62", "0", "-1", "48"],
     "tags": ["Hybrid"]
   },
   "Striped": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Black": ["M0NFO","-1","-1","48","cbtRI","0","-1","48"],
-      "Blue": ["VTYx","-1","-1","48","YO0q","0","-1","48"],
-      "Green": ["RZl8","-1","-1","48","bUfZ","0","-1","48"],
-      "Red": ["EE65C","-1","-1","48","qTuvY","0","-1","48"],
-      "White": ["h9aDK","-1","-1","48","RJ8i","0","-1","48"]
+      "Black": ["M0NFO", "-1", "-1", "48", "cbtRI", "0", "-1", "48"],
+      "Blue": ["VTYx", "-1", "-1", "48", "YO0q", "0", "-1", "48"],
+      "Green": ["RZl8", "-1", "-1", "48", "bUfZ", "0", "-1", "48"],
+      "Red": ["EE65C", "-1", "-1", "48", "qTuvY", "0", "-1", "48"],
+      "White": ["h9aDK", "-1", "-1", "48", "RJ8i", "0", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Sunbeam Drake": {
     "genderOnly": false,
     "group": "Drake",
-    "sprites": ["kErGP","-6","-1","48"],
+    "sprites": ["kErGP", "-6", "-1", "48"],
     "tags": ["Regular"]
   },
   "Sunrise": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["dJ2C","-13","-1","48","R6N5","-14","-1","48"],
+    "sprites": ["dJ2C", "-13", "-1", "48", "R6N5", "-14", "-1", "48"],
     "tags": ["Regular"]
   },
   "Sunset": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["Hp0F","-12","-1","48","G4t5R","-1","-1","48"],
+    "sprites": ["Hp0F", "-12", "-1", "48", "G4t5R", "-1", "-1", "48"],
     "tags": ["Regular"]
   },
   "Sunsong Amphiptere": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["pepn","0","-1","48","AuK3l","-3","-1","48"],
+    "sprites": ["pepn", "0", "-1", "48", "AuK3l", "-3", "-1", "48"],
     "tags": ["Regular"]
   },
   "Sunstone": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["8Dspi","-1","-1","48"],
+    "sprites": ["8Dspi", "-1", "-1", "48"],
     "tags": ["Regular"]
   },
   "Swallowtail": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["i43aO","-8","-1","48","hc5z6","0","-1","48"],
+    "sprites": ["i43aO", "-8", "-1", "48", "hc5z6", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Sweetling": {
     "genderOnly": "m",
     "group": "Standard",
     "sprites": {
-      "Black": ["qZgqQ","0","-1","48"],
-      "Pink": ["voFHL","0","-1","48"]
+      "Black": ["qZgqQ", "0", "-1", "48"],
+      "Pink": ["voFHL", "0", "-1", "48"]
     },
     "tags": ["Valentine"]
   },
   "Tercorn": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["01iOg","0","-1","48"],
+    "sprites": ["01iOg", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Terrae": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["8ueT","0","-1","48","l4gZA","0","-1","48"],
+    "sprites": ["8ueT", "0", "-1", "48", "l4gZA", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Tetra": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["T9QFW","0","-1","48"],
+    "sprites": ["T9QFW", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Thunder": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["fQBUi","0","-1","48"],
+    "sprites": ["fQBUi", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Thundersnow": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["3vp64","-14","-1","48"],
+    "sprites": ["3vp64", "-14", "-1", "48"],
     "tags": ["Regular"]
   },
   "Tideweaver Lindwyrm": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["vSmka","-14","-1","48","7vhsp","0","-1","48"],
+    "sprites": ["vSmka", "-14", "-1", "48", "7vhsp", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Tri-Horn Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["28tsb","-17","-1","48","PdpYp","-6","-1","48"],
+    "sprites": ["28tsb", "-17", "-1", "48", "PdpYp", "-6", "-1", "48"],
     "tags": ["Regular"]
   },
   "Tsunami Wyvern": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["L7m0y","0","-1","48","sGx8M","-15","-1","48"],
+    "sprites": ["L7m0y", "0", "-1", "48", "sGx8M", "-15", "-1", "48"],
     "tags": ["Regular"]
   },
   "Turpentine": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["bdTkj","0","-1","48"],
+    "sprites": ["bdTkj", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Two-Finned Bluna": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["nCSM","-2","-1","48","YUauj","-7","-1","48"],
+    "sprites": ["nCSM", "-2", "-1", "48", "YUauj", "-7", "-1", "48"],
     "tags": ["Hybrid"]
   },
   "Undine": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Green": ["N73sL","-9","-1","48","GP7mn","0","-1","48"],
-      "Yellow": ["t4AY7","-9","-1","48","c0Grh","0","-1","48"]
+      "Green": ["N73sL", "-9", "-1", "48", "GP7mn", "0", "-1", "48"],
+      "Yellow": ["t4AY7", "-9", "-1", "48", "c0Grh", "0", "-1", "48"]
     },
     "tags": ["Regular"]
   },
@@ -1070,66 +1070,66 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Blue": ["pYEFv","0","-1","48"],
-      "Red": ["a7H2S","-9","-1","48"]
+      "Blue": ["pYEFv", "0", "-1", "48"],
+      "Red": ["a7H2S", "-9", "-1", "48"]
     },
     "tags": ["Hybrid"]
   },
   "Valentine": {
     "genderOnly": "f",
     "group": "Standard",
-    "sprites": ["tpBD3","0","-1","48"],
+    "sprites": ["tpBD3", "0", "-1", "48"],
     "tags": ["Valentine"]
   },
   "Vampire": {
     "genderOnly": false,
     "group": "Other",
-    "sprites": ["Ivh5","0","-1","47","MXv75","0","-1","47"],
+    "sprites": ["Ivh5", "0", "-1", "47", "MXv75", "0", "-1", "47"],
     "tags": ["Regular"]
   },
   "Vremya Drake": {
     "genderOnly": false,
     "group": "Drake",
-    "sprites": ["hdhTm","0","-1","48"],
+    "sprites": ["hdhTm", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Water": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["2kQWa","0","-1","48","NNq3","-3","-1","48"],
+    "sprites": ["2kQWa", "0", "-1", "48", "NNq3", "-3", "-1", "48"],
     "tags": ["Regular"]
   },
   "Water Walker": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["AQGjY","-30","-1","48"],
+    "sprites": ["AQGjY", "-30", "-1", "48"],
     "tags": ["Regular"]
   },
   "Waterhorse": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["lXIv","-17","-1","48","QocQm","0","-1","48"],
+    "sprites": ["lXIv", "-17", "-1", "48", "QocQm", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Whiptail": {
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["C8Xt","0","-1","48"],
+    "sprites": ["C8Xt", "0", "-1", "48"],
     "tags": ["Regular"]
   },
   "Xol": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Blue": ["kmDB5","0","-1","48","RRDqa","-4","-1","48"],
-      "Red": ["g1g0x","0","-1","48","jGaBm","-4","-1","48"]
+      "Blue": ["kmDB5", "0", "-1", "48", "RRDqa", "-4", "-1", "48"],
+      "Red": ["g1g0x", "0", "-1", "48", "jGaBm", "-4", "-1", "48"]
     },
     "tags": ["Regular"]
   },
   "Yulebuck": {
     "genderOnly": "m",
     "group": "Standard",
-    "sprites": ["RSrR","-1","-1","48"],
+    "sprites": ["RSrR", "-1", "-1", "48"],
     "tags": ["Christmas"]
   }
 }

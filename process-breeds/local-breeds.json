@@ -17,7 +17,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["lRVeO","pAako"],
+    "sprites": ["lRVeO", "pAako"],
     "tags": ["Regular"]
   },
   "Aeria Gloris": {
@@ -38,14 +38,14 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["mQCP6","We7TE"],
+    "sprites": ["mQCP6", "We7TE"],
     "tags": ["Regular"]
   },
   "Amalthean": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["jQItl","JOKAw"],
+    "sprites": ["jQItl", "JOKAw"],
     "tags": ["Hybrid"]
   },
   "Aranoa": {
@@ -60,9 +60,9 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Nirami": ["gjt5P","DPgK5"],
-      "Salt TCA": ["84555","wHITK"],
-      "__regular__": ["ck9p3","W63P1"]
+      "Salt Nirami": ["gjt5P", "DPgK5"],
+      "Salt TCA": ["84555", "wHITK"],
+      "__regular__": ["ck9p3", "W63P1"]
     },
     "tags": ["Halloween"]
   },
@@ -70,14 +70,14 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["EhfrQ","GJF56"],
+    "sprites": ["EhfrQ", "GJF56"],
     "tags": ["Regular"]
   },
   "Arrakyma": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["yukAh","lNIXS"],
+    "sprites": ["yukAh", "lNIXS"],
     "tags": ["Regular"]
   },
   "Ash": {
@@ -108,7 +108,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["0dlsg","qW1yK"],
+    "sprites": ["0dlsg", "qW1yK"],
     "tags": ["Regular"]
   },
   "Baikala": {
@@ -116,8 +116,8 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": {
-      "Blue": ["zcr7c","R58nI"],
-      "Green": ["siClI","lZDRW"]
+      "Blue": ["zcr7c", "R58nI"],
+      "Green": ["siClI", "lZDRW"]
     },
     "tags": ["Regular"]
   },
@@ -139,7 +139,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["FflJ0","G5OBh"],
+    "sprites": ["FflJ0", "G5OBh"],
     "tags": ["Regular"]
   },
   "Blazeback": {
@@ -182,8 +182,8 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Infinis": ["SRP5l","2w8nP"],
-      "__regular__": ["jQ06C","qhbIi"]
+      "Salt Infinis": ["SRP5l", "2w8nP"],
+      "__regular__": ["jQ06C", "qhbIi"]
     },
     "tags": ["Halloween"]
   },
@@ -206,8 +206,8 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt JOTB": ["rFI9v","mqFhV"],
-      "__regular__": ["EspR4","Wm1pn"]
+      "Salt JOTB": ["rFI9v", "mqFhV"],
+      "__regular__": ["EspR4", "Wm1pn"]
     },
     "tags": ["Halloween"]
   },
@@ -216,8 +216,8 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Corporeal": ["My6XH","vkTQ2"],
-      "Incorporeal": ["5mbRb","whJ3b"]
+      "Corporeal": ["My6XH", "vkTQ2"],
+      "Incorporeal": ["5mbRb", "whJ3b"]
     },
     "tags": ["Regular"]
   },
@@ -233,8 +233,8 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": {
-      "Blue": ["Z1cNw","xP0Zn"],
-      "Green": ["1M7Je","Ay9Nc"]
+      "Blue": ["Z1cNw", "xP0Zn"],
+      "Green": ["1M7Je", "Ay9Nc"]
     },
     "tags": ["Regular"]
   },
@@ -243,8 +243,8 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": {
-      "Salt Odeen": ["GtvMN","iyKgt"],
-      "__regular__": ["7kiVA","zag1a"]
+      "Salt Odeen": ["GtvMN", "iyKgt"],
+      "__regular__": ["7kiVA", "zag1a"]
     },
     "tags": ["Halloween"]
   },
@@ -253,9 +253,9 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Birdzgoboom": ["uZ9hS","Es9FU"],
-      "Salt Pixxelation": ["s0n9m","VtdtJ"],
-      "__regular__": ["Qn1Pw","iYHtV"]
+      "Salt Birdzgoboom": ["uZ9hS", "Es9FU"],
+      "Salt Pixxelation": ["s0n9m", "VtdtJ"],
+      "__regular__": ["Qn1Pw", "iYHtV"]
     },
     "tags": ["Halloween"]
   },
@@ -271,8 +271,8 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Stunned": ["gs4wp","SauM7"],
-      "__regular__": ["IF5U","4dFF"]
+      "Stunned": ["gs4wp", "SauM7"],
+      "__regular__": ["IF5U", "4dFF"]
     },
     "tags": ["Regular"]
   },
@@ -304,12 +304,12 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": {
-      "Alpine": ["fmV9V","d5fEg"],
-      "Coast": ["TVRZx","bM4IJ"],
-      "Desert": ["GqRZg","09hSs"],
-      "Forest": ["hyIgz","9NijL"],
-      "Jungle": ["SR3RM","7zEdp"],
-      "Volcano": ["CdgGh","pb7Bo"]
+      "Alpine": ["fmV9V", "d5fEg"],
+      "Coast": ["TVRZx", "bM4IJ"],
+      "Desert": ["GqRZg", "09hSs"],
+      "Forest": ["hyIgz", "9NijL"],
+      "Jungle": ["SR3RM", "7zEdp"],
+      "Volcano": ["CdgGh", "pb7Bo"]
     },
     "tags": ["Regular"]
   },
@@ -317,7 +317,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["FnHwj","1Hyq5"],
+    "sprites": ["FnHwj", "1Hyq5"],
     "tags": ["Regular"]
   },
   "Flare-Tail Pygmy": {
@@ -369,12 +369,12 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Amethyst": ["5SKI4","5zwml"],
-      "Aqua": ["CQcoY","mTSVY"],
-      "Citrine": ["n6Rg2","pvSvs"],
-      "Jade": ["FOVKb","t5T5v"],
-      "Ruby": ["IjxzV","Eeqm9"],
-      "Sapphire": ["Oyra5","1ZOo5"]
+      "Amethyst": ["5SKI4", "5zwml"],
+      "Aqua": ["CQcoY", "mTSVY"],
+      "Citrine": ["n6Rg2", "pvSvs"],
+      "Jade": ["FOVKb", "t5T5v"],
+      "Ruby": ["IjxzV", "Eeqm9"],
+      "Sapphire": ["Oyra5", "1ZOo5"]
     },
     "tags": ["Regular"]
   },
@@ -389,14 +389,14 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["ku0VO","oBuNq"],
+    "sprites": ["ku0VO", "oBuNq"],
     "tags": ["Regular"]
   },
   "Glaucus Drake": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Drake",
-    "sprites": ["VqdZ6","0v08H"],
+    "sprites": ["VqdZ6", "0v08H"],
     "tags": ["Regular"]
   },
   "Glystere Wyrm": {
@@ -418,14 +418,14 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["MGNSJ","UenUs"],
+    "sprites": ["MGNSJ", "UenUs"],
     "tags": ["Regular"]
   },
   "Grave": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["tcA6d","D6hAp"],
+    "sprites": ["tcA6d", "D6hAp"],
     "tags": ["Halloween"]
   },
   "Greater Spotted Drake": {
@@ -460,7 +460,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["vI1DF","MORbO"],
+    "sprites": ["vI1DF", "MORbO"],
     "tags": ["Regular"]
   },
   "Heartstealing": {
@@ -474,21 +474,21 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Drake",
-    "sprites": ["srkhZ","QeUao"],
+    "sprites": ["srkhZ", "QeUao"],
     "tags": ["Regular"]
   },
   "Hooktalon": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["y8TNS","d21pP"],
+    "sprites": ["y8TNS", "d21pP"],
     "tags": ["Regular"]
   },
   "Howler Drake": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Drake",
-    "sprites": ["gWZmB","rjQfl"],
+    "sprites": ["gWZmB", "rjQfl"],
     "tags": ["Regular"]
   },
   "Hunter": {
@@ -509,7 +509,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["s5fGo","iA4YL"],
+    "sprites": ["s5fGo", "iA4YL"],
     "tags": ["Hybrid"]
   },
   "Iridichi": {
@@ -517,8 +517,8 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Schenanigans": ["BU7YK","wigLa"],
-      "__regular__": ["f9I08","J7Wb8"]
+      "Salt Schenanigans": ["BU7YK", "wigLa"],
+      "__regular__": ["f9I08", "J7Wb8"]
     },
     "tags": ["Halloween"]
   },
@@ -526,7 +526,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["ZGWAV","bwKDP"],
+    "sprites": ["ZGWAV", "bwKDP"],
     "tags": ["Hybrid"]
   },
   "Khusa": {
@@ -541,8 +541,8 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Infinis": ["y4dL5","sazrx"],
-      "__regular__": ["GKebv","pC2D8"]
+      "Salt Infinis": ["y4dL5", "sazrx"],
+      "__regular__": ["GKebv", "pC2D8"]
     },
     "tags": ["Halloween"]
   },
@@ -557,7 +557,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["oNF4y","adV4j"],
+    "sprites": ["oNF4y", "adV4j"],
     "tags": ["Regular"]
   },
   "Leodon": {
@@ -601,7 +601,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["NO0i0","BmFLn"],
+    "sprites": ["NO0i0", "BmFLn"],
     "tags": ["Regular"]
   },
   "Mariner Pygmy": {
@@ -637,7 +637,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["bfgVY","R5EQj"],
+    "sprites": ["bfgVY", "R5EQj"],
     "tags": ["Regular"]
   },
   "Morphodrake": {
@@ -661,7 +661,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Two-headed",
-    "sprites": ["ZHvg5","3SK3A"],
+    "sprites": ["ZHvg5", "3SK3A"],
     "tags": ["Regular"]
   },
   "Nhiostrife Wyvern": {
@@ -675,14 +675,14 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["wPwLI","GeK5M"],
+    "sprites": ["wPwLI", "GeK5M"],
     "tags": ["Hybrid"]
   },
   "Olive": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["hivSK","4kTAq"],
+    "sprites": ["hivSK", "4kTAq"],
     "tags": ["Regular"]
   },
   "Omen Wyrm": {
@@ -690,7 +690,7 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Birdzgoboom": ["40Fe4","v9OgZ"]
+      "Salt Birdzgoboom": ["40Fe4", "v9OgZ"]
     },
     "tags": ["Halloween"]
   },
@@ -699,8 +699,8 @@
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": {
-      "Metachrosis": ["422Bx","vatB9"],
-      "__regular__": ["Y2ULc","acP7t"]
+      "Metachrosis": ["422Bx", "vatB9"],
+      "__regular__": ["Y2ULc", "acP7t"]
     },
     "tags": ["Regular"]
   },
@@ -708,7 +708,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["KDPH","XQ5D4"],
+    "sprites": ["KDPH", "XQ5D4"],
     "tags": ["Regular"]
   },
   "Pitfire": {
@@ -716,12 +716,12 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Reborn": ["vvzJm","yqF6z"],
-      "Reborn Salt Schenanigans": ["GOBKa","V6zbS"],
-      "Reborn Salt Spatio": ["bQMAK","jKTHD"],
-      "Salt Schenanigans": ["5IpCe","DFk2c"],
-      "Salt Spatio": ["3pGCm","8jjcE"],
-      "__regular__": ["cSGcX","819Ix"]
+      "Reborn": ["vvzJm", "yqF6z"],
+      "Reborn Salt Schenanigans": ["GOBKa", "V6zbS"],
+      "Reborn Salt Spatio": ["bQMAK", "jKTHD"],
+      "Salt Schenanigans": ["5IpCe", "DFk2c"],
+      "Salt Spatio": ["3pGCm", "8jjcE"],
+      "__regular__": ["cSGcX", "819Ix"]
     },
     "tags": ["Halloween"]
   },
@@ -792,7 +792,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["tZSi2","zGmc1"],
+    "sprites": ["tZSi2", "zGmc1"],
     "tags": ["Regular"]
   },
   "Risensong": {
@@ -806,7 +806,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["lTktE","F7TMe"],
+    "sprites": ["lTktE", "F7TMe"],
     "tags": ["Hybrid"]
   },
   "Sabertooth Bull Drake": {
@@ -820,14 +820,14 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["WO4Fw","frO9M"],
+    "sprites": ["WO4Fw", "frO9M"],
     "tags": ["Regular"]
   },
   "Sawtooth": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["jfKte","mOTLj"],
+    "sprites": ["jfKte", "mOTLj"],
     "tags": ["Regular"]
   },
   "Script": {
@@ -848,14 +848,14 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Pygmy",
-    "sprites": ["WZn25","cH9U1"],
+    "sprites": ["WZn25", "cH9U1"],
     "tags": ["Regular"]
   },
   "Serrati Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["xhtpE","VtfDa"],
+    "sprites": ["xhtpE", "VtfDa"],
     "tags": ["Regular"]
   },
   "Setsong": {
@@ -919,8 +919,8 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Green": ["qA36V","0gpYC"],
-      "Violet": ["i3TBl","5wnHq"]
+      "Green": ["qA36V", "0gpYC"],
+      "Violet": ["i3TBl", "5wnHq"]
     },
     "tags": ["Regular"]
   },
@@ -1027,7 +1027,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["FOQe5","uuc66"],
+    "sprites": ["FOQe5", "uuc66"],
     "tags": ["Hybrid"]
   },
   "Undead": {
@@ -1062,7 +1062,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["gMPNF","cp4l7"],
+    "sprites": ["gMPNF", "cp4l7"],
     "tags": ["Regular"]
   },
   "Vermeil": {
@@ -1115,8 +1115,8 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Odeen": ["ncCdI","HJrHd"],
-      "__regular__": ["P37TJ","89Y6e"]
+      "Salt Odeen": ["ncCdI", "HJrHd"],
+      "__regular__": ["P37TJ", "89Y6e"]
     },
     "tags": ["Halloween"]
   },
@@ -1232,7 +1232,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": ["QmCa9","NvRwS"],
+    "sprites": ["QmCa9", "NvRwS"],
     "tags": ["Regular"]
   },
   "Zyumorph": {
