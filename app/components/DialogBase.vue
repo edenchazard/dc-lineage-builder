@@ -149,7 +149,7 @@ const exposeMethods = {
       transition:
         transform 0.5s linear 0.5s,
         opacity 0.5s linear 0.5s;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
     }
   }
 }

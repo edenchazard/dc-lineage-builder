@@ -33,15 +33,13 @@ export function throwBreedError(name: string): never {
 export function getBreedData(breedName: string): BreedEntry | undefined {
   const entry = listOfBreeds.find((v) => v.name === breedName);
 
-  //if(!entry) throwBreedError(breedName);
-
   return entry;
 }
 
 export function breedEntryToPortrait(
   breed: BreedEntry,
   gender: 'male' | 'female',
-) {
+): PortraitData {
   if (!breed[gender])
     throw new Error(`DragonGender isn't available for ${breed.name}`);
 
