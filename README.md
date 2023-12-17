@@ -59,14 +59,14 @@ npm i
 npm run dev
 ```
 
-You can access the project at [http://localhost:5173](http://localhost:5173).
+You can access the project at [http://localhost:5173/dc/lineage-builder/](http://localhost:5173/dc/lineage-builder/).
 
 ### Testing
 
 To run the tests, you should be in the `testapp` container.
 
 ```sh
-docker-compose up test -d
+docker-compose up testapp -d
 docker-compose exec testapp sh
 npm run test:unit
 ```
@@ -84,11 +84,13 @@ docker-compose --env-file .env.production -f docker-compose.prod.yml up -d --bui
 
 ## Breed processing
 
-These utilities are for automating our breed table, css and json files, as well as putting them in the correct locations. Local images will be fetched automatically if they aren't already in the caches.
+These utilities are for automating our breed list, css and json files, as well as putting them in the correct locations. Under the hood, puppeteer is used for image downloading.
+
+Images are cached to avoid refetching them unnecessarily.
 
 The file "breed-ignore" is to be used for ignoring particular images. Codes in this list will not be handled by the process script and must be handled manually (mainly through the download script). This is mostly useful for time-based sprites, where the lineage portrait can change based on the time of day.
 
-### process
+### process breeds
 
 This script is to be run whenever breed data has been changed.
 
