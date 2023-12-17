@@ -13,5 +13,3 @@ RUN apt-get update && apt-get install gnupg wget -y && \
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY ./src/process-breeds/package*.json ./
-RUN npm install
