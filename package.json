@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "private": true,
   "author": "Charley Reeson (https://chazza.me)",
-  "module": "true",
+  "type": "module",
   "scripts": {
     "server:start": "tsx watch ./app/backend/server.ts",
     "vue:start": "vite --host",
@@ -15,7 +15,9 @@
     "lint:fix": "npm run lint -- --fix",
     "test:unit": "vitest --coverage",
     "fmt": "prettier --write .",
-    "fix": "npm run lint:fix && npm run format"
+    "fix": "npm run lint:fix && npm run format",
+    "download": "node --experimental-json-modules ./process-breeds/download.js",
+    "process": "node --experimental-json-modules ./process-breeds/process.js"
   },
   "dependencies": {
     "@floating-ui/vue": "^1.0.2",
@@ -66,6 +68,7 @@
     "jsdom": "^22.1.0",
     "postcss-nesting": "^12.0.1",
     "prettier": "^3.0.1",
+    "puppeteer": "^21.6.1",
     "tsx": "^3.14.0",
     "typescript": "^5.3.3",
     "vite": "^4.2.1",

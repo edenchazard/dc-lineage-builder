@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: tail -F anything
+    command: sleep infinity
     volumes:
       - .:/app
       - /app/node_modules
@@ -30,7 +30,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: tail -F anything
+    command: sleep infinity
     volumes:
       - .:/app
       - /app/node_modules
@@ -54,18 +54,16 @@ services:
     networks:
       - internal
 
-  # breeds:
-  #   container_name: dc-lb-dev-process-breeds
-  #   build:
-  #     context: .
-  #     dockerfile: ./[rocess-breeds/Dockerfile
-  #   cap_add:
-  #     - SYS_ADMIN
-  #   volumes:
-  #     - ./app/backend:/backend
-  #     - ./src/frontend:/frontend
-  #     - ./src/process-breeds:/app
-  #     - /app/node_modules
+  breeds:
+    container_name: dc-lb-dev-breeds
+    build:
+      context: .
+      dockerfile: ./process-breeds/Dockerfile
+    command: sleep infinity
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - .:/app
 
 volumes:
   dbdata:
