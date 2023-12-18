@@ -13,9 +13,9 @@ export function getFileAndDirName(): { __filename: string; __dirname: string } {
 // takes a file path expecting to be a breeds file and sorts
 // all keys alphabetically and formats them to look nicer.
 // it's good for our git diffs.
-export async function prettyPrintJSONFile<
-  T extends Record<any, any> = Record<any, any>,
->(jsonFileLocation: string): Promise<T> {
+export async function prettyPrintJSONFile(
+  jsonFileLocation: string,
+): Promise<void> {
   // https://stackoverflow.com/a/24630587
   const objectKeySort = (object: Record<any, any> | Array<string>) => {
     if (typeof object !== 'object' || object instanceof Array)

@@ -3,12 +3,7 @@ import { setTimeout } from 'timers/promises';
 import puppeteer from 'puppeteer';
 import { chromiumSettings } from './files';
 
-import type {
-  IgnoreFile,
-  IgnoreList,
-  PortraitCacheSettings,
-  PortraitSizing,
-} from './types';
+import type { IgnoreFile, IgnoreList, PortraitSizing } from './types';
 import { PortraitCache } from './portraitCache';
 
 export function getBreedTable(json) {
@@ -81,7 +76,6 @@ async function getIgnoredBreeds(ignoreFile: IgnoreFile): Promise<IgnoreList> {
 export async function checkCache(
   json,
   cache: PortraitCache,
-  browserSettings: PortraitCacheSettings,
   ignoreFile: IgnoreFile | null = null,
 ): Promise<void> {
   // get a list of codes we want to check our specified cache for
@@ -104,7 +98,7 @@ export async function checkCache(
 
   const browser = await puppeteer.launch(chromiumSettings);
 
-  console.log(`Checking cache for: ${cache.path}`);
+  console.log(`Checking cache for: ${cache.settings.folder}`);
 
   // remove ignored images
   const ignored = ignoreFile !== null ? await getIgnoredBreeds(ignoreFile) : [];
@@ -115,7 +109,7 @@ export async function checkCache(
   let throttle = 0;
   await Promise.all(
     codes.map(async (code) => {
-      const path = `${cache.path}${code}.png`;
+      const path = `${cache.settings.folder}${code}.png`;
 
       // check cache. if we don't have the image, we'll redownload it.
       try {
@@ -127,13 +121,13 @@ export async function checkCache(
         // we don't want to ddos DC, so we'll throttle our requests to 1/second.
         throttle++;
         await setTimeout(throttle * 1000);
-        await cache.downloadPortrait(code, browser, browserSettings);
+        await cache.downloadPortrait(code, browser);
       }
     }),
   );
 
   browser.close();
-  console.log(`... Cache ${cache.path} OK.`);
+  console.log(`... Cache ${cache.settings.folder} OK.`);
 }
 
 // Takes a list of *full* file paths to tiles and combines them into a single
