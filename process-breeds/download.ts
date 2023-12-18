@@ -1,11 +1,9 @@
 import { setTimeout } from 'timers/promises';
 
 import puppeteer from 'puppeteer';
+import { caches, chromiumSettings } from './files';
 
-import { cache36, cache72, chromiumSettings } from './files';
-import { PortraitCache } from './portraitCache';
-
-async function main() {
+(async function main() {
   // parse args for codes
   const codes = process.argv.slice(2);
 
@@ -17,21 +15,8 @@ async function main() {
     }
   });
 
-  const [driver36, driver72] = await Promise.all([
-    PortraitCache.load(cache36.folder),
-    PortraitCache.load(cache72.folder),
-  ]);
-
-  const caches = [
-    {
-      driver: driver36,
-      settings: cache36,
-    },
-    {
-      driver: driver72,
-      settings: cache72,
-    },
-  ];
+  const cacheArray = Object.values(caches);
+  await Promise.all(cacheArray.map((cache) => cache.tryAccess()));
 
   const browser = await puppeteer.launch(chromiumSettings);
 
@@ -39,23 +24,17 @@ async function main() {
 
   // all ok, download the image for each cache
   await Promise.all(
-    caches.map(async (cache) => {
+    cacheArray.map(async (cache) => {
       await Promise.all(
         codes.map(async (code) => {
           // we don't want to ddos DC, so we'll throttle our requests to 1/second.
           throttle++;
           await setTimeout(throttle * 1000);
-          await cache.driver.downloadPortrait(
-            code,
-            browser,
-            cache.settings.device,
-          );
+          await cache.downloadPortrait(code, browser);
         }),
       );
     }),
   );
 
   browser.close();
-}
-
-main();
+})();

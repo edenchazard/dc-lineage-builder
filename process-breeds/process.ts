@@ -16,8 +16,7 @@
 import { promises as fs } from 'fs';
 
 import { getFileAndDirName, prettyPrintJSONFile } from './utils';
-import { cache36, cache72, ignoreFile } from './files';
-import { PortraitCache } from './portraitCache';
+import { caches, ignoreFile } from './files';
 
 import {
   saveResolutionStylesheet,
@@ -82,35 +81,32 @@ async function main() {
     `Found ${breeds.length} total breed entries (${localNumber} local and ${fallbackNumber} fallbacks.)`,
   );
 
-  const [driver36, driver72] = await Promise.all([
-    PortraitCache.load(cache36.folder),
-    PortraitCache.load(cache72.folder),
-  ]);
-
   // prettify our json files
   await Promise.all([
     prettyPrintJSONFile(__dirname + '/local-breeds.json'),
     prettyPrintJSONFile(__dirname + '/fallback-breeds.json'),
   ]);
 
+  await Promise.all(Object.values(caches).map((cache) => cache.tryAccess()));
+
   // 36 x 48
-  await checkCache(localJSON, driver36, cache36.device, ignoreFile);
-  console.log(__dirname);
+  await checkCache(localJSON, caches.cache36, ignoreFile);
+
   await saveResolutionStylesheet({
-    locTiles: cache36.folder,
+    locTiles: caches.cache36.settings.folder,
     locCSSFile: './app/assets/tile-rendering/sprites-36x48.css',
     sizing: { width: 36, height: 48 },
-    injectFolder: cache36.inject,
+    injectFolder: caches.cache36.settings.inject,
   });
 
   // 72 x 96 high dpi
-  await checkCache(localJSON, driver72, cache72.device, ignoreFile);
+  await checkCache(localJSON, caches.cache72, ignoreFile);
 
   await saveResolutionStylesheet({
-    locTiles: cache72.folder,
+    locTiles: caches.cache72.settings.folder,
     locCSSFile: './app/assets/tile-rendering/sprites-72x96.css',
     sizing: { width: 72, height: 96 },
-    injectFolder: cache72.inject,
+    injectFolder: caches.cache72.settings.inject,
   });
 
   // make and save the definition file

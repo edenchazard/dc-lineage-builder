@@ -3,25 +3,27 @@ import type { Browser } from 'puppeteer';
 import type { PortraitCacheSettings } from './types';
 
 class Cache {
-  path: string | null = null;
+  private path: string;
 
   constructor(cachePath: string) {
     this.path = cachePath;
   }
 
-  static async load(cachePath: string) {
+  async tryAccess() {
     try {
-      await fs.access(cachePath);
-      return new this(cachePath);
+      await fs.access(this.path);
     } catch (e) {
-      throw new Error(`Cannot access cache: ${cachePath}`);
+      throw new Error(`Cannot access cache: ${this.path}`);
     }
   }
 }
 
 class PortraitCache extends Cache {
-  constructor(cachePath: string) {
-    super(cachePath);
+  readonly settings: PortraitCacheSettings;
+
+  constructor(settings: PortraitCacheSettings) {
+    super(settings.folder);
+    this.settings = settings;
   }
 
   // returns a new page with custom headers and cookies for dc
@@ -52,12 +54,11 @@ class PortraitCache extends Cache {
   async downloadPortrait(
     code: string,
     browser: Browser,
-    browserSettings: PortraitCacheSettings,
   ): never | Promise<void> {
-    const filePath = `${this.path}${code}.png`;
+    const filePath = `${this.settings.folder}${code}.png`;
 
-    console.log(`... Downloading image for ${code} to ${this.path}`);
-    const page = await this.newPage(browser, browserSettings['device']);
+    console.log(`... Downloading image for ${code} to ${this.settings.folder}`);
+    const page = await this.newPage(browser, this.settings.device);
 
     // navigate to the lineage page
     await page.goto(`https://dragcave.net/lineage/${code}`);
