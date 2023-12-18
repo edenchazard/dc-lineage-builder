@@ -4,7 +4,7 @@ import { promises as fs } from 'fs';
 
 // Node modules don't support __dirname and __filename
 // This will provide that functionality.
-export function getFileAndDirName() {
+export function getFileAndDirName(): { __filename: string; __dirname: string } {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   return { __filename, __dirname };
@@ -13,15 +13,17 @@ export function getFileAndDirName() {
 // takes a file path expecting to be a breeds file and sorts
 // all keys alphabetically and formats them to look nicer.
 // it's good for our git diffs.
-export async function prettyPrintJSONFile(jsonFileLocation) {
+export async function prettyPrintJSONFile<
+  T extends Record<any, any> = Record<any, any>,
+>(jsonFileLocation: string): Promise<T> {
   // https://stackoverflow.com/a/24630587
-  const objectKeySort = (object) => {
+  const objectKeySort = (object: Record<any, any> | Array<string>) => {
     if (typeof object !== 'object' || object instanceof Array)
       // Not to sort the array
       return object;
-    var keys = Object.keys(object);
+    const keys = Object.keys(object);
     keys.sort();
-    var newObject = {};
+    const newObject: Record<any, any> = {};
     for (var i = 0; i < keys.length; i++) {
       newObject[keys[i]] = objectKeySort(object[keys[i]]);
     }
@@ -29,7 +31,7 @@ export async function prettyPrintJSONFile(jsonFileLocation) {
   };
 
   // https://stackoverflow.com/a/54931396
-  const prettyPrintArray = (json, indent = 2) => {
+  const prettyPrintArray = (json: Record<any, any>, indent = 2): string => {
     if (typeof json === 'string') {
       json = JSON.parse(json);
     }

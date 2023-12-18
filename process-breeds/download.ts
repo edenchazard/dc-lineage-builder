@@ -2,8 +2,8 @@ import { setTimeout } from 'timers/promises';
 
 import puppeteer from 'puppeteer';
 
-import { cache36, cache72, chromiumSettings } from './files.js';
-import { portraitCache } from './cache.js';
+import { cache36, cache72, chromiumSettings } from './files';
+import { PortraitCache } from './portraitCache';
 
 async function main() {
   // parse args for codes
@@ -18,8 +18,8 @@ async function main() {
   });
 
   const [driver36, driver72] = await Promise.all([
-    portraitCache.load(cache36.folder),
-    portraitCache.load(cache72.folder),
+    PortraitCache.load(cache36.folder),
+    PortraitCache.load(cache72.folder),
   ]);
 
   const caches = [

@@ -15,9 +15,9 @@
 */
 import { promises as fs } from 'fs';
 
-import { getFileAndDirName, prettyPrintJSONFile } from './utils.js';
-import { cache36, cache72, ignoreFile } from './files.js';
-import { portraitCache } from './cache.js';
+import { getFileAndDirName, prettyPrintJSONFile } from './utils';
+import { cache36, cache72, ignoreFile } from './files';
+import { PortraitCache } from './portraitCache';
 
 import {
   saveResolutionStylesheet,
@@ -34,7 +34,7 @@ import {
 
 import fallbackJSON from './fallback-breeds.json' assert { type: 'json' };
 
-const { __dirname, __filename } = getFileAndDirName();
+const { __dirname } = getFileAndDirName();
 
 function getBreedsTable() {
   // check for duplicate breed name keys in both sets, and warn
@@ -83,8 +83,8 @@ async function main() {
   );
 
   const [driver36, driver72] = await Promise.all([
-    portraitCache.load(cache36.folder),
-    portraitCache.load(cache72.folder),
+    PortraitCache.load(cache36.folder),
+    PortraitCache.load(cache72.folder),
   ]);
 
   // prettify our json files
