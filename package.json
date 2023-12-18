@@ -16,8 +16,8 @@
     "test:unit": "vitest --coverage",
     "fmt": "prettier --write .",
     "fix": "npm run lint:fix && npm run format",
-    "download": "node --experimental-json-modules ./process-breeds/download.js",
-    "process": "node --experimental-json-modules ./process-breeds/process.js"
+    "download": "tsx ./process-breeds/download.ts",
+    "process": "tsx ./process-breeds/process.ts"
   },
   "dependencies": {
     "@floating-ui/vue": "^1.0.2",
