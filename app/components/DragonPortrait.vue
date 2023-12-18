@@ -20,7 +20,7 @@
     />
     <img
       v-else
-      src="/src/assets/images/placeholder.png"
+      src="../assets/images/placeholder.png"
     />
     <span class="sr-only label">{{ data.name }}</span>
   </span>
