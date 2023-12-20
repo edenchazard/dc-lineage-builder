@@ -13,41 +13,49 @@ export function getFileAndDirName(): { __filename: string; __dirname: string } {
 // takes a file path expecting to be a breeds file and sorts
 // all keys alphabetically and formats them to look nicer.
 // it's good for our git diffs.
+function isRecord(what: unknown): what is Record<string, unknown> {
+  return !Array.isArray(what) && typeof what === 'object' && what !== null;
+}
+
 export async function prettyPrintJSONFile(
   jsonFileLocation: string,
 ): Promise<void> {
-  // https://stackoverflow.com/a/24630587
-  const objectKeySort = (object: Record<any, any> | Array<string>) => {
-    if (typeof object !== 'object' || object instanceof Array)
-      // Not to sort the array
-      return object;
-    const keys = Object.keys(object);
-    keys.sort();
-    const newObject: Record<any, any> = {};
-    for (var i = 0; i < keys.length; i++) {
-      newObject[keys[i]] = objectKeySort(object[keys[i]]);
+  const objectKeySort = <T>(what: T): T => {
+    // don't sort arrays or primitive values
+    if (isRecord(what)) {
+      const sortedObject: Record<string, unknown> = {};
+
+      Object.keys(what)
+        .sort()
+        .forEach((key) => (sortedObject[key] = objectKeySort(what[key])));
+
+      return sortedObject as T;
     }
-    return newObject;
+
+    return what;
   };
 
   // https://stackoverflow.com/a/54931396
-  const prettyPrintArray = (json: Record<any, any>, indent = 2): string => {
+  const prettyPrintArray = (
+    json: Record<string, unknown>,
+    indent = 2,
+  ): string => {
     if (typeof json === 'string') {
       json = JSON.parse(json);
     }
     const output = JSON.stringify(
       json,
-      function (k, v) {
+      function (_, v) {
         if (v instanceof Array) return JSON.stringify(v);
         return v;
       },
       indent,
     )
       .replace(/\\/g, '')
-      .replace(/\"\[/g, '[')
-      .replace(/\]\"/g, ']')
-      .replace(/\"\{/g, '{')
-      .replace(/\}\"/g, '}');
+      .replace(/"\[/g, '[')
+      .replace(/\]"/g, ']')
+      .replace(/"\{/g, '{')
+      .replace(/\}"/g, '}');
 
     return output;
   };
