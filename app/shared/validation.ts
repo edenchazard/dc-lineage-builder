@@ -4,7 +4,6 @@ import type {
   BreedEntry,
   DragonDisplay,
   DragonGender,
-  //DragonType,
   NoDragonParents,
   PartialLineage,
 } from './types';
@@ -17,7 +16,7 @@ export const CODEREGEXP = /[a-zA-Z0-9]+/;
 export const BREEDNAMEREGEXP = /[a-zA-Z0-9 ]{1,32}/;
 
 export const codeValidator = string()
-  .required()
+  .default('')
   .test(
     'code',
     ({ value }) =>
@@ -27,7 +26,7 @@ export const codeValidator = string()
   );
 
 export const nameValidator = string()
-  .required()
+  .default('')
   .test(
     'name',
     ({ value }) =>
@@ -40,9 +39,9 @@ export const nameValidator = string()
 
 export const dragonSchema: ObjectSchema<PartialLineage> = object()
   .shape({
-    name: nameValidator.default(() => DragonBuilder.generateName()),
-    code: codeValidator.default(() => DragonBuilder.generateCode()),
-    display: number<DragonDisplay>().required().min(0).max(1).default(0),
+    name: nameValidator.required().default(() => DragonBuilder.generateName()),
+    code: codeValidator.required().default(() => DragonBuilder.generateCode()),
+    display: number<DragonDisplay>().required().oneOf([0, 1]).default(0),
     breed: lazy(() =>
       string()
         .required()
@@ -60,13 +59,13 @@ export const dragonSchema: ObjectSchema<PartialLineage> = object()
     ),
     gender: string<DragonGender>().required().oneOf(['m', 'f']),
     parents: object()
+      .required()
+      .default({})
       .shape({
         m: lazy(() => dragonSchema.default(undefined)),
         f: lazy(() => dragonSchema.default(undefined)),
       })
-      .shape({} as NoDragonParents)
-      .default({})
-      .required(),
+      .shape({} as NoDragonParents),
   })
   .noUnknown();
 

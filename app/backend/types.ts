@@ -6,5 +6,5 @@ export interface RequestResponse {
 }
 
 export interface RequestContext extends Context {
-  body: RequestResponse;
+  body: Record<string, unknown>;
 }

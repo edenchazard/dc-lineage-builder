@@ -11,10 +11,6 @@ const router = new Router({
   prefix: config.apiPath + '/lineage',
 });
 
-router.use(async (ctx, next) => {
-  await next();
-});
-
 // Save a new lineage
 router.post('/', async (ctx: RequestContext) => {
   if (!ctx.request.body.dragon) {
@@ -50,14 +46,13 @@ router.get('/:hash', async (ctx: RequestContext) => {
     .test(validateLineageHash)
     .validate(ctx.params.hash);
 
-  const [rows] = await pool.execute<RowDataPacket[]>(
+  const [[row]] = await pool.execute<RowDataPacket[]>(
     `SELECT content, last_view FROM saved_lineages WHERE hash = ?`,
     [hashCode],
   );
 
-  if (!rows[0]) {
-    ctx.status = 404;
-    return;
+  if (!row) {
+    ctx.throw(404);
   }
 
   // update access time to reset it
@@ -70,7 +65,7 @@ router.get('/:hash', async (ctx: RequestContext) => {
   );
 
   ctx.body = {
-    lineage: JSON.parse(rows[0].content),
+    lineage: JSON.parse(row.content),
   };
 });
 
