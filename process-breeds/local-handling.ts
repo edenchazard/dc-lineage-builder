@@ -7,10 +7,10 @@ import type { IgnoreFile, IgnoreList, PortraitSizing } from './types';
 import { PortraitCache } from './portraitCache';
 
 export function getBreedTable(json) {
-  let entries = [];
+  const entries = [];
 
   const createEntry = function (name, breed, spritedata) {
-    let entry = {
+    const entry = {
       name: name,
       genderOnly: breed.genderOnly,
       metaData: {
@@ -35,12 +35,12 @@ export function getBreedTable(json) {
     return entry;
   };
 
-  for (let breedname in json) {
+  for (const breedname in json) {
     const breed = json[breedname];
     const has_alts = Object.getPrototypeOf(breed.sprites) === Object.prototype;
 
     if (has_alts) {
-      for (let altname in breed.sprites) {
+      for (const altname in breed.sprites) {
         const altdata = breed.sprites[altname];
         const fullName =
           altname === '__regular__' ? breedname : breedname + ' ' + altname;

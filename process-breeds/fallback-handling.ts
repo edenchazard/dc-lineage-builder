@@ -32,11 +32,11 @@ function getImages(fallbacks) {
 
   const images = [];
 
-  for (let breedName in fallbacks) {
+  for (const breedName in fallbacks) {
     const breed = fallbacks[breedName];
 
     if (hasAlts(breed.sprites)) {
-      for (let altName in breed.sprites) {
+      for (const altName in breed.sprites) {
         const spriteArray = breed.sprites[altName];
         addToImages(spriteArray, images);
       }
@@ -51,7 +51,7 @@ function getImages(fallbacks) {
 
 export function makeCSSStyleSheet(json) {
   const makeClass = ({ code, left, top, height }) => {
-    let attributes = (
+    const attributes = (
       `left:${left}px;` +
       `top:${top}px;` +
       (height !== '' ? `height:${height}px;` : '')
@@ -90,7 +90,7 @@ export function getBreedTable(json) {
   // create a flat list of breeds, with alts as "separate breeds"
   const breeds = [];
 
-  for (let breedName in json) {
+  for (const breedName in json) {
     const breed = json[breedName];
     const metaData = {
       group: breed.group,
@@ -100,7 +100,7 @@ export function getBreedTable(json) {
 
     // determine if this breed has alts
     if (hasAlts(breed.sprites)) {
-      for (let altName in breed.sprites) {
+      for (const altName in breed.sprites) {
         const spriteArray = breed.sprites[altName];
         breeds.push({
           name: breedName + ' ' + altName,
