@@ -1,6 +1,10 @@
 import { object, boolean } from 'yup';
 import { codeValidator } from '../../shared/validation';
-import { getDataForPair, checkDragonsMatchGender } from '../onsite';
+import {
+  getDataForPair,
+  checkDragonsMatchGender,
+  OnsiteError,
+} from '../onsite';
 import Router from '@koa/router';
 import type { RequestContext } from '../types';
 import config from '../config';
@@ -41,20 +45,29 @@ router.post('/', async (ctx: RequestContext) => {
     }
 
     if (errors.length) {
-      ctx.body = { errors };
-    }
+      // try to fetch the html for both codes as long as neither were an outright
+      // failure
+      if (errors.find((e) => e.type === 'error')) {
+        ctx.throw(404, { errors });
+      }
 
-    // try to fetch the html for both codes as long as neither were an outright
-    // failure
-    if (errors.find((e) => e.type === 'error')) {
-      ctx.throw(404);
+      ctx.body = { errors };
     }
   }
 
-  ctx.body = {
-    ...ctx.body,
-    ...(await getDataForPair([male, female])),
-  };
+  try {
+    const pair = await getDataForPair([male, female]);
+    ctx.body = {
+      ...ctx.body,
+      ...pair,
+    };
+  } catch (err) {
+    if (err instanceof OnsiteError) {
+      if (err.message.startsWith('Dragon not found')) {
+        ctx.throw(404);
+      }
+    }
+  }
 });
 
 export default router;

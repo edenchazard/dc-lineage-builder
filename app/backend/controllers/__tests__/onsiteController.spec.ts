@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import app from '../../app';
 import request from 'supertest';
+import { OnsiteError } from '../../onsite';
 
 const rq = request(app.callback());
 
@@ -11,8 +12,9 @@ const mocks = vi.hoisted(() => {
   };
 });
 
-vi.mock('../../onsite', () => {
+vi.mock('../../onsite', async () => {
   return {
+    ...(await vi.importActual<typeof import('../../onsite')>('../../onsite')),
     checkDragonsMatchGender: mocks.checkDragonsMatchGender,
     getDataForPair: mocks.getDataForPair,
   };
@@ -23,11 +25,61 @@ describe('onsiteController', async () => {
     afterEach(() => {
       vi.clearAllMocks();
     });
-    describe.todo('returns errors when missing male or female');
 
-    describe.todo("errors when one dragon can't be found");
+    it('422 when missing male or female', async () => {
+      await rq.post('/dc/lineage-builder/api/onsite').send({}).expect(422);
+    });
 
-    describe.todo('warns when one dragon is the wrong gender');
+    it("errors when one dragon's html can't be found", async () => {
+      mocks.checkDragonsMatchGender.mockReturnValue([
+        { code: '0COCk', correct: true },
+        { code: 'BbOOB', correct: true },
+      ]);
+
+      mocks.getDataForPair.mockImplementation(async () => {
+        throw new OnsiteError('Dragon not found.');
+      });
+
+      await rq
+        .post('/dc/lineage-builder/api/onsite')
+        .send({
+          male: '0COCk',
+          female: 'BbOOB',
+          doChecks: true,
+        })
+        .expect(404);
+    });
+
+    it("errors when doChecks enabled and one dragon can't be found", async () => {
+      mocks.checkDragonsMatchGender.mockReturnValue([
+        { code: '0COCk', correct: null },
+        { code: 'BbOOB', correct: null },
+      ]);
+
+      mocks.getDataForPair.mockReturnValue({
+        male: {
+          code: '0COCk',
+          html: '<p></p>',
+          gen: 3,
+        },
+        female: {
+          code: 'BbOOB',
+          html: '<p></p>',
+          gen: 3,
+        },
+      });
+
+      const res = await rq
+        .post('/dc/lineage-builder/api/onsite')
+        .send({
+          male: '0COCk',
+          female: 'BbOOB',
+          doChecks: true,
+        })
+        .expect(404);
+
+      expect(res.body.errors).length(2);
+    });
 
     it('fails if invalid codes given', async () => {
       const res = await rq
@@ -112,7 +164,7 @@ describe('onsiteController', async () => {
       expect(res.body).to.not.contain.keys('errors');
     });
 
-    it('warns if incorrect gender', async () => {
+    it('warns when dragons ok but checks enabled and wrong gender', async () => {
       const data = {
         male: {
           code: '0COCk',

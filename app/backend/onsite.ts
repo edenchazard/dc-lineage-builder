@@ -114,16 +114,12 @@ export async function grabHTML(
 
   try {
     const response = await fetchDragon(code);
-    //const a = performance.now();
     const root = nodeHTMLParser
       .parse(response)
       .querySelector(`a[href='/view/${code}']`)
       ?.closest('div > ul').parentNode as unknown as HTMLElement;
 
     if (!root) throw new OnsiteError(`Couldn't find root. Dragon: ${code}`);
-
-    //const b = performance.now();
-    //console.log(`parse complete in ${(b-a)} for ${code}`);
 
     return {
       code,

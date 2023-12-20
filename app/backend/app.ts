@@ -15,8 +15,10 @@ app
         ctx.body = { errors: err.errors };
         ctx.status = 422;
       } else {
-        ctx.status = 500;
-        ctx.body = { errors: ['Sorry, an error has occurred :('] };
+        ctx.status = ctx.status || 500;
+        ctx.body = {
+          errors: err.errors || ['Sorry, an error has occurred :('],
+        };
       }
     }
   })
