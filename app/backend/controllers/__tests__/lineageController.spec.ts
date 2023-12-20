@@ -4,75 +4,87 @@ import request from 'supertest';
 import { DragonBuilder } from '../../../shared/dragonBuilder';
 import pool from '../../pool';
 import crypto from 'crypto';
-import type { PoolConnection } from 'mysql2/promise';
+import type { PoolConnection, RowDataPacket } from 'mysql2/promise';
+import config from '../../config';
 
 const rq = request(app.callback());
 const con: PoolConnection = await pool.getConnection();
 
-describe('app', () => {
-  describe('lineageController', async () => {
-    beforeEach(async () => await con.beginTransaction());
+describe('lineageController', async () => {
+  beforeEach(async () => await con.beginTransaction());
 
-    afterEach(async () => {
-      await con.rollback();
-      con.release();
+  afterEach(async () => {
+    await con.rollback();
+    con.release();
+  });
+
+  describe('/lineage/{hash}', () => {
+    it("404 when a lineage hash isn't found", async () => {
+      await rq
+        .get('/lineage/a1c6b9e0fa6157dd694525fcdb0be99e14110174/show')
+        .expect(404);
     });
 
-    describe('/lineage/${hash}', () => {
-      it("404s when a lineage hash isn't found", async () => {
-        await rq.get('/lineage/blah/show').expect(404);
+    it('returns a lineage json', async () => {
+      const dragon = DragonBuilder.create();
+      const json = JSON.stringify(dragon);
+      const hashCode = crypto.createHash('sha1').update(json).digest('hex');
+
+      await con.query(
+        'INSERT INTO `saved_lineages` (`hash`, `last_view`, `content`) VALUES (?, CURDATE(), ?)',
+        [hashCode, json],
+      );
+
+      const res = await rq
+        .get(`/dc/lineage-builder/api/lineage/${hashCode}`)
+        .expect(200);
+
+      expect(res.body).to.eql({
+        lineage: dragon,
       });
-
-      it('returns a lineage json', async () => {
-        const dragon = DragonBuilder.create();
-        const json = JSON.stringify(dragon);
-        const hashCode = crypto.createHash('sha1').update(json).digest('hex');
-
-        await con.execute(
-          'INSERT INTO `saved_lineages` (`hash`, `last_view`, `content`) VALUES (?, CURDATE(), ?)',
-          [hashCode, json],
-        );
-
-        const res = await rq
-          .get(`/dc/lineage-builder/api/lineage/${hashCode}`)
-          .expect(200);
-
-        expect(res.body).to.be.eqls({
-          lineage: dragon,
-        });
-      });
-
-      describe.todo('sets the last_view to now');
     });
 
-    describe('/lineage/create', () => {
-      it("404s when json isn't present", async () => {
-        await rq.post('/dc/lineage-builder/api/lineage').expect(404);
-      });
+    describe.todo('sets the last_view to now');
+  });
 
-      describe.todo('sets the last_view to now if already exists');
+  describe('/lineage/create', () => {
+    it("404 when json isn't present", async () => {
+      await rq.post('/dc/lineage-builder/api/lineage').expect(404);
+    });
 
-      it('fails validation when given a bad dragon', async () => {
-        const dragon = DragonBuilder.create({ code: 'nanawo akari MY QUEEN' });
+    describe.todo('sets the last_view to now if already exists');
 
-        const res = await rq
-          .post(`/dc/lineage-builder/api/lineage`)
-          .send({ dragon })
-          .expect(200);
+    it('fails validation when given a bad dragon', async () => {
+      const dragon = DragonBuilder.create({ code: 'nanawo akari MY QUEEN' });
 
-        expect(res.body).to.has.key('errors');
-      });
+      const res = await rq
+        .post(`/dc/lineage-builder/api/lineage`)
+        .send({ dragon })
+        .expect(422);
 
-      it('stores a new lineage and returns unique hash', async () => {
-        const dragon = DragonBuilder.create();
+      expect(res.body).to.have.key('errors');
+    });
 
-        const res = await rq
-          .post(`/dc/lineage-builder/api/lineage`)
-          .send({ dragon })
-          .expect(200);
+    it('stores a new lineage and returns unique hash', async () => {
+      const dragon = DragonBuilder.create();
+      const hashCode = crypto
+        .createHash('sha1')
+        .update(config.salt + JSON.stringify(dragon))
+        .digest('hex');
 
-        expect(res.body).to.has.key('hash');
-      });
+      const res = await rq
+        .post(`/dc/lineage-builder/api/lineage`)
+        .send({ dragon })
+        .expect(200);
+
+      expect(res.body.hash).to.eql(hashCode);
+
+      const [[row]] = await con.query<RowDataPacket[]>(
+        'SELECT * FROM saved_lineages WHERE hash = ?',
+        [res.body.hash],
+      );
+
+      expect(JSON.parse(row.content)).to.eql(dragon);
     });
   });
 });

@@ -10,13 +10,13 @@ app
   .use(async (ctx, next) => {
     try {
       await next();
-    } catch (ex) {
-      if (ex instanceof ValidationError) {
-        ctx.body = {
-          errors: ex.errors,
-        };
+    } catch (err) {
+      if (err instanceof ValidationError) {
+        ctx.body = { errors: err.errors };
+        ctx.status = 422;
       } else {
-        ctx.status = 403;
+        ctx.status = 500;
+        ctx.body = { errors: ['Sorry, an error has occurred :('] };
       }
     }
   })
