@@ -84,7 +84,7 @@ describe('utils', () => {
       });
 
       expect(createLineageLink('test')).to.be.equal(
-        'http://example.com/view/test',
+        'http://example.com/dc/lineage-builder/view/test',
       );
 
       Object.defineProperty(window, 'location', {

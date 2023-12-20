@@ -3,5 +3,5 @@ import config from './config';
 
 export default mysql.createPool({
   ...config.db,
-  waitForConnections: true,
+  connectionLimit: 10,
 });

@@ -16,30 +16,32 @@ export const NAMEREGEXP = /^[a-zA-Z0-9]([a-zA-Z0-9 '-]+)[a-zA-Z0-9]$/;
 export const CODEREGEXP = /[a-zA-Z0-9]+/;
 export const BREEDNAMEREGEXP = /[a-zA-Z0-9 ]{1,32}/;
 
+export const codeValidator = string()
+  .required()
+  .test(
+    'code',
+    ({ value }) =>
+      `Codes must be 4 to 5 characters and alphanumeric.
+  ${value} was given.`,
+    validateCode,
+  );
+
+export const nameValidator = string()
+  .required()
+  .test(
+    'name',
+    ({ value }) =>
+      `Names must be 1 to 32 characters in length and only contain
+    alphanumeric characters, spaces apostrophes and dashes.
+    Additionally non-alphanumeric characters must not be
+    present at the start and end of name. ${value} was given.`,
+    validateName,
+  );
+
 export const dragonSchema: ObjectSchema<PartialLineage> = object()
   .shape({
-    name: string()
-      .required()
-      .test(
-        'name',
-        ({ value }) =>
-          `Names must be 1 to 32 characters in length and only contain
-        alphanumeric characters, spaces apostrophes and dashes.
-        Additionally non-alphanumeric characters must not be
-        present at the start and end of name. ${value} was given.`,
-        validateName,
-      )
-      .default(() => DragonBuilder.generateName()),
-    code: string()
-      .required()
-      .test(
-        'code',
-        ({ value }) =>
-          `Codes must be 4 to 5 characters and alphanumeric.
-        ${value} was given.`,
-        validateCode,
-      )
-      .default(() => DragonBuilder.generateCode()),
+    name: nameValidator.default(() => DragonBuilder.generateName()),
+    code: codeValidator.default(() => DragonBuilder.generateCode()),
     display: number<DragonDisplay>().required().min(0).max(1).default(0),
     breed: lazy(() =>
       string()
@@ -81,7 +83,7 @@ export function validateGenerationCount(count: number): boolean {
 }
 
 export function validateLineageHash(str: string): boolean {
-  return /^[a-f0-6]{64}$/.test(str);
+  return /^[a-f0-9]{40}$/.test(str);
 }
 
 function getTrueBreeds(): BreedEntry['name'][] {
