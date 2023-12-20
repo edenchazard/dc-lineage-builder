@@ -1,7 +1,6 @@
 name: dc-lb_dev
 services:
   app:
-    container_name: app
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -25,20 +24,7 @@ services:
       - APIKey=${APIKey}
       - VITE_APP_URL=${VITE_APP_URL}
 
-  testapp:
-    container_name: testapp
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    command: sleep infinity
-    volumes:
-      - .:/app
-      - /app/node_modules
-    networks:
-      - internal
-
   db:
-    container_name: dc-lb-dev-db
     image: mariadb:10
     tty: true
     volumes:
@@ -55,7 +41,6 @@ services:
       - internal
 
   breeds:
-    container_name: dc-lb-dev-breeds
     build:
       context: .
       dockerfile: ./process-breeds/Dockerfile
@@ -65,8 +50,45 @@ services:
     volumes:
       - .:/app
 
+  testapp:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: sleep infinity
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - testdb
+    networks:
+      - testing
+    environment:
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=linbuilder
+      - MYSQL_PASSWORD=linbuilder
+      - MYSQL_ROOT_PASSWORD=linbuilder
+      - MYSQL_HOST=testdb
+      - APIKey=${APIKey}
+      - VITE_APP_URL=${VITE_APP_URL}
+
+  testdb:
+    image: mariadb:10
+    tty: true
+    volumes:
+      - ./db/dev:/docker-entrypoint-initdb.d
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: linbuilder
+      MYSQL_PASSWORD: linbuilder
+      MYSQL_ROOT_PASSWORD: linbuilder
+    networks:
+      - testing
+
 volumes:
   dbdata:
 
 networks:
   internal:
+  testing:

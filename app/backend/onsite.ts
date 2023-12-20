@@ -2,18 +2,18 @@ import axios, { AxiosError } from 'axios';
 import nodeHTMLParser from 'node-html-parser';
 import { getDragonsByCode } from './dcapi';
 
-interface DragonOnsite {
+export interface DragonOnsite {
   code: string;
   html: string;
   gen: number;
 }
 
-interface DragonPair {
+export interface DragonPair {
   male: DragonOnsite;
   female: DragonOnsite;
 }
 
-class OnsiteError extends Error {
+export class OnsiteError extends Error {
   constructor(message: string) {
     super(message);
     this.name = 'OnsiteError';
@@ -24,7 +24,7 @@ class OnsiteError extends Error {
  * Check a pair of dragons are male and female
  * @param codes Format: [male, female]
  */
-async function checkDragonsMatchGender(
+export async function checkDragonsMatchGender(
   codes: [string, string],
 ): Promise<{ code: string; correct: boolean | null }[]> {
   const apiDragons = await getDragonsByCode(codes);
@@ -50,7 +50,10 @@ async function checkDragonsMatchGender(
  * @param filter Whether to replace whitespace and fix urls
  * @returns
  */
-async function grabHTML(code: string, filter = true): Promise<DragonOnsite> {
+export async function grabHTML(
+  code: string,
+  filter = true,
+): Promise<DragonOnsite> {
   const fetchDragon = async (code: string) => {
     try {
       return (await axios.get(`https://dragcave.net/lineage/${code}`)).data;
@@ -135,7 +138,9 @@ async function grabHTML(code: string, filter = true): Promise<DragonOnsite> {
 /**
  * Returns data for a male and female pair of dragons
  */
-async function getDataForPair(codes: [string, string]): Promise<DragonPair> {
+export async function getDataForPair(
+  codes: [string, string],
+): Promise<DragonPair> {
   const dragons = await Promise.all(codes.map((code) => grabHTML(code)));
 
   const [male, female] = dragons.map((dragon) => {
@@ -150,5 +155,3 @@ async function getDataForPair(codes: [string, string]): Promise<DragonPair> {
     female,
   };
 }
-
-export { OnsiteError, grabHTML, getDataForPair, checkDragonsMatchGender };
