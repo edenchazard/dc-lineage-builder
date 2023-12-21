@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { DragonBuilder } from '../dragonBuilder';
 
-describe('dragon builder', () => {
-  describe('#create', () => {
+describe('dragonBuilder', () => {
+  describe('.create()', () => {
     it('returns a new lineage with defaults and no metadata', async () => {
       const instance = DragonBuilder.create();
 
@@ -18,7 +18,7 @@ describe('dragon builder', () => {
     });
   });
 
-  describe('#createWithMetadata', () => {
+  describe('.createWithMetadata()', () => {
     it('returns a new lineage with defaults and metadata', async () => {
       const instance = DragonBuilder.createWithMetadata();
 
@@ -31,7 +31,7 @@ describe('dragon builder', () => {
         'gender',
         'selected',
       ]);
-      expect(instance).property('selected').to.be.false;
+      expect(instance.selected).to.be.false;
     });
   });
 });

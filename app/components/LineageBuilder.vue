@@ -197,7 +197,8 @@ function selectionSwitchParents() {
   applyToSelected((dragon) => {
     // no parents, ignore
     if (!hasParents(dragon)) return;
-    //dragon.parents = dragonBuilder.switchParents(dragon.parents);
+
+    Object.assign(dragon, LineageHandler(dragon).switchParents().raw());
   });
 }
 

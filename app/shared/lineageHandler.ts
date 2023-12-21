@@ -234,7 +234,8 @@ class LineageHandler<
       // todo
       if (breed!.genderOnly) dragon.breed = placeholder.name;
 
-      Object.assign(dragon.gender, newGender);
+      dragon.gender = newGender;
+
       return dragon;
     };
 
