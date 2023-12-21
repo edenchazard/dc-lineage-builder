@@ -112,23 +112,19 @@ export async function grabHTML(
     return parseInt(genNode.textContent ?? '1');
   };
 
-  try {
-    const response = await fetchDragon(code);
-    const root = nodeHTMLParser
-      .parse(response)
-      .querySelector(`a[href='/view/${code}']`)
-      ?.closest('div > ul').parentNode as unknown as HTMLElement;
+  const response = await fetchDragon(code);
+  const root = nodeHTMLParser
+    .parse(response)
+    .querySelector(`a[href='/view/${code}']`)
+    ?.closest('div > ul').parentNode as unknown as HTMLElement;
 
-    if (!root) throw new OnsiteError(`Couldn't find root. Dragon: ${code}`);
+  if (!root) throw new OnsiteError(`Couldn't find root. Dragon: ${code}`);
 
-    return {
-      code,
-      html: getHTML(root, filter),
-      gen: getGen(root),
-    };
-  } catch (ex: unknown) {
-    return ex;
-  }
+  return {
+    code,
+    html: getHTML(root, filter),
+    gen: getGen(root),
+  };
 }
 
 /**
