@@ -4,12 +4,13 @@ import {
   createLineageLink,
   expandGender,
   getBreedData,
+  getDCTime,
   validGenderForBreed,
 } from '../utils';
 import type { BreedEntry, PortraitData } from 'app/shared/types';
 
 describe('utils', () => {
-  describe('#validGenderForBreed', () => {
+  describe('validGenderForBreed', () => {
     it('true when both genders and male given', () => {
       const val = getBreedData('Aria');
       expect(val).to.have.property('genderOnly', false);
@@ -35,7 +36,7 @@ describe('utils', () => {
     });
   });
 
-  describe('#getBreedData', () => {
+  describe('getBreedData', () => {
     it("breed name returns the breed's data", () => {
       expect(getBreedData('Aegis Enraged')).to.have.all.keys(
         'name',
@@ -50,7 +51,7 @@ describe('utils', () => {
     });
   });
 
-  describe('#breedEntryToPortrait', () => {
+  describe('breedEntryToPortrait', () => {
     it('returns the portrait for breed available as male with male wanted', () => {
       expectTypeOf(
         breedEntryToPortrait(getBreedData('Aria') as BreedEntry, 'male'),
@@ -64,7 +65,7 @@ describe('utils', () => {
     });
   });
 
-  describe('#expandGender', () => {
+  describe('expandGender', () => {
     it('m expands to male', () => {
       expect(expandGender('m')).to.be.eq('male');
     });
@@ -73,7 +74,7 @@ describe('utils', () => {
     });
   });
 
-  describe('#createLineageLink', () => {
+  describe('createLineageLink', () => {
     it('returns a link to the view lineage with a given hash', async () => {
       const originalWindowLocation = window.location;
 
@@ -92,6 +93,14 @@ describe('utils', () => {
         enumerable: true,
         value: originalWindowLocation,
       });
+    });
+  });
+
+  describe('getDCTime', () => {
+    it('returns time in EST or EDT', () => {
+      expect(
+        getDCTime().find((part) => part.type === 'timeZoneName')?.value,
+      ).to.be.oneOf(['EST', 'EDT']);
     });
   });
 });

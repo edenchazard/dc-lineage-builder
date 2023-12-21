@@ -120,9 +120,11 @@ export function addBreed(breedObj: BreedEntry, resort: boolean = true) {
 }
 
 export function getDCTime() {
-  return new Date(
-    new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }),
-  );
+  return new Intl.DateTimeFormat('en-us', {
+    timeZone: 'America/New_York',
+    timeStyle: 'long',
+    hour12: false,
+  }).formatToParts();
 }
 
 export function deepClone<T>(obj: T): T {
