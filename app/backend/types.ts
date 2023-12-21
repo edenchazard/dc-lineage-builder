@@ -1,10 +1,10 @@
 import type { Context } from 'koa';
 
-export interface RequestResponse {
-  errors: { type: 'Warning' | 'Error'; message: string }[];
-  data: Record<string, unknown>;
-}
-
-export interface RequestContext extends Context {
-  body: Record<string, unknown>;
-}
+export type RequestContext = Context & {
+  request: {
+    body: {
+      errors?: { type: 'Warning' | 'Error'; message: string }[];
+      [x: string]: unknown;
+    };
+  };
+};

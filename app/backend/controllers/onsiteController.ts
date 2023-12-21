@@ -58,7 +58,7 @@ router.post('/', async (ctx: RequestContext) => {
   try {
     const pair = await getDataForPair([male, female]);
     ctx.body = {
-      ...ctx.body,
+      ...(ctx.body ?? {}),
       ...pair,
     };
   } catch (err) {

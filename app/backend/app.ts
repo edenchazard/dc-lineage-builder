@@ -17,7 +17,9 @@ app
       } else {
         ctx.status = ctx.status || 500;
         ctx.body = {
-          errors: err.errors || ['Sorry, an error has occurred :('],
+          errors: (err as Record<string, unknown>).errors ?? [
+            'Sorry, an error has occurred :(',
+          ],
         };
       }
     }
