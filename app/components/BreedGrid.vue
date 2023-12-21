@@ -118,4 +118,3 @@ function cellSizeAndPositionGetter(item: PortraitData, index: number) {
   margin: 3px;
 }
 </style>
-../../../../shared/types

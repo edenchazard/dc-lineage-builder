@@ -82,4 +82,3 @@ function selected(index: number) {
   color: #000;
 }
 </style>
-../../../../shared/types

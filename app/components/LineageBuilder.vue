@@ -242,4 +242,3 @@ function selectBy(condition: (dragon: PartialLineageWithMetadata) => boolean) {
   }
 }
 </style>
-../shared/lineageHandler ../shared/dragonBuilder

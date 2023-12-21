@@ -231,7 +231,6 @@ class LineageHandler<
 
       const breed = getBreedData(dragon.breed);
 
-      // todo
       if (breed!.genderOnly) dragon.breed = placeholder.name;
 
       dragon.gender = newGender;

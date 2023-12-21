@@ -102,4 +102,3 @@ onMounted(async () => {
   max-width: 480px;
 }
 </style>
-../../../shared/types

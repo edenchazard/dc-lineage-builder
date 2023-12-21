@@ -88,4 +88,3 @@ const generations = computed(() => {
   }
 }
 </style>
-../../../../shared/types ../shared/lineageHandler

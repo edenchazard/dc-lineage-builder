@@ -137,4 +137,3 @@ function finishedEditing(e: Event) {
   }
 }
 </style>
-../shared/dragonBuilder

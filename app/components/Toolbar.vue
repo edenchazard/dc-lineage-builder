@@ -700,4 +700,3 @@ function capitalise(string: string) {
   }
 }
 </style>
-../shared/lineageHandler ../shared/breeds

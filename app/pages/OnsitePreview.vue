@@ -175,4 +175,3 @@ async function fetchLineage(e: Event) {
   overflow-x: auto;
 }
 </style>
-../app/validation
