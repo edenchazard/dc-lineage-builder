@@ -30,7 +30,9 @@ function adjustTiles() {
   // In the daytime, nocturnes
   // have a different position.
   const isNocturneActive = (() => {
-    const hours = getDCTime().getHours();
+    const hours = parseInt(
+      getDCTime().find((part) => part.type === 'hour')?.value ?? '',
+    );
     return hours >= 18 || hours < 6;
   })();
 
