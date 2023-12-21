@@ -6,11 +6,14 @@ describe('dragon builder', () => {
     it('returns a new lineage with defaults and no metadata', async () => {
       const instance = DragonBuilder.create();
 
-      expect(instance).to.have.property('code');
-      expect(instance).to.have.property('name');
-      expect(instance).to.have.property('parents');
-      expect(instance).to.have.property('breed');
-      expect(instance).to.have.property('gender');
+      expect(instance).to.have.all.keys([
+        'code',
+        'name',
+        'parents',
+        'display',
+        'breed',
+        'gender',
+      ]);
       expect(instance).to.not.have.property('selected');
     });
   });
@@ -19,12 +22,15 @@ describe('dragon builder', () => {
     it('returns a new lineage with defaults and metadata', async () => {
       const instance = DragonBuilder.createWithMetadata();
 
-      expect(instance).to.have.property('code');
-      expect(instance).to.have.property('name');
-      expect(instance).to.have.property('parents');
-      expect(instance).to.have.property('breed');
-      expect(instance).to.have.property('gender');
-      expect(instance).to.have.property('selected');
+      expect(instance).to.have.all.keys([
+        'code',
+        'name',
+        'parents',
+        'display',
+        'breed',
+        'gender',
+        'selected',
+      ]);
       expect(instance).property('selected').to.be.false;
     });
   });
