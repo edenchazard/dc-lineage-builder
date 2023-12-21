@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import type { PartialLineage } from 'app/shared/types';
 import { Lineage, LineageHandler } from '../lineageHandler';
-import { dragonGen3 } from '../../__tests__/testData';
+import { dragonGen3, dragonGen3Swapped } from '../../__tests__/testData';
 
-describe('lineage handler', () => {
-  describe('#getAtPath', async () => {
+describe('lineageHandler', () => {
+  describe('#getAtPath()', async () => {
     it('returns new lineage handler instance', async () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       const subTree = theLineage.getAtPath('m.m');
@@ -38,6 +38,13 @@ describe('lineage handler', () => {
       const subTree = theLineage.getAtPath('m.m.f.f');
 
       expect(subTree?.raw()).to.be.eq(undefined);
+    });
+  });
+
+  describe('#switchParents()', () => {
+    it('swaps the parents and uses placeholders if necessary', async () => {
+      const theLineage = Lineage(dragonGen3 as PartialLineage);
+      expect(theLineage.switchParents().raw()).to.be.eql(dragonGen3Swapped);
     });
   });
 });

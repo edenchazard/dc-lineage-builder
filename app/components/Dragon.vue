@@ -46,20 +46,28 @@
         :title="problems"
         :aria-label="problems"
       />
-      <DragonButton
-        v-if="hasAncestry"
-        class="tile-button-right"
-        title="Remove ancestors"
-        icon="minus"
-        @click="deleteAncestors"
-      />
-      <DragonButton
-        v-else
-        class="tile-button-right"
-        title="Add ancestors"
-        icon="arrow-right"
-        @click="addAncestors"
-      />
+      <div class="tile-button-right">
+        <DragonButton
+          v-if="hasAncestry"
+          class="switch"
+          title="Switch parents"
+          icon="sync-alt"
+          @click="switchParents"
+        />
+        <DragonButton
+          v-if="hasAncestry"
+          title="Remove ancestors"
+          icon="minus"
+          @click="deleteAncestors"
+        />
+        <DragonButton
+          v-else
+          class="tile-button-right"
+          title="Add ancestors"
+          icon="arrow-right"
+          @click="addAncestors"
+        />
+      </div>
       <DragonLabel
         :value="data.display === 1 ? data.code : data.name"
         :display="data.display"
@@ -137,7 +145,7 @@ import DragonLabel from './DragonLabel.vue';
 import BreedSelector from './BreedSelector.vue';
 import DragonPortrait from './DragonPortrait.vue';
 import DragonButton from './DragonButton.vue';
-import { Lineage } from '../shared/lineageHandler';
+import { Lineage, LineageHandler } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder';
 import { validateCode, validateName } from '../shared/validation';
 import { placeholder } from '../shared/breeds';
@@ -237,6 +245,10 @@ function pasteBranch() {
   // insert the new branch
   // Todo type this
   props.data.parents = JSON.parse(clipboard);
+}
+
+function switchParents() {
+  Object.assign(props.data, Lineage(props.data).switchParents().raw());
 }
 
 function copyBranch() {
@@ -380,19 +392,20 @@ function handleClick() {
     > .tile-button-right {
       position: absolute;
     }
-
     > .tile-bottom-controls {
       width: 120px;
     }
     /* position the controls left and right of the tile */
     > .tile-button-right {
-      margin-top: 10px;
-      right: 5px;
+      right: 0.5rem;
+      margin-top: -3rem;
+      display: flex;
+      flex-direction: column;
     }
 
     > .tile-button-left {
-      margin-top: 10px;
-      left: 6px;
+      margin-top: 0.2rem;
+      left: 0.4rem;
     }
   }
 
@@ -444,4 +457,3 @@ function handleClick() {
   }
 }
 </style>
-../directives ../shared/lineageHandler ../shared/dragonBuilder ../shared/breeds

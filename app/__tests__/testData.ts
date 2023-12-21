@@ -262,7 +262,7 @@ export const dragonGen3 = {
           display: 1,
         },
       },
-      breed: 'Placeholder',
+      breed: 'Aegis Enraged',
       gender: 'm',
       display: 1,
     },
@@ -270,6 +270,49 @@ export const dragonGen3 = {
       code: 'Vqfvy',
       name: 'Millicent Red',
       parents: {},
+      breed: 'Aeon Wyvern',
+      gender: 'f',
+      display: 1,
+    },
+  },
+  breed: 'Placeholder',
+  gender: 'm',
+  display: 1,
+};
+
+export const dragonGen3Swapped = {
+  code: 'uIfWm',
+  name: 'Corry Indigo',
+  parents: {
+    m: {
+      code: 'Vqfvy',
+      name: 'Millicent Red',
+      parents: {},
+      breed: 'Aeon Wyvern',
+      gender: 'm',
+      display: 1,
+    },
+    f: {
+      code: 'WuTUL',
+      name: 'Rakel Orange',
+      parents: {
+        m: {
+          code: 'WuTUL',
+          name: 'Red Blue',
+          parents: {},
+          breed: 'Placeholder',
+          gender: 'm',
+          display: 1,
+        },
+        f: {
+          code: 'Vqfvy',
+          name: 'White Star',
+          parents: {},
+          breed: 'Placeholder',
+          gender: 'f',
+          display: 1,
+        },
+      },
       breed: 'Placeholder',
       gender: 'f',
       display: 1,
