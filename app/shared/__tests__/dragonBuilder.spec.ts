@@ -28,10 +28,4 @@ describe('dragon builder', () => {
       expect(instance).property('selected').to.be.false;
     });
   });
-
-  describe('#switchParents', () => {
-    it('returns new lineage handler instance', async () => {
-      const instance = DragonBuilder.createWithMetadata();
-    });
-  });
 });

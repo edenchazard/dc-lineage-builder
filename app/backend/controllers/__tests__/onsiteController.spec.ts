@@ -77,8 +77,8 @@ describe('onsiteController', async () => {
           doChecks: true,
         })
         .expect(404);
-
-      expect(res.body.errors).length(2);
+      expect(res.body.errors[0].message).to.contain('may not exist');
+      expect(res.body.errors[1].message).to.contain('may not exist');
     });
 
     it('fails if invalid codes given', async () => {
@@ -90,8 +90,6 @@ describe('onsiteController', async () => {
         })
         .expect(422);
 
-      expect(res.body).to.have.key('errors');
-      expect(res.body.errors).length(2);
       expect(res.body.errors[0]).to.contain('Codes must be');
       expect(res.body.errors[1]).to.contain('Codes must be');
     });
@@ -160,8 +158,7 @@ describe('onsiteController', async () => {
         .expect(200);
 
       expect(mocks.checkDragonsMatchGender).not.toHaveBeenCalled();
-      expect(res.body).to.contain.all.keys(data);
-      expect(res.body).to.not.contain.keys('errors');
+      expect(res.body).to.eql(data);
     });
 
     it('warns when dragons ok but checks enabled and wrong gender', async () => {
@@ -195,11 +192,14 @@ describe('onsiteController', async () => {
         .expect(200);
 
       expect(mocks.checkDragonsMatchGender).toHaveBeenCalledOnce();
-      expect(res.body).to.contain.all.keys(data);
-      expect(res.body.errors).to.eql([
-        { type: 'warning', message: '0COCk is not the correct gender.' },
-        { type: 'warning', message: 'BbOOB is not the correct gender.' },
-      ]);
+
+      expect(res.body).to.deep.contain({
+        ...data,
+        errors: [
+          { type: 'warning', message: '0COCk is not the correct gender.' },
+          { type: 'warning', message: 'BbOOB is not the correct gender.' },
+        ],
+      });
     });
   });
 });
