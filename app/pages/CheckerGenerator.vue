@@ -290,5 +290,3 @@ function switchBreeds() {
   }
 }
 </style>
-../../../shared/types ../../../shared/globals ../shared/dragonBuilder
-../shared/breeds
