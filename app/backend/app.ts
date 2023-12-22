@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
+import serve from 'koa-static';
 import { ValidationError } from 'yup';
 import lineageController from './controllers/lineageController';
 import onsiteController from './controllers/onsiteController';
@@ -37,6 +38,8 @@ app
       }
     }
   })
+  .use(serve('./index.html'))
+  .use(serve('./assets'))
   .use(bodyParser())
   .use(lineageController.routes())
   .use(lineageController.allowedMethods())

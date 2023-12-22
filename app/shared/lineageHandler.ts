@@ -12,7 +12,7 @@ import {
 } from '../app/utils';
 import { DragonBuilder } from './dragonBuilder';
 import { dragonSchema, validateGenerationCount } from './validation';
-import settings from '../app/settings';
+import settings from './settings';
 import { saveLineage } from '../app/api';
 import { placeholder } from './breeds';
 

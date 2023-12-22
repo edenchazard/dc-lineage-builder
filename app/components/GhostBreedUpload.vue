@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import type { PortraitData } from '../shared/types';
-import settings from '../app/settings';
+import settings from '../shared/settings';
 import DragonPortrait from './DragonPortrait.vue';
 import { placeholder } from '../shared/breeds';
 

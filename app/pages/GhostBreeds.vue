@@ -115,7 +115,7 @@ import { ref, watch } from 'vue';
 import type { BreedEntry, DragonGender } from '../shared/types';
 import { addBreed } from '../app/utils';
 import { BREEDNAMEREGEXP } from '../shared/validation';
-import settings from '../app/settings';
+import settings from '../shared/settings';
 import GhostBreedUpload from '../components/GhostBreedUpload.vue';
 import Feedback from '../components/Feedback.vue';
 

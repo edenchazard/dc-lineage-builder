@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+      target: production
     command: sleep infinity
     volumes:
       - .:/app

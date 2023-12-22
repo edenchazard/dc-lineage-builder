@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
+    "noEmitOnError": true,
     "target": "ES2021",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "isolatedModules": true,
@@ -12,10 +13,11 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strict": true,
+    "outDir": "/prod",
     "verbatimModuleSyntax": true,
     "paths": {
       "@shared/*": ["./shared/*"]
     }
   },
-  "exclude": ["node_modules/**", "coverage/**"]
+  "exclude": ["node_modules/**", "coverage/**", "process-breeds/**"]
 }
