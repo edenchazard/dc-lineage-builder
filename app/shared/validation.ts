@@ -7,9 +7,9 @@ import type {
   NoDragonParents,
   PartialLineage,
 } from './types';
-import settings from './settings';
-import { listOfBreeds, placeholder } from './breeds';
-import { DragonBuilder } from './dragonBuilder';
+import settings from './settings.js';
+import { listOfBreeds, placeholder } from './breeds.js';
+import { DragonBuilder } from './dragonBuilder.js';
 
 export const NAMEREGEXP = /^[a-zA-Z0-9]([a-zA-Z0-9 '-]+)[a-zA-Z0-9]$/;
 export const CODEREGEXP = /[a-zA-Z0-9]+/;

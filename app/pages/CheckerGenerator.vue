@@ -131,8 +131,12 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
 import type { PortraitData, DragonGender, BreedEntry } from '../shared/types';
-import { breedEntryToPortrait, expandGender, getBreedData } from '../app/utils';
-import { useTagStore } from '../store/useTagStore';
+import {
+  breedEntryToPortrait,
+  expandGender,
+  getBreedData,
+} from '../app/utils.js';
+import { useTagStore } from '../store/useTagStore.js';
 
 import Lineage from '../components/Lineage.vue';
 import FilteredBreedList from '../components/FilteredBreedList.vue';
@@ -143,8 +147,12 @@ import DialogGenerate from '../components/DialogGenerate.vue';
 import ToolbarButton from '../components/ToolbarButton.vue';
 import BreedSearchControl from '../components/BreedSearchControl.vue';
 import DragonPortrait from '../components/DragonPortrait.vue';
-import { DragonBuilder } from '../shared/dragonBuilder';
-import { femalePortraits, malePortraits, placeholder } from '../shared/breeds';
+import { DragonBuilder } from '../shared/dragonBuilder.js';
+import {
+  femalePortraits,
+  malePortraits,
+  placeholder,
+} from '../shared/breeds.js';
 
 const tree = ref(DragonBuilder.createWithMetadata());
 const tagStore = useTagStore();

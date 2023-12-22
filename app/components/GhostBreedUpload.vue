@@ -23,9 +23,9 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import type { PortraitData } from '../shared/types';
-import settings from '../shared/settings';
+import settings from '../shared/settings.js';
 import DragonPortrait from './DragonPortrait.vue';
-import { placeholder } from '../shared/breeds';
+import { placeholder } from '../shared/breeds.js';
 
 const props = defineProps({
   label: {

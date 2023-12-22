@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { PartialLineageWithMetadata } from '../shared/types';
 import { useTreeHistory } from './useTreeHistory';
 import { LineageHandler } from '../shared/lineageHandler';
-import { placeholder } from '../shared/breeds';
+import { placeholder } from '../shared/breeds.js';
 
 /*
     basically a way we can:

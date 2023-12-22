@@ -1,10 +1,10 @@
 import { string } from 'yup';
 import type { RowDataPacket } from 'mysql2';
-import { dragonSchema, validateLineageHash } from '../../shared/validation';
-import config from '../config';
+import { dragonSchema, validateLineageHash } from '../../shared/validation.js';
+import config from '../config.js';
 import Router from '@koa/router';
 import crypto from 'crypto';
-import pool from '../pool';
+import pool from '../pool.js';
 import type { RequestContext } from '../types';
 
 const router = new Router({

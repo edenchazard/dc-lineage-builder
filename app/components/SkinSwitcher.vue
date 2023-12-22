@@ -27,7 +27,7 @@
 </template>
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { useSkinStore } from '../store/useSkinStore';
+import { useSkinStore } from '../store/useSkinStore.js';
 const skinStore = useSkinStore();
 
 defineProps({

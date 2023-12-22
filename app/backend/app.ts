@@ -2,10 +2,10 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
 import { ValidationError } from 'yup';
-import lineageController from './controllers/lineageController';
-import onsiteController from './controllers/onsiteController';
-import { ServerError, type ErrorArray } from './serverError';
-import { injectBreedList } from '../shared/breeds';
+import lineageController from './controllers/lineageController.js';
+import onsiteController from './controllers/onsiteController.js';
+import { ServerError, type ErrorArray } from './serverError.js';
+import { injectBreedList } from '../shared/breeds.js';
 
 injectBreedList();
 

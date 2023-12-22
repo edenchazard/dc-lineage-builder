@@ -9,12 +9,12 @@ import {
   deepClone,
   getBreedData,
   hasParents,
-} from '../app/utils';
-import { DragonBuilder } from './dragonBuilder';
-import { dragonSchema, validateGenerationCount } from './validation';
-import settings from './settings';
-import { saveLineage } from '../app/api';
-import { placeholder } from './breeds';
+} from '../app/utils.js';
+import { DragonBuilder } from './dragonBuilder.js';
+import { dragonSchema, validateGenerationCount } from './validation.js';
+import settings from './settings.js';
+import { saveLineage } from '../app/api.js';
+import { placeholder } from './breeds.js';
 
 /**
  * Returns a handler tries to json parse the passed treeref

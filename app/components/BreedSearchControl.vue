@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { debounce } from '../app/utils';
+import { debounce } from '../app/utils.js';
 
 const emit = defineEmits<{
   (e: 'update', value: string): void;

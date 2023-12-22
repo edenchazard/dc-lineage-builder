@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DragonBuilder } from '../dragonBuilder';
+import { DragonBuilder } from '../dragonBuilder.js';
 
 describe('dragonBuilder', () => {
   describe('.create()', () => {

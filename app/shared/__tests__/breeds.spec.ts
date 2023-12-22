@@ -5,8 +5,8 @@ import {
   malePortraits,
   placeholder,
   injectBreedList,
-} from '../breeds';
-import { getDCTime } from '../../app/utils';
+} from '../breeds.js';
+import { getDCTime } from '../../app/utils.js';
 
 vi.mock('../../app/utils', async () => {
   return {

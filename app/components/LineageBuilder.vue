@@ -52,14 +52,14 @@ import type {
   LineageConfig,
 } from '../shared/types';
 
-import { hasParents } from '../app/utils';
-import { getLineage } from '../app/api';
-import { useAppStore } from '../store/useAppStore';
+import { hasParents } from '../app/utils.js';
+import { getLineage } from '../app/api.js';
+import { useAppStore } from '../store/useAppStore.js';
 import Toolbar from './Toolbar.vue';
 import Lineage from './Lineage.vue';
 import Feedback from './Feedback.vue';
 import { Lineage as LineageHandler } from '../shared/lineageHandler';
-import { DragonBuilder } from '../shared/dragonBuilder';
+import { DragonBuilder } from '../shared/dragonBuilder.js';
 
 const route = useRoute();
 const appStore = useAppStore();

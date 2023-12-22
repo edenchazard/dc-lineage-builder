@@ -1,5 +1,5 @@
 import type { BreedEntry, PortraitData } from './types';
-import { getDCTime, filterBreedTableByGender } from '../app/utils';
+import { getDCTime, filterBreedTableByGender } from '../app/utils.js';
 
 const placeholder: BreedEntry = {
   name: 'Placeholder',

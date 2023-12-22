@@ -6,9 +6,9 @@ import {
   getBreedData,
   getDCTime,
   validGenderForBreed,
-} from '../utils';
+} from '../utils.js';
 import type { BreedEntry, PortraitData } from '../../shared/types';
-import { injectBreedList } from '../../shared/breeds';
+import { injectBreedList } from '../../shared/breeds.js';
 
 await injectBreedList();
 

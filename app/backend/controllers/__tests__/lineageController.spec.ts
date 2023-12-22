@@ -1,7 +1,7 @@
 import { describe, it, beforeEach, afterEach, expect } from 'vitest';
 import app from '../../app';
 import request from 'supertest';
-import { DragonBuilder } from '../../../shared/dragonBuilder';
+import { DragonBuilder } from '../../../shared/dragonBuilder.js';
 import pool from '../../pool';
 import crypto from 'crypto';
 import type { PoolConnection, RowDataPacket } from 'mysql2/promise';
