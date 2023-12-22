@@ -7,7 +7,7 @@ import type {
   NoDragonParents,
   PartialLineage,
 } from './types';
-import settings from '../app/settings';
+import settings from './settings';
 import { listOfBreeds, placeholder } from './breeds';
 import { DragonBuilder } from './dragonBuilder';
 

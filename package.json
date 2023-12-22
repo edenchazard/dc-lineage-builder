@@ -1,5 +1,5 @@
 {
-  "name": "dc-lineage-builder-frontend",
+  "name": "dc-lineage-builder",
   "version": "3.0.0",
   "private": true,
   "author": "Charley Reeson (https://chazza.me)",
@@ -7,9 +7,10 @@
   "scripts": {
     "server:start": "tsx watch ./app/backend/server.ts",
     "vue:start": "vite --host",
-    "vue:build": "vite build",
+    "build": "vite build",
     "vue:preview": "vite preview",
     "dev": "concurrently 'npm run server:start' 'npm run vue:start'",
+    "production": "node ./backend/server.js",
     "ts:check": "tsc --noEmit",
     "lint": "eslint . --ext .vue,.ts",
     "lint:fix": "npm run lint -- --fix",

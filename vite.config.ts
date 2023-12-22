@@ -8,6 +8,9 @@ export default ({ mode }: { mode: string }) => {
 
   return defineConfig({
     root: 'app',
+    build: {
+      outDir: '../dist',
+    },
     base: env.VITE_APP_URL,
     server: {
       proxy: {
