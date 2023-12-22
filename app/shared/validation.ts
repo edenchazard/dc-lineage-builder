@@ -87,6 +87,6 @@ export function validateLineageHash(str: string): boolean {
 
 function getTrueBreeds(): BreedEntry['name'][] {
   return listOfBreeds
-    .filter((breed) => ['local', 'dc'].includes(breed.metaData.src))
+    .filter((breed) => breed.metaData.src !== 'ghost')
     .map((breed) => breed.name);
 }
