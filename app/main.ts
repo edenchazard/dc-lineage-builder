@@ -6,11 +6,8 @@ import router from './router/router';
 
 import { createPinia } from 'pinia';
 import Application from './App.vue';
-import { syncPortraits } from './shared/breeds';
 
 const app = createApp(Application);
-
-syncPortraits();
 
 app
   .use(createPinia())
