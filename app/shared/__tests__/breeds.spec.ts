@@ -4,6 +4,7 @@ import {
   listOfBreeds,
   malePortraits,
   placeholder,
+  injectBreedList,
 } from '../breeds';
 import { getDCTime } from '../../app/utils';
 
@@ -15,6 +16,8 @@ vi.mock('../../app/utils', async () => {
     getDCTime: vi.fn(() => [{ type: 'hour', value: '8' }]),
   };
 });
+
+await injectBreedList();
 
 describe('breeds', () => {
   it('exports a list of breeds with placeholder as first in the list', () => {

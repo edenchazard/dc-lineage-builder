@@ -4,7 +4,16 @@ import { ValidationError } from 'yup';
 import lineageController from './controllers/lineageController';
 import onsiteController from './controllers/onsiteController';
 import { ServerError, type ErrorArray } from './serverError';
+import { injectBreedList } from '../shared/breeds';
+
+injectBreedList();
+
 const app = new Koa();
+
+app.context.abort = function (status: number, errors: ErrorArray) {
+  this.status = status;
+  throw new ServerError(errors);
+};
 
 app
   .use(async (ctx, next) => {
@@ -33,10 +42,5 @@ app
   .use(lineageController.allowedMethods())
   .use(onsiteController.routes())
   .use(onsiteController.allowedMethods());
-
-app.context.abort = function (status: number, errors: ErrorArray) {
-  this.status = status;
-  throw new ServerError(errors);
-};
 
 export default app;

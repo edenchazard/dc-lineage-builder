@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import 'reset-css';
-import { watch } from 'vue';
+import { onMounted, watch } from 'vue';
 import { useDevicePixelRatio } from '@vueuse/core';
 import { useRoute } from 'vue-router';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -40,6 +40,7 @@ import './assets/layouts/theming.css';
 import { useAppStore } from './store/useAppStore';
 import Header from './components/Header.vue';
 import SkinSwitcher from './components/SkinSwitcher.vue';
+import { adjustTiles, injectBreedList } from './shared/breeds';
 
 const route = useRoute();
 const appStore = useAppStore();
@@ -59,6 +60,11 @@ watch(
   },
   { immediate: true },
 );
+
+onMounted(async () => {
+  await injectBreedList();
+  adjustTiles();
+});
 </script>
 
 <style>

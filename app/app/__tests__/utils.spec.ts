@@ -7,7 +7,10 @@ import {
   getDCTime,
   validGenderForBreed,
 } from '../utils';
-import type { BreedEntry, PortraitData } from 'app/shared/types';
+import type { BreedEntry, PortraitData } from '../../shared/types';
+import { injectBreedList } from '../../shared/breeds';
+
+await injectBreedList();
 
 describe('utils', () => {
   describe('validGenderForBreed', () => {
