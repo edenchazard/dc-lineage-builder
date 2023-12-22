@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/view/:hash',
     name: 'Viewing Lineage',
-    component: () => import('../pages/View.vue'),
+    component: () => import('../pages/LineageView.vue'),
   },
   {
     path: '/how-to',

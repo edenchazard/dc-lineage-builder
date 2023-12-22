@@ -21,7 +21,7 @@ describe('lineageController', async () => {
   describe('/lineage/{hash}', () => {
     it("404 when a lineage hash isn't found", async () => {
       await rq
-        .get('/lineage/a1c6b9e0fa6157dd694525fcdb0be99e14110174/show')
+        .get('/lineage/a1c6b9e0fa6157dd694525fcdb0be99e14110174')
         .expect(404);
     });
 
@@ -55,27 +55,27 @@ describe('lineageController', async () => {
     describe.todo('sets the last_view to now if already exists');
 
     it('fails validation when given a bad dragon', async () => {
-      const dragon = DragonBuilder.create({ code: 'nanawo akari MY QUEEN' });
+      const lineage = DragonBuilder.create({ code: 'nanawo akari MY QUEEN' });
 
       const res = await rq
         .post(`/dc/lineage-builder/api/lineage`)
-        .send({ dragon })
+        .send({ lineage })
         .expect(422);
 
       expect(res.body).to.have.key('errors');
     });
 
     it('stores a new lineage and returns unique hash', async () => {
-      const dragon = DragonBuilder.create();
+      const lineage = DragonBuilder.create();
       const hashCode = crypto
         .createHash('sha1')
-        .update(config.salt + JSON.stringify(dragon))
+        .update(config.salt + JSON.stringify(lineage))
         .digest('hex');
 
       const res = await rq
         .post(`/dc/lineage-builder/api/lineage`)
-        .send({ dragon })
-        .expect(200);
+        .send({ lineage })
+        .expect(201);
 
       expect(res.body.hash).to.eql(hashCode);
 
@@ -84,7 +84,7 @@ describe('lineageController', async () => {
         [res.body.hash],
       );
 
-      expect(JSON.parse(row.content)).to.eql(dragon);
+      expect(JSON.parse(row.content)).to.eql(lineage);
     });
   });
 });

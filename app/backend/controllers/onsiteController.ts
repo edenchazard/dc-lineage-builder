@@ -1,9 +1,9 @@
-import { object, boolean } from 'yup';
+import { object } from 'yup';
 import { codeValidator } from '../../shared/validation';
 import {
   getDataForPair,
   checkDragonsMatchGender,
-  OnsiteError,
+  OnsiteDragonNotFoundError,
 } from '../onsite';
 import Router from '@koa/router';
 import type { RequestContext } from '../types';
@@ -14,9 +14,8 @@ const router = new Router({
 });
 
 router.post('/', async (ctx: RequestContext) => {
-  const { male, female, doChecks } = await object()
+  const { male, female } = await object()
     .shape({
-      doChecks: boolean().default(false),
       male: codeValidator.required(),
       female: codeValidator.required(),
     })
@@ -24,9 +23,12 @@ router.post('/', async (ctx: RequestContext) => {
       abortEarly: false,
     });
 
-  // do checks if applicable, such as ensuring the dragons match the gender
-  if (doChecks) {
-    const genderChecks = await checkDragonsMatchGender([male, female]);
+  try {
+    // do checks such as ensuring the dragons match the gender
+    const [genderChecks, pair] = await Promise.all([
+      checkDragonsMatchGender([male, female]),
+      getDataForPair([male, female]),
+    ]);
 
     const errors = [];
 
@@ -37,36 +39,30 @@ router.post('/', async (ctx: RequestContext) => {
           message: `${dragon.code} is not the correct gender.`,
         });
       } else if (dragon.correct === null) {
-        errors.push({
-          type: 'error',
-          message: `${dragon.code} couldn't be looked at for gender check. It may not exist.`,
-        });
+        throw new OnsiteDragonNotFoundError(dragon.code);
       }
     }
 
-    if (errors.length) {
-      // try to fetch the html for both codes as long as neither were an outright
-      // failure
-      if (errors.find((e) => e.type === 'error')) {
-        ctx.throw(404, { errors });
-      }
-
-      ctx.body = { errors };
-    }
-  }
-
-  try {
-    const pair = await getDataForPair([male, female]);
     ctx.body = {
-      ...(ctx.body ?? {}),
+      errors,
       ...pair,
     };
   } catch (err) {
-    if (err instanceof OnsiteError) {
-      if (err.message.startsWith('Dragon not found')) {
-        ctx.throw(404);
-      }
+    if (err instanceof OnsiteDragonNotFoundError) {
+      ctx.abort(404, [
+        {
+          type: 'error',
+          message: `The dragon ${err.message} could not be found. If you're sure it exists, then it may be hidden.`,
+        },
+      ]);
     }
+
+    ctx.abort(500, [
+      {
+        type: 'error',
+        message: 'A problem occurred when contacting DragCave.',
+      },
+    ]);
   }
 });
 

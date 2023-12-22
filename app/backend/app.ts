@@ -3,7 +3,7 @@ import bodyParser from 'koa-bodyparser';
 import { ValidationError } from 'yup';
 import lineageController from './controllers/lineageController';
 import onsiteController from './controllers/onsiteController';
-
+import { ServerError, type ErrorArray } from './serverError';
 const app = new Koa();
 
 app
@@ -12,13 +12,17 @@ app
       await next();
     } catch (err) {
       if (err instanceof ValidationError) {
-        ctx.body = { errors: err.errors };
         ctx.status = 422;
+        ctx.body = { errors: err.errors };
+      } else if (err instanceof ServerError) {
+        ctx.body = {
+          errors: err.errors ?? [{ type: 'error', message: 'Not found' }],
+        };
       } else {
         ctx.status = ctx.status || 500;
         ctx.body = {
-          errors: (err as Record<string, unknown>).errors ?? [
-            'Sorry, an error has occurred :(',
+          errors: (err as Record<string, unknown>)?.errors ?? [
+            { type: 'error', message: 'Sorry, an error has occurred :(' },
           ],
         };
       }
@@ -29,5 +33,10 @@ app
   .use(lineageController.allowedMethods())
   .use(onsiteController.routes())
   .use(onsiteController.allowedMethods());
+
+app.context.abort = function (status: number, errors: ErrorArray) {
+  this.status = status;
+  throw new ServerError(errors);
+};
 
 export default app;

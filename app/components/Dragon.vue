@@ -145,7 +145,7 @@ import DragonLabel from './DragonLabel.vue';
 import BreedSelector from './BreedSelector.vue';
 import DragonPortrait from './DragonPortrait.vue';
 import DragonButton from './DragonButton.vue';
-import { Lineage, LineageHandler } from '../shared/lineageHandler';
+import { Lineage } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder';
 import { validateCode, validateName } from '../shared/validation';
 import { placeholder } from '../shared/breeds';

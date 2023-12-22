@@ -11,18 +11,16 @@ const router = new Router({
   prefix: config.apiPath + '/lineage',
 });
 
-// Save a new lineage
 router.post('/', async (ctx: RequestContext) => {
-  if (!ctx.request.body.dragon) {
-    ctx.status = 404;
-    return;
+  if (!ctx.request.body.lineage) {
+    ctx.abort(404);
   }
 
-  const dragon = await dragonSchema
+  const lineage = await dragonSchema
     .required()
-    .validate(ctx.request.body.dragon);
+    .validate(ctx.request.body.lineage);
 
-  const jsonString = JSON.stringify(dragon);
+  const jsonString = JSON.stringify(lineage);
   const hashCode = crypto
     .createHash('sha1')
     .update(config.salt + jsonString)
@@ -34,12 +32,12 @@ router.post('/', async (ctx: RequestContext) => {
     [hashCode, jsonString],
   );
 
+  ctx.status = 201;
   ctx.body = {
     hash: hashCode,
   };
 });
 
-// return a lineage
 router.get('/:hash', async (ctx: RequestContext) => {
   const hashCode = await string()
     .required()
@@ -52,7 +50,7 @@ router.get('/:hash', async (ctx: RequestContext) => {
   );
 
   if (!row) {
-    ctx.throw(404);
+    ctx.abort(404);
   }
 
   // update access time to reset it

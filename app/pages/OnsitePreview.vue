@@ -41,14 +41,6 @@
             />
           </div>
           <div>
-            <input
-              id="doChecks"
-              v-model="doChecks"
-              type="checkbox"
-            />
-            <label for="doChecks">Check genders</label>
-          </div>
-          <div>
             <button type="submit">Preview</button>
           </div>
         </form>
@@ -85,6 +77,7 @@ import OnSitePreview from '../components/OnsitePreview.vue';
 import LineageGenerationCounter from '../components/LineageGenerationCounter.vue';
 import Feedback from '../components/Feedback.vue';
 import { validateCode } from '../shared/validation';
+import { AxiosError } from 'axios';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');
@@ -129,29 +122,31 @@ async function fetchLineage(e: Event) {
     status.value.warn(
       'Invalid code. Codes must be 4-5 characters in length and alphanumeric.',
     );
-    // error
     return;
   }
 
-  status.value.info({ message: 'Contacting server...', showDismiss: false });
-  const response = await getOnSitePreview(mCode, fCode, doChecks.value);
+  try {
+    status.value.info({ message: 'Contacting server...', showDismiss: false });
 
-  // Deal with problems
-  if (response.data.errors.length > 0) {
-    status.value.update(response.data.errors);
-    if (response.data.errors.some((e) => e.type === 'Error')) return;
-  } else status.value.close();
+    const response = await getOnSitePreview(mCode, fCode, doChecks.value);
 
-  const { male, female } = response.data.data.dragons;
+    // Deal with problems
+    if (response.data.errors) {
+      status.value.update(response.data.errors.join(' '));
+      if (response.data.errors.some((e) => e.type === 'error')) return;
+    } else status.value.close();
 
-  // build the lineage html
-  htmlPreview.value = male.html + female.html;
+    const { male, female } = response.data;
 
-  // Choose the highest gen from our pair and plus one (for the result)
-  generations.value = Math.max(male.gen, female.gen) + 1;
+    // build the lineage html
+    htmlPreview.value = male.html + female.html;
 
-  // Clean up lineage
-  nextTick(() => {
+    // Choose the highest gen from our pair and plus one (for the result)
+    generations.value = Math.max(male.gen, female.gen) + 1;
+
+    // Clean up lineage
+    await nextTick();
+
     // fix 5th column tile sizes, if we have to
     getTilesNDeep(5).forEach((el) => (el.style.width = '24px'));
 
@@ -163,7 +158,14 @@ async function fetchLineage(e: Event) {
         ul?.parentNode?.removeChild(ul);
       });
     }
-  });
+  } catch (ex) {
+    if (ex instanceof AxiosError && ex.response?.status === 404) {
+      status.value.error(ex.response.data.errors[0].message);
+      return;
+    }
+
+    status.value.error('Sorry, an error has occurred.');
+  }
 }
 </script>
 

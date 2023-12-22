@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import app from '../../app';
 import request from 'supertest';
-import { OnsiteError } from '../../onsite';
+import { OnsiteDragonNotFoundError } from '../../onsite';
 
 const rq = request(app.callback());
 
@@ -37,7 +37,7 @@ describe('onsiteController', async () => {
       ]);
 
       mocks.getDataForPair.mockImplementation(async () => {
-        throw new OnsiteError('Dragon not found.');
+        throw new OnsiteDragonNotFoundError('BbOOB');
       });
 
       await rq
@@ -45,12 +45,11 @@ describe('onsiteController', async () => {
         .send({
           male: '0COCk',
           female: 'BbOOB',
-          doChecks: true,
         })
         .expect(404);
     });
 
-    it("errors when doChecks enabled and one dragon can't be found", async () => {
+    it("errors when checkDragonsMatchGender dragon can't be found", async () => {
       mocks.checkDragonsMatchGender.mockReturnValue([
         { code: '0COCk', correct: null },
         { code: 'BbOOB', correct: null },
@@ -74,11 +73,9 @@ describe('onsiteController', async () => {
         .send({
           male: '0COCk',
           female: 'BbOOB',
-          doChecks: true,
         })
         .expect(404);
-      expect(res.body.errors[0].message).to.contain('may not exist');
-      expect(res.body.errors[1].message).to.contain('may not exist');
+      expect(res.body.errors[0].message).to.contain('could not be found.');
     });
 
     it('fails if invalid codes given', async () => {
@@ -94,7 +91,7 @@ describe('onsiteController', async () => {
       expect(res.body.errors[1]).to.contain('Codes must be');
     });
 
-    it('returns two good dragons after checks', async () => {
+    it('returns two good dragons', async () => {
       const data = {
         male: {
           code: '0COCk',
@@ -120,48 +117,14 @@ describe('onsiteController', async () => {
         .send({
           male: '0COCk',
           female: 'BbOOB',
-          doChecks: true,
         })
         .expect(200);
 
       expect(mocks.checkDragonsMatchGender).toHaveBeenCalledOnce();
-      expect(res.body).to.eql(data);
+      expect(res.body).to.eql({ errors: [], ...data });
     });
 
-    it('returns two good dragons without checks', async () => {
-      const data = {
-        male: {
-          code: '0COCk',
-          html: '<p></p>',
-          gen: 3,
-        },
-        female: {
-          code: 'BbOOB',
-          html: '<p></p>',
-          gen: 3,
-        },
-      };
-
-      mocks.checkDragonsMatchGender.mockReturnValue([
-        { code: '0COCk', correct: true },
-        { code: 'BbOOB', correct: true },
-      ]);
-
-      mocks.getDataForPair.mockReturnValue(data);
-
-      const res = await rq
-        .post('/dc/lineage-builder/api/onsite')
-        .send({
-          male: '0COCk',
-          female: 'BbOOB',
-        })
-        .expect(200);
-
-      expect(mocks.checkDragonsMatchGender).not.toHaveBeenCalled();
-      expect(res.body).to.eql(data);
-    });
-
-    it('warns when dragons ok but checks enabled and wrong gender', async () => {
+    it('warns when dragons ok but wrong gender', async () => {
       const data = {
         male: {
           code: '0COCk',
