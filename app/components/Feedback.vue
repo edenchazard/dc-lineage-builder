@@ -43,11 +43,11 @@ import { onBeforeUnmount, ref } from 'vue';
 import type { PropType } from 'vue';
 
 const Feedbacks = {
-  None: 'none',
-  Warning: 'exclamation-triangle',
-  Success: 'check',
-  Information: 'info-circle',
-  Error: 'times',
+  none: 'none',
+  warning: 'exclamation-triangle',
+  success: 'check',
+  information: 'info-circle',
+  error: 'times',
 };
 
 type FeedbackTypes = keyof typeof Feedbacks;
@@ -77,7 +77,7 @@ let onCloseHandler: () => void;
 
 const defaults: Readonly<Properties> = {
   message: '',
-  type: 'None',
+  type: 'none',
   autoClose: -1,
   showDismiss: true,
 };
@@ -159,10 +159,10 @@ const createShortcut = (forType: FeedbackTypes) => {
   };
 };
 
-const warn = createShortcut('Warning');
-const info = createShortcut('Information');
-const error = createShortcut('Error');
-const success = createShortcut('Success');
+const warn = createShortcut('warning');
+const info = createShortcut('information');
+const error = createShortcut('error');
+const success = createShortcut('success');
 
 defineExpose({
   update,
@@ -178,22 +178,22 @@ defineExpose({
   padding: 5px 20px;
   font-weight: bold;
 }
-.None {
+.none {
   display: none;
 }
-.Information {
+.information {
   background: #93c5fd;
   color: #000;
 }
-.Error {
+.error {
   background: #fca5a5;
   color: #000;
 }
-.Success {
+.success {
   background: #bef264;
   color: #000;
 }
-.Warning {
+.warning {
   background: #fde047;
   color: #000;
 }

@@ -20,6 +20,13 @@ export class OnsiteError extends Error {
   }
 }
 
+export class OnsiteDragonNotFoundError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'OnsiteDragonNotFoundError';
+  }
+}
+
 /**
  * Check a pair of dragons are male and female
  * @param codes Format: [male, female]
@@ -31,7 +38,7 @@ export async function checkDragonsMatchGender(
   const [male, female] = codes;
 
   const checkGender = (code: string, shouldBe: 'Male' | 'Female') => {
-    if (!(code in apiDragons)) return null;
+    if (!(code in apiDragons)) throw new OnsiteDragonNotFoundError(code);
 
     if ([shouldBe, ''].includes(apiDragons[code].gender)) return true;
 
@@ -60,9 +67,7 @@ export async function grabHTML(
     } catch (err: unknown) {
       if (err instanceof AxiosError && err.response) {
         if (err.response.status === 404)
-          throw new OnsiteError(
-            `Dragon not found. Possibly fogged or doesn't exist. Dragon: ${code}`,
-          );
+          throw new OnsiteDragonNotFoundError(code);
         else
           throw new OnsiteError(
             `Non-200 OK response when grabbing from DC. Dragon: ${code}`,

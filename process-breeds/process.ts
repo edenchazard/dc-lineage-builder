@@ -24,7 +24,7 @@ import {
   checkCache,
 } from './local-handling.js';
 
-import localJSON from './local-breeds.json' assert { type: 'json' };
+import localJSON from './local-breeds.json';
 
 import {
   makeCSSStyleSheet,

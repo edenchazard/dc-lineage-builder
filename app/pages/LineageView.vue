@@ -50,6 +50,7 @@ import { createLineageLink } from '../app/utils';
 import Lineage from '../components/Lineage.vue';
 import Textbox from '../components/Textbox.vue';
 import Feedback from '../components/Feedback.vue';
+import { AxiosError } from 'axios';
 
 const route = useRoute();
 const tree = ref<null | PartialLineage>(null);
@@ -72,21 +73,16 @@ onMounted(async () => {
       `Loading lineage... For big lineages, this can sometimes take a moment to load.`,
     );
 
-    // fetch from server
     const response = await getLineage(hash);
 
-    // errors
-    if (response.errors.length > 0) {
-      status.value.update(response.errors);
+    status.value.close(() => (tree.value = response.data.lineage));
+  } catch (ex) {
+    if (ex instanceof AxiosError && ex.response?.status === 404) {
+      status.value.error("The lineage couldn't be found.");
       return;
     }
 
-    // ok
-    status.value.close(() => {
-      tree.value = response.data.lineage;
-    });
-  } catch (ex) {
-    if (ex instanceof Error) status.value.error({ message: ex.message });
+    status.value.error('Sorry, an error has occurred.');
   }
 });
 </script>

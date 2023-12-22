@@ -100,6 +100,7 @@ function reset() {
 
 onUpdated(async () => {
   if (!status.value) return;
+
   reset();
 
   const incomingTree = Lineage(props.tree);
@@ -113,27 +114,25 @@ onUpdated(async () => {
       isLoadedAndOk.value = true;
       viewLink.value = link;
     });
-  } catch (e) {
+  } catch (ex) {
     let message = '';
 
-    if (e instanceof ValidationError) {
-      field.value = e.type;
-      error.value = e.message;
+    if (ex instanceof ValidationError) {
+      field.value = ex.type;
+      error.value = ex.message;
 
-      if (e.type !== 'generation-count') {
+      if (ex.type !== 'generation-count') {
         problemDragon.value = incomingTree
-          .getAtPath((e.path as string).substring(0, e.path?.lastIndexOf('.')))
+          .getAtPath(
+            (ex.path as string).substring(0, ex.path?.lastIndexOf('.')),
+          )
           ?.raw();
         message = 'The problem dragon is displayed below.';
       } else {
-        message = e.message;
+        message = ex.message;
       }
-    } else if (e instanceof AxiosError) {
-      const { response } = e;
-
-      message = `You may want to try again
-            or export it instead.
-            The error is: ${response?.status} ${response?.data}`;
+    } else if (ex instanceof AxiosError) {
+      message = `You may want to try again or export it instead.`;
     }
 
     status.value.error(
@@ -143,4 +142,3 @@ onUpdated(async () => {
   }
 });
 </script>
-../../../../shared/types ../shared/lineageHandler
