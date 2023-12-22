@@ -3,7 +3,7 @@ import {
   listOfBreeds,
   malePortraits,
   syncPortraits,
-} from '../shared/breeds';
+} from '../shared/breeds.js';
 import type {
   BreedEntry,
   FilterTag,
@@ -13,7 +13,7 @@ import type {
   MaybePartialLineageWithMetadata,
   PartialLineageWithMetadata,
 } from '../shared/types';
-import { BREEDNAMEREGEXP } from '../shared/validation';
+import { BREEDNAMEREGEXP } from '../shared/validation.js';
 
 export function validGenderForBreed(
   gender: DragonGender,

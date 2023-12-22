@@ -72,7 +72,7 @@ import { ref, computed } from 'vue';
 import type { PropType } from 'vue';
 import { useShare } from '@vueuse/core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { debounce } from '../app/utils';
+import { debounce } from '../app/utils.js';
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void;

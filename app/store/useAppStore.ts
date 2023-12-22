@@ -2,7 +2,7 @@ import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 import type { PartialLineageWithMetadata } from '../shared/types';
 import { useTreeAnalyser } from './useTreeAnalyser';
-import { DragonBuilder } from '../shared/dragonBuilder';
+import { DragonBuilder } from '../shared/dragonBuilder.js';
 import { LineageHandler } from '../shared/lineageHandler';
 import { version } from '../../package.json';
 

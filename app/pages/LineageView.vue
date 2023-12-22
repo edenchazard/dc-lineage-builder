@@ -44,8 +44,8 @@ import { reactive, ref, onBeforeUnmount, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
 import type { LineageConfig, PartialLineage } from '../shared/types';
-import { getLineage } from '../app/api';
-import { createLineageLink } from '../app/utils';
+import { getLineage } from '../app/api.js';
+import { createLineageLink } from '../app/utils.js';
 
 import Lineage from '../components/Lineage.vue';
 import Textbox from '../components/Textbox.vue';

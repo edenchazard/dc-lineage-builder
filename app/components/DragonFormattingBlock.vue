@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
 import type { MaybePartialLineageWithMetadata } from '../shared/types';
-import { hasParents } from '../app/utils';
+import { hasParents } from '../app/utils.js';
 import { Lineage } from '../shared/lineageHandler';
 
 defineProps({

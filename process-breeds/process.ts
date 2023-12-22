@@ -15,7 +15,7 @@
 */
 import { promises as fs } from 'fs';
 
-import { getFileAndDirName, prettyPrintJSONFile } from './utils';
+import { getFileAndDirName, prettyPrintJSONFile } from './utils.js';
 import { caches, ignoreFile } from './files';
 
 import {

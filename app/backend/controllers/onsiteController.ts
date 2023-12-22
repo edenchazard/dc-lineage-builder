@@ -1,13 +1,13 @@
 import { object } from 'yup';
-import { codeValidator } from '../../shared/validation';
+import { codeValidator } from '../../shared/validation.js';
 import {
   getDataForPair,
   checkDragonsMatchGender,
   OnsiteDragonNotFoundError,
-} from '../onsite';
+} from '../onsite.js';
 import Router from '@koa/router';
 import type { RequestContext } from '../types';
-import config from '../config';
+import config from '../config.js';
 
 const router = new Router({
   prefix: config.apiPath + '/onsite',

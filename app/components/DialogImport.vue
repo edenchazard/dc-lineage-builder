@@ -37,7 +37,7 @@ import type { PartialLineage } from '../shared/types';
 import Dialog from './DialogBase.vue';
 import Textbox from './Textbox.vue';
 import Feedback from './Feedback.vue';
-import { dragonSchema } from '../shared/validation';
+import { dragonSchema } from '../shared/validation.js';
 import { Lineage } from '../shared/lineageHandler';
 
 const emit = defineEmits<{

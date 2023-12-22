@@ -51,7 +51,7 @@ import { ref } from 'vue';
 import type { PropType } from 'vue';
 import { onStartTyping } from '@vueuse/core';
 import type { DragonGender, PortraitData } from '../shared/types';
-import { useTagStore } from '../store/useTagStore';
+import { useTagStore } from '../store/useTagStore.js';
 import FilteredBreedList from './FilteredBreedList.vue';
 import BreedSelectorReuse from './BreedSelectorReuse.vue';
 import BreedSelectorWrapper from './BreedSelectorWrapper.vue';

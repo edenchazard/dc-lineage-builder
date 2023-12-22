@@ -179,7 +179,7 @@
 
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import settings from '../shared/settings';
+import settings from '../shared/settings.js';
 </script>
 
 <style scoped>

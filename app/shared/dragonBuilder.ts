@@ -4,7 +4,7 @@ import {
   colors,
   animals,
 } from 'unique-names-generator';
-import { placeholder } from './breeds';
+import { placeholder } from './breeds.js';
 import type { PartialLineageWithMetadata, PartialLineage } from './types';
 
 export class DragonBuilder {

@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import type { PartialLineage } from '../types';
-import { dragonSchema, validateGenerationCount } from '../validation';
+import { dragonSchema, validateGenerationCount } from '../validation.js';
 import { Lineage } from '../lineageHandler';
-import { DragonBuilder } from '../dragonBuilder';
+import { DragonBuilder } from '../dragonBuilder.js';
 import { dragonGen13, dragonGen2 } from '../../__tests__/testData';
 
 describe('lineage validations', () => {

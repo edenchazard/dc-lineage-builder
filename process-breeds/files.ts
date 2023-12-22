@@ -1,6 +1,6 @@
 import type { PuppeteerLaunchOptions } from 'puppeteer';
 import { KnownDevices } from 'puppeteer';
-import { getFileAndDirName } from './utils';
+import { getFileAndDirName } from './utils.js';
 import { PortraitCache } from './portraitCache';
 
 const { __dirname } = getFileAndDirName();

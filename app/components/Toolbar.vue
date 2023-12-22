@@ -200,9 +200,9 @@ import type {
   PartialLineageWithMetadata,
   PortraitData,
 } from '../shared/types';
-import { filterEggGroups, filterTags } from '../app/utils';
+import { filterEggGroups, filterTags } from '../app/utils.js';
 import { LineageHandler } from '../shared/lineageHandler';
-import { useAppStore } from '../store/useAppStore';
+import { useAppStore } from '../store/useAppStore.js';
 import DialogExport from './DialogExport.vue';
 import DialogImport from './DialogImport.vue';
 import DialogGenerate from './DialogGenerate.vue';
@@ -210,13 +210,13 @@ import ToolbarButton from './ToolbarButton.vue';
 import ToolbarDropDownMenu from './ToolbarDropDownMenu.vue';
 import ToolbarDropDownMenuItem from './ToolbarDropDownMenuItem.vue';
 import ToolbarGroup from './ToolbarGroup.vue';
-import { useTagStore } from '../store/useTagStore';
+import { useTagStore } from '../store/useTagStore.js';
 import {
   femalePortraits,
   listOfBreeds,
   malePortraits,
   placeholder,
-} from '../shared/breeds';
+} from '../shared/breeds.js';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {

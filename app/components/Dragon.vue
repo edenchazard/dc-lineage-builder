@@ -139,16 +139,16 @@ import {
   breedEntryToPortrait,
   expandGender,
   hasParents,
-} from '../app/utils';
-import { useAppStore } from '../store/useAppStore';
+} from '../app/utils.js';
+import { useAppStore } from '../store/useAppStore.js';
 import DragonLabel from './DragonLabel.vue';
 import BreedSelector from './BreedSelector.vue';
 import DragonPortrait from './DragonPortrait.vue';
 import DragonButton from './DragonButton.vue';
 import { Lineage } from '../shared/lineageHandler';
-import { DragonBuilder } from '../shared/dragonBuilder';
-import { validateCode, validateName } from '../shared/validation';
-import { placeholder } from '../shared/breeds';
+import { DragonBuilder } from '../shared/dragonBuilder.js';
+import { validateCode, validateName } from '../shared/validation.js';
+import { placeholder } from '../shared/breeds.js';
 import vOnLongPress from '../directives/long-press/vue-3-long-press';
 
 const props = defineProps({

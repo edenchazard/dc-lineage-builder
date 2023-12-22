@@ -5,7 +5,7 @@
   />
 </template>
 <script setup lang="ts">
-import { useTagStore } from '../store/useTagStore';
+import { useTagStore } from '../store/useTagStore.js';
 import TagList from './TagList.vue';
 
 const tagStore = useTagStore();
