@@ -139,7 +139,7 @@ import {
   breedEntryToPortrait,
   expandGender,
   hasParents,
-} from '../app/utils.js';
+} from '../shared/utils.js';
 import { useAppStore } from '../store/useAppStore.js';
 import DragonLabel from './DragonLabel.vue';
 import BreedSelector from './BreedSelector.vue';

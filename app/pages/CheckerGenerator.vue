@@ -135,7 +135,7 @@ import {
   breedEntryToPortrait,
   expandGender,
   getBreedData,
-} from '../app/utils.js';
+} from '../shared/utils.js';
 import { useTagStore } from '../store/useTagStore.js';
 
 import Lineage from '../components/Lineage.vue';

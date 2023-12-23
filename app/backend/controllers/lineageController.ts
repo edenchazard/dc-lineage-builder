@@ -1,14 +1,15 @@
+import path from 'path';
+import Router from '@koa/router';
 import { string } from 'yup';
 import type { RowDataPacket } from 'mysql2';
+import crypto from 'crypto';
 import { dragonSchema, validateLineageHash } from '../../shared/validation.js';
 import config from '../config.js';
-import Router from '@koa/router';
-import crypto from 'crypto';
 import pool from '../pool.js';
 import type { RequestContext } from '../types';
 
 const router = new Router({
-  prefix: config.apiPath + '/lineage',
+  prefix: path.join(config.appUrl, '/api/lineage'),
 });
 
 router.post('/', async (ctx: RequestContext) => {

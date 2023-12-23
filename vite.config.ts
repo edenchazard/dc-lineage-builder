@@ -14,7 +14,7 @@ export default ({ mode }: { mode: string }) => {
     base: env.VITE_APP_URL,
     server: {
       proxy: {
-        [env.VITE_APP_URL + 'api']: {
+        [env.BASE_URL + '/api']: {
           target: 'http://app:3000',
           changeOrigin: true,
         },

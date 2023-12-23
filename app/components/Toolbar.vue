@@ -200,7 +200,7 @@ import type {
   PartialLineageWithMetadata,
   PortraitData,
 } from '../shared/types';
-import { filterEggGroups, filterTags } from '../app/utils.js';
+import { filterEggGroups, filterTags } from '../shared/utils.js';
 import { LineageHandler } from '../shared/lineageHandler';
 import { useAppStore } from '../store/useAppStore.js';
 import DialogExport from './DialogExport.vue';

@@ -1,6 +1,7 @@
 export default {
   APIKey: process.env.APIKey,
   port: 3000,
+  appUrl: process.env.VITE_APP_URL ?? '',
   db: {
     port: 3306,
     host: process.env.MYSQL_HOST,
@@ -9,5 +10,4 @@ export default {
     password: process.env.MYSQL_PASSWORD,
   },
   salt: 'salt',
-  apiPath: `${process.env.VITE_APP_URL}api`,
 };

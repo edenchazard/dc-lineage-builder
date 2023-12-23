@@ -1,5 +1,5 @@
 import type { BreedEntry, PortraitData } from './types';
-import { getDCTime, filterBreedTableByGender } from '../app/utils.js';
+import { getDCTime, filterBreedTableByGender } from './utils.js';
 
 const placeholder: BreedEntry = {
   name: 'Placeholder',
@@ -19,7 +19,8 @@ const listOfBreeds: BreedEntry[] = [placeholder];
 
 async function injectBreedList() {
   listOfBreeds.push(
-    ...((await import('./breed-definitions.json')).default as BreedEntry[]),
+    ...((await import('./breed-definitions.json', { with: { type: 'json' } }))
+      .default as BreedEntry[]),
   );
 
   syncPortraits();

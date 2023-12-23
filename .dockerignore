@@ -3,15 +3,15 @@
 **/node_modules
 **/.vscode
 **/__tests__
+/coverage
 
 **/.gitignore
 **/docker-compose*.yml
-**/Dockerfile*
+**/Dockerfile
 **/npm-debug.log
-**/.prettierrc
-**/.prettierignore
-**/.eslintignore
-**/.eslintrc.cjs
+**/.prettier*
+**/.eslint*
 /README.md
 /TODO.md
 /CHANGELOG.md
+/.editorconfig

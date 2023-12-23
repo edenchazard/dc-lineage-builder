@@ -15,7 +15,7 @@
 import { ref } from 'vue';
 import type { PropType } from 'vue';
 import type { TagListOption } from '../shared/types';
-import { deepClone } from '../app/utils.js';
+import { deepClone } from '../shared/utils.js';
 const props = defineProps({
   // Accepts a mixed array of { name, active }
   // or simple strings. If a string is provided,

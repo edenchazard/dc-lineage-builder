@@ -18,7 +18,7 @@
 import { computed } from 'vue';
 import type { PropType } from 'vue';
 import type { BreedEntry, DragonGender, PortraitData } from '../shared/types';
-import { getBreedData, filterBreedTableByGender } from '../app/utils.js';
+import { getBreedData, filterBreedTableByGender } from '../shared/utils.js';
 import { useAppStore } from '../store/useAppStore.js';
 import BreedGrid from './BreedGrid.vue';
 
