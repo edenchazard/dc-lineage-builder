@@ -13,10 +13,10 @@ WORKDIR /app/app/
 RUN npm run vue:build
 
 FROM node:${NODE_VERSION} AS production
-WORKDIR /aaaaAAAAAAAAAA
+WORKDIR /app
 ENV NODE_ENV=production
 COPY package*.json ./
 RUN npm i
 COPY --from=build /prod/backend ./backend
 COPY --from=build /prod/shared ./shared
-COPY --from=build /app/dist ./
+COPY --from=build /app/dist ./backend/static

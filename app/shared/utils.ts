@@ -3,7 +3,7 @@ import {
   listOfBreeds,
   malePortraits,
   syncPortraits,
-} from '../shared/breeds.js';
+} from './breeds.js';
 import type {
   BreedEntry,
   FilterTag,
@@ -12,8 +12,8 @@ import type {
   PortraitData,
   MaybePartialLineageWithMetadata,
   PartialLineageWithMetadata,
-} from '../shared/types';
-import { BREEDNAMEREGEXP } from '../shared/validation.js';
+} from './types.js';
+import { BREEDNAMEREGEXP } from './validation.js';
 
 export function validGenderForBreed(
   gender: DragonGender,
@@ -175,6 +175,6 @@ export function debounce(
 
 export function createLineageLink(hash: string) {
   const origin = window.location.origin;
-  const mountPath = import.meta.env.VITE_APP_URL;
+  const mountPath = import.meta.env.BASE_URL;
   return `${origin}${mountPath}view/${hash}`;
 }

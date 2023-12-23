@@ -9,7 +9,7 @@ import {
   deepClone,
   getBreedData,
   hasParents,
-} from '../app/utils.js';
+} from './utils.js';
 import { DragonBuilder } from './dragonBuilder.js';
 import { dragonSchema, validateGenerationCount } from './validation.js';
 import settings from './settings.js';

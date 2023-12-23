@@ -1,3 +1,5 @@
+import path from 'path';
+import Router from '@koa/router';
 import { object } from 'yup';
 import { codeValidator } from '../../shared/validation.js';
 import {
@@ -5,12 +7,11 @@ import {
   checkDragonsMatchGender,
   OnsiteDragonNotFoundError,
 } from '../onsite.js';
-import Router from '@koa/router';
 import type { RequestContext } from '../types';
 import config from '../config.js';
 
 const router = new Router({
-  prefix: config.apiPath + '/onsite',
+  prefix: path.join(config.appUrl, '/api/lineage'),
 });
 
 router.post('/', async (ctx: RequestContext) => {

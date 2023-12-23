@@ -6,6 +6,5 @@
     "types": ["vite/client"]
   },
   "include": ["**/*.vue", "**/*.ts"],
-  "files": ["vue-shim.d.ts"],
-  "exclude": ["backend/**"]
+  "exclude": ["./backend"]
 }

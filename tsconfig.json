@@ -14,10 +14,7 @@
     "noImplicitThis": true,
     "strict": true,
     "outDir": "/prod",
-    "verbatimModuleSyntax": true,
-    "paths": {
-      "@shared/*": ["./shared/*"]
-    }
+    "verbatimModuleSyntax": true
   },
-  "exclude": ["node_modules/**", "coverage/**", "process-breeds/**"]
+  "exclude": ["node_modules/**", "coverage/**"]
 }

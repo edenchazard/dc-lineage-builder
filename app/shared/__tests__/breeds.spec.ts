@@ -6,13 +6,11 @@ import {
   placeholder,
   injectBreedList,
 } from '../breeds.js';
-import { getDCTime } from '../../app/utils.js';
+import { getDCTime } from '../utils.js';
 
 vi.mock('../../app/utils', async () => {
   return {
-    ...(await vi.importActual<typeof import('../../app/utils')>(
-      '../../app/utils',
-    )),
+    ...(await vi.importActual<typeof import('../utils.js')>('../../app/utils')),
     getDCTime: vi.fn(() => [{ type: 'hour', value: '8' }]),
   };
 });

@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue';
 import type { ComputedRef, WritableComputedRef } from 'vue';
 import { defineStore } from 'pinia';
-import { deepClone } from '../app/utils.js';
+import { deepClone } from '../shared/utils.js';
 import type { TagListOption, FilterTag, EggGroupTag } from '../shared/types';
 import { filterTags, eggGroups } from '../shared/types';
 

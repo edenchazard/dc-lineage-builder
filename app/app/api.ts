@@ -8,7 +8,7 @@ interface APIResponse {
 
 const http = axios.create({
   method: 'get',
-  baseURL: import.meta.env.VITE_APP_URL + 'api',
+  baseURL: import.meta.env.BASE_URL + 'api',
 });
 
 function callAPI<T>(url: string, options: AxiosRequestConfig = {}) {

@@ -29,4 +29,4 @@ yarn-debug.log*
 yarn-error.log*
 /app/coverage
 
-**/dist
+app/backend/static

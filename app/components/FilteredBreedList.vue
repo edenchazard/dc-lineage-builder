@@ -20,7 +20,7 @@
 import { nextTick, watch, computed, ref } from 'vue';
 import type { PropType } from 'vue';
 import type { FilterTag, EggGroupTag, PortraitData } from '../shared/types';
-import { filterEggGroups, filterTags } from '../app/utils.js';
+import { filterEggGroups, filterTags } from '../shared/utils.js';
 import BreedGrid from './BreedGrid.vue';
 
 const props = defineProps({

@@ -52,7 +52,7 @@ import type {
   LineageConfig,
 } from '../shared/types';
 
-import { hasParents } from '../app/utils.js';
+import { hasParents } from '../shared/utils.js';
 import { getLineage } from '../app/api.js';
 import { useAppStore } from '../store/useAppStore.js';
 import Toolbar from './Toolbar.vue';

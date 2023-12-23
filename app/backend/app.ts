@@ -1,13 +1,21 @@
+import { fileURLToPath } from 'url';
+import path from 'path';
+import { readFile } from 'fs/promises';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
+import mount from 'koa-mount';
 import { ValidationError } from 'yup';
 import lineageController from './controllers/lineageController.js';
 import onsiteController from './controllers/onsiteController.js';
 import { ServerError, type ErrorArray } from './serverError.js';
 import { injectBreedList } from '../shared/breeds.js';
+import config from './config.js';
 
 injectBreedList();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = new Koa();
 
@@ -17,6 +25,7 @@ app.context.abort = function (status: number, errors: ErrorArray) {
 };
 
 app
+  .use(mount(config.appUrl, serve(path.join(__dirname, '/static'))))
   .use(async (ctx, next) => {
     try {
       await next();
@@ -38,12 +47,15 @@ app
       }
     }
   })
-  .use(serve('./index.html'))
-  .use(serve('./assets'))
   .use(bodyParser())
   .use(lineageController.routes())
   .use(lineageController.allowedMethods())
   .use(onsiteController.routes())
-  .use(onsiteController.allowedMethods());
+  .use(onsiteController.allowedMethods())
+  .use(async (ctx) => {
+    ctx.body = await readFile(path.join(__dirname, '/static/index.html'), {
+      encoding: 'utf8',
+    });
+  });
 
 export default app;
