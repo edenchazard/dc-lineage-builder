@@ -1,4 +1,3 @@
-name: dc-lb_dev
 services:
   app:
     build:
@@ -53,6 +52,7 @@ services:
     command: sleep infinity
     volumes:
       - .:/app
+      - /app/node_modules
     depends_on:
       - testdb
     networks:
