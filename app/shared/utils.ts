@@ -176,5 +176,5 @@ export function debounce(
 export function createLineageLink(hash: string) {
   const origin = window.location.origin;
   const mountPath = import.meta.env.BASE_URL;
-  return `${origin}${mountPath}view/${hash}`;
+  return `${origin}${mountPath}/view/${hash}`;
 }

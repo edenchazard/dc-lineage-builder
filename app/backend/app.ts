@@ -53,6 +53,8 @@ app
   .use(onsiteController.routes())
   .use(onsiteController.allowedMethods())
   .use(async (ctx) => {
+    if (ctx.body) return;
+
     ctx.body = await readFile(path.join(__dirname, '/static/index.html'), {
       encoding: 'utf8',
     });

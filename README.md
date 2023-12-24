@@ -24,7 +24,7 @@ Written in TypeScript with a Vue.js ~~2~~ 3 frontend and a Node.js backend.
 
 ## Running the project
 
-The project is dockerized, so all you need is docker, docker-compose and a clone of the repository. You can then choose to run the development or production compose files.
+The project is dockerized, so all you need is docker, docker-compose and a clone of the repository.
 
 ```sh
 # clone repo
@@ -33,19 +33,12 @@ git clone https://github.com/edenchazard/dc-lineage-builder.git
 cd dc-lineage-builder
 
 # set up development settings
-cp .env.example .env.development
+cp .env.example .env
 
 # edit with your favourite text editor
 # and change the settings. you will need to
 # insert your DragCave API key.
-nano .env.development
-
-# set up production settings
-cp .env.example .env.production
-
-# for production you are recommended to use different
-# credentials for the database!
-nano .env.production
+nano .env
 ```
 
 ### Development

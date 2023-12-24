@@ -9,6 +9,8 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+    env_file:
+      - .env
     ports:
       - '5173:5173'
       - '3000:3000'
@@ -16,14 +18,6 @@ services:
       - db
     networks:
       - internal
-    environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_HOST=${MYSQL_HOST}
-      - APIKey=${APIKey}
-      - VITE_APP_URL=${VITE_APP_URL}
 
   db:
     image: mariadb:10
@@ -58,19 +52,18 @@ services:
     command: sleep infinity
     volumes:
       - .:/app
-      - /app/node_modules
     depends_on:
       - testdb
     networks:
       - testing
+    env_file:
+      - .env
     environment:
       - MYSQL_DATABASE=testdb
       - MYSQL_USER=linbuilder
       - MYSQL_PASSWORD=linbuilder
       - MYSQL_ROOT_PASSWORD=linbuilder
       - MYSQL_HOST=testdb
-      - APIKey=${APIKey}
-      - VITE_APP_URL=${VITE_APP_URL}
 
   testdb:
     image: mariadb:10

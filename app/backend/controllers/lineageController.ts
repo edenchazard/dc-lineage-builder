@@ -9,7 +9,7 @@ import pool from '../pool.js';
 import type { RequestContext } from '../types';
 
 const router = new Router({
-  prefix: path.join(config.appUrl, '/api/lineage'),
+  prefix: path.join(config.apiUrl, '/lineage'),
 });
 
 router.post('/', async (ctx: RequestContext) => {

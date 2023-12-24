@@ -1,10 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# configs
-#src/backend/src/config.js
-.env.production
-.env.development
-
 # dependencies
 **/node_modules
 /.pnp
@@ -19,9 +14,11 @@ src/frontend/dist
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
+.env.production
 .env.production.local
 
 npm-debug.log*
