@@ -11,6 +11,7 @@ WORKDIR /app/app/backend
 RUN npx tsc
 WORKDIR /app/app/
 RUN npm run vue:build
+WORKDIR /app
 
 FROM node:${NODE_VERSION} AS production
 WORKDIR /app

@@ -49,6 +49,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+      target: build
     command: sleep infinity
     volumes:
       - .:/app
