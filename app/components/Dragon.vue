@@ -29,7 +29,7 @@
           onLongPress: handleLongPress,
         }"
         class="dragon-breed-picker-button pointer"
-        :disabled="disabled"
+        disabled
         type="button"
       >
         <DragonPortrait
@@ -297,6 +297,8 @@ function switchLabel() {
 }
 
 function handleLongPress() {
+  if (props.disabled) return;
+
   if (appStore.selectionCount === 0) {
     if (!props.data.selected) {
       props.data.selected = true;
@@ -307,6 +309,8 @@ function handleLongPress() {
 }
 
 function handleClick() {
+  if (props.disabled) return;
+
   // if selection mode is active, we should add to the selection
   if (appStore.selectionCount > 0) {
     props.data.selected = !props.data.selected;

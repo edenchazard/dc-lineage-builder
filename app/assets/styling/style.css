@@ -113,6 +113,13 @@ accessibility
   border-radius: 0.25em;
 }
 
+button.pointer {
+  &[disabled],
+  &[aria-disabled] {
+    cursor: unset;
+  }
+}
+
 /**
 overwrites
 **/
