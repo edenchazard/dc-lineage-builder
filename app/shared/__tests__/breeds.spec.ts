@@ -8,9 +8,9 @@ import {
 } from '../breeds.js';
 import { getDCTime } from '../utils.js';
 
-vi.mock('../../app/utils', async () => {
+vi.mock('../utils.js', async () => {
   return {
-    ...(await vi.importActual('../../app/utils')),
+    ...(await vi.importActual('../utils.js')),
     getDCTime: vi.fn(() => [{ type: 'hour', value: '8' }]),
   };
 });
