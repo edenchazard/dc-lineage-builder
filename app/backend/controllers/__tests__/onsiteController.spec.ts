@@ -14,7 +14,7 @@ const mocks = vi.hoisted(() => {
 
 vi.mock('../../onsite', async () => {
   return {
-    ...(await vi.importActual<typeof import('../../onsite')>('../../onsite')),
+    ...(await vi.importActual('../../onsite')),
     checkDragonsMatchGender: mocks.checkDragonsMatchGender,
     getDataForPair: mocks.getDataForPair,
   };

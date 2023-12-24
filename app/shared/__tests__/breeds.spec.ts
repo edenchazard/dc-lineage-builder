@@ -10,7 +10,7 @@ import { getDCTime } from '../utils.js';
 
 vi.mock('../../app/utils', async () => {
   return {
-    ...(await vi.importActual<typeof import('../utils.js')>('../../app/utils')),
+    ...(await vi.importActual('../../app/utils')),
     getDCTime: vi.fn(() => [{ type: 'hour', value: '8' }]),
   };
 });

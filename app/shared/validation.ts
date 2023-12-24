@@ -1,5 +1,5 @@
 import { object, string, number, lazy } from 'yup';
-import { ObjectSchema } from 'yup';
+import type { ObjectSchema } from 'yup';
 import type {
   BreedEntry,
   DragonDisplay,
