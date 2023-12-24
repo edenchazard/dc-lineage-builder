@@ -1,42 +1,38 @@
 <template>
-  <div>
-    <div class="central-block">
-      <div>
-        <Feedback
-          ref="status"
-          :global-settings="{ showDismiss: false }"
-        />
-      </div>
-      <div
-        v-if="tree != null"
-        id="options"
-      >
-        <span class="option">
-          <router-link
-            :to="{
-              path: '/',
-              query: { template: hash },
-            }"
-            >Import into editor</router-link
-          >
-        </span>
-        <span class="option">
-          Share link:
-          <Textbox
-            v-model="shareLink"
-            type="input"
-            :show-copy-button="true"
-          />
-        </span>
-      </div>
-    </div>
-    <div v-if="tree != null">
-      <Lineage
-        :root="tree"
-        :config="config"
+  <div
+    id="text"
+    class="content-limit constrain-width"
+  >
+    <Feedback
+      ref="status"
+      :global-settings="{ showDismiss: false }"
+    />
+    <div
+      v-if="tree != null"
+      id="options"
+    >
+      <Textbox
+        id="share-link"
+        v-model="shareLink"
+        type="input"
+        show-copy-button
+        show-share-button
       />
+      <router-link
+        :to="{
+          path: '/',
+          query: { template: hash },
+        }"
+        >Import into editor</router-link
+      >
     </div>
   </div>
+
+  <Lineage
+    v-if="tree != null"
+    :root="tree"
+    :config="config"
+  />
 </template>
 
 <script setup lang="ts">
@@ -87,14 +83,16 @@ onMounted(async () => {
 });
 </script>
 <style scoped>
+#text {
+  margin-bottom: 0.5rem;
+}
+
 #options {
-  margin: 15px 0px;
+  display: flex;
+  gap: 1rem;
 }
-.option {
-  margin: 5px 10px;
-}
-.share-link {
-  width: 100%;
-  max-width: 480px;
+
+#share-link {
+  flex: 1;
 }
 </style>

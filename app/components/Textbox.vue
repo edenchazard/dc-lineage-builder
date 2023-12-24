@@ -178,17 +178,17 @@ function select() {
 .text {
   box-sizing: border-box;
   width: 100%;
-  padding-right: 2.2rem;
+  padding-right: 2.4rem;
   font-family: monospace;
 
   &.two-button {
-    padding-right: 4rem;
+    padding-right: 4.8rem;
   }
 }
 
 .buttons {
   position: absolute;
-  right: 0.2rem;
+  right: 1rem;
   top: 0.2rem;
   display: flex;
   gap: 0.5rem;
@@ -218,10 +218,10 @@ function select() {
     content: '';
     position: absolute;
     transform: scale(0);
-    width: 100%;
-    height: 100%;
-    left: 0;
+    height: 1.5rem;
+    width: 1.5rem;
     top: 0;
+    right: 0;
     border-radius: inherit;
     display: flex;
     align-items: center;
@@ -254,7 +254,7 @@ function select() {
   align-items: center;
   position: absolute;
   right: 0;
-  top: -1em;
+  top: -1.5em;
   background: var(--bg);
   color: var(--fg);
   padding: 0.5rem;

@@ -2,39 +2,31 @@
 <template>
   <TransitionGroup
     tag="ul"
+    class="list"
     @after-leave="closed"
   >
     <li
       v-for="(feedback, index) in stack"
       :key="index"
-      class="container"
+      class="item"
       :class="getFeedbackClass(feedback.type)"
     >
-      <div class="split">
-        <div class="icon-portion">
-          <font-awesome-icon
-            class="icon"
-            :icon="Feedbacks[feedback.type]"
-          />
-        </div>
-        <div
-          class="message-portion"
-          v-html="feedback.message"
+      <span class="symbol">
+        <font-awesome-icon
+          class="icon"
+          :icon="Feedbacks[feedback.type]"
         />
-        <div
-          v-if="feedback.showDismiss"
-          class="close-portion"
-        >
-          <button
-            type="button"
-            class="close-button"
-            title="Dismiss"
-            @click="dismiss(index)"
-          >
-            <font-awesome-icon icon="times" />
-          </button>
-        </div>
-      </div>
+      </span>
+      <p v-html="feedback.message"></p>
+      <button
+        v-if="feedback.showDismiss"
+        type="button"
+        class="dismiss pointer"
+        title="Dismiss"
+        @click="dismiss(index)"
+      >
+        <font-awesome-icon icon="times" />
+      </button>
     </li>
   </TransitionGroup>
 </template>
@@ -174,9 +166,19 @@ defineExpose({
 });
 </script>
 <style scoped>
-.container {
-  padding: 5px 20px;
+.list {
+  padding: 0;
+}
+.item {
+  display: grid;
+  grid-template-columns: auto auto 2rem;
+  align-items: center;
+  gap: 1rem;
   font-weight: bold;
+  padding: 0.5rem 1rem;
+}
+.right {
+  display: flex;
 }
 .none {
   display: none;
@@ -197,27 +199,27 @@ defineExpose({
   background: #fde047;
   color: #000;
 }
-.split {
+.symbol {
   display: flex;
+  justify-content: center;
+  border-radius: 100%;
+  height: 2rem;
+  aspect-ratio: 1/1;
   align-items: center;
+  border: 1px solid;
+  padding: 0.5rem;
 }
-.icon-portion {
-  margin: 0px 10px;
-  text-align: center;
+.icon {
+  width: 100%;
+  height: 100%;
 }
-.icon-portion .icon {
-  width: 40px;
-  height: 40px;
-}
-.message-portion {
-  flex: 1;
-}
-.close-portion .close-button {
-  background-color: inherit;
-  border: 0px none;
-}
-.close-portion .close-button:hover {
-  cursor: pointer;
+.dismiss {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-self: stretch;
+  font-size: 1.2rem;
+  padding: 0;
 }
 
 .v-enter-active,
