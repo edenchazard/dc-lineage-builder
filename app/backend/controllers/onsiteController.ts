@@ -11,7 +11,7 @@ import type { RequestContext } from '../types';
 import config from '../config.js';
 
 const router = new Router({
-  prefix: path.join(config.appUrl, '/api/lineage'),
+  prefix: path.join(config.apiUrl, '/onsite'),
 });
 
 router.post('/', async (ctx: RequestContext) => {

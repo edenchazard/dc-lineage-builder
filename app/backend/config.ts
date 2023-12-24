@@ -1,7 +1,8 @@
 export default {
-  APIKey: process.env.APIKey,
+  APIKey: process.env.APIKey ?? '',
   port: 3000,
-  appUrl: process.env.VITE_APP_URL ?? '',
+  appUrl: process.env.VITE_APP_URL ?? '/',
+  apiUrl: process.env.VITE_API_URL ?? '/api',
   db: {
     port: 3306,
     host: process.env.MYSQL_HOST,
