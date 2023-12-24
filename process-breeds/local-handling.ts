@@ -4,7 +4,7 @@ import puppeteer from 'puppeteer';
 import { chromiumSettings } from './files';
 
 import type { IgnoreFile, IgnoreList, PortraitSizing } from './types';
-import { PortraitCache } from './portraitCache';
+import type { PortraitCache } from './portraitCache';
 
 export function getBreedTable(json) {
   const entries = [];

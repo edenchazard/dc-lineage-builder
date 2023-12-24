@@ -201,7 +201,7 @@ import type {
   PortraitData,
 } from '../shared/types';
 import { filterEggGroups, filterTags } from '../shared/utils.js';
-import { LineageHandler } from '../shared/lineageHandler';
+import type { LineageHandler } from '../shared/lineageHandler';
 import { useAppStore } from '../store/useAppStore.js';
 import DialogExport from './DialogExport.vue';
 import DialogImport from './DialogImport.vue';
