@@ -19,6 +19,7 @@
         show-share-button
       />
       <router-link
+        rel="nofollow"
         :to="{
           path: '/',
           query: { template: hash },

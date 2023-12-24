@@ -27,7 +27,7 @@
       @undo="appStore.treeHistory.undo"
       @redo="appStore.treeHistory.redo"
     />
-    <div class="central-block">
+    <div class="constrain-width">
       <Feedback ref="status" />
     </div>
     <Lineage
@@ -60,6 +60,7 @@ import Lineage from './Lineage.vue';
 import Feedback from './Feedback.vue';
 import { Lineage as LineageHandler } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
+import { AxiosError } from 'axios';
 
 const route = useRoute();
 const appStore = useAppStore();
@@ -84,25 +85,20 @@ onMounted(async () => {
         message: `Loading template... For big lineages, this can take a moment to load.`,
         showDismiss: false,
       });
-
-      // fetch from server
       const response = await getLineage(hash);
-
-      // there were errors, display them and default back to an empty lineage.
-      if (response.errors.length > 0) {
-        status.value.update(response.errors);
-        return;
-      }
 
       status.value.close(() => {
         appStore.activeTree = LineageHandler(response.data.lineage)
           .withMetadata()
           .raw();
       });
-    } catch (ex: unknown) {
-      if (ex instanceof Error) {
-        status.value.error(ex.message);
+    } catch (ex) {
+      if (ex instanceof AxiosError && ex.response?.status === 404) {
+        status.value.error("The lineage couldn't be found.");
+        return;
       }
+
+      status.value.error('Sorry, an error has occurred.');
     }
 });
 
