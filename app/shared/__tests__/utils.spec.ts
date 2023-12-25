@@ -6,9 +6,9 @@ import {
   getBreedData,
   getDCTime,
   validGenderForBreed,
-} from '../../shared/utils.js';
-import type { BreedEntry, PortraitData } from '../../shared/types';
-import { injectBreedList } from '../../shared/breeds.js';
+} from '../utils.js';
+import type { BreedEntry, PortraitData } from '../types.js';
+import { injectBreedList } from '../breeds.js';
 
 await injectBreedList();
 
@@ -88,7 +88,8 @@ describe('utils', () => {
       });
 
       expect(createLineageLink('test')).to.be.equal(
-        'http://example.com/dc/lineage-builder/view/test',
+        new URL(import.meta.env.BASE_URL + '/view/test', 'http://example.com')
+          .href,
       );
 
       Object.defineProperty(window, 'location', {

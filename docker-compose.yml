@@ -58,13 +58,7 @@ services:
     networks:
       - testing
     env_file:
-      - .env
-    environment:
-      - MYSQL_DATABASE=testdb
-      - MYSQL_USER=linbuilder
-      - MYSQL_PASSWORD=linbuilder
-      - MYSQL_ROOT_PASSWORD=linbuilder
-      - MYSQL_HOST=testdb
+      - .env.testing
 
   testdb:
     image: mariadb:10
@@ -73,11 +67,8 @@ services:
       - ./db/dev:/docker-entrypoint-initdb.d
     ports:
       - '3307:3306'
-    environment:
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: linbuilder
-      MYSQL_PASSWORD: linbuilder
-      MYSQL_ROOT_PASSWORD: linbuilder
+    env_file:
+      - .env.testing
     networks:
       - testing
 
