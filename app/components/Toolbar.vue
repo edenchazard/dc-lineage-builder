@@ -29,16 +29,28 @@
     >
       <input
         id="show-interface"
-        v-model="config.showInterface"
+        :checked="config.showInterface"
         class="item"
         type="checkbox"
+        @change="
+          updateConfig(
+            'showInterface',
+            ($event.target as HTMLInputElement).checked,
+          )
+        "
       />
       <label for="show-interface">Show controls</label>
       <input
         id="show-labels"
-        v-model="config.showLabels"
+        :checked="config.showLabels"
         class="item"
         type="checkbox"
+        @change="
+          updateConfig(
+            'showLabels',
+            ($event.target as HTMLInputElement).checked,
+          )
+        "
       />
       <label for="show-labels">Show labels</label>
     </div>
@@ -59,22 +71,28 @@
       >
         <ToolbarDropDownMenuItem
           as="other"
-          @click.self="config.showInterface = !config.showInterface"
+          @click.self="updateConfig('showInterface', !config.showInterface)"
         >
           <input
             id="show-interface2"
-            v-model="config.showInterface"
+            :checked="config.showInterface"
             type="checkbox"
+            @change="
+              updateConfig(
+                'showInterface',
+                ($event.target as HTMLInputElement).checked,
+              )
+            "
           />
           <label for="show-interface2">Show controls</label>
         </ToolbarDropDownMenuItem>
         <ToolbarDropDownMenuItem
           as="other"
-          @click.self="config.showLabels = !config.showLabels"
+          @click.self="updateConfig('showLabels', !config.showLabels)"
         >
           <input
             id="show-labels2"
-            :value="config.showLabels"
+            :checked="config.showLabels"
             type="checkbox"
           />
           <label for="show-labels2">Show labels</label>
@@ -401,6 +419,11 @@ const emit = defineEmits<{
   (e: 'fullscreen'): void;
   (e: 'undo'): void;
   (e: 'redo'): void;
+  (
+    e: 'updateConfig',
+    configurationName: keyof LineageConfig,
+    newValue: LineageConfig[typeof configurationName],
+  ): void;
 }>();
 
 const treeSelectedContains = (
@@ -477,6 +500,12 @@ function handleScrollRight() {
     selectionToolsScrollArea.value.scrollWidth;
 }
 
+function updateConfig(
+  configurationName: keyof LineageConfig,
+  newValue: LineageConfig[typeof configurationName],
+) {
+  emit('updateConfig', configurationName, newValue);
+}
 /**
  * helpers
  */
