@@ -7,9 +7,7 @@
       v-if="appStore.activeTree !== null"
       :config="config"
       :tree="appStore.activeTree"
-      @update-config="
-        (key: keyof LineageConfig, value: boolean) => (config[key] = value)
-      "
+      @update-config="(key, value) => (config[key] = value)"
       @import-tree="
         (newTree) =>
           (appStore.activeTree = LineageHandler(newTree).withMetadata())
