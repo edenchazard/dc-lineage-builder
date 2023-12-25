@@ -2,15 +2,47 @@ import { promises as fs } from 'fs';
 import { setTimeout } from 'timers/promises';
 import puppeteer from 'puppeteer';
 import { chromiumSettings } from './files';
-
 import type { IgnoreFile, IgnoreList, PortraitSizing } from './types';
 import type { PortraitCache } from './portraitCache';
+import type {
+  EggGroupTag,
+  FilterTag,
+  BreedEntry,
+  GenderOnly,
+} from '../app/shared/types';
 
-export function getBreedTable(json) {
-  const entries = [];
+export interface LocalBreedsJSON {
+  [breedName: string]: LocalBreedEntry;
+}
 
-  const createEntry = function (name, breed, spritedata) {
-    const entry = {
+interface LocalBreedEntry {
+  dimorphism: boolean;
+  genderOnly: GenderOnly;
+  group: EggGroupTag;
+  tags: FilterTag[];
+  sprites:
+    | LocalNonDimorphicSprite
+    | LocalDimorphicSpritePair
+    | LocalBreedEntryAltList;
+}
+
+interface LocalBreedEntryAltList {
+  [altName: string]: LocalNonDimorphicSprite | LocalDimorphicSpritePair;
+}
+
+type LocalNonDimorphicSprite = string;
+
+type LocalDimorphicSpritePair = [string, string];
+
+export function getBreedTable(json: LocalBreedsJSON): BreedEntry[] {
+  const entries: BreedEntry[] = [];
+
+  const createEntry = function (
+    name: string,
+    breed: LocalBreedEntry,
+    spriteData: LocalDimorphicSpritePair | LocalNonDimorphicSprite,
+  ) {
+    const entry: BreedEntry = {
       name: name,
       genderOnly: breed.genderOnly,
       metaData: {
@@ -21,14 +53,14 @@ export function getBreedTable(json) {
     };
 
     if (breed.dimorphism) {
-      entry.male = spritedata[0];
-      entry.female = spritedata[1];
+      entry.male = spriteData[0];
+      entry.female = spriteData[1];
     } else {
       if (!breed.genderOnly) {
-        entry.male = entry.female = spritedata;
+        entry.male = entry.female = spriteData as LocalNonDimorphicSprite;
       } else {
         const gender = breed.genderOnly == 'm' ? 'male' : 'female';
-        entry[gender] = spritedata;
+        entry[gender] = spriteData as LocalNonDimorphicSprite;
       }
     }
 
@@ -37,9 +69,8 @@ export function getBreedTable(json) {
 
   for (const breedname in json) {
     const breed = json[breedname];
-    const has_alts = Object.getPrototypeOf(breed.sprites) === Object.prototype;
 
-    if (has_alts) {
+    if (typeof breed.sprites === 'object' && !Array.isArray(breed.sprites)) {
       for (const altname in breed.sprites) {
         const altdata = breed.sprites[altname];
         const fullName =
@@ -74,13 +105,13 @@ async function getIgnoredBreeds(ignoreFile: IgnoreFile): Promise<IgnoreList> {
 }
 
 export async function checkCache(
-  json,
+  json: LocalBreedsJSON,
   cache: PortraitCache,
   ignoreFile: IgnoreFile | null = null,
 ): Promise<void> {
   // get a list of codes we want to check our specified cache for
   // while ignoring any on our ignore file
-  const getCodes = (breeds, ignoreList: IgnoreList): string[] => {
+  const getCodes = (breeds: BreedEntry[], ignoreList: IgnoreList): string[] => {
     const codes = new Set<string>();
 
     breeds.forEach((breed) => {

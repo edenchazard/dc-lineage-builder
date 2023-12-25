@@ -1,60 +1,114 @@
-const isDimorphic = (spriteArray) => !!spriteArray[4];
-const hasAlts = (spriteObj) =>
-  Object.getPrototypeOf(spriteObj) === Object.prototype;
+import type {
+  BreedEntry,
+  EggGroupTag,
+  FilterTag,
+  MetaData,
+  GenderOnly,
+  DragonGender,
+} from '../app/shared/types';
 
-function getImages(fallbacks) {
-  const getDataForSprite = (spriteArray, gender) => {
+export interface FallbackBreedsJSON {
+  [breedName: string]: FallbackBreedEntry;
+}
+
+interface FallbackBreedEntry {
+  genderOnly: GenderOnly;
+  group: EggGroupTag;
+  sprites:
+    | FallbackNonDimorphicSprite
+    | FallbackDimorphicSpritePair
+    | FallbackBreedEntryAltList;
+  tags: FilterTag[];
+}
+
+interface FallbackBreedEntryAltList {
+  [altName: string]: FallbackNonDimorphicSprite | FallbackDimorphicSpritePair;
+}
+
+type FallbackSprite = [string, number, number, number];
+
+type FallbackNonDimorphicSprite = FallbackSprite;
+
+// [m, f]
+type FallbackDimorphicSpritePair = [...FallbackSprite, ...FallbackSprite];
+
+interface FallbackImage {
+  left: number;
+  top: number;
+  height: number | null;
+  code: string;
+}
+
+const isDimorphic = (
+  spriteArray: FallbackNonDimorphicSprite | FallbackDimorphicSpritePair,
+) => !!spriteArray[4];
+
+const hasAlts = (
+  sprites:
+    | FallbackNonDimorphicSprite
+    | FallbackDimorphicSpritePair
+    | FallbackBreedEntryAltList,
+): sprites is FallbackBreedEntryAltList =>
+  typeof sprites === 'object' && !Array.isArray(sprites);
+
+function getImages(json: FallbackBreedsJSON) {
+  /**
+   * @param gender for gender only breeds without dimorphism, we'll _always_ assume the sprite data is as with no array indices shenanigans.
+   */
+  const getDataForSprite = (
+    spriteArray: FallbackNonDimorphicSprite | FallbackDimorphicSpritePair,
+    gender: DragonGender = 'm',
+  ): FallbackImage => {
     const offset = gender === 'm' ? 0 : 4;
 
     return {
-      left: spriteArray[offset + 1],
-      top: spriteArray[offset + 2],
-      height: spriteArray[offset + 3],
-      code: spriteArray[offset],
+      code: spriteArray[offset] as string,
+      left: spriteArray[offset + 1] as number,
+      top: spriteArray[offset + 2] as number,
+      height: spriteArray[offset + 3] as number | null,
     };
   };
 
-  const addToImages = (spriteArray, images, genderOnly) => {
-    const dimorphic = isDimorphic(spriteArray);
-
-    if (dimorphic) {
+  const addToImages = (
+    spriteArray: FallbackNonDimorphicSprite | FallbackDimorphicSpritePair,
+    images: FallbackImage[],
+    genderOnly: GenderOnly,
+  ) => {
+    if (isDimorphic(spriteArray)) {
       images.push(getDataForSprite(spriteArray, 'm'));
       images.push(getDataForSprite(spriteArray, 'f'));
     } else {
       if (!genderOnly) {
-        const image = getDataForSprite(spriteArray, 'm');
-        images.push(image);
+        images.push(getDataForSprite(spriteArray));
       } else {
         images.push(getDataForSprite(spriteArray, genderOnly));
       }
     }
   };
 
-  const images = [];
+  const images: FallbackImage[] = [];
 
-  for (const breedName in fallbacks) {
-    const breed = fallbacks[breedName];
+  for (const breedName in json) {
+    const breed = json[breedName];
 
     if (hasAlts(breed.sprites)) {
       for (const altName in breed.sprites) {
-        const spriteArray = breed.sprites[altName];
-        addToImages(spriteArray, images);
+        addToImages(breed.sprites[altName], images, breed.genderOnly);
       }
     } else {
-      const spriteArray = breed.sprites;
-      addToImages(spriteArray, images);
+      addToImages(breed.sprites, images, breed.genderOnly);
     }
   }
 
   return images;
 }
 
-export function makeCSSStyleSheet(json) {
-  const makeClass = ({ code, left, top, height }) => {
+export function makeCSSStyleSheet(json: FallbackBreedsJSON) {
+  const makeClass = ({ code, left, top, height }: FallbackImage) => {
     const attributes = (
       `left:${left}px;` +
       `top:${top}px;` +
-      (height !== '' ? `height:${height}px;` : '')
+      (height !== null ? `height:${height}px;` : '')
     ).trim();
 
     return `.d-${code}{` + attributes + `}`;
@@ -63,9 +117,12 @@ export function makeCSSStyleSheet(json) {
   return getImages(json).map(makeClass).join('');
 }
 
-export function getBreedTable(json) {
-  const createBreed = (spriteArray, genderOnly) => {
-    const entry = {},
+export function getBreedTable(json: FallbackBreedsJSON): BreedEntry[] {
+  const getGenderProperties = (
+    spriteArray: FallbackNonDimorphicSprite | FallbackDimorphicSpritePair,
+    genderOnly: GenderOnly,
+  ) => {
+    const entry: Pick<BreedEntry, 'female' | 'male'> = {},
       dimorphic = isDimorphic(spriteArray);
 
     if (dimorphic) {
@@ -88,11 +145,11 @@ export function getBreedTable(json) {
   };
 
   // create a flat list of breeds, with alts as "separate breeds"
-  const breeds = [];
+  const breeds: BreedEntry[] = [];
 
   for (const breedName in json) {
     const breed = json[breedName];
-    const metaData = {
+    const metaData: MetaData = {
       group: breed.group,
       tags: breed.tags,
       src: 'dc',
@@ -104,7 +161,7 @@ export function getBreedTable(json) {
         const spriteArray = breed.sprites[altName];
         breeds.push({
           name: breedName + ' ' + altName,
-          ...createBreed(spriteArray, breed.genderOnly),
+          ...getGenderProperties(spriteArray, breed.genderOnly),
           genderOnly: breed.genderOnly,
           metaData,
         });
@@ -113,7 +170,7 @@ export function getBreedTable(json) {
       const spriteArray = breed.sprites;
       breeds.push({
         name: breedName,
-        ...createBreed(spriteArray, breed.genderOnly),
+        ...getGenderProperties(spriteArray, breed.genderOnly),
         genderOnly: breed.genderOnly,
         metaData,
       });
