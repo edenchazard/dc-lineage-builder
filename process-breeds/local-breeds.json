@@ -1,4 +1,15 @@
 {
+  "Abyss Watcher": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Salt MoonShark": ["abqwu","RYMEj"],
+      "Salt Schenanigans": ["35HjT","FrN6z"],
+      "__regular__": ["crvng","pmpkn"]
+    },
+    "tags": ["Halloween"]
+  },
   "Aegis": {
     "dimorphism": false,
     "genderOnly": "m",
@@ -47,6 +58,13 @@
     "group": "Standard",
     "sprites": ["jQItl","JOKAw"],
     "tags": ["Hybrid"]
+  },
+  "Aqualis": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["NuOVp","j9tBc"],
+    "tags": ["Regular"]
   },
   "Aranoa": {
     "dimorphism": false,
@@ -126,6 +144,13 @@
     "genderOnly": false,
     "group": "Drake",
     "sprites": "WZRxc",
+    "tags": ["Regular"]
+  },
+  "Black Tea": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["PNxhP","yVi55"],
     "tags": ["Regular"]
   },
   "Blacktip": {
@@ -238,12 +263,20 @@
     },
     "tags": ["Regular"]
   },
+  "Coral Pygmy Wyvern": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": ["76SLL","4GlYB"],
+    "tags": ["Regular"]
+  },
   "Crypt": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": {
       "Salt Odeen": ["GtvMN","iyKgt"],
+      "Salt Rwyvern": ["1waIt","3jSzN"],
       "__regular__": ["7kiVA","zag1a"]
     },
     "tags": ["Halloween"]
@@ -320,6 +353,24 @@
     "sprites": ["FnHwj","1Hyq5"],
     "tags": ["Regular"]
   },
+  "Fever Wyvern": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "id8od",
+    "tags": ["Regular"]
+  },
+  "Fire Gem": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Blue": ["mgV3Z","BhGzi"],
+      "Green": ["5feXv","o0S8K"],
+      "Red": ["KCpfA","Sk6wd"]
+    },
+    "tags": ["Regular"]
+  },
   "Flare-Tail Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
@@ -359,6 +410,7 @@
     "genderOnly": "f",
     "group": "Standard",
     "sprites": {
+      "Salt Fiona": "tSKlj",
       "Salt Odeen": "4CMLL",
       "__regular__": "38Wem"
     },
@@ -456,6 +508,13 @@
     "sprites": "FHW2y",
     "tags": ["Hybrid"]
   },
+  "Guardian Of Nature": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "k3PF",
+    "tags": ["CB"]
+  },
   "Harvest": {
     "dimorphism": true,
     "genderOnly": false,
@@ -463,12 +522,29 @@
     "sprites": ["vI1DF","MORbO"],
     "tags": ["Regular"]
   },
+  "Heartseeker": {
+    "dimorphism": false,
+    "genderOnly": "m",
+    "group": "Standard",
+    "sprites": {
+      "Salt LadyLyzar": "hmSAC",
+      "__regular__": "iPfaV"
+    },
+    "tags": ["Valentine"]
+  },
   "Heartstealing": {
     "dimorphism": false,
     "genderOnly": "f",
     "group": "Standard",
     "sprites": "Awrh4",
     "tags": ["Valentine"]
+  },
+  "Holly": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "y82Nx",
+    "tags": ["Christmas"]
   },
   "Honey Drake": {
     "dimorphism": true,
@@ -482,6 +558,13 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": ["y8TNS","d21pP"],
+    "tags": ["Regular"]
+  },
+  "Horse": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["MzNTU","5CsPF"],
     "tags": ["Regular"]
   },
   "Howler Drake": {
@@ -521,6 +604,13 @@
       "__regular__": ["f9I08","J7Wb8"]
     },
     "tags": ["Halloween"]
+  },
+  "Jaw Splitter Wyrm": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["tLO7i","mEAbR"],
+    "tags": ["Regular"]
   },
   "Jester": {
     "dimorphism": true,
@@ -604,6 +694,25 @@
     "sprites": ["NO0i0","BmFLn"],
     "tags": ["Regular"]
   },
+  "Lunar Herald": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Bronze": "WGJTW",
+      "Gold": "tKt64",
+      "Indigo": "fMTLl",
+      "Silver": "Zcyy7"
+    },
+    "tags": ["Regular"]
+  },
+  "Magelight Pygmy Wyvern": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": ["hQCUw","xmgmf"],
+    "tags": ["Regular"]
+  },
   "Mariner Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
@@ -616,6 +725,13 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "Iac9u",
+    "tags": ["Regular"]
+  },
+  "Mimic Pygmy": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": ["SwdTI","vVqnW"],
     "tags": ["Regular"]
   },
   "Mint": {
@@ -690,7 +806,9 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Birdzgoboom": ["40Fe4","v9OgZ"]
+      "Salt Birdzgoboom": ["40Fe4","v9OgZ"],
+      "Salt Process": ["Qfyao","1fPdz"],
+      "__regular__": ["vortx","JwLvz"]
     },
     "tags": ["Halloween"]
   },
@@ -702,6 +820,20 @@
       "Metachrosis": ["422Bx","vatB9"],
       "__regular__": ["Y2ULc","acP7t"]
     },
+    "tags": ["Regular"]
+  },
+  "Peach Pied": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "qgX9o",
+    "tags": ["Regular"]
+  },
+  "Pillow": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["Po3tS","fIIG"],
     "tags": ["Regular"]
   },
   "Pink": {
@@ -725,6 +857,13 @@
     },
     "tags": ["Halloween"]
   },
+  "Plated Colossus": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["7bzCd","lEpYM"],
+    "tags": ["Regular"]
+  },
   "Pryanost Lindwyrm": {
     "dimorphism": false,
     "genderOnly": "f",
@@ -734,6 +873,27 @@
       "Salt MoonShark": "iZTHk"
     },
     "tags": ["Christmas"]
+  },
+  "Pumpkin": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": {
+      "Salt Marrionetta": "King",
+      "__regular__": "hEqW"
+    },
+    "tags": ["Halloween"]
+  },
+  "Pyralspite": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Almandine": "AtPm1",
+      "Pyrope": "31Iya",
+      "Spessartine": "xq4Yl"
+    },
+    "tags": ["Regular"]
   },
   "Pyropellis Wyvern": {
     "dimorphism": false,
@@ -781,11 +941,38 @@
     "sprites": "B6Q0m",
     "tags": ["Regular"]
   },
+  "Red": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "WnAo",
+    "tags": ["Regular"]
+  },
   "Red-Tailed Wyrm": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": "HQcbA",
+    "tags": ["Regular"]
+  },
+  "Ribbon Dancer": {
+    "dimorphism": false,
+    "genderOnly": "f",
+    "group": "Standard",
+    "sprites": {
+      "Salt LadyLyzar": "Hg2k",
+      "__regular__": "2PIc"
+    },
+    "tags": ["Christmas"]
+  },
+  "Ridgewing": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Purple": ["pbMTv","jBBoq"],
+      "Tan": ["vYWmo","zjGLw"]
+    },
     "tags": ["Regular"]
   },
   "Rift Wyrm": {
@@ -865,6 +1052,22 @@
     "sprites": "BiRHM",
     "tags": ["Hybrid"]
   },
+  "Shadow Walker": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Salt Fiona": "p9ukA"
+    },
+    "tags": ["Halloween"]
+  },
+  "Shallow Water": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["vkpHc","JCL1R"],
+    "tags": ["Hybrid"]
+  },
   "Shumoga": {
     "dimorphism": false,
     "genderOnly": false,
@@ -880,6 +1083,20 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "6ImMt",
+    "tags": ["Regular"]
+  },
+  "Sinomorph": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "TfmjY",
+    "tags": ["CB"]
+  },
+  "Skysilk": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "RN88M",
     "tags": ["Regular"]
   },
   "Snow": {
@@ -956,6 +1173,13 @@
     "sprites": "X2hRu",
     "tags": ["Regular"]
   },
+  "Storm": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["ZQDEZ","ne5L"],
+    "tags": ["Regular"]
+  },
   "Stratos": {
     "dimorphism": false,
     "genderOnly": false,
@@ -973,6 +1197,34 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "7sNC0",
+    "tags": ["Regular"]
+  },
+  "Sunrise": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["dJ2C","R6N5"],
+    "tags": ["Regular"]
+  },
+  "Sunset": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["Hp0F","G4t5R"],
+    "tags": ["Regular"]
+  },
+  "Sunstone": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "8Dspi",
+    "tags": ["Regular"]
+  },
+  "Tangledrakin": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Two-headed",
+    "sprites": ["NE6Xz"],
     "tags": ["Regular"]
   },
   "Tarantula Hawk Drake": {
@@ -994,6 +1246,13 @@
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": "NFTkm",
+    "tags": ["Regular"]
+  },
+  "Thundersnow": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "3vp64",
     "tags": ["Regular"]
   },
   "Tinsel": {
@@ -1040,6 +1299,7 @@
       "Eastern": "4OvtJ",
       "Leviathan": "gY7aJ",
       "Lindwyrm": "dD16c",
+      "Pygmy Amphiptere": "E2B68",
       "Pygmy Eastern": "zwt63",
       "Pygmy Lindwyrm": "t8cWP",
       "Pygmy Western": "ApbPX",
@@ -1050,6 +1310,8 @@
       "Two-headed Lindwyrm": "7Dp8V",
       "Two-headed Sea Serpent": "d2wFv",
       "Two-headed Western": "cGgSH",
+      "Two-headed Wyvern": "Dm18d",
+      "Two-headed wingless": "YkTcF",
       "Two-headed wyrm": "faMiw",
       "Western": "Fnva",
       "Wingless": "V8anY",
@@ -1057,6 +1319,15 @@
       "Wyvern": "hs7vp"
     },
     "tags": ["Regular"]
+  },
+  "Valentine": {
+    "dimorphism": false,
+    "genderOnly": "f",
+    "group": "Standard",
+    "sprites": {
+      "Salt Marrionetta": "Mari"
+    },
+    "tags": ["Valentine"]
   },
   "Venturis": {
     "dimorphism": true,
@@ -1085,6 +1356,20 @@
       "White": "SDRMX",
       "Yellow": "Pbxw6"
     },
+    "tags": ["Regular"]
+  },
+  "Water": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["2kQWa","NNq3"],
+    "tags": ["Regular"]
+  },
+  "Waterhorse": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["lXIv","QocQm"],
     "tags": ["Regular"]
   },
   "White": {
@@ -1234,6 +1519,15 @@
     "group": "Standard",
     "sprites": ["QmCa9","NvRwS"],
     "tags": ["Regular"]
+  },
+  "Yulebuck": {
+    "dimorphism": false,
+    "genderOnly": "m",
+    "group": "Standard",
+    "sprites": {
+      "Salt Marrionetta": "T7J6"
+    },
+    "tags": ["Christmas"]
   },
   "Zyumorph": {
     "dimorphism": false,

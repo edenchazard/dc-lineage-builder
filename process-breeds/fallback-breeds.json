@@ -38,12 +38,6 @@
     "sprites": ["XhlnK",0,-1,48,"4s3jH",-27,-1,48],
     "tags": ["Regular"]
   },
-  "Aqualis": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["NuOVp",-6,-1,48,"j9tBc",0,-1,48],
-    "tags": ["Regular"]
-  },
   "Arsani": {
     "genderOnly": "f",
     "group": "Standard",
@@ -106,12 +100,6 @@
     "group": "Standard",
     "sprites": ["jsLv",0,-1,48,"F04k",-2,-1,48],
     "tags": ["Halloween"]
-  },
-  "Black Tea": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["PNxhP",-10,-1,48,"yVi55",-6,-1,48],
-    "tags": ["Regular"]
   },
   "Black Truffle": {
     "genderOnly": false,
@@ -209,12 +197,6 @@
     },
     "tags": ["Regular"]
   },
-  "Coral Pygmy Wyvern": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["76SLL",0,4,null,"4GlYB",-17,4,null],
-    "tags": ["Regular"]
-  },
   "Crimson Flare Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
@@ -297,22 +279,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["JQjm9",-18,-1,48],
-    "tags": ["Regular"]
-  },
-  "Fever Wyvern": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["AO5F4",-8,-1,48],
-    "tags": ["Regular"]
-  },
-  "Fire Gem": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Blue": ["mgV3Z",-15,-1,48,"BhGzi",0,-1,48],
-      "Green": ["5feXv",-14,-1,48,"o0S8K",-5,-1,48],
-      "Red": ["KCpfA",-12,-1,48,"Sk6wd",0,-1,48]
-    },
     "tags": ["Regular"]
   },
   "Flamingo Wyvern": {
@@ -401,18 +367,6 @@
     "sprites": ["beEo3",-4,-1,48],
     "tags": ["Regular"]
   },
-  "Guardian Of Nature": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["k3PF",-7,-1,48],
-    "tags": ["CB"]
-  },
-  "Heartseeker": {
-    "genderOnly": "m",
-    "group": "Standard",
-    "sprites": ["iPfaV",-14,-1,48],
-    "tags": ["Valentine"]
-  },
   "Hellfire Wyvern": {
     "genderOnly": false,
     "group": "Standard",
@@ -425,22 +379,10 @@
     "sprites": ["QklUl",-14,-1,48,"ZtlTu",-14,-1,48],
     "tags": ["Hybrid"]
   },
-  "Holly": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["y82Nx",-8,-1,48],
-    "tags": ["Christmas"]
-  },
   "Hooded Murkling": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["TIOUK",-20,-1,48],
-    "tags": ["Regular"]
-  },
-  "Horse": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["MzNTU",-16,-1,48,"5CsPF",-17,-1,48],
     "tags": ["Regular"]
   },
   "Ice": {
@@ -491,23 +433,6 @@
     "sprites": ["3NvWW",0,-1,48,"rphkc",-2,-1,48],
     "tags": ["Regular"]
   },
-  "Lunar Herald": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Bronze": ["WGJTW",-15,-1,48],
-      "Gold": ["tKt64",-15,-1,48],
-      "Indigo": ["fMTLl",-15,-1,48],
-      "Silver": ["Zcyy7",-15,-1,48]
-    },
-    "tags": ["Regular"]
-  },
-  "Magelight Pygmy Wyvern": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["hQCUw",-7,-1,48,"xmgmf",-11,0,null],
-    "tags": ["Regular"]
-  },
   "Magi": {
     "genderOnly": false,
     "group": "Standard",
@@ -533,12 +458,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["ja4AL",0,-1,48,"0GCyQ",-22,-1,48],
-    "tags": ["Regular"]
-  },
-  "Mimic Pygmy": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["SwdTI",-1,-1,48,"vVqnW",0,-1,null],
     "tags": ["Regular"]
   },
   "Mirisia Amphiptere": {
@@ -631,12 +550,6 @@
     "sprites": ["k2gGG",0,-1,48],
     "tags": ["Regular"]
   },
-  "Omen Wyrm": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["vortx",0,-1,48,"JwLvz",-13,-1,48],
-    "tags": ["Halloween"]
-  },
   "Oracle Wyrm": {
     "genderOnly": false,
     "group": "Standard",
@@ -653,22 +566,10 @@
     },
     "tags": ["Regular"]
   },
-  "Pillow": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["XDeUI",0,-1,48,"vPck9",-20,-1,48],
-    "tags": ["Regular"]
-  },
   "Pipio Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": ["fYqIQ",-8,-1,48,"iaAWK",0,-1,48],
-    "tags": ["Regular"]
-  },
-  "Plated Colossus": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["7bzCd",-12,-1,48,"lEpYM",-13,-1,48],
     "tags": ["Regular"]
   },
   "Pryanost Lindwyrm": {
@@ -683,53 +584,16 @@
     "sprites": ["VNOng",0,-1,48],
     "tags": ["Regular"]
   },
-  "Pumpkin": {
-    "genderOnly": false,
-    "group": "Pygmy",
-    "sprites": ["hEqW",-13,-1,48],
-    "tags": ["Halloween"]
-  },
   "Purple": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["VdVa",-11,-1,48,"9QQ4i",0,-1,48],
     "tags": ["Regular"]
   },
-  "Pyralspite": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Almandine": ["AtPm1",0,-1,48],
-      "Pyrope": ["31Iya",0,-1,48],
-      "Spessartine": ["xq4Yl",0,-1,48]
-    },
-    "tags": ["Regular"]
-  },
   "Quonebb": {
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": ["ZNJKk",0,-1,48,"S2sEw",-14,-1,48],
-    "tags": ["Regular"]
-  },
-  "Red": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["WnAo",-26,-1,48],
-    "tags": ["Regular"]
-  },
-  "Ribbon Dancer": {
-    "genderOnly": "f",
-    "group": "Standard",
-    "sprites": ["2PIc",-12,-1,48],
-    "tags": ["Christmas"]
-  },
-  "Ridgewing": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": {
-      "Purple": ["pbMTv",-7,-1,48,"jBBoq",-28,-1,48],
-      "Tan": ["vYWmo",-7,-1,48,"zjGLw",-28,-1,48]
-    },
     "tags": ["Regular"]
   },
   "Rosebud": {
@@ -814,12 +678,6 @@
     "sprites": ["DxTEq",0,-1,48],
     "tags": ["Halloween"]
   },
-  "Shallow Water": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["vkpHc",0,-1,48,"JCL1R",-12,-1,48],
-    "tags": ["Hybrid"]
-  },
   "Shimmer-Scale": {
     "genderOnly": false,
     "group": "Standard",
@@ -842,12 +700,6 @@
     "sprites": ["Yh0jg",0,-1,48,"ez0Bl",-20,-1,48],
     "tags": ["Regular"]
   },
-  "Sinomorph": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["TfmjY",-11,-1,48],
-    "tags": ["CB"]
-  },
   "Siyat": {
     "genderOnly": false,
     "group": "Standard",
@@ -856,12 +708,6 @@
       "Green": ["n1G53",-1,-1,48],
       "Purple": ["sa6Zc",-1,-1,48]
     },
-    "tags": ["Regular"]
-  },
-  "Skysilk": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["RN88M",0,-1,48],
     "tags": ["Regular"]
   },
   "Skystrider": {
@@ -928,12 +774,6 @@
     "sprites": ["T2Hv",0,-1,48],
     "tags": ["Regular"]
   },
-  "Storm": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["ZQDEZ",0,-1,48,"ne5L",0,-1,48],
-    "tags": ["Regular"]
-  },
   "Storm-Rider": {
     "genderOnly": false,
     "group": "Standard",
@@ -958,28 +798,10 @@
     "sprites": ["kErGP",-6,-1,48],
     "tags": ["Regular"]
   },
-  "Sunrise": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["dJ2C",-13,-1,48,"R6N5",-14,-1,48],
-    "tags": ["Regular"]
-  },
-  "Sunset": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["Hp0F",-12,-1,48,"G4t5R",-1,-1,48],
-    "tags": ["Regular"]
-  },
   "Sunsong Amphiptere": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["pepn",0,-1,48,"AuK3l",-3,-1,48],
-    "tags": ["Regular"]
-  },
-  "Sunstone": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["8Dspi",-1,-1,48],
     "tags": ["Regular"]
   },
   "Swallowtail": {
@@ -1019,12 +841,6 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["fQBUi",0,-1,48],
-    "tags": ["Regular"]
-  },
-  "Thundersnow": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["3vp64",-14,-1,48],
     "tags": ["Regular"]
   },
   "Tideweaver Lindwyrm": {
@@ -1087,28 +903,22 @@
     "sprites": ["Ivh5",0,-1,47,"MXv75",0,-1,47],
     "tags": ["Regular"]
   },
+  "Vilvoor": {
+    "genderOnly": false,
+    "group": "Two-headed",
+    "sprites": ["KPT8S",0,-1,48,"p7OCb",-19,-1,48],
+    "tags": ["Regular"]
+  },
   "Vremya Drake": {
     "genderOnly": false,
     "group": "Drake",
     "sprites": ["hdhTm",0,-1,48],
     "tags": ["Regular"]
   },
-  "Water": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["2kQWa",0,-1,48,"NNq3",-3,-1,48],
-    "tags": ["Regular"]
-  },
   "Water Walker": {
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["AQGjY",-30,-1,48],
-    "tags": ["Regular"]
-  },
-  "Waterhorse": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["lXIv",-17,-1,48,"QocQm",0,-1,48],
     "tags": ["Regular"]
   },
   "Whiptail": {
