@@ -22,23 +22,30 @@ import {
   saveResolutionStylesheet,
   getBreedTable as localBreedTable,
   checkCache,
+  type LocalBreedsJSON,
 } from './local-handling.js';
 
-import localJSON from './local-breeds.json';
+import _localJSON from './local-breeds.json';
 
 import {
   makeCSSStyleSheet,
   getBreedTable as fallbackBreedTable,
+  type FallbackBreedsJSON,
 } from './fallback-handling.js';
 
-import fallbackJSON from './fallback-breeds.json' assert { type: 'json' };
+import _fallbackJSON from './fallback-breeds.json' assert { type: 'json' };
+import type { BreedEntry } from '../app/shared/types';
 
 const { __dirname } = getFileAndDirName();
+
+const fallbackJSON = _fallbackJSON as unknown as FallbackBreedsJSON;
+
+const localJSON = _localJSON as unknown as LocalBreedsJSON;
 
 function getBreedsTable() {
   // check for duplicate breed name keys in both sets, and warn
   // if they exist.
-  const mapNames = (breed) => breed.name;
+  const mapNames = (breed: BreedEntry) => breed.name;
   const fallbacks = fallbackBreedTable(fallbackJSON);
   const locals = localBreedTable(localJSON);
   const fallbackNames = fallbacks.map(mapNames);
@@ -50,7 +57,7 @@ function getBreedsTable() {
     if (fallbackNames.includes(uniqueName) && localNames.includes(uniqueName)) {
       throw new Error(`Err: Breed name ${uniqueName} exists in both lists.`);
     }
-    const dupeCheck = (name) => name === uniqueName;
+    const dupeCheck = (name: string) => name === uniqueName;
 
     // check for dupes of each computed name in lists
     if (fallbackNames.filter(dupeCheck).length > 1) {
