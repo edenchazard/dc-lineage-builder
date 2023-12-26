@@ -24,42 +24,27 @@ defineProps({
   },
 });
 </script>
-<style scoped>
+<style scoped lang="postcss">
 #lineage {
-  margin: 0px auto;
+  margin: 0 auto;
   font: var(--dc-lineage-font);
-  background: inherit;
-  line-height: 19.6px;
+  background: var(--dc-background);
+  color: var(--dc-lineage-colour);
   display: flex;
   flex-direction: column;
+  overflow-x: auto;
+  box-sizing: border-box;
 }
-#lineage {
-  padding: 1px;
-  background: inherit;
-  display: flex;
-  margin: 0px auto;
-}
-:deep(#lineage > ul) {
-  /* center lineage */
-  margin: 0px auto;
-}
+:deep(li::before),
 :deep(li::after) {
   content: '';
-  position: absolute;
-  top: calc(50% - 12px);
-  right: 0;
-  border-top: var(--lineageLineStyle);
+  display: block;
   width: 24px;
-  height: 0;
-}
-:deep(li::after) {
-  content: '';
   position: absolute;
-  top: calc(50% - 12px);
-  right: 0;
-  border-top: var(--lineageLineStyle);
-  width: 24px;
-  height: 0;
+  height: 50%;
+  left: 0;
+  border-left: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
+    var(--dc-lineage-line-colour);
 }
 :deep(li:only-child::after) {
   display: none;
@@ -78,18 +63,6 @@ defineProps({
 :deep(li:first-child::before),
 :deep(li:last-child::after) {
   display: none;
-}
-:deep(li::before),
-:deep(li::after) {
-  content: '';
-  display: block;
-  border-left: var(--lineageLineStyle);
-  border-bottom: var(--lineageLineStyle);
-  width: 24px;
-  position: absolute;
-  height: 50%;
-  bottom: calc(50% + 12px);
-  left: 0;
 }
 :deep(li:last-child > *) {
   padding-bottom: 0;
@@ -118,18 +91,25 @@ defineProps({
 :deep(label > i) {
   font-style: italic;
 }
+:deep(li::before) {
+  bottom: calc(50% + 12px);
+  border-bottom: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
+    var(--dc-lineage-line-colour);
+}
 :deep(li::after) {
   top: calc(50% - 14px);
   bottom: auto;
   border-bottom: 0 none;
-  border-top: var(--lineageLineStyle);
+  border-top: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
+    var(--dc-lineage-line-colour);
 }
 :deep(div::after) {
   content: '';
   position: absolute;
   top: calc(50% - 12px);
   right: 0;
-  border-top: var(--lineageLineStyle);
+  border-top: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
+    var(--dc-lineage-line-colour);
   width: 24px;
   height: 0;
 }
