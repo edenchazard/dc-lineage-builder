@@ -55,17 +55,12 @@ interface OnSitePreviewResponse extends APIResponse {
     gen: number;
   };
 }
-function getOnSitePreview(
-  male: string,
-  female: string,
-  doChecks: boolean = false,
-) {
+function getOnSitePreview(male: string, female: string) {
   return callAPI<OnSitePreviewResponse>(`/onsite`, {
     method: 'post',
     data: {
       male,
       female,
-      doChecks,
     },
   });
 }
