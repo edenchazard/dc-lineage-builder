@@ -641,8 +641,6 @@ function capitalise(string: string) {
     scrollbar-width: none;
     gap: 0.5rem;
     cursor: w-resize;
-    scroll-snap-type: x mandatory;
-    scroll-snap-stop: always;
 
     &::-webkit-scrollbar {
       display: none;
