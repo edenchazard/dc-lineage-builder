@@ -29,7 +29,7 @@
           onLongPress: handleLongPress,
         }"
         class="dragon-breed-picker-button pointer"
-        disabled
+        :disabled="disabled"
         type="button"
       >
         <DragonPortrait
