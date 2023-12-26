@@ -18,6 +18,8 @@
     "ts:check": "tsc --noEmit",
     "test:unit": "vitest",
     "coverage": "vitest --coverage",
+    "db:fresh": "tsx ./app/commands/databaseFresh.ts",
+    "db:seed": "tsx ./app/commands/databaseSeed.ts",
     "process": "tsx ./process-breeds/process.ts",
     "download": "tsx ./process-breeds/download.ts",
     "prod": "node ./backend/server.js"

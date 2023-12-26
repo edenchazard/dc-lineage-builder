@@ -23,6 +23,7 @@ export default ({ mode }: { mode: string }) => {
     },
     plugins: [vue()],
     test: {
+      setupFiles: ['./app/commands/databaseFresh.ts'],
       environment: 'jsdom',
       exclude: [...configDefaults.exclude, 'e2e/*'],
       coverage: {
