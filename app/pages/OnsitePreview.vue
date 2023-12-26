@@ -12,10 +12,10 @@
             their lineages to see the result.
           </p>
           <p>
-            Start by entering the codes for the male and the female and press
-            preview. You can have Lineage Builder automatically check the
-            genders are correct by ticking the checkbox. Dragons without a
-            gender, such as ungendered hatchlings, will be ignored.
+            Enter the codes for the male and the female and press preview.
+            Lineage Builder will check the genders of both dragons, although
+            dragons without a gender, such as ungendered hatchlings, will be
+            ignored.
           </p>
           <p><strong>This feature is experimental.</strong></p>
         </div>
@@ -131,7 +131,7 @@ async function fetchLineage(e: Event) {
 
     // Deal with problems
     if (response.data.errors) {
-      status.value.update(response.data.errors.join(' '));
+      status.value.update(response.data.errors);
       if (response.data.errors.some((e) => e.type === 'error')) return;
     } else status.value.close();
 
