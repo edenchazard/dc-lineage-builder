@@ -72,17 +72,12 @@ function getImages(json: FallbackBreedsJSON) {
   const addToImages = (
     spriteArray: FallbackNonDimorphicSprite | FallbackDimorphicSpritePair,
     images: FallbackImage[],
-    genderOnly: GenderOnly,
   ) => {
     if (isDimorphic(spriteArray)) {
       images.push(getDataForSprite(spriteArray, 'm'));
       images.push(getDataForSprite(spriteArray, 'f'));
     } else {
-      if (!genderOnly) {
-        images.push(getDataForSprite(spriteArray));
-      } else {
-        images.push(getDataForSprite(spriteArray, genderOnly));
-      }
+      images.push(getDataForSprite(spriteArray));
     }
   };
 
@@ -93,10 +88,10 @@ function getImages(json: FallbackBreedsJSON) {
 
     if (hasAlts(breed.sprites)) {
       for (const altName in breed.sprites) {
-        addToImages(breed.sprites[altName], images, breed.genderOnly);
+        addToImages(breed.sprites[altName], images);
       }
     } else {
-      addToImages(breed.sprites, images, breed.genderOnly);
+      addToImages(breed.sprites, images);
     }
   }
 
