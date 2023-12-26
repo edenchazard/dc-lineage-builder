@@ -83,7 +83,10 @@ export async function grabHTML(
    * @param root The root returned by fetchDragon()
    * @param filter Whether to replace whitespace and fix urls
    */
-  const getHTML = (root: HTMLElement, filter: boolean): string => {
+  const getHTML = async (
+    root: HTMLElement,
+    filter: boolean,
+  ): Promise<string> => {
     const baseULTag = root.querySelector('ul');
 
     if (baseULTag === null)
@@ -91,15 +94,45 @@ export async function grabHTML(
 
     let html = baseULTag.toString();
 
-    if (filter)
+    if (filter) {
+      // grab all the images and make base64 data encodes of them
+      const images = [
+        ...new Set(
+          Array.from(baseULTag.querySelectorAll('img')).map(
+            (img) => img.getAttribute('src') as string,
+          ),
+        ),
+      ];
+
+      const base64Images = await Promise.all(
+        images.map(async (url) => {
+          const image = await axios.get(
+            new URL(url, 'https://dragcave.net').href,
+            {
+              responseType: 'arraybuffer',
+            },
+          );
+
+          return {
+            url,
+            base64:
+              'data:image/png;base64,' +
+              Buffer.from(image.data).toString('base64'),
+          };
+        }),
+      );
+
       html = html
         // strip large whitespaces
         //.replace(/\s{2,}/g, '')
         // add additional properties to links
         .replaceAll('<a ', "<a rel='noopener noreferrer' target='_blank' ")
-        // replace the shorthanded urls with full links to dragcave
-        .replaceAll('/images/', 'https://dragcave.net/images/')
         .replaceAll('/view/', 'https://dragcave.net/view/');
+
+      base64Images.forEach(
+        (img) => (html = html.replaceAll(img.url, img.base64)),
+      );
+    }
 
     return html;
   };
@@ -127,7 +160,7 @@ export async function grabHTML(
 
   return {
     code,
-    html: getHTML(root, filter),
+    html: await getHTML(root, filter),
     gen: getGen(root),
   };
 }

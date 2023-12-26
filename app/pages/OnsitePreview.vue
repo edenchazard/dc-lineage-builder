@@ -83,7 +83,6 @@ const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');
 const maleCode = ref('');
 const femaleCode = ref('');
-const doChecks = ref(true);
 const generations = ref(0);
 const cutoff = 12;
 const fixRightmostColumn = ref(true);
@@ -128,7 +127,7 @@ async function fetchLineage(e: Event) {
   try {
     status.value.info({ message: 'Contacting server...', showDismiss: false });
 
-    const response = await getOnSitePreview(mCode, fCode, doChecks.value);
+    const response = await getOnSitePreview(mCode, fCode);
 
     // Deal with problems
     if (response.data.errors) {
