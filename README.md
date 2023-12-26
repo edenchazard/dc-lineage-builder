@@ -47,9 +47,7 @@ From the project root directory, use the command:
 
 ```sh
 docker-compose up app -d
-docker-compose exec app sh
-npm i
-npm run dev
+docker-compose exec app sh -c "npm i && npm run dev"
 ```
 
 You can access the project at [http://localhost:5173/dc/lineage-builder/](http://localhost:5173/dc/lineage-builder/).
@@ -60,8 +58,7 @@ To run the tests, you should be in the `testapp` container.
 
 ```sh
 docker-compose up testapp -d
-docker-compose exec testapp sh
-npm run test:unit
+docker-compose exec testapp sh -c "npm run test:unit"
 ```
 
 Tests are run via Vitest, and will automatically re-run whenever a file is changed.
@@ -74,6 +71,10 @@ Tests are run via Vitest, and will automatically re-run whenever a file is chang
 ```sh
 docker-compose --env-file .env.production -f docker-compose.prod.yml up -d --build
 ```
+
+## Migrations
+
+Lineage Builder doesn't use an ORM as it wouldn't be particularly useful. Instead, you can set up the database by running `npm run db:fresh` to set up the table and `npm run db:seed` to seed data.
 
 ## Breed processing
 
