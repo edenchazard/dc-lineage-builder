@@ -40,7 +40,6 @@
 
 <script setup lang="ts">
 /* eslint-disable no-redeclare */
-//todo fix @updateConfig="(key, value) => config[key] = value"
 import { onMounted, reactive, ref } from 'vue';
 import { onBeforeRouteLeave, useRoute } from 'vue-router';
 import { useFullscreen } from '@vueuse/core';
@@ -189,7 +188,6 @@ function selectionAddParents() {
 
 function selectionSwitchParents() {
   applyToSelected((dragon) => {
-    // no parents, ignore
     if (!hasParents(dragon)) return;
 
     Object.assign(dragon, LineageHandler(dragon).switchParents().raw());

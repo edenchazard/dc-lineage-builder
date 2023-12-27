@@ -1,21 +1,29 @@
 <template>
-  <div class="tag-list">
-    <button
-      v-for="(tag, index) in tags"
-      :key="tag.name"
-      :class="tag.active ? 'tag-active' : 'tag-inactive'"
-      type="button"
-      @click="selected(index)"
-    >
-      {{ tag.name }}
-    </button>
-  </div>
+  <label
+    v-for="(tag, index) in tags"
+    :key="tag.name"
+    class="tag"
+    :class="{
+      inactive: !tag.active,
+    }"
+    v-bind="$attrs"
+  >
+    <input
+      :name="name"
+      type="checkbox"
+      :checked="tag.active"
+      :value="tag.name"
+      @change="selected(index)"
+    />{{ tag.name }}</label
+  >
 </template>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { PropType } from 'vue';
 import type { TagListOption } from '../shared/types';
 import { deepClone } from '../shared/utils.js';
+
 const props = defineProps({
   // Accepts a mixed array of { name, active }
   // or simple strings. If a string is provided,
@@ -32,6 +40,10 @@ const props = defineProps({
   atLeastOneEnabled: {
     type: Boolean,
     default: false,
+  },
+  name: {
+    type: String,
+    required: true,
   },
 });
 
@@ -66,24 +78,29 @@ function selected(index: number) {
   emit('update:modelValue', deepClone(tags.value));
 }
 </script>
-<style scoped>
-.tag-list {
-  display: flex;
-  gap: 0.3rem;
-  margin: 0.3rem 0;
-}
-.tag-list button {
-  padding: 5px;
-  color: #000;
-  border-radius: 5px;
+<style scoped lang="postcss">
+.tag {
+  display: inline-block;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
   border: 0px none;
   font-size: 0.7rem;
-}
-.tag-active {
-  background: lightblue;
-}
-.tag-inactive {
-  background: lightgray;
-  color: #000;
+  cursor: pointer;
+  opacity: 1;
+
+  &.inactive {
+    opacity: 0.4;
+  }
+
+  &:focus-within {
+    outline: 3px solid var(--ui-focus-colour);
+  }
+
+  > [type='checkbox'] {
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    outline: none;
+  }
 }
 </style>

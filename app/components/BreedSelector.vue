@@ -5,32 +5,38 @@
     @close="close"
   >
     <template #content>
-      <section class="recently-used">
-        <h3>Breeds already in lineage</h3>
+      <section id="recently-used">
+        <h2 class="title sr-only">Already in lineage</h2>
         <BreedSelectorReuse
           :filter-by-gender="genderFilter"
           @breed-selected="breedSelected"
         />
       </section>
-      <section class="breeds">
-        <h3>Breeds</h3>
-        <div class="groups">
-          <label>Groups:</label>
-          <BreedGroupsTagSelector />
-        </div>
-        <div class="applied-tags">
-          <label>Showing:</label>
-          <BreedTagsSelector />
-        </div>
-        <div class="search">
-          <label for="mates-search"
-            ><font-awesome-icon icon="search" /> Filter:</label
-          >
+
+      <section>
+        <h2 class="sr-only">Filtering</h2>
+        <div id="filtering">
           <BreedSearchControl
+            id="results-search"
             ref="mateSearchEl"
+            placeholder="Search"
             @update="(search) => (searchString = search)"
           />
+          <label
+            for="results-search"
+            class="sr-only"
+          >
+            Search
+          </label>
+          <label class="sr-only">Groups</label>
+          <BreedGroupsTagSelector name="filters-groups" />
+          <label class="sr-only">Showing</label>
+          <BreedTagsSelector name="filters-tags" />
         </div>
+      </section>
+
+      <section id="breeds">
+        <h2 class="sr-only">Results</h2>
         <FilteredBreedList
           :search="searchString"
           :breeds="breeds"
@@ -93,66 +99,32 @@ function close() {
 }
 </script>
 <style scoped>
-/* hide labels on mobile screens */
-.breeds label {
-  display: none;
+section + section {
+  margin-top: 0.5rem;
 }
-.breed-selector {
-  color: var(--breedDropDownColourFG);
-  display: flex;
-  flex-direction: column;
-}
-.recently-used {
+
+#recently-used {
   flex-grow: 0;
 }
-.breeds {
+
+#breeds-inline-search {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+#filtering {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+}
+
+#breeds {
   overflow: hidden;
   display: flex;
   flex-direction: column;
   flex: 1;
-}
-.applied-tags,
-.groups {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: left;
-}
-.search {
-  display: flex;
-  align-items: flex-start;
-  margin: 5px 0px;
-}
-.search input {
-  flex: 1;
-  margin-left: 5px;
-  width: 100%;
-}
-h2 {
-  font-size: 16px;
-}
-h3 {
-  margin: 0;
-  min-height: 17px;
-  position: relative;
-  font-size: 11px;
-  z-index: 1;
-  overflow: hidden;
-  text-align: left;
-}
-h3:after {
-  position: absolute;
-  top: 50%;
-  overflow: hidden;
-  width: 100%;
-  height: 1px;
-  content: '\a0';
-  background-color: #000;
-  margin-left: 5px;
-}
-@media only screen and (min-width: 500px) {
-  .breeds label {
-    display: unset;
-  }
 }
 </style>

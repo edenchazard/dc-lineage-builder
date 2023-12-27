@@ -80,7 +80,7 @@ function close() {
 @media only screen and (min-width: 501px) {
   #breed-selector-wrapper {
     width: 500px;
-    box-shadow: 0px 0px 200px 0px #000000;
+    box-shadow: 0px 0px 200px 0px #000;
     margin-left: -250px;
     left: 50%;
   }
@@ -89,10 +89,9 @@ function close() {
 @media only screen and (min-height: 501px) {
   #breed-selector-wrapper {
     height: 500px;
-    /* https://stackoverflow.com/questions/2005954/center-a-positionfixed-element */
     margin-top: -250px;
     top: 50%;
-    box-shadow: 2px 2px 20px 1px;
+    box-shadow: 2px 2px 20px 1px #000;
   }
 }
 </style>
