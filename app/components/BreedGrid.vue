@@ -17,15 +17,34 @@
   </VirtualCollection>
   <ul
     v-else
-    class="mates-list"
+    class="breeds-list"
   >
     <li
       v-for="{ data: breed } in list"
       :key="breed.name"
       @click="emit('breedSelected', breed)"
+      class="breed-entry"
     >
-      <DragonPortrait :data="breed" />
-      {{ breed.name }}
+      <button
+        type="button"
+        class="breed-entry-button"
+        :aria-labelledby="id(breed.name)"
+      >
+        <DragonPortrait :data="breed" />
+        <span
+          class="breed-entry-name"
+          :id="id(breed.name)"
+          >{{ breed.name }}</span
+        >
+        <span class="tag-group">{{ breed.metaData.group }}</span>
+        <span
+          v-for="filter in breed.metaData.tags"
+          :key="filter"
+          class="tag-filter"
+        >
+          {{ filter }}</span
+        >
+      </button>
     </li>
   </ul>
 </template>
@@ -82,6 +101,10 @@ function cellSizeAndPositionGetter(item: PortraitData, index: number) {
     y: Math.floor(index / columns.value) * (portraitHeight + margin),
   };
 }
+
+function id(name: string) {
+  return name.replaceAll(' ', '-');
+}
 </script>
 
 <style scoped>
@@ -94,27 +117,42 @@ function cellSizeAndPositionGetter(item: PortraitData, index: number) {
   list-style-type: none;
   margin: 0 auto;
 }
-.mates-compact .imgbox,
-.mates-list li {
-  cursor: pointer;
-}
 .mates-compact {
   overflow: hidden auto;
 }
-.mates-list li {
-  text-overflow: ellipsis;
-  /*white-space: nowrap;*/
-  overflow: hidden;
+.breed-entry {
+  display: flex;
+  cursor: pointer;
+}
+
+.breed-entry + .breed-entry {
+  border-top: 1px solid var(--ui-breed-list-border);
+}
+
+.breed-entry-button {
+  flex: 1;
+  border: 0;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--breedDropDownColourFG);
-}
-.mates-list li:last-child {
-  border: none;
-}
-.mates-list li .imgbox-fullsize {
-  /* fix bug with flexbox */
-  min-width: 34px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background: transparent;
+  gap: 0.5rem;
   margin: 3px;
+  color: inherit;
+  cursor: inherit;
+}
+.breed-entry-name {
+  flex: 1;
+  text-align: left;
+}
+
+.tag-group,
+.tag-filter {
+  display: inline-block;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  border: 0px none;
+  font-size: 0.7rem;
 }
 </style>

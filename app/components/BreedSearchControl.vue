@@ -1,7 +1,7 @@
 <template>
   <input
+    class="breed-search interactive"
     type="search"
-    placeholder="search"
     @input="search"
   />
 </template>
@@ -19,3 +19,12 @@ const search = debounce(
   250,
 );
 </script>
+
+<style scoped>
+.breed-search {
+  padding-left: 1.8rem;
+  background: #fff url('../assets/images/magnifying-glass-solid.svg') no-repeat
+    0.5rem center;
+  background-size: 0.8rem;
+}
+</style>

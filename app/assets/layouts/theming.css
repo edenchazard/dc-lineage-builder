@@ -73,6 +73,13 @@
 
   --ui-focus-colour: rgb(0 0 0 / 50%);
 
+  --ui-breed-list-border: #7b5e28;
+
+  --ui-tags-groups-bg: #44300b;
+  --ui-tags-groups-fg: #fff;
+  --ui-tags-filters-bg: #991b1e;
+  --ui-tags-filters-fg: #fff;
+
   --dialog-header-bg: var(--dc-colour-2);
   --dialog-header-fg: #fff;
   --dialog-header-font: 0.875rem 'fq';
@@ -220,6 +227,13 @@
   --ui-modal-footer: #000;
 
   --ui-focus-colour: rgba(255, 102, 0);
+
+  --ui-breed-list-border: #959595;
+
+  --ui-tags-groups-bg: #52a5c6;
+  --ui-tags-groups-fg: #fff;
+  --ui-tags-filters-bg: #ff9315;
+  --ui-tags-filters-fg: #000;
 
   --semi-black: rgba(0, 0, 0, 0.5);
   --tile-shade: rgba(0, 0, 0, 0.4);
@@ -437,7 +451,7 @@
 }
 
 .skin-mobile-dark {
-  --dc-colour-1: #2b303a; /* #21252d; */
+  --dc-colour-1: #2b303a;
   --dc-colour-2: #fff;
   --dc-colour-3: #444e5e;
   --dc-colour-4: #2b303a;
@@ -492,6 +506,13 @@
   --ui-modal-footer: #000;
 
   --ui-focus-colour: rgba(193, 198, 255, 0.8);
+
+  --ui-breed-list-border: #93a1b3;
+
+  --ui-tags-groups-bg: #2b303a;
+  --ui-tags-groups-fg: #fff;
+  --ui-tags-filters-bg: #5f9aff;
+  --ui-tags-filters-fg: #fff;
 
   --dialog-header-bg: var(--dc-colour-4);
   --dialog-header-fg: #fff;
@@ -617,6 +638,13 @@
   --ui-footer-fg: #fff;
 
   --ui-focus-colour: #ff9315;
+
+  --ui-breed-list-border: #959595;
+
+  --ui-tags-groups-bg: #24b2e580;
+  --ui-tags-groups-fg: #ddd;
+  --ui-tags-filters-bg: #2db2e6;
+  --ui-tags-filters-fg: #ddd;
 
   --dialog-header-bg: #000;
   --dialog-header-fg: #fff;

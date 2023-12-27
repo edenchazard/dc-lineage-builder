@@ -566,6 +566,8 @@ function capitalise(string: string) {
 
 .selection-apply-breed-container {
   position: relative;
+  display: flex;
+  align-items: center;
 
   > .breed-dropdown {
     padding-right: 2.5rem;
@@ -579,9 +581,7 @@ function capitalise(string: string) {
     text-align: center;
     position: absolute;
     font-size: 0.7em;
-    right: 1.1rem;
-    top: 3px;
-    bottom: 3px;
+    right: 1.4rem;
     width: 2.7em;
     overflow: hidden;
     border-radius: 0.25rem;
