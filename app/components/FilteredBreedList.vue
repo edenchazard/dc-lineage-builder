@@ -87,13 +87,11 @@ watch(container, () => {
 
 <style scoped>
 .results {
-  padding: 0;
+  padding: 0px;
   flex: 1;
   overflow-y: auto;
 }
 .no-results {
-  margin-top: 1rem;
   font-style: italic;
-  text-align: center;
 }
 </style>

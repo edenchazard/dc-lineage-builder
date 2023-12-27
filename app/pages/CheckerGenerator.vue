@@ -1,11 +1,13 @@
 <template>
   <DialogExport
-    v-if="showExportDialog"
+    id="Export lineage"
+    :open="showExportDialog"
     :tree="tree"
     @close="showExportDialog = false"
   />
   <DialogGenerate
-    v-if="showGenerateDialog"
+    id="Generate lineage"
+    :open="showGenerateDialog"
     :tree="tree"
     @close="showGenerateDialog = false"
   />
@@ -53,9 +55,19 @@
               class="form"
             >
               <label for="enabled-groups">Groups:</label>
-              <BreedGroupsTagSelector id="enabled-groups" />
+              <div class="tag-list">
+                <BreedGroupsTagSelector
+                  name="filters-groups"
+                  id="enabled-groups"
+                />
+              </div>
               <label for="enabled-tags">Showing:</label>
-              <BreedTagsSelector id="enabled-tags" />
+              <div class="tag-list">
+                <BreedTagsSelector
+                  name="filters-tags"
+                  id="enabled-tags"
+                />
+              </div>
               <label for="search">Search: </label>
               <BreedSearchControl
                 id="search"
@@ -88,34 +100,28 @@
         </form>
       </section>
       <section id="breeds">
-        <FilteredBreedList
-          :search="query"
-          :breeds="malePortraits"
-          :tags="tagStore.enabledTags"
-          :groups="tagStore.enabledEggGroups"
-          class="results"
-          @breed-selected="selectMale"
-        />
-        <div id="mini-preview">
-          <DragonPortrait
-            :data="male"
-            class="tile"
+        <div class="gender">
+          <h2>Male</h2>
+          <FilteredBreedList
+            :search="query"
+            :breeds="malePortraits"
+            :tags="tagStore.enabledTags"
+            :groups="tagStore.enabledEggGroups"
+            class="results"
+            @breed-selected="selectMale"
           />
-          <label>Male breed</label>
-          <DragonPortrait
-            :data="male"
-            class="tile"
-          />
-          <label>Female breed</label>
         </div>
-        <FilteredBreedList
-          :search="query"
-          :breeds="femalePortraits"
-          :tags="tagStore.enabledTags"
-          :groups="tagStore.enabledEggGroups"
-          class="results"
-          @breed-selected="selectFemale"
-        />
+        <div class="gender">
+          <h2>Female</h2>
+          <FilteredBreedList
+            :search="query"
+            :breeds="femalePortraits"
+            :tags="tagStore.enabledTags"
+            :groups="tagStore.enabledEggGroups"
+            class="results"
+            @breed-selected="selectFemale"
+          />
+        </div>
       </section>
       <section>
         <Lineage
@@ -146,7 +152,6 @@ import DialogExport from '../components/DialogExport.vue';
 import DialogGenerate from '../components/DialogGenerate.vue';
 import ToolbarButton from '../components/ToolbarButton.vue';
 import BreedSearchControl from '../components/BreedSearchControl.vue';
-import DragonPortrait from '../components/DragonPortrait.vue';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 import {
   femalePortraits,
@@ -235,13 +240,18 @@ function switchBreeds() {
 }
 </script>
 <style scoped>
+section + section {
+  margin-top: 1rem;
+}
 .content {
   display: flex;
   flex-direction: column;
 }
+
 #form {
   --label-width: 8rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   column-gap: 1rem;
   grid-template-columns: var(--label-width) 1fr 1fr;
   align-items: center;
@@ -255,7 +265,7 @@ function switchBreeds() {
 #filter-controls {
   display: grid;
   grid-template-columns: var(--label-width) 1fr;
-  column-gap: 1rem;
+  gap: 0.5rem 1rem;
 }
 
 #filter .legend {
@@ -263,38 +273,58 @@ function switchBreeds() {
   padding-right: 1rem;
 }
 
+.tag-list {
+  line-height: 1.2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+}
+
 #controls {
   grid-row: 1/3;
-  display: grid;
+  display: flex;
   grid-auto-columns: min-content;
   grid-column-start: 3;
 }
 
 #breeds {
-  display: flex;
-  flex-direction: column;
   gap: 1rem;
-}
-
-#mini-preview {
-  align-self: center;
-  text-align: center;
-}
-.tile {
-  margin: 0 auto;
-}
-.breed-list {
-}
-.results {
-  min-height: 15rem;
-  width: 100%;
-  max-width: 40rem;
+  display: flex;
   flex: 1;
 }
 
-@media (min-width: 62.5em) {
-  #breeds {
-    flex-direction: row;
+.gender {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.gender h2 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.tile {
+  margin: 0 auto;
+}
+
+.results {
+  min-height: 15rem;
+  width: 100%;
+}
+/* todo */
+:deep(#controls) {
+  & .label::after {
+    content: unset;
+  }
+}
+@media (min-width: 40rem) {
+  #form {
+    display: grid;
+  }
+  #controls {
+    display: grid;
   }
 }
 </style>
