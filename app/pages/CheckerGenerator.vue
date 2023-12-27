@@ -57,15 +57,15 @@
               <label for="enabled-groups">Groups:</label>
               <div class="tag-list">
                 <BreedGroupsTagSelector
-                  name="filters-groups"
                   id="enabled-groups"
+                  name="filters-groups"
                 />
               </div>
               <label for="enabled-tags">Showing:</label>
               <div class="tag-list">
                 <BreedTagsSelector
-                  name="filters-tags"
                   id="enabled-tags"
+                  name="filters-tags"
                 />
               </div>
               <label for="search">Search: </label>
@@ -135,13 +135,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue';
-import type { PortraitData, DragonGender, BreedEntry } from '../shared/types';
-import {
-  breedEntryToPortrait,
-  expandGender,
-  getBreedData,
-} from '../shared/utils.js';
+import { ref, watch } from 'vue';
+import type { PortraitData, DragonGender } from '../shared/types';
+import { getBreedData } from '../shared/utils.js';
 import { useTagStore } from '../store/useTagStore.js';
 
 import Lineage from '../components/Lineage.vue';
@@ -162,22 +158,11 @@ import {
 const tree = ref(DragonBuilder.createWithMetadata());
 const tagStore = useTagStore();
 const maleBreed = ref(placeholder.name);
-const hoverMaleBreed = ref(placeholder.name);
 const femaleBreed = ref(placeholder.name);
 const genCount = ref(2);
 const query = ref('');
 const showExportDialog = ref(false);
 const showGenerateDialog = ref(false);
-
-function portraitFor(which, gender: DragonGender) {
-  // return the breed data for this breed name or if no match, the placeholder
-  const entry = getBreedData(which) as BreedEntry;
-  const portrait = breedEntryToPortrait(entry, expandGender(gender));
-
-  return portrait;
-}
-
-const male = computed(() => portraitFor(hoverMaleBreed.value, 'm'));
 
 // whenever the gen count changes, the tree should update to reflect it
 watch(genCount, () => updateTree(tree.value.gender));

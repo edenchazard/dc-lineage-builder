@@ -22,8 +22,8 @@
     <li
       v-for="{ data: breed } in list"
       :key="breed.name"
-      @click="emit('breedSelected', breed)"
       class="breed-entry"
+      @click="emit('breedSelected', breed)"
     >
       <button
         type="button"
@@ -32,8 +32,8 @@
       >
         <DragonPortrait :data="breed" />
         <span
-          class="breed-entry-name"
           :id="id(breed.name)"
+          class="breed-entry-name"
           >{{ breed.name }}</span
         >
         <span class="tag-group">{{ breed.metaData.group }}</span>
