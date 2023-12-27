@@ -4,9 +4,6 @@
     aria-description="Select a breed."
     @close="close"
   >
-    <template #title>
-      <h2>Choose a breed</h2>
-    </template>
     <template #content>
       <section class="recently-used">
         <h3>Breeds already in lineage</h3>

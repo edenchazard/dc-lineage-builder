@@ -67,12 +67,17 @@ function selected(index: number) {
 }
 </script>
 <style scoped>
+.tag-list {
+  display: flex;
+  gap: 0.3rem;
+  margin: 0.3rem 0;
+}
 .tag-list button {
   padding: 5px;
   color: #000;
   border-radius: 5px;
   border: 0px none;
-  margin: 3px 6px;
+  font-size: 0.7rem;
 }
 .tag-active {
   background: lightblue;
