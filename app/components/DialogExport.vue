@@ -1,5 +1,5 @@
 <template>
-  <Dialog
+  <DialogBase
     :id="id"
     :open="open"
     @close="emit('close')"
@@ -38,7 +38,7 @@
         Close
       </button>
     </template>
-  </Dialog>
+  </DialogBase>
 </template>
 <script setup lang="ts">
 import { onUpdated, ref } from 'vue';
@@ -47,7 +47,7 @@ import type {
   MaybePartialLineageWithMetadata,
   PartialLineage,
 } from '../shared/types';
-import Dialog from './DialogBase.vue';
+import DialogBase from './DialogBase.vue';
 import Feedback from './Feedback.vue';
 import Textbox from './Textbox.vue';
 import DragonFormattingBlock from './DragonFormattingBlock.vue';

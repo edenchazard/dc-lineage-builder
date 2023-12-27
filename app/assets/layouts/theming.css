@@ -134,6 +134,10 @@
     }
   }
 
+  & #breed-selector-wrapper {
+    background: #7b5e28;
+  }
+
   @media (min-width: 62em) {
     #mobile-menu-button {
       display: none;
@@ -825,25 +829,3 @@
     }
   }
 }
-
-/* .skin-portal2 {
-  --colourBG: #000;
-  --colourFG: #ddd;
-  --lineageLineStyle: 1px dotted rgba(192, 192, 192, 0.5);
-  --lineageFont: 'din';
-  --lineageGenColour: rgba(192, 192, 192, 0.5);
-  --dragonPortraitStyle: 1px solid rgba(192, 192, 192, 0.5);
-  --builderBG: #000 url(backgrounds/portal2-contentbg2.png) repeat-x fixed;
-  --builderControlBG: #ddd;
-  --builderControlFG: #000;
-  --linkColour: #2db2e6;
-  --headerBG: transparent;
-  --lineageToolColour: rgba(221, 221, 221, 0.5);
-  --breedDropDownColourFG: #000;
-  --modalBG: #fff;
-  --modalFG: #000;
-  --modalHeaderBG: #ddd;
-  --modalHeaderFG: #000;
-  --modalFooterBtnBG: #000;
-  --modalFooterBtnFG: #fff;
-} */

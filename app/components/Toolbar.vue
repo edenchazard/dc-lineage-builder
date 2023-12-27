@@ -644,7 +644,6 @@ function capitalise(string: string) {
 
     &::-webkit-scrollbar {
       display: none;
-      /* ... or should this be kept visible for accessibility? */
     }
 
     & :deep(.control) {

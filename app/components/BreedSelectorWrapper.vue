@@ -1,24 +1,32 @@
 <template>
   <div
+    id="breed-selector-wrapper"
     ref="rootEl"
-    class="focusable-dialog"
     role="dialog"
     aria-modal="true"
   >
-    <div id="modal-header">
-      <slot name="title"> Dialog Title </slot>
-      <slot name="close">
+    <header class="dialog-header">
+      <h1 class="dialog-header-title">
+        <slot name="title">Choose a breed</slot>
+      </h1>
+
+      <div class="dialog-buttons">
         <button
-          class="close themed-button"
-          @click="close"
+          class="button close-button"
+          type="button"
+          title="Close dialog"
+          @click="emit('close')"
         >
-          close
+          <FontAwesomeIcon
+            size="2x"
+            icon="times"
+          />
         </button>
-      </slot>
-    </div>
-    <div id="modal-description">
+      </div>
+    </header>
+    <main class="dialog-main">
       <slot name="content"></slot>
-    </div>
+    </main>
   </div>
 </template>
 <script setup lang="ts">
@@ -44,8 +52,7 @@ function close() {
 }
 </script>
 <style scoped>
-.focusable-dialog {
-  background: #fff;
+#breed-selector-wrapper {
   z-index: 99;
   position: fixed;
   bottom: 0;
@@ -58,26 +65,20 @@ function close() {
   max-height: 500px;
   display: flex;
   flex-direction: column;
-  padding: 4px;
   overscroll-behavior: contain;
+  background: var(--dialog-body-bg);
 }
 
-#modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-}
-
-#modal-description {
+.dialog-main {
   flex: 1;
   display: flex;
   overflow: auto;
   flex-direction: column;
+  padding: 0.5rem;
 }
 
 @media only screen and (min-width: 501px) {
-  .focusable-dialog {
+  #breed-selector-wrapper {
     width: 500px;
     box-shadow: 0px 0px 200px 0px #000000;
     margin-left: -250px;
@@ -86,12 +87,12 @@ function close() {
 }
 
 @media only screen and (min-height: 501px) {
-  .focusable-dialog {
+  #breed-selector-wrapper {
     height: 500px;
     /* https://stackoverflow.com/questions/2005954/center-a-positionfixed-element */
     margin-top: -250px;
     top: 50%;
-    box-shadow: 0px 0px 200px 0px #000000;
+    box-shadow: 2px 2px 20px 1px;
   }
 }
 </style>

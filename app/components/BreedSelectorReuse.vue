@@ -55,6 +55,6 @@ const recentlyUsed = computed(() => {
 }
 .information {
   font-style: italic;
-  font-size: 11px;
+  text-align: center;
 }
 </style>

@@ -8,12 +8,12 @@
       v-bind="$attrs"
       @breed-selected="(breed) => emit('breedSelected', breed)"
     />
-    <div
+    <p
       v-else
       class="no-results"
     >
       {{ noResultsText }}
-    </div>
+    </p>
   </div>
 </template>
 <script setup lang="ts">
@@ -92,6 +92,8 @@ watch(container, () => {
   overflow-y: auto;
 }
 .no-results {
+  margin-top: 1rem;
   font-style: italic;
+  text-align: center;
 }
 </style>
