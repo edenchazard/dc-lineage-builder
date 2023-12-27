@@ -95,6 +95,7 @@
     serif;
 
   > #top {
+    --ui-focus-colour: #fc0;
     font-family: 'fq', 'Times New Roman', 'Times', serif;
     color: var(--dc-colour-5);
 
@@ -218,7 +219,7 @@
   --ui-modal-content: #fff;
   --ui-modal-footer: #000;
 
-  --ui-focus-colour: rgba(255, 102, 0, 0.5);
+  --ui-focus-colour: rgba(255, 102, 0);
 
   --semi-black: rgba(0, 0, 0, 0.5);
   --tile-shade: rgba(0, 0, 0, 0.4);
@@ -614,6 +615,8 @@
   --ui-header-bg: #000;
   --ui-footer-bg: #000;
   --ui-footer-fg: #fff;
+
+  --ui-focus-colour: #ff9315;
 
   --dialog-header-bg: #000;
   --dialog-header-fg: #fff;
