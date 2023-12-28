@@ -1,4 +1,4 @@
-import pool from '../backend/pool.js';
+import pool from '../pool.js';
 
 const table = 'saved_lineages';
 
