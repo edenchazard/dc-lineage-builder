@@ -53,7 +53,7 @@ function close() {
 </script>
 <style scoped>
 #breed-selector-wrapper {
-  z-index: 99;
+  z-index: 1000;
   position: fixed;
   bottom: 0;
   top: 0;
