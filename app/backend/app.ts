@@ -25,7 +25,15 @@ app.context.abort = function (status: number, errors: ErrorArray) {
 };
 
 app
-  .use(mount(config.appUrl, serve(path.join(__dirname, '/static'))))
+  .use(
+    mount(
+      config.appUrl,
+      serve(path.join(__dirname, '/static'), {
+        // 1 month
+        maxAge: 2629800000,
+      }),
+    ),
+  )
   .use(async (ctx, next) => {
     try {
       await next();
