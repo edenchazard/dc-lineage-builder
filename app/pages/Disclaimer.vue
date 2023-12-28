@@ -13,6 +13,20 @@
         <p>
           Code and design &copy; <a href="https://chazza.me">eden chazard</a>.
         </p>
+        <div class="special-thanks">
+          <p>
+            Special thanks to <i>Mu-Cephei (endulum)</i> for their crazy work
+            with the themes.
+          </p>
+          <aside>
+            <p>
+              Check out their
+              <a href="https://endulum.github.io/dc-shuffle-clock/index.html"
+                >Cave Shuffle Clock here</a
+              >!
+            </p>
+          </aside>
+        </div>
       </section>
       <section>
         <h2>Art Usage</h2>
@@ -86,3 +100,9 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.special-thanks {
+  font-weight: bold;
+}
+</style>
