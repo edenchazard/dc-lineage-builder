@@ -46,15 +46,18 @@ const route = useRoute();
 const appStore = useAppStore();
 
 const { pixelRatio } = useDevicePixelRatio();
+let use72 = false;
 
 /* dynamically load and apply the correct spritesheet depending on
- pixel ratio */
+ pixel ratio. If we've requested the 72x set, we should prioritise it
+ over the 36x res. */
 watch(
   pixelRatio,
   () => {
     if (pixelRatio.value > 1) {
       import('./assets/tile-rendering/sprites-72x96.css');
-    } else {
+      use72 = true;
+    } else if (!use72) {
       import('./assets/tile-rendering/sprites-36x48.css');
     }
   },
