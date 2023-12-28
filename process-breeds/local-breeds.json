@@ -515,6 +515,15 @@
     "sprites": "k3PF",
     "tags": ["CB"]
   },
+  "Harkfrost": {
+    "dimorphism": false,
+    "genderOnly": "m",
+    "group": "Standard",
+    "sprites": {
+      "__regular__": "4youu"
+    },
+    "tags": ["Christmas"]
+  },
   "Harvest": {
     "dimorphism": true,
     "genderOnly": false,
