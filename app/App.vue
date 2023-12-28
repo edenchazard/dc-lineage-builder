@@ -52,10 +52,10 @@ const { pixelRatio } = useDevicePixelRatio();
 watch(
   pixelRatio,
   () => {
-    if (pixelRatio.value <= 1) {
-      import('./assets/tile-rendering/sprites-36x48.css');
-    } else {
+    if (pixelRatio.value > 1) {
       import('./assets/tile-rendering/sprites-72x96.css');
+    } else {
+      import('./assets/tile-rendering/sprites-36x48.css');
     }
   },
   { immediate: true },

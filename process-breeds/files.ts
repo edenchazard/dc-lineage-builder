@@ -11,19 +11,19 @@ export const ignoreFile = __dirname + '/breed-ignore';
 // device settings for use with puppeteer
 export const caches = {
   cache36: new PortraitCache({
-    folder: __dirname + '/caches/72/',
-    inject: __dirname + '/inject/72/',
+    folder: __dirname + '/caches/36/',
+    inject: __dirname + '/inject/36/',
     device: {
-      dpr: 2.75,
+      dpr: 1,
       device: KnownDevices['Pixel 5'],
     },
   }),
 
   cache72: new PortraitCache({
-    folder: __dirname + '/caches/36/',
-    inject: __dirname + '/inject/36/',
+    folder: __dirname + '/caches/72/',
+    inject: __dirname + '/inject/72/',
     device: {
-      dpr: 1,
+      dpr: 2.75,
       device: null,
     },
   }),
