@@ -15,7 +15,7 @@ export const caches = {
     inject: __dirname + '/inject/36/',
     device: {
       dpr: 1,
-      device: KnownDevices['Pixel 5'],
+      device: null,
     },
   }),
 
@@ -24,7 +24,7 @@ export const caches = {
     inject: __dirname + '/inject/72/',
     device: {
       dpr: 2.75,
-      device: null,
+      device: KnownDevices['Pixel 5'],
     },
   }),
 };
