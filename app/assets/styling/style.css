@@ -127,3 +127,13 @@ overwrites
 .svg-inline--fa {
   margin: 0 0.5rem;
 }
+
+/* need a way of referencing these to the ones in the settings file */
+:root {
+  --size36x48W: 36px;
+  --size36x48H: 48px;
+  --size24x32W: 24px;
+  --size24x32H: 32px;
+  --size36x48-w-adjust: calc(var(--size36x48W) - 2px);
+  --size36x48-h-adjust: calc(var(--size36x48H) - 2px);
+}

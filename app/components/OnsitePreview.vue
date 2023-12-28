@@ -3,10 +3,12 @@
   <ul id="lineage">
     <li>
       <div>
-        <img
-          src="../assets/images/placeholder.png"
-          alt="result placeholder"
-        />
+        <span class="border">
+          <img
+            src="../assets/images/placeholder.png"
+            alt="result placeholder"
+          />
+        </span>
         <label>Result</label>
       </div>
       <ul
@@ -113,6 +115,21 @@ defineProps({
   width: 24px;
   height: 0;
 }
+
+:deep(a),
+.border {
+  width: var(--size36x48-w-adjust);
+  height: var(--size36x48-h-adjust);
+  display: inline-block;
+  overflow: hidden;
+  border: 1px solid var(--dc-lineage-line-colour);
+  background: var(--dc-lineage-tile-background, transparent);
+}
+
+:deep(img) {
+  margin: -1px -1px;
+}
+
 /* fix for the bar showing up on the rightmost gen */
 :deep(li div:last-child::after) {
   display: none;
