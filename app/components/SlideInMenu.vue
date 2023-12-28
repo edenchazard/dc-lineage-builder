@@ -2,7 +2,6 @@
   <div
     ref="mobileMenu"
     class="slide-in-menu-container"
-    :aria-hidden="!isOpen"
   >
     <Transition
       name="fade"
