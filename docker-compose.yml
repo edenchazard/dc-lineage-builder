@@ -5,6 +5,9 @@ services:
       dockerfile: ./Dockerfile
       target: production
     command: sleep infinity
+    volumes:
+      - .:/app
+      - /app/node_modules
     env_file:
       - .env
     ports:
