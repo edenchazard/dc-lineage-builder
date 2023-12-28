@@ -74,7 +74,21 @@ docker-compose --env-file .env.production -f docker-compose.prod.yml up -d --bui
 
 ## Migrations
 
-Lineage Builder doesn't use an ORM as it wouldn't be particularly useful. Instead, you can set up the database by running `npm run db:fresh` to set up the table and `npm run db:seed` to seed data.
+Lineage Builder doesn't use an ORM as it wouldn't be particularly useful.
+
+As tsx isn't used in production, the way to invoke database commands differs. In dev, you'll need to use:
+
+```sh
+tsx ./app/backend/commands/databaseFresh.ts # set up table
+tsx ./app/backend/commands/databaseSeed.ts # seed data
+```
+
+In production:
+
+```sh
+node ./backend/commands/databaseFresh.js # set up table
+node ./backend/commands/databaseSeed.js # seed data
+```
 
 ## Breed processing
 
