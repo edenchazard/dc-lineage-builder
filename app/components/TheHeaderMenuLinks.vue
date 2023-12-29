@@ -33,5 +33,3 @@ const links = [
   ['/disclaimer', 'Disclaimer'],
 ];
 </script>
-
-<style scoped></style>

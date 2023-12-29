@@ -2,13 +2,14 @@
   <div
     ref="mobileMenu"
     class="slide-in-menu-container"
+    :hidden="!open"
   >
     <Transition
       name="fade"
       mode="in-out"
     >
       <div
-        v-if="isOpen"
+        v-if="hasFocus"
         class="blackout"
         @click="emit('change', false)"
       />
@@ -17,7 +18,7 @@
       class="slide-in-menu-wrapper"
       v-bind="$attrs"
       :class="{
-        open: isOpen,
+        open: hasFocus,
       }"
     >
       <slot name="default" />
@@ -30,45 +31,46 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
-//import { useSwipe } from '@vueuse/core';
+import { useScrollLock } from '@vueuse/core';
 
 const emit = defineEmits<{
   (e: 'change', open: boolean): void;
 }>();
 
 const props = defineProps({
-  slideThreshold: {
-    type: Number,
-    required: true,
-  },
   open: {
     type: Boolean,
     required: true,
   },
 });
 
-const isOpen = computed(() => props.open);
 const mobileMenu = ref<HTMLDivElement>();
-const { activate, deactivate } = useFocusTrap(mobileMenu);
-//const { isSwiping, direction } = useSwipe(document.body);
 
-watch(isOpen, (value) => {
-  (value ? activate : deactivate)();
+const scrollLockDoc = useScrollLock(document.documentElement, false);
+const scrollLockBody = useScrollLock(document.body, false);
+
+const { activate, deactivate, hasFocus } = useFocusTrap(mobileMenu, {
+  onActivate() {
+    scrollLockBody.value = true;
+    scrollLockDoc.value = true;
+  },
+  onDeactivate() {
+    scrollLockBody.value = false;
+    scrollLockDoc.value = false;
+  },
 });
 
-/* watch(isSwiping, () => {
-  if (window.screen.width >= props.slideThreshold) {
-    return;
+watchEffect(() => {
+  if (props.open) {
+    setTimeout(() => {
+      activate();
+    }, 100);
+  } else {
+    deactivate();
   }
-
-  if (direction.value === 'left') {
-    emit('change', false);
-  } else if (direction.value === 'right') {
-    emit('change', true);
-  }
-}); */
+});
 </script>
 
 <style>
@@ -83,7 +85,7 @@ watch(isOpen, (value) => {
   position: fixed;
   top: 0px;
   left: var(--negative);
-  transition: 0.5s linear;
+  transition: 0.3s linear;
   z-index: 1000;
   display: block;
 }
