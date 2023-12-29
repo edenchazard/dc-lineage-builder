@@ -38,7 +38,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './assets/styling/style.css';
 import './assets/layouts/theming.css';
 import { useAppStore } from './store/useAppStore.js';
-import Header from './components/Header.vue';
+import Header from './components/TheHeader.vue';
 import SkinSwitcher from './components/SkinSwitcher.vue';
 import { adjustTiles, injectBreedList } from './shared/breeds.js';
 

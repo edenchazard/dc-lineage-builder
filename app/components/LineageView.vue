@@ -4,12 +4,12 @@
     :data-show-labels="config.showLabels"
     :data-show-editor-interface="config.showInterface"
   >
-    <LineageGenerationCounter :count="generations" />
+    <LineageViewGenerationCounter :count="generations" />
     <ul
       v-if="root !== null"
       class="lineage-root"
     >
-      <Dragon
+      <LineageViewNode
         :data="root"
         :nodes-from-root="0"
         :disabled="config.disabled"
@@ -25,8 +25,8 @@ import type {
   PartialLineageWithMetadata,
 } from '../shared/types';
 
-import Dragon from './Dragon.vue';
-import LineageGenerationCounter from './LineageGenerationCounter.vue';
+import LineageViewNode from './LineageViewNode.vue';
+import LineageViewGenerationCounter from './LineageViewGenerationCounter.vue';
 import { Lineage } from '../shared/lineageHandler';
 
 const props = defineProps({

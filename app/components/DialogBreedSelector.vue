@@ -1,5 +1,5 @@
 <template>
-  <BreedSelectorWrapper
+  <DialogBreedSelectorWrapper
     aria-label="Choose a breed"
     aria-description="Select a breed."
     @close="close"
@@ -7,7 +7,7 @@
     <template #content>
       <section id="recently-used">
         <h2 class="title sr-only">Already in lineage</h2>
-        <BreedSelectorReuse
+        <BreedListReuse
           :filter-by-gender="genderFilter"
           @breed-selected="breedSelected"
         />
@@ -16,7 +16,7 @@
       <section>
         <h2 class="sr-only">Filtering</h2>
         <div id="filtering">
-          <BreedSearchControl
+          <BreedSearch
             id="results-search"
             ref="mateSearchEl"
             placeholder="Search"
@@ -29,15 +29,15 @@
             Search
           </label>
           <label class="sr-only">Groups</label>
-          <BreedGroupsTagSelector name="filters-groups" />
+          <BreedTagListGroups name="filters-groups" />
           <label class="sr-only">Showing</label>
-          <BreedTagsSelector name="filters-tags" />
+          <BreedTagListTags name="filters-tags" />
         </div>
       </section>
 
       <section id="breeds">
         <h2 class="sr-only">Results</h2>
-        <FilteredBreedList
+        <BreedListFiltered
           :search="searchString"
           :breeds="breeds"
           :tags="tagStore.enabledTags"
@@ -47,7 +47,7 @@
         />
       </section>
     </template>
-  </BreedSelectorWrapper>
+  </DialogBreedSelectorWrapper>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -55,12 +55,12 @@ import type { PropType } from 'vue';
 import { onStartTyping } from '@vueuse/core';
 import type { DragonGender, PortraitData } from '../shared/types';
 import { useTagStore } from '../store/useTagStore.js';
-import FilteredBreedList from './FilteredBreedList.vue';
-import BreedSelectorReuse from './BreedSelectorReuse.vue';
-import BreedSelectorWrapper from './BreedSelectorWrapper.vue';
-import BreedTagsSelector from './BreedTagsSelector.vue';
-import BreedGroupsTagSelector from './BreedGroupsTagSelector.vue';
-import BreedSearchControl from './BreedSearchControl.vue';
+import BreedListFiltered from './BreedListFiltered.vue';
+import BreedListReuse from './BreedListReuse.vue';
+import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
+import BreedTagListTags from './BreedTagListTags.vue';
+import BreedTagListGroups from './BreedTagListGroups.vue';
+import BreedSearch from './BreedSearch.vue';
 
 defineProps({
   breeds: {

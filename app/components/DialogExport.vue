@@ -1,5 +1,5 @@
 <template>
-  <DialogBase
+  <BaseDialog
     :id="id"
     :open="open"
     @close="emit('close')"
@@ -27,7 +27,7 @@
       </div>
       <div v-if="problemDragon">
         The problem dragon is:
-        <DragonFormattingBlock :dragon="problemDragon" />
+        <DragonProblem :dragon="problemDragon" />
       </div>
     </template>
     <template #footer>
@@ -38,7 +38,7 @@
         Close
       </button>
     </template>
-  </DialogBase>
+  </BaseDialog>
 </template>
 <script setup lang="ts">
 import { onUpdated, ref } from 'vue';
@@ -47,10 +47,10 @@ import type {
   MaybePartialLineageWithMetadata,
   PartialLineage,
 } from '../shared/types';
-import DialogBase from './DialogBase.vue';
+import BaseDialog from './BaseDialog.vue';
 import Feedback from './Feedback.vue';
 import Textbox from './Textbox.vue';
-import DragonFormattingBlock from './DragonFormattingBlock.vue';
+import DragonProblem from './DragonProblem.vue';
 import { Lineage } from '../shared/lineageHandler';
 
 const props = defineProps({

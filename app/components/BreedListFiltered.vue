@@ -1,6 +1,6 @@
 <template>
   <div class="results">
-    <BreedGrid
+    <BreedList
       v-if="filteredBreeds.length > 0"
       ref="container"
       :list="filteredBreeds.map((breed) => ({ data: breed }))"
@@ -21,7 +21,7 @@ import { nextTick, watch, computed, ref } from 'vue';
 import type { PropType } from 'vue';
 import type { FilterTag, EggGroupTag, PortraitData } from '../shared/types';
 import { filterEggGroups, filterTags } from '../shared/utils.js';
-import BreedGrid from './BreedGrid.vue';
+import BreedList from './BreedList.vue';
 
 const props = defineProps({
   breeds: {

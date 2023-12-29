@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { PartialLineage } from '../shared/types';
-import DialogBase from './DialogBase.vue';
+import DialogBase from './BaseDialog.vue';
 import Textbox from './Textbox.vue';
 import Feedback from './Feedback.vue';
 import { dragonSchema } from '../shared/validation.js';

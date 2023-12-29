@@ -1,5 +1,5 @@
 <template>
-  <TagList
+  <BaseTagList
     v-model="tagStore.tags"
     class="tag-filter"
     at-least-one-enabled
@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { useTagStore } from '../store/useTagStore.js';
-import TagList from './TagList.vue';
+import BaseTagList from './BaseTagList.vue';
 
 const tagStore = useTagStore();
 
