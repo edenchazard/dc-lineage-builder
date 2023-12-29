@@ -2,6 +2,7 @@
   <li class="tile-container">
     <DialogBreedSelector
       v-if="showDialogBreedSelector"
+      :autofocus-search="autofocusBreedSelector"
       :breeds="availableMates"
       :gender-filter="data.gender"
       @breed-selected="changeBreed"
@@ -170,6 +171,7 @@ const props = defineProps({
   },
 });
 
+let autofocusBreedSelector = false;
 const ls = localStorage;
 const appStore = useAppStore();
 const showDialogBreedSelector = ref(false);
@@ -308,13 +310,22 @@ function handleLongPress() {
   }
 }
 
-function handleClick() {
+function handleClick(e: Event) {
   if (props.disabled) return;
 
   // if selection mode is active, we should add to the selection
   if (appStore.selectionCount > 0) {
     props.data.selected = !props.data.selected;
   } else {
+    if (e instanceof KeyboardEvent && e.code === 'Space') {
+      // if the keyboard was used to open the dialog, it's relatively safe
+      // to assume they'll want to immediately use the search
+      // control too.
+      autofocusBreedSelector = true;
+    } else {
+      autofocusBreedSelector = false;
+    }
+
     showDialogBreedSelector.value = true;
   }
 }

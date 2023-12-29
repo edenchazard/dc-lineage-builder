@@ -1,5 +1,7 @@
 <template>
   <DialogBreedSelectorWrapper
+    ref="wrapper"
+    tabindex="-1"
     aria-label="Choose a breed"
     aria-description="Select a breed."
     @close="close"
@@ -61,8 +63,9 @@ import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedTagListTags from './BreedTagListTags.vue';
 import BreedTagListGroups from './BreedTagListGroups.vue';
 import BreedSearch from './BreedSearch.vue';
+import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
 
-defineProps({
+const props = defineProps({
   breeds: {
     type: Array<PortraitData>,
     required: true,
@@ -70,6 +73,10 @@ defineProps({
   genderFilter: {
     type: String as PropType<DragonGender>,
     required: true,
+  },
+  autofocusSearch: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -81,6 +88,23 @@ const emit = defineEmits<{
 const tagStore = useTagStore();
 const searchString = ref('');
 const mateSearchEl = ref<HTMLInputElement>();
+const wrapper = ref();
+
+const { deactivate } = useFocusTrap(wrapper, {
+  immediate: true,
+  escapeDeactivates: true,
+  onDeactivate: close,
+  initialFocus() {
+    if (props.autofocusSearch) {
+      setTimeout(() => {
+        mateSearchEl.value?.$el.focus();
+      }, 100);
+      return false;
+    }
+
+    return undefined;
+  },
+});
 
 // focus search bar when begin typing
 onStartTyping(() => {
@@ -91,7 +115,7 @@ onStartTyping(() => {
 
 function breedSelected(breed: PortraitData) {
   emit('breedSelected', breed);
-  close();
+  deactivate();
 }
 
 function close() {
