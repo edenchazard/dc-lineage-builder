@@ -1,6 +1,6 @@
 <template>
   <div class="reuse">
-    <BreedGrid
+    <BreedList
       v-if="recentlyUsed.length > 0"
       :list="recentlyUsed.map((breed) => ({ data: breed }))"
       :compact="true"
@@ -20,7 +20,7 @@ import type { PropType } from 'vue';
 import type { BreedEntry, DragonGender, PortraitData } from '../shared/types';
 import { getBreedData, filterBreedTableByGender } from '../shared/utils.js';
 import { useAppStore } from '../store/useAppStore.js';
-import BreedGrid from './BreedGrid.vue';
+import BreedList from './BreedList.vue';
 
 const props = defineProps({
   filterByGender: {

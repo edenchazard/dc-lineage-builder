@@ -53,11 +53,11 @@
       v-if="htmlPreview !== ''"
       :id="containerID"
     >
-      <LineageGenerationCounter
+      <LineageViewGenerationCounter
         :count="generations"
         :limit="cutoff"
       />
-      <OnSitePreview :html-preview="htmlPreview" />
+      <OnsitePreview :html-preview="htmlPreview" />
     </div>
   </section>
 </template>
@@ -73,8 +73,8 @@
 </div> */
 import { ref, nextTick } from 'vue';
 import { getOnSitePreview } from '../app/api.js';
-import OnSitePreview from '../components/OnsitePreview.vue';
-import LineageGenerationCounter from '../components/LineageGenerationCounter.vue';
+import OnsitePreview from '../components/OnsitePreview.vue';
+import LineageViewGenerationCounter from '../components/LineageViewGenerationCounter.vue';
 import Feedback from '../components/Feedback.vue';
 import { validateCode } from '../shared/validation.js';
 import { AxiosError } from 'axios';

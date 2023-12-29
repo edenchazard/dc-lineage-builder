@@ -1,5 +1,5 @@
 <template>
-  <TagList
+  <BaseTagList
     v-model="tagStore.groups"
     class="tag-group"
     at-least-one-enabled
@@ -8,7 +8,7 @@
 </template>
 <script setup lang="ts">
 import { useTagStore } from '../store/useTagStore.js';
-import TagList from './TagList.vue';
+import BaseTagList from './BaseTagList.vue';
 
 const tagStore = useTagStore();
 

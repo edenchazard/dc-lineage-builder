@@ -1,6 +1,6 @@
 <template>
   <header id="top">
-    <SlideInMenu
+    <TheSlideInMenu
       id="mobile-menu-wrapper"
       :open="menuOpen"
       :slide-threshold="1002"
@@ -22,8 +22,8 @@
           />
         </button>
       </div>
-      <HeaderMenuLinks id="mobile-menu" />
-    </SlideInMenu>
+      <TheHeaderMenuLinks id="mobile-menu" />
+    </TheSlideInMenu>
 
     <div
       id="header"
@@ -48,7 +48,7 @@
           >Lineage Builder
         </router-link>
       </span>
-      <HeaderMenuLinks id="desktop-menu" />
+      <TheHeaderMenuLinks id="desktop-menu" />
     </div>
   </header>
 </template>
@@ -57,8 +57,8 @@
 import { ref } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { onKeyDown } from '@vueuse/core';
-import HeaderMenuLinks from './HeaderMenuLinks.vue';
-import SlideInMenu from './SlideInMenu.vue';
+import TheHeaderMenuLinks from './TheHeaderMenuLinks.vue';
+import TheSlideInMenu from './TheSlideInMenu.vue';
 
 onKeyDown('Escape', () => (menuOpen.value = false));
 

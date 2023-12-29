@@ -28,7 +28,7 @@
     <div class="constrain-width">
       <Feedback ref="status" />
     </div>
-    <Lineage
+    <LineageView
       v-if="appStore.activeTree !== null"
       class="builder"
       :root="appStore.activeTree"
@@ -53,7 +53,7 @@ import { hasParents } from '../shared/utils.js';
 import { getLineage } from '../app/api.js';
 import { useAppStore } from '../store/useAppStore.js';
 import Toolbar from './Toolbar.vue';
-import Lineage from './Lineage.vue';
+import LineageView from './LineageView.vue';
 import Feedback from './Feedback.vue';
 import { Lineage as LineageHandler } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder.js';

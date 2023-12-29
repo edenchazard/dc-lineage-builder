@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <Lineage
+  <LineageView
     v-if="tree != null"
     :root="tree"
     :config="config"
@@ -44,7 +44,7 @@ import type { LineageConfig, PartialLineage } from '../shared/types';
 import { getLineage } from '../app/api.js';
 import { createLineageLink } from '../shared/utils.js';
 
-import Lineage from '../components/Lineage.vue';
+import LineageView from '../components/LineageView.vue';
 import Textbox from '../components/Textbox.vue';
 import Feedback from '../components/Feedback.vue';
 import { AxiosError } from 'axios';

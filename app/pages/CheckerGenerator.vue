@@ -56,20 +56,20 @@
             >
               <label for="enabled-groups">Groups:</label>
               <div class="tag-list">
-                <BreedGroupsTagSelector
+                <BreedTagListGroups
                   id="enabled-groups"
                   name="filters-groups"
                 />
               </div>
               <label for="enabled-tags">Showing:</label>
               <div class="tag-list">
-                <BreedTagsSelector
+                <BreedTagListTags
                   id="enabled-tags"
                   name="filters-tags"
                 />
               </div>
               <label for="search">Search: </label>
-              <BreedSearchControl
+              <BreedSearch
                 id="search"
                 class="interactive pointer"
                 placeholder="Search breeds"
@@ -102,7 +102,7 @@
       <section id="breeds">
         <div class="gender">
           <h2>Male</h2>
-          <FilteredBreedList
+          <BreedListFiltered
             :search="query"
             :breeds="malePortraits"
             :tags="tagStore.enabledTags"
@@ -113,7 +113,7 @@
         </div>
         <div class="gender">
           <h2>Female</h2>
-          <FilteredBreedList
+          <BreedListFiltered
             :search="query"
             :breeds="femalePortraits"
             :tags="tagStore.enabledTags"
@@ -124,7 +124,7 @@
         </div>
       </section>
       <section>
-        <Lineage
+        <LineageView
           v-if="tree !== null"
           :root="tree"
           :config="{ showInterface: false, showLabels: true, disabled: true }"
@@ -140,14 +140,14 @@ import type { PortraitData, DragonGender } from '../shared/types';
 import { getBreedData } from '../shared/utils.js';
 import { useTagStore } from '../store/useTagStore.js';
 
-import Lineage from '../components/Lineage.vue';
-import FilteredBreedList from '../components/FilteredBreedList.vue';
-import BreedTagsSelector from '../components/BreedTagsSelector.vue';
-import BreedGroupsTagSelector from '../components/BreedGroupsTagSelector.vue';
+import LineageView from '../components/LineageView.vue';
+import BreedListFiltered from '../components/BreedListFiltered.vue';
+import BreedTagListTags from '../components/BreedTagListTags.vue';
+import BreedTagListGroups from '../components/BreedTagListGroups.vue';
 import DialogExport from '../components/DialogExport.vue';
 import DialogGenerate from '../components/DialogGenerate.vue';
 import ToolbarButton from '../components/ToolbarButton.vue';
-import BreedSearchControl from '../components/BreedSearchControl.vue';
+import BreedSearch from '../components/BreedSearch.vue';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 import {
   femalePortraits,

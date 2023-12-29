@@ -1,21 +1,21 @@
 <template>
   <li class="tile-container">
-    <BreedSelector
-      v-if="showBreedSelector"
+    <DialogBreedSelector
+      v-if="showDialogBreedSelector"
       :breeds="availableMates"
       :gender-filter="data.gender"
       @breed-selected="changeBreed"
-      @close="showBreedSelector = false"
+      @close="showDialogBreedSelector = false"
     />
     <div class="tile">
-      <DragonButton
+      <LineageViewNodeButton
         v-if="nodesFromRoot === 0"
         class="tile-button-left tile-button-add-desc"
         title="Add descendant"
         icon="arrow-left"
         @click="addDescendant"
       />
-      <DragonButton
+      <LineageViewNodeButton
         v-if="nodesFromRoot > 0"
         class="tile-button-left tile-button-remove-desc"
         title="Remove descendants"
@@ -47,20 +47,20 @@
         :aria-label="problems"
       />
       <div class="tile-button-right">
-        <DragonButton
+        <LineageViewNodeButton
           v-if="hasAncestry"
           class="switch"
           title="Switch parents"
           icon="sync-alt"
           @click="switchParents"
         />
-        <DragonButton
+        <LineageViewNodeButton
           v-if="hasAncestry"
           title="Remove ancestors"
           icon="minus"
           @click="deleteAncestors"
         />
-        <DragonButton
+        <LineageViewNodeButton
           v-else
           class="tile-button-right"
           title="Add ancestors"
@@ -68,38 +68,38 @@
           @click="addAncestors"
         />
       </div>
-      <DragonLabel
+      <LineageViewNodeLabel
         :value="data.display === 1 ? data.code : data.name"
         :display="data.display"
         :disabled="disabled"
         @changed="labelChanged"
       />
       <div class="tile-bottom-controls tile-button-group">
-        <DragonButton
+        <LineageViewNodeButton
           v-if="nodesFromRoot === 0 && data.gender === 'm'"
           title="Switch gender to female"
           icon="mars"
           @click="switchGender"
         />
-        <DragonButton
+        <LineageViewNodeButton
           v-else-if="nodesFromRoot === 0 && data.gender === 'f'"
           title="Switch gender to male"
           icon="venus"
           @click="switchGender"
         />
-        <DragonButton
+        <LineageViewNodeButton
           class="switchLabel"
           title="Switch label"
           icon="font"
           @click="switchLabel"
         />
-        <DragonButton
+        <LineageViewNodeButton
           v-if="hasAncestry"
           title="Copy ancestors"
           icon="clone"
           @click="copyBranch"
         />
-        <DragonButton
+        <LineageViewNodeButton
           title="Paste ancestors"
           icon="paste"
           @click="pasteBranch"
@@ -110,12 +110,12 @@
       v-if="hasAncestry"
       class="tile-parents"
     >
-      <Dragon
+      <LineageViewNode
         :data="data.parents.m as PartialLineageWithMetadata"
         :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
       />
-      <Dragon
+      <LineageViewNode
         :data="data.parents.f as PartialLineageWithMetadata"
         :nodes-from-root="nodesFromRoot + 1"
         :disabled="disabled"
@@ -141,10 +141,10 @@ import {
   hasParents,
 } from '../shared/utils.js';
 import { useAppStore } from '../store/useAppStore.js';
-import DragonLabel from './DragonLabel.vue';
-import BreedSelector from './BreedSelector.vue';
+import LineageViewNodeLabel from './LineageViewNodeLabel.vue';
+import DialogBreedSelector from './DialogBreedSelector.vue';
 import DragonPortrait from './DragonPortrait.vue';
-import DragonButton from './DragonButton.vue';
+import LineageViewNodeButton from './LineageViewNodeButton.vue';
 import { Lineage } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 import { validateCode, validateName } from '../shared/validation.js';
@@ -172,7 +172,7 @@ const props = defineProps({
 
 const ls = localStorage;
 const appStore = useAppStore();
-const showBreedSelector = ref(false);
+const showDialogBreedSelector = ref(false);
 
 const hasAncestry = computed(() => hasParents(props.data));
 
@@ -228,7 +228,7 @@ function switchGender() {
 
 // todo type this
 function changeBreed(e: PortraitData) {
-  showBreedSelector.value = false;
+  showDialogBreedSelector.value = false;
 
   // update the breed
   props.data.breed = e.name;
@@ -315,7 +315,7 @@ function handleClick() {
   if (appStore.selectionCount > 0) {
     props.data.selected = !props.data.selected;
   } else {
-    showBreedSelector.value = true;
+    showDialogBreedSelector.value = true;
   }
 }
 </script>
