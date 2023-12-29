@@ -8,7 +8,6 @@
     <TheSlideInMenu
       id="mobile-menu-wrapper"
       :open="menuOpen"
-      :slide-threshold="1002"
       @change="(state) => (menuOpen = state)"
     >
       <div
@@ -64,19 +63,19 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { onKeyDown } from '@vueuse/core';
 import TheHeaderMenuLinks from './TheHeaderMenuLinks.vue';
 import TheSlideInMenu from './TheSlideInMenu.vue';
+import router from '../router/router';
+
+const menuOpen = ref(false);
 
 onKeyDown('Escape', () => (menuOpen.value = false));
 
-const menuOpen = ref(false);
+router.afterEach(() => (menuOpen.value = false));
 </script>
 
 <style>
 #top {
   background: var(--ui-header-bg);
   color: var(--ui-header-fg);
-  /* padding-top: 0.5rem;
-  padding-bottom: 0.5rem; */
-  /*   padding: 0.25rem 0.5rem; */
 }
 
 #top a {
