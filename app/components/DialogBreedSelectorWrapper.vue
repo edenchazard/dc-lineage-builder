@@ -4,9 +4,13 @@
     ref="rootEl"
     role="dialog"
     aria-modal="true"
+    aria-labelledby="dialog-breed-selector-wrapper"
   >
     <header class="dialog-header">
-      <h1 class="dialog-header-title">
+      <h1
+        id="dialog-breed-selector-wrapper"
+        class="dialog-header-title"
+      >
         <slot name="title">Choose a breed</slot>
       </h1>
 
@@ -14,7 +18,7 @@
         <button
           class="button close-button"
           type="button"
-          title="Close dialog"
+          title="Close"
           @click="emit('close')"
         >
           <FontAwesomeIcon
