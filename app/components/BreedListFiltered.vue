@@ -4,7 +4,7 @@
       v-if="filteredBreeds.length > 0"
       ref="container"
       :list="filteredBreeds.map((breed) => ({ data: breed }))"
-      :compact="filteredBreeds.length > 9"
+      :compact="search.length < 3 && filteredBreeds.length > 9"
       v-bind="$attrs"
       @breed-selected="(breed) => emit('breedSelected', breed)"
     />
