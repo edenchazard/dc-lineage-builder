@@ -1,6 +1,6 @@
 import path from 'path';
 import Router from '@koa/router';
-import { object } from 'yup';
+import { number, object } from 'yup';
 import { codeValidator } from '../../shared/validation.js';
 import {
   getDataForPair,
@@ -15,10 +15,13 @@ const router = new Router({
 });
 
 router.post('/', async (ctx: RequestContext) => {
-  const { male, female } = await object()
+  const { male, female, options } = await object()
     .shape({
       male: codeValidator.required(),
       female: codeValidator.required(),
+      options: object().shape({
+        dpr: number().default(1),
+      }),
     })
     .validate(ctx.request.body, {
       abortEarly: false,
@@ -28,7 +31,7 @@ router.post('/', async (ctx: RequestContext) => {
     // do checks such as ensuring the dragons match the gender
     const [genderChecks, pair] = await Promise.all([
       checkDragonsMatchGender([male, female]),
-      getDataForPair([male, female]),
+      getDataForPair([male, female], options),
     ]);
 
     const errors = [];

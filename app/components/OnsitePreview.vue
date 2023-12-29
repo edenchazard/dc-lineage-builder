@@ -118,18 +118,26 @@ defineProps({
 
 :deep(a),
 .border {
-  width: var(--size36x48-w-adjust);
-  height: var(--size36x48-h-adjust);
+  width: var(--size36x48W);
+  height: var(--size36x48H);
   display: inline-block;
   overflow: hidden;
   border: 1px solid var(--dc-lineage-line-colour);
   background: var(--dc-lineage-tile-background, transparent);
+  box-sizing: border-box;
 }
 
 :deep(img) {
   margin: -1px -1px;
+  width: inherit;
+  height: inherit;
 }
 
+/* fixes the tiny tiles */
+:deep(li li li li li li a) {
+  width: var(--size24x32W) !important;
+  height: var(--size24x32H) !important;
+}
 /* fix for the bar showing up on the rightmost gen */
 :deep(li div:last-child::after) {
   display: none;

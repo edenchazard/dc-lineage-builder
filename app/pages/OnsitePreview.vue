@@ -127,7 +127,9 @@ async function fetchLineage(e: Event) {
   try {
     status.value.info({ message: 'Contacting server...', showDismiss: false });
 
-    const response = await getOnSitePreview(mCode, fCode);
+    const response = await getOnSitePreview(mCode, fCode, {
+      dpr: window.devicePixelRatio ?? 1,
+    });
 
     // Deal with problems
     if (response.data.errors) {
