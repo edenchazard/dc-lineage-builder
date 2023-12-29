@@ -1,4 +1,9 @@
 <template>
+  <a
+    href="#content"
+    class="sr-only"
+    >Skip to content</a
+  >
   <header id="top">
     <TheSlideInMenu
       id="mobile-menu-wrapper"
