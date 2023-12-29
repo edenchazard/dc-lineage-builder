@@ -1,11 +1,11 @@
 import type { PuppeteerLaunchOptions } from 'puppeteer';
 import { KnownDevices } from 'puppeteer';
 import { getFileAndDirName } from './utils.js';
-import { PortraitCache } from './portraitCache';
+import { PortraitCache } from './portraitCache.js';
 
 const { __dirname } = getFileAndDirName();
 
-export const ignoreFile = __dirname + '/breed-ignore';
+export const ignoreFile = __dirname + '/breedignore';
 
 // Each of these has the cache folder we want to use, and the
 // device settings for use with puppeteer

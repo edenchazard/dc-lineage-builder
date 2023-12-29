@@ -8,7 +8,7 @@ import mount from 'koa-mount';
 import { ValidationError } from 'yup';
 import lineageController from './controllers/lineageController.js';
 import onsiteController from './controllers/onsiteController.js';
-import { ServerError, type ErrorArray } from './serverError.js';
+import { ServerError, type ErrorArray } from './ServerError.js';
 import { injectBreedList } from '../shared/breeds.js';
 import config from './config.js';
 

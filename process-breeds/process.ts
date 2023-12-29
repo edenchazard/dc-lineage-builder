@@ -23,17 +23,17 @@ import {
   getBreedTable as localBreedTable,
   checkCache,
   type LocalBreedsJSON,
-} from './local-handling.js';
+} from './localHandling.js';
 
-import _localJSON from './local-breeds.json';
+import _localJSON from './localBreeds.json';
 
 import {
   makeCSSStyleSheet,
   getBreedTable as fallbackBreedTable,
   type FallbackBreedsJSON,
-} from './fallback-handling.js';
+} from './fallbackHandling.js';
 
-import _fallbackJSON from './fallback-breeds.json' assert { type: 'json' };
+import _fallbackJSON from './fallbackBreeds.json' assert { type: 'json' };
 import type { BreedEntry } from '../app/shared/types';
 
 const { __dirname } = getFileAndDirName();

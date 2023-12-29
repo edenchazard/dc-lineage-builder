@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import nodeHTMLParser from 'node-html-parser';
-import { getDragonsByCode } from './dcapi.js';
+import { getDragonsByCode } from './dcApi.js';
 
 export interface DragonOnsite {
   code: string;
