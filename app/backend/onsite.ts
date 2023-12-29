@@ -27,6 +27,18 @@ export class OnsiteDragonNotFoundError extends Error {
   }
 }
 
+interface GetHTMLOptions {
+  /**
+   * Whether to replace whitespace and fix urls
+   */
+  filter?: boolean;
+
+  /**
+   * Pass a Device Pixel Ratio to return an appropriate result
+   */
+  dpr?: number;
+}
+
 /**
  * Check a pair of dragons are male and female
  * @param codes Format: [male, female]
@@ -59,11 +71,17 @@ export async function checkDragonsMatchGender(
  */
 export async function grabHTML(
   code: string,
-  filter = true,
+  options: GetHTMLOptions,
 ): Promise<DragonOnsite> {
-  const fetchDragon = async (code: string) => {
+  const fetchDragon = async (code: string, dpr: GetHTMLOptions['dpr'] = 1) => {
     try {
-      return (await axios.get(`https://dragcave.net/lineage/${code}`)).data;
+      return (
+        await axios.get(`https://dragcave.net/lineage/${code}`, {
+          headers: {
+            Cookie: `dpr=${dpr};`,
+          },
+        })
+      ).data;
     } catch (err: unknown) {
       if (err instanceof AxiosError && err.response) {
         if (err.response.status === 404)
@@ -81,11 +99,10 @@ export async function grabHTML(
 
   /**
    * @param root The root returned by fetchDragon()
-   * @param filter Whether to replace whitespace and fix urls
    */
   const getHTML = async (
     root: HTMLElement,
-    filter: boolean,
+    options: GetHTMLOptions,
   ): Promise<string> => {
     const baseULTag = root.querySelector('ul');
 
@@ -94,7 +111,7 @@ export async function grabHTML(
 
     let html = baseULTag.toString();
 
-    if (filter) {
+    if (options.filter) {
       // grab all the images and make base64 data encodes of them
       const images = [
         ...new Set(
@@ -123,9 +140,6 @@ export async function grabHTML(
       );
 
       html = html
-        // strip large whitespaces
-        //.replace(/\s{2,}/g, '')
-        // add additional properties to links
         .replaceAll('<a ', "<a rel='noopener noreferrer' target='_blank' ")
         .replaceAll('/view/', 'https://dragcave.net/view/');
 
@@ -150,7 +164,8 @@ export async function grabHTML(
     return parseInt(genNode.textContent ?? '1');
   };
 
-  const response = await fetchDragon(code);
+  const response = await fetchDragon(code, options.dpr ?? 1);
+
   const root = nodeHTMLParser
     .parse(response)
     .querySelector(`a[href='/view/${code}']`)
@@ -160,7 +175,7 @@ export async function grabHTML(
 
   return {
     code,
-    html: await getHTML(root, filter),
+    html: await getHTML(root, options),
     gen: getGen(root),
   };
 }
@@ -170,8 +185,11 @@ export async function grabHTML(
  */
 export async function getDataForPair(
   codes: [string, string],
+  options: GetHTMLOptions = {},
 ): Promise<DragonPair> {
-  const dragons = await Promise.all(codes.map((code) => grabHTML(code)));
+  const dragons = await Promise.all(
+    codes.map((code) => grabHTML(code, { filter: true, ...options })),
+  );
 
   const [male, female] = dragons.map((dragon) => {
     // return with error for this dragon
