@@ -121,6 +121,10 @@ section + section {
   gap: 0.25rem 0.5rem;
 }
 
+#results-search {
+  max-width: 8rem;
+}
+
 #breeds {
   overflow: hidden;
   display: flex;
