@@ -5,6 +5,6 @@ db
 **/sprites-36x48.css
 **/sprites-72x96.css
 **/breed-definitions.json
-process-breeds/*-breeds.json
+process-breeds/*breeds.json
 package.json
 package-lock.json
