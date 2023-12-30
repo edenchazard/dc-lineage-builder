@@ -1,26 +1,45 @@
 <template>
-  <VirtualCollection
-    v-if="compact && list.length > 0"
-    class="mates-compact"
-    :cell-size-and-position-getter="cellSizeAndPositionGetter"
-    :collection="list"
-    :height="sizeH"
-    :width="sizeW"
-    :section-size="size"
+  <div
+    v-if="compact && breedList.length > 0"
+    ref="wrapper"
+    class="wrapper"
+    :tabindex="breedList.length > 0 ? 0 : -1"
+    @focusout="handleFocusOut"
+    @keyup.enter="navigateToCell(0, $event)"
   >
-    <template #cell="{ data: breed }">
-      <DragonPortrait
-        :data="breed"
-        @click="emit('breedSelected', breed)"
-      />
-    </template>
-  </VirtualCollection>
+    <VirtualCollection
+      v-if="compact && breedList.length > 0"
+      class="mates-compact"
+      :cell-size-and-position-getter="cellSizeAndPositionGetter"
+      :collection="breedList"
+      :height="sizeH"
+      :width="sizeW"
+      :section-size="size"
+      @vnode-updated="checkFocus"
+    >
+      <template #cell="{ data }">
+        <button
+          type="button"
+          class="grid-cell"
+          :tabindex="-1"
+          :data-index="data.index"
+          @click="emit('breedSelected', data.breed)"
+          @focus="focused = true"
+          @keydown.down.up.left.right="
+            navigateToCell(determineGridAction(data.index, $event), $event)
+          "
+        >
+          <DragonPortrait :data="data.breed" />
+        </button>
+      </template>
+    </VirtualCollection>
+  </div>
   <ul
     v-else
     class="breeds-list"
   >
     <li
-      v-for="{ data: breed } in list"
+      v-for="{ data: { breed } } in breedList"
       :key="breed.name"
       class="breed-entry"
       @click="emit('breedSelected', breed)"
@@ -41,8 +60,7 @@
           v-for="filter in breed.metaData.tags"
           :key="filter"
           class="tag-filter"
-        >
-          {{ filter }}</span
+          >{{ filter }}</span
         >
       </button>
     </li>
@@ -50,22 +68,24 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, watch } from 'vue';
+import { useElementSize } from '@vueuse/core';
 import VirtualCollection from 'vue-virtual-collection/src/VirtualCollection.vue';
-import { onMounted, ref, getCurrentInstance } from 'vue';
 import type { PortraitData } from '../shared/types';
 import DragonPortrait from './DragonPortrait.vue';
+import settings from '../shared/settings.js';
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
 }>();
 
-defineProps({
+const props = defineProps({
   compact: {
     type: Boolean,
-    required: true,
+    default: true,
   },
   list: {
-    type: Array<{ data: PortraitData }>,
+    type: Array<PortraitData>,
     default: [],
   },
   size: {
@@ -74,60 +94,92 @@ defineProps({
   },
 });
 
-const obs: {
-  func: (() => void) | null;
-  observer: ResizeObserver | null;
-} = {
-  func: null,
-  observer: null,
-};
+const wrapper = ref();
+const focused = ref(false);
+const activeIndex = ref<number>(0);
+const portraitWidth = settings.tileSizes.fullSize.width;
+const portraitHeight = settings.tileSizes.fullSize.height;
+const margin = 3;
+const columns = computed(() =>
+  Math.floor(sizeW.value / (portraitWidth + margin * 2)),
+);
 
-const sizeH = ref(0);
-const sizeW = ref(0);
+const breedList = computed(() =>
+  props.list.map((breed, index) => ({ data: { index, breed } })),
+);
 
-// We want our grid to be fluid, which means we have to employ a somewhat
-// hacky solution to ensure it takes up the parent container's space
-// once on initiation and there again when it's resized
-onMounted(() => {
-  const instance = getCurrentInstance();
-  const parent = instance?.parent?.proxy?.$el;
+// scroll the collection back to the top if the list changes
+watch(breedList, () => {
+  if (!wrapper.value) return;
 
-  if (!parent) return;
-
-  obs.func = () => {
-    if (!parent) return;
-
-    // the breed grid should expand to fill the space of the parent,
-    // so we have to manually calculate the width and height
-    const { width, height } = (parent as HTMLElement).getBoundingClientRect();
-    sizeW.value = width;
-    sizeH.value = height;
-  };
-
-  // once on initiation
-  obs.func();
-
-  // and again when the parent is resized
-  obs.observer = new ResizeObserver(() => {
-    if (obs.func) obs.func();
-  });
-  obs.observer.observe(parent);
+  wrapper.value.querySelector('.vue-virtual-collection').scroll(0, 0);
 });
 
-function cellSizeAndPositionGetter(item: PortraitData, index: number) {
-  const containerWidth = sizeW.value,
-    portraitWidth = 36,
-    portraitHeight = 48,
-    margin = 2,
-    columns = Math.floor(containerWidth / (portraitWidth + margin * 2));
+// We want our grid to be fluid, which means we have to employ a somewhat
+// hacky solution to ensure it takes up the parent container's space even when
+// resized
+const { height: sizeH, width: sizeW } = useElementSize(wrapper);
 
-  // compute size and position
+function cellSizeAndPositionGetter(_: PortraitData, index: number) {
   return {
     width: portraitWidth,
-    height: portraitHeight,
-    x: (index % columns) * (portraitWidth + margin),
-    y: Math.floor(index / columns) * (portraitHeight + margin),
+    height: portraitHeight + margin,
+    x: margin + (index % columns.value) * (portraitWidth + margin),
+    y: margin + Math.floor(index / columns.value) * (portraitHeight + margin),
   };
+}
+
+function handleFocusOut() {
+  requestAnimationFrame(() => {
+    if (wrapper.value && !wrapper.value.contains(document.activeElement)) {
+      focused.value = false;
+      activeIndex.value = 0;
+    }
+  });
+}
+
+/**
+ * Unfortunately, the way virtual scroll works means focus can be lost
+ * as it replaces cells
+ */
+function checkFocus() {
+  if (!focused.value) return;
+
+  const next = wrapper.value.querySelector(
+    `.grid-cell[data-index='${activeIndex.value}']`,
+  );
+
+  if (next) {
+    next.focus();
+  }
+}
+
+function navigateToCell(nextIndex: number, e: KeyboardEvent) {
+  e.preventDefault();
+
+  const next = wrapper.value.querySelector(
+    `.grid-cell[data-index='${nextIndex}']`,
+  );
+
+  if (next) {
+    activeIndex.value = nextIndex;
+    next.focus();
+  }
+}
+
+function determineGridAction(currentIndex: number, e: KeyboardEvent) {
+  switch (e.key) {
+    case 'ArrowUp':
+      return currentIndex - columns.value;
+    case 'ArrowDown':
+      return currentIndex + columns.value;
+    case 'ArrowLeft':
+      return currentIndex - 1;
+    case 'ArrowRight':
+      return currentIndex + 1;
+    default:
+      return -1;
+  }
 }
 
 function id(name: string) {
@@ -136,10 +188,11 @@ function id(name: string) {
 </script>
 
 <style scoped>
-.grid {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
+.grid-cell {
+  border: 0px none;
+  padding: 0;
+  margin: 0;
+  background: none;
 }
 .mates {
   list-style-type: none;
@@ -182,5 +235,19 @@ function id(name: string) {
   border-radius: 0.5rem;
   border: 0px none;
   font-size: 0.7rem;
+}
+
+.wrapper {
+  margin: 4px;
+  height: calc(100% - 8px - 0.2rem);
+  width: calc(100% - 8px - 0.2rem);
+  padding: 0.4rem;
+  box-sizing: border-box;
+}
+.grid-cell:focus {
+  outline: 3px solid var(--ui-focus-colour);
+}
+.wrapper:focus-within {
+  outline: 3px solid var(--ui-focus-colour);
 }
 </style>

@@ -5,7 +5,7 @@
   >
     <BreedList
       ref="container"
-      :list="filteredBreeds.map((breed) => ({ data: breed }))"
+      :list="filteredBreeds"
       :compact="search.length < 3 && filteredBreeds.length > 9"
       v-bind="$attrs"
       @breed-selected="(breed) => emit('breedSelected', breed)"
@@ -22,9 +22,20 @@
 <script setup lang="ts">
 import { nextTick, watch, computed, ref } from 'vue';
 import type { PropType } from 'vue';
-import type { FilterTag, EggGroupTag, PortraitData } from '../shared/types';
-import { filterEggGroups, filterTags } from '../shared/utils.js';
+import type {
+  FilterTag,
+  EggGroupTag,
+  PortraitData,
+  BreedEntry,
+} from '../shared/types';
+import {
+  filterBreedTableByGender,
+  filterEggGroups,
+  filterTags,
+  getBreedData,
+} from '../shared/utils.js';
 import BreedList from './BreedList.vue';
+import { useAppStore } from '../store/useAppStore';
 
 const props = defineProps({
   breeds: {
@@ -55,6 +66,8 @@ const emit = defineEmits<{
 
 const container = ref<HTMLDivElement | null>(null);
 
+const appStore = useAppStore();
+
 const filteredBreeds = computed(() => {
   const search = props.search.toLowerCase().trim();
   const breeds = props.breeds
@@ -63,9 +76,17 @@ const filteredBreeds = computed(() => {
     .filter(filterTags(props.tags));
 
   // if the search string is empty, return the whole
-  // list
-  if (search === '') return breeds;
-
+  // list, with already used breeds first
+  if (search === '') {
+    return [
+      ...props.breeds.filter(
+        (breed) => appStore.usedBreeds.get(breed.name) !== undefined,
+      ),
+      ...breeds.filter(
+        (breed) => appStore.usedBreeds.get(breed.name) === undefined,
+      ),
+    ];
+  }
   // we make two arrays, one for primary results (the search matches
   // the beginning of the breed name, and secondary results, where
   // the breed name includes the search term somewhere.

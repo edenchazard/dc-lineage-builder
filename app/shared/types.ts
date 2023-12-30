@@ -1,9 +1,9 @@
 const filterTags = [
+  'CB',
   'Valentine',
   'Christmas',
   'Halloween',
   'Hybrid',
-  'CB',
   'Regular',
 ] as const;
 const eggGroups = [
