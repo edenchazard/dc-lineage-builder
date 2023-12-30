@@ -31,7 +31,7 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { nextTick, ref, watchEffect } from 'vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
 import { useScrollLock } from '@vueuse/core';
 
@@ -62,11 +62,10 @@ const { activate, deactivate, hasFocus } = useFocusTrap(mobileMenu, {
   },
 });
 
-watchEffect(() => {
+watchEffect(async () => {
   if (props.open) {
-    setTimeout(() => {
-      activate();
-    }, 100);
+    await nextTick();
+    activate();
   } else {
     deactivate();
   }
