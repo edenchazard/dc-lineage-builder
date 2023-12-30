@@ -5,8 +5,13 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior() {
-    window.scrollTo(0, 0);
+    return { left: 0, top: 0 };
   },
+});
+
+router.afterEach((route) => {
+  const pageName = route.name?.toString();
+  document.title = (pageName ? `${pageName} | ` : '') + 'Lineage Builder';
 });
 
 export default router;
