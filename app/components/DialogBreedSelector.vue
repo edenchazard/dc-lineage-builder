@@ -15,13 +15,17 @@
         />
       </section>
 
-      <section>
+      <form
+        role="search"
+        @submit.prevent="jumpToFirstResult"
+      >
         <h2 class="sr-only">Filtering</h2>
         <div id="filtering">
           <BreedSearch
             id="results-search"
             ref="mateSearchEl"
             placeholder="Search"
+            enterkeyhint="search"
             @update="(search) => (searchString = search)"
           />
           <label
@@ -35,9 +39,12 @@
           <label class="sr-only">Showing</label>
           <BreedTagListTags name="filters-tags" />
         </div>
-      </section>
+      </form>
 
-      <section id="breeds">
+      <section
+        id="breeds"
+        ref="resultsEl"
+      >
         <h2 class="sr-only">Results</h2>
         <BreedListFiltered
           :search="searchString"
@@ -52,7 +59,7 @@
   </DialogBreedSelectorWrapper>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { nextTick, ref } from 'vue';
 import type { PropType } from 'vue';
 import { onStartTyping } from '@vueuse/core';
 import type { DragonGender, PortraitData } from '../shared/types';
@@ -89,6 +96,7 @@ const tagStore = useTagStore();
 const searchString = ref('');
 const mateSearchEl = ref<HTMLInputElement>();
 const wrapper = ref();
+const resultsEl = ref<HTMLElement>();
 
 const { deactivate } = useFocusTrap(wrapper, {
   immediate: true,
@@ -96,9 +104,7 @@ const { deactivate } = useFocusTrap(wrapper, {
   onDeactivate: close,
   initialFocus() {
     if (props.autofocusSearch) {
-      setTimeout(() => {
-        mateSearchEl.value?.$el.focus();
-      }, 100);
+      nextTick(() => mateSearchEl.value?.$el.focus());
       return false;
     }
 
@@ -121,9 +127,21 @@ function breedSelected(breed: PortraitData) {
 function close() {
   emit('close');
 }
+
+async function jumpToFirstResult() {
+  await nextTick();
+
+  if (resultsEl.value) {
+    resultsEl.value
+      .querySelector<HTMLElement>("[tabindex='-1'], .breed-entry-button")
+      ?.focus();
+  }
+}
 </script>
 <style scoped>
-section + section {
+section + section,
+section + form,
+form + section {
   margin-top: 0.5rem;
 }
 

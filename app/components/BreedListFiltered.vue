@@ -1,20 +1,23 @@
 <template>
-  <div class="results">
+  <div
+    v-if="filteredBreeds.length > 0"
+    class="results"
+  >
     <BreedList
-      v-if="filteredBreeds.length > 0"
       ref="container"
       :list="filteredBreeds.map((breed) => ({ data: breed }))"
       :compact="search.length < 3 && filteredBreeds.length > 9"
       v-bind="$attrs"
       @breed-selected="(breed) => emit('breedSelected', breed)"
     />
-    <p
-      v-else
-      class="no-results"
-    >
-      {{ noResultsText }}
-    </p>
   </div>
+  <p
+    v-else
+    tabindex="-1"
+    class="no-results"
+  >
+    {{ noResultsText }}
+  </p>
 </template>
 <script setup lang="ts">
 import { nextTick, watch, computed, ref } from 'vue';
@@ -74,7 +77,7 @@ const filteredBreeds = computed(() => {
     if (position === 0) primary.push(breed);
     else if (position > -1) secondary.push(breed);
   }
-  return primary.concat(secondary);
+  return [...primary, ...secondary];
 });
 
 watch(container, () => {
@@ -93,5 +96,8 @@ watch(container, () => {
 }
 .no-results {
   font-style: italic;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
 }
 </style>
