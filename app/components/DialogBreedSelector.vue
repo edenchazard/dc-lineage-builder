@@ -7,14 +7,6 @@
     @close="close"
   >
     <template #content>
-      <section id="recently-used">
-        <h2 class="title sr-only">Already in lineage</h2>
-        <BreedListReuse
-          :filter-by-gender="genderFilter"
-          @breed-selected="breedSelected"
-        />
-      </section>
-
       <form
         role="search"
         @submit.prevent="jumpToFirstResult"
@@ -65,7 +57,6 @@ import { onStartTyping } from '@vueuse/core';
 import type { DragonGender, PortraitData } from '../shared/types';
 import { useTagStore } from '../store/useTagStore.js';
 import BreedListFiltered from './BreedListFiltered.vue';
-import BreedListReuse from './BreedListReuse.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedTagListTags from './BreedTagListTags.vue';
 import BreedTagListGroups from './BreedTagListGroups.vue';
@@ -133,7 +124,9 @@ async function jumpToFirstResult() {
 
   if (resultsEl.value) {
     resultsEl.value
-      .querySelector<HTMLElement>("[tabindex='-1'], .breed-entry-button")
+      .querySelector<HTMLElement>(
+        "[tabindex='-1'], .breed-entry-button, .grid-cell",
+      )
       ?.focus();
   }
 }

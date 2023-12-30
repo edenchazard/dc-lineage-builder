@@ -81,9 +81,9 @@ function close() {
   padding: 0.5rem;
 }
 
-@media only screen and (min-width: 501px) {
+@media only screen and (min-width: 504px) {
   #breed-selector-wrapper {
-    width: 500px;
+    width: 503px;
     box-shadow: 0px 0px 200px 0px #000;
     margin-left: -250px;
     left: 50%;
