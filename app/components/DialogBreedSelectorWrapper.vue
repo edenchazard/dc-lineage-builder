@@ -5,6 +5,7 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="dialog-breed-selector-wrapper"
+    tabindex="-1"
   >
     <header class="dialog-header">
       <h1

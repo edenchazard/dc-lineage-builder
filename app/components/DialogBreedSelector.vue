@@ -1,9 +1,6 @@
 <template>
   <DialogBreedSelectorWrapper
     ref="wrapper"
-    tabindex="-1"
-    aria-label="Choose a breed"
-    aria-description="Select a breed."
     @close="close"
   >
     <template #content>
@@ -26,9 +23,9 @@
           >
             Search
           </label>
-          <label class="sr-only">Groups</label>
+          <span class="sr-only">Groups</span>
           <BreedTagListGroups name="filters-groups" />
-          <label class="sr-only">Showing</label>
+          <span class="sr-only">Showing</span>
           <BreedTagListTags name="filters-tags" />
         </div>
       </form>
