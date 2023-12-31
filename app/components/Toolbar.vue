@@ -156,12 +156,14 @@
         <ToolbarGroup>
           <div class="selection-apply-breed-container">
             <select
+              id="selection-apply-breed"
               ref="breedSelector"
               v-model="selectedBreed"
               title="Apply selected breed"
               class="breed-dropdown interactive"
               data-no-dragscroll
               :disabled="itemsSelected === 0"
+              aria-labelledby="selection-apply-breed selection-apply-count "
               @change="emit('changeBreed', selectedBreed)"
             >
               <option
@@ -172,10 +174,11 @@
               </option>
             </select>
             <span
+              id="selection-apply-count"
               title="Dragons selected"
               class="count"
               @click="breedSelector?.focus()"
-              >{{ itemsSelected }}</span
+              >{{ itemsSelected }}<span class="sr-only">selected</span></span
             >
           </div>
           <template #legend>Breed</template>
@@ -539,7 +542,7 @@ function capitalise(string: string) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .invisible {
   display: none;
   grid-template-columns: 1fr;
