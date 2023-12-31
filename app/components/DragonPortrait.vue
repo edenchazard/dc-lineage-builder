@@ -5,7 +5,7 @@
   >
     <img
       v-if="data.metaData.src === 'dc'"
-      :src="'//dragcave.net/image/' + data.image"
+      :src="'https://dragcave.net/image/' + data.image"
       :class="'fallback d-' + data.image"
     />
     <span
