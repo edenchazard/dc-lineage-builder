@@ -520,7 +520,8 @@
     "genderOnly": "m",
     "group": "Standard",
     "sprites": {
-      "__regular__": "4youu"
+      "Day Form": "4youu",
+      "Night Form": "sAuNa"
     },
     "tags": ["Christmas"]
   },

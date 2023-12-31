@@ -90,8 +90,8 @@ async function main() {
 
   // prettify our json files
   await Promise.all([
-    prettyPrintJSONFile(__dirname + '/local-breeds.json'),
-    prettyPrintJSONFile(__dirname + '/fallback-breeds.json'),
+    prettyPrintJSONFile(__dirname + '/localBreeds.json'),
+    prettyPrintJSONFile(__dirname + '/fallbackBreeds.json'),
   ]);
 
   await Promise.all(Object.values(caches).map((cache) => cache.tryAccess()));
