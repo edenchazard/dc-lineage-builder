@@ -224,7 +224,7 @@ function switchBreeds() {
   updateTree(tree.value.gender);
 }
 </script>
-<style scoped>
+<style scoped lang="postcss">
 section + section {
   margin-top: 1rem;
 }
@@ -274,15 +274,11 @@ section + section {
 }
 
 #breeds {
-  gap: 1rem;
   display: flex;
-  flex: 1;
 }
 
 .gender {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  width: 50%;
 }
 
 .gender h2 {
@@ -295,8 +291,8 @@ section + section {
 }
 
 .results {
-  min-height: 15rem;
   width: 100%;
+  height: 20rem;
 }
 /* todo */
 :deep(#controls) {

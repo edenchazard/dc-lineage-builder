@@ -2,19 +2,18 @@
   <div
     v-if="compact && breedList.length > 0"
     ref="wrapper"
-    class="wrapper"
-    :tabindex="breedList.length > 0 ? 0 : -1"
-    @focusout="handleFocusOut"
-    @keyup.enter="navigateToCell(0, $event)"
   >
     <VirtualCollection
-      v-if="compact && breedList.length > 0"
-      class="mates-compact"
+      ref="grid"
+      :tabindex="breedList.length > 0 ? 0 : -1"
+      class="mates-compact grid"
       :cell-size-and-position-getter="cellSizeAndPositionGetter"
       :collection="breedList"
-      :height="sizeH"
-      :width="sizeW"
+      :height="abs(parentSize.height.value - scrollGutter)"
+      :width="abs(parentSize.width.value - scrollGutter)"
       :section-size="size"
+      @focusout="handleFocusOut"
+      @keyup.enter="navigateToCell(0, $event)"
       @vnode-updated="checkFocus"
     >
       <template #cell="{ data }">
@@ -69,7 +68,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-import { useElementSize } from '@vueuse/core';
+import { useElementSize, useParentElement } from '@vueuse/core';
 import VirtualCollection from 'vue-virtual-collection/src/VirtualCollection.vue';
 import type { PortraitData } from '../shared/types';
 import DragonPortrait from './DragonPortrait.vue';
@@ -93,15 +92,26 @@ const props = defineProps({
     default: 600,
   },
 });
-
-const wrapper = ref();
-const focused = ref(false);
-const activeIndex = ref<number>(0);
 const portraitWidth = settings.tileSizes.fullSize.width;
 const portraitHeight = settings.tileSizes.fullSize.height;
-const margin = 3;
+const margin = 4;
+const scrollGutter = 18;
+const wrapper = ref();
+const grid = ref();
+const focused = ref(false);
+const activeIndex = ref<number>(0);
+const parent = useParentElement(wrapper);
+const parentSize = useElementSize(parent);
+const abs = Math.abs;
+
+// We want our grid to be fluid, which means we have to employ a somewhat
+// hacky solution to ensure it takes up the parent container's space even when
+// resized
 const columns = computed(() =>
-  Math.floor(sizeW.value / (portraitWidth + margin * 2)),
+  Math.floor(
+    (parentSize.width.value - portraitWidth - margin) /
+      (portraitWidth + margin),
+  ),
 );
 
 const breedList = computed(() =>
@@ -110,28 +120,24 @@ const breedList = computed(() =>
 
 // scroll the collection back to the top if the list changes
 watch(breedList, () => {
-  if (!wrapper.value) return;
+  if (!parent.value) return;
 
-  wrapper.value.querySelector('.vue-virtual-collection').scroll(0, 0);
+  parent.value.querySelector('.vue-virtual-collection')?.scroll(0, 0);
 });
 
-// We want our grid to be fluid, which means we have to employ a somewhat
-// hacky solution to ensure it takes up the parent container's space even when
-// resized
-const { height: sizeH, width: sizeW } = useElementSize(wrapper);
-
 function cellSizeAndPositionGetter(_: PortraitData, index: number) {
+  const column = index % columns.value;
   return {
     width: portraitWidth,
     height: portraitHeight + margin,
-    x: margin + (index % columns.value) * (portraitWidth + margin),
+    x: margin + column * (portraitWidth + margin),
     y: margin + Math.floor(index / columns.value) * (portraitHeight + margin),
   };
 }
 
 function handleFocusOut() {
   requestAnimationFrame(() => {
-    if (wrapper.value && !wrapper.value.contains(document.activeElement)) {
+    if (parent.value && !parent.value.contains(document.activeElement)) {
       focused.value = false;
       activeIndex.value = 0;
     }
@@ -145,7 +151,7 @@ function handleFocusOut() {
 function checkFocus() {
   if (!focused.value) return;
 
-  const next = wrapper.value.querySelector(
+  const next = parent.value?.querySelector<HTMLButtonElement>(
     `.grid-cell[data-index='${activeIndex.value}']`,
   );
 
@@ -157,7 +163,7 @@ function checkFocus() {
 function navigateToCell(nextIndex: number, e: KeyboardEvent) {
   e.preventDefault();
 
-  const next = wrapper.value.querySelector(
+  const next = parent.value?.querySelector<HTMLButtonElement>(
     `.grid-cell[data-index='${nextIndex}']`,
   );
 
@@ -237,17 +243,13 @@ function id(name: string) {
   font-size: 0.7rem;
 }
 
-.wrapper {
-  margin: 4px;
-  height: calc(100% - 8px - 0.2rem);
-  width: calc(100% - 8px - 0.2rem);
-  padding: 0.4rem;
-  box-sizing: border-box;
-}
 .grid-cell:focus {
   outline: 3px solid var(--ui-focus-colour);
 }
-.wrapper:focus-within {
+.grid {
+  margin: calc(v-bind('margin') * 1px);
+}
+.grid:focus-within {
   outline: 3px solid var(--ui-focus-colour);
 }
 </style>
