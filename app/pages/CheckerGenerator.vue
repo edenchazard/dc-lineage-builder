@@ -32,6 +32,7 @@
         <form
           id="form"
           class="form"
+          @submit.prevent
         >
           <label for="generations">Generations: </label>
           <select
