@@ -9,6 +9,7 @@
     v-bind="$attrs"
   >
     <input
+      class="sr-only"
       :name="name"
       type="checkbox"
       :checked="tag.active"
