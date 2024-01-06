@@ -12,9 +12,9 @@
     @close="showGenerateDialog = false"
   />
 
-  <div class="constrain-width content">
-    <div class="content-limit">
-      <section>
+  <div>
+    <section class="constrain-width">
+      <div class="content-limit">
         <h1>Checker Generator</h1>
         <p>
           On this page you can build checkers quickly. Simply select how many
@@ -22,84 +22,88 @@
           breed (bottom).
         </p>
         <p>You can then export it and import it for use with the editor.</p>
-      </section>
-    </div>
-    <div>
-      <section
-        id="checker-controls"
-        class="content-limit"
-      >
+      </div>
+    </section>
+    <div class="mx-auto">
+      <div role="toolbar">
         <form
-          id="form"
-          class="form"
+          id="checker-toolbar"
+          class="form constrain-width content-limit"
           @submit.prevent
         >
-          <label for="generations">Generations: </label>
-          <select
-            id="generations"
-            v-model="genCount"
-            title="Generations"
-            class="interactive pointer"
-          >
-            <option
-              v-for="index in 6"
-              :key="index"
-              :value="index + 1"
-            >
-              {{ index + 1 }}
-            </option>
-          </select>
-          <fieldset id="filter">
-            <legend class="legend">Search and filter</legend>
-            <div
-              id="filter-controls"
-              class="form"
-            >
-              <label for="enabled-groups">Groups:</label>
-              <div class="tag-list">
+          <div id="checker-toolbar-top">
+            <div id="section-2">
+              <ToolbarButton
+                title="Get Link"
+                :icon="{ icon: 'link', size: '2x' }"
+                label="Get Link"
+                @click="showGenerateDialog = true"
+              />
+              <ToolbarButton
+                title="Export dragon"
+                :icon="{ icon: 'save', size: '2x' }"
+                label="Export"
+                @click="showExportDialog = true"
+              />
+              <ToolbarButton
+                title="Switch breeds"
+                :icon="{ icon: 'exchange-alt', size: '2x' }"
+                label="Switch breeds"
+                @click="switchBreeds"
+              />
+            </div>
+            <div id="section-1">
+              <label for="generations">Generations: </label>
+              <select
+                id="generations"
+                v-model="genCount"
+                title="Generations"
+                class="interactive pointer"
+              >
+                <option
+                  v-for="index in 6"
+                  :key="index"
+                  :value="index + 1"
+                >
+                  {{ index + 1 }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div id="checker-toolbar-bottom">
+            <fieldset id="section-3-1">
+              <div>
+                <legend class="legend">Filters</legend>
+              </div>
+              <div
+                id="filter-controls"
+                class="tag-list"
+              >
                 <BreedTagListGroups
                   id="enabled-groups"
                   name="filters-groups"
                 />
-              </div>
-              <label for="enabled-tags">Showing:</label>
-              <div class="tag-list">
                 <BreedTagListTags
                   id="enabled-tags"
                   name="filters-tags"
                 />
               </div>
-              <label for="search">Search: </label>
-              <BreedSearch
-                id="search"
-                class="interactive pointer"
-                placeholder="Search breeds"
-                @update="(search: string) => (query = search)"
-              />
+            </fieldset>
+
+            <div id="section-3-2">
+              <div id="filter-search">
+                <label for="search">Search:</label>
+                <BreedSearch
+                  id="search"
+                  class="interactive pointer"
+                  @update="(search: string) => (query = search)"
+                />
+              </div>
             </div>
-          </fieldset>
-          <div id="controls">
-            <ToolbarButton
-              title="Get Link"
-              :icon="{ icon: 'link', size: '2x' }"
-              label="Get Link"
-              @click="showGenerateDialog = true"
-            />
-            <ToolbarButton
-              title="Export dragon"
-              :icon="{ icon: 'save', size: '2x' }"
-              label="Export"
-              @click="showExportDialog = true"
-            />
-            <ToolbarButton
-              title="Switch breeds"
-              :icon="{ icon: 'exchange-alt', size: '2x' }"
-              label="Switch breeds"
-              @click="switchBreeds"
-            />
           </div>
         </form>
-      </section>
+      </div>
       <section id="breeds">
         <div class="gender">
           <h2>Male</h2>
@@ -124,14 +128,14 @@
           />
         </div>
       </section>
-      <section>
-        <LineageView
-          v-if="tree !== null"
-          :root="tree"
-          :config="{ showInterface: false, showLabels: true, disabled: true }"
-        />
-      </section>
     </div>
+    <section id="lineage">
+      <LineageView
+        v-if="tree !== null"
+        :root="tree"
+        :config="{ showInterface: false, showLabels: true, disabled: true }"
+      />
+    </section>
   </div>
 </template>
 
@@ -229,49 +233,84 @@ function switchBreeds() {
 section + section {
   margin-top: 1rem;
 }
+
 .content {
   display: flex;
   flex-direction: column;
 }
-
+#checker-toolbar {
+  background: var(--ui-builder-toolbar-bg);
+  padding: 0.5rem;
+  border-radius: 0;
+  overflow: hidden;
+  margin: 1rem auto;
+}
 #form {
   --label-width: 8rem;
   display: flex;
   flex-direction: column;
   column-gap: 1rem;
-  grid-template-columns: var(--label-width) 1fr 1fr;
-  align-items: center;
 }
-
-#filter {
-  grid-column: 1/3;
-  border-top: 1px solid;
+#checker-toolbar-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#checker-toolbar-bottom {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+#section-1 {
+  display: flex;
+  align-items: center;
+  justify-self: stretch;
+}
+#generations {
+  width: 100%;
+  min-width: 8rem;
+  max-width: 10rem;
 }
 
 #filter-controls {
-  display: grid;
-  grid-template-columns: var(--label-width) 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem 1rem;
 }
 
-#filter .legend {
-  font-weight: bold;
-  padding-right: 1rem;
+#section-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem 1rem;
 }
-
+#section-3-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem 1rem;
+}
+#section-3-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.legend {
+  text-align: center;
+  font-weight: bold;
+}
 .tag-list {
   line-height: 1.2rem;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.25rem 0.5rem;
+  gap: 0.25rem;
+  flex-direction: row !important;
+  justify-content: center;
 }
 
-#controls {
-  grid-row: 1/3;
+#section-2 {
   display: flex;
-  grid-auto-columns: min-content;
-  grid-column-start: 3;
 }
 
 #breeds {
@@ -295,18 +334,19 @@ section + section {
   width: 100%;
   height: 20rem;
 }
-/* todo */
-:deep(#controls) {
+#lineage {
+  margin-top: 1rem;
+}
+:deep(#checker-toolbar) {
   & .label::after {
     content: unset;
   }
 }
-@media (min-width: 40rem) {
-  #form {
-    display: grid;
-  }
-  #controls {
-    display: grid;
+
+@media (min-width: 33rem) {
+  #checker-toolbar-top {
+    justify-content: space-between;
+    flex-direction: row;
   }
 }
 </style>

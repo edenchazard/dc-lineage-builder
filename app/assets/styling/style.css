@@ -105,6 +105,9 @@ utilities
 .pointer {
   cursor: pointer;
 }
+.mx-auto {
+  margin: 0 auto;
+}
 
 /**
 accessibility
