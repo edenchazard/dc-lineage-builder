@@ -2,19 +2,20 @@
   <div
     v-if="compact && breedList.length > 0"
     ref="wrapper"
+    @keyup.enter="navigateToCell(0)"
+    @focusout="handleFocusOut"
+    @keydown="handleKeyDown"
   >
     <VirtualCollection
       ref="grid"
-      :tabindex="breedList.length > 0 ? 0 : -1"
       class="mates-compact grid"
+      :tabindex="breedList.length > 0 ? 0 : -1"
       :cell-size-and-position-getter="cellSizeAndPositionGetter"
       :collection="breedList"
       :height="abs(parentSize.height.value - scrollGutter)"
       :width="abs(parentSize.width.value - scrollGutter)"
       :section-size="size"
-      @focusout="handleFocusOut"
-      @keyup.enter="navigateToCell(0, $event)"
-      @vnode-updated="checkFocus"
+      @vue:updated="checkFocus"
     >
       <template #cell="{ data }">
         <button
@@ -24,9 +25,6 @@
           :data-index="data.index"
           @click="emit('breedSelected', data.breed)"
           @focus="focused = true"
-          @keydown.down.up.left.right="
-            navigateToCell(determineGridAction(data.index, $event), $event)
-          "
         >
           <DragonPortrait :data="data.breed" />
         </button>
@@ -67,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, nextTick } from 'vue';
 import { useElementSize, useParentElement } from '@vueuse/core';
 import VirtualCollection from 'vue-virtual-collection/src/VirtualCollection.vue';
 import type { PortraitData } from '../shared/types';
@@ -96,7 +94,7 @@ const portraitWidth = settings.tileSizes.fullSize.width;
 const portraitHeight = settings.tileSizes.fullSize.height;
 const margin = 4;
 const scrollGutter = 18;
-const wrapper = ref();
+const wrapper = ref<HTMLDivElement>();
 const grid = ref();
 const focused = ref(false);
 const activeIndex = ref<number>(0);
@@ -144,14 +142,28 @@ function handleFocusOut() {
   });
 }
 
+function handleKeyDown(e: KeyboardEvent) {
+  if (e.target instanceof HTMLButtonElement && 'index' in e.target.dataset) {
+    const nextIndex = determineGridAction(
+      parseInt(e.target.dataset.index ?? '0'),
+      e,
+    );
+
+    if (nextIndex !== -1) {
+      e.preventDefault();
+      navigateToCell(nextIndex);
+    }
+  }
+}
 /**
  * Unfortunately, the way virtual scroll works means focus can be lost
  * as it replaces cells
  */
-function checkFocus() {
+async function checkFocus() {
   if (!focused.value) return;
 
-  const next = parent.value?.querySelector<HTMLButtonElement>(
+  await nextTick();
+  const next = wrapper.value?.querySelector<HTMLButtonElement>(
     `.grid-cell[data-index='${activeIndex.value}']`,
   );
 
@@ -160,17 +172,54 @@ function checkFocus() {
   }
 }
 
-function navigateToCell(nextIndex: number, e: KeyboardEvent) {
-  e.preventDefault();
+function navigateToCell(nextIndex: number) {
+  // we'll correct "out of bounds" navs where possible
+  if (nextIndex > breedList.value.length - 1) {
+    nextIndex = breedList.value.length - 1;
+  } else if (nextIndex < 0) {
+    nextIndex = 0;
+  }
 
-  const next = parent.value?.querySelector<HTMLButtonElement>(
+  const gridEl = grid.value.$el;
+
+  let next = parent.value?.querySelector<HTMLButtonElement>(
     `.grid-cell[data-index='${nextIndex}']`,
   );
 
-  if (next) {
-    activeIndex.value = nextIndex;
-    next.focus();
+  // I truly hate this. we have to adjust scrolling when we reach "unloaded"
+  // sections.
+  if (!next) {
+    // start
+    if (nextIndex === 0) {
+      gridEl.scrollTop = 0;
+    }
+    // end
+    else if (nextIndex === breedList.value.length - 1) {
+      gridEl.scrollTop = gridEl
+        .querySelector('.vue-virtual-collection-container')
+        .getBoundingClientRect().height;
+    }
+    // something in between
+    else {
+      const scroll =
+        (gridEl.getBoundingClientRect().height + portraitHeight + margin) / 2;
+
+      if (nextIndex > activeIndex.value) {
+        gridEl.scrollTop += scroll;
+      }
+
+      if (nextIndex < activeIndex.value) {
+        gridEl.scrollTop -= scroll;
+      }
+
+      next = parent.value?.querySelector<HTMLButtonElement>(
+        `.grid-cell[data-index='${nextIndex}']`,
+      );
+    }
   }
+
+  activeIndex.value = nextIndex;
+  next?.focus();
 }
 
 function determineGridAction(currentIndex: number, e: KeyboardEvent) {
@@ -183,6 +232,10 @@ function determineGridAction(currentIndex: number, e: KeyboardEvent) {
       return currentIndex - 1;
     case 'ArrowRight':
       return currentIndex + 1;
+    case 'End':
+      return breedList.value.length - 1;
+    case 'Home':
+      return 0;
     default:
       return -1;
   }
