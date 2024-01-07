@@ -55,19 +55,27 @@ class PortraitCache extends Cache {
     code: string,
     browser: Browser,
   ): never | Promise<void> {
+    // sometimes we might want to pick the same dragon
+    // but it can have a variable image we only fetch
+    // at certain times.
+    const underscore = code.indexOf('_');
+    const isVariable = underscore > -1;
+    const actualCode = code.substring(0, isVariable ? underscore : undefined);
     const filePath = `${this.settings.folder}${code}.png`;
 
-    console.log(`... Downloading image for ${code} to ${this.settings.folder}`);
+    console.log(
+      `... Downloading image for ${actualCode} to ${this.settings.folder} as file ${code}`,
+    );
     const page = await this.newPage(browser, this.settings.device);
 
     // navigate to the lineage page
-    await page.goto(`https://dragcave.net/lineage/${code}`);
+    await page.goto(`https://dragcave.net/lineage/${actualCode}`);
 
     // find the img tag of the dragon we're looking for
-    const element = await page.$(`img[alt='${code}']`);
+    const element = await page.$(`img[alt='${actualCode}']`);
 
     if (!element) {
-      throw new Error(`Failed to find image node for ${code}`);
+      throw new Error(`Failed to find image node for ${actualCode}`);
     }
 
     // get the uniquely generated src
@@ -77,7 +85,7 @@ class PortraitCache extends Cache {
     const image = await page.goto(imgUrl);
 
     if (!image) {
-      throw new Error(`Image failed to download: ${code}`);
+      throw new Error(`Image failed to download: ${actualCode}`);
     }
 
     await fs.writeFile(filePath, await image.buffer());
