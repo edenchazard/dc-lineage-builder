@@ -166,17 +166,19 @@ export async function grabHTML(
 
   const response = await fetchDragon(code, options.dpr ?? 1);
 
-  const root = nodeHTMLParser
-    .parse(response)
-    .querySelector(`a[href='/view/${code}']`)
-    ?.closest('div > ul').parentNode as unknown as HTMLElement;
+  const root = nodeHTMLParser.parse(response);
 
-  if (!root) throw new OnsiteError(`Couldn't find root. Dragon: ${code}`);
+  const lineageRoot = root
+    ?.querySelector(`a[href='/view/${code}']`)
+    ?.closest('div > ul')?.parentNode as unknown as HTMLElement;
+
+  if (!lineageRoot)
+    throw new OnsiteError(`Couldn't find root. Dragon: ${code}`);
 
   return {
     code,
-    html: await getHTML(root, options),
-    gen: getGen(root),
+    html: await getHTML(lineageRoot, options),
+    gen: getGen(lineageRoot),
   };
 }
 
