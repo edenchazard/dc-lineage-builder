@@ -521,7 +521,11 @@
     "group": "Standard",
     "sprites": {
       "Day Form": "4youu",
-      "Night Form": "sAuNa"
+      "Day Form Salt Haze": "BjNoO",
+      "Day Form Salt Schenanigans": "CHHg4",
+      "Night Form": "sAuNa",
+      "Night Form Salt Haze": "BjNoO_b",
+      "Night Form Salt Schenanigans": "CHHg4_b"
     },
     "tags": ["Christmas"]
   },
