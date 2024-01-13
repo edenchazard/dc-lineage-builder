@@ -13,7 +13,7 @@
   />
 
   <div>
-    <section class="constrain-width">
+    <section class="constrain-width section">
       <div class="content-limit">
         <h1>Checker Generator</h1>
         <p>
@@ -25,7 +25,7 @@
       </div>
     </section>
     <div class="mx-auto">
-      <div role="toolbar">
+      <div role="toolbar section">
         <form
           id="checker-toolbar"
           class="form constrain-width content-limit"
@@ -104,10 +104,20 @@
           </div>
         </form>
       </div>
-      <section id="breeds">
-        <div class="gender">
-          <h2>Male</h2>
+      <div
+        id="breeds"
+        class="section"
+      >
+        <section class="gender">
+          <h2
+            id="males"
+            tabindex="0"
+          >
+            Male
+          </h2>
           <BreedListFiltered
+            id="males"
+            aria-labelledby="males"
             :search="query"
             :breeds="malePortraits"
             :tags="tagStore.enabledTags"
@@ -115,10 +125,17 @@
             class="results"
             @breed-selected="selectMale"
           />
-        </div>
-        <div class="gender">
-          <h2>Female</h2>
+        </section>
+        <section class="gender">
+          <h2
+            id="females"
+            tabindex="0"
+          >
+            Female
+          </h2>
           <BreedListFiltered
+            id="females"
+            aria-labelledby="females"
             :search="query"
             :breeds="femalePortraits"
             :tags="tagStore.enabledTags"
@@ -126,10 +143,13 @@
             class="results"
             @breed-selected="selectFemale"
           />
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
-    <section id="lineage">
+    <section
+      id="lineage"
+      class="section"
+    >
       <LineageView
         v-if="tree !== null"
         :root="tree"
@@ -230,7 +250,7 @@ function switchBreeds() {
 }
 </script>
 <style scoped lang="postcss">
-section + section {
+.section + .section {
   margin-top: 1rem;
 }
 

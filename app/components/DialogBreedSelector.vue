@@ -36,6 +36,7 @@
       >
         <h2 class="sr-only">Results</h2>
         <BreedListFiltered
+          id="filtered-breeds"
           :search="searchString"
           :breeds="breeds"
           :tags="tagStore.enabledTags"
