@@ -10,7 +10,7 @@
       @update-config="(key, value) => (config[key] = value)"
       @import-tree="
         (newTree) =>
-          (appStore.activeTree = LineageHandler(newTree).withMetadata())
+          (appStore.activeTree = LineageHandler(newTree).withMetadata().tree)
       "
       @unselect-all="unselectAll"
       @change-breed="selectionChangeBreed"
