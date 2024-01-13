@@ -4,6 +4,7 @@
     class="results"
   >
     <BreedList
+      :id="id"
       ref="container"
       :list="filteredBreeds"
       :compact="search.length < 3 && filteredBreeds.length > 9"
@@ -46,6 +47,10 @@ const props = defineProps({
   },
   groups: {
     type: Array as PropType<EggGroupTag[]>,
+    required: true,
+  },
+  id: {
+    type: String,
     required: true,
   },
 });
