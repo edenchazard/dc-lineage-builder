@@ -37,6 +37,7 @@
             selected: focused && data.index === activeIndex,
           }"
           @click="emit('breedSelected', data.breed)"
+          @mousedown="activeIndex = data.index"
         />
       </template>
     </VirtualCollection>
