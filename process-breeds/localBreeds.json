@@ -353,6 +353,13 @@
     "sprites": ["FnHwj","1Hyq5"],
     "tags": ["Regular"]
   },
+  "Fenghuo Wyrm": {
+    "dimorphism": false,
+    "genderOnly": "m",
+    "group": "Standard",
+    "sprites": "YearF",
+    "tags": ["Valentine"]
+  },
   "Fever Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
