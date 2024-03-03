@@ -12,154 +12,148 @@
     @close="showGenerateDialog = false"
   />
 
-  <div>
-    <section class="constrain-width section">
-      <div class="content-limit">
-        <h1>Checker Generator</h1>
-        <p>
-          On this page you can build checkers quickly. Simply select how many
-          generations you want it to be, the male breed (top) and the female
-          breed (bottom).
-        </p>
-        <p>You can then export it and import it for use with the editor.</p>
-      </div>
-    </section>
-    <div class="mx-auto">
-      <div
-        role="toolbar"
-        class="section"
-      >
-        <form
-          id="checker-toolbar"
-          class="form constrain-width content-limit"
-          @submit.prevent
-        >
-          <div id="checker-toolbar-top">
-            <div id="section-2">
-              <ToolbarButton
-                title="Get Link"
-                :icon="{ icon: 'link', size: '2x' }"
-                label="Get Link"
-                @click="showGenerateDialog = true"
-              />
-              <ToolbarButton
-                title="Export dragon"
-                :icon="{ icon: 'save', size: '2x' }"
-                label="Export"
-                @click="showExportDialog = true"
-              />
-              <ToolbarButton
-                title="Switch breeds"
-                :icon="{ icon: 'exchange-alt', size: '2x' }"
-                label="Switch breeds"
-                @click="switchBreeds"
-              />
-            </div>
-            <div id="section-1">
-              <label for="generations">Generations: </label>
-              <select
-                id="generations"
-                v-model="genCount"
-                title="Generations"
-                class="interactive pointer"
-              >
-                <option
-                  v-for="index in 6"
-                  :key="index"
-                  :value="index + 1"
-                >
-                  {{ index + 1 }}
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div id="checker-toolbar-bottom">
-            <fieldset id="section-3-1">
-              <div>
-                <legend class="legend">Filters</legend>
-              </div>
-              <div
-                id="filter-controls"
-                class="tag-list"
-              >
-                <BreedTagListGroups
-                  id="enabled-groups"
-                  name="filters-groups"
-                />
-                <BreedTagListTags
-                  id="enabled-tags"
-                  name="filters-tags"
-                />
-              </div>
-            </fieldset>
-
-            <div id="section-3-2">
-              <div id="filter-search">
-                <label for="search">Search:</label>
-                <BreedSearch
-                  id="search"
-                  class="interactive pointer"
-                  @update="(search: string) => (query = search)"
-                />
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div
-        id="breeds"
-        class="section"
-      >
-        <section class="gender">
-          <h2
-            id="males"
-            tabindex="0"
-          >
-            Male
-          </h2>
-          <BreedListFiltered
-            id="males"
-            aria-labelledby="males"
-            :search="query"
-            :breeds="malePortraits"
-            :tags="tagStore.enabledTags"
-            :groups="tagStore.enabledEggGroups"
-            class="results"
-            @breed-selected="selectMale"
-          />
-        </section>
-        <section class="gender">
-          <h2
-            id="females"
-            tabindex="0"
-          >
-            Female
-          </h2>
-          <BreedListFiltered
-            id="females"
-            aria-labelledby="females"
-            :search="query"
-            :breeds="femalePortraits"
-            :tags="tagStore.enabledTags"
-            :groups="tagStore.enabledEggGroups"
-            class="results"
-            @breed-selected="selectFemale"
-          />
-        </section>
-      </div>
+  <section class="constrain-width section">
+    <div class="content-limit">
+      <h1>Checker Generator</h1>
+      <p>
+        On this page you can build checkers quickly. Simply select how many
+        generations you want it to be, the male breed (top) and the female breed
+        (bottom).
+      </p>
+      <p>You can then export it and import it for use with the editor.</p>
     </div>
-    <section
-      id="lineage"
+  </section>
+  <div>
+    <div
+      role="toolbar"
       class="section"
     >
-      <LineageView
-        v-if="tree !== null"
-        :root="tree"
-        :config="{ showInterface: false, showLabels: true, disabled: true }"
-      />
-    </section>
+      <form
+        id="checker-toolbar"
+        class="form constrain-width content-limit"
+        @submit.prevent
+      >
+        <div id="checker-toolbar-top">
+          <div id="section-2">
+            <ToolbarButton
+              title="Get Link"
+              :icon="{ icon: 'link', size: '2x' }"
+              label="Get Link"
+              @click="showGenerateDialog = true"
+            />
+            <ToolbarButton
+              title="Export dragon"
+              :icon="{ icon: 'save', size: '2x' }"
+              label="Export"
+              @click="showExportDialog = true"
+            />
+            <ToolbarButton
+              title="Switch breeds"
+              :icon="{ icon: 'exchange-alt', size: '2x' }"
+              label="Switch breeds"
+              @click="switchBreeds"
+            />
+          </div>
+          <div id="section-1">
+            <label for="generations">Generations: </label>
+            <select
+              id="generations"
+              v-model="genCount"
+              title="Generations"
+              class="interactive pointer"
+            >
+              <option
+                v-for="index in 6"
+                :key="index"
+                :value="index + 1"
+              >
+                {{ index + 1 }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div id="checker-toolbar-bottom">
+          <fieldset id="section-3-1">
+            <div>
+              <legend class="legend">Filters</legend>
+            </div>
+            <div
+              id="filter-controls"
+              class="tag-list"
+            >
+              <BreedTagListGroups
+                id="enabled-groups"
+                name="filters-groups"
+              />
+              <BreedTagListTags
+                id="enabled-tags"
+                name="filters-tags"
+              />
+            </div>
+          </fieldset>
+
+          <div id="section-3-2">
+            <div id="filter-search">
+              <label for="search">Search:</label>
+              <BreedSearch
+                id="search"
+                class="interactive pointer"
+                @update="(search: string) => (query = search)"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div
+      id="breeds"
+      class="section"
+    >
+      <section class="gender">
+        <h2
+          id="males"
+          tabindex="0"
+        >
+          Male
+        </h2>
+        <BreedListFiltered
+          id="males"
+          aria-labelledby="males"
+          :search="query"
+          :breeds="malePortraits"
+          :tags="tagStore.enabledTags"
+          :groups="tagStore.enabledEggGroups"
+          class="results"
+          @breed-selected="selectMale"
+        />
+      </section>
+      <section class="gender">
+        <h2
+          id="females"
+          tabindex="0"
+        >
+          Female
+        </h2>
+        <BreedListFiltered
+          id="females"
+          aria-labelledby="females"
+          :search="query"
+          :breeds="femalePortraits"
+          :tags="tagStore.enabledTags"
+          :groups="tagStore.enabledEggGroups"
+          class="results"
+          @breed-selected="selectFemale"
+        />
+      </section>
+    </div>
   </div>
+  <LineageView
+    v-if="tree !== null"
+    id="lineage-wrapper"
+    :root="tree"
+    :config="{ showInterface: false, showLabels: true, disabled: true }"
+  />
 </template>
 
 <script setup lang="ts">
@@ -360,6 +354,7 @@ function switchBreeds() {
 }
 #lineage {
   margin-top: 1rem;
+  flex: 1;
 }
 :deep(#checker-toolbar) {
   & .label::after {
