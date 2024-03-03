@@ -90,6 +90,7 @@ const resultsEl = ref<HTMLElement>();
 const { deactivate } = useFocusTrap(wrapper, {
   immediate: true,
   escapeDeactivates: true,
+  clickOutsideDeactivates: true,
   onDeactivate: close,
   initialFocus() {
     if (props.autofocusSearch) {
