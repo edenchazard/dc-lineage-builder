@@ -194,9 +194,7 @@
   --ui-builder-toolbar-bg: var(--ui-header-bg);
   --ui-builder-toolbar-selection-group-bg: rgba(0, 0, 0, 0.25);
   --ui-builder-toolbar-selection-group-fg: #fff;
-  /* --ui-builder-toolbar-selection-group-border: 1px dashed #44300b59; */
   --ui-builder-toolbar-selection-scrolls: rgba(0, 0, 0, 0.5);
-  /* --ui-builder-toolbar-selection-shadows: #000; */
   --ui-builder-toolbar-selection-count-bg: var(--dc-colour-3);
   --ui-builder-toolbar-selection-count-fg: #fff;
   --ui-builder-toolbar-button-bg: transparent;
@@ -509,7 +507,7 @@
 
   --ui-breed-list-border: #93a1b3;
 
-  --ui-tags-groups-bg: #2b303a;
+  --ui-tags-groups-bg: #daa5203a;
   --ui-tags-groups-fg: #fff;
   --ui-tags-filters-bg: #5f9aff;
   --ui-tags-filters-fg: #fff;
