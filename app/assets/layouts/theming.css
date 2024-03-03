@@ -30,6 +30,7 @@
   --dc-colour-7: #7b5e28;
   --dc-colour-8: #991b1e;
 
+  --dc-background: var(--dc-colour-1) url(./default/default-bg.png) repeat;
   --dc-lineage-line-width: 1px;
   --dc-lineage-line-style: solid;
   --dc-lineage-line-colour: var(--dc-colour-3);
@@ -93,7 +94,7 @@
   --copy-fail-fg: #fff;
   --copy-fail-bg: var(--dc-colour-8);
 
-  background: var(--dc-colour-1) url(./default/default-bg.png) repeat;
+  background: var(--dc-background);
 
   font:
     0.875rem / 1.225rem 'PT Serif',
@@ -147,7 +148,7 @@
   }
 
   & .builder-container:fullscreen {
-    background: url(./default/default-bg.png) repeat;
+    background: var(--dc-background);
   }
 
   @media (min-width: 62em) {
@@ -192,6 +193,9 @@
   --dc-lineage-gen-text-colour: var(--dc-colour-3);
   --dc-lineage-font: 400 14px / normal 'DIN', 'Arial', sans-serif;
   --dc-lineage-colour: var(--dc-colour-2);
+
+  --dc-background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png)
+    repeat;
 
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: #fff;
@@ -245,7 +249,7 @@
   --dialog-header-fg: var(--dc-colour-1);
   --dialog-header-font: 0.875rem 'din';
   --dialog-header-closebutton-bg: var(--dc-colour-4);
-  --dialog-body-bg: url(./portal2-light/lighttile.png) repeat;
+  --dialog-body-bg: var(--dc-background);
   --dialog-body-fg: #000;
   --dialog-footer-button-bg: var(--dc-colour-4);
   --dialog-footer-button-fg: #fff;
@@ -256,8 +260,7 @@
   --copy-fail-fg: #fff;
   --copy-fail-bg: var(--dc-colour-5);
 
-  background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png)
-    repeat;
+  background: var(--dc-background);
 
   font:
     0.875rem / normal 'Arial',
@@ -435,7 +438,7 @@
   }
 
   & .builder-container:fullscreen {
-    background: url(./portal2-light/portal2-light-wt.png) repeat;
+    background: var(--dc-background);
   }
 
   @media (min-width: 86.5em) {
@@ -472,6 +475,7 @@
   --dc-lineage-font: 500 14px/16.8px Roboto, Helvetica, Arial, sans-serif;
   --dc-lineage-colour: var(--dc-colour-8);
   --dc-lineage-tile-background: var(--dc-colour-4);
+  --dc-background: var(--dc-colour-6);
 
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: var(--dc-colour-5);
@@ -519,7 +523,7 @@
   --dialog-header-fg: #fff;
   --dialog-header-font: 0.875rem Roboto, Helvetica, Arial, sans-serif;
   --dialog-header-closebutton-bg: var(--dc-colour-9);
-  --dialog-body-bg: var(--dc-colour-3);
+  --dialog-body-bg: var(--dc-background);
   --dialog-body-fg: #fff;
   --dialog-footer-button-bg: var(--dc-colour-9);
   --dialog-footer-button-fg: #fff;
@@ -530,7 +534,7 @@
   --copy-fail-fg: #fff;
   --copy-fail-bg: crimson;
 
-  background: var(--dc-colour-6);
+  background: var(--dc-background);
 
   font:
     0.875rem/1.138rem Roboto,
@@ -586,7 +590,7 @@
   }
 
   & .builder-container:fullscreen {
-    background: var(--dc-colour-6);
+    background: var(--dc-background);
   }
 
   @media (min-width: 54em) {
@@ -681,9 +685,6 @@
   }
 
   &body {
-    /*     background-color: #2f2f2f;
-    background-image: url(/assets/layouts/portal2/edenisasquare.png);
-    background-repeat: repeat; */
     background: #000;
   }
   & h1 {
