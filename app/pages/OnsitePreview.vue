@@ -48,36 +48,24 @@
     </div>
   </div>
 
-  <section id="onsite-preview-result">
-    <div
-      v-if="htmlPreview !== ''"
-      :id="containerID"
-    >
-      <LineageViewGenerationCounter
-        :count="generations"
-        :limit="cutoff"
-      />
-      <OnsitePreview :html-preview="htmlPreview" />
-    </div>
-  </section>
+  <LineageWrapper
+    v-if="htmlPreview !== ''"
+    :id="containerID"
+    :generations="generations"
+    :generation-cut-off="cutoff"
+  >
+    <OnsitePreview :html-preview="htmlPreview" />
+  </LineageWrapper>
 </template>
 
 <script setup lang="ts">
-/*
-<div>
-    <input
-        type="checkbox"
-        id="doRightmostFix"
-        v-model="fixRightmostColumn" />
-    <label for="doRightmostFix">Fix rightmost column on 13+ lineages</label>
-</div> */
 import { ref, nextTick } from 'vue';
 import { getOnSitePreview } from '../app/api.js';
 import OnsitePreview from '../components/OnsitePreview.vue';
-import LineageViewGenerationCounter from '../components/LineageViewGenerationCounter.vue';
 import Feedback from '../components/Feedback.vue';
 import { validateCode } from '../shared/validation.js';
 import { AxiosError } from 'axios';
+import LineageWrapper from '../components/LineageWrapper.vue';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');
@@ -172,9 +160,9 @@ async function fetchLineage(e: Event) {
 
 <style scoped>
 #onsite-preview-container {
-  margin: 0px auto;
   display: flex;
   flex-direction: column;
   overflow-x: auto;
+  flex: 1;
 }
 </style>

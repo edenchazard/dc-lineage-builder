@@ -78,6 +78,8 @@ onMounted(async () => {
   line-height: 1.7em;
   background: var(--dc-background);
   padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 #bottom {

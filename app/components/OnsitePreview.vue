@@ -30,12 +30,12 @@ defineProps({
 #lineage {
   margin: 0 auto;
   font: var(--dc-lineage-font);
-  background: var(--dc-background);
   color: var(--dc-lineage-colour);
   display: flex;
   flex-direction: column;
   overflow-x: auto;
   box-sizing: border-box;
+  flex: 1;
 }
 :deep(li::before),
 :deep(li::after) {
