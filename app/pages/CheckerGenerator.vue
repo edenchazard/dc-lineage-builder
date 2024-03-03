@@ -24,7 +24,10 @@
     </div>
   </section>
   <div>
-    <div role="toolbar section">
+    <div
+      role="toolbar"
+      class="section"
+    >
       <form
         id="checker-toolbar"
         class="form constrain-width content-limit"
@@ -254,6 +257,7 @@ function switchBreeds() {
 }
 #checker-toolbar {
   background: var(--ui-builder-toolbar-bg);
+  color: var(--ui-builder-toolbar-button-fg);
   padding: 0.5rem;
   border-radius: 0;
   overflow: hidden;
