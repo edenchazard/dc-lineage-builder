@@ -37,8 +37,6 @@
   --dc-lineage-font: 400 14px/19.6px 'fq', 'Times New Roman', Times, serif;
   --dc-lineage-colour: var(--dc-colour-2);
 
-  --dc-background: var(--dc-colour-1) url(./default/default-bg.png) repeat fixed;
-
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: rgba(123, 94, 40, 0.5);
   --ui-builder-toolbar-bg: rgb(107 80 31 / 12%);
@@ -95,6 +93,8 @@
   --copy-fail-fg: #fff;
   --copy-fail-bg: var(--dc-colour-8);
 
+  background: var(--dc-colour-1) url(./default/default-bg.png) repeat;
+
   font:
     0.875rem / 1.225rem 'PT Serif',
     'Times New Roman',
@@ -144,6 +144,10 @@
 
   & #breed-selector-wrapper {
     background: #7b5e28;
+  }
+
+  & .builder-container:fullscreen {
+    background: url(./default/default-bg.png) repeat;
   }
 
   @media (min-width: 62em) {
@@ -254,6 +258,9 @@
   --copy-fail-fg: #fff;
   --copy-fail-bg: var(--dc-colour-5);
 
+  background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png)
+    repeat;
+
   font:
     0.875rem / normal 'Arial',
     sans-serif;
@@ -296,12 +303,6 @@
   & .dialog-header {
     box-shadow: inset 0 0 5px var(--semi-black);
     text-transform: uppercase;
-  }
-
-  > #content,
-  > #bottom {
-    background: var(--dc-colour-1) url(./portal2-light/portal2-light-wt.png)
-      repeat;
   }
 
   > #top {
@@ -435,6 +436,10 @@
     outline-offset: -1px;
   }
 
+  & .builder-container:fullscreen {
+    background: url(./portal2-light/portal2-light-wt.png) repeat;
+  }
+
   @media (min-width: 86.5em) {
     #mobile-menu-button {
       display: none;
@@ -469,8 +474,6 @@
   --dc-lineage-font: 500 14px/16.8px Roboto, Helvetica, Arial, sans-serif;
   --dc-lineage-colour: var(--dc-colour-8);
   --dc-lineage-tile-background: var(--dc-colour-4);
-
-  --dc-background: var(--dc-colour-6);
 
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: var(--dc-colour-5);
@@ -529,6 +532,8 @@
   --copy-fail-fg: #fff;
   --copy-fail-bg: crimson;
 
+  background: var(--dc-colour-6);
+
   font:
     0.875rem/1.138rem Roboto,
     Helvetica,
@@ -582,6 +587,10 @@
     }
   }
 
+  & .builder-container:fullscreen {
+    background: var(--dc-colour-6);
+  }
+
   @media (min-width: 54em) {
     #site-title {
       overflow: unset;
@@ -612,7 +621,7 @@
 
   --dc-lineage-line-width: 1px;
   --dc-lineage-line-style: dotted;
-  --dc-lineage-line-colour: var(--dc-colour-7);
+  --dc-lineage-line-colour: rgba(192, 192, 192, 0.5);
   --dc-lineage-gen-text-colour: var(--dc-colour-7);
   --dc-lineage-font: 14px 'DIN', 'Arial', sans-serif;
   --dc-lineage-colour: var(--dc-colour-2);
@@ -673,6 +682,12 @@
     font-family: 'DIN', Arial, Helvetica, sans-serif;
   }
 
+  &body {
+    /*     background-color: #2f2f2f;
+    background-image: url(/assets/layouts/portal2/edenisasquare.png);
+    background-repeat: repeat; */
+    background: #000;
+  }
   & h1 {
     text-transform: uppercase;
     font-weight: bold;
@@ -782,9 +797,16 @@
     padding: 0 0.5rem;
   }
 
-  > #content {
+  & .builder-container:fullscreen {
+    background-color: inherit;
+  }
+
+  & .lineage-view {
     background: var(--dc-colour-1) url(/assets/layouts/portal2/portal2.png)
-      repeat-x fixed;
+      repeat-x 0px -113px;
+  }
+  > #content {
+    background-color: #303030;
     color: var(--dc-colour-2);
     & a {
       color: var(--dc-colour-6);

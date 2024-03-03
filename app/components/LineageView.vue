@@ -1,10 +1,9 @@
 <template>
-  <div
-    class="lineage-view"
+  <LineageWrapper
+    :generations="generations"
     :data-show-labels="config.showLabels"
     :data-show-editor-interface="config.showInterface"
   >
-    <LineageViewGenerationCounter :count="generations" />
     <ul
       v-if="root !== null"
       class="lineage-root"
@@ -15,19 +14,19 @@
         :disabled="config.disabled"
       />
     </ul>
-  </div>
+  </LineageWrapper>
 </template>
+
 <script setup lang="ts">
-import { computed } from 'vue';
 import type { PropType } from 'vue';
 import type {
   LineageConfig,
   PartialLineageWithMetadata,
 } from '../shared/types';
-
+import { computed } from 'vue';
 import LineageViewNode from './LineageViewNode.vue';
-import LineageViewGenerationCounter from './LineageViewGenerationCounter.vue';
 import { Lineage } from '../shared/lineageHandler';
+import LineageWrapper from './LineageWrapper.vue';
 
 const props = defineProps({
   root: {
@@ -46,24 +45,12 @@ const props = defineProps({
   },
 });
 
-const generations = computed(() => {
-  return props.root ? Lineage(props.root).generations() : 0;
-});
+const generations = computed(() =>
+  props.root ? Lineage(props.root).generations() : 0,
+);
 </script>
 
 <style scoped>
-.lineage-view {
-  margin: 0 auto;
-  font: var(--dc-lineage-font);
-  background: var(--dc-background);
-  color: var(--dc-lineage-colour);
-  display: flex;
-  flex-direction: column;
-  overflow-x: auto;
-  width: 100%;
-  padding: 0 1rem;
-  box-sizing: border-box;
-}
 .lineage-root {
   margin: 0 auto;
 }

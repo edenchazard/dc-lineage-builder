@@ -221,9 +221,9 @@ function selectBy(condition: (dragon: PartialLineageWithMetadata) => boolean) {
   align-items: stretch;
   flex-direction: column;
   display: flex;
+  flex: 1;
 
   &:fullscreen {
-    background: var(--dc-background);
     height: 100vh !important;
     width: 100vh !important;
     overflow: auto;
