@@ -30,6 +30,6 @@ const links = [
   ['/ghost-breeds', 'Ghost breeds'],
   ['/onsite-preview', 'Onsite Preview'],
   ['/tutorial', 'Tutorial'],
-  ['/disclaimer', 'Disclaimer'],
+  ['/about', 'About'],
 ];
 </script>

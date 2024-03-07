@@ -22,9 +22,14 @@ const routes: RouteRecordRaw[] = [
     redirect: '/tutorial',
   },
   {
+    path: '/about',
+    name: 'About',
+    component: () => import('../pages/About.vue'),
+  },
+  {
     path: '/disclaimer',
     name: 'Disclaimer',
-    component: () => import('../pages/Disclaimer.vue'),
+    redirect: '/about',
   },
   {
     path: '/checkers',
