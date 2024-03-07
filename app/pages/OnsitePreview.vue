@@ -21,28 +21,43 @@
         </div>
       </section>
       <section id="onsite-preview-form">
-        <form @submit="fetchLineage">
-          <div>
-            <label for="male">Male: </label>
-            <input
-              id="male"
-              v-model="maleCode"
-              type="text"
-              min="4"
-              max="5"
-            />
-            <label for="female">Female: </label>
-            <input
-              id="female"
-              v-model="femaleCode"
-              type="text"
-              min="4"
-              max="5"
-            />
-          </div>
-          <div>
-            <button type="submit">Preview</button>
-          </div>
+        <form
+          id="form"
+          class="form"
+          @submit="fetchLineage"
+        >
+          <label
+            for="male"
+            class="label"
+            >Male</label
+          >
+          <input
+            id="male"
+            v-model="maleCode"
+            class="interactive"
+            type="text"
+            min="4"
+            max="5"
+          />
+          <label
+            for="female"
+            class="label"
+            >Female</label
+          >
+          <input
+            id="female"
+            v-model="femaleCode"
+            class="interactive"
+            type="text"
+            min="4"
+            max="5"
+          />
+          <button
+            type="submit"
+            class="pointer btn"
+          >
+            Preview
+          </button>
         </form>
       </section>
     </div>
@@ -164,5 +179,17 @@ async function fetchLineage(e: Event) {
   flex-direction: column;
   overflow-x: auto;
   flex: 1;
+}
+
+#form {
+  max-width: 20rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+#form button[type='submit'] {
+  grid-column: 1/-1;
 }
 </style>

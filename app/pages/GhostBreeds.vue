@@ -22,90 +22,93 @@
         lower resolutions and 96Hx72W on higher resolutions.
       </p>
     </section>
-    <section>
-      <form
-        id="form"
-        class="form"
-        @submit="addToEntries"
+    <form
+      id="form"
+      class="form"
+      @submit="addToEntries"
+    >
+      <label
+        class="label"
+        for="name"
+        >Breed name</label
       >
-        <label
-          class="label"
-          for="name"
-          >Breed name</label
-        >
+      <input
+        id="name"
+        v-model="name"
+        type="text"
+        name="name"
+        class="interactive"
+        required
+        title="Breed name must be alphanumeric and 1-32 characters long."
+        :pattern="BREEDNAMEREGEXP.toString().slice(1, -1)"
+      />
+      <span class="label">Gender availability</span>
+      <div id="gender-availability">
         <input
-          id="name"
-          v-model="name"
-          type="text"
-          name="name"
-          class="interactive"
-          required
-          title="Breed name must be alphanumeric and 1-32 characters long."
-          :pattern="BREEDNAMEREGEXP.toString().slice(1, -1)"
+          id="avail_both"
+          v-model="genderAvailability"
+          type="radio"
+          value="b"
         />
-        <span class="label">Gender availability</span>
-        <div id="gender-availability">
-          <input
-            id="avail_both"
-            v-model="genderAvailability"
-            type="radio"
-            value="b"
+        <label for="avail_both">Both</label>
+        <input
+          id="avail_male"
+          v-model="genderAvailability"
+          type="radio"
+          value="m"
+        />
+        <label for="avail_male">Male-only</label>
+        <input
+          id="avail_female"
+          v-model="genderAvailability"
+          type="radio"
+          value="f"
+        />
+        <label for="avail_female">Female-only</label>
+      </div>
+      <span class="label">Tiles</span>
+      <div id="tiles">
+        <template v-if="['b', 'm'].includes(genderAvailability)">
+          <GhostBreedUpload
+            ref="maleTile"
+            label="male"
+            aria-required="true"
+            class="select"
+            :class="{ invalid: maleBase64 === '' }"
+            @tile-chosen="(base64) => portraitSelected('m', base64)"
+            @upload-error="uploadError"
           />
-          <label for="avail_both">Both</label>
-          <input
-            id="avail_male"
-            v-model="genderAvailability"
-            type="radio"
-            value="m"
+          <label
+            class="tile-label"
+            for="male"
+            >Male
+          </label>
+        </template>
+        <template v-if="['b', 'f'].includes(genderAvailability)">
+          <GhostBreedUpload
+            ref="femaleTile"
+            class="select"
+            label="female"
+            aria-required="true"
+            :class="{ invalid: femaleBase64 === '' }"
+            @tile-chosen="(base64) => portraitSelected('f', base64)"
+            @upload-error="uploadError"
           />
-          <label for="avail_male">Male-only</label>
-          <input
-            id="avail_female"
-            v-model="genderAvailability"
-            type="radio"
-            value="f"
-          />
-          <label for="avail_female">Female-only</label>
-        </div>
-        <span class="label">Tiles</span>
-        <div id="tiles">
-          <template v-if="['b', 'm'].includes(genderAvailability)">
-            <GhostBreedUpload
-              ref="maleTile"
-              label="male"
-              aria-required="true"
-              class="select"
-              :class="{ invalid: maleBase64 === '' }"
-              @tile-chosen="(base64) => portraitSelected('m', base64)"
-              @upload-error="uploadError"
-            />
-            <label
-              class="tile-label"
-              for="male"
-              >Male
-            </label>
-          </template>
-          <template v-if="['b', 'f'].includes(genderAvailability)">
-            <GhostBreedUpload
-              ref="femaleTile"
-              class="select"
-              label="female"
-              aria-required="true"
-              :class="{ invalid: femaleBase64 === '' }"
-              @tile-chosen="(base64) => portraitSelected('f', base64)"
-              @upload-error="uploadError"
-            />
-            <label
-              class="tile-label"
-              for="female"
-              >Female</label
-            >
-          </template>
-        </div>
-        <button type="submit">Add breed</button>
-      </form>
-      <Feedback ref="status" />
-    </section>
+          <label
+            class="tile-label"
+            for="female"
+            >Female</label
+          >
+        </template>
+      </div>
+      <button
+        type="submit"
+        class="btn pointer"
+      >
+        Add breed
+      </button>
+    </form>
+    <Feedback ref="status" />
   </div>
 </template>
 
@@ -216,13 +219,16 @@ function addToEntries(e: Event) {
 <style scoped lang="postcss">
 .content {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
-  flex-wrap: wrap;
+  align-items: start;
 }
 #form {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  max-width: 20rem;
+  width: 100%;
 }
 #gender-availability {
   display: grid;
@@ -242,18 +248,6 @@ function addToEntries(e: Event) {
   & .tile-label {
     grid-row: 2;
     margin: 0 auto;
-  }
-}
-
-#form button[type='submit'] {
-  grid-column: 2;
-}
-
-@media (min-width: 380px) {
-  #form {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 1rem;
   }
 }
 </style>

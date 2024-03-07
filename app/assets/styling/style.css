@@ -40,6 +40,14 @@ body {
       content: ':';
     }
   }
+
+  & .btn {
+    padding: 1rem;
+    background-color: var(--form-button-bg);
+    color: var(--form-button-fg);
+    border: 0;
+    border-radius: 0.25rem;
+  }
 }
 .w-max {
   max-width: 100%;

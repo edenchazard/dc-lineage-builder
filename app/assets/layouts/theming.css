@@ -94,6 +94,9 @@
   --copy-fail-fg: #fff;
   --copy-fail-bg: var(--dc-colour-8);
 
+  --form-button-bg: var(--dc-colour-2);
+  --form-button-fg: #fff;
+
   background: var(--dc-background);
 
   font:
@@ -259,6 +262,9 @@
   --copy-success-bg: var(--dc-colour-4);
   --copy-fail-fg: #fff;
   --copy-fail-bg: var(--dc-colour-5);
+
+  --form-button-bg: var(--dc-colour-4);
+  --form-button-fg: #fff;
 
   background: var(--dc-background);
 
@@ -534,6 +540,9 @@
   --copy-fail-fg: #fff;
   --copy-fail-bg: crimson;
 
+  --form-button-bg: var(--dc-colour-9);
+  --form-button-fg: #fff;
+
   background: var(--dc-background);
 
   font:
@@ -671,6 +680,9 @@
   --copy-success-bg: var(--dc-colour-4);
   --copy-fail-fg: #fff;
   --copy-fail-bg: var(--dc-colour-5);
+
+  --form-button-bg: var(--dc-colour-4);
+  --form-button-fg: #fff;
 
   font:
     0.875rem / normal 'Arial',
