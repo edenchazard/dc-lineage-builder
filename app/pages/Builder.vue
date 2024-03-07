@@ -1,4 +1,5 @@
 <template>
+  <h1 class="sr-only">Build</h1>
   <LineageBuilder />
 </template>
 

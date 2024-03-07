@@ -1,4 +1,5 @@
 <template>
+  <h1 class="sr-only">Viewing lineage</h1>
   <div
     id="text"
     class="content-limit constrain-width"

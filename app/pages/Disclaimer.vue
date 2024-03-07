@@ -4,6 +4,7 @@
     class="constrain-width content"
   >
     <div class="content-limit">
+      <h1>About</h1>
       <section>
         <h2>Credits</h2>
         <p>Art &copy; Dragon Cave artists.</p>
