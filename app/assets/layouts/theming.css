@@ -748,7 +748,7 @@
     }
   }
 
-  & #site-title {
+  & #site-title-link {
     color: var(--dc-colour-6);
 
     &:hover {
