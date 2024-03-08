@@ -1,9 +1,6 @@
 <template>
   <div class="constrain-width content">
     <div class="content-limit">
-      <div>
-        <Feedback ref="status" />
-      </div>
       <section id="information">
         <div>
           <h1>Onsite Preview</h1>
@@ -17,7 +14,6 @@
             dragons without a gender, such as ungendered hatchlings, will be
             ignored.
           </p>
-          <p><strong>This feature is experimental.</strong></p>
         </div>
       </section>
       <section id="onsite-preview-form">
@@ -59,6 +55,7 @@
             Preview
           </button>
         </form>
+        <Feedback ref="status" />
       </section>
     </div>
   </div>
@@ -185,7 +182,7 @@ async function fetchLineage(e: Event) {
   max-width: 20rem;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
 }
 

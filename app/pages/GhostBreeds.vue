@@ -226,7 +226,7 @@ function addToEntries(e: Event) {
 #form {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
   max-width: 20rem;
   width: 100%;
 }
