@@ -41,7 +41,7 @@
 <script setup lang="ts">
 /* eslint-disable no-redeclare */
 import { onMounted, reactive, ref } from 'vue';
-import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from 'vue-router';
+import { onBeforeRouteLeave, useRoute } from 'vue-router';
 import { useFullscreen } from '@vueuse/core';
 import type {
   PartialLineageWithMetadata,
