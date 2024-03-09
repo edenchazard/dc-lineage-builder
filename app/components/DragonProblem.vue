@@ -55,9 +55,6 @@ defineProps({
   font-family: monospace;
   padding: 0.5rem 0;
 }
-
-.node {
-}
 .node-line {
   margin: 0;
   line-height: 1.5rem;
@@ -69,7 +66,6 @@ defineProps({
   background: rgba(255, 34, 34, 0.5);
   font-weight: bold;
 }
-
 .error {
   font-size: 0.7rem;
   padding: 0 1rem 0 2rem;

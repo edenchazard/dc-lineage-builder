@@ -1,9 +1,6 @@
 <template>
   <div class="constrain-width content">
     <div class="content-limit">
-      <div>
-        <Feedback ref="status" />
-      </div>
       <section id="information">
         <div>
           <h1>Onsite Preview</h1>
@@ -17,33 +14,48 @@
             dragons without a gender, such as ungendered hatchlings, will be
             ignored.
           </p>
-          <p><strong>This feature is experimental.</strong></p>
         </div>
       </section>
       <section id="onsite-preview-form">
-        <form @submit="fetchLineage">
-          <div>
-            <label for="male">Male: </label>
-            <input
-              id="male"
-              v-model="maleCode"
-              type="text"
-              min="4"
-              max="5"
-            />
-            <label for="female">Female: </label>
-            <input
-              id="female"
-              v-model="femaleCode"
-              type="text"
-              min="4"
-              max="5"
-            />
-          </div>
-          <div>
-            <button type="submit">Preview</button>
-          </div>
+        <form
+          id="form"
+          class="form"
+          @submit="fetchLineage"
+        >
+          <label
+            for="male"
+            class="label"
+            >Male</label
+          >
+          <input
+            id="male"
+            v-model="maleCode"
+            class="interactive"
+            type="text"
+            min="4"
+            max="5"
+          />
+          <label
+            for="female"
+            class="label"
+            >Female</label
+          >
+          <input
+            id="female"
+            v-model="femaleCode"
+            class="interactive"
+            type="text"
+            min="4"
+            max="5"
+          />
+          <button
+            type="submit"
+            class="pointer btn"
+          >
+            Preview
+          </button>
         </form>
+        <Feedback ref="status" />
       </section>
     </div>
   </div>
@@ -164,5 +176,17 @@ async function fetchLineage(e: Event) {
   flex-direction: column;
   overflow-x: auto;
   flex: 1;
+}
+
+#form {
+  max-width: 20rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#form button[type='submit'] {
+  grid-column: 1/-1;
 }
 </style>

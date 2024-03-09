@@ -5,31 +5,30 @@
     @close="emit('close')"
   >
     <template #title> Export lineage </template>
-    <template #default>
-      <Feedback
-        ref="status"
-        :global-settings="{ showDismiss: false }"
+    <Feedback
+      ref="status"
+      :global-settings="{ showDismiss: false }"
+    />
+    <div
+      v-if="!isError"
+      class="flex flex-col"
+    >
+      <p>
+        Copy and paste this text to a text file to import this lineage later.
+      </p>
+      <Textbox
+        v-model="file"
+        placeholder="Export code"
+        type="textarea"
+        readonly
+        :show-copy-button="true"
+        select-all-on-focus
       />
-      <div v-if="!isError">
-        <p>
-          Copy and paste this text to a text file to import this lineage later.
-        </p>
-        <div>
-          <Textbox
-            v-model="file"
-            placeholder="Export code"
-            type="textarea"
-            readonly
-            :show-copy-button="true"
-            select-all-on-focus
-          />
-        </div>
-      </div>
-      <div v-if="problemDragon">
-        The problem dragon is:
-        <DragonProblem :dragon="problemDragon" />
-      </div>
-    </template>
+    </div>
+    <div v-if="problemDragon">
+      The problem dragon is:
+      <DragonProblem :dragon="problemDragon" />
+    </div>
     <template #footer>
       <button
         class="dialog-footer-button"

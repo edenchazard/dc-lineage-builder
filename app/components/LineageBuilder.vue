@@ -99,10 +99,11 @@ onMounted(async () => {
     }
 });
 
-// reset stuff on leave
-// tree can be a large memory hog, and gc doesn't always get to it immediately.
+// The tree can be a memory hog. Additionally, the user might have navigated
+// away from the page by accident. We'll keep the lineage, but clear
+// the history to save memory.
 onBeforeRouteLeave(() => {
-  appStore.replaceRoot(DragonBuilder.createWithMetadata());
+  appStore.treeHistory.clear();
 });
 
 /**

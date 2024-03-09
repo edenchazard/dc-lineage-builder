@@ -4,6 +4,7 @@ layout
 :root {
   --desktop: 1024px;
   --mobile: 768px;
+  --input-guttering: 0.5rem;
 }
 
 html {
@@ -29,6 +30,7 @@ body {
 
 .content-limit {
   max-width: 100ch;
+  width: 100%;
 }
 
 .form {
@@ -40,6 +42,14 @@ body {
       content: ':';
     }
   }
+
+  & .btn {
+    padding: 1rem;
+    background-color: var(--form-button-bg);
+    color: var(--form-button-fg);
+    border: 0;
+    border-radius: 0.25rem;
+  }
 }
 .w-max {
   max-width: 100%;
@@ -48,10 +58,11 @@ body {
 /**
 interactive elements
 **/
-.interactive {
-  margin: 3px;
+.interactive,
+input[type='text'],
+select {
   border: none;
-  padding: 0.5rem;
+  padding: var(--input-guttering);
   background: #fff;
   border-radius: 0.4rem;
 }
@@ -104,6 +115,13 @@ utilities
 }
 .pointer {
   cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
 }
 
 /**

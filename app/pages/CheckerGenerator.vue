@@ -98,7 +98,6 @@
               <label for="search">Search:</label>
               <BreedSearch
                 id="search"
-                class="interactive pointer"
                 @update="(search: string) => (query = search)"
               />
             </div>

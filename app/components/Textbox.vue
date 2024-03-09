@@ -1,12 +1,14 @@
 <template>
-  <div class="text-box">
+  <div
+    class="text-box"
+    :class="{ 'two-button': showCopyButton && showShareButton }"
+  >
     <input
       v-if="type === 'input'"
       ref="input"
       class="text interactive"
-      :class="{ 'two-button': showCopyButton && showShareButton }"
       type="text"
-      v-bind="$attrs"
+      :="$attrs"
       :value="modelValue"
       @input="(e) => update((e.target as HTMLInputElement).value)"
       @focus="select"
@@ -15,8 +17,6 @@
       v-else-if="type === 'textarea'"
       ref="input"
       class="text interactive"
-      :class="{ 'two-button': showCopyButton && showShareButton }"
-      v-bind="$attrs"
       :value="modelValue"
       @input="(e) => update((e.target as HTMLTextAreaElement).value)"
       @focus="select"
@@ -73,6 +73,8 @@ import type { PropType } from 'vue';
 import { useShare } from '@vueuse/core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { debounce } from '../shared/utils.js';
+
+defineOptions({ inheritAttrs: false });
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void;
@@ -174,22 +176,27 @@ function select() {
 <style scoped>
 .text-box {
   position: relative;
-}
-.text {
-  box-sizing: border-box;
   width: 100%;
-  padding-right: 2.4rem;
-  font-family: monospace;
+  --scrollbar-space: 1.2rem;
+  --gutter: 2rem;
 
   &.two-button {
-    padding-right: 4.8rem;
+    --gutter: 4rem;
   }
+}
+
+.text {
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: calc(var(--gutter) + var(--scrollbar-space));
+  font-family: monospace;
+  resize: vertical;
 }
 
 .buttons {
   position: absolute;
-  right: 1rem;
-  top: 0.2rem;
+  right: var(--scrollbar-space);
+  top: calc(var(--input-guttering) - 0.2rem);
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -288,15 +295,11 @@ function select() {
 }
 
 .success {
-  /* --fg: #ffffffff;
-  --bg: green; */
   --fg: var(--copy-success-fg);
   --bg: var(--copy-success-bg);
 }
 
 .fail {
-  /* --fg: #ffffffff;
-  --bg: red; */
   --fg: var(--copy-fail-fg);
   --bg: var(--copy-fail-bg);
 }
