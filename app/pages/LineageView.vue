@@ -91,7 +91,10 @@ onMounted(async () => {
 
 #options {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
 }
 
 #share-link {

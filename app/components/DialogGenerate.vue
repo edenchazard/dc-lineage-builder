@@ -9,7 +9,10 @@
       ref="status"
       :global-settings="{ showDismiss: false }"
     />
-    <div v-if="isLoadedAndOk">
+    <div
+      v-if="isLoadedAndOk"
+      class="flex flex-col"
+    >
       <p>
         To share this lineage with other people, copy and paste the link below.
       </p>

@@ -4,23 +4,23 @@
     :open="open"
     @close="close"
   >
-    <template #title> Import lineage </template>
+    <template #title>Import lineage</template>
     <Feedback
       ref="status"
       :global-settings="{ showDismiss: false }"
     />
-    <p>Paste the export text and click 'import'.</p>
-    <p>
-      If you have a lineage in progress, importing a new lineage will overwrite
-      it.
-    </p>
-    <div>
-      <Textbox
-        v-model="file"
-        placeholder="Paste your import text here"
-        type="textarea"
-      />
+    <div class="flex flex-col">
+      <p>Paste the export text and click 'import'.</p>
+      <p>
+        If you have a lineage in progress, importing a new lineage will
+        overwrite it.
+      </p>
     </div>
+    <Textbox
+      v-model="file"
+      placeholder="Paste your import text here"
+      type="textarea"
+    />
     <template #footer>
       <button
         class="dialog-footer-button"
