@@ -18,6 +18,7 @@
       ref="input"
       class="text interactive"
       :value="modelValue"
+      :="$attrs"
       @input="(e) => update((e.target as HTMLTextAreaElement).value)"
       @focus="select"
     >

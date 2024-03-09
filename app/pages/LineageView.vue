@@ -18,6 +18,8 @@
         type="input"
         show-copy-button
         show-share-button
+        readonly
+        select-all-on-focus
       />
       <router-link
         rel="nofollow"
