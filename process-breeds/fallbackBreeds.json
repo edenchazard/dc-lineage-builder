@@ -415,6 +415,12 @@
     "sprites": ["72JJG",0,-1,48],
     "tags": ["Regular"]
   },
+  "Lalopias Leviathan": {
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["m5MnX",0,-1,48],
+    "tags": ["Regular"]
+  },
   "Light Weaver": {
     "genderOnly": "f",
     "group": "Standard",

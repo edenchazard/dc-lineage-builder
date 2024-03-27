@@ -281,6 +281,13 @@
     },
     "tags": ["Halloween"]
   },
+  "Delta": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "JZsP5",
+    "tags": ["Regular"]
+  },
   "Desipis": {
     "dimorphism": true,
     "genderOnly": false,
@@ -357,7 +364,11 @@
     "dimorphism": false,
     "genderOnly": "m",
     "group": "Standard",
-    "sprites": "YearF",
+    "sprites": {
+      "Salt Spatio": "IRls2",
+      "Salt Znowy": "PArAs",
+      "__regular__": "YearF"
+    },
     "tags": ["Valentine"]
   },
   "Fever Wyvern": {
