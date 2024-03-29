@@ -288,6 +288,13 @@
     "sprites": "JZsP5",
     "tags": ["Regular"]
   },
+  "Delta Small": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": "OBTd8",
+    "tags": ["Regular"]
+  },
   "Desipis": {
     "dimorphism": true,
     "genderOnly": false,
