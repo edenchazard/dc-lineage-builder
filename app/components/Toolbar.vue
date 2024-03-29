@@ -70,32 +70,34 @@
         label="Settings"
       >
         <ToolbarDropDownMenuItem
-          as="other"
-          @click.self="updateConfig('showInterface', !config.showInterface)"
+          as="div"
+          @click="updateConfig('showInterface', !config.showInterface)"
         >
           <input
             id="show-interface2"
             :checked="config.showInterface"
             type="checkbox"
-            @change="
-              updateConfig(
-                'showInterface',
-                ($event.target as HTMLInputElement).checked,
-              )
-            "
           />
-          <label for="show-interface2">Show controls</label>
+          <label
+            for="show-interface2"
+            @click.prevent
+            >Show controls</label
+          >
         </ToolbarDropDownMenuItem>
         <ToolbarDropDownMenuItem
-          as="other"
-          @click.self="updateConfig('showLabels', !config.showLabels)"
+          as="div"
+          @click="updateConfig('showLabels', !config.showLabels)"
         >
           <input
             id="show-labels2"
             :checked="config.showLabels"
             type="checkbox"
           />
-          <label for="show-labels2">Show labels</label>
+          <label
+            for="show-labels2"
+            @click.prevent
+            >Show labels</label
+          >
         </ToolbarDropDownMenuItem>
       </ToolbarDropDownMenu>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="as === 'button' ? 'button' : 'div'"
+    :is="as === 'button' ? 'button' : props.as"
     :type="as === 'button' ? 'button' : null"
     v-bind="$attrs"
     class="menu-item"
@@ -13,9 +13,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
 
-defineProps({
+const props = defineProps({
   as: {
-    type: String as PropType<'button' | 'other'>,
+    type: String as PropType<'button' | string>,
     default: 'button',
   },
 });
