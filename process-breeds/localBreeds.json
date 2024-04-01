@@ -52,6 +52,13 @@
     "sprites": ["mQCP6","We7TE"],
     "tags": ["Regular"]
   },
+  "Almerald": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "LVXzb",
+    "tags": ["Regular"]
+  },
   "Amalthean": {
     "dimorphism": true,
     "genderOnly": false,
@@ -665,6 +672,13 @@
     "sprites": "xL6v2",
     "tags": ["Regular"]
   },
+  "Kingcrowne": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "0GxDX",
+    "tags": ["Regular"]
+  },
   "Kohraki": {
     "dimorphism": true,
     "genderOnly": false,
@@ -781,10 +795,13 @@
     "tags": ["Regular"]
   },
   "Mistletoe": {
+    "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
-      "Salt Pixxelation": "e5OlA"
+      "Salt Pixxelation": "e5OlA",
+      "Salt Tikigurl91": "AOprF",
+      "__regular__": "YiKaz"
     },
     "tags": ["Christmas"]
   },

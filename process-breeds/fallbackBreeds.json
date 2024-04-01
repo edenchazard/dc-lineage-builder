@@ -14,12 +14,6 @@
     },
     "tags": ["Regular"]
   },
-  "Almerald": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["KOxsP",-1,-1,48],
-    "tags": ["Regular"]
-  },
   "Amarignis": {
     "genderOnly": "f",
     "group": "Standard",
@@ -397,12 +391,6 @@
     "sprites": ["jeuAc",0,-1,48,"onrpD",-23,-1,48],
     "tags": ["Regular"]
   },
-  "Kingcrowne": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["jibRe",-19,-1,48],
-    "tags": ["Regular"]
-  },
   "Kovos Pygmy": {
     "genderOnly": false,
     "group": "Pygmy",
@@ -483,12 +471,6 @@
     "group": "Pygmy",
     "sprites": ["vOQlC",-13,1,null,"8tVIh",0,-1,null],
     "tags": ["Regular"]
-  },
-  "Mistletoe": {
-    "genderOnly": false,
-    "group": "Standard",
-    "sprites": ["W8Xkj",0,-1,48],
-    "tags": ["Christmas"]
   },
   "Mistra": {
     "genderOnly": false,
