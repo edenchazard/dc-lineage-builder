@@ -41,7 +41,7 @@ useScroll(window, {
 
 <style scoped>
 .lineage-view {
-  margin: 0 auto;
+  margin: 1rem auto auto auto;
   font: var(--dc-lineage-font);
   color: var(--dc-lineage-colour);
   display: flex;
