@@ -229,9 +229,5 @@ function selectBy(condition: (dragon: PartialLineageWithMetadata) => boolean) {
     width: 100vh !important;
     overflow: auto;
   }
-
-  & > .builder {
-    margin-top: 0.5rem;
-  }
 }
 </style>
