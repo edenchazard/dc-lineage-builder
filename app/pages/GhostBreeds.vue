@@ -113,7 +113,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 import type { BreedEntry, DragonGender } from '../shared/types';
 import { addBreed } from '../shared/utils.js';
