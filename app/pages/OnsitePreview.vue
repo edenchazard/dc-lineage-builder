@@ -20,7 +20,7 @@
         <form
           id="form"
           class="form"
-          @submit="fetchLineage"
+          @submit.prevent="fetchLineage"
         >
           <label
             for="male"
@@ -108,7 +108,6 @@ function getColumn(depth: number) {
 }
 
 async function fetchLineage(e: Event) {
-  e.preventDefault();
   if (!status.value) return;
 
   // reset
