@@ -148,7 +148,7 @@ function uploadError(error: string) {
   status.value.error(`Upload error: ${error}.`);
 }
 
-function addToEntries(e: Event) {
+function addToEntries() {
   if (!status.value) return;
 
   // returns a set of specific properties depending

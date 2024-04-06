@@ -107,7 +107,7 @@ function getColumn(depth: number) {
   return getColumnsNDeep<HTMLLIElement>(depth);
 }
 
-async function fetchLineage(e: Event) {
+async function fetchLineage() {
   if (!status.value) return;
 
   // reset
