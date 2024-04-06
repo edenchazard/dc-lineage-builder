@@ -203,7 +203,7 @@ function addToEntries() {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  align-items: start;
+  align-items: flex-start;
 }
 #form {
   display: flex;
