@@ -133,11 +133,6 @@ const femaleTile = ref<InstanceType<typeof GhostBreedUpload>>();
 const maleTile = ref<InstanceType<typeof GhostBreedUpload>>();
 const status = ref<InstanceType<typeof Feedback>>();
 
-// reset when availability changes
-watch(genderAvailability, () => {
-  maleBase64.value = femaleBase64.value = '';
-});
-
 function portraitSelected(gender: DragonGender, base64: string) {
   if (gender === 'm') maleBase64.value = base64;
   else if (gender === 'f') femaleBase64.value = base64;
@@ -154,50 +149,40 @@ function addToEntries(e: Event) {
 
   if (!status.value) return;
 
-  // returns a set of specific properties depending
-  // on the availability option selected
-  const getGenderProps = (
-    availability: Availability,
-    male: string,
-    female: string,
-  ) => {
-    if (availability === 'f') return { genderOnly: 'f', female };
-    else if (availability === 'm') return { genderOnly: 'm', male };
-
-    // default to both
-    return { genderOnly: false, female, male };
-  };
-
   // create gender props
-  const genderProps = getGenderProps(
-    genderAvailability.value,
-    maleBase64.value,
-    femaleBase64.value,
-  );
+  const genderProps: Pick<BreedEntry, 'genderOnly' | 'male' | 'female'> = {
+    genderOnly:
+      genderAvailability.value === 'b' ? false : genderAvailability.value,
+  };
 
   // Error when a tile is missing based on gender props
   // and focus the appropriate element.
-  if (genderProps?.male === '') {
+  if (
+    ['b', 'm'].includes(genderAvailability.value) &&
+    maleBase64.value === ''
+  ) {
     status.value.error(`The male tile is missing.`);
     setTimeout(() => maleTile.value?.focus(), 100);
     return;
+  } else {
+    genderProps.male = maleBase64.value;
   }
 
-  if (genderProps?.female === '') {
+  if (
+    ['b', 'f'].includes(genderAvailability.value) &&
+    femaleBase64.value === ''
+  ) {
     status.value.error(`The female tile is missing.`);
     setTimeout(() => femaleTile.value?.focus(), 100);
     return;
+  } else {
+    genderProps.female = femaleBase64.value;
   }
 
   // add the breed
   const breed: BreedEntry = {
     name: name.value,
-    //...{ genderOnly: 2, female: "", male: "" },
-    ...getGenderProps(
-      genderAvailability.value,
-      maleBase64.value,
-      femaleBase64.value,
-    ),
+    ...genderProps,
     metaData: {
       group: '*',
       tags: ['Regular'],
