@@ -20,7 +20,7 @@
         <form
           id="form"
           class="form"
-          @submit="fetchLineage"
+          @submit.prevent="fetchLineage"
         >
           <label
             for="male"
@@ -107,8 +107,7 @@ function getColumn(depth: number) {
   return getColumnsNDeep<HTMLLIElement>(depth);
 }
 
-async function fetchLineage(e: Event) {
-  e.preventDefault();
+async function fetchLineage() {
   if (!status.value) return;
 
   // reset

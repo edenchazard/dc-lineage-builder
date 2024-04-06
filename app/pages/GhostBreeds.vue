@@ -25,7 +25,7 @@
     <form
       id="form"
       class="form"
-      @submit="addToEntries"
+      @submit.prevent="addToEntries"
     >
       <label
         class="label"
@@ -148,10 +148,7 @@ function uploadError(error: string) {
   status.value.error(`Upload error: ${error}.`);
 }
 
-function addToEntries(e: Event) {
-  // don't submit form
-  e.preventDefault();
-
+function addToEntries() {
   if (!status.value) return;
 
   // returns a set of specific properties depending
