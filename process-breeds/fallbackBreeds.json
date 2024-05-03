@@ -855,6 +855,12 @@
     "sprites": ["bdTkj",0,-1,48],
     "tags": ["Regular"]
   },
+  "Twinklecape Pygmy": {
+    "genderOnly": false,
+    "group": "Pygmy",
+    "sprites": ["zS5C5",0,-1,null,"Fn4jg",-10,-1,48],
+    "tags": ["Regular"]
+  },
   "Two-Finned Bluna": {
     "genderOnly": false,
     "group": "Standard",
@@ -913,6 +919,12 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["C8Xt",0,-1,48],
+    "tags": ["Regular"]
+  },
+  "Windrider Wyvern": {
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["pqirR",0,-1,48],
     "tags": ["Regular"]
   },
   "Xol": {
