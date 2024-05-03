@@ -33,7 +33,7 @@ import {
   type FallbackBreedsJSON,
 } from './fallbackHandling.js';
 
-import _fallbackJSON from './fallbackBreeds.json' assert { type: 'json' };
+import _fallbackJSON from './fallbackBreeds.json'; // assert { type: 'json' };
 import type { BreedEntry } from '../app/shared/types';
 
 const { __dirname } = getFileAndDirName();
