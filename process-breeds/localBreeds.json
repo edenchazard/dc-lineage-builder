@@ -91,6 +91,13 @@
     },
     "tags": ["Halloween"]
   },
+  "Archelonian": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["WkHfU","4XNgU"],
+    "tags": ["Regular"]
+  },
   "Aria": {
     "dimorphism": true,
     "genderOnly": false,
@@ -207,6 +214,13 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "BgX4W",
+    "tags": ["Regular"]
+  },
+  "Caihong": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "SVsKO",
     "tags": ["Regular"]
   },
   "Caligene": {
@@ -1584,6 +1598,13 @@
       "Salt Marrionetta": "T7J6"
     },
     "tags": ["Christmas"]
+  },
+  "Zarafauri": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "kSrKU",
+    "tags": ["Regular"]
   },
   "Zyumorph": {
     "dimorphism": false,

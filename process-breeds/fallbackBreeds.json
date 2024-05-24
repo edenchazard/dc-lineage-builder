@@ -162,6 +162,13 @@
     "sprites": ["0wXI7",0,-1,48],
     "tags": ["Regular"]
   },
+  "Chaliuba": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["yWHos",0,-1,48],
+    "tags": ["Regular"]
+  },
   "Cloudplume": {
     "genderOnly": false,
     "group": "Standard",
@@ -823,6 +830,13 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["T9QFW",0,-1,48],
+    "tags": ["Regular"]
+  },
+  "Thousand Wish": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["qtfhX",-3,-1,48],
     "tags": ["Regular"]
   },
   "Thunder": {
