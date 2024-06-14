@@ -66,6 +66,14 @@
     "sprites": ["jQItl","JOKAw"],
     "tags": ["Hybrid"]
   },
+  "Amarignis": {
+    "genderOnly": "f",
+    "group": "Standard",
+    "sprites": {
+      "Salt Dohaerys": "eraNS"
+    },
+    "tags": ["Valentine"]
+  },
   "Aqualis": {
     "dimorphism": true,
     "genderOnly": false,
@@ -698,6 +706,7 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": {
+      "Salt Dohaerys": ["pRJPR","Qgqgi"],
       "Salt Infinis": ["y4dL5","sazrx"],
       "__regular__": ["GKebv","pC2D8"]
     },
