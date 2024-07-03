@@ -1171,6 +1171,16 @@
     "sprites": "TfmjY",
     "tags": ["CB"]
   },
+  "Siorghlas Wyvern": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": {
+      "Blueflame": "JC2Mj",
+      "Evergreen": "oikQN"
+    },
+    "tags": ["Regular"]
+  },
   "Skysilk": {
     "dimorphism": false,
     "genderOnly": false,

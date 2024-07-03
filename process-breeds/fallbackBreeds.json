@@ -288,6 +288,15 @@
     "sprites": ["hGua",-15,-1,48,"7hsk",-6,-1,48],
     "tags": ["Regular"]
   },
+  "Flint Drake": {
+    "genderOnly": false,
+    "group": "Drake",
+    "sprites": {
+      "Dark": ["RwrKY",0,-1,48,"w5PLH",-25,-1,48],
+      "Light": ["1MA0A",0,-1,48,"AomJY",-19,-1,48]
+    },
+    "tags": ["Regular"]
+  },
   "Floret Wyvern Alstroemeria": {
     "genderOnly": false,
     "group": "Standard",
