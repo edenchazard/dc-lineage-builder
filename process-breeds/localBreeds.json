@@ -224,6 +224,13 @@
     "sprites": "BgX4W",
     "tags": ["Regular"]
   },
+  "Brumous": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "ps6CX",
+    "tags": ["Regular"]
+  },
   "Caihong": {
     "dimorphism": false,
     "genderOnly": false,

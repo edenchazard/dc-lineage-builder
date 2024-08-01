@@ -676,6 +676,12 @@
     "sprites": ["9VS4",0,-1,47.5,"urpl",-15,-1,48],
     "tags": ["Regular"]
   },
+  "Seraph": {
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["0chqt",-18,-1,48],
+    "tags": ["Regular"]
+  },
   "Shadow Walker": {
     "genderOnly": false,
     "group": "Standard",
