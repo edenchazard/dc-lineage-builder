@@ -1,4 +1,32 @@
 <template>
+  <img
+    v-if="!inviteDismissed"
+    src="https://dragcave.net/image/rnTk.gif"
+    alt="Garden mint"
+    id="garden-mint"
+    @animationend="showInvite()"
+  />
+  <div
+    id="garden-message"
+    v-if="invitationOpen"
+  >
+    <p>
+      Pssst! I'm Matthias the Mint dragon, here to invite you to the
+      <a href="https://chazza.me/dc/hatchery">Garden of Eden</a>
+      &mdash; a brand new hatchery!
+      <button
+        type="button"
+        @click="
+          () => {
+            inviteDismissed = true;
+            invitationOpen = false;
+          }
+        "
+      >
+        Begone, Matthias!
+      </button>
+    </p>
+  </div>
   <a
     href="#content"
     class="sr-only"
@@ -60,22 +88,30 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { onKeyDown } from '@vueuse/core';
+import { onKeyDown, useLocalStorage } from '@vueuse/core';
 import TheHeaderMenuLinks from './TheHeaderMenuLinks.vue';
 import TheSlideInMenu from './TheSlideInMenu.vue';
 import router from '../router/router';
 
 const menuOpen = ref(false);
+const invitationOpen = ref(false);
+const inviteDismissed = useLocalStorage('inviteDismissed', false);
 
 onKeyDown('Escape', () => (menuOpen.value = false));
 
 router.afterEach(() => (menuOpen.value = false));
+
+function showInvite() {
+  invitationOpen.value = true;
+}
 </script>
 
 <style>
 #top {
   background: var(--ui-header-bg);
   color: var(--ui-header-fg);
+  z-index: 1;
+  position: relative;
 }
 
 #top a {
@@ -94,6 +130,8 @@ router.afterEach(() => (menuOpen.value = false));
   /*   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.75); */
   margin: 0 auto;
   gap: 0.5rem;
+  z-index: 1;
+  position: relative;
 }
 
 #site-title {
@@ -175,5 +213,55 @@ desktop menu
   align-items: center;
   text-decoration: none;
   white-space: nowrap;
+}
+
+#garden-mint {
+  position: absolute;
+  rotate: 180deg;
+  z-index: 1;
+  top: 0;
+  left: 0.5rem;
+  animation: gardener 3s forwards 1;
+}
+
+#garden-message {
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  z-index: 1000;
+  background: var(--dc-background);
+  color: var(--dialog-body-fg);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--dc-lineage-colour);
+  box-shadow: 0px 0px 15px -2px black;
+  animation: message 1.5s forwards 1;
+  max-width: 14rem;
+}
+
+@keyframes gardener {
+  0% {
+    transform: translateY(-2.5rem);
+  }
+  50% {
+    transform: translateY(-2rem);
+  }
+  75% {
+    transform: translateY(-2.5rem);
+  }
+  100% {
+    transform: translateY(-3.5rem) rotate(90deg);
+  }
+}
+
+@keyframes message {
+  0% {
+    transform: translateX(2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(3.5rem);
+    opacity: 1;
+  }
 }
 </style>
