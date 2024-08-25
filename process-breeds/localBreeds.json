@@ -653,7 +653,15 @@
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
-    "sprites": "1kr4a",
+    "sprites": {
+      "Earthquake": "IHKWN",
+      "Fertility": "7GqXA",
+      "Incubate": "RGKZq",
+      "Influence": "c6Adf",
+      "Teleport": "99VUe",
+      "Ward": "ydqWA",
+      "__regular__": "1kr4a"
+    },
     "tags": ["Regular"]
   },
   "Hydrophidius": {
