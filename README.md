@@ -46,8 +46,8 @@ nano .env
 From the project root directory, use the command:
 
 ```sh
-docker-compose up app -d
-docker-compose exec app sh -c "npm i && npm run dev"
+docker compose -f docker-compose.dev.yml up app -d
+docker compose exec app sh -c "npm run dev"
 ```
 
 You can access the project at [http://localhost:5173/dc/lineage-builder/](http://localhost:5173/dc/lineage-builder/).
@@ -57,8 +57,8 @@ You can access the project at [http://localhost:5173/dc/lineage-builder/](http:/
 To run the tests, you should be in the `testapp` container.
 
 ```sh
-docker-compose up testapp -d
-docker-compose exec testapp sh -c "npm run test:unit"
+docker compose up testapp -d
+docker compose exec testapp sh -c "npm run test:unit"
 ```
 
 Tests are run via Vitest, and will automatically re-run whenever a file is changed.
@@ -69,14 +69,14 @@ Tests are run via Vitest, and will automatically re-run whenever a file is chang
 2. From the project root directory, use the command:
 
 ```sh
-docker-compose --env-file .env.production -f docker-compose.prod.yml up -d --build
+docker compose up -d
 ```
 
 ## Migrations
 
 Lineage Builder doesn't use an ORM as it wouldn't be particularly useful.
 
-As tsx isn't used in production, the way to invoke database commands differs. In dev, you'll need to use:
+As tsx isn't used in production, the way to invoke database commands differs slightly. In dev, you'll need to use:
 
 ```sh
 tsx ./app/backend/commands/databaseFresh.ts # set up table
@@ -103,7 +103,7 @@ The file "breed-ignore" is to be used for ignoring particular images. Codes in t
 This script is to be run whenever breed data has been changed.
 
 ```sh
-docker-compose run --rm breeds npm run process
+docker compose run --rm breeds npm run process
 ```
 
 ### download
@@ -111,5 +111,5 @@ docker-compose run --rm breeds npm run process
 This script will fetch the lineage portraits at the time of running it. If these images are already in the cache, they will be replaced. Specify multiple codes as a list:
 
 ```sh
-docker-compose run --rm breeds npm run download code1 code2 code3
+docker compose run --rm breeds npm run download code1 code2 code3
 ```

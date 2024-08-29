@@ -1,0 +1,11 @@
+ARG NODE_VERSION=lts-alpine
+
+#####
+
+FROM node:${NODE_VERSION} AS build
+ENV NODE_ENV=development
+WORKDIR /app
+COPY package*.json ./
+RUN npm i
+
+CMD [ "npm" , "run", "dev" ]

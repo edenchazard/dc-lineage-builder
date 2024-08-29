@@ -21,3 +21,5 @@ RUN npm i
 COPY --from=build /prod/backend ./backend
 COPY --from=build /prod/shared ./shared
 COPY --from=build /app/dist ./backend/static
+
+CMD [ "npm" , "run", "prod" ]

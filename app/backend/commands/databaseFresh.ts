@@ -23,3 +23,5 @@ await con.execute(`
 await con.commit();
 
 con.release();
+
+process.exit(0);
