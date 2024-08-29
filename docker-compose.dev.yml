@@ -42,8 +42,7 @@ services:
   testapp:
     build:
       context: .
-      dockerfile: ./Dockerfile
-      target: build
+      dockerfile: ./Dockerfile.dev
     command: sleep infinity
     volumes:
       - .:/app
@@ -58,8 +57,6 @@ services:
   testdb:
     image: mariadb:10
     tty: true
-    ports:
-      - 3307:3306
     env_file:
       - .env.testing
     networks:

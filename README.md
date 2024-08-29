@@ -57,7 +57,7 @@ You can access the project at [http://localhost:5173/dc/lineage-builder/](http:/
 To run the tests, you should be in the `testapp` container.
 
 ```sh
-docker compose up testapp -d
+docker compose -f docker-compose.dev.yml up testapp -d
 docker compose exec testapp sh -c "npm run test:unit"
 ```
 

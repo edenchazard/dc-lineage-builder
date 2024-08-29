@@ -19,5 +19,3 @@ console.log((await con.query(`SELECT COUNT(*) AS row_count FROM ${table}`))[0]);
 await con.commit();
 
 con.release();
-
-process.exit(0);

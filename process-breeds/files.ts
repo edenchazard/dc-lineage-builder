@@ -31,6 +31,6 @@ export const caches = {
 
 export const chromiumSettings: PuppeteerLaunchOptions = {
   args: ['--no-sandbox'],
-  headless: 'new',
+  headless: 'shell',
   executablePath: '/usr/bin/google-chrome',
 };
