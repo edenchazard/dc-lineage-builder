@@ -916,6 +916,13 @@
     },
     "tags": ["Regular"]
   },
+  "Pastel": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Two-headed",
+    "sprites": "yfcyF",
+    "tags": ["Regular"]
+  },
   "Peach Pied": {
     "dimorphism": false,
     "genderOnly": false,
