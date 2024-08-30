@@ -65,7 +65,7 @@ Tests are run via Vitest, and will automatically re-run whenever a file is chang
 
 ### Production
 
-1. Change MOUNT_PATH in `docker-compose.prod.yml` to the deployment url. e.g. If you want it to be available at example.org/lineage-builder, you'd use "/lineage-builder".
+1. Change MOUNT_PATH in `docker-compose.yml` to the deployment url. e.g. If you want it to be available at example.org/lineage-builder, you'd use "/lineage-builder".
 2. From the project root directory, use the command:
 
 ```sh
