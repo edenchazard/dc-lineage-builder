@@ -110,7 +110,7 @@ function showInvite() {
 #top {
   background: var(--ui-header-bg);
   color: var(--ui-header-fg);
-  z-index: 1;
+  z-index: 15;
   position: relative;
 }
 
@@ -130,7 +130,6 @@ function showInvite() {
   /*   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.75); */
   margin: 0 auto;
   gap: 0.5rem;
-  z-index: 1;
   position: relative;
 }
 
@@ -228,7 +227,7 @@ desktop menu
   position: absolute;
   top: 4rem;
   left: 0;
-  z-index: 1000;
+  z-index: 14;
   background: var(--dc-background);
   color: var(--dialog-body-fg);
   padding: 0.5rem;
