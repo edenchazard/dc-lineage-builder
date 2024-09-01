@@ -103,7 +103,7 @@ The file "breed-ignore" is to be used for ignoring particular images. Codes in t
 This script is to be run whenever breed data has been changed.
 
 ```sh
-docker compose run --rm breeds npm run process
+docker compose -f docker-compose.dev.yml run --rm breeds npm run process
 ```
 
 ### download
@@ -111,5 +111,5 @@ docker compose run --rm breeds npm run process
 This script will fetch the lineage portraits at the time of running it. If these images are already in the cache, they will be replaced. Specify multiple codes as a list:
 
 ```sh
-docker compose run --rm breeds npm run download code1 code2 code3
+docker compose -f docker-compose.dev.yml run --rm breeds npm run download code1 code2 code3
 ```

@@ -74,7 +74,7 @@ function getBreedsTable() {
 }
 
 async function main() {
-  const definitionsJSON = 'breed-definitions.json';
+  const definitionsFile = 'breed-definitions.ts';
   const breeds = getBreedsTable();
   const json = JSON.stringify(breeds);
   const localNumber = breeds.filter(
@@ -117,7 +117,13 @@ async function main() {
   });
 
   // make and save the definition file
-  await fs.writeFile('./app/shared/' + definitionsJSON, json, 'utf8');
+  await fs.writeFile(
+    './app/shared/' + definitionsFile,
+    "import type { BreedEntry } from './types'; export default " +
+      json +
+      ' as BreedEntry[];',
+    'utf8',
+  );
 
   console.log('Synced breed definitions.');
 

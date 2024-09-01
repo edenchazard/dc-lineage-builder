@@ -18,10 +18,7 @@ const femalePortraits: PortraitData[] = [];
 const listOfBreeds: BreedEntry[] = [placeholder];
 
 async function injectBreedList() {
-  listOfBreeds.push(
-    ...((await import('./breed-definitions.json', { with: { type: 'json' } }))
-      .default as BreedEntry[]),
-  );
+  listOfBreeds.push(...(await import('./breed-definitions.js')).default);
 
   syncPortraits();
 }
