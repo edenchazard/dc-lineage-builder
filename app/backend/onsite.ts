@@ -1,6 +1,6 @@
-import axios, { AxiosError } from 'axios';
 import nodeHTMLParser from 'node-html-parser';
-import { getDragonsByCode } from './dcApi.js';
+import config from './config.js';
+import type { DragonData, GetDragonsBulkResponse } from './types.js';
 
 export interface DragonOnsite {
   code: string;
@@ -39,6 +39,13 @@ interface GetHTMLOptions {
   dpr?: number;
 }
 
+class APIError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'APIError';
+  }
+}
+
 /**
  * Check a pair of dragons are male and female
  * @param codes Format: [male, female]
@@ -46,54 +53,52 @@ interface GetHTMLOptions {
 export async function checkDragonsMatchGender(
   codes: [string, string],
 ): Promise<{ code: string; correct: boolean | null }[]> {
-  const apiDragons = await getDragonsByCode(codes);
-  const [male, female] = codes;
+  const response = await fetch(`https://dragcave.net/api/v2/dragons`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${config.clientSecret}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      ids: codes.join(','),
+    }),
+  });
 
-  const checkGender = (code: string, shouldBe: 'Male' | 'Female') => {
-    if (!(code in apiDragons)) throw new OnsiteDragonNotFoundError(code);
+  if (!response.ok) throw new APIError('Error in response.');
 
-    if ([shouldBe, ''].includes(apiDragons[code].gender)) return true;
+  const result = (await response.json()) as GetDragonsBulkResponse;
 
+  if (result.errors.length > 0) throw new APIError('Error in response.');
+
+  const checkGender = (code: string, shouldBe: DragonData['gender']) => {
+    if (!(code in result.dragons)) throw new OnsiteDragonNotFoundError(code);
+    if ([shouldBe, ''].includes(result.dragons[code].gender)) return true;
     return false;
   };
 
   return [
-    { code: male, correct: checkGender(male, 'Male') },
-    { code: female, correct: checkGender(female, 'Female') },
+    { code: codes[0], correct: checkGender(codes[0], 'Male') },
+    { code: codes[1], correct: checkGender(codes[1], 'Female') },
   ];
 }
 
-/**
- *
- * @param code
- * @param filter Whether to replace whitespace and fix urls
- * @returns
- */
 export async function grabHTML(
   code: string,
   options: GetHTMLOptions,
 ): Promise<DragonOnsite> {
   const fetchDragon = async (code: string, dpr: GetHTMLOptions['dpr'] = 1) => {
-    try {
-      return (
-        await axios.get(`https://dragcave.net/lineage/${code}`, {
-          headers: {
-            Cookie: `dpr=${dpr};`,
-          },
-        })
-      ).data;
-    } catch (err: unknown) {
-      if (err instanceof AxiosError && err.response) {
-        if (err.response.status === 404)
-          throw new OnsiteDragonNotFoundError(code);
-        else
-          throw new OnsiteError(
-            `Non-200 OK response when grabbing from DC. Dragon: ${code}`,
-          );
-      } else
-        throw new OnsiteError(
-          `Unknown error while retrieving. Dragon: ${code}`,
-        );
+    const response = await fetch(`https://dragcave.net/lineage/${code}`, {
+      headers: {
+        Cookie: `dpr=${dpr};`,
+      },
+    });
+
+    if (response.ok) {
+      return await response.text();
+    } else if (response.status === 404) {
+      throw new OnsiteDragonNotFoundError(code);
+    } else {
+      throw new OnsiteError(`Unknown error while retrieving. Dragon: ${code}`);
     }
   };
 
@@ -123,18 +128,21 @@ export async function grabHTML(
 
       const base64Images = await Promise.all(
         images.map(async (url) => {
-          const image = await axios.get(
+          const response = await fetch(
             new URL(url, 'https://dragcave.net').href,
-            {
-              responseType: 'arraybuffer',
-            },
           );
+
+          if (!response.ok) {
+            throw new OnsiteError(
+              `Error while fetching image. Dragon: ${code}`,
+            );
+          }
 
           return {
             url,
             base64:
               'data:image/png;base64,' +
-              Buffer.from(image.data).toString('base64'),
+              Buffer.from(await response.arrayBuffer()).toString('base64'),
           };
         }),
       );

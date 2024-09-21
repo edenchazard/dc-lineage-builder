@@ -1,5 +1,5 @@
 export default {
-  APIKey: process.env.APIKey ?? '',
+  clientSecret: process.env.CLIENT_SECRET ?? '',
   port: 3000,
   appUrl: process.env.VITE_APP_URL ?? '/',
   apiUrl: process.env.VITE_API_URL ?? '/api',
