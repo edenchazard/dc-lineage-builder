@@ -46,6 +46,7 @@ app
           errors: err.errors ?? [{ type: 'error', message: 'Not found' }],
         };
       } else {
+        console.log(err);
         ctx.status = ctx.status || 500;
         ctx.body = {
           errors: (err as Record<string, unknown>)?.errors ?? [

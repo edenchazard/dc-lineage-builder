@@ -24,13 +24,13 @@
   },
   "dependencies": {
     "@koa/router": "^13.0.0",
-    "axios": "^1.7.5",
     "koa": "^2.15.3",
     "koa-bodyparser": "^4.4.1",
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
     "mysql2": "^3.11.0",
     "node-html-parser": "^6.1.13",
+    "ofetch": "^1.4.0",
     "unique-names-generator": "^4.7.1",
     "yup": "^1.4.0"
   },

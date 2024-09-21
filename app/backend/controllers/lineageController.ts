@@ -34,6 +34,7 @@ router.post('/', async (ctx: RequestContext) => {
   );
 
   ctx.status = 201;
+
   ctx.body = {
     hash: hashCode,
   };

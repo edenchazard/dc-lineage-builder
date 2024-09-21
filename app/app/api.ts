@@ -1,24 +1,18 @@
-import axios from 'axios';
-import type { AxiosRequestConfig } from 'axios';
+import { ofetch, type FetchOptions } from 'ofetch';
 import type { PartialLineage } from '../shared/types';
 
 interface APIResponse {
   errors: Array<{ type: 'warning' | 'error'; message: string }>;
 }
 
-const http = axios.create({
-  method: 'get',
-  baseURL: import.meta.env.VITE_API_URL,
-});
-
-function callAPI<T>(url: string, options: AxiosRequestConfig = {}) {
+async function callAPI<T>(url: string, options: FetchOptions<'json'> = {}) {
   if ('url' in options)
     throw new Error('options parameter should not contain url');
 
   // url comes last to prevent it being overwritten via options
-  return http.request<T>({
+  return ofetch<T>(url, {
     ...options,
-    url,
+    baseURL: import.meta.env.VITE_API_URL,
   });
 }
 
@@ -36,8 +30,8 @@ interface LineageGenerationResponse extends APIResponse {
 
 function saveLineage(tree: PartialLineage) {
   return callAPI<LineageGenerationResponse>('/lineage', {
-    method: 'post',
-    data: {
+    method: 'POST',
+    body: {
       lineage: tree,
     },
   });
@@ -61,8 +55,8 @@ function getOnSitePreview(
   options?: { dpr: number },
 ) {
   return callAPI<OnSitePreviewResponse>(`/onsite`, {
-    method: 'post',
-    data: {
+    method: 'POST',
+    body: {
       male,
       female,
       options: {

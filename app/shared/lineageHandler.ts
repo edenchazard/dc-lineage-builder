@@ -215,7 +215,7 @@ class LineageHandler<
       )
       .validate(this.withoutMetadata().raw());
 
-    return createLineageLink((await saveLineage(legit)).data.hash);
+    return createLineageLink((await saveLineage(legit)).hash);
   }
 
   // Takes a parents object and switches the two
