@@ -1,5 +1,4 @@
 <template>
-  <div id="dialogs"></div>
   <Header />
   <main id="content">
     <router-view :key="route.fullPath" />

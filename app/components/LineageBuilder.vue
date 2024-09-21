@@ -3,6 +3,7 @@
     ref="builder"
     class="builder-container"
   >
+    <div id="dialogs"></div>
     <Toolbar
       v-if="appStore.activeTree !== null"
       :config="config"
