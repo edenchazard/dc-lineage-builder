@@ -52,7 +52,6 @@ router.post('/', async (ctx: RequestContext) => {
       ...pair,
     };
   } catch (err) {
-    console.log(err);
     if (err instanceof OnsiteDragonNotFoundError) {
       ctx.abort(404, [
         {
