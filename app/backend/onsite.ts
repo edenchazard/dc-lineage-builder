@@ -1,6 +1,7 @@
 import nodeHTMLParser from 'node-html-parser';
 import config from './config.js';
 import type { DragonData, GetDragonsBulkResponse } from './types.js';
+import { ofetch } from 'ofetch';
 
 export interface DragonOnsite {
   code: string;
@@ -53,26 +54,29 @@ class APIError extends Error {
 export async function checkDragonsMatchGender(
   codes: [string, string],
 ): Promise<{ code: string; correct: boolean | null }[]> {
-  const response = await fetch(`https://dragcave.net/api/v2/dragons`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${config.clientSecret}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
+  const response = await ofetch<GetDragonsBulkResponse>(
+    `https://dragcave.net/api/v2/dragons`,
+    {
+      method: 'POST',
+      timeout: 10000,
+      headers: {
+        Authorization: `Bearer ${config.clientSecret}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        ids: codes.join(','),
+      }),
+      onResponseError() {
+        throw new APIError('Error in response.');
+      },
     },
-    body: new URLSearchParams({
-      ids: codes.join(','),
-    }),
-  });
+  );
 
-  if (!response.ok) throw new APIError('Error in response.');
-
-  const result = (await response.json()) as GetDragonsBulkResponse;
-
-  if (result.errors.length > 0) throw new APIError('Error in response.');
+  if (response.errors.length > 0) throw new APIError('Error in response.');
 
   const checkGender = (code: string, shouldBe: DragonData['gender']) => {
-    if (!(code in result.dragons)) throw new OnsiteDragonNotFoundError(code);
-    if ([shouldBe, ''].includes(result.dragons[code].gender)) return true;
+    if (!(code in response.dragons)) throw new OnsiteDragonNotFoundError(code);
+    if ([shouldBe, ''].includes(response.dragons[code].gender)) return true;
     return false;
   };
 
@@ -87,19 +91,20 @@ export async function grabHTML(
   options: GetHTMLOptions,
 ): Promise<DragonOnsite> {
   const fetchDragon = async (code: string, dpr: GetHTMLOptions['dpr'] = 1) => {
-    const response = await fetch(`https://dragcave.net/lineage/${code}`, {
+    return ofetch(`https://dragcave.net/lineage/${code}`, {
       headers: {
         Cookie: `dpr=${dpr};`,
       },
-    });
+      onResponseError(response) {
+        if (response.response.status === 404) {
+          throw new OnsiteError(`Error while fetching. Dragon: ${code}`);
+        }
 
-    if (response.ok) {
-      return await response.text();
-    } else if (response.status === 404) {
-      throw new OnsiteDragonNotFoundError(code);
-    } else {
-      throw new OnsiteError(`Unknown error while retrieving. Dragon: ${code}`);
-    }
+        throw new OnsiteError(
+          `Unknown error while retrieving. Dragon: ${code}`,
+        );
+      },
+    });
   };
 
   /**
@@ -128,15 +133,16 @@ export async function grabHTML(
 
       const base64Images = await Promise.all(
         images.map(async (url) => {
-          const response = await fetch(
+          const response = await ofetch(
             new URL(url, 'https://dragcave.net').href,
+            {
+              onResponseError() {
+                throw new OnsiteError(
+                  `Error while fetching image. Dragon: ${code}`,
+                );
+              },
+            },
           );
-
-          if (!response.ok) {
-            throw new OnsiteError(
-              `Error while fetching image. Dragon: ${code}`,
-            );
-          }
 
           return {
             url,

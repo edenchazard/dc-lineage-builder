@@ -57,7 +57,6 @@
 import { onUpdated, ref } from 'vue';
 import type { PropType } from 'vue';
 import { ValidationError } from 'yup';
-import { AxiosError } from 'axios';
 import type {
   MaybePartialLineageWithMetadata,
   PartialLineage,
@@ -67,6 +66,7 @@ import BaseDialog from './BaseDialog.vue';
 import Feedback from './Feedback.vue';
 import Textbox from './Textbox.vue';
 import DragonProblem from './DragonProblem.vue';
+import { FetchError } from 'ofetch';
 
 const props = defineProps({
   open: {
@@ -134,7 +134,7 @@ onUpdated(async () => {
       } else {
         message = ex.message;
       }
-    } else if (ex instanceof AxiosError) {
+    } else if (ex instanceof FetchError) {
       message = `You may want to try again or export it instead.`;
     }
 

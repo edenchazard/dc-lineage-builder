@@ -76,8 +76,8 @@ import { getOnSitePreview } from '../app/api.js';
 import OnsitePreview from '../components/OnsitePreview.vue';
 import Feedback from '../components/Feedback.vue';
 import { validateCode } from '../shared/validation.js';
-import { AxiosError } from 'axios';
 import LineageWrapper from '../components/LineageWrapper.vue';
+import { FetchError } from 'ofetch';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');
@@ -131,12 +131,12 @@ async function fetchLineage() {
     });
 
     // Deal with problems
-    if (response.data.errors) {
-      status.value.update(response.data.errors);
-      if (response.data.errors.some((e) => e.type === 'error')) return;
+    if (response.errors) {
+      status.value.update(response.errors);
+      if (response.errors.some((e) => e.type === 'error')) return;
     } else status.value.close();
 
-    const { male, female } = response.data;
+    const { male, female } = response;
 
     // build the lineage html
     htmlPreview.value = male.html + female.html;
@@ -159,8 +159,8 @@ async function fetchLineage() {
       });
     }
   } catch (ex) {
-    if (ex instanceof AxiosError && ex.response?.status === 404) {
-      status.value.error(ex.response.data.errors[0].message);
+    if (ex instanceof FetchError && ex.response?.status === 404) {
+      status.value.error((await ex.response.json()).errors[0].message);
       return;
     }
 

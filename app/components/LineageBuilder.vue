@@ -57,7 +57,7 @@ import LineageView from './LineageView.vue';
 import Feedback from './Feedback.vue';
 import { Lineage as LineageHandler } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
-import { AxiosError } from 'axios';
+import { FetchError } from 'ofetch';
 
 const route = useRoute();
 const appStore = useAppStore();
@@ -85,12 +85,12 @@ onMounted(async () => {
       const response = await getLineage(hash);
 
       status.value.close(() => {
-        appStore.activeTree = LineageHandler(response.data.lineage)
+        appStore.activeTree = LineageHandler(response.lineage)
           .withMetadata()
           .raw();
       });
     } catch (ex) {
-      if (ex instanceof AxiosError && ex.response?.status === 404) {
+      if (ex instanceof FetchError && ex.response?.status === 404) {
         status.value.error("The lineage couldn't be found.");
         return;
       }

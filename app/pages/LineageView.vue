@@ -50,7 +50,7 @@ import { createLineageLink } from '../shared/utils.js';
 import LineageView from '../components/LineageView.vue';
 import Textbox from '../components/Textbox.vue';
 import Feedback from '../components/Feedback.vue';
-import { AxiosError } from 'axios';
+import { FetchError } from 'ofetch';
 
 const route = useRoute();
 const tree = ref<null | PartialLineage>(null);
@@ -75,9 +75,9 @@ onMounted(async () => {
 
     const response = await getLineage(hash);
 
-    status.value.close(() => (tree.value = response.data.lineage));
+    status.value.close(() => (tree.value = response.lineage));
   } catch (ex) {
-    if (ex instanceof AxiosError && ex.response?.status === 404) {
+    if (ex instanceof FetchError && ex.response?.status === 404) {
       status.value.error("The lineage couldn't be found.");
       return;
     }
