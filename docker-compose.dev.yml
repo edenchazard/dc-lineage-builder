@@ -59,8 +59,6 @@ services:
     tty: true
     env_file:
       - .env.testing
-    ports:
-      - '3307:3306'
     networks:
       - testing
 
