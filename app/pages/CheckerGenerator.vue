@@ -11,6 +11,7 @@
     :tree="tree"
     @close="showGenerateDialog = false"
   />
+  <div id="dialogs"></div>
 
   <section class="constrain-width section">
     <div class="content-limit">
