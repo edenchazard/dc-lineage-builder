@@ -702,6 +702,13 @@
     "sprites": ["ZGWAV","bwKDP"],
     "tags": ["Hybrid"]
   },
+  "Kaikos": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": "3buXZ",
+    "tags": ["Regular"]
+  },
   "Khusa": {
     "dimorphism": false,
     "genderOnly": false,
