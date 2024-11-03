@@ -1031,6 +1031,13 @@
     "sprites": "AGD87",
     "tags": ["Regular"]
   },
+  "Quantari": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "group": "Standard",
+    "sprites": ["Frgtn","SlsOf"],
+    "tags": ["Halloween"]
+  },
   "Radiant Angel": {
     "dimorphism": false,
     "genderOnly": "m",
