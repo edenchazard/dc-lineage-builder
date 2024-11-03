@@ -11,7 +11,7 @@ import settings from './settings.js';
 import { listOfBreeds, placeholder } from './breeds.js';
 import { DragonBuilder } from './dragonBuilder.js';
 
-export const NAMEREGEXP = /^[a-zA-Z0-9]([a-zA-Z0-9 '-]+)[a-zA-Z0-9]$/;
+export const NAMEREGEXP = /^[a-zA-Z0-9]([a-zA-Z0-9― —’–'-]+)[a-zA-Z0-9]$/;
 export const CODEREGEXP = /[a-zA-Z0-9]+/;
 export const BREEDNAMEREGEXP = /[a-zA-Z0-9 ]{1,32}/;
 
