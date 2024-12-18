@@ -32,6 +32,7 @@
     "node-html-parser": "^6.1.13",
     "ofetch": "^1.4.0",
     "unique-names-generator": "^4.7.1",
+    "vue-multiselect": "^3.1.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {

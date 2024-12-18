@@ -8,7 +8,7 @@
       "Salt Schenanigans": ["35HjT","FrN6z"],
       "__regular__": ["crvng","pmpkn"]
     },
-    "tags": ["Halloween"]
+    "tags": ["Halloween","water","wyrm"]
   },
   "Aegis": {
     "dimorphism": false,
@@ -22,14 +22,14 @@
       "Neutral Salt Birdzgoboom": "qjn78",
       "Neutral Salt Odeen": "SuORy"
     },
-    "tags": ["Christmas"]
+    "tags": ["Christmas","primary:life","secondary:ice","wingless"]
   },
   "Aeon Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["lRVeO","pAako"],
-    "tags": ["Regular"]
+    "tags": ["Regular","time","wyvern"]
   },
   "Aeria Gloris": {
     "dimorphism": false,

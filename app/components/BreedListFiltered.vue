@@ -22,38 +22,23 @@
 </template>
 <script setup lang="ts">
 import { nextTick, watch, computed, ref } from 'vue';
-import type { PropType } from 'vue';
-import type { FilterTag, EggGroupTag, PortraitData } from '../shared/types';
-import { filterEggGroups, filterTags } from '../shared/utils.js';
+import type { PortraitData, TagModel } from '../shared/types';
 import BreedList from './BreedList.vue';
 import { useAppStore } from '../store/useAppStore';
 
-const props = defineProps({
-  breeds: {
-    type: Array<PortraitData>,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    breeds: PortraitData[];
+    search?: string;
+    noResultsText?: string;
+    tags: TagModel;
+    id: string;
+  }>(),
+  {
+    search: '',
+    noResultsText: 'No results',
   },
-  search: {
-    type: String,
-    default: '',
-  },
-  noResultsText: {
-    type: String,
-    default: 'No results',
-  },
-  tags: {
-    type: Array as PropType<FilterTag[]>,
-    required: true,
-  },
-  groups: {
-    type: Array as PropType<EggGroupTag[]>,
-    required: true,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-});
+);
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
@@ -65,10 +50,44 @@ const appStore = useAppStore();
 
 const filteredBreeds = computed(() => {
   const search = props.search.toLowerCase().trim();
-  const breeds = props.breeds
-    // filter the group and tags
-    .filter(filterEggGroups(props.groups))
-    .filter(filterTags(props.tags));
+
+  const breeds = (function () {
+    if (!props.tags.BodyType.length && !props.tags.Element.length) {
+      return props.breeds;
+    }
+
+    return props.breeds.filter((breed) => {
+      if (props.tags.Element.length > 0) {
+        let matches = 0;
+
+        for (const tag of props.tags.Element) {
+          if (breed.metaData.tags.includes(tag)) {
+            matches++;
+          }
+
+          if (matches !== props.tags.Element.length) {
+            return false;
+          }
+        }
+      }
+
+      if (props.tags.BodyType.length > 0) {
+        let matches = 0;
+
+        for (const tag of props.tags.BodyType) {
+          if (breed.metaData.tags.includes(tag)) {
+            matches++;
+          }
+
+          if (matches !== props.tags.BodyType.length) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    });
+  })();
 
   // if the search string is empty, return the whole
   // list, with already used breeds first

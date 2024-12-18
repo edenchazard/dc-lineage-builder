@@ -23,10 +23,28 @@
           >
             Search
           </label>
-          <span class="sr-only">Groups</span>
-          <BreedTagListGroups name="filters-groups" />
-          <span class="sr-only">Showing</span>
-          <BreedTagListTags name="filters-tags" />
+          <Multiselect
+            multiple
+            v-model="model"
+            :options="filtersByGroup"
+            group-values="tags"
+            group-label="name"
+            :max-height="240"
+            selectLabel=""
+            selectedLabel=""
+            deselectLabel=""
+            placeholder=""
+            searchable
+            group-select
+            :option-height="30"
+          >
+            <template #selection="{ values }">
+              <div class="tags">
+                <span class="tag-list">{{ values.join(', ') }}</span>
+                <span class="tag-counter">{{ values.length }}</span>
+              </div>
+            </template>
+          </Multiselect>
         </div>
       </form>
 
@@ -39,8 +57,7 @@
           id="filtered-breeds"
           :search="searchString"
           :breeds="breeds"
-          :tags="tagStore.enabledTags"
-          :groups="tagStore.enabledEggGroups"
+          :tags="chosenTags"
           no-results-text="There are no breeds that match this criteria."
           @breed-selected="breedSelected"
         />
@@ -49,17 +66,27 @@
   </DialogBreedSelectorWrapper>
 </template>
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
+import Multiselect from 'vue-multiselect';
+import 'vue-multiselect/dist/vue-multiselect.min.css';
 import type { PropType } from 'vue';
 import { onStartTyping } from '@vueuse/core';
-import type { DragonGender, PortraitData } from '../shared/types';
+import {
+  type DragonGender,
+  type NewTag,
+  type PortraitData,
+  type TagModel,
+  bodyTypeTags,
+  elementTags,
+  filterTags,
+  filtersByGroup,
+} from '../shared/types';
 import { useTagStore } from '../store/useTagStore.js';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
-import BreedTagListTags from './BreedTagListTags.vue';
-import BreedTagListGroups from './BreedTagListGroups.vue';
 import BreedSearch from './BreedSearch.vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
+import BaseTagList from './BaseTagList.vue';
 
 const props = defineProps({
   breeds: {
@@ -81,11 +108,18 @@ const emit = defineEmits<{
   (e: 'close'): void;
 }>();
 
-const tagStore = useTagStore();
 const searchString = ref('');
 const mateSearchEl = ref<HTMLInputElement>();
 const wrapper = ref();
 const resultsEl = ref<HTMLElement>();
+const model = ref<NewTag[]>([]);
+
+const chosenTags = computed(() => {
+  return {
+    Element: model.value.filter((tag) => elementTags.includes(tag)),
+    BodyType: model.value.filter((tag) => bodyTypeTags.includes(tag)),
+  };
+});
 
 const { deactivate } = useFocusTrap(wrapper, {
   immediate: true,
@@ -150,13 +184,11 @@ form + section {
 
 #filtering {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.25rem 0.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 #results-search {
-  max-width: 8rem;
 }
 
 #breeds {
@@ -165,4 +197,85 @@ form + section {
   flex-direction: column;
   flex: 1;
 }
+.tabs {
+  display: flex;
+  flex: 1;
+  padding: 0.5rem;
+}
+
+[name='tab'] {
+  display: none;
+
+  &:checked + label {
+    background: #b9dfee;
+    border-radius: 0.25rem 0.25rem 0 0;
+  }
+  & + label {
+    background: #f0f0f0;
+    border-radius: 0.25rem 0.25rem 0 0;
+    padding: 0.5rem 0.75rem 1rem 0.75rem;
+
+    &:not(:first-child) {
+      border-left: 1px solid #ccc;
+    }
+  }
+}
+
+.tab-body {
+  display: flex;
+  gap: 0.5rem;
+  background: #b9dfee;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag-list {
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+
+.tag-counter {
+  font-size: 0.75rem;
+  color: #666;
+  background: #b9dfee;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+.tag {
+  background: lightblue;
+  padding: 0.2rem;
+  border-radius: 0.25rem;
+  line-height: 2rem;
+}
+</style>
+<style>
+.multiselect__tags {
+}
+.multiselect__element {
+  font-size: 0.8rem;
+}
+.multiselect__placeholder {
+  display: none;
+}
+/* .multiselect__element[role='option'] {
+  display: inline-block;
+}
+.multiselect__option--group {
+  display: block !important;
+} */
 </style>

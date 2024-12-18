@@ -1,10 +1,10 @@
 <template>
   <label
-    v-for="(tag, index) in tags"
-    :key="tag.name"
+    v-for="tag in tagSet"
+    :key="tag"
     class="tag"
     :class="{
-      inactive: !tag.active,
+      inactive: !model[tag],
     }"
     v-bind="$attrs"
   >
@@ -12,73 +12,49 @@
       class="sr-only"
       :name="name"
       type="checkbox"
-      :checked="tag.active"
-      :value="tag.name"
-      @change="selected(index)"
-    />{{ tag.name }}</label
+      :checked="model[tag]"
+      :value="tag"
+      @change="selected(tag)"
+    />{{ tag }}</label
   >
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { PropType } from 'vue';
-import type { TagListOption } from '../shared/types';
 import { deepClone } from '../shared/utils.js';
+import type { FilterTag, NewTag, TagModel } from '../shared/types.js';
 
-const props = defineProps({
-  // Accepts a mixed array of { name, active }
-  // or simple strings. If a string is provided,
-  // the tag will be transformed into the tag object
-  // with the default value applied
-  modelValue: {
-    type: Array as PropType<Array<string | TagListOption>>,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    defaultActive: boolean;
+    atLeastOneEnabled: boolean;
+    name: string;
+    tagSet: Array<NewTag>;
+  }>(),
+  {
+    atLeastOneEnabled: false,
+    defaultActive: true,
   },
-  defaultActive: {
-    type: Boolean,
-    default: true,
-  },
-  atLeastOneEnabled: {
-    type: Boolean,
-    default: false,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-});
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', values: TagListOption[]): void;
-}>();
-
-// create our tag states based on values provided in initial
-const tags = ref<TagListOption[]>(
-  props.modelValue.map((tag) =>
-    typeof tag === 'string'
-      ? // if string, transform into { name, active } object
-        { name: tag, active: props.defaultActive }
-      : // or return the tag as provided
-        tag,
-  ),
 );
 
-function selected(index: number) {
-  const tag = tags.value[index];
+const model = defineModel<TagModel>('modelValue', {
+  default: {},
+});
 
+function selected(tag: NewTag) {
   // if this option is enabled, then we must ensure at least one tag
-  // is enabled at all times,
+  // from the set is enabled at all times,
   // to do this, we simply check the array of tags for actives and not
   // matching the selected tag name
-  if (props.atLeastOneEnabled) {
-    const cb = ({ active, name }: TagListOption) => active && name !== tag.name;
-    if (!tags.value.some(cb)) return;
-  }
+  /* if (props.atLeastOneEnabled) {
+    if (!props.modelValue)) return;
+  } */
 
-  tags.value[index].active = !tag.active;
-  emit('update:modelValue', deepClone(tags.value));
+  model.value[tag] = !model.value[tag];
 }
 </script>
+
 <style scoped lang="postcss">
 .tag {
   display: inline-block;

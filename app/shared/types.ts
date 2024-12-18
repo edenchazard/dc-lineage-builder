@@ -1,11 +1,3 @@
-const filterTags = [
-  'CB',
-  'Valentine',
-  'Christmas',
-  'Halloween',
-  'Hybrid',
-  'Regular',
-] as const;
 const eggGroups = [
   'Standard',
   'Pygmy',
@@ -98,6 +90,68 @@ interface LineageConfig {
   disabled: boolean;
 }
 
+const elementTags = [
+  'light',
+  'dark',
+  'magi',
+  'life',
+  'death',
+  'time',
+  'earth',
+  'lightning',
+  'air',
+  'water',
+  'fire',
+  'ice',
+] as const;
+
+const bodyTypeTags = [
+  'amphiptere',
+  'wingless',
+  'drake',
+  'western',
+  'eastern',
+  'sea serpent',
+  'wyvern',
+  'lindwyrm',
+  'wyrm',
+  'pygmy eastern',
+  'pygmy lindwyrm',
+  'pygmy wyrm',
+  'pygmy wyvern',
+  'pygmy western',
+  'pygmy wingless',
+  'pygmy amphiptere',
+  'two-head eastern',
+  'two-head lindwyrm',
+  'two-head amphiptere',
+  'two-head sea serpent',
+  'two-head wyrm',
+  'two-head wyvern',
+  'two-head wingless',
+  'two-head western',
+] as const;
+
+const filterTags = [...elementTags, ...bodyTypeTags] as const;
+
+const filtersByGroup = [
+  {
+    name: 'Element',
+    tags: elementTags,
+  },
+  {
+    name: 'Body Type',
+    tags: bodyTypeTags,
+  },
+];
+
+type NewTag = (typeof filterTags)[number];
+
+type TagModel = {
+  Element: (typeof elementTags)[];
+  BodyType: (typeof bodyTypeTags)[];
+};
+
 export type {
   GenderOnly,
   DragonMetadata,
@@ -118,6 +172,8 @@ export type {
   PortraitData,
   FilterTag,
   EggGroupTag,
+  NewTag,
+  TagModel,
 };
 
-export { filterTags, eggGroups };
+export { eggGroups, filterTags, elementTags, bodyTypeTags, filtersByGroup };
