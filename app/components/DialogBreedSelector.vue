@@ -25,7 +25,7 @@
           </label>
           <Multiselect
             multiple
-            v-model="model"
+            v-model="tagStore"
             :options="filtersByGroup"
             group-values="tags"
             group-label="name"
@@ -81,18 +81,15 @@ import 'vue-multiselect/dist/vue-multiselect.min.css';
 import { onStartTyping } from '@vueuse/core';
 import {
   type DragonGender,
-  type NewTag,
   type PortraitData,
-  bodyTypeTags,
-  elementTags,
   filtersByGroup,
 } from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
-import { resolveLabel } from '../shared/utils';
 import BreedTag from './BreedTag.vue';
+import { tagsFromModel, tagStore } from '../store/useTagStore.js';
 
 const props = withDefaults(
   defineProps<{
@@ -114,19 +111,7 @@ const searchString = ref('');
 const mateSearchEl = ref<HTMLInputElement>();
 const wrapper = ref();
 const resultsEl = ref<HTMLElement>();
-const model = ref<NewTag[]>([]);
-
-const chosenTags = computed(() => {
-  return {
-    PrimaryElement: model.value
-      .filter((tag) => elementTags.map((s) => `p:${s}`).includes(tag))
-      .map((tag) => tag.slice(2)),
-    SecondaryElement: model.value
-      .filter((tag) => elementTags.map((s) => `s:${s}`).includes(tag))
-      .map((tag) => tag.slice(2)),
-    BodyType: model.value.filter((tag) => bodyTypeTags.includes(tag)),
-  };
-});
+const chosenTags = computed(() => tagsFromModel(tagStore));
 
 const { deactivate } = useFocusTrap(wrapper, {
   immediate: true,

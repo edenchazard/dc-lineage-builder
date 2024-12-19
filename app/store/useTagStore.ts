@@ -1,76 +1,72 @@
-import { computed, ref } from 'vue';
-import type { ComputedRef, WritableComputedRef } from 'vue';
-import { defineStore } from 'pinia';
-import { deepClone } from '../shared/utils.js';
-import type { TagListOption, FilterTag, EggGroupTag } from '../shared/types';
-import { filterTags, eggGroups } from '../shared/types';
+import { unref, type MaybeRef } from 'vue';
+import {
+  bodyTypeTags,
+  elementTags,
+  type BreedEntry,
+  type NewTag,
+  type TagModel,
+} from '../shared/types';
+import { useSessionStorage } from '@vueuse/core';
+import { resolveLabel } from '../shared/utils';
 
-interface SessionTagSet {
-  key: string;
-  tags: readonly EggGroupTag[] | readonly FilterTag[];
-}
+export const tagStore = useSessionStorage<NewTag[]>('tags', []);
 
-// returns tags in session if set, or defaults
-function loadTags(session: SessionTagSet): TagListOption[] {
-  // get the session
-  const saved = sessionStorage.getItem(session.key);
-  const defaults = session.tags.map((tag: string) => ({
-    name: tag,
-    active: true,
-  }));
-
-  // session exists, return the collection
-  if (typeof saved === 'string') return JSON.parse(saved);
-
-  // Return the default collection of tags with active set to true
-  return defaults;
-}
-
-// Takes in an array of Tag types, filters for active tags
-// and then creates an array of just the names
-function flattenTagArray(tags: TagListOption[]) {
-  return tags.filter((tag) => tag.active).map((tag) => tag.name);
-}
-
-function useCreateTagStorage<T extends FilterTag[] | EggGroupTag[]>(
-  session: SessionTagSet,
-) {
-  const tags = ref(loadTags(session));
-  // updates sessionstorage whenever the tags are updated
-  const comp = computed({
-    get: () => tags.value,
-    set: (newList) => {
-      tags.value = deepClone(newList);
-      sessionStorage.setItem(session.key, JSON.stringify(newList));
-    },
-  });
-
-  const enabled = computed(() => flattenTagArray(tags.value) as T);
-
-  const ret: readonly [WritableComputedRef<TagListOption[]>, ComputedRef<T>] = [
-    comp,
-    enabled,
-  ];
-  return ret;
-}
-
-export const useTagStore = defineStore('tagStore', () => {
-  const [tags, enabledTags] = useCreateTagStorage<FilterTag[]>({
-    key: 'session-tags',
-    tags: filterTags,
-  });
-
-  // groups to hide from the selection interface, such as *
-  const hidden = ['*'];
-  const [groups, enabledEggGroups] = useCreateTagStorage<EggGroupTag[]>({
-    key: 'session-groups',
-    tags: eggGroups.filter((tag) => !hidden.includes(tag)),
-  });
-
+export function tagsFromModel(tags: MaybeRef<NewTag[]>): TagModel {
+  const unrefTags = unref(tags);
   return {
-    tags,
-    groups,
-    enabledEggGroups,
-    enabledTags,
+    PrimaryElement: unrefTags
+      .filter((tag): tag is TagModel['PrimaryElement'][number] =>
+        elementTags.map((s) => `p:${s}`).includes(tag),
+      )
+      .map(resolveLabel),
+    SecondaryElement: unrefTags
+      .filter((tag): tag is TagModel['SecondaryElement'][number] =>
+        elementTags.map((s) => `s:${s}`).includes(tag),
+      )
+      .map(resolveLabel),
+    BodyType: unrefTags.filter((tag): tag is TagModel['BodyType'][number] =>
+      bodyTypeTags.includes('' + tag),
+    ),
   };
-});
+}
+
+export function filterBreedsByTagsWith<
+  Metadatable extends Pick<BreedEntry, 'metaData'>,
+>(breeds: Metadatable[], tags: TagModel) {
+  if (
+    !tags.BodyType.length &&
+    !tags.PrimaryElement.length &&
+    !tags.SecondaryElement.length
+  ) {
+    return breeds;
+  }
+  const primaryFilters = new Set([
+    ...tags.PrimaryElement.map((s) => `p:${s}`),
+    ...tags.PrimaryElement,
+  ]);
+
+  const secondaryFilters = new Set([
+    ...tags.SecondaryElement.map((s) => `s:${s}`),
+    ...tags.SecondaryElement,
+  ]);
+
+  const bodyTypeFilters = new Set(tags.BodyType);
+
+  return breeds.filter((breed) => {
+    const set = new Set(breed.metaData.tags);
+
+    if (tags.PrimaryElement.length && primaryFilters.isDisjointFrom(set)) {
+      return false;
+    }
+
+    if (tags.SecondaryElement.length && secondaryFilters.isDisjointFrom(set)) {
+      return false;
+    }
+
+    if (tags.BodyType.length && bodyTypeFilters.isDisjointFrom(set)) {
+      return false;
+    }
+
+    return true;
+  });
+}

@@ -7,7 +7,7 @@
       :id="id"
       ref="container"
       :list="filteredBreeds"
-      :compact="search.length < 3 && filteredBreeds.length > 9"
+      :compact="search.length < 3 && filteredBreeds.length > 100"
       v-bind="$attrs"
       @breed-selected="(breed) => emit('breedSelected', breed)"
     />
@@ -25,6 +25,7 @@ import { nextTick, watch, computed, ref } from 'vue';
 import type { PortraitData, TagModel } from '../shared/types';
 import BreedList from './BreedList.vue';
 import { useAppStore } from '../store/useAppStore';
+import { filterBreedsByTagsWith } from '../store/useTagStore';
 
 const props = withDefaults(
   defineProps<{
@@ -51,52 +52,7 @@ const appStore = useAppStore();
 const filteredBreeds = computed(() => {
   const search = props.search.toLowerCase().trim();
 
-  const breeds = (function () {
-    console.log(props.tags);
-
-    if (
-      !props.tags.BodyType.length &&
-      !props.tags.PrimaryElement.length &&
-      !props.tags.SecondaryElement.length
-    ) {
-      return props.breeds;
-    }
-    const primaryFilters = new Set([
-      ...props.tags.PrimaryElement.map((s) => `p:${s}`),
-      ...props.tags.PrimaryElement,
-    ]);
-
-    const secondaryFilters = new Set([
-      ...props.tags.SecondaryElement.map((s) => `s:${s}`),
-      ...props.tags.SecondaryElement,
-    ]);
-
-    const bodyTypeFilters = new Set(props.tags.BodyType);
-
-    return props.breeds.filter((breed) => {
-      const set = new Set(breed.metaData.tags);
-
-      if (
-        props.tags.PrimaryElement.length &&
-        primaryFilters.isDisjointFrom(set)
-      ) {
-        return false;
-      }
-
-      if (
-        props.tags.SecondaryElement.length &&
-        secondaryFilters.isDisjointFrom(set)
-      ) {
-        return false;
-      }
-
-      if (props.tags.BodyType.length && bodyTypeFilters.isDisjointFrom(set)) {
-        return false;
-      }
-
-      return true;
-    });
-  })();
+  const breeds = filterBreedsByTagsWith(props.breeds, props.tags);
 
   // if the search string is empty, return the whole
   // list, with already used breeds first
