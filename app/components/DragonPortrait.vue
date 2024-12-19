@@ -98,6 +98,7 @@ computed:{
   background: var(--dc-lineage-tile-background, transparent);
   overflow: hidden;
   display: block;
+  flex-shrink: 0;
 }
 .imgbox-fullsize {
   /* this needs adjusting by 2px in either directon */

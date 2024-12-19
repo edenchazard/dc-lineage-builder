@@ -65,43 +65,35 @@
     </template>
   </DialogBreedSelectorWrapper>
 </template>
+
 <script setup lang="ts">
 import { computed, nextTick, ref } from 'vue';
 import Multiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
-import type { PropType } from 'vue';
 import { onStartTyping } from '@vueuse/core';
 import {
   type DragonGender,
   type NewTag,
   type PortraitData,
-  type TagModel,
   bodyTypeTags,
   elementTags,
-  filterTags,
   filtersByGroup,
 } from '../shared/types';
-import { useTagStore } from '../store/useTagStore.js';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
-import BaseTagList from './BaseTagList.vue';
 
-const props = defineProps({
-  breeds: {
-    type: Array<PortraitData>,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    breeds: PortraitData[];
+    genderFilter: DragonGender;
+    autofocusSearch?: boolean;
+  }>(),
+  {
+    autofocusSearch: false,
   },
-  genderFilter: {
-    type: String as PropType<DragonGender>,
-    required: true,
-  },
-  autofocusSearch: {
-    type: Boolean,
-    default: false,
-  },
-});
+);
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
@@ -116,8 +108,13 @@ const model = ref<NewTag[]>([]);
 
 const chosenTags = computed(() => {
   return {
-    Element: model.value.filter((tag) => elementTags.includes(tag)),
-    BodyType: model.value.filter((tag) => bodyTypeTags.includes(tag)),
+    PrimaryElement: model.value.find((tag) =>
+      elementTags.map((s) => `p:${s}`).includes(tag),
+    ),
+    SecondaryElement: model.value.find((tag) =>
+      elementTags.map((s) => `s:${s}`).includes(tag),
+    ),
+    BodyType: model.value.find((tag) => bodyTypeTags.includes(tag)),
   };
 });
 

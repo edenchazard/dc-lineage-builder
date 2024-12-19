@@ -8,7 +8,7 @@
       "Salt Schenanigans": ["35HjT","FrN6z"],
       "__regular__": ["crvng","pmpkn"]
     },
-    "tags": ["Halloween","water","wyrm"]
+    "tags": ["Halloween","wyrm","water"]
   },
   "Aegis": {
     "dimorphism": false,
@@ -22,49 +22,49 @@
       "Neutral Salt Birdzgoboom": "qjn78",
       "Neutral Salt Odeen": "SuORy"
     },
-    "tags": ["Christmas","primary:life","secondary:ice","wingless"]
+    "tags": ["Christmas","wingless","p:life","s:ice"]
   },
   "Aeon Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["lRVeO","pAako"],
-    "tags": ["Regular","time","wyvern"]
+    "tags": ["Regular","wyvern","time"]
   },
   "Aeria Gloris": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "YCJJG",
-    "tags": ["Regular"]
+    "tags": ["Regular","amphiptere","p:magi","s:lightning"]
   },
   "Aether Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "l5osI",
-    "tags": ["Regular"]
+    "tags": ["Regular","wyvern","air"]
   },
   "Algarre": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["mQCP6","We7TE"],
-    "tags": ["Regular"]
+    "tags": ["Regular","western","neutral"]
   },
   "Almerald": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "LVXzb",
-    "tags": ["Regular"]
+    "tags": ["Regular","eastern","light"]
   },
   "Amalthean": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["jQItl","JOKAw"],
-    "tags": ["Hybrid"]
+    "tags": ["Hybrid","western","p:life","s:water"]
   },
   "Amarignis": {
     "genderOnly": "f",
@@ -72,21 +72,21 @@
     "sprites": {
       "Salt Dohaerys": "eraNS"
     },
-    "tags": ["Valentine"]
+    "tags": ["Valentine","eastern","p:light","s:fire"]
   },
   "Aqualis": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["NuOVp","j9tBc"],
-    "tags": ["Regular"]
+    "tags": ["Regular","eastern","water"]
   },
   "Aranoa": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "1D3iI",
-    "tags": ["Regular"]
+    "tags": ["Regular","wingless","water"]
   },
   "Arcana": {
     "dimorphism": true,
@@ -97,35 +97,35 @@
       "Salt TCA": ["84555","wHITK"],
       "__regular__": ["ck9p3","W63P1"]
     },
-    "tags": ["Halloween"]
+    "tags": ["Halloween","western","magi"]
   },
   "Archelonian": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["WkHfU","4XNgU"],
-    "tags": ["Regular"]
+    "tags": ["Regular","wyvern","p:water","s:death"]
   },
   "Aria": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["EhfrQ","GJF56"],
-    "tags": ["Regular"]
+    "tags": ["Regular","western","neutral"]
   },
   "Arrakyma": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["yukAh","lNIXS"],
-    "tags": ["Regular"]
+    "tags": ["Regular","leviathan","p:earth","s:death"]
   },
   "Ash": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "jFX3Q",
-    "tags": ["Regular"]
+    "tags": ["Regular","wingless","earth"]
   },
   "Astrael": {
     "dimorphism": false,
@@ -142,7 +142,7 @@
       "Vintage Chic": "e7Mp5",
       "the OG": "S99uD"
     },
-    "tags": ["Regular"]
+    "tags": ["Regular","western","p:earth","s:life"]
   },
   "Avin Pygmy": {
     "dimorphism": true,

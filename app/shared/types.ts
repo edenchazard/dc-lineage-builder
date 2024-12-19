@@ -1,3 +1,5 @@
+const filterTags = [] as const;
+
 const eggGroups = [
   'Standard',
   'Pygmy',
@@ -6,6 +8,7 @@ const eggGroups = [
   'Other',
   '*',
 ] as const;
+
 type FilterTag = (typeof filterTags)[number];
 type EggGroupTag = (typeof eggGroups)[number];
 
@@ -73,7 +76,7 @@ interface BreedEntry {
 type GenderOnly = DragonGender | false;
 interface MetaData {
   group: EggGroupTag;
-  tags: FilterTag[];
+  tags: string[];
   src: Sources;
 }
 type Sources = 'local' | 'dc' | 'ghost';
@@ -132,12 +135,14 @@ const bodyTypeTags = [
   'two-head western',
 ] as const;
 
-const filterTags = [...elementTags, ...bodyTypeTags] as const;
-
 const filtersByGroup = [
   {
-    name: 'Element',
-    tags: elementTags,
+    name: 'Primary Element',
+    tags: elementTags.map((tag) => `p:${tag}`),
+  },
+  {
+    name: 'Secondary Element',
+    tags: elementTags.map((tag) => `s:${tag}`),
   },
   {
     name: 'Body Type',
@@ -145,11 +150,12 @@ const filtersByGroup = [
   },
 ];
 
-type NewTag = (typeof filterTags)[number];
+type NewTag = string;
 
 type TagModel = {
-  Element: (typeof elementTags)[];
-  BodyType: (typeof bodyTypeTags)[];
+  PrimaryElement: (typeof elementTags)[number] | null;
+  SecondaryElement: (typeof elementTags)[number] | null;
+  BodyType: (typeof bodyTypeTags)[number] | null;
 };
 
 export type {

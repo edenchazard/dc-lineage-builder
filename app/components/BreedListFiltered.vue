@@ -52,37 +52,42 @@ const filteredBreeds = computed(() => {
   const search = props.search.toLowerCase().trim();
 
   const breeds = (function () {
-    if (!props.tags.BodyType.length && !props.tags.Element.length) {
+    console.log(props.tags);
+    if (
+      !props.tags.BodyType &&
+      !props.tags.PrimaryElement &&
+      !props.tags.SecondaryElement
+    ) {
       return props.breeds;
     }
 
     return props.breeds.filter((breed) => {
-      if (props.tags.Element.length > 0) {
-        let matches = 0;
+      const set = new Set(breed.metaData.tags);
 
-        for (const tag of props.tags.Element) {
-          if (breed.metaData.tags.includes(tag)) {
-            matches++;
-          }
+      if (props.tags.PrimaryElement) {
+        const values = new Set([
+          props.tags.PrimaryElement,
+          props.tags.PrimaryElement.slice(8),
+        ]);
 
-          if (matches !== props.tags.Element.length) {
-            return false;
-          }
+        if (values.isDisjointFrom(set)) {
+          return false;
         }
       }
 
-      if (props.tags.BodyType.length > 0) {
-        let matches = 0;
+      if (props.tags.SecondaryElement) {
+        const values = new Set([
+          props.tags.SecondaryElement,
+          props.tags.SecondaryElement.slice(10),
+        ]);
 
-        for (const tag of props.tags.BodyType) {
-          if (breed.metaData.tags.includes(tag)) {
-            matches++;
-          }
-
-          if (matches !== props.tags.BodyType.length) {
-            return false;
-          }
+        if (values.isDisjointFrom(set)) {
+          return false;
         }
+      }
+      console.log(props.tags.BodyType, set);
+      if (props.tags.BodyType && !set.has(props.tags.BodyType)) {
+        return false;
       }
 
       return true;
@@ -104,8 +109,8 @@ const filteredBreeds = computed(() => {
   // we make two arrays, one for primary results (the search matches
   // the beginning of the breed name, and secondary results, where
   // the breed name includes the search term somewhere.
-  const primary: PortraitData[] = [],
-    secondary: PortraitData[] = [];
+  const p: PortraitData[] = [],
+    s: PortraitData[] = [];
 
   for (let breed of breeds) {
     const position = breed.name.toLowerCase().trim().indexOf(search);

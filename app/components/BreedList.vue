@@ -68,7 +68,8 @@
           v-for="filter in breed.metaData.tags"
           :key="filter"
           class="tag-filter"
-          >{{ filter }}</span
+          :class="filter"
+          >{{ filter.replaceAll(tagRegexp, '') }}</span
         >
       </button>
     </li>
@@ -105,6 +106,7 @@ const props = defineProps({
     required: true,
   },
 });
+const tagRegexp = /^(p:|s:)/g;
 const portraitWidth = settings.tileSizes.fullSize.width;
 const portraitHeight = settings.tileSizes.fullSize.height;
 const margin = 4;
@@ -259,14 +261,15 @@ function strToId(name: string) {
   flex: 1;
   border: 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   text-overflow: ellipsis;
-  overflow: hidden;
   background: transparent;
-  gap: 0.5rem;
+  gap: 0 0.5rem;
   margin: 3px;
   color: inherit;
   cursor: inherit;
+  justify-content: end;
 }
 .breed-entry-name {
   flex: 1;
@@ -275,11 +278,39 @@ function strToId(name: string) {
 
 .tag-group,
 .tag-filter {
-  display: inline-block;
-  padding: 0.3rem;
-  border-radius: 0.5rem;
-  border: 0 none;
-  font-size: 0.7rem;
+  padding: 0.2rem;
+  border-radius: 0.1rem;
+  font-size: 0.65rem;
+  text-transform: capitalize;
+
+  &[class*='water'] {
+    background: rgb(87, 131, 172);
+    color: white;
+  }
+  &[class*='fire'] {
+    background: red;
+    color: white;
+  }
+  &[class*='earth'] {
+    background: green;
+    color: white;
+  }
+  &[class*='air'] {
+    background: lightblue;
+    color: white;
+  }
+  &[class*='light'] {
+    background: rgb(255, 255, 132);
+    color: black;
+  }
+  &[class*='dark'] {
+    background: rgb(31, 28, 28);
+    color: white;
+  }
+  &[class*='death'] {
+    background: rgb(0, 0, 0);
+    color: white;
+  }
 }
 
 .grid {
