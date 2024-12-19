@@ -118,13 +118,13 @@ const model = ref<NewTag[]>([]);
 
 const chosenTags = computed(() => {
   return {
-    PrimaryElement: model.value.find((tag) =>
-      elementTags.map((s) => `p:${s}`).includes(tag),
-    ),
-    SecondaryElement: model.value.find((tag) =>
-      elementTags.map((s) => `s:${s}`).includes(tag),
-    ),
-    BodyType: model.value.find((tag) => bodyTypeTags.includes(tag)),
+    PrimaryElement: model.value
+      .filter((tag) => elementTags.map((s) => `p:${s}`).includes(tag))
+      .map((tag) => tag.slice(2)),
+    SecondaryElement: model.value
+      .filter((tag) => elementTags.map((s) => `s:${s}`).includes(tag))
+      .map((tag) => tag.slice(2)),
+    BodyType: model.value.filter((tag) => bodyTypeTags.includes(tag)),
   };
 });
 

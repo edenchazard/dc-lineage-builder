@@ -53,40 +53,44 @@ const filteredBreeds = computed(() => {
 
   const breeds = (function () {
     console.log(props.tags);
+
     if (
-      !props.tags.BodyType &&
-      !props.tags.PrimaryElement &&
-      !props.tags.SecondaryElement
+      !props.tags.BodyType.length &&
+      !props.tags.PrimaryElement.length &&
+      !props.tags.SecondaryElement.length
     ) {
       return props.breeds;
     }
+    const primaryFilters = new Set([
+      ...props.tags.PrimaryElement.map((s) => `p:${s}`),
+      ...props.tags.PrimaryElement,
+    ]);
+
+    const secondaryFilters = new Set([
+      ...props.tags.SecondaryElement.map((s) => `s:${s}`),
+      ...props.tags.SecondaryElement,
+    ]);
+
+    const bodyTypeFilters = new Set(props.tags.BodyType);
 
     return props.breeds.filter((breed) => {
       const set = new Set(breed.metaData.tags);
 
-      if (props.tags.PrimaryElement) {
-        const values = new Set([
-          props.tags.PrimaryElement,
-          props.tags.PrimaryElement.slice(2),
-        ]);
-
-        if (values.isDisjointFrom(set)) {
-          return false;
-        }
+      if (
+        props.tags.PrimaryElement.length &&
+        primaryFilters.isDisjointFrom(set)
+      ) {
+        return false;
       }
 
-      if (props.tags.SecondaryElement) {
-        const values = new Set([
-          props.tags.SecondaryElement,
-          props.tags.SecondaryElement.slice(2),
-        ]);
-
-        if (values.isDisjointFrom(set)) {
-          return false;
-        }
+      if (
+        props.tags.SecondaryElement.length &&
+        secondaryFilters.isDisjointFrom(set)
+      ) {
+        return false;
       }
-      console.log(props.tags.BodyType, set);
-      if (props.tags.BodyType && !set.has(props.tags.BodyType)) {
+
+      if (props.tags.BodyType.length && bodyTypeFilters.isDisjointFrom(set)) {
         return false;
       }
 

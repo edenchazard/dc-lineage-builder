@@ -153,9 +153,9 @@ const filtersByGroup = [
 type NewTag = string;
 
 type TagModel = {
-  PrimaryElement: (typeof elementTags)[number] | null;
-  SecondaryElement: (typeof elementTags)[number] | null;
-  BodyType: (typeof bodyTypeTags)[number] | null;
+  PrimaryElement: (typeof elementTags)[number][];
+  SecondaryElement: (typeof elementTags)[number][];
+  BodyType: (typeof bodyTypeTags)[number][];
 };
 
 export type {
