@@ -63,14 +63,11 @@
           class="breed-entry-name"
           >{{ breed.name }}</span
         >
-        <span class="tag-group">{{ breed.metaData.group }}</span>
-        <span
+        <BreedTag
           v-for="filter in breed.metaData.tags"
           :key="filter"
-          class="tag-filter"
-          :class="filter"
-          >{{ filter.replaceAll(tagRegexp, '') }}</span
-        >
+          :tag="filter"
+        />
       </button>
     </li>
   </ul>
@@ -83,6 +80,8 @@ import VirtualCollection from 'vue-virtual-collection/src/VirtualCollection.vue'
 import type { PortraitData } from '../shared/types';
 import DragonPortrait from './DragonPortrait.vue';
 import settings from '../shared/settings.js';
+import { resolveLabel } from '../shared/utils';
+import BreedTag from './BreedTag.vue';
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
@@ -106,7 +105,6 @@ const props = defineProps({
     required: true,
   },
 });
-const tagRegexp = /^(p:|s:)/g;
 const portraitWidth = settings.tileSizes.fullSize.width;
 const portraitHeight = settings.tileSizes.fullSize.height;
 const margin = 4;
@@ -274,43 +272,6 @@ function strToId(name: string) {
 .breed-entry-name {
   flex: 1;
   text-align: left;
-}
-
-.tag-group,
-.tag-filter {
-  padding: 0.2rem;
-  border-radius: 0.1rem;
-  font-size: 0.65rem;
-  text-transform: capitalize;
-
-  &[class*='water'] {
-    background: rgb(87, 131, 172);
-    color: white;
-  }
-  &[class*='fire'] {
-    background: red;
-    color: white;
-  }
-  &[class*='earth'] {
-    background: green;
-    color: white;
-  }
-  &[class*='air'] {
-    background: lightblue;
-    color: white;
-  }
-  &[class*='light'] {
-    background: rgb(255, 255, 132);
-    color: black;
-  }
-  &[class*='dark'] {
-    background: rgb(31, 28, 28);
-    color: white;
-  }
-  &[class*='death'] {
-    background: rgb(0, 0, 0);
-    color: white;
-  }
 }
 
 .grid {

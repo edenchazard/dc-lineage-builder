@@ -37,12 +37,20 @@
             searchable
             group-select
             :option-height="30"
+            :close-on-select="false"
           >
             <template #selection="{ values }">
               <div class="tags">
                 <span class="tag-list">{{ values.join(', ') }}</span>
                 <span class="tag-counter">{{ values.length }}</span>
               </div>
+            </template>
+
+            <template #option="{ option }">
+              <template v-if="option.$isLabel">
+                <span>{{ option.$groupLabel }}</span>
+              </template>
+              <template v-else> <BreedTag :tag="option" /> </template>
             </template>
           </Multiselect>
         </div>
@@ -83,6 +91,8 @@ import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
+import { resolveLabel } from '../shared/utils';
+import BreedTag from './BreedTag.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -252,16 +262,17 @@ form + section {
   justify-content: center;
   border-radius: 100%;
 }
-
-.tag {
-  background: lightblue;
-  padding: 0.2rem;
-  border-radius: 0.25rem;
-  line-height: 2rem;
-}
 </style>
 <style>
+.multiselect__content-wrapper {
+  /*  display: block !important; */
+}
 .multiselect__tags {
+}
+.multiselect__option {
+  /*   padding: 0.5rem;
+  min-height: 1rem;
+  line-height: 0.5rem; */
 }
 .multiselect__element {
   font-size: 0.8rem;

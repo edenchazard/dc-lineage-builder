@@ -67,7 +67,7 @@ const filteredBreeds = computed(() => {
       if (props.tags.PrimaryElement) {
         const values = new Set([
           props.tags.PrimaryElement,
-          props.tags.PrimaryElement.slice(8),
+          props.tags.PrimaryElement.slice(2),
         ]);
 
         if (values.isDisjointFrom(set)) {
@@ -78,7 +78,7 @@ const filteredBreeds = computed(() => {
       if (props.tags.SecondaryElement) {
         const values = new Set([
           props.tags.SecondaryElement,
-          props.tags.SecondaryElement.slice(10),
+          props.tags.SecondaryElement.slice(2),
         ]);
 
         if (values.isDisjointFrom(set)) {
@@ -109,8 +109,8 @@ const filteredBreeds = computed(() => {
   // we make two arrays, one for primary results (the search matches
   // the beginning of the breed name, and secondary results, where
   // the breed name includes the search term somewhere.
-  const p: PortraitData[] = [],
-    s: PortraitData[] = [];
+  const primary: PortraitData[] = [];
+  const secondary: PortraitData[] = [];
 
   for (let breed of breeds) {
     const position = breed.name.toLowerCase().trim().indexOf(search);

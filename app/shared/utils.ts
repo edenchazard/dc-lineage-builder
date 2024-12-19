@@ -178,3 +178,8 @@ export function createLineageLink(hash: string) {
   const mountPath = import.meta.env.BASE_URL;
   return `${origin}${mountPath}/view/${hash}`;
 }
+
+const tagRegExp = /^(p:|s:)/g;
+export function resolveLabel(tag: string) {
+  return tag.replace(tagRegExp, '');
+}
