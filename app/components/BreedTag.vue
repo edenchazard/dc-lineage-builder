@@ -38,6 +38,9 @@ withDefaults(
   background: #808080;
   line-height: 1rem;
 
+  &.neutral {
+    background: #949494;
+  }
   &.water {
     background: #116fe8;
   }

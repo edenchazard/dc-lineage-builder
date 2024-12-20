@@ -85,6 +85,7 @@ const elementTags = [
   'water',
   'fire',
   'ice',
+  'neutral',
 ] as const;
 
 const bodyTypeTags = [
