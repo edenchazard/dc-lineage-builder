@@ -159,7 +159,7 @@
       "Blue": ["zcr7c","R58nI"],
       "Green": ["siClI","lZDRW"]
     },
-    "tags": ["Regular","two-head sea serpent","water"]
+    "tags": ["Regular","two-head leviathan","water"]
   },
   "Berry Drake": {
     "dimorphism": false,
@@ -287,7 +287,7 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "4bsEN",
-    "tags": ["Hybrid","sea serpent","water"]
+    "tags": ["Hybrid","leviathan","water"]
   },
   "Ciriax Lindwyrm": {
     "dimorphism": true,
@@ -783,7 +783,7 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": "OkSYV",
-    "tags": ["Regular","water","sea serpent","coast"]
+    "tags": ["Regular","water","leviathan","coast"]
   },
   "Luminox Wyvern": {
     "dimorphism": true,
@@ -1181,7 +1181,7 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["vkpHc","JCL1R"],
-    "tags": ["Hybrid","water","sea serpent"]
+    "tags": ["Hybrid","water","leviathan"]
   },
   "Shumoga": {
     "dimorphism": false,
@@ -1315,7 +1315,7 @@
       "Dusk": "20uav",
       "Night": "IFpVR"
     },
-    "tags": ["Regular","sea serpent","p:air","s:light","alpine","desert","jungle"]
+    "tags": ["Regular","leviathan","p:air","s:light","alpine","desert","jungle"]
   },
   "Striped River": {
     "dimorphism": false,
@@ -1433,7 +1433,7 @@
       "Pygmy Wyvern": "xgW6e",
       "Two-headed Eastern": "FeT6A",
       "Two-headed Lindwyrm": "7Dp8V",
-      "Two-headed Sea Serpent": "d2wFv",
+      "Two-headed leviathan": "d2wFv",
       "Two-headed Western": "cGgSH",
       "Two-headed Wyvern": "Dm18d",
       "Two-headed wingless": "YkTcF",
@@ -1488,7 +1488,7 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["2kQWa","NNq3"],
-    "tags": ["Regular","water","sea serpent","coast"]
+    "tags": ["Regular","water","leviathan","coast"]
   },
   "Waterhorse": {
     "dimorphism": true,

@@ -235,7 +235,7 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["dgqt",0,-1,48],
-    "tags": ["Regular","sea serpent","water"]
+    "tags": ["Regular","leviathan","water"]
   },
   "Dorsal": {
     "genderOnly": false,
@@ -423,7 +423,7 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["m5MnX",0,-1,48],
-    "tags": ["Regular","sea serpent","fire"]
+    "tags": ["Regular","leviathan","fire"]
   },
   "Light Weaver": {
     "genderOnly": "f",
@@ -628,7 +628,7 @@
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["oUgYZ",0,-1,48],
-    "tags": ["Regular","sea serpent","water"]
+    "tags": ["Regular","leviathan","water"]
   },
   "Sapphire": {
     "genderOnly": false,
