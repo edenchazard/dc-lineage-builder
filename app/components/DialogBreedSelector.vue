@@ -97,6 +97,7 @@
                               v-model="tagStore"
                               type="checkbox"
                               :value="tag"
+                              class="white"
                             />
                             <label :for="tag">{{ resolveLabel(tag) }}</label>
                           </BreedTag>
@@ -282,25 +283,6 @@ form + section {
 .filters-container {
   border-radius: 0.5rem;
   padding: 0.5rem;
-
-  & input[type='checkbox'] {
-    margin: 0px;
-    padding: 0.5rem;
-    appearance: none;
-    border: 1px solid white;
-    position: relative;
-    border-radius: 0.2rem;
-
-    &:checked::after {
-      content: '\2713';
-      color: #fff;
-      text-align: center;
-      position: absolute;
-      left: 3px;
-      top: 0px;
-      font-weight: bold;
-    }
-  }
 }
 
 .header {
@@ -344,14 +326,6 @@ form + section {
     position: sticky;
     background: var(--ui-modal-content);
 
-    & input[type='checkbox'] {
-      border: 1px solid black;
-
-      &:checked::after {
-        color: black;
-      }
-    }
-
     & .label {
       flex: 1;
     }
@@ -367,6 +341,10 @@ form + section {
     flex-wrap: wrap;
     gap: 0.5rem;
     padding: 0 1rem;
+
+    & input {
+      background: transparent;
+    }
   }
 }
 </style>
