@@ -39,19 +39,21 @@ withDefaults(
   line-height: 1rem;
 
   &.water {
-    background: #2980ef;
+    background: #116fe8;
   }
   &.fire {
-    background: #e62829;
+    background: hsl(360, 79%, 51%);
   }
   &.earth {
     background: #915121;
   }
   &.air {
     background: #81b9ef;
+    color: #222222;
   }
   &.light {
-    background: #bababa;
+    background: #d9d190;
+    color: #222222;
   }
   &.dark {
     background: #624d4e;
@@ -60,19 +62,20 @@ withDefaults(
     background: #704170;
   }
   &.magi {
-    background: #ef4179;
+    background: #e11455;
   }
   &.life {
     background: #5060e1;
   }
   &.time {
-    background: #40b5a5;
+    background: #378177;
   }
   &.lightning {
-    background: #fac000;
+    background: #947100;
   }
   &.ice {
     background: #3dcef3;
+    color: #222222;
   }
 }
 </style>
