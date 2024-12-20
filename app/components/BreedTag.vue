@@ -1,19 +1,27 @@
 <template>
-  <span
+  <component
+    :is="as"
     class="tag"
     :class="resolveLabel(tag)"
   >
-    <slot />
-    {{ resolveLabel(tag) }}
-  </span>
+    <slot>
+      {{ resolveLabel(tag) }}
+    </slot>
+  </component>
 </template>
 
 <script setup lang="ts">
 import { resolveLabel } from '../shared/utils';
 
-defineProps<{
-  tag: string;
-}>();
+withDefaults(
+  defineProps<{
+    tag: string;
+    as?: string;
+  }>(),
+  {
+    as: 'span',
+  },
+);
 </script>
 
 <style scoped lang="postcss">
@@ -28,6 +36,7 @@ defineProps<{
   letter-spacing: 0.05rem;
   color: white;
   background: #808080;
+  line-height: 1rem;
 
   &.water {
     background: #2980ef;

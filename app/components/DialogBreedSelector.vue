@@ -86,18 +86,20 @@
                         </div>
 
                         <ul class="tag-set">
-                          <li
+                          <BreedTag
+                            as="li"
+                            :tag="tag"
                             v-for="tag in group.tags"
                             :key="tag"
                           >
-                            <BreedTag :tag="tag">
-                              <input
-                                v-model="tagStore"
-                                type="checkbox"
-                                :value="tag"
-                              />
-                            </BreedTag>
-                          </li>
+                            <input
+                              :id="tag"
+                              v-model="tagStore"
+                              type="checkbox"
+                              :value="tag"
+                            />
+                            <label :for="tag">{{ resolveLabel(tag) }}</label>
+                          </BreedTag>
                         </ul>
                       </fieldset>
                     </li>
@@ -144,6 +146,7 @@ import {
 import { Dropdown } from 'floating-vue';
 import 'floating-vue/dist/style.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { resolveLabel } from '../shared/utils';
 
 const props = withDefaults(
   defineProps<{
@@ -281,8 +284,22 @@ form + section {
   padding: 0.5rem;
 
   & input[type='checkbox'] {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0.5rem;
+    appearance: none;
+    border: 1px solid white;
+    position: relative;
+    border-radius: 0.2rem;
+
+    &:checked::after {
+      content: '\2713';
+      color: #fff;
+      text-align: center;
+      position: absolute;
+      left: 3px;
+      top: 0px;
+      font-weight: bold;
+    }
   }
 }
 
@@ -326,6 +343,14 @@ form + section {
     top: 0;
     position: sticky;
     background: var(--ui-modal-content);
+
+    & input[type='checkbox'] {
+      border: 1px solid black;
+
+      &:checked::after {
+        color: black;
+      }
+    }
 
     & .label {
       flex: 1;
