@@ -23,7 +23,11 @@
 import { ref } from 'vue';
 import type { PropType } from 'vue';
 import { deepClone } from '../shared/utils.js';
-import type { FilterTag, NewTag, TagModel } from '../shared/types.js';
+import type {
+  FilterTag,
+  NewTag,
+  TagFilterCollection,
+} from '../shared/types.js';
 
 const props = withDefaults(
   defineProps<{
@@ -38,7 +42,7 @@ const props = withDefaults(
   },
 );
 
-const model = defineModel<TagModel>('modelValue', {
+const model = defineModel<TagFilterCollection>('modelValue', {
   default: {},
 });
 

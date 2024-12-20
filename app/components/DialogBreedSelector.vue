@@ -79,17 +79,17 @@ import { computed, nextTick, ref } from 'vue';
 import Multiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 import { onStartTyping } from '@vueuse/core';
-import {
-  type DragonGender,
-  type PortraitData,
-  filtersByGroup,
-} from '../shared/types';
+import { type DragonGender, type PortraitData } from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
 import BreedTag from './BreedTag.vue';
-import { tagsFromModel, tagStore } from '../store/useTagStore.js';
+import {
+  tagsFromModel,
+  tagStore,
+  filtersByGroup,
+} from '../store/useTagStore.js';
 
 const props = withDefaults(
   defineProps<{

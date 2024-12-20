@@ -1,10 +1,3 @@
-interface TagListOption {
-  name: string;
-  active: boolean;
-}
-
-//= Record<never,never>
-
 interface DragonParents {
   m?: PartialLineage;
   f?: PartialLineage;
@@ -62,7 +55,7 @@ interface BreedEntry {
 type GenderOnly = DragonGender | false;
 interface MetaData {
   group: string;
-  tags: string[];
+  tags: NewTag;
   src: Sources;
 }
 type Sources = 'local' | 'dc' | 'ghost';
@@ -121,33 +114,18 @@ const bodyTypeTags = [
   'two-head western',
 ] as const;
 
-const filtersByGroup = [
-  {
-    name: 'Primary Element',
-    tags: elementTags.map((tag) => `p:${tag}`),
-  },
-  {
-    name: 'Secondary Element',
-    tags: elementTags.map((tag) => `s:${tag}`),
-  },
-  {
-    name: 'Body Type',
-    tags: bodyTypeTags,
-  },
-];
-
-type TagModel = {
-  PrimaryElement: (typeof elementTags)[number][];
-  SecondaryElement: (typeof elementTags)[number][];
-  BodyType: (typeof bodyTypeTags)[number][];
+type TagFilterCollection = {
+  primaryElement: (typeof elementTags)[number][];
+  secondaryElement: (typeof elementTags)[number][];
+  bodyType: (typeof bodyTypeTags)[number][];
 };
 
-type NewTag = FlatArray<
-  | TagModel['PrimaryElement']
-  | TagModel['SecondaryElement']
-  | TagModel['BodyType'],
-  1
->;
+type NewTag =
+  | TagFilterCollection['primaryElement'][number]
+  | TagFilterCollection['secondaryElement'][number]
+  | TagFilterCollection['bodyType'][number];
+
+export { elementTags, bodyTypeTags };
 
 export type {
   GenderOnly,
@@ -162,13 +140,10 @@ export type {
   PartialLineageWithMetadata,
   MaybePartialLineageWithMetadata,
   //MaybeDragonTypeWithMetaData,
-  TagListOption,
   BreedEntry,
   MetaData,
   LineageConfig,
   PortraitData,
   NewTag,
-  TagModel,
+  TagFilterCollection,
 };
-
-export { elementTags, bodyTypeTags, filtersByGroup };

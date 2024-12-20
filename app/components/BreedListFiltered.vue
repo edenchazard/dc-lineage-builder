@@ -22,7 +22,7 @@
 </template>
 <script setup lang="ts">
 import { nextTick, watch, computed, ref } from 'vue';
-import type { PortraitData, TagModel } from '../shared/types';
+import type { PortraitData, TagFilterCollection } from '../shared/types';
 import BreedList from './BreedList.vue';
 import { useAppStore } from '../store/useAppStore';
 import { filterBreedsByTagsWith } from '../store/useTagStore';
@@ -32,7 +32,7 @@ const props = withDefaults(
     breeds: PortraitData[];
     search?: string;
     noResultsText?: string;
-    tags: TagModel;
+    tags: TagFilterCollection;
     id: string;
   }>(),
   {
