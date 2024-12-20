@@ -80,7 +80,6 @@ import VirtualCollection from 'vue-virtual-collection/src/VirtualCollection.vue'
 import type { PortraitData } from '../shared/types';
 import DragonPortrait from './DragonPortrait.vue';
 import settings from '../shared/settings.js';
-import { resolveLabel } from '../shared/utils';
 import BreedTag from './BreedTag.vue';
 
 const emit = defineEmits<{

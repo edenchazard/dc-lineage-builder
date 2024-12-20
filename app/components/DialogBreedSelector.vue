@@ -23,36 +23,89 @@
           >
             Search
           </label>
-          <Multiselect
-            multiple
-            v-model="tagStore"
-            :options="filtersByGroup"
-            group-values="tags"
-            group-label="name"
-            :max-height="240"
-            selectLabel=""
-            selectedLabel=""
-            deselectLabel=""
-            placeholder=""
-            searchable
-            group-select
-            :option-height="30"
-            :close-on-select="false"
+
+          <Dropdown
+            :distance="0"
+            auto-size="min"
+            auto-boundary-max-size
+            :triggers="['click']"
+            container="#breed-selector-wrapper"
           >
-            <template #selection="{ values }">
-              <div class="tags">
-                <span class="tag-list">{{ values.join(', ') }}</span>
-                <span class="tag-counter">{{ values.length }}</span>
+            <button
+              class="applied-filters interactive"
+              type="button"
+            >
+              <span class="tag-list">{{ tagStore.join(', ') }}</span>
+              <span class="tag-counter">{{ tagStore.length }}</span>
+            </button>
+
+            <template #popper="{ hide }">
+              <div class="filters-container">
+                <div class="header">
+                  <span class="title">Show breeds with...</span>
+                  <button
+                    class="clear-all"
+                    type="button"
+                    @click="tagStore = []"
+                  >
+                    Clear All
+                  </button>
+                  <button
+                    class="close"
+                    type="button"
+                    aria-label="Close filters"
+                    title="Close filters"
+                    @click="hide"
+                  >
+                    <FontAwesomeIcon
+                      size="2x"
+                      icon="times"
+                    />
+                  </button>
+                </div>
+                <form>
+                  <ul class="filter-menu">
+                    <li
+                      v-for="group in filtersByGroup"
+                      :key="group.name"
+                    >
+                      <fieldset>
+                        <div class="group">
+                          <input
+                            type="checkbox"
+                            :id="group.name"
+                          />
+                          <legend>
+                            <label
+                              class="label"
+                              :for="group.name"
+                            >
+                              {{ group.name }}
+                            </label>
+                          </legend>
+                        </div>
+
+                        <ul class="tag-set">
+                          <li
+                            v-for="tag in group.tags"
+                            :key="tag"
+                          >
+                            <BreedTag :tag="tag">
+                              <input
+                                v-model="tagStore"
+                                type="checkbox"
+                                :value="tag"
+                              />
+                            </BreedTag>
+                          </li>
+                        </ul>
+                      </fieldset>
+                    </li>
+                  </ul>
+                </form>
               </div>
             </template>
-
-            <template #option="{ option }">
-              <template v-if="option.$isLabel">
-                <span>{{ option.$groupLabel }}</span>
-              </template>
-              <template v-else> <BreedTag :tag="option" /> </template>
-            </template>
-          </Multiselect>
+          </Dropdown>
         </div>
       </form>
 
@@ -76,8 +129,6 @@
 
 <script setup lang="ts">
 import { computed, nextTick, ref } from 'vue';
-import Multiselect from 'vue-multiselect';
-import 'vue-multiselect/dist/vue-multiselect.min.css';
 import { onStartTyping } from '@vueuse/core';
 import { type DragonGender, type PortraitData } from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
@@ -90,6 +141,9 @@ import {
   tagStore,
   filtersByGroup,
 } from '../store/useTagStore.js';
+import { Dropdown } from 'floating-vue';
+import 'floating-vue/dist/style.css';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const props = withDefaults(
   defineProps<{
@@ -156,6 +210,7 @@ async function jumpToFirstResult() {
   }
 }
 </script>
+
 <style scoped>
 section + section,
 section + form,
@@ -180,95 +235,113 @@ form + section {
   gap: 0.5rem;
 }
 
-#results-search {
-}
-
 #breeds {
   overflow: hidden;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
-.tabs {
-  display: flex;
-  flex: 1;
-  padding: 0.5rem;
-}
 
-[name='tab'] {
-  display: none;
-
-  &:checked + label {
-    background: #b9dfee;
-    border-radius: 0.25rem 0.25rem 0 0;
-  }
-  & + label {
-    background: #f0f0f0;
-    border-radius: 0.25rem 0.25rem 0 0;
-    padding: 0.5rem 0.75rem 1rem 0.75rem;
-
-    &:not(:first-child) {
-      border-left: 1px solid #ccc;
-    }
-  }
-}
-
-.tab-body {
-  display: flex;
-  gap: 0.5rem;
-  background: #b9dfee;
-  padding: 0.5rem;
+.applied-filters {
   width: 100%;
-  border-radius: 0.25rem;
-  flex-wrap: wrap;
-}
-
-.tags {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.tag-list {
-  flex: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 100%;
-}
-
-.tag-counter {
-  font-size: 0.75rem;
-  color: #666;
-  background: #b9dfee;
-  width: 1.5rem;
-  height: 1.5rem;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  text-align: left;
+  background: var(--ui-modal-content);
+  border: none;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 100%;
+
+  & .tag-list {
+    flex: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  & .tag-counter {
+    font-size: 0.75rem;
+    color: #666;
+    background: #b9dfee;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+  }
 }
-</style>
-<style>
-.multiselect__content-wrapper {
-  /*  display: block !important; */
+
+.filters-container {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+
+  & input[type='checkbox'] {
+    margin: 0;
+    padding: 0;
+  }
 }
-.multiselect__tags {
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: 0.075rem;
+  gap: 1rem;
+
+  & .title {
+    flex: 1;
+  }
+
+  & button {
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--ui-text-colour);
+  }
+
+  & .clear-all {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    background: hsl(0, 100%, 40%);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    color: #fff;
+  }
 }
-.multiselect__option {
-  /*   padding: 0.5rem;
-  min-height: 1rem;
-  line-height: 0.5rem; */
+
+.filter-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  & .group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    top: 0;
+    position: sticky;
+    background: var(--ui-modal-content);
+
+    & .label {
+      flex: 1;
+    }
+  }
+
+  & .group {
+    padding: 0.5rem 0;
+    gap: 0.5rem;
+  }
+
+  & .tag-set {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0 1rem;
+  }
 }
-.multiselect__element {
-  font-size: 0.8rem;
-}
-.multiselect__placeholder {
-  display: none;
-}
-/* .multiselect__element[role='option'] {
-  display: inline-block;
-}
-.multiselect__option--group {
-  display: block !important;
-} */
 </style>

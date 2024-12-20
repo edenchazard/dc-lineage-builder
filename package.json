@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@koa/router": "^13.0.0",
+    "floating-vue": "^5.2.2",
     "koa": "^2.15.3",
     "koa-bodyparser": "^4.4.1",
     "koa-mount": "^4.0.0",
