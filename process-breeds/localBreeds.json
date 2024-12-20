@@ -56,7 +56,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["jQItl","JOKAw"],
-    "tags": ["Hybrid","western","p:life","s:water"]
+    "tags": ["hybrid","western","p:life","s:water"]
   },
   "Amarignis": {
     "genderOnly": "f",
@@ -251,7 +251,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "4bsEN",
-    "tags": ["Hybrid","leviathan","water"]
+    "tags": ["hybrid","leviathan","water"]
   },
   "Ciriax Lindwyrm": {
     "dimorphism": true,
@@ -487,19 +487,19 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "1uCIH",
-    "tags": ["Hybrid","magi","western"]
+    "tags": ["hybrid","magi","western"]
   },
   "Guardian Avatar (Creation)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "zsQD6",
-    "tags": ["Hybrid","light","western"]
+    "tags": ["hybrid","light","western"]
   },
   "Guardian Avatar (Destruction)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "FHW2y",
-    "tags": ["Hybrid","dark","western"]
+    "tags": ["hybrid","dark","western"]
   },
   "Guardian Of Nature": {
     "dimorphism": false,
@@ -595,7 +595,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["s5fGo","iA4YL"],
-    "tags": ["Hybrid","p:magi","s:life","western"]
+    "tags": ["hybrid","p:magi","s:life","western"]
   },
   "Iridichi": {
     "dimorphism": true,
@@ -616,7 +616,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["ZGWAV","bwKDP"],
-    "tags": ["Hybrid","death","two-head western"]
+    "tags": ["hybrid","death","two-head western"]
   },
   "Kaikos": {
     "dimorphism": false,
@@ -784,7 +784,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["wPwLI","GeK5M"],
-    "tags": ["Hybrid","p:neutral","s:fire","western"]
+    "tags": ["hybrid","p:neutral","s:fire","western"]
   },
   "Olive": {
     "dimorphism": true,
@@ -969,13 +969,13 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "1sJdX",
-    "tags": ["Hybrid","light","lindwyrm"]
+    "tags": ["hybrid","light","lindwyrm"]
   },
   "Royal Eminence": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["lTktE","F7TMe"],
-    "tags": ["Hybrid","neutral","western"]
+    "tags": ["hybrid","neutral","western"]
   },
   "Sabertooth Bull Drake": {
     "dimorphism": false,
@@ -1023,7 +1023,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "BiRHM",
-    "tags": ["Hybrid","light","lindwyrm"]
+    "tags": ["hybrid","light","lindwyrm"]
   },
   "Shadow Walker": {
     "dimorphism": false,
@@ -1037,7 +1037,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["vkpHc","JCL1R"],
-    "tags": ["Hybrid","water","leviathan"]
+    "tags": ["hybrid","water","leviathan"]
   },
   "Shumoga": {
     "dimorphism": false,
@@ -1123,7 +1123,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "nbzOQ",
-    "tags": ["Hybrid","drake","earth"]
+    "tags": ["hybrid","drake","earth"]
   },
   "Starsinger": {
     "dimorphism": false,
@@ -1241,7 +1241,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["FOQe5","uuc66"],
-    "tags": ["Hybrid","western","light"]
+    "tags": ["hybrid","western","light"]
   },
   "Undead": {
     "dimorphism": false,

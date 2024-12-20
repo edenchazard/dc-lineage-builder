@@ -130,7 +130,7 @@
   "Carina": {
     "genderOnly": false,
     "sprites": ["FVU6w",0,-1,48,"m4JIp",-17,-1,48],
-    "tags": ["Hybrid","western","fire"]
+    "tags": ["hybrid","western","fire"]
   },
   "Cassare": {
     "genderOnly": false,
@@ -217,7 +217,7 @@
   "Dusk Pygmy": {
     "genderOnly": false,
     "sprites": ["HIWV5",-1,6,null,"sALdr",0,1,null],
-    "tags": ["Hybrid","pygmy western","neutral"]
+    "tags": ["hybrid","pygmy western","neutral"]
   },
   "Ember": {
     "genderOnly": false,
@@ -293,7 +293,7 @@
   "Geode": {
     "genderOnly": false,
     "sprites": ["I7I5K",0,-1,48,"6CRd",-37,-1,48],
-    "tags": ["Hybrid","western","earth"]
+    "tags": ["hybrid","western","earth"]
   },
   "Glowback Pygmy": {
     "genderOnly": false,
@@ -328,7 +328,7 @@
   "Hellhorse": {
     "genderOnly": false,
     "sprites": ["QklUl",-14,-1,48,"ZtlTu",-14,-1,48],
-    "tags": ["Hybrid","western","fire"]
+    "tags": ["hybrid","western","fire"]
   },
   "Hooded Murkling": {
     "genderOnly": false,
@@ -632,7 +632,7 @@
   "Sophrosyne": {
     "genderOnly": false,
     "sprites": ["2gdz2",-16,-1,47.5,"5KfGP",0,-1,48],
-    "tags": ["Hybrid","western","light"]
+    "tags": ["hybrid","western","light"]
   },
   "Soulstone": {
     "genderOnly": "f",
@@ -667,7 +667,7 @@
   "Storm-Rider": {
     "genderOnly": false,
     "sprites": ["Vqd62",0,-1,48],
-    "tags": ["Hybrid","western","lightning"]
+    "tags": ["hybrid","western","lightning"]
   },
   "Striped": {
     "genderOnly": false,
@@ -752,12 +752,12 @@
   "Twinklecape Pygmy": {
     "genderOnly": false,
     "sprites": ["zS5C5",0,-1,null,"Fn4jg",-10,-1,48],
-    "tags": ["Hybrid","pygmy western","p:light","s:air"]
+    "tags": ["hybrid","pygmy western","p:light","s:air"]
   },
   "Two-Finned Bluna": {
     "genderOnly": false,
     "sprites": ["nCSM",-2,-1,48,"YUauj",-7,-1,48],
-    "tags": ["Hybrid","amphiptere","water"]
+    "tags": ["hybrid","amphiptere","water"]
   },
   "Undine": {
     "genderOnly": false,
@@ -773,7 +773,7 @@
       "Blue": ["pYEFv",0,-1,48],
       "Red": ["a7H2S",-9,-1,48]
     },
-    "tags": ["Hybrid","wingless","p:water","s:fire"]
+    "tags": ["hybrid","wingless","p:water","s:fire"]
   },
   "Valentine": {
     "genderOnly": "f",
