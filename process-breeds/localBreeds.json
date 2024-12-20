@@ -149,7 +149,7 @@
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": ["0dlsg","qW1yK"],
-    "tags": ["Regular"]
+    "tags": ["Regular","pygmy wyvern","neutral"]
   },
   "Baikala": {
     "dimorphism": true,
@@ -159,84 +159,84 @@
       "Blue": ["zcr7c","R58nI"],
       "Green": ["siClI","lZDRW"]
     },
-    "tags": ["Regular"]
+    "tags": ["Regular","two-head sea serpent","water"]
   },
   "Berry Drake": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Drake",
     "sprites": "WZRxc",
-    "tags": ["Regular"]
+    "tags": ["Regular","drake","neutral"]
   },
   "Black Tea": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Standard",
     "sprites": ["PNxhP","yVi55"],
-    "tags": ["Regular"]
+    "tags": ["Regular","western","life"]
   },
   "Blacktip": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "Ux4sg",
-    "tags": ["Regular"]
+    "tags": ["Regular","western","air"]
   },
   "Blancblack": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Two-headed",
     "sprites": ["FflJ0","G5OBh"],
-    "tags": ["Regular"]
+    "tags": ["Regular","two-head eastern","p:light","s:dark"]
   },
   "Blazeback": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "L4psn",
-    "tags": ["Regular"]
+    "tags": ["Regular","western","fire"]
   },
   "Blizzard Wizard": {
     "dimorphism": false,
     "genderOnly": "m",
     "group": "Standard",
     "sprites": "TjcoW",
-    "tags": ["Christmas"]
+    "tags": ["Christmas","western","magi"]
   },
   "Blue-Banded": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "q5WZY",
-    "tags": ["Regular"]
+    "tags": ["Regular","western","water"]
   },
   "Bolt": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "sHE0e",
-    "tags": ["Regular"]
+    "tags": ["Regular","eastern","lightning"]
   },
   "Boreal": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "BgX4W",
-    "tags": ["Regular"]
+    "tags": ["Regular","western","ice"]
   },
   "Brumous": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "ps6CX",
-    "tags": ["Regular"]
+    "tags": ["Regular","western","p:light","s:ice"]
   },
   "Caihong": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "SVsKO",
-    "tags": ["Regular"]
+    "tags": ["Regular","lindwyrm","fire"]
   },
   "Caligene": {
     "dimorphism": true,
@@ -246,21 +246,21 @@
       "Salt Infinis": ["SRP5l","2w8nP"],
       "__regular__": ["jQ06C","qhbIi"]
     },
-    "tags": ["Halloween"]
+    "tags": ["Halloween","western","death"]
   },
   "Candelabra": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "fSAGq",
-    "tags": ["Regular"]
+    "tags": ["Regular","western","light"]
   },
   "Carmine Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "omj3Y",
-    "tags": ["Regular"]
+    "tags": ["Regular","wyvern","neutral"]
   },
   "Cavern Lurker": {
     "dimorphism": true,
@@ -270,7 +270,7 @@
       "Salt JOTB": ["rFI9v","mqFhV"],
       "__regular__": ["EspR4","Wm1pn"]
     },
-    "tags": ["Halloween"]
+    "tags": ["Halloween","western","dark"]
   },
   "Celestial": {
     "dimorphism": true,
@@ -280,14 +280,14 @@
       "Corporeal": ["My6XH","vkTQ2"],
       "Incorporeal": ["5mbRb","whJ3b"]
     },
-    "tags": ["Regular"]
+    "tags": ["Regular","western","magi"]
   },
   "Ceriuth": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "4bsEN",
-    "tags": ["Hybrid"]
+    "tags": ["Hybrid","sea serpent","water"]
   },
   "Ciriax Lindwyrm": {
     "dimorphism": true,
@@ -297,14 +297,14 @@
       "Blue": ["Z1cNw","xP0Zn"],
       "Green": ["1M7Je","Ay9Nc"]
     },
-    "tags": ["Regular"]
+    "tags": ["Regular","two-head lindwyrm","dark"]
   },
   "Coral Pygmy Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": ["76SLL","4GlYB"],
-    "tags": ["Regular"]
+    "tags": ["Regular","pygmy wyvern","water"]
   },
   "Crypt": {
     "dimorphism": true,
@@ -315,21 +315,21 @@
       "Salt Rwyvern": ["1waIt","3jSzN"],
       "__regular__": ["7kiVA","zag1a"]
     },
-    "tags": ["Halloween"]
+    "tags": ["Halloween","two-head wingless","p:death","s:life"]
   },
   "Delta": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "JZsP5",
-    "tags": ["Regular"]
+    "tags": ["Regular","western","magi"]
   },
   "Delta (Small)": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Pygmy",
     "sprites": "OBTd8",
-    "tags": ["Regular"]
+    "tags": ["Regular","pygmy western","magi"]
   },
   "Desipis": {
     "dimorphism": true,
@@ -340,14 +340,14 @@
       "Salt Pixxelation": ["s0n9m","VtdtJ"],
       "__regular__": ["Qn1Pw","iYHtV"]
     },
-    "tags": ["Halloween"]
+    "tags": ["Halloween","western","p:dark","s:magi"]
   },
   "Diamondwing": {
     "dimorphism": false,
     "genderOnly": false,
     "group": "Standard",
     "sprites": "k7UUE",
-    "tags": ["Regular"]
+    "tags": ["Regular","western","earth"]
   },
   "Electric": {
     "dimorphism": true,
