@@ -28,41 +28,49 @@
             :distance="0"
             auto-size="min"
             auto-boundary-max-size
-            :triggers="['click']"
             container="#breed-selector-wrapper"
+            auto-hide
+            @apply-show="focusFiltersTitle()"
           >
-            <div class="applied-filters interactive pointer">
-              <label
-                for="applied-filters"
-                class="sr-only"
-              >
-                Filters
-              </label>
-              <input
-                type="text"
-                id="applied-filters"
-                readonly
-                :value="tagStore.join(', ')"
-                class="tag-list pointer"
-                placeholder="Filters"
-              />
-              <span
-                class="tag-counter"
-                title="Applied filters"
-              >
-                {{ tagStore.length }}
-              </span>
-            </div>
+            <template #default="{ show }">
+              <div class="applied-filters">
+                <label
+                  for="applied-filters"
+                  class="sr-only"
+                >
+                  Filters
+                </label>
+                <input
+                  readonly
+                  type="text"
+                  id="applied-filters"
+                  :value="tagStore.join(', ')"
+                  class="tag-list pointer"
+                  placeholder="Filters"
+                  @keydown.space.enter="show()"
+                  @click="show()"
+                />
+                <span
+                  class="tag-counter"
+                  title="Applied filters"
+                  @keydown.space.enter="show()"
+                  @click="show()"
+                >
+                  {{ tagStore.length }}
+                </span>
+              </div>
+            </template>
 
             <template #popper="{ hide }">
               <div class="filters-container">
                 <div class="header">
-                  <span
+                  <p
                     tabindex="0"
                     class="title"
+                    ref="filtersTitle"
                   >
                     Show breeds with...
-                  </span>
+                  </p>
                   <button
                     class="clear-all pointer"
                     type="button"
@@ -156,8 +164,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
-import { onStartTyping } from '@vueuse/core';
+import { computed, nextTick, ref, useTemplateRef } from 'vue';
+import { onStartTyping, set } from '@vueuse/core';
 import { type DragonGender, type PortraitData } from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
@@ -194,7 +202,13 @@ const searchString = ref('');
 const mateSearchEl = ref<HTMLInputElement>();
 const wrapper = ref();
 const resultsEl = ref<HTMLElement>();
+const filtersTitle = useTemplateRef<HTMLParagraphElement>('filtersTitle');
 const chosenTags = computed(() => tagsFromModel(tagStore));
+
+async function focusFiltersTitle() {
+  await nextTick();
+  setTimeout(() => filtersTitle.value?.focus(), 40);
+}
 
 const { deactivate } = useFocusTrap(wrapper, {
   immediate: true,
@@ -275,7 +289,6 @@ form + section {
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
   margin: 0;
   padding: 0;
   text-align: left;
