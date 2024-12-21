@@ -55,7 +55,7 @@ services:
       - testing
 
   testdb:
-    image: mariadb:10
+    image: mariadb:10.11.10
     tty: true
     env_file:
       - .env.testing
