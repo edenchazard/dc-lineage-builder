@@ -13,7 +13,7 @@ jobs:
         run: echo "" > .env
 
       - name: start test environment
-        run: docker compose -f docker-compose.dev.yml up -d testapp
+        run: docker compose -f docker-compose.dev.yml up testapp -d
 
       - name: run prettier checks
         run: docker compose exec -T testapp sh -c "npm run fmt:check"
@@ -28,7 +28,7 @@ jobs:
         run: echo "" > .env
 
       - name: start test environment
-        run: docker compose -f docker-compose.dev.yml up -d testapp
+        run: docker compose -f docker-compose.dev.yml up testapp -d
 
       - name: run linting
         run: docker compose exec -T testapp sh -c "npm run lint"
@@ -43,7 +43,7 @@ jobs:
         run: echo "" > .env
 
       - name: start test environment
-        run: docker compose -f docker-compose.dev.yml up -d testapp
+        run: docker compose -f docker-compose.dev.yml up testapp -d
 
       - name: run typescript checks
         run: docker compose exec -T testapp sh -c "npm run ts:check"
@@ -58,7 +58,7 @@ jobs:
         run: echo "" > .env
 
       - name: start test environment
-        run: docker compose -f docker-compose.dev.yml up -d testapp
+        run: docker compose -f docker-compose.dev.yml up testapp -d
 
       - name: run those tests babyyyyyy
         run: docker compose exec -T testapp sh -c "npm run test:unit -- --run"
