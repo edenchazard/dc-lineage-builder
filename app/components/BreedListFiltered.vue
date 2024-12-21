@@ -7,6 +7,7 @@
       :id="id"
       ref="container"
       :list="filteredBreeds"
+      :search="search"
       :compact="search.length < 3 && filteredBreeds.length > 100"
       v-bind="$attrs"
       @breed-selected="(breed) => emit('breedSelected', breed)"

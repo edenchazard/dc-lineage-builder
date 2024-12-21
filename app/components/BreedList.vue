@@ -58,18 +58,23 @@
         :aria-labelledby="strToId(breed.name)"
       >
         <DragonPortrait :data="breed" />
-        <span
-          :id="strToId(breed.name)"
-          class="breed-entry-name"
-        >
-          {{ breed.name }}
-        </span>
-        <div class="tags">
-          <BreedTag
-            v-for="filter in breed.metaData.tags"
-            :key="filter"
-            :tag="filter"
+        <div class="details">
+          <b
+            :id="strToId(breed.name)"
+            class="name"
+            v-html="
+              search
+                ? breed.name.replaceAll(searchRegExp, `<mark>$1</mark>`)
+                : breed.name
+            "
           />
+          <div class="tags">
+            <BreedTag
+              v-for="filter in breed.metaData.tags"
+              :key="filter"
+              :tag="filter"
+            />
+          </div>
         </div>
       </button>
     </li>
@@ -89,24 +94,22 @@ const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
 }>();
 
-const props = defineProps({
-  compact: {
-    type: Boolean,
-    default: true,
+const props = withDefaults(
+  defineProps<{
+    compact: boolean;
+    list: PortraitData[];
+    size?: number;
+    id: string;
+    search?: string;
+  }>(),
+  {
+    compact: true,
+    list: () => [],
+    size: 600,
+    search: '',
   },
-  list: {
-    type: Array<PortraitData>,
-    default: [],
-  },
-  size: {
-    type: Number,
-    default: 600,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-});
+);
+
 const portraitWidth = settings.tileSizes.fullSize.width;
 const portraitHeight = settings.tileSizes.fullSize.height;
 const margin = 4;
@@ -118,6 +121,9 @@ const parent = useParentElement(wrapper);
 const parentSize = useElementSize(parent);
 const focused = ref(false);
 const abs = Math.abs;
+
+const searchRegExp = computed(() => new RegExp(`(${props.search})`, 'gi'));
+
 // We want our grid to be fluid, which means we have to employ a somewhat
 // hacky solution to ensure it takes up the parent container's space even when
 // resized
@@ -248,43 +254,43 @@ function strToId(name: string) {
 .mates-compact {
   overflow: hidden auto;
 }
+
 .breed-entry {
   display: flex;
   cursor: pointer;
-}
 
-.breed-entry + .breed-entry {
-  border-top: 1px solid var(--ui-breed-list-border);
+  & + .breed-entry {
+    border-top: 1px solid var(--ui-breed-list-border);
+  }
 }
 
 .breed-entry-button {
   flex: 1;
   border: 0;
-  display: grid;
+  display: flex;
   grid-template-columns: auto 1fr;
-  align-items: center;
+  align-items: start;
   text-overflow: ellipsis;
   background: transparent;
   gap: 0.5rem;
   margin: 3px;
   color: inherit;
   cursor: inherit;
-  justify-content: end;
-}
+  padding: 0.5rem 0;
 
-.tags {
-  grid-column: 1 /-1;
-  text-align: right;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: flex-end;
-}
+  & .details {
+    & .name {
+      text-align: left;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+  }
 
-.breed-entry-name {
-  flex: 1;
-  text-align: left;
-  text-wrap: nowrap;
+  & .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }
 
 .grid {
@@ -299,6 +305,11 @@ function strToId(name: string) {
 </style>
 
 <style lang="postcss">
+.breed-entry-button {
+  & mark {
+    background: #ffff00;
+  }
+}
 .grid-cell {
   pointer-events: all;
 
