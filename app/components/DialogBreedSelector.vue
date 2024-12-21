@@ -36,7 +36,11 @@
               type="button"
             >
               <span class="tag-list">{{ tagStore.join(', ') }}</span>
-              <span class="tag-counter">{{ tagStore.length }}</span>
+              <span
+                class="tag-counter"
+                title="Applied filters"
+                >{{ tagStore.length }}</span
+              >
             </button>
 
             <template #popper="{ hide }">
@@ -45,7 +49,6 @@
                   <span
                     tabindex="0"
                     class="title"
-                    autofocus
                   >
                     Show breeds with...
                   </span>
@@ -265,7 +268,7 @@ form + section {
   margin: 0;
   padding: 0.25rem 0.5rem;
   text-align: left;
-  background: var(--ui-modal-content);
+  background: #fff;
   border: none;
   display: flex;
   align-items: center;
@@ -280,14 +283,14 @@ form + section {
 
   & .tag-counter {
     font-size: 0.75rem;
-    color: #666;
-    background: #b9dfee;
     width: 1.5rem;
     height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 100%;
+    background: var(--ui-builder-toolbar-selection-count-bg);
+    color: var(--ui-builder-toolbar-selection-count-fg);
   }
 }
 
