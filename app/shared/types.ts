@@ -125,20 +125,24 @@ const habitatTags = [
   'volcano',
 ] as const;
 
+const releaseTags = ['regular', 'valentine', 'halloween', 'christmas'] as const;
+
 type TagFilterCollection = {
   primaryElement: (typeof elementTags)[number][];
   secondaryElement: (typeof elementTags)[number][];
   bodyType: (typeof bodyTypeTags)[number][];
   habitat: (typeof habitatTags)[number][];
+  release: (typeof releaseTags)[number][];
 };
 
 type NewTag =
   | TagFilterCollection['primaryElement'][number]
   | TagFilterCollection['secondaryElement'][number]
   | TagFilterCollection['bodyType'][number]
-  | TagFilterCollection['habitat'][number];
+  | TagFilterCollection['habitat'][number]
+  | TagFilterCollection['release'][number];
 
-export { elementTags, bodyTypeTags, habitatTags };
+export { elementTags, bodyTypeTags, habitatTags, releaseTags };
 
 export type {
   GenderOnly,

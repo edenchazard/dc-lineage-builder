@@ -108,5 +108,18 @@ withDefaults(
     background: #fff;
     color: #000;
   }
+
+  &.christmas {
+    background: #970000;
+    color: rgb(0, 241, 0);
+  }
+  &.halloween {
+    background: #000;
+    color: #f70;
+  }
+  &.valentine {
+    background: rgb(158, 78, 130);
+    color: #fff;
+  }
 }
 </style>

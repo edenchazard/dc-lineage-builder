@@ -3,6 +3,7 @@ import {
   bodyTypeTags,
   elementTags,
   habitatTags,
+  releaseTags,
   type BreedEntry,
   type NewTag,
   type TagFilterCollection,
@@ -33,6 +34,11 @@ export function tagsFromModel(tags: MaybeRef<NewTag[]>): TagFilterCollection {
       (tag): tag is TagFilterCollection['habitat'][number] =>
         habitatTags.includes(tag as TagFilterCollection['habitat'][number]),
     ),
+
+    release: unrefTags.filter(
+      (tag): tag is TagFilterCollection['release'][number] =>
+        releaseTags.includes(tag as TagFilterCollection['release'][number]),
+    ),
   };
 }
 
@@ -44,7 +50,8 @@ export function filterBreedsByTagsWith<
     tags.bodyType.length +
       tags.primaryElement.length +
       tags.secondaryElement.length +
-      tags.habitat.length
+      tags.habitat.length +
+      tags.release.length
   ) {
     return breeds;
   }
@@ -59,8 +66,8 @@ export function filterBreedsByTagsWith<
   ]);
 
   const bodyTypeFilters = new Set(tags.bodyType);
-
   const habitatFilters = new Set(tags.habitat);
+  const releaseFilters = new Set(tags.release);
 
   return breeds.filter((breed) => {
     const set = new Set(breed.metaData.tags);
@@ -78,6 +85,10 @@ export function filterBreedsByTagsWith<
     }
 
     if (tags.habitat.length && habitatFilters.isDisjointFrom(set)) {
+      return false;
+    }
+
+    if (tags.release.length && releaseFilters.isDisjointFrom(set)) {
       return false;
     }
 
@@ -101,5 +112,9 @@ export const filtersByGroup = [
   {
     name: 'Habitat',
     tags: habitatTags,
+  },
+  {
+    name: 'Release',
+    tags: releaseTags,
   },
 ];
