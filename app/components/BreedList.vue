@@ -61,13 +61,16 @@
         <span
           :id="strToId(breed.name)"
           class="breed-entry-name"
-          >{{ breed.name }}</span
         >
-        <BreedTag
-          v-for="filter in breed.metaData.tags"
-          :key="filter"
-          :tag="filter"
-        />
+          {{ breed.name }}
+        </span>
+        <div class="tags">
+          <BreedTag
+            v-for="filter in breed.metaData.tags"
+            :key="filter"
+            :tag="filter"
+          />
+        </div>
       </button>
     </li>
   </ul>
@@ -257,20 +260,31 @@ function strToId(name: string) {
 .breed-entry-button {
   flex: 1;
   border: 0;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
   text-overflow: ellipsis;
   background: transparent;
-  gap: 0 0.5rem;
+  gap: 0.5rem;
   margin: 3px;
   color: inherit;
   cursor: inherit;
   justify-content: end;
 }
+
+.tags {
+  grid-column: 1 /-1;
+  text-align: right;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
 .breed-entry-name {
   flex: 1;
   text-align: left;
+  text-wrap: nowrap;
 }
 
 .grid {

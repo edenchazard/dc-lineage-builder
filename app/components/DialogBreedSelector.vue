@@ -42,7 +42,13 @@
             <template #popper="{ hide }">
               <div class="filters-container">
                 <div class="header">
-                  <span class="title">Show breeds with...</span>
+                  <span
+                    tabindex="0"
+                    class="title"
+                    autofocus
+                  >
+                    Show breeds with...
+                  </span>
                   <button
                     class="clear-all"
                     type="button"
@@ -55,7 +61,7 @@
                     type="button"
                     aria-label="Close filters"
                     title="Close filters"
-                    @click="hide"
+                    @click="hide()"
                   >
                     <FontAwesomeIcon
                       size="2x"
@@ -72,6 +78,11 @@
                       <fieldset>
                         <div class="group">
                           <input
+                            :checked="
+                              new Set(tagStore).isSupersetOf(
+                                new Set(group.tags),
+                              )
+                            "
                             type="checkbox"
                             :id="group.name"
                           />
@@ -306,7 +317,7 @@ form + section {
   & .clear-all {
     text-transform: uppercase;
     font-size: 0.75rem;
-    background: hsl(0, 100%, 40%);
+    background: #cc0000;
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     color: #fff;
@@ -324,6 +335,7 @@ form + section {
     gap: 0.5rem;
     top: 0;
     position: sticky;
+    z-index: 2;
     background: var(--ui-modal-content);
 
     & .label {
@@ -344,6 +356,10 @@ form + section {
 
     & input {
       background: transparent;
+
+      & + label {
+        padding-left: 0.5rem;
+      }
     }
   }
 }
