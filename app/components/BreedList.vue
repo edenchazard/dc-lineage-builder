@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html We have control over the content. -->
 <template>
   <div
     v-if="compact && breedList.length > 0"

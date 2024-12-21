@@ -16,9 +16,9 @@
           Filters
         </label>
         <input
+          id="applied-filters"
           readonly
           type="text"
-          id="applied-filters"
           :value="tagStore.join(', ')"
           class="tag-list pointer"
           placeholder="Filters"
@@ -40,9 +40,9 @@
       <div class="filters-container">
         <div class="header">
           <p
+            ref="filtersTitle"
             tabindex="0"
             class="title"
-            ref="filtersTitle"
           >
             Show breeds with...
           </p>
@@ -75,11 +75,11 @@
               <fieldset>
                 <div class="group">
                   <input
+                    :id="slug(group.name)"
                     :checked="
                       new Set(tagStore).isSupersetOf(new Set(group.tags))
                     "
                     type="checkbox"
-                    :id="slug(group.name)"
                   />
                   <legend>
                     <label
@@ -93,10 +93,10 @@
 
                 <ul class="tag-set">
                   <BreedTag
-                    as="li"
-                    :tag="tag"
                     v-for="tag in group.tags"
                     :key="tag"
+                    as="li"
+                    :tag="tag"
                   >
                     <input
                       :id="slug(tag)"

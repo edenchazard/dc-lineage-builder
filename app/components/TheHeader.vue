@@ -1,14 +1,14 @@
 <template>
   <img
     v-if="!inviteDismissed"
+    id="garden-mint"
     src="https://dragcave.net/image/rnTk.gif"
     alt="Garden mint"
-    id="garden-mint"
     @animationend="showInvite()"
   />
   <div
-    id="garden-message"
     v-if="invitationOpen"
+    id="garden-message"
   >
     <p>
       Pssst! I'm Matthias the Mint dragon, here to invite you to the
