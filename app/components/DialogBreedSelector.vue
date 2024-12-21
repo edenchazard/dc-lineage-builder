@@ -31,17 +31,28 @@
             :triggers="['click']"
             container="#breed-selector-wrapper"
           >
-            <button
-              class="applied-filters interactive"
-              type="button"
-            >
-              <span class="tag-list">{{ tagStore.join(', ') }}</span>
+            <div class="applied-filters interactive pointer">
+              <label
+                for="applied-filters"
+                class="sr-only"
+              >
+                Filters
+              </label>
+              <input
+                type="text"
+                id="applied-filters"
+                readonly
+                :value="tagStore.join(', ')"
+                class="tag-list pointer"
+                placeholder="Filters"
+              />
               <span
                 class="tag-counter"
                 title="Applied filters"
-                >{{ tagStore.length }}</span
               >
-            </button>
+                {{ tagStore.length }}
+              </span>
+            </div>
 
             <template #popper="{ hide }">
               <div class="filters-container">
@@ -53,14 +64,14 @@
                     Show breeds with...
                   </span>
                   <button
-                    class="clear-all"
+                    class="clear-all pointer"
                     type="button"
                     @click="tagStore = []"
                   >
                     Clear All
                   </button>
                   <button
-                    class="close"
+                    class="close pointer"
                     type="button"
                     aria-label="Close filters"
                     title="Close filters"
@@ -266,9 +277,8 @@ form + section {
   white-space: nowrap;
   overflow: hidden;
   margin: 0;
-  padding: 0.25rem 0.5rem;
+  padding: 0;
   text-align: left;
-  background: #fff;
   border: none;
   display: flex;
   align-items: center;
@@ -282,6 +292,8 @@ form + section {
   }
 
   & .tag-counter {
+    position: absolute;
+    right: 1rem;
     font-size: 0.75rem;
     width: 1.5rem;
     height: 1.5rem;
