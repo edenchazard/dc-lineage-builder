@@ -55,12 +55,12 @@
       <button
         type="button"
         class="breed-entry-button"
-        :aria-labelledby="strToId(breed.name)"
+        :aria-labelledby="slug(breed.name)"
       >
         <DragonPortrait :data="breed" />
         <div class="details">
           <b
-            :id="strToId(breed.name)"
+            :id="slug(breed.name)"
             class="name"
             v-html="
               search
@@ -89,6 +89,7 @@ import type { PortraitData } from '../shared/types';
 import DragonPortrait from './DragonPortrait.vue';
 import settings from '../shared/settings.js';
 import BreedTag from './BreedTag.vue';
+import { slug } from '../shared/utils';
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
@@ -236,10 +237,6 @@ function determineGridAction(currentIndex: number, e: KeyboardEvent) {
     default:
       return -1;
   }
-}
-
-function strToId(name: string) {
-  return name.replaceAll(' ', '-');
 }
 </script>
 

@@ -3,6 +3,7 @@ import {
   bodyTypeTags,
   elementTags,
   habitatTags,
+  miscTags,
   releaseTags,
   type BreedEntry,
   type NewTag,
@@ -39,6 +40,10 @@ export function tagsFromModel(tags: MaybeRef<NewTag[]>): TagFilterCollection {
       (tag): tag is TagFilterCollection['release'][number] =>
         releaseTags.includes(tag as TagFilterCollection['release'][number]),
     ),
+
+    misc: unrefTags.filter((tag): tag is TagFilterCollection['misc'][number] =>
+      miscTags.includes(tag as TagFilterCollection['misc'][number]),
+    ),
   };
 }
 
@@ -51,7 +56,8 @@ export function filterBreedsByTagsWith<
       tags.primaryElement.length +
       tags.secondaryElement.length +
       tags.habitat.length +
-      tags.release.length
+      tags.release.length +
+      tags.misc.length
   ) {
     return breeds;
   }
@@ -68,6 +74,7 @@ export function filterBreedsByTagsWith<
   const bodyTypeFilters = new Set(tags.bodyType);
   const habitatFilters = new Set(tags.habitat);
   const releaseFilters = new Set(tags.release);
+  const miscFilters = new Set(tags.misc);
 
   return breeds.filter((breed) => {
     const set = new Set(breed.metaData.tags);
@@ -89,6 +96,10 @@ export function filterBreedsByTagsWith<
     }
 
     if (tags.release.length && releaseFilters.isDisjointFrom(set)) {
+      return false;
+    }
+
+    if (tags.misc.length && miscFilters.isDisjointFrom(set)) {
       return false;
     }
 
@@ -116,5 +127,9 @@ export const filtersByGroup = [
   {
     name: 'Release',
     tags: releaseTags,
+  },
+  {
+    name: 'Misceallaneous',
+    tags: miscTags,
   },
 ];

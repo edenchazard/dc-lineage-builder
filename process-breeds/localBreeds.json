@@ -251,7 +251,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "4bsEN",
-    "tags": ["hybrid","leviathan","water"]
+    "tags": ["regular","hybrid","leviathan","water"]
   },
   "Ciriax Lindwyrm": {
     "dimorphism": true,
@@ -487,25 +487,25 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "1uCIH",
-    "tags": ["hybrid","magi","western"]
+    "tags": ["regular","hybrid","magi","western"]
   },
   "Guardian Avatar (Creation)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "zsQD6",
-    "tags": ["hybrid","light","western"]
+    "tags": ["regular","hybrid","light","western"]
   },
   "Guardian Avatar (Destruction)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "FHW2y",
-    "tags": ["hybrid","dark","western"]
+    "tags": ["regular","hybrid","dark","western"]
   },
   "Guardian Of Nature": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "k3PF",
-    "tags": ["CB","neutral","western"]
+    "tags": ["regular","neutral","western","cave","CB-only","summonable"]
   },
   "Harkfrost": {
     "dimorphism": false,
@@ -583,7 +583,7 @@
       "Ward": "ydqWA",
       "__regular__": "1kr4a"
     },
-    "tags": ["regular","BSA","neutral","wingless","forest"]
+    "tags": ["regular","Has BSA","neutral","wingless","forest"]
   },
   "Hydrophidius": {
     "dimorphism": false,
@@ -595,7 +595,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["s5fGo","iA4YL"],
-    "tags": ["hybrid","p:magi","s:life","western"]
+    "tags": ["regular","hybrid","p:magi","s:life","western"]
   },
   "Iridichi": {
     "dimorphism": true,
@@ -616,7 +616,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["ZGWAV","bwKDP"],
-    "tags": ["hybrid","death","two-head western"]
+    "tags": ["regular","hybrid","death","two-head western"]
   },
   "Kaikos": {
     "dimorphism": false,
@@ -784,7 +784,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["wPwLI","GeK5M"],
-    "tags": ["hybrid","p:neutral","s:fire","western"]
+    "tags": ["regular","hybrid","p:neutral","s:fire","western"]
   },
   "Olive": {
     "dimorphism": true,
@@ -833,7 +833,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["KDPH","XQ5D4"],
-    "tags": ["regular","BSA","neutral","western","all"]
+    "tags": ["regular","Has BSA","neutral","western","all"]
   },
   "Pitfire": {
     "dimorphism": true,
@@ -933,7 +933,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "WnAo",
-    "tags": ["regular","BSA","fire","western","desert","volcano"]
+    "tags": ["regular","Has BSA","fire","western","desert","volcano"]
   },
   "Red-Tailed Wyrm": {
     "dimorphism": false,
@@ -969,13 +969,13 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "1sJdX",
-    "tags": ["hybrid","light","lindwyrm"]
+    "tags": ["regular","hybrid","light","lindwyrm"]
   },
   "Royal Eminence": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["lTktE","F7TMe"],
-    "tags": ["hybrid","neutral","western"]
+    "tags": ["regular","hybrid","neutral","western"]
   },
   "Sabertooth Bull Drake": {
     "dimorphism": false,
@@ -1023,7 +1023,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "BiRHM",
-    "tags": ["hybrid","light","lindwyrm"]
+    "tags": ["regular","hybrid","light","lindwyrm"]
   },
   "Shadow Walker": {
     "dimorphism": false,
@@ -1037,7 +1037,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["vkpHc","JCL1R"],
-    "tags": ["hybrid","water","leviathan"]
+    "tags": ["regular","hybrid","water","leviathan"]
   },
   "Shumoga": {
     "dimorphism": false,
@@ -1058,7 +1058,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "TfmjY",
-    "tags": ["CB","neutral","western"]
+    "tags": ["regular","neutral","western","cave","CB-only","summonable"]
   },
   "Siorghlas Wyvern": {
     "dimorphism": false,
@@ -1067,7 +1067,7 @@
       "Blueflame": "JC2Mj",
       "Evergreen": "oikQN"
     },
-    "tags": ["regular","BSA","p:life","s:fire","wyvern","forest","alpine"]
+    "tags": ["regular","Has BSA","p:life","s:fire","wyvern","forest","alpine"]
   },
   "Skysilk": {
     "dimorphism": false,
@@ -1123,7 +1123,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "nbzOQ",
-    "tags": ["hybrid","drake","earth"]
+    "tags": ["regular","hybrid","drake","earth"]
   },
   "Starsinger": {
     "dimorphism": false,
@@ -1241,7 +1241,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["FOQe5","uuc66"],
-    "tags": ["hybrid","western","light"]
+    "tags": ["regular","hybrid","western","light"]
   },
   "Undead": {
     "dimorphism": false,

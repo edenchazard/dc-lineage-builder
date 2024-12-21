@@ -91,13 +91,13 @@ const elementTags = [
 const bodyTypeTags = [
   'amphiptere',
   'wingless',
-  'drake',
   'western',
   'eastern',
   'leviathan',
   'wyvern',
   'lindwyrm',
   'wyrm',
+  'drake',
   'pygmy eastern',
   'pygmy lindwyrm',
   'pygmy wyrm',
@@ -123,7 +123,10 @@ const habitatTags = [
   'forest',
   'jungle',
   'volcano',
+  'cave',
 ] as const;
+
+const miscTags = ['Has BSA', 'summonable', 'CB-only'] as const;
 
 const releaseTags = ['regular', 'valentine', 'halloween', 'christmas'] as const;
 
@@ -133,6 +136,7 @@ type TagFilterCollection = {
   bodyType: (typeof bodyTypeTags)[number][];
   habitat: (typeof habitatTags)[number][];
   release: (typeof releaseTags)[number][];
+  misc: (typeof miscTags)[number][];
 };
 
 type NewTag =
@@ -140,9 +144,10 @@ type NewTag =
   | TagFilterCollection['secondaryElement'][number]
   | TagFilterCollection['bodyType'][number]
   | TagFilterCollection['habitat'][number]
-  | TagFilterCollection['release'][number];
+  | TagFilterCollection['release'][number]
+  | TagFilterCollection['misc'][number];
 
-export { elementTags, bodyTypeTags, habitatTags, releaseTags };
+export { elementTags, bodyTypeTags, habitatTags, releaseTags, miscTags };
 
 export type {
   GenderOnly,

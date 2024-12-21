@@ -2,7 +2,7 @@
   <component
     :is="as"
     class="tag"
-    :class="resolveLabel(tag)"
+    :class="slug(resolveLabel(tag))"
   >
     <slot>
       {{ resolveLabel(tag) }}
@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { resolveLabel } from '../shared/utils';
+import { resolveLabel, slug } from '../shared/utils';
 
 withDefaults(
   defineProps<{
@@ -44,7 +44,7 @@ withDefaults(
     background: #116fe8;
   }
   &.fire {
-    background: hsl(360, 79%, 51%);
+    background: #e51f1f;
   }
   &.earth {
     background: #915121;
@@ -105,13 +105,12 @@ withDefaults(
     color: #000;
   }
   &.all {
-    background: #fff;
-    color: #000;
+    background: #805c5c;
   }
 
   &.christmas {
     background: #970000;
-    color: rgb(0, 241, 0);
+    color: #24ff24;
   }
   &.halloween {
     background: #000;
@@ -120,6 +119,30 @@ withDefaults(
   &.valentine {
     background: rgb(158, 78, 130);
     color: #fff;
+  }
+
+  &[class*='pygmy-'] {
+    background: #ba5817;
+  }
+
+  &[class*='two-head-'] {
+    background: #557991;
+  }
+
+  &.drake {
+    background: #d6a624;
+    color: #000;
+  }
+
+  &.eastern,
+  &.leviathan,
+  &.wyrm,
+  &.wyvern,
+  &.lindwyrm,
+  &.amphiptere,
+  &.wingless,
+  &.western {
+    background: #1b6a0b;
   }
 }
 </style>

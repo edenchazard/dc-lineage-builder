@@ -79,12 +79,12 @@
                       new Set(tagStore).isSupersetOf(new Set(group.tags))
                     "
                     type="checkbox"
-                    :id="group.name"
+                    :id="slug(group.name)"
                   />
                   <legend>
                     <label
                       class="label"
-                      :for="group.name"
+                      :for="slug(group.name)"
                     >
                       {{ group.name }}
                     </label>
@@ -99,13 +99,13 @@
                     :key="tag"
                   >
                     <input
-                      :id="tag"
+                      :id="slug(tag)"
                       v-model="tagStore"
                       type="checkbox"
                       :value="tag"
                       class="white"
                     />
-                    <label :for="tag">{{ resolveLabel(tag) }}</label>
+                    <label :for="slug(tag)">{{ resolveLabel(tag) }}</label>
                   </BreedTag>
                 </ul>
               </fieldset>
@@ -122,7 +122,7 @@ import { nextTick, useTemplateRef } from 'vue';
 import { Dropdown } from 'floating-vue';
 import 'floating-vue/dist/style.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { resolveLabel } from '../shared/utils';
+import { resolveLabel, slug } from '../shared/utils';
 import BreedTag from './BreedTag.vue';
 import { filtersByGroup, tagStore } from '../store/useTagStore';
 
@@ -225,6 +225,7 @@ async function focusFiltersTitle() {
     white-space: nowrap;
     overflow: hidden;
     width: 100%;
+    padding-right: 2.2rem;
   }
 
   & .tag-counter {

@@ -151,6 +151,10 @@ export function createLineageLink(hash: string) {
 }
 
 const tagRegExp = /^(p:|s:)/g;
-export function resolveLabel<T = NewTag>(tag: string): T {
+export function resolveLabel<T extends NewTag>(tag: string): T {
   return tag.replace(tagRegExp, '') as T;
+}
+
+export function slug(str: string) {
+  return str.replaceAll(' ', '-').toLowerCase();
 }
