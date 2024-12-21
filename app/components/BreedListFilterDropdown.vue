@@ -126,7 +126,7 @@ import { resolveLabel } from '../shared/utils';
 import BreedTag from './BreedTag.vue';
 import { filtersByGroup, tagStore } from '../store/useTagStore';
 
-const filtersTitle = useTemplateRef<HTMLParagraphElement>('filtersTitle');
+const filtersTitle = useTemplateRef('filtersTitle');
 
 async function focusFiltersTitle() {
   await nextTick();

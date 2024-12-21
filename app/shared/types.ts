@@ -115,18 +115,30 @@ const bodyTypeTags = [
   'two-head western',
 ] as const;
 
+const habitatTags = [
+  'hybrid',
+  'alpine',
+  'coast',
+  'desert',
+  'forest',
+  'jungle',
+  'volcano',
+] as const;
+
 type TagFilterCollection = {
   primaryElement: (typeof elementTags)[number][];
   secondaryElement: (typeof elementTags)[number][];
   bodyType: (typeof bodyTypeTags)[number][];
+  habitat: (typeof habitatTags)[number][];
 };
 
 type NewTag =
   | TagFilterCollection['primaryElement'][number]
   | TagFilterCollection['secondaryElement'][number]
-  | TagFilterCollection['bodyType'][number];
+  | TagFilterCollection['bodyType'][number]
+  | TagFilterCollection['habitat'][number];
 
-export { elementTags, bodyTypeTags };
+export { elementTags, bodyTypeTags, habitatTags };
 
 export type {
   GenderOnly,

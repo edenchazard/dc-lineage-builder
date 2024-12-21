@@ -79,5 +79,34 @@ withDefaults(
     background: #3dcef3;
     color: #222222;
   }
+
+  &.alpine {
+    background: #e5b39b;
+    color: #000;
+  }
+  &.forest {
+    background: #d4e4df;
+    color: #000;
+  }
+  &.desert {
+    background: #e6debe;
+    color: #000;
+  }
+  &.volcano {
+    background: #b890ca;
+    color: #000;
+  }
+  &.jungle {
+    background: #bfc4bc;
+    color: #000;
+  }
+  &.coast {
+    background: #a2aabe;
+    color: #000;
+  }
+  &.all {
+    background: #fff;
+    color: #000;
+  }
 }
 </style>

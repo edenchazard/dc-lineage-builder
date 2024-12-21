@@ -2,6 +2,7 @@ import { unref, type MaybeRef } from 'vue';
 import {
   bodyTypeTags,
   elementTags,
+  habitatTags,
   type BreedEntry,
   type NewTag,
   type TagFilterCollection,
@@ -27,6 +28,11 @@ export function tagsFromModel(tags: MaybeRef<NewTag[]>): TagFilterCollection {
       (tag): tag is TagFilterCollection['bodyType'][number] =>
         bodyTypeTags.includes(tag as TagFilterCollection['bodyType'][number]),
     ),
+
+    habitat: unrefTags.filter(
+      (tag): tag is TagFilterCollection['habitat'][number] =>
+        habitatTags.includes(tag as TagFilterCollection['habitat'][number]),
+    ),
   };
 }
 
@@ -34,9 +40,11 @@ export function filterBreedsByTagsWith<
   Metadatable extends Pick<BreedEntry, 'metaData'>,
 >(breeds: Metadatable[], tags: TagFilterCollection) {
   if (
-    !tags.bodyType.length &&
-    !tags.primaryElement.length &&
-    !tags.secondaryElement.length
+    0 ===
+    tags.bodyType.length +
+      tags.primaryElement.length +
+      tags.secondaryElement.length +
+      tags.habitat.length
   ) {
     return breeds;
   }
@@ -52,6 +60,8 @@ export function filterBreedsByTagsWith<
 
   const bodyTypeFilters = new Set(tags.bodyType);
 
+  const habitatFilters = new Set(tags.habitat);
+
   return breeds.filter((breed) => {
     const set = new Set(breed.metaData.tags);
 
@@ -64,6 +74,10 @@ export function filterBreedsByTagsWith<
     }
 
     if (tags.bodyType.length && bodyTypeFilters.isDisjointFrom(set)) {
+      return false;
+    }
+
+    if (tags.habitat.length && habitatFilters.isDisjointFrom(set)) {
       return false;
     }
 
@@ -83,5 +97,9 @@ export const filtersByGroup = [
   {
     name: 'Body Type',
     tags: bodyTypeTags,
+  },
+  {
+    name: 'Habitat',
+    tags: habitatTags,
   },
 ];
