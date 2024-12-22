@@ -52,7 +52,7 @@ interface BreedEntry {
   genderOnly: GenderOnly;
   metaData: MetaData;
 }
-type GenderOnly = DragonGender | false;
+type GenderOnly = DragonGender | boolean;
 interface MetaData {
   tags: NewTag[];
   src: Sources;
@@ -71,7 +71,7 @@ interface LineageConfig {
   disabled: boolean;
 }
 
-const elementTags = [
+const elements = [
   'light',
   'dark',
   'magi',
@@ -86,6 +86,14 @@ const elementTags = [
   'ice',
   'neutral',
 ] as const;
+
+const primaryElementTags = elements.map<`p:${(typeof elements)[number]}`>(
+  (tag) => `p:${tag}`,
+);
+
+const secondaryElementTags = elements.map<`s:${(typeof elements)[number]}`>(
+  (tag) => `s:${tag}`,
+);
 
 const bodyTypeTags = ['standard', 'drake', 'pygmy', 'two-head'] as const;
 
@@ -116,8 +124,8 @@ const miscTags = ['Has BSA', 'summonable', 'CB-only'] as const;
 const releaseTags = ['regular', 'valentine', 'halloween', 'christmas'] as const;
 
 type TagFilterCollection = {
-  primaryElement: (typeof elementTags)[number][];
-  secondaryElement: (typeof elementTags)[number][];
+  primaryElement: (typeof primaryElementTags)[number][];
+  secondaryElement: (typeof secondaryElementTags)[number][];
   bodyType: (typeof bodyTypeTags)[number][];
   bodySubtype: (typeof bodySubtypeTags)[number][];
   habitat: (typeof habitatTags)[number][];
@@ -125,22 +133,29 @@ type TagFilterCollection = {
   misc: (typeof miscTags)[number][];
 };
 
-type NewTag =
-  | TagFilterCollection['primaryElement'][number]
-  | TagFilterCollection['secondaryElement'][number]
-  | TagFilterCollection['bodyType'][number]
-  | TagFilterCollection['bodySubtype'][number]
-  | TagFilterCollection['habitat'][number]
-  | TagFilterCollection['release'][number]
-  | TagFilterCollection['misc'][number];
+const tags = [
+  ...bodyTypeTags,
+  ...bodySubtypeTags,
+  ...elements,
+  ...primaryElementTags,
+  ...secondaryElementTags,
+  ...habitatTags,
+  ...releaseTags,
+  ...miscTags,
+] as const;
+
+type NewTag = (typeof tags)[number];
 
 export {
-  elementTags,
+  elements,
+  primaryElementTags,
+  secondaryElementTags,
   bodyTypeTags,
   bodySubtypeTags,
   habitatTags,
   releaseTags,
   miscTags,
+  tags,
 };
 
 export type {

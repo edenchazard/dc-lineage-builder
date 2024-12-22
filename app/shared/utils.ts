@@ -151,7 +151,7 @@ export function createLineageLink(hash: string) {
 }
 
 const tagRegExp = /^(p:|s:)/g;
-export function resolveLabel<T extends NewTag>(tag: string): T {
+export function resolveLabel<T>(tag: string): T {
   return tag.replace(tagRegExp, '') as T;
 }
 

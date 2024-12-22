@@ -69,31 +69,29 @@
         <form>
           <ul class="filter-menu">
             <li
-              v-for="group in filtersByGroup"
-              :key="group.name"
+              v-for="(tags, name) in filtersByGroup"
+              :key="name"
             >
               <fieldset>
                 <div class="group">
                   <input
-                    :id="slug(group.name)"
-                    :checked="
-                      new Set(tagStore).isSupersetOf(new Set(group.tags))
-                    "
+                    :id="slug(name)"
+                    :checked="new Set(tagStore).isSupersetOf(new Set(tags))"
                     type="checkbox"
                   />
                   <legend>
                     <label
                       class="label"
-                      :for="slug(group.name)"
+                      :for="slug(name)"
                     >
-                      {{ group.name }}
+                      {{ name }}
                     </label>
                   </legend>
                 </div>
 
                 <ul class="tag-set">
                   <BreedTag
-                    v-for="tag in group.tags"
+                    v-for="tag in tags"
                     :key="tag"
                     as="li"
                     :tag="tag"

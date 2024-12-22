@@ -2,13 +2,15 @@ import { unref, type MaybeRef } from 'vue';
 import {
   bodyTypeTags,
   bodySubtypeTags,
-  elementTags,
   habitatTags,
   miscTags,
   releaseTags,
   type BreedEntry,
   type NewTag,
   type TagFilterCollection,
+  secondaryElementTags,
+  primaryElementTags,
+  elements,
 } from '../shared/types';
 import { useSessionStorage } from '@vueuse/core';
 import { resolveLabel } from '../shared/utils';
@@ -40,13 +42,10 @@ export function tagsFromModel(tags: MaybeRef<NewTag[]>): TagFilterCollection {
   const unrefTags = unref(tags);
 
   return {
-    primaryElement: unrefTags
-      .filter((tag) => elementTags.map((s) => `p:${s}`).includes(tag))
-      .map(resolveLabel) as TagFilterCollection['primaryElement'],
-
-    secondaryElement: unrefTags
-      .filter((tag) => elementTags.map((s) => `s:${s}`).includes(tag))
-      .map(resolveLabel) as TagFilterCollection['secondaryElement'],
+    primaryElement: unrefTags.filter((tag) => primaryElementTags.includes(tag)),
+    secondaryElement: unrefTags.filter((tag) =>
+      secondaryElementTags.includes(tag),
+    ),
 
     bodyType: unrefTags.filter(
       (tag): tag is TagFilterCollection['bodyType'][number] =>
@@ -92,15 +91,13 @@ export function filterBreedsByTagsWith<
     return breeds;
   }
   const primaryFilters = new Set([
-    ...tags.primaryElement.map((s) => `p:${s}`),
     ...tags.primaryElement,
+    ...tags.primaryElement.map(resolveLabel),
   ]);
-
   const secondaryFilters = new Set([
-    ...tags.secondaryElement.map((s) => `s:${s}`),
     ...tags.secondaryElement,
+    ...tags.secondaryElement.map(resolveLabel),
   ]);
-
   const bodyTypeFilters = new Set(tags.bodyType);
   const bodySubtypeFilters = new Set(tags.bodySubtype);
   const habitatFilters = new Set(tags.habitat);
@@ -142,33 +139,12 @@ export function filterBreedsByTagsWith<
   });
 }
 
-export const filtersByGroup = [
-  {
-    name: 'Primary Element',
-    tags: elementTags.map((tag) => `p:${tag}`),
-  },
-  {
-    name: 'Secondary Element',
-    tags: elementTags.map((tag) => `s:${tag}`),
-  },
-  {
-    name: 'Body Type',
-    tags: bodyTypeTags,
-  },
-  {
-    name: 'Body Subtype',
-    tags: bodySubtypeTags,
-  },
-  {
-    name: 'Habitat',
-    tags: habitatTags,
-  },
-  {
-    name: 'Release',
-    tags: releaseTags,
-  },
-  {
-    name: 'Miscellaneous',
-    tags: miscTags,
-  },
-];
+export const filtersByGroup = {
+  'Primary Element': primaryElementTags,
+  'Secondary Element': secondaryElementTags,
+  'Body Type': bodyTypeTags,
+  'Body Subtype': bodySubtypeTags,
+  Habitat: habitatTags,
+  Release: releaseTags,
+  Miscellaneous: miscTags,
+};

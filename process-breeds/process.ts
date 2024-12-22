@@ -25,22 +25,18 @@ import {
   type LocalBreedsJSON,
 } from './localHandling.js';
 
-import _localJSON from './localBreeds.json';
-
 import {
   makeCSSStyleSheet,
   getBreedTable as fallbackBreedTable,
   type FallbackBreedsJSON,
 } from './fallbackHandling.js';
 
-import _fallbackJSON from './fallbackBreeds.json'; // assert { type: 'json' };
 import type { BreedEntry } from '../app/shared/types';
 
 const { __dirname } = getFileAndDirName();
 
-const fallbackJSON = _fallbackJSON as unknown as FallbackBreedsJSON;
-
-const localJSON = _localJSON as unknown as LocalBreedsJSON;
+let fallbackJSON: FallbackBreedsJSON = {};
+let localJSON: LocalBreedsJSON = {};
 
 function getBreedsTable() {
   // check for duplicate breed name keys in both sets, and warn
@@ -73,7 +69,22 @@ function getBreedsTable() {
   return [...fallbacks, ...locals].sort((a, b) => a.name.localeCompare(b.name));
 }
 
+async function prettyPrintFiles() {
+  // prettify our json files
+  await Promise.all([
+    prettyPrintJSONFile(__dirname + '/localBreeds.json'),
+    prettyPrintJSONFile(__dirname + '/fallbackBreeds.json'),
+  ]);
+
+  fallbackJSON = (await import('./fallbackBreeds.json'))
+    .default as unknown as FallbackBreedsJSON;
+  localJSON = (await import('./localBreeds.json'))
+    .default as unknown as LocalBreedsJSON;
+}
+
 async function main() {
+  await prettyPrintFiles();
+
   const definitionsFile = 'breed-definitions.ts';
   const breeds = getBreedsTable();
   const json = JSON.stringify(breeds);
@@ -87,12 +98,6 @@ async function main() {
   console.log(
     `Found ${breeds.length} total breed entries (${localNumber} local and ${fallbackNumber} fallbacks.)`,
   );
-
-  // prettify our json files
-  await Promise.all([
-    prettyPrintJSONFile(__dirname + '/localBreeds.json'),
-    prettyPrintJSONFile(__dirname + '/fallbackBreeds.json'),
-  ]);
 
   await Promise.all(Object.values(caches).map((cache) => cache.tryAccess()));
 
