@@ -109,8 +109,8 @@ withDefaults(
   }
 
   &.christmas {
-    background: #970000;
-    color: #24ff24;
+    background: #104310;
+    color: #d0d0d0;
   }
   &.halloween {
     background: #000;
