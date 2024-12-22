@@ -168,7 +168,7 @@ export const filtersByGroup = [
     tags: releaseTags,
   },
   {
-    name: 'Misceallaneous',
+    name: 'Miscellaneous',
     tags: miscTags,
   },
 ];
