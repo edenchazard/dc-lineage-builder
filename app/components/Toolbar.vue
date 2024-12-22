@@ -717,8 +717,9 @@ function capitalise(string: string) {
     display: grid;
     align-items: center;
     grid-template-rows: repeat(auto-fit, minmax(0, 2rem));
-    grid-template-columns: 1.5rem 1fr;
+    grid-template-columns: 1.75rem 1fr;
     padding-left: var(--padding);
+    justify-items: start;
   }
 
   .functions {

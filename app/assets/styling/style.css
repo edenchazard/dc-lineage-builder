@@ -70,21 +70,23 @@ select {
 
 input[type='checkbox'] {
   margin: 0px;
-  padding: 0.5rem;
+  padding: 0.1rem;
   appearance: none;
-  position: relative;
   border-radius: 0.2rem;
   border: 1px solid black;
   background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  aspect-ratio: 1;
+  min-height: 1.1rem;
+  box-sizing: content-box;
 
   &:checked::after {
     color: black;
     content: '\2713';
-    text-align: center;
-    position: absolute;
-    left: 20%;
-    font-size: 0.75rem;
-    top: 0px;
+    font-size: 0.9rem;
     font-weight: bold;
   }
 
