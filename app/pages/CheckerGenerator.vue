@@ -86,8 +86,8 @@
             />
             <label for="applied-filters">Filters:</label>
             <BreedListFilterDropdown
-              container="#filter-controls"
               id="applied-filters"
+              container="#filter-controls"
             />
           </div>
         </div>

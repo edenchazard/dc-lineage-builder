@@ -10,7 +10,6 @@ import type {
   PortraitData,
   MaybePartialLineageWithMetadata,
   PartialLineageWithMetadata,
-  NewTag,
 } from './types.js';
 import { BREEDNAMEREGEXP } from './validation.js';
 

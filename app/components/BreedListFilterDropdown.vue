@@ -16,7 +16,7 @@
           type="text"
           :value="tagStore.join(', ')"
           class="tag-list pointer"
-          :placeholder
+          :placeholder="placeholder"
           @keydown.space.enter="show()"
           @click="show()"
         />

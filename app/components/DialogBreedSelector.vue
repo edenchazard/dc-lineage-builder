@@ -30,9 +30,9 @@
             Filters
           </label>
           <BreedListFilterDropdown
+            id="applied-filters"
             placeholder="Filters"
             container="#breed-selector-wrapper"
-            id="applied-filters"
           />
         </div>
       </form>

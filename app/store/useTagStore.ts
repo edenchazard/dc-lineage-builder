@@ -10,7 +10,6 @@ import {
   type TagFilterCollection,
   secondaryElementTags,
   primaryElementTags,
-  elements,
 } from '../shared/types';
 import { useSessionStorage } from '@vueuse/core';
 import { resolveLabel } from '../shared/utils';
@@ -41,10 +40,17 @@ export const tagStore = useSessionStorage<NewTag[]>('tags', []);
 export function tagsFromModel(tags: MaybeRef<NewTag[]>): TagFilterCollection {
   const unrefTags = unref(tags);
 
-  return {
-    primaryElement: unrefTags.filter((tag) => primaryElementTags.includes(tag)),
+  // I just don't care enough about this to fix it properly.
+  const ret = {
+    primaryElement: unrefTags.filter((tag) =>
+      primaryElementTags.includes(
+        tag as TagFilterCollection['primaryElement'][number],
+      ),
+    ),
     secondaryElement: unrefTags.filter((tag) =>
-      secondaryElementTags.includes(tag),
+      secondaryElementTags.includes(
+        tag as TagFilterCollection['secondaryElement'][number],
+      ),
     ),
 
     bodyType: unrefTags.filter(
@@ -73,6 +79,8 @@ export function tagsFromModel(tags: MaybeRef<NewTag[]>): TagFilterCollection {
       miscTags.includes(tag as TagFilterCollection['misc'][number]),
     ),
   };
+
+  return ret as TagFilterCollection;
 }
 
 export function filterBreedsByTagsWith<
