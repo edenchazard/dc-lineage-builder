@@ -7,7 +7,7 @@
       "Salt Schenanigans": ["35HjT","FrN6z"],
       "__regular__": ["crvng","pmpkn"]
     },
-    "tags": ["halloween","wyrm","water"]
+    "tags": ["halloween","standard","wyrm","water"]
   },
   "Aegis": {
     "dimorphism": false,
@@ -20,31 +20,31 @@
       "Neutral Salt Birdzgoboom": "qjn78",
       "Neutral Salt Odeen": "SuORy"
     },
-    "tags": ["christmas","wingless","p:life","s:ice"]
+    "tags": ["christmas","standard","wingless","p:life","s:ice"]
   },
   "Aeon Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["lRVeO","pAako"],
-    "tags": ["regular","wyvern","time"]
+    "tags": ["regular","standard","wyvern","time"]
   },
   "Aeria Gloris": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "YCJJG",
-    "tags": ["regular","amphiptere","p:magi","s:lightning"]
+    "tags": ["regular","standard","amphiptere","p:magi","s:lightning"]
   },
   "Aether Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "l5osI",
-    "tags": ["regular","wyvern","air"]
+    "tags": ["regular","standard","wyvern","air"]
   },
   "Algarre": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["mQCP6","We7TE"],
-    "tags": ["regular","western","neutral"]
+    "tags": ["regular","standard","western","neutral"]
   },
   "Almerald": {
     "dimorphism": false,
@@ -56,7 +56,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["jQItl","JOKAw"],
-    "tags": ["hybrid","western","p:life","s:water"]
+    "tags": ["hybrid","standard","western","p:life","s:water"]
   },
   "Amarignis": {
     "genderOnly": "f",
@@ -75,7 +75,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "1D3iI",
-    "tags": ["regular","wingless","water"]
+    "tags": ["regular","standard","wingless","water"]
   },
   "Arcana": {
     "dimorphism": true,
@@ -85,31 +85,31 @@
       "Salt TCA": ["84555","wHITK"],
       "__regular__": ["ck9p3","W63P1"]
     },
-    "tags": ["halloween","western","magi"]
+    "tags": ["halloween","standard","western","magi"]
   },
   "Archelonian": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["WkHfU","4XNgU"],
-    "tags": ["regular","wyvern","p:water","s:death"]
+    "tags": ["regular","standard","wyvern","p:water","s:death"]
   },
   "Aria": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["EhfrQ","GJF56"],
-    "tags": ["regular","western","neutral"]
+    "tags": ["regular","standard","western","neutral"]
   },
   "Arrakyma": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["yukAh","lNIXS"],
-    "tags": ["regular","leviathan","p:earth","s:death"]
+    "tags": ["regular","standard","leviathan","p:earth","s:death"]
   },
   "Ash": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "jFX3Q",
-    "tags": ["regular","wingless","earth"]
+    "tags": ["regular","standard","wingless","earth"]
   },
   "Astrael": {
     "dimorphism": false,
@@ -125,13 +125,13 @@
       "Vintage Chic": "e7Mp5",
       "the OG": "S99uD"
     },
-    "tags": ["regular","western","p:earth","s:life"]
+    "tags": ["regular","standard","western","p:earth","s:life"]
   },
   "Avin Pygmy": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["0dlsg","qW1yK"],
-    "tags": ["regular","pygmy wyvern","neutral"]
+    "tags": ["regular","pygmy","wyvern","neutral"]
   },
   "Baikala": {
     "dimorphism": true,
@@ -140,7 +140,7 @@
       "Blue": ["zcr7c","R58nI"],
       "Green": ["siClI","lZDRW"]
     },
-    "tags": ["regular","two-head leviathan","water"]
+    "tags": ["regular","two-head","leviathan","water"]
   },
   "Berry Drake": {
     "dimorphism": false,
@@ -152,37 +152,37 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["PNxhP","yVi55"],
-    "tags": ["regular","western","life"]
+    "tags": ["regular","standard","western","life"]
   },
   "Blacktip": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "Ux4sg",
-    "tags": ["regular","western","air"]
+    "tags": ["regular","standard","western","air"]
   },
   "Blancblack": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["FflJ0","G5OBh"],
-    "tags": ["regular","two-head eastern","p:light","s:dark"]
+    "tags": ["regular","two-head","eastern","p:light","s:dark"]
   },
   "Blazeback": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "L4psn",
-    "tags": ["regular","western","fire"]
+    "tags": ["regular","standard","western","fire"]
   },
   "Blizzard Wizard": {
     "dimorphism": false,
     "genderOnly": "m",
     "sprites": "TjcoW",
-    "tags": ["christmas","western","magi"]
+    "tags": ["christmas","standard","western","magi"]
   },
   "Blue-Banded": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "q5WZY",
-    "tags": ["regular","western","water"]
+    "tags": ["regular","standard","western","water"]
   },
   "Bolt": {
     "dimorphism": false,
@@ -194,19 +194,19 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "BgX4W",
-    "tags": ["regular","western","ice"]
+    "tags": ["regular","standard","western","ice"]
   },
   "Brumous": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "ps6CX",
-    "tags": ["regular","western","p:light","s:ice"]
+    "tags": ["regular","standard","western","p:light","s:ice"]
   },
   "Caihong": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "SVsKO",
-    "tags": ["regular","lindwyrm","fire"]
+    "tags": ["regular","standard","lindwyrm","fire"]
   },
   "Caligene": {
     "dimorphism": true,
@@ -215,19 +215,19 @@
       "Salt Infinis": ["SRP5l","2w8nP"],
       "__regular__": ["jQ06C","qhbIi"]
     },
-    "tags": ["halloween","western","death"]
+    "tags": ["halloween","standard","western","death"]
   },
   "Candelabra": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "fSAGq",
-    "tags": ["regular","western","light"]
+    "tags": ["regular","standard","western","light"]
   },
   "Carmine Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "omj3Y",
-    "tags": ["regular","wyvern","neutral"]
+    "tags": ["regular","standard","wyvern","neutral"]
   },
   "Cavern Lurker": {
     "dimorphism": true,
@@ -236,7 +236,7 @@
       "Salt JOTB": ["rFI9v","mqFhV"],
       "__regular__": ["EspR4","Wm1pn"]
     },
-    "tags": ["halloween","western","dark"]
+    "tags": ["halloween","standard","western","dark"]
   },
   "Celestial": {
     "dimorphism": true,
@@ -245,13 +245,13 @@
       "Corporeal": ["My6XH","vkTQ2"],
       "Incorporeal": ["5mbRb","whJ3b"]
     },
-    "tags": ["regular","western","magi"]
+    "tags": ["regular","standard","western","magi"]
   },
   "Ceriuth": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "4bsEN",
-    "tags": ["regular","hybrid","leviathan","water"]
+    "tags": ["regular","hybrid","standard","leviathan","water"]
   },
   "Ciriax Lindwyrm": {
     "dimorphism": true,
@@ -260,13 +260,13 @@
       "Blue": ["Z1cNw","xP0Zn"],
       "Green": ["1M7Je","Ay9Nc"]
     },
-    "tags": ["regular","two-head lindwyrm","dark"]
+    "tags": ["regular","two-head","lindwyrm","dark"]
   },
   "Coral Pygmy Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["76SLL","4GlYB"],
-    "tags": ["regular","pygmy wyvern","water"]
+    "tags": ["regular","pygmy","wyvern","water"]
   },
   "Crypt": {
     "dimorphism": true,
@@ -276,19 +276,19 @@
       "Salt Rwyvern": ["1waIt","3jSzN"],
       "__regular__": ["7kiVA","zag1a"]
     },
-    "tags": ["halloween","two-head wingless","p:death","s:life"]
+    "tags": ["halloween","two-head","wingless","p:death","s:life"]
   },
   "Delta": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "JZsP5",
-    "tags": ["regular","western","magi"]
+    "tags": ["regular","standard","western","magi"]
   },
   "Delta (Small)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "OBTd8",
-    "tags": ["regular","pygmy western","magi"]
+    "tags": ["regular","pygmy","western","magi"]
   },
   "Desipis": {
     "dimorphism": true,
@@ -298,13 +298,13 @@
       "Salt Pixxelation": ["s0n9m","VtdtJ"],
       "__regular__": ["Qn1Pw","iYHtV"]
     },
-    "tags": ["halloween","western","p:dark","s:magi"]
+    "tags": ["halloween","standard","western","p:dark","s:magi"]
   },
   "Diamondwing": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "k7UUE",
-    "tags": ["regular","western","earth"]
+    "tags": ["regular","standard","western","earth"]
   },
   "Electric": {
     "dimorphism": true,
@@ -313,19 +313,19 @@
       "Stunned": ["gs4wp","SauM7"],
       "__regular__": ["IF5U","4dFF"]
     },
-    "tags": ["regular","lightning","western","alpine"]
+    "tags": ["regular","lightning","standard","western","alpine"]
   },
   "Elux Lucis": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "aH9q6",
-    "tags": ["regular","p:light","s:air","lindwyrm","alpine"]
+    "tags": ["regular","p:light","s:air","standard","lindwyrm","alpine"]
   },
   "Equinox": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "6vti7",
-    "tags": ["regular","p:light","s:time","western","forest","volcano","jungle","alpine"]
+    "tags": ["regular","p:light","s:time","standard","western","forest","volcano","jungle","alpine"]
   },
   "Erador Lindwyrm": {
     "dimorphism": false,
@@ -333,7 +333,7 @@
     "sprites": {
       "Salt Spatio": "v54W2"
     },
-    "tags": ["valentine","p:magi","s:life","lindwyrm","cave"]
+    "tags": ["valentine","p:magi","s:life","standard","lindwyrm","cave"]
   },
   "False-Headed Hydra": {
     "dimorphism": true,
@@ -346,13 +346,13 @@
       "Jungle": ["SR3RM","7zEdp"],
       "Volcano": ["CdgGh","pb7Bo"]
     },
-    "tags": ["regular","neutral","two-head wyrm"]
+    "tags": ["regular","neutral","two-head","wyrm"]
   },
   "Fell": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["FnHwj","1Hyq5"],
-    "tags": ["regular","death","wingless","all"]
+    "tags": ["regular","death","standard","wingless","all"]
   },
   "Fenghuo Wyrm": {
     "dimorphism": false,
@@ -362,13 +362,13 @@
       "Salt Znowy": "PArAs",
       "__regular__": "YearF"
     },
-    "tags": ["valentine","p:life","s:fire","wyrm"]
+    "tags": ["valentine","p:life","s:fire","standard","wyrm"]
   },
   "Fever Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "id8od",
-    "tags": ["regular","death","wyvern","jungle"]
+    "tags": ["regular","death","standard","wyvern","jungle"]
   },
   "Fire Gem": {
     "dimorphism": true,
@@ -378,7 +378,7 @@
       "Green": ["5feXv","o0S8K"],
       "Red": ["KCpfA","Sk6wd"]
     },
-    "tags": ["regular","fire","western","volcano"]
+    "tags": ["regular","fire","standard","western","volcano"]
   },
   "Flare-Tail Pygmy": {
     "dimorphism": false,
@@ -387,7 +387,7 @@
       "Blue": "HorMh",
       "Red": "uXL9J"
     },
-    "tags": ["regular","p:light","s:dark","pygmy eastern","alpine"]
+    "tags": ["regular","p:light","s:dark","pygmy","eastern","alpine"]
   },
   "Floral-Crowned": {
     "dimorphism": false,
@@ -396,19 +396,19 @@
       "Salt JOTB": "QPPUG",
       "__regular__": "vdc7L"
     },
-    "tags": ["valentine","life","western","cave"]
+    "tags": ["valentine","life","standard","western","cave"]
   },
   "Freckled": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "rc1lV",
-    "tags": ["regular","neutral","western","desert","jungle"]
+    "tags": ["regular","neutral","standard","western","desert","jungle"]
   },
   "Furor Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "KVM4T",
-    "tags": ["regular","Adventure","pygmy wingless","desert"]
+    "tags": ["regular","Adventure","pygmy","wingless","desert"]
   },
   "Garland": {
     "dimorphism": false,
@@ -418,7 +418,7 @@
       "Salt Odeen": "4CMLL",
       "__regular__": "38Wem"
     },
-    "tags": ["christmas","fire","amphiptere","cave"]
+    "tags": ["christmas","fire","standard","amphiptere","cave"]
   },
   "Gemshard": {
     "dimorphism": true,
@@ -437,13 +437,13 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "c36Ig",
-    "tags": ["regular","time","two-head wyvern","jungle","forest"]
+    "tags": ["regular","time","two-head","wyvern","jungle","forest"]
   },
   "Gilded Bloodscale": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["ku0VO","oBuNq"],
-    "tags": ["regular","two-head western","volcano"]
+    "tags": ["regular","two-head","western","volcano"]
   },
   "Glaucus Drake": {
     "dimorphism": true,
@@ -463,19 +463,19 @@
       "Salt Spatio": "m00OD",
       "Yellow": "42Flu"
     },
-    "tags": ["christmas","p:ice","s:light","wyrm","cave"]
+    "tags": ["christmas","p:ice","s:light","standard","wyrm","cave"]
   },
   "Gold-Horned Tangar": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["MGNSJ","UenUs"],
-    "tags": ["regular","life","western","jungle"]
+    "tags": ["regular","life","standard","western","jungle"]
   },
   "Grave": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["tcA6d","D6hAp"],
-    "tags": ["halloween","fire","western","cave"]
+    "tags": ["halloween","fire","standard","western","cave"]
   },
   "Greater Spotted Drake": {
     "dimorphism": false,
@@ -487,25 +487,25 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "1uCIH",
-    "tags": ["regular","hybrid","magi","western"]
+    "tags": ["regular","hybrid","magi","standard","western"]
   },
   "Guardian Avatar (Creation)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "zsQD6",
-    "tags": ["regular","hybrid","light","western"]
+    "tags": ["regular","hybrid","light","standard","western"]
   },
   "Guardian Avatar (Destruction)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "FHW2y",
-    "tags": ["regular","hybrid","dark","western"]
+    "tags": ["regular","hybrid","dark","standard","western"]
   },
   "Guardian Of Nature": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "k3PF",
-    "tags": ["regular","neutral","western","cave","CB-only","summonable"]
+    "tags": ["regular","neutral","standard","western","cave","CB-only","summonable"]
   },
   "Harkfrost": {
     "dimorphism": false,
@@ -518,13 +518,13 @@
       "Night Form Salt Haze": "BjNoO_b",
       "Night Form Salt Schenanigans": "CHHg4_b"
     },
-    "tags": ["christmas","p:air","s:ice","lindwyrm","cave"]
+    "tags": ["christmas","p:air","s:ice","standard","lindwyrm","cave"]
   },
   "Harvest": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["vI1DF","MORbO"],
-    "tags": ["regular","earth","western","forest","alpine"]
+    "tags": ["regular","earth","standard","western","forest","alpine"]
   },
   "Heartseeker": {
     "dimorphism": false,
@@ -533,7 +533,7 @@
       "Salt LadyLyzar": "hmSAC",
       "__regular__": "iPfaV"
     },
-    "tags": ["valentine","neutral","western","cave"]
+    "tags": ["valentine","neutral","standard","western","cave"]
   },
   "Heartstealing": {
     "dimorphism": false,
@@ -545,7 +545,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "y82Nx",
-    "tags": ["christmas","life","western","cave"]
+    "tags": ["christmas","life","standard","western","cave"]
   },
   "Honey Drake": {
     "dimorphism": true,
@@ -557,13 +557,13 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["y8TNS","d21pP"],
-    "tags": ["regular","two-head western","desert"]
+    "tags": ["regular","two-head","western","desert"]
   },
   "Horse": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["MzNTU","5CsPF"],
-    "tags": ["regular","neutral","western","jungle"]
+    "tags": ["regular","neutral","standard","western","jungle"]
   },
   "Howler Drake": {
     "dimorphism": true,
@@ -583,19 +583,19 @@
       "Ward": "ydqWA",
       "__regular__": "1kr4a"
     },
-    "tags": ["regular","Has BSA","neutral","wingless","forest"]
+    "tags": ["regular","Has BSA","neutral","standard","wingless","forest"]
   },
   "Hydrophidius": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "oXtku",
-    "tags": ["regular","water","amphiptere","coast"]
+    "tags": ["regular","water","standard","amphiptere","coast"]
   },
   "Incense": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["s5fGo","iA4YL"],
-    "tags": ["regular","hybrid","p:magi","s:life","western"]
+    "tags": ["regular","hybrid","p:magi","s:life","standard","western"]
   },
   "Iridichi": {
     "dimorphism": true,
@@ -604,37 +604,37 @@
       "Salt Schenanigans": ["BU7YK","wigLa"],
       "__regular__": ["f9I08","J7Wb8"]
     },
-    "tags": ["halloween","p:death","s:magi","amphiptere","cave"]
+    "tags": ["halloween","p:death","s:magi","standard","amphiptere","cave"]
   },
   "Jaw Splitter Wyrm": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["tLO7i","mEAbR"],
-    "tags": ["regular","death","wyrm","all"]
+    "tags": ["regular","death","standard","wyrm","all"]
   },
   "Jester": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["ZGWAV","bwKDP"],
-    "tags": ["regular","hybrid","death","two-head western"]
+    "tags": ["regular","hybrid","death","two-head","western"]
   },
   "Kaikos": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "3buXZ",
-    "tags": ["regular","death","lindwyrm","forest","coast"]
+    "tags": ["regular","death","standard","lindwyrm","forest","coast"]
   },
   "Khusa": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "xL6v2",
-    "tags": ["regular","earth","western","alpine","desert"]
+    "tags": ["regular","earth","standard","western","alpine","desert"]
   },
   "Kingcrowne": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "0GxDX",
-    "tags": ["regular","p:light","s:magi","western","all"]
+    "tags": ["regular","p:light","s:magi","standard","western","all"]
   },
   "Kohraki": {
     "dimorphism": true,
@@ -644,13 +644,13 @@
       "Salt Infinis": ["y4dL5","sazrx"],
       "__regular__": ["GKebv","pC2D8"]
     },
-    "tags": ["halloween","p:air","s:dark","wyvern","cave"]
+    "tags": ["halloween","p:air","s:dark","standard","wyvern","cave"]
   },
   "Kyanite Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "v82SU",
-    "tags": ["regular","earth","pygmy eastern","all"]
+    "tags": ["regular","earth","pygmy","eastern","all"]
   },
   "Labradorite": {
     "dimorphism": true,
@@ -662,7 +662,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "uqlWD",
-    "tags": ["regular","fire","wingless","volcano"]
+    "tags": ["regular","fire","standard","wingless","volcano"]
   },
   "Light Weaver": {
     "dimorphism": false,
@@ -676,7 +676,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "DKgwS",
-    "tags": ["regular","light","wingless","alpine"]
+    "tags": ["regular","light","standard","wingless","alpine"]
   },
   "Lihnseyre": {
     "dimorphism": false,
@@ -688,13 +688,13 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "OkSYV",
-    "tags": ["regular","water","leviathan","coast"]
+    "tags": ["regular","water","standard","leviathan","coast"]
   },
   "Luminox Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["NO0i0","BmFLn"],
-    "tags": ["regular","fire","wyvern","forest"]
+    "tags": ["regular","fire","standard","wyvern","forest"]
   },
   "Lunar Herald": {
     "dimorphism": false,
@@ -705,19 +705,19 @@
       "Indigo": "fMTLl",
       "Silver": "Zcyy7"
     },
-    "tags": ["regular","p:light","s:time","western","desert","volcano","alpine"]
+    "tags": ["regular","p:light","s:time","standard","western","desert","volcano","alpine"]
   },
   "Magelight Pygmy Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["hQCUw","xmgmf"],
-    "tags": ["regular","pygmy wyvern","alpine"]
+    "tags": ["regular","pygmy","wyvern","alpine"]
   },
   "Mariner Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "rsJSZ",
-    "tags": ["regular","neutral","pygmy western","coast"]
+    "tags": ["regular","neutral","pygmy","western","coast"]
   },
   "Marocephalic": {
     "dimorphism": false,
@@ -729,13 +729,13 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["SwdTI","vVqnW"],
-    "tags": ["regular","magi","pygmy wyvern","forest","jungle"]
+    "tags": ["regular","magi","pygmy","wyvern","forest","jungle"]
   },
   "Mint": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "rnTk",
-    "tags": ["regular","neutral","wingless","coast","forest","jungle","alpine","volcano"]
+    "tags": ["regular","neutral","standard","wingless","coast","forest","jungle","alpine","volcano"]
   },
   "Mistletoe": {
     "dimorphism": false,
@@ -745,13 +745,13 @@
       "Salt Tikigurl91": "AOprF",
       "__regular__": "YiKaz"
     },
-    "tags": ["christmas","life","western","cave"]
+    "tags": ["christmas","life","standard","western","cave"]
   },
   "Monarch": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["bfgVY","R5EQj"],
-    "tags": ["regular","earth","western","jungle","forest","desert"]
+    "tags": ["regular","earth","standard","western","jungle","forest","desert"]
   },
   "Morphodrake": {
     "dimorphism": false,
@@ -766,31 +766,31 @@
       "Salt Infinis": "5ikD8",
       "__regular__": "pxCOk"
     },
-    "tags": ["valentine","p:earth","s:water","western","cave"]
+    "tags": ["valentine","p:earth","s:water","standard","western","cave"]
   },
   "Nexus": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["ZHvg5","3SK3A"],
-    "tags": ["regular","dark","two-head western","alpine","volcano"]
+    "tags": ["regular","dark","two-head","western","alpine","volcano"]
   },
   "Nhiostrife Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "pK6SX",
-    "tags": ["regular","air","wyvern","alpine"]
+    "tags": ["regular","air","standard","wyvern","alpine"]
   },
   "Nobleshield": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["wPwLI","GeK5M"],
-    "tags": ["regular","hybrid","p:neutral","s:fire","western"]
+    "tags": ["regular","hybrid","p:neutral","s:fire","standard","western"]
   },
   "Olive": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["hivSK","4kTAq"],
-    "tags": ["regular","dark","western","forest"]
+    "tags": ["regular","dark","standard","western","forest"]
   },
   "Omen Wyrm": {
     "dimorphism": true,
@@ -800,7 +800,7 @@
       "Salt Process": ["Qfyao","1fPdz"],
       "__regular__": ["vortx","JwLvz"]
     },
-    "tags": ["halloween","p:fire","s:dark","wyrm","cave"]
+    "tags": ["halloween","p:fire","s:dark","standard","wyrm","cave"]
   },
   "Painted Ray Pygmy": {
     "dimorphism": true,
@@ -809,31 +809,31 @@
       "Metachrosis": ["422Bx","vatB9"],
       "__regular__": ["Y2ULc","acP7t"]
     },
-    "tags": ["regular","p:water","s:magi","pygmy amphiptere","coast"]
+    "tags": ["regular","p:water","s:magi","pygmy","amphiptere","coast"]
   },
   "Pastel": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "yfcyF",
-    "tags": ["regular","two-head western","neutral","alpine"]
+    "tags": ["regular","two-head","western","neutral","alpine"]
   },
   "Peach Pied": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "qgX9o",
-    "tags": ["regular","neutral","western","coast","forest","desert"]
+    "tags": ["regular","neutral","standard","western","coast","forest","desert"]
   },
   "Pillow": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["Po3tS","fIIG"],
-    "tags": ["regular","neutral","western","alpine"]
+    "tags": ["regular","neutral","standard","western","alpine"]
   },
   "Pink": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["KDPH","XQ5D4"],
-    "tags": ["regular","Has BSA","neutral","western","all"]
+    "tags": ["regular","Has BSA","neutral","standard","western","all"]
   },
   "Pitfire": {
     "dimorphism": true,
@@ -846,13 +846,13 @@
       "Salt Spatio": ["3pGCm","8jjcE"],
       "__regular__": ["cSGcX","819Ix"]
     },
-    "tags": ["halloween","death","western","cave"]
+    "tags": ["halloween","death","standard","western","cave"]
   },
   "Plated Colossus": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["7bzCd","lEpYM"],
-    "tags": ["regular","earth","western","forest","jungle"]
+    "tags": ["regular","earth","standard","western","forest","jungle"]
   },
   "Pryanost Lindwyrm": {
     "dimorphism": false,
@@ -861,7 +861,7 @@
       "Salt Infinis": "1N3R6",
       "Salt MoonShark": "iZTHk"
     },
-    "tags": ["christmas","p:fire","s:magi","lindwyrm","cave"]
+    "tags": ["christmas","p:fire","s:magi","standard","lindwyrm","cave"]
   },
   "Pumpkin": {
     "dimorphism": false,
@@ -870,7 +870,7 @@
       "Salt Marrionetta": "King",
       "__regular__": "hEqW"
     },
-    "tags": ["halloween","pygmy western","cave"]
+    "tags": ["halloween","pygmy","western","cave"]
   },
   "Pyralspite": {
     "dimorphism": false,
@@ -880,7 +880,7 @@
       "Pyrope": "31Iya",
       "Spessartine": "xq4Yl"
     },
-    "tags": ["regular","earth","western"]
+    "tags": ["regular","earth","standard","western"]
   },
   "Pyropellis Wyvern": {
     "dimorphism": false,
@@ -893,25 +893,25 @@
       "Orange": "CeGqv",
       "Purple": "X6kh6"
     },
-    "tags": ["regular","fire","wyvern","volcano"]
+    "tags": ["regular","fire","standard","wyvern","volcano"]
   },
   "Pyrovar": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "44jeg",
-    "tags": ["regular","fire","western","volcano"]
+    "tags": ["regular","fire","standard","western","volcano"]
   },
   "Pyrrhichios": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "AGD87",
-    "tags": ["regular","time","western","volcano"]
+    "tags": ["regular","time","standard","western","volcano"]
   },
   "Quantari": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["Frgtn","SlsOf"],
-    "tags": ["halloween","dark","wingless","cave"]
+    "tags": ["halloween","dark","standard","wingless","cave"]
   },
   "Radiant Angel": {
     "dimorphism": false,
@@ -921,25 +921,25 @@
       "Salt Infinis": "pHVvj",
       "__regular__": "ykiII"
     },
-    "tags": ["valentine","magi","western","cave"]
+    "tags": ["valentine","magi","standard","western","cave"]
   },
   "Razorcrest Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "B6Q0m",
-    "tags": ["regular","air","wyvern","alpine"]
+    "tags": ["regular","air","standard","wyvern","alpine"]
   },
   "Red": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "WnAo",
-    "tags": ["regular","Has BSA","fire","western","desert","volcano"]
+    "tags": ["regular","Has BSA","fire","standard","western","desert","volcano"]
   },
   "Red-Tailed Wyrm": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "HQcbA",
-    "tags": ["regular","air","pygmy wyrm","desert","forest","jungle"]
+    "tags": ["regular","air","pygmy","wyrm","desert","forest","jungle"]
   },
   "Ribbon Dancer": {
     "dimorphism": false,
@@ -948,7 +948,7 @@
       "Salt LadyLyzar": "Hg2k",
       "__regular__": "2PIc"
     },
-    "tags": ["christmas","light","western","cave"]
+    "tags": ["christmas","light","standard","western","cave"]
   },
   "Ridgewing": {
     "dimorphism": true,
@@ -957,25 +957,25 @@
       "Purple": ["pbMTv","jBBoq"],
       "Tan": ["vYWmo","zjGLw"]
     },
-    "tags": ["regular","air","western","alpine"]
+    "tags": ["regular","air","standard","western","alpine"]
   },
   "Rift Wyrm": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["tZSi2","zGmc1"],
-    "tags": ["regular","p:magi","s:water","wyrm","all"]
+    "tags": ["regular","p:magi","s:water","standard","wyrm","all"]
   },
   "Risensong": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "1sJdX",
-    "tags": ["regular","hybrid","light","lindwyrm"]
+    "tags": ["regular","hybrid","light","standard","lindwyrm"]
   },
   "Royal Eminence": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["lTktE","F7TMe"],
-    "tags": ["regular","hybrid","neutral","western"]
+    "tags": ["regular","hybrid","neutral","standard","western"]
   },
   "Sabertooth Bull Drake": {
     "dimorphism": false,
@@ -987,43 +987,43 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["WO4Fw","frO9M"],
-    "tags": ["regular","earth","western","desert"]
+    "tags": ["regular","earth","standard","western","desert"]
   },
   "Sawtooth": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["jfKte","mOTLj"],
-    "tags": ["regular","p:water","s:air","western","jungle"]
+    "tags": ["regular","p:water","s:air","standard","western","jungle"]
   },
   "Script": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "fHfj9",
-    "tags": ["regular","magi","lindwyrm","volcano"]
+    "tags": ["regular","magi","standard","lindwyrm","volcano"]
   },
   "Scymrian Pygmy": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "woK0s",
-    "tags": ["regular","life","pygmy western","all"]
+    "tags": ["regular","life","pygmy","western","all"]
   },
   "Seawyrm Pygmy": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["WZn25","cH9U1"],
-    "tags": ["regular","pygmy lindwyrm","coast"]
+    "tags": ["regular","pygmy","lindwyrm","coast"]
   },
   "Serrati Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["xhtpE","VtfDa"],
-    "tags": ["regular","death","wyvern","volcano"]
+    "tags": ["regular","death","standard","wyvern","volcano"]
   },
   "Setsong": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "BiRHM",
-    "tags": ["regular","hybrid","light","lindwyrm"]
+    "tags": ["regular","hybrid","light","standard","lindwyrm"]
   },
   "Shadow Walker": {
     "dimorphism": false,
@@ -1031,13 +1031,13 @@
     "sprites": {
       "Salt Fiona": "p9ukA"
     },
-    "tags": ["halloween","magi","western","cave"]
+    "tags": ["halloween","magi","standard","western","cave"]
   },
   "Shallow Water": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["vkpHc","JCL1R"],
-    "tags": ["regular","hybrid","water","leviathan"]
+    "tags": ["regular","hybrid","water","standard","leviathan"]
   },
   "Shumoga": {
     "dimorphism": false,
@@ -1046,19 +1046,19 @@
       "Pale": "3snCV",
       "Wild": "22fr1"
     },
-    "tags": ["regular","fire","western","desert","alpine"]
+    "tags": ["regular","fire","standard","western","desert","alpine"]
   },
   "Silvershade Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "6ImMt",
-    "tags": ["regular","p:time","s:light","wyvern","volcano"]
+    "tags": ["regular","p:time","s:light","standard","wyvern","volcano"]
   },
   "Sinomorph": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "TfmjY",
-    "tags": ["regular","neutral","western","cave","CB-only","summonable"]
+    "tags": ["regular","neutral","standard","western","cave","CB-only","summonable"]
   },
   "Siorghlas Wyvern": {
     "dimorphism": false,
@@ -1067,13 +1067,13 @@
       "Blueflame": "JC2Mj",
       "Evergreen": "oikQN"
     },
-    "tags": ["regular","Has BSA","p:life","s:fire","wyvern","forest","alpine"]
+    "tags": ["regular","Has BSA","p:life","s:fire","standard","wyvern","forest","alpine"]
   },
   "Skysilk": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "RN88M",
-    "tags": ["regular","air","western","desert","jungle"]
+    "tags": ["regular","air","standard","western","desert","jungle"]
   },
   "Snow": {
     "dimorphism": false,
@@ -1082,7 +1082,7 @@
       "Salt Infinis": "SPqh3",
       "__regular__": "ViiiL"
     },
-    "tags": ["christmas","ice","western","cave"]
+    "tags": ["christmas","ice","standard","western","cave"]
   },
   "Solstice": {
     "dimorphism": false,
@@ -1092,7 +1092,7 @@
       "Night": "O928E",
       "Salt Odeen": "UjTRs"
     },
-    "tags": ["christmas","time","western","cave"]
+    "tags": ["christmas","time","standard","western","cave"]
   },
   "Sonata": {
     "dimorphism": false,
@@ -1102,7 +1102,7 @@
       "Gold": "jQG9b",
       "Silver": "w1cT9"
     },
-    "tags": ["regular","p:light","s:dark","amphiptere","all"]
+    "tags": ["regular","p:light","s:dark","standard","amphiptere","all"]
   },
   "Spinel Wyvern": {
     "dimorphism": true,
@@ -1111,13 +1111,13 @@
       "Green": ["qA36V","0gpYC"],
       "Violet": ["i3TBl","5wnHq"]
     },
-    "tags": ["regular","earth","wyvern","desert","volcano"]
+    "tags": ["regular","earth","standard","wyvern","desert","volcano"]
   },
   "Spotted Greenwing": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "oG8fr",
-    "tags": ["regular","neutral","western","forest"]
+    "tags": ["regular","neutral","standard","western","forest"]
   },
   "Spotted Teal Drake": {
     "dimorphism": false,
@@ -1133,19 +1133,19 @@
       "Salt Nirami": "GudBJ",
       "__regular__": "0KKor"
     },
-    "tags": ["christmas","western","light","cave"]
+    "tags": ["christmas","standard","western","light","cave"]
   },
   "Stellarum Wyrm": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "X2hRu",
-    "tags": ["regular","magi","wyrm","alpine"]
+    "tags": ["regular","magi","standard","wyrm","alpine"]
   },
   "Storm": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["ZQDEZ","ne5L"],
-    "tags": ["regular","air","western","all"]
+    "tags": ["regular","air","standard","western","all"]
   },
   "Stratos": {
     "dimorphism": false,
@@ -1156,7 +1156,7 @@
       "Dusk": "20uav",
       "Night": "IFpVR"
     },
-    "tags": ["regular","leviathan","p:air","s:light","alpine","desert","jungle"]
+    "tags": ["regular","standard","leviathan","p:air","s:light","alpine","desert","jungle"]
   },
   "Striped River": {
     "dimorphism": false,
@@ -1168,25 +1168,25 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["dJ2C","R6N5"],
-    "tags": ["regular","light","western","alpine"]
+    "tags": ["regular","light","standard","western","alpine"]
   },
   "Sunset": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["Hp0F","G4t5R"],
-    "tags": ["regular","light","western","alpine"]
+    "tags": ["regular","light","standard","western","alpine"]
   },
   "Sunstone": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "8Dspi",
-    "tags": ["regular","fire","western","desert"]
+    "tags": ["regular","fire","standard","western","desert"]
   },
   "Tangledrakin": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": ["NE6Xz"],
-    "tags": ["regular","two-head wingless","p:earth","s:life","forest","jungle"]
+    "tags": ["regular","two-head","wingless","p:earth","s:life","forest","jungle"]
   },
   "Tarantula Hawk Drake": {
     "dimorphism": false,
@@ -1204,7 +1204,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "NFTkm",
-    "tags": ["regular","light","two-head wyrm","desert","jungle"]
+    "tags": ["regular","light","two-head","wyrm","desert","jungle"]
   },
   "Thundersnow": {
     "dimorphism": false,
@@ -1221,7 +1221,7 @@
       "Salt Marrionetta": "Penk",
       "Silver": "30d5P"
     },
-    "tags": ["regular","neutral","western"]
+    "tags": ["regular","neutral","standard","western"]
   },
   "Tombstone": {
     "dimorphism": false,
@@ -1241,7 +1241,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["FOQe5","uuc66"],
-    "tags": ["regular","hybrid","western","light"]
+    "tags": ["regular","hybrid","standard","western","light"]
   },
   "Undead": {
     "dimorphism": false,
@@ -1288,7 +1288,7 @@
       "Salt TCA": "DN0Ir",
       "__regular__": "42TLi"
     },
-    "tags": ["valentine","life","wyvern","cave"]
+    "tags": ["valentine","life","standard","wyvern","cave"]
   },
   "Vespine Drake": {
     "dimorphism": false,
@@ -1303,19 +1303,19 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["2kQWa","NNq3"],
-    "tags": ["regular","water","leviathan","coast"]
+    "tags": ["regular","water","standard","leviathan","coast"]
   },
   "Waterhorse": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["lXIv","QocQm"],
-    "tags": ["regular","water","wingless","coast"]
+    "tags": ["regular","water","standard","wingless","coast"]
   },
   "White": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "K1GT",
-    "tags": ["regular","p:life","s:light","western","all"]
+    "tags": ["regular","p:life","s:light","standard","western","all"]
   },
   "Wintertide": {
     "dimorphism": false,
@@ -1323,13 +1323,13 @@
     "sprites": {
       "__regular__": "2Dmsy"
     },
-    "tags": ["christmas","p:life","s:fire","amphiptere","cave"]
+    "tags": ["christmas","p:life","s:fire","standard","amphiptere","cave"]
   },
   "Wisteria": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "zioYC",
-    "tags": ["regular","life","wingless","forest"]
+    "tags": ["regular","life","standard","wingless","forest"]
   },
   "Witchlight": {
     "dimorphism": true,
@@ -1338,91 +1338,91 @@
       "Salt Odeen": ["ncCdI","HJrHd"],
       "__regular__": ["P37TJ","89Y6e"]
     },
-    "tags": ["halloween","p:dark","s:magi","western","cave"]
+    "tags": ["halloween","p:dark","s:magi","standard","western","cave"]
   },
   "Wrapping-Wing": {
     "dimorphism": false,
     "genderOnly": "m",
     "sprites": "2pong",
-    "tags": ["christmas","light","western","cave"]
+    "tags": ["christmas","light","standard","western","cave"]
   },
   "Xenowyrm (Aquilo)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "fxnVu",
-    "tags": ["regular","air","wyrm","alpine"]
+    "tags": ["regular","air","standard","wyrm","alpine"]
   },
   "Xenowyrm (Aso)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "yAPFc",
-    "tags": ["regular","ice","wyrm","coast"]
+    "tags": ["regular","ice","standard","wyrm","coast"]
   },
   "Xenowyrm (Astrapi)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "5yOn5",
-    "tags": ["regular","lightning","wyrm","alpine"]
+    "tags": ["regular","lightning","standard","wyrm","alpine"]
   },
   "Xenowyrm (Chrono)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "aikmX",
-    "tags": ["regular","time","wyrm","forest"]
+    "tags": ["regular","time","standard","wyrm","forest"]
   },
   "Xenowyrm (Gaia)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "XpP8V",
-    "tags": ["regular","life","wyrm","jungle"]
+    "tags": ["regular","life","standard","wyrm","jungle"]
   },
   "Xenowyrm (Ke'Maro)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "FTmNo",
-    "tags": ["regular","death","wyrm","volcano"]
+    "tags": ["regular","death","standard","wyrm","volcano"]
   },
   "Xenowyrm (Mageia)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "yxJTI",
-    "tags": ["regular","magi","wyrm","desert"]
+    "tags": ["regular","magi","standard","wyrm","desert"]
   },
   "Xenowyrm (Obidar)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "jyn5w",
-    "tags": ["regular","earth","wyrm","forest"]
+    "tags": ["regular","earth","standard","wyrm","forest"]
   },
   "Xenowyrm (Pharos)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "dDDQ3",
-    "tags": ["regular","light","wyrm","desert"]
+    "tags": ["regular","light","standard","wyrm","desert"]
   },
   "Xenowyrm (Pyro)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "grsFX",
-    "tags": ["regular","fire","wyrm","volcano"]
+    "tags": ["regular","fire","standard","wyrm","volcano"]
   },
   "Xenowyrm (Staterae)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "WP5Jo",
-    "tags": ["regular","neutral","wyrm","all"]
+    "tags": ["regular","neutral","standard","wyrm","all"]
   },
   "Xenowyrm (Thalassa)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "K3VVG",
-    "tags": ["regular","water","wyrm","coast"]
+    "tags": ["regular","water","standard","wyrm","coast"]
   },
   "Xenowyrm (Umbra)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "wtlPt",
-    "tags": ["regular","dark","wyrm","jungle"]
+    "tags": ["regular","dark","standard","wyrm","jungle"]
   },
   "Xocoatl": {
     "dimorphism": false,
@@ -1431,13 +1431,13 @@
       "Salt Schenanigans": "yfweC",
       "__regular__": "W10PC"
     },
-    "tags": ["valentine","p:life","s:air","amphiptere","cave"]
+    "tags": ["valentine","p:life","s:air","standard","amphiptere","cave"]
   },
   "Yellow-Crowned": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["QmCa9","NvRwS"],
-    "tags": ["regular","light","western","desert"]
+    "tags": ["regular","light","standard","western","desert"]
   },
   "Yulebuck": {
     "dimorphism": false,
@@ -1445,13 +1445,13 @@
     "sprites": {
       "Salt Marrionetta": "T7J6"
     },
-    "tags": ["christmas","light","western","cave"]
+    "tags": ["christmas","light","standard","western","cave"]
   },
   "Zarafauri": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "kSrKU",
-    "tags": ["regular","p:earth","s:life","wingless","jungle"]
+    "tags": ["regular","p:earth","s:life","standard","wingless","jungle"]
   },
   "Zyumorph": {
     "dimorphism": false,
@@ -1472,6 +1472,6 @@
     "sprites": {
       "Salt Marrionetta": "Mari"
     },
-    "tags": ["valentine","magi","western","cave"]
+    "tags": ["valentine","magi","standard","western","cave"]
   }
 }

@@ -88,7 +88,9 @@ const elementTags = [
   'neutral',
 ] as const;
 
-const bodyTypeTags = [
+const bodyTypeTags = ['standard', 'drake', 'pygmy', 'two-head'] as const;
+
+const bodySubtypeTags = [
   'amphiptere',
   'wingless',
   'western',
@@ -97,22 +99,6 @@ const bodyTypeTags = [
   'wyvern',
   'lindwyrm',
   'wyrm',
-  'drake',
-  'pygmy eastern',
-  'pygmy lindwyrm',
-  'pygmy wyrm',
-  'pygmy wyvern',
-  'pygmy western',
-  'pygmy wingless',
-  'pygmy amphiptere',
-  'two-head eastern',
-  'two-head lindwyrm',
-  'two-head amphiptere',
-  'two-head leviathan',
-  'two-head wyrm',
-  'two-head wyvern',
-  'two-head wingless',
-  'two-head western',
 ] as const;
 
 const habitatTags = [
@@ -134,6 +120,7 @@ type TagFilterCollection = {
   primaryElement: (typeof elementTags)[number][];
   secondaryElement: (typeof elementTags)[number][];
   bodyType: (typeof bodyTypeTags)[number][];
+  bodySubtype: (typeof bodySubtypeTags)[number][];
   habitat: (typeof habitatTags)[number][];
   release: (typeof releaseTags)[number][];
   misc: (typeof miscTags)[number][];
@@ -143,11 +130,19 @@ type NewTag =
   | TagFilterCollection['primaryElement'][number]
   | TagFilterCollection['secondaryElement'][number]
   | TagFilterCollection['bodyType'][number]
+  | TagFilterCollection['bodySubtype'][number]
   | TagFilterCollection['habitat'][number]
   | TagFilterCollection['release'][number]
   | TagFilterCollection['misc'][number];
 
-export { elementTags, bodyTypeTags, habitatTags, releaseTags, miscTags };
+export {
+  elementTags,
+  bodyTypeTags,
+  bodySubtypeTags,
+  habitatTags,
+  releaseTags,
+  miscTags,
+};
 
 export type {
   GenderOnly,

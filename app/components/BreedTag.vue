@@ -121,11 +121,11 @@ withDefaults(
     color: #fff;
   }
 
-  &[class*='pygmy-'] {
+  &.pygmy {
     background: #ba5817;
   }
 
-  &[class*='two-head-'] {
+  &.two-head {
     background: #557991;
   }
 
@@ -133,15 +133,7 @@ withDefaults(
     background: #d6a624;
     color: #000;
   }
-
-  &.eastern,
-  &.leviathan,
-  &.wyrm,
-  &.wyvern,
-  &.lindwyrm,
-  &.amphiptere,
-  &.wingless,
-  &.western {
+  &.standard {
     background: #1b6a0b;
   }
 }
