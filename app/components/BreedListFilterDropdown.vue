@@ -3,25 +3,20 @@
     :distance="0"
     auto-size="min"
     auto-boundary-max-size
-    container="#breed-selector-wrapper"
+    :container="container"
+    placement="bottom-start"
     auto-hide
     @apply-show="focusFiltersTitle()"
   >
     <template #default="{ show }">
       <div class="applied-filters">
-        <label
-          for="applied-filters"
-          class="sr-only"
-        >
-          Filters
-        </label>
         <input
-          id="applied-filters"
+          :id="id"
           readonly
           type="text"
           :value="tagStore.join(', ')"
           class="tag-list pointer"
-          placeholder="Filters"
+          :placeholder
           @keydown.space.enter="show()"
           @click="show()"
         />
@@ -124,6 +119,12 @@ import { resolveLabel, slug } from '../shared/utils';
 import BreedTag from './BreedTag.vue';
 import { filtersByGroup, tagStore } from '../store/useTagStore';
 
+defineProps<{
+  container: string;
+  id: string;
+  placeholder?: string | undefined;
+}>();
+
 const filtersTitle = useTemplateRef('filtersTitle');
 
 async function focusFiltersTitle() {
@@ -135,7 +136,9 @@ async function focusFiltersTitle() {
 <style scoped lang="postcss">
 .filters-container {
   border-radius: 0.5rem;
-  padding: 0.5rem;
+  font: var(--dc-lineage-font);
+  max-height: 25rem;
+  padding: 0.5rem 0;
 }
 
 .header {
@@ -216,6 +219,7 @@ async function focusFiltersTitle() {
   border: none;
   display: flex;
   align-items: center;
+  position: relative;
 
   & .tag-list {
     flex: 1;
@@ -239,5 +243,13 @@ async function focusFiltersTitle() {
     background: var(--ui-builder-toolbar-selection-count-bg);
     color: var(--ui-builder-toolbar-selection-count-fg);
   }
+}
+</style>
+<style>
+.v-popper__wrapper {
+  max-width: 35rem;
+}
+.v-popper__inner {
+  padding: 0 0.5rem;
 }
 </style>

@@ -1,4 +1,4 @@
-import { unref, type MaybeRef } from 'vue';
+import { computed, unref, type MaybeRef } from 'vue';
 import {
   bodyTypeTags,
   bodySubtypeTags,
@@ -148,3 +148,5 @@ export const filtersByGroup = {
   Release: releaseTags,
   Miscellaneous: miscTags,
 };
+
+export const chosenTags = computed(() => tagsFromModel(tagStore));

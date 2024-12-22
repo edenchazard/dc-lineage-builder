@@ -23,7 +23,17 @@
           >
             Search
           </label>
-          <BreedListFilterDropdown />
+          <label
+            for="applied-filters"
+            class="sr-only"
+          >
+            Filters
+          </label>
+          <BreedListFilterDropdown
+            placeholder="Filters"
+            container="#breed-selector-wrapper"
+            id="applied-filters"
+          />
         </div>
       </form>
 
@@ -46,14 +56,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
+import { nextTick, ref } from 'vue';
 import { onStartTyping } from '@vueuse/core';
 import { type DragonGender, type PortraitData } from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
-import { tagsFromModel, tagStore } from '../store/useTagStore.js';
+import { chosenTags } from '../store/useTagStore.js';
 import BreedListFilterDropdown from './BreedListFilterDropdown.vue';
 
 const props = withDefaults(
@@ -76,7 +86,6 @@ const searchString = ref('');
 const mateSearchEl = ref<HTMLInputElement>();
 const wrapper = ref();
 const resultsEl = ref<HTMLElement>();
-const chosenTags = computed(() => tagsFromModel(tagStore));
 
 const { deactivate } = useFocusTrap(wrapper, {
   immediate: true,

@@ -75,33 +75,20 @@
         </div>
 
         <div id="checker-toolbar-bottom">
-          <fieldset id="section-3-1">
-            <div>
-              <legend class="legend">Filters</legend>
-            </div>
-            <div
-              id="filter-controls"
-              class="tag-list"
-            >
-              <BreedTagListGroups
-                id="enabled-groups"
-                name="filters-groups"
-              />
-              <BreedTagListTags
-                id="enabled-tags"
-                name="filters-tags"
-              />
-            </div>
-          </fieldset>
-
-          <div id="section-3-2">
-            <div id="filter-search">
-              <label for="search">Search:</label>
-              <BreedSearch
-                id="search"
-                @update="(search: string) => (query = search)"
-              />
-            </div>
+          <div
+            id="filter-controls"
+            class="tag-list"
+          >
+            <label for="search">Search:</label>
+            <BreedSearch
+              id="search"
+              @update="(search: string) => (query = search)"
+            />
+            <label for="applied-filters">Filters:</label>
+            <BreedListFilterDropdown
+              container="#filter-controls"
+              id="applied-filters"
+            />
           </div>
         </div>
       </form>
@@ -120,10 +107,9 @@
         <BreedListFiltered
           id="males"
           aria-labelledby="males"
+          :tags="chosenTags"
           :search="query"
           :breeds="malePortraits"
-          :tags="tagStore.enabledTags"
-          :groups="tagStore.enabledEggGroups"
           class="results"
           @breed-selected="selectMale"
         />
@@ -140,9 +126,8 @@
           aria-labelledby="females"
           :search="query"
           :breeds="femalePortraits"
-          :tags="tagStore.enabledTags"
-          :groups="tagStore.enabledEggGroups"
           class="results"
+          :tags="chosenTags"
           @breed-selected="selectFemale"
         />
       </section>
@@ -160,12 +145,9 @@
 import { ref, watch } from 'vue';
 import type { PortraitData, DragonGender } from '../shared/types';
 import { getBreedData } from '../shared/utils.js';
-import { useTagStore } from '../store/useTagStore.js';
 
 import LineageView from '../components/LineageView.vue';
 import BreedListFiltered from '../components/BreedListFiltered.vue';
-import BreedTagListTags from '../components/BreedTagListTags.vue';
-import BreedTagListGroups from '../components/BreedTagListGroups.vue';
 import DialogExport from '../components/DialogExport.vue';
 import DialogGenerate from '../components/DialogGenerate.vue';
 import ToolbarButton from '../components/ToolbarButton.vue';
@@ -176,9 +158,10 @@ import {
   malePortraits,
   placeholder,
 } from '../shared/breeds.js';
+import { chosenTags } from '../store/useTagStore';
+import BreedListFilterDropdown from '../components/BreedListFilterDropdown.vue';
 
 const tree = ref(DragonBuilder.createWithMetadata());
-const tagStore = useTagStore();
 const maleBreed = ref(placeholder.name);
 const femaleBreed = ref(placeholder.name);
 const genCount = ref(2);
@@ -271,7 +254,6 @@ function switchBreeds() {
 }
 #checker-toolbar-top {
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-direction: column;
 }
@@ -283,18 +265,18 @@ function switchBreeds() {
 #section-1 {
   display: flex;
   align-items: center;
-  justify-self: stretch;
+  margin: 0.5rem 0;
 }
 #generations {
   width: 100%;
   min-width: 8rem;
-  max-width: 10rem;
 }
 
 #filter-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem;
 }
 
 #section-3 {
@@ -304,8 +286,8 @@ function switchBreeds() {
 }
 #section-3-1 {
   display: flex;
-  flex-direction: column;
   gap: 0.5rem 1rem;
+  align-items: center;
 }
 #section-3-2 {
   display: flex;
@@ -316,15 +298,6 @@ function switchBreeds() {
 .legend {
   text-align: center;
   font-weight: bold;
-}
-.tag-list {
-  line-height: 1.2rem;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  flex-direction: row !important;
-  justify-content: center;
 }
 
 #section-2 {
