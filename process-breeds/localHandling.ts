@@ -4,12 +4,7 @@ import puppeteer from 'puppeteer';
 import { chromiumSettings } from './files';
 import type { IgnoreFile, IgnoreList, PortraitSizing } from './types';
 import type { PortraitCache } from './portraitCache';
-import type {
-  EggGroupTag,
-  FilterTag,
-  BreedEntry,
-  GenderOnly,
-} from '../app/shared/types';
+import type { BreedEntry, GenderOnly, NewTag } from '../app/shared/types';
 
 export interface LocalBreedsJSON {
   [breedName: string]: LocalBreedEntry;
@@ -18,8 +13,7 @@ export interface LocalBreedsJSON {
 interface LocalBreedEntry {
   dimorphism: boolean;
   genderOnly: GenderOnly;
-  group: EggGroupTag;
-  tags: FilterTag[];
+  tags: NewTag[];
   sprites:
     | LocalNonDimorphicSprite
     | LocalDimorphicSpritePair
@@ -46,7 +40,6 @@ export function getBreedTable(json: LocalBreedsJSON): BreedEntry[] {
       name: name,
       genderOnly: breed.genderOnly,
       metaData: {
-        group: breed.group,
         tags: breed.tags,
         src: 'local',
       },

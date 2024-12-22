@@ -13,6 +13,27 @@ import {
 import { useSessionStorage } from '@vueuse/core';
 import { resolveLabel } from '../shared/utils';
 
+// Set.prototype.isDisjointFrom() doesn't quite have widespread support yet,
+// so we'll have to implement a polyfill for it.
+if (!Set.prototype.isDisjointFrom) {
+  Set.prototype.isDisjointFrom = function <T>(
+    this: Set<T>,
+    other: Set<T>,
+  ): boolean {
+    console.log('test');
+    if (this.size <= other.size) {
+      for (const elem of this) {
+        if (other.has(elem)) return false;
+      }
+    } else {
+      for (const elem of other.keys()) {
+        if (this.has(elem)) return false;
+      }
+    }
+    return true;
+  };
+}
+
 export const tagStore = useSessionStorage<NewTag[]>('tags', []);
 
 export function tagsFromModel(tags: MaybeRef<NewTag[]>): TagFilterCollection {

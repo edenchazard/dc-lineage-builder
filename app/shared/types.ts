@@ -54,8 +54,7 @@ interface BreedEntry {
 }
 type GenderOnly = DragonGender | false;
 interface MetaData {
-  group: string;
-  tags: NewTag;
+  tags: NewTag[];
   src: Sources;
 }
 type Sources = 'local' | 'dc' | 'ghost';
