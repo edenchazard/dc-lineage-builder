@@ -20,13 +20,13 @@
       "Neutral Salt Birdzgoboom": "qjn78",
       "Neutral Salt Odeen": "SuORy"
     },
-    "tags": ["christmas","standard","wingless","p:life","s:ice"]
+    "tags": ["christmas","standard","wingless","p:life","s:ice","Has BSA"]
   },
   "Aeon Wyvern": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["lRVeO","pAako"],
-    "tags": ["regular","standard","wyvern","time"]
+    "tags": ["regular","standard","wyvern","time","Has BSA"]
   },
   "Aeria Gloris": {
     "dimorphism": false,
@@ -125,7 +125,7 @@
       "Vintage Chic": "e7Mp5",
       "the OG": "S99uD"
     },
-    "tags": ["regular","standard","western","p:earth","s:life"]
+    "tags": ["regular","standard","western","p:earth","s:life","Has BSA"]
   },
   "Avin Pygmy": {
     "dimorphism": true,
@@ -188,7 +188,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "sHE0e",
-    "tags": ["regular","eastern","lightning"]
+    "tags": ["regular","eastern","lightning","Has BSA"]
   },
   "Boreal": {
     "dimorphism": false,
@@ -245,7 +245,7 @@
       "Corporeal": ["My6XH","vkTQ2"],
       "Incorporeal": ["5mbRb","whJ3b"]
     },
-    "tags": ["regular","standard","western","magi"]
+    "tags": ["regular","standard","western","magi","Has BSA"]
   },
   "Ceriuth": {
     "dimorphism": false,
@@ -282,13 +282,13 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "JZsP5",
-    "tags": ["regular","standard","western","magi"]
+    "tags": ["regular","standard","western","magi","Has BSA"]
   },
   "Delta (Small)": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "OBTd8",
-    "tags": ["regular","pygmy","western","magi"]
+    "tags": ["regular","pygmy","western","magi","Has BSA"]
   },
   "Desipis": {
     "dimorphism": true,
@@ -408,7 +408,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "KVM4T",
-    "tags": ["regular","Adventure","pygmy","wingless","desert"]
+    "tags": ["regular","Adventure","pygmy","wingless","desert","Has BSA"]
   },
   "Garland": {
     "dimorphism": false,
@@ -463,7 +463,7 @@
       "Salt Spatio": "m00OD",
       "Yellow": "42Flu"
     },
-    "tags": ["christmas","p:ice","s:light","standard","wyrm","cave"]
+    "tags": ["christmas","p:ice","s:light","standard","wyrm","cave","Has BSA"]
   },
   "Gold-Horned Tangar": {
     "dimorphism": true,
@@ -501,7 +501,7 @@
     "sprites": "FHW2y",
     "tags": ["regular","hybrid","dark","standard","western"]
   },
-  "Guardian Of Nature": {
+  "Guardian of Nature": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "k3PF",
@@ -809,7 +809,7 @@
       "Metachrosis": ["422Bx","vatB9"],
       "__regular__": ["Y2ULc","acP7t"]
     },
-    "tags": ["regular","p:water","s:magi","pygmy","amphiptere","coast"]
+    "tags": ["regular","p:water","s:magi","pygmy","amphiptere","coast","Has BSA"]
   },
   "Pastel": {
     "dimorphism": false,
@@ -905,7 +905,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "AGD87",
-    "tags": ["regular","time","standard","western","volcano"]
+    "tags": ["regular","time","standard","western","volcano","Has BSA"]
   },
   "Quantari": {
     "dimorphism": true,
@@ -1037,7 +1037,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["vkpHc","JCL1R"],
-    "tags": ["regular","hybrid","water","standard","leviathan"]
+    "tags": ["regular","hybrid","water","standard","leviathan","Has BSA"]
   },
   "Shumoga": {
     "dimorphism": false,
@@ -1210,7 +1210,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "3vp64",
-    "tags": ["regular","p:ice","s:lightning","eastern","alpine"]
+    "tags": ["regular","p:ice","s:lightning","eastern","alpine","Has BSA"]
   },
   "Tinsel": {
     "dimorphism": false,
@@ -1315,7 +1315,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "K1GT",
-    "tags": ["regular","p:life","s:light","standard","western","all"]
+    "tags": ["regular","p:life","s:light","standard","western","all","Has BSA"]
   },
   "Wintertide": {
     "dimorphism": false,
@@ -1464,7 +1464,7 @@
       "White": "YRSBw",
       "Yellow": "o2YNK"
     },
-    "tags": ["regular","neutral"]
+    "tags": ["regular","neutral","Has BSA"]
   },
   "valentine": {
     "dimorphism": false,

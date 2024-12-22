@@ -40,7 +40,7 @@
   "Astralophyne": {
     "genderOnly": false,
     "sprites": ["EKXWG",-18,-1,48],
-    "tags": ["regular","standard","western","p:life","s:light"]
+    "tags": ["regular","standard","western","p:life","s:light","Has BSA"]
   },
   "Avea Pygmy": {
     "genderOnly": false,
@@ -237,7 +237,7 @@
   "Fanalea": {
     "genderOnly": false,
     "sprites": ["JQjm9",-18,-1,48],
-    "tags": ["regular","standard","western","life"]
+    "tags": ["regular","standard","western","life","Has BSA"]
   },
   "Flamingo Wyvern": {
     "genderOnly": false,
@@ -313,7 +313,7 @@
   "Green": {
     "genderOnly": false,
     "sprites": ["NRSH",0,-1,48],
-    "tags": ["regular","standard","western","earth"]
+    "tags": ["regular","standard","western","earth","Has BSA"]
   },
   "Guardian": {
     "genderOnly": false,
@@ -333,12 +333,12 @@
   "Hooded Murkling": {
     "genderOnly": false,
     "sprites": ["TIOUK",-20,-1,48],
-    "tags": ["regular","standard","western","p:dark","s:death"]
+    "tags": ["regular","standard","western","p:dark","s:death","Has BSA"]
   },
   "Ice": {
     "genderOnly": false,
     "sprites": ["DJuWf",-8,-1,48],
-    "tags": ["regular","standard","western","ice"]
+    "tags": ["regular","standard","western","ice","Has BSA"]
   },
   "Imperial Fleshcrowne": {
     "genderOnly": false,
@@ -378,12 +378,12 @@
   "Magi": {
     "genderOnly": false,
     "sprites": ["CSJeS",-36,-1,48],
-    "tags": ["regular","standard","western","magi"]
+    "tags": ["regular","standard","western","magi","Has BSA"]
   },
   "Magma": {
     "genderOnly": false,
     "sprites": ["3cut",-12,-1,48],
-    "tags": ["regular","standard","wingless","fire"]
+    "tags": ["regular","standard","wingless","fire","Has BSA"]
   },
   "Magnesium Amphiptere": {
     "genderOnly": false,
@@ -501,7 +501,7 @@
   "Purple": {
     "genderOnly": false,
     "sprites": ["VdVa",-11,-1,48,"9QQ4i",0,-1,48],
-    "tags": ["regular","standard","western","life"]
+    "tags": ["regular","standard","western","life","Has BSA"]
   },
   "Quonebb": {
     "genderOnly": false,
@@ -575,7 +575,7 @@
   "Seraph": {
     "genderOnly": false,
     "sprites": ["0chqt",-18,-1,48],
-    "tags": ["regular","standard","western","p:life","s:light"]
+    "tags": ["regular","standard","western","p:life","s:light","Has BSA"]
   },
   "Shadow Walker": {
     "genderOnly": false,
@@ -632,7 +632,7 @@
   "Sophrosyne": {
     "genderOnly": false,
     "sprites": ["2gdz2",-16,-1,47.5,"5KfGP",0,-1,48],
-    "tags": ["regular","hybrid","standard","western","light"]
+    "tags": ["regular","hybrid","standard","western","light","Has BSA"]
   },
   "Soulstone": {
     "genderOnly": "f",
@@ -727,7 +727,7 @@
   "Thunder": {
     "genderOnly": false,
     "sprites": ["fQBUi",0,-1,48],
-    "tags": ["regular","standard","western","lightning"]
+    "tags": ["regular","standard","western","lightning","Has BSA"]
   },
   "Tideweaver Lindwyrm": {
     "genderOnly": false,
@@ -778,7 +778,7 @@
   "Vampire": {
     "genderOnly": false,
     "sprites": ["Ivh5",0,-1,47,"MXv75",0,-1,47],
-    "tags": ["regular","standard","western","death"]
+    "tags": ["regular","standard","western","death","Has BSA"]
   },
   "Vilvoor": {
     "genderOnly": false,
