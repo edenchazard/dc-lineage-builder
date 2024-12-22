@@ -15,7 +15,7 @@
   "Amarignis": {
     "genderOnly": "f",
     "sprites": ["CastA",-14,-1,48],
-    "tags": ["eastern","p:light","s:fire","valentine"]
+    "tags": ["standard","eastern","p:light","s:fire","valentine"]
   },
   "Anagallis": {
     "genderOnly": false,
@@ -589,12 +589,12 @@
       "Gold": ["wTAL8",0,-1,48],
       "Silver": ["Adqkz",0,-1,48]
     },
-    "tags": ["eastern","water","regular"]
+    "tags": ["standard","eastern","water","regular"]
   },
   "Silver": {
     "genderOnly": false,
     "sprites": ["1ZrX",0,-1,48,"s38LX",-3,-1,48],
-    "tags": ["eastern","light","regular"]
+    "tags": ["standard","eastern","light","regular"]
   },
   "Sinii Krai": {
     "genderOnly": false,
@@ -722,7 +722,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": ["qtfhX",-3,-1,48],
-    "tags": ["eastern","p:life","s:lightning","regular"]
+    "tags": ["standard","eastern","p:life","s:lightning","regular"]
   },
   "Thunder": {
     "genderOnly": false,

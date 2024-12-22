@@ -63,13 +63,13 @@
     "sprites": {
       "Salt Dohaerys": "eraNS"
     },
-    "tags": ["eastern","p:light","s:fire","valentine"]
+    "tags": ["standard","eastern","p:light","s:fire","valentine"]
   },
   "Aqualis": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["NuOVp","j9tBc"],
-    "tags": ["eastern","water","regular"]
+    "tags": ["standard","eastern","water","regular"]
   },
   "Aranoa": {
     "dimorphism": false,
@@ -431,7 +431,7 @@
       "Ruby": ["IjxzV","Eeqm9"],
       "Sapphire": ["Oyra5","1ZOo5"]
     },
-    "tags": ["eastern","air","jungle","regular"]
+    "tags": ["standard","eastern","air","jungle","regular"]
   },
   "Ghanser": {
     "dimorphism": false,
@@ -670,7 +670,7 @@
     "sprites": {
       "Salt Pixxelation": "DabBz"
     },
-    "tags": ["eastern","p:light","s:fire","cave","christmas"]
+    "tags": ["standard","eastern","p:light","s:fire","cave","christmas"]
   },
   "Lightstreak": {
     "dimorphism": false,
@@ -682,7 +682,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "PkHwb",
-    "tags": ["eastern","p:life","s:magi","jungle","regular"]
+    "tags": ["standard","eastern","p:life","s:magi","jungle","regular"]
   },
   "Lotaan": {
     "dimorphism": false,
@@ -1277,7 +1277,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["gMPNF","cp4l7"],
-    "tags": ["eastern","time","alpine","regular"]
+    "tags": ["standard","eastern","time","alpine","regular"]
   },
   "Vermeil": {
     "dimorphism": false,
@@ -1464,7 +1464,7 @@
       "White": "YRSBw",
       "Yellow": "o2YNK"
     },
-    "tags": ["neutral","regular","Has BSA"]
+    "tags": ["standard","neutral","regular","Has BSA"]
   },
   "valentine": {
     "dimorphism": false,
