@@ -117,6 +117,7 @@ const habitatTags = [
   'jungle',
   'volcano',
   'cave',
+  'all',
 ] as const;
 
 const miscTags = ['Has BSA', 'summonable', 'CB-only'] as const;

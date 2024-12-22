@@ -352,7 +352,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["FnHwj","1Hyq5"],
-    "tags": ["all","standard","wingless","death","regular"]
+    "tags": ["standard","wingless","death","all","regular"]
   },
   "Fenghuo Wyrm": {
     "dimorphism": false,
@@ -610,7 +610,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["tLO7i","mEAbR"],
-    "tags": ["all","standard","wyrm","death","regular"]
+    "tags": ["standard","wyrm","death","all","regular"]
   },
   "Jester": {
     "dimorphism": true,
@@ -634,7 +634,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "0GxDX",
-    "tags": ["all","standard","western","p:light","s:magi","regular"]
+    "tags": ["standard","western","p:light","s:magi","all","regular"]
   },
   "Kohraki": {
     "dimorphism": true,
@@ -650,13 +650,13 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "v82SU",
-    "tags": ["all","pygmy","eastern","earth","regular"]
+    "tags": ["pygmy","eastern","earth","all","regular"]
   },
   "Labradorite": {
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["oNF4y","adV4j"],
-    "tags": ["all","eastern","p:dark","s:earth","regular"]
+    "tags": ["eastern","p:dark","s:earth","all","regular"]
   },
   "Leodon": {
     "dimorphism": false,
@@ -833,7 +833,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["KDPH","XQ5D4"],
-    "tags": ["all","standard","western","neutral","regular","Has BSA"]
+    "tags": ["standard","western","neutral","all","regular","Has BSA"]
   },
   "Pitfire": {
     "dimorphism": true,
@@ -963,7 +963,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["tZSi2","zGmc1"],
-    "tags": ["all","standard","wyrm","p:magi","s:water","regular"]
+    "tags": ["standard","wyrm","p:magi","s:water","all","regular"]
   },
   "Risensong": {
     "dimorphism": false,
@@ -1005,7 +1005,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "woK0s",
-    "tags": ["all","pygmy","western","life","regular"]
+    "tags": ["pygmy","western","life","all","regular"]
   },
   "Seawyrm Pygmy": {
     "dimorphism": true,
@@ -1102,7 +1102,7 @@
       "Gold": "jQG9b",
       "Silver": "w1cT9"
     },
-    "tags": ["all","standard","amphiptere","p:light","s:dark","regular"]
+    "tags": ["standard","amphiptere","p:light","s:dark","all","regular"]
   },
   "Spinel Wyvern": {
     "dimorphism": true,
@@ -1145,7 +1145,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["ZQDEZ","ne5L"],
-    "tags": ["all","standard","western","air","regular"]
+    "tags": ["standard","western","air","all","regular"]
   },
   "Stratos": {
     "dimorphism": false,
@@ -1297,7 +1297,7 @@
       "White": "SDRMX",
       "Yellow": "Pbxw6"
     },
-    "tags": ["all","drake","neutral","regular"]
+    "tags": ["drake","neutral","all","regular"]
   },
   "Water": {
     "dimorphism": true,
@@ -1315,7 +1315,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "K1GT",
-    "tags": ["all","standard","western","p:life","s:light","regular","Has BSA"]
+    "tags": ["standard","western","p:life","s:light","all","regular","Has BSA"]
   },
   "Wintertide": {
     "dimorphism": false,
@@ -1410,7 +1410,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": "WP5Jo",
-    "tags": ["all","standard","wyrm","neutral","regular"]
+    "tags": ["standard","wyrm","neutral","all","regular"]
   },
   "Xenowyrm (Thalassa)": {
     "dimorphism": false,
