@@ -145,7 +145,7 @@ const tags = [
   ...miscTags,
 ] as const;
 
-type NewTag = (typeof tags)[number];
+type NewTag = Readonly<(typeof tags)[number]>;
 
 export {
   elements,

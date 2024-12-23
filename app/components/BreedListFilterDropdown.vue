@@ -73,6 +73,7 @@
                     :id="slug(name)"
                     :checked="new Set(tagStore).isSupersetOf(new Set(tags))"
                     type="checkbox"
+                    @change="toggle(tags)"
                   />
                   <legend>
                     <label
@@ -118,6 +119,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { resolveLabel, slug } from '../shared/utils';
 import BreedTag from './BreedTag.vue';
 import { filtersByGroup, tagStore } from '../store/useTagStore';
+import type { NewTag } from '../shared/types';
 
 defineProps<{
   container: string;
@@ -130,6 +132,18 @@ const filtersTitle = useTemplateRef('filtersTitle');
 async function focusFiltersTitle() {
   await nextTick();
   setTimeout(() => filtersTitle.value?.focus(), 40);
+}
+
+function toggle(tags: NewTag[]) {
+  const group = new Set(tags);
+  const model = new Set(tagStore.value);
+
+  if (group.size === [...group].filter((tag) => model.has(tag)).length) {
+    tags.forEach((tag) => model.delete(tag));
+  } else {
+    tags.forEach((tag) => model.add(tag));
+  }
+  tagStore.value = Array.from(model);
 }
 </script>
 
