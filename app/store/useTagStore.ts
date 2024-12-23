@@ -21,7 +21,6 @@ if (!Set.prototype.isDisjointFrom) {
     this: Set<T>,
     other: Set<T>,
   ): boolean {
-    console.log('test');
     if (this.size <= other.size) {
       for (const elem of this) {
         if (other.has(elem)) return false;
