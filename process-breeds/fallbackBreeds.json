@@ -2,7 +2,7 @@
   "Albino": {
     "genderOnly": false,
     "sprites": ["zZ7E",0,-1,48],
-    "tags": ["standard","western","neutral","regular","forest","alpine"]
+    "tags": ["standard","western","neutral","alpine","forest","regular"]
   },
   "Alcedine Wyvern": {
     "genderOnly": false,
@@ -10,57 +10,57 @@
       "Blue": ["2LTzD",-15,-1,48],
       "Brown": ["CNsfX",-16,-1,48]
     },
-    "tags": ["standard","wyvern","air","regular","all"]
+    "tags": ["standard","wyvern","air","all","regular"]
   },
   "Amarignis": {
     "genderOnly": "f",
     "sprites": ["CastA",-14,-1,48],
-    "tags": ["standard","eastern","p:light","s:fire","valentine","cave"]
+    "tags": ["standard","eastern","p:light","s:fire","cave","valentine"]
   },
   "Anagallis": {
     "genderOnly": false,
     "sprites": ["3zNLA",-27,-1,48,"BvQnr",0,-1,48],
-    "tags": ["standard","western","neutral","regular","desert","forest","jungle"]
+    "tags": ["standard","western","neutral","desert","forest","jungle","regular"]
   },
   "Antarean": {
     "genderOnly": false,
     "sprites": ["XhlnK",0,-1,48,"4s3jH",-27,-1,48],
-    "tags": ["standard","western","p:light","s:fire","regular","desert"]
+    "tags": ["standard","western","p:light","s:fire","desert","regular"]
   },
   "Arsani": {
     "genderOnly": "f",
     "sprites": ["jFbDs",-16,-1,48],
-    "tags": ["standard","western","magi","valentine","cave"]
+    "tags": ["standard","western","magi","cave","valentine"]
   },
   "Astaarus": {
     "genderOnly": false,
     "sprites": ["LMtdH",-8,-1,48,"jUPLO",-8,-1,48],
-    "tags": ["standard","western","p:light","s:fire","regular","alpine"]
+    "tags": ["standard","western","p:light","s:fire","alpine","regular"]
   },
   "Astralophyne": {
     "genderOnly": false,
     "sprites": ["EKXWG",-18,-1,48],
-    "tags": ["standard","western","p:life","s:light","regular","Has BSA","forest"]
+    "tags": ["standard","western","p:life","s:light","forest","regular","Has BSA"]
   },
   "Avea Pygmy": {
     "genderOnly": false,
     "sprites": ["mKkIO",-9,6,null,"Pg3V8",0,2,null],
-    "tags": ["pygmy","western","air","regular","all"]
+    "tags": ["pygmy","western","air","all","regular"]
   },
   "Azure Glacewing": {
     "genderOnly": false,
     "sprites": ["Jj9wo",-16,-1,48],
-    "tags": ["standard","western","neutral","regular","forest"]
+    "tags": ["standard","western","neutral","forest","regular"]
   },
   "Balloon": {
     "genderOnly": false,
     "sprites": ["TP9t",0,-1,48],
-    "tags": ["standard","western","air","regular","coast","forest","jungle","alpine"]
+    "tags": ["standard","western","air","alpine","coast","forest","jungle","regular"]
   },
   "Bauta": {
     "genderOnly": false,
     "sprites": ["pWW5i",-15,-1,48],
-    "tags": ["two-head","western","neutral","regular","coast"]
+    "tags": ["two-head","western","neutral","coast","regular"]
   },
   "Black": {
     "genderOnly": false,
@@ -73,47 +73,47 @@
   "Black Capped Teimarr": {
     "genderOnly": false,
     "sprites": ["xRG9g",-24,-1,48,"Gtagr",0,-1,48],
-    "tags": ["standard","western","water","regular","all"]
+    "tags": ["standard","western","water","all","regular"]
   },
   "Black Marrow": {
     "genderOnly": false,
     "sprites": ["jsLv",0,-1,48,"F04k",-2,-1,48],
-    "tags": ["standard","western","death","halloween","cave"]
+    "tags": ["standard","western","death","cave","halloween"]
   },
   "Black Truffle": {
     "genderOnly": false,
     "sprites": ["2ISNc",-13,-1,48],
-    "tags": ["standard","western","neutral","regular","all"]
+    "tags": ["standard","western","neutral","all","regular"]
   },
   "Bleeding Moon": {
     "genderOnly": false,
     "sprites": ["UilCo",-1,-1,48,"H4vT8",-1,-1,48],
-    "tags": ["standard","western","dark","regular","alpine"]
+    "tags": ["standard","western","dark","alpine","regular"]
   },
   "Blusang Lindwurm": {
     "genderOnly": false,
     "sprites": ["aAwxC",-3,-1,48,"WzRMQ",-2,-1,48],
-    "tags": ["standard","lindwyrm","water","regular","coast"]
+    "tags": ["standard","lindwyrm","water","coast","regular"]
   },
   "Bright-Breasted Wyvern": {
     "genderOnly": false,
     "sprites": ["RCa3",-20,-1,48,"X48YN",-1,-1,48],
-    "tags": ["standard","wyvern","neutral","regular","jungle"]
+    "tags": ["standard","wyvern","neutral","jungle","regular"]
   },
   "Brimstone": {
     "genderOnly": false,
     "sprites": ["iQ2ML",0,-1,48],
-    "tags": ["standard","western","fire","regular","volcano","desert"]
+    "tags": ["standard","western","fire","desert","volcano","regular"]
   },
   "Brute": {
     "genderOnly": false,
     "sprites": ["Nn6jX",-16,-1,48,"LgbSx",0,-1,48],
-    "tags": ["standard","western","death","regular","alpine"]
+    "tags": ["standard","western","death","alpine","regular"]
   },
   "Canopy": {
     "genderOnly": false,
     "sprites": ["EQNPr",-26,-1,48,"WScX",0,7,null],
-    "tags": ["standard","western","life","regular","jungle"]
+    "tags": ["standard","western","life","jungle","regular"]
   },
   "Cantormaris": {
     "genderOnly": false,
@@ -125,7 +125,7 @@
       "Sophos": ["gVJON",-14,-1,48],
       "Tutela": ["A1EtF",-14,-1,48]
     },
-    "tags": ["standard","wyvern","p:water","s:magi","regular","coast","volcano","jungle"]
+    "tags": ["standard","wyvern","p:water","s:magi","coast","jungle","volcano","regular"]
   },
   "Carina": {
     "genderOnly": false,
@@ -135,28 +135,28 @@
   "Cassare": {
     "genderOnly": false,
     "sprites": ["0wXI7",0,-1,48],
-    "tags": ["standard","western","neutral","regular","all"]
+    "tags": ["standard","western","neutral","all","regular"]
   },
   "Chaliuba": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": ["yWHos",0,-1,48],
-    "tags": ["standard","western","neutral","regular","alpine"]
+    "tags": ["standard","western","neutral","alpine","regular"]
   },
   "Cloudplume": {
     "genderOnly": false,
     "sprites": ["rbsCL",0,-1,48],
-    "tags": ["eastern","air","regular","alpine"]
+    "tags": ["eastern","air","alpine","regular"]
   },
   "Coastal Waverunner": {
     "genderOnly": false,
     "sprites": ["LiAJc",-9,-1,48],
-    "tags": ["standard","wyvern","water","regular","coast"]
+    "tags": ["standard","wyvern","water","coast","regular"]
   },
   "Common Pygmy": {
     "genderOnly": false,
     "sprites": ["le4nV",-2,-3,null,"JWOk",0,7,null],
-    "tags": ["pygmy","western","neutral","regular","forest","jungle","alpine"]
+    "tags": ["pygmy","western","neutral","alpine","forest","jungle","regular"]
   },
   "Copper": {
     "genderOnly": false,
@@ -171,12 +171,12 @@
   "Crimson Flare Pygmy": {
     "genderOnly": false,
     "sprites": ["Btwff",-2,7,null],
-    "tags": ["pygmy","western","neutral","regular","volcano"]
+    "tags": ["pygmy","western","neutral","volcano","regular"]
   },
   "Crystalline": {
     "genderOnly": false,
     "sprites": ["U54cN",-26,-1,48,"N78NT",-3,-1,48],
-    "tags": ["standard","western","ice","regular","alpine"]
+    "tags": ["standard","western","ice","alpine","regular"]
   },
   "Dark Green": {
     "genderOnly": false,
@@ -184,22 +184,22 @@
       "Alt.": ["F3EP",0,-1,48],
       "regular": ["qdvf",-15,-1,48]
     },
-    "tags": ["standard","wingless","p:dark","s:life","regular","forest","jungle"]
+    "tags": ["standard","wingless","p:dark","s:life","forest","jungle","regular"]
   },
   "Dark Lumina": {
     "genderOnly": false,
     "sprites": ["Sw8fG",0,-1,48,"yWz0A",0,-1,48],
-    "tags": ["standard","western","dark","regular","all"]
+    "tags": ["standard","western","dark","all","regular"]
   },
   "Daydream": {
     "genderOnly": false,
     "sprites": ["NN1V",0,-1,48,"dSjh",0,-1,48],
-    "tags": ["standard","western","air","regular","coast","forest","jungle"]
+    "tags": ["standard","western","air","coast","forest","jungle","regular"]
   },
   "Deep Sea": {
     "genderOnly": false,
     "sprites": ["dgqt",0,-1,48],
-    "tags": ["standard","leviathan","water","regular","coast"]
+    "tags": ["standard","leviathan","water","coast","regular"]
   },
   "Dorsal": {
     "genderOnly": false,
@@ -207,12 +207,12 @@
       "Purple": ["mfnIj",-28,-1,48],
       "Red": ["k6Pw",-28,-1,48]
     },
-    "tags": ["standard","wingless","neutral","regular","jungle"]
+    "tags": ["standard","wingless","neutral","jungle","regular"]
   },
   "Duotone": {
     "genderOnly": false,
     "sprites": ["Umm0u",-14,-1,48,"Jib3s",-12,-1,48],
-    "tags": ["two-head","western","neutral","regular","all"]
+    "tags": ["two-head","western","neutral","all","regular"]
   },
   "Dusk Pygmy": {
     "genderOnly": false,
@@ -222,27 +222,27 @@
   "Ember": {
     "genderOnly": false,
     "sprites": ["TXoK5",0,-1,48,"b3mHb",0,-1,48],
-    "tags": ["standard","western","fire","regular","volcano"]
+    "tags": ["standard","western","fire","volcano","regular"]
   },
   "Erador Lindwyrm": {
     "genderOnly": "m",
     "sprites": ["yummy",-14,-1,48],
-    "tags": ["standard","lindwyrm","p:magi","s:life","valentine","cave"]
+    "tags": ["standard","lindwyrm","p:magi","s:life","cave","valentine"]
   },
   "Falconiform Wyvern": {
     "genderOnly": false,
     "sprites": ["Png8A",0,-1,48,"uUYCh",-6,-1,48],
-    "tags": ["standard","wyvern","fire","regular","volcano"]
+    "tags": ["standard","wyvern","fire","volcano","regular"]
   },
   "Fanalea": {
     "genderOnly": false,
     "sprites": ["JQjm9",-18,-1,48],
-    "tags": ["standard","western","life","regular","Has BSA","jungle"]
+    "tags": ["standard","western","life","jungle","regular","Has BSA"]
   },
   "Flamingo Wyvern": {
     "genderOnly": false,
     "sprites": ["hGua",-15,-1,48,"7hsk",-6,-1,48],
-    "tags": ["standard","wyvern","earth","regular","coast","jungle"]
+    "tags": ["standard","wyvern","earth","coast","jungle","regular"]
   },
   "Flint Drake": {
     "genderOnly": false,
@@ -273,22 +273,22 @@
   "Frilled": {
     "genderOnly": false,
     "sprites": ["t73t",-1,-1,48,"kcaS",-15,-1,47],
-    "tags": ["standard","western","neutral","regular","jungle"]
+    "tags": ["standard","western","neutral","jungle","regular"]
   },
   "Frostbite": {
     "genderOnly": false,
     "sprites": ["Whfs7",0,-1,48],
-    "tags": ["standard","western","ice","regular","alpine"]
+    "tags": ["standard","western","ice","alpine","regular"]
   },
   "Galvanic Wyvern": {
     "genderOnly": false,
     "sprites": ["CPQCI",0,-1,48],
-    "tags": ["standard","wyvern","p:dark","s:lightning","regular","volcano"]
+    "tags": ["standard","wyvern","p:dark","s:lightning","volcano","regular"]
   },
   "Geminae": {
     "genderOnly": false,
     "sprites": ["5NMZB",0,-1,48],
-    "tags": ["two-head","western","magi","regular","desert"]
+    "tags": ["two-head","western","magi","desert","regular"]
   },
   "Geode": {
     "genderOnly": false,
@@ -298,32 +298,32 @@
   "Glowback Pygmy": {
     "genderOnly": false,
     "sprites": ["NMEFa",-1,-1,47,"vwCkh",-9,0,null],
-    "tags": ["pygmy","western","light","regular","forest","jungle"]
+    "tags": ["pygmy","western","light","forest","jungle","regular"]
   },
   "Gold": {
     "genderOnly": false,
     "sprites": ["3iKre",-33,-1,48,"huQIl",-10,-1,48],
-    "tags": ["standard","western","earth","regular","all"]
+    "tags": ["standard","western","earth","all","regular"]
   },
   "Golden Wyvern": {
     "genderOnly": false,
     "sprites": ["Eb0nc",-9,-1,48,"amvgQ",-13,-1,48],
-    "tags": ["standard","wyvern","magi","regular","alpine"]
+    "tags": ["standard","wyvern","magi","alpine","regular"]
   },
   "Green": {
     "genderOnly": false,
     "sprites": ["NRSH",0,-1,48],
-    "tags": ["standard","western","earth","regular","Has BSA","forest","volcano"]
+    "tags": ["standard","western","earth","forest","volcano","regular","Has BSA"]
   },
   "Guardian": {
     "genderOnly": false,
     "sprites": ["beEo3",-4,-1,48],
-    "tags": ["standard","western","p:light","s:neutral","regular","volcano"]
+    "tags": ["standard","western","p:light","s:neutral","volcano","regular"]
   },
   "Hellfire Wyvern": {
     "genderOnly": false,
     "sprites": ["8oak",-18,-1,48,"FPQ3Q",-14,-1,48],
-    "tags": ["standard","wyvern","fire","regular","volcano"]
+    "tags": ["standard","wyvern","fire","volcano","regular"]
   },
   "Hellhorse": {
     "genderOnly": false,
@@ -333,57 +333,57 @@
   "Hooded Murkling": {
     "genderOnly": false,
     "sprites": ["TIOUK",-20,-1,48],
-    "tags": ["standard","western","p:dark","s:death","regular","Has BSA","coast"]
+    "tags": ["standard","western","p:dark","s:death","coast","regular","Has BSA"]
   },
   "Ice": {
     "genderOnly": false,
     "sprites": ["DJuWf",-8,-1,48],
-    "tags": ["standard","western","ice","regular","Has BSA","alpine"]
+    "tags": ["standard","western","ice","alpine","regular","Has BSA"]
   },
   "Imperial Fleshcrowne": {
     "genderOnly": false,
     "sprites": ["jeuAc",0,-1,48,"onrpD",-23,-1,48],
-    "tags": ["standard","western","neutral","regular","all"]
+    "tags": ["standard","western","neutral","all","regular"]
   },
   "Kovos Pygmy": {
     "genderOnly": false,
     "sprites": ["Kc90V",-3,0,null],
-    "tags": ["pygmy","lindwyrm","p:water","s:death","regular","coast"]
+    "tags": ["pygmy","lindwyrm","p:water","s:death","coast","regular"]
   },
   "Lacula": {
     "genderOnly": false,
     "sprites": ["72JJG",0,-1,48],
-    "tags": ["standard","amphiptere","water","regular","coast"]
+    "tags": ["standard","amphiptere","water","coast","regular"]
   },
   "Lalopias Leviathan": {
     "genderOnly": false,
     "sprites": ["m5MnX",0,-1,48],
-    "tags": ["standard","leviathan","fire","regular","volcano"]
+    "tags": ["standard","leviathan","fire","volcano","regular"]
   },
   "Light Weaver": {
     "genderOnly": "f",
     "sprites": ["Fstvl",0,-1,48],
-    "tags": ["eastern","p:light","s:fire","christmas","cave"]
+    "tags": ["eastern","p:light","s:fire","cave","christmas"]
   },
   "Lightning Pygmy": {
     "genderOnly": false,
     "sprites": ["bITER",-14,-1,48,"yaigm",0,-1,48],
-    "tags": ["pygmy","wyvern","lightning","regular","all"]
+    "tags": ["pygmy","wyvern","lightning","all","regular"]
   },
   "Lumina": {
     "genderOnly": false,
     "sprites": ["3NvWW",0,-1,48,"rphkc",-2,-1,48],
-    "tags": ["standard","western","light","regular","all"]
+    "tags": ["standard","western","light","all","regular"]
   },
   "Magi": {
     "genderOnly": false,
     "sprites": ["CSJeS",-36,-1,48],
-    "tags": ["standard","western","magi","regular","Has BSA","all"]
+    "tags": ["standard","western","magi","all","regular","Has BSA"]
   },
   "Magma": {
     "genderOnly": false,
     "sprites": ["3cut",-12,-1,48],
-    "tags": ["standard","wingless","fire","regular","Has BSA","volcano"]
+    "tags": ["standard","wingless","fire","volcano","regular","Has BSA"]
   },
   "Magnesium Amphiptere": {
     "genderOnly": false,
@@ -396,37 +396,37 @@
   "Melismor": {
     "genderOnly": false,
     "sprites": ["ja4AL",0,-1,48,"0GCyQ",-22,-1,48],
-    "tags": ["eastern","earth","regular","forest"]
+    "tags": ["eastern","earth","forest","regular"]
   },
   "Mirisia Amphiptere": {
     "genderOnly": false,
     "sprites": ["dZBE0",-17,-1,48,"33KB2",0,-1,48],
-    "tags": ["standard","amphiptere","life","regular","alpine","forest","jungle"]
+    "tags": ["standard","amphiptere","life","alpine","forest","jungle","regular"]
   },
   "Misfit Pygmy": {
     "genderOnly": false,
     "sprites": ["1ijun",-17,-1,null,"rhicq",0,5,null],
-    "tags": ["pygmy","western","neutral","regular","jungle"]
+    "tags": ["pygmy","western","neutral","jungle","regular"]
   },
   "Mistlet Pygmy": {
     "genderOnly": false,
     "sprites": ["vOQlC",-13,1,null,"8tVIh",0,-1,null],
-    "tags": ["pygmy","western","neutral","regular","forest","jungle"]
+    "tags": ["pygmy","western","neutral","forest","jungle","regular"]
   },
   "Mistra": {
     "genderOnly": false,
     "sprites": ["8zBw4",-14,-1,48,"OZ4vC",0,-1,48],
-    "tags": ["standard","western","air","regular","coast","jungle"]
+    "tags": ["standard","western","air","coast","jungle","regular"]
   },
   "Moonglow Drake": {
     "genderOnly": false,
     "sprites": ["KmIoR",-1,-1,47.5],
-    "tags": ["drake","neutral","regular","forest"]
+    "tags": ["drake","neutral","forest","regular"]
   },
   "Moonstone": {
     "genderOnly": false,
     "sprites": ["iGHeF",0,-1,48,"4YH05",0,-1,48],
-    "tags": ["standard","western","magi","regular","desert"]
+    "tags": ["standard","western","magi","desert","regular"]
   },
   "Nebula": {
     "genderOnly": false,
@@ -434,7 +434,7 @@
       "Green-Red": ["6jlEA",0,-1,48,"LJVA",-12,-1,48],
       "Purple-Blue": ["6lTN",-14,-1,48,"RWCrt",-1,-1,48]
     },
-    "tags": ["standard","wyvern","light","regular","alpine","desert"]
+    "tags": ["standard","wyvern","light","alpine","desert","regular"]
   },
   "Neglected": {
     "genderOnly": false,
@@ -444,7 +444,7 @@
   "Neotropical": {
     "genderOnly": false,
     "sprites": ["184Wv",0,-1,48,"WmmUO",-41,-1,48],
-    "tags": ["standard","western","neutral","regular","jungle"]
+    "tags": ["standard","western","neutral","jungle","regular"]
   },
   "Nilia Pygmy": {
     "genderOnly": false,
@@ -452,27 +452,27 @@
       "Blue": ["kn15d",0,-2,null,"m8jRE",-38,7,null],
       "Green": ["oYD13",0,-1,47.5,"Az8rw",-5,-1,48]
     },
-    "tags": ["pygmy","western","neutral","regular","alpine"]
+    "tags": ["pygmy","western","neutral","alpine","regular"]
   },
   "Nocturne": {
     "genderOnly": false,
     "sprites": ["3rrhN",-1,-1,48,"OrTHo",-16,-1,48],
-    "tags": ["standard","western","time","regular","alpine","forest"]
+    "tags": ["standard","western","time","alpine","forest","regular"]
   },
   "Occulri Pygmy": {
     "genderOnly": false,
     "sprites": ["OJoUD",0,-1,48,"syo4v",-10,-1,48],
-    "tags": ["pygmy","amphiptere","p:magi","s:dark","regular","jungle"]
+    "tags": ["pygmy","amphiptere","p:magi","s:dark","jungle","regular"]
   },
   "Ochredrake": {
     "genderOnly": false,
     "sprites": ["k2gGG",0,-1,48],
-    "tags": ["drake","neutral","regular","forest"]
+    "tags": ["drake","neutral","forest","regular"]
   },
   "Oracle Wyrm": {
     "genderOnly": false,
     "sprites": ["7DY50",-14,-1,47.5,"IRESi",-7,-1,48],
-    "tags": ["standard","wyrm","light","regular","alpine","coast","forest","jungle"]
+    "tags": ["standard","wyrm","light","alpine","coast","forest","jungle","regular"]
   },
   "Pargulus Pygmy": {
     "genderOnly": false,
@@ -486,52 +486,52 @@
   "Pipio Pygmy": {
     "genderOnly": false,
     "sprites": ["fYqIQ",-8,-1,48,"iaAWK",0,-1,48],
-    "tags": ["pygmy","western","air","regular","all"]
+    "tags": ["pygmy","western","air","all","regular"]
   },
   "Pryanost Lindwyrm": {
     "genderOnly": "f",
     "sprites": ["Bread",-10,-1,48],
-    "tags": ["standard","lindwyrm","p:fire","s:magi","christmas","cave"]
+    "tags": ["standard","lindwyrm","p:fire","s:magi","cave","christmas"]
   },
   "Pseudo-wyvern Drake": {
     "genderOnly": false,
     "sprites": ["VNOng",0,-1,48],
-    "tags": ["drake","neutral","regular","desert"]
+    "tags": ["drake","neutral","desert","regular"]
   },
   "Purple": {
     "genderOnly": false,
     "sprites": ["VdVa",-11,-1,48,"9QQ4i",0,-1,48],
-    "tags": ["standard","western","life","regular","Has BSA","all"]
+    "tags": ["standard","western","life","all","regular","Has BSA"]
   },
   "Quonebb": {
     "genderOnly": false,
     "sprites": ["ZNJKk",0,-1,48,"S2sEw",-14,-1,48],
-    "tags": ["two-head","western","p:magi","s:life","regular","coast","forest","jungle"]
+    "tags": ["two-head","western","p:magi","s:life","coast","forest","jungle","regular"]
   },
   "Rosebud": {
     "genderOnly": "f",
     "sprites": ["bCYm",0,-1,48],
-    "tags": ["standard","western","air","valentine","cave"]
+    "tags": ["standard","western","air","cave","valentine"]
   },
   "Royal Blue": {
     "genderOnly": false,
     "sprites": ["PacF6",-14,-1,48,"QuJTZ",0,-1,48],
-    "tags": ["standard","western","neutral","regular","alpine"]
+    "tags": ["standard","western","neutral","alpine","regular"]
   },
   "Royal Crimson": {
     "genderOnly": false,
     "sprites": ["mEGXD",0,-1,48],
-    "tags": ["standard","western","neutral","regular","volcano"]
+    "tags": ["standard","western","neutral","volcano","regular"]
   },
   "Sakuhana Wyvern": {
     "genderOnly": "f",
     "sprites": ["beeMy",0,-1,48],
-    "tags": ["standard","wyvern","life","valentine","cave"]
+    "tags": ["standard","wyvern","life","cave","valentine"]
   },
   "Sapo": {
     "genderOnly": false,
     "sprites": ["oUgYZ",0,-1,48],
-    "tags": ["standard","leviathan","water","regular","forest","jungle"]
+    "tags": ["standard","leviathan","water","forest","jungle","regular"]
   },
   "Sapphire": {
     "genderOnly": false,
@@ -540,12 +540,12 @@
       "Pink": ["BWu29",-11,-1,48],
       "Yellow": ["SvYIb",-12,-1,47.5]
     },
-    "tags": ["standard","western","light","regular","all"]
+    "tags": ["standard","western","light","all","regular"]
   },
   "Scimitar-Wing Wyvern": {
     "genderOnly": false,
     "sprites": ["uo3jm",-8,-1,48,"vxNpR",-14,-1,48],
-    "tags": ["standard","wyvern","neutral","regular","volcano","desert"]
+    "tags": ["standard","wyvern","neutral","desert","volcano","regular"]
   },
   "Scourgekeeper": {
     "genderOnly": false,
@@ -555,32 +555,32 @@
   "Seasonal (Autumn)": {
     "genderOnly": false,
     "sprites": ["ahsLy",0,-1,47.5,"opRc",0,-1,47.5],
-    "tags": ["standard","western","time","regular","forest"]
+    "tags": ["standard","western","time","forest","regular"]
   },
   "Seasonal (Spring)": {
     "genderOnly": false,
     "sprites": ["zIbq",-13,-1,48,"UnAk",-2,-1,47.5],
-    "tags": ["standard","western","time","regular","forest"]
+    "tags": ["standard","western","time","forest","regular"]
   },
   "Seasonal (Summer)": {
     "genderOnly": false,
     "sprites": ["MwN1D",-6,-1,48,"drZi",-8,-1,48],
-    "tags": ["standard","western","time","regular","forest"]
+    "tags": ["standard","western","time","forest","regular"]
   },
   "Seasonal (Winter)": {
     "genderOnly": false,
     "sprites": ["9VS4",0,-1,47.5,"urpl",-15,-1,48],
-    "tags": ["standard","western","time","regular","alpine"]
+    "tags": ["standard","western","time","alpine","regular"]
   },
   "Seraph": {
     "genderOnly": false,
     "sprites": ["0chqt",-18,-1,48],
-    "tags": ["standard","western","p:life","s:light","regular","Has BSA","forest"]
+    "tags": ["standard","western","p:life","s:light","forest","regular","Has BSA"]
   },
   "Shadow Walker": {
     "genderOnly": false,
     "sprites": ["DxTEq",0,-1,48],
-    "tags": ["standard","western","magi","halloween","cave"]
+    "tags": ["standard","western","magi","cave","halloween"]
   },
   "Shimmer-Scale": {
     "genderOnly": false,
@@ -594,12 +594,12 @@
   "Silver": {
     "genderOnly": false,
     "sprites": ["1ZrX",0,-1,48,"s38LX",-3,-1,48],
-    "tags": ["standard","eastern","light","regular","all"]
+    "tags": ["standard","eastern","light","all","regular"]
   },
   "Sinii Krai": {
     "genderOnly": false,
     "sprites": ["Yh0jg",0,-1,48,"ez0Bl",-20,-1,48],
-    "tags": ["standard","western","neutral","regular","coast"]
+    "tags": ["standard","western","neutral","coast","regular"]
   },
   "Siyat": {
     "genderOnly": false,
@@ -608,17 +608,17 @@
       "Green": ["n1G53",-1,-1,48],
       "Purple": ["sa6Zc",-1,-1,48]
     },
-    "tags": ["standard","western","air","regular","coast","forest","alpine"]
+    "tags": ["standard","western","air","alpine","coast","forest","regular"]
   },
   "Skystrider": {
     "genderOnly": false,
     "sprites": ["MJqMB",0,-1,48,"J0j9v",-8,-1,48],
-    "tags": ["standard","amphiptere","air","regular","alpine","coast","forest"]
+    "tags": ["standard","amphiptere","air","alpine","coast","forest","regular"]
   },
   "Skywing": {
     "genderOnly": false,
     "sprites": ["qAXD",0,-1,48],
-    "tags": ["standard","amphiptere","air","regular","coast"]
+    "tags": ["standard","amphiptere","air","coast","regular"]
   },
   "Snow Angel": {
     "genderOnly": "f",
@@ -627,7 +627,7 @@
       "Tri-Colored": ["qiJ3",0,-1,48],
       "White-Tipped": ["nnnvZ",0,-1,48]
     },
-    "tags": ["standard","western","ice","christmas","cave"]
+    "tags": ["standard","western","ice","cave","christmas"]
   },
   "Sophrosyne": {
     "genderOnly": false,
@@ -637,7 +637,7 @@
   "Soulstone": {
     "genderOnly": "f",
     "sprites": ["nKs22",-15,-1,48],
-    "tags": ["standard","western","light","valentine","cave"]
+    "tags": ["standard","western","light","cave","valentine"]
   },
   "Speckle-Throated": {
     "genderOnly": false,
@@ -647,22 +647,22 @@
   "Spirit Ward": {
     "genderOnly": false,
     "sprites": ["Ddw2a",-30,-1,48,"5X7iB",-16,-1,48],
-    "tags": ["standard","wyvern","light","regular","forest","alpine"]
+    "tags": ["standard","wyvern","light","alpine","forest","regular"]
   },
   "Spitfire": {
     "genderOnly": false,
     "sprites": ["MYdtZ",-45,-1,48],
-    "tags": ["standard","western","fire","regular","desert"]
+    "tags": ["standard","western","fire","desert","regular"]
   },
   "Split": {
     "genderOnly": false,
     "sprites": ["00To3",0,-1,48,"yqSe",0,-1,48],
-    "tags": ["two-head","western","neutral","regular","all"]
+    "tags": ["two-head","western","neutral","all","regular"]
   },
   "Stone": {
     "genderOnly": false,
     "sprites": ["T2Hv",0,-1,48],
-    "tags": ["standard","western","earth","regular","desert","alpine","volcano"]
+    "tags": ["standard","western","earth","alpine","desert","volcano","regular"]
   },
   "Storm-Rider": {
     "genderOnly": false,
@@ -678,22 +678,22 @@
       "Red": ["EE65C",-1,-1,48,"qTuvY",0,-1,48],
       "White": ["h9aDK",-1,-1,48,"RJ8i",0,-1,48]
     },
-    "tags": ["standard","western","neutral","regular","forest","jungle"]
+    "tags": ["standard","western","neutral","forest","jungle","regular"]
   },
   "Sunbeam Drake": {
     "genderOnly": false,
     "sprites": ["kErGP",-6,-1,48],
-    "tags": ["drake","neutral","regular","forest"]
+    "tags": ["drake","neutral","forest","regular"]
   },
   "Sunsong Amphiptere": {
     "genderOnly": false,
     "sprites": ["pepn",0,-1,48,"AuK3l",-3,-1,48],
-    "tags": ["standard","amphiptere","light","regular","jungle"]
+    "tags": ["standard","amphiptere","light","jungle","regular"]
   },
   "Swallowtail": {
     "genderOnly": false,
     "sprites": ["i43aO",-8,-1,48,"hc5z6",0,-1,48],
-    "tags": ["standard","western","air","regular","forest"]
+    "tags": ["standard","western","air","forest","regular"]
   },
   "Sweetling": {
     "genderOnly": "m",
@@ -701,53 +701,53 @@
       "Black": ["qZgqQ",0,-1,48],
       "Pink": ["voFHL",0,-1,48]
     },
-    "tags": ["standard","wingless","neutral","valentine","cave"]
+    "tags": ["standard","wingless","neutral","cave","valentine"]
   },
   "Tercorn": {
     "genderOnly": false,
     "sprites": ["01iOg",0,-1,48],
-    "tags": ["standard","western","p:water","s:life","regular","coast"]
+    "tags": ["standard","western","p:water","s:life","coast","regular"]
   },
   "Terrae": {
     "genderOnly": false,
     "sprites": ["8ueT",0,-1,48,"l4gZA",0,-1,48],
-    "tags": ["standard","wingless","earth","regular","forest"]
+    "tags": ["standard","wingless","earth","forest","regular"]
   },
   "Tetra": {
     "genderOnly": false,
     "sprites": ["T9QFW",0,-1,48],
-    "tags": ["standard","western","neutral","regular","coast","jungle"]
+    "tags": ["standard","western","neutral","coast","jungle","regular"]
   },
   "Thousand Wish": {
     "dimorphism": false,
     "genderOnly": false,
     "sprites": ["qtfhX",-3,-1,48],
-    "tags": ["standard","eastern","p:life","s:lightning","regular","forest"]
+    "tags": ["standard","eastern","p:life","s:lightning","forest","regular"]
   },
   "Thunder": {
     "genderOnly": false,
     "sprites": ["fQBUi",0,-1,48],
-    "tags": ["standard","western","lightning","regular","Has BSA","desert"]
+    "tags": ["standard","western","lightning","desert","regular","Has BSA"]
   },
   "Tideweaver Lindwyrm": {
     "genderOnly": false,
     "sprites": ["vSmka",-14,-1,48,"7vhsp",0,-1,48],
-    "tags": ["standard","lindwyrm","water","regular","coast"]
+    "tags": ["standard","lindwyrm","water","coast","regular"]
   },
   "Tri-Horn Wyvern": {
     "genderOnly": false,
     "sprites": ["28tsb",-17,-1,48,"PdpYp",-6,-1,48],
-    "tags": ["standard","wyvern","ice","regular","alpine"]
+    "tags": ["standard","wyvern","ice","alpine","regular"]
   },
   "Tsunami Wyvern": {
     "genderOnly": false,
     "sprites": ["L7m0y",0,-1,48,"sGx8M",-15,-1,48],
-    "tags": ["standard","wyvern","water","regular","coast"]
+    "tags": ["standard","wyvern","water","coast","regular"]
   },
   "Turpentine": {
     "genderOnly": false,
     "sprites": ["bdTkj",0,-1,48],
-    "tags": ["standard","western","dark","regular","desert"]
+    "tags": ["standard","western","dark","desert","regular"]
   },
   "Twinklecape Pygmy": {
     "genderOnly": false,
@@ -765,7 +765,7 @@
       "Green": ["N73sL",-9,-1,48,"GP7mn",0,-1,48],
       "Yellow": ["t4AY7",-9,-1,48,"c0Grh",0,-1,48]
     },
-    "tags": ["standard","western","water","regular","forest","alpine"]
+    "tags": ["standard","western","water","alpine","forest","regular"]
   },
   "Ushgorn": {
     "genderOnly": false,
@@ -783,27 +783,27 @@
   "Vilvoor": {
     "genderOnly": false,
     "sprites": ["KPT8S",0,-1,48,"p7OCb",-19,-1,48],
-    "tags": ["two-head","wyvern","dark","regular","alpine","volcano"]
+    "tags": ["two-head","wyvern","dark","alpine","volcano","regular"]
   },
   "Vremya Drake": {
     "genderOnly": false,
     "sprites": ["hdhTm",0,-1,48],
-    "tags": ["drake","time","regular","forest"]
+    "tags": ["drake","time","forest","regular"]
   },
   "Water Walker": {
     "genderOnly": false,
     "sprites": ["AQGjY",-30,-1,48],
-    "tags": ["standard","wingless","water","regular","coast","forest","jungle"]
+    "tags": ["standard","wingless","water","coast","forest","jungle","regular"]
   },
   "Whiptail": {
     "genderOnly": false,
     "sprites": ["C8Xt",0,-1,48],
-    "tags": ["standard","western","neutral","regular","forest"]
+    "tags": ["standard","western","neutral","forest","regular"]
   },
   "Windrider Wyvern": {
     "genderOnly": false,
     "sprites": ["pqirR",0,-1,48],
-    "tags": ["standard","wyvern","p:air","s:water","regular","all"]
+    "tags": ["standard","wyvern","p:air","s:water","all","regular"]
   },
   "Xol": {
     "genderOnly": false,
@@ -811,16 +811,16 @@
       "Blue": ["kmDB5",0,-1,48,"RRDqa",-4,-1,48],
       "Red": ["g1g0x",0,-1,48,"jGaBm",-4,-1,48]
     },
-    "tags": ["standard","wingless","p:fire","s:water","regular","volcano"]
+    "tags": ["standard","wingless","p:fire","s:water","volcano","regular"]
   },
   "Yulebuck": {
     "genderOnly": "m",
     "sprites": ["RSrR",-1,-1,48],
-    "tags": ["standard","western","light","christmas","cave"]
+    "tags": ["standard","western","light","cave","christmas"]
   },
   "valentine": {
     "genderOnly": "f",
     "sprites": ["tpBD3",0,-1,48],
-    "tags": ["standard","western","magi","valentine","cave"]
+    "tags": ["standard","western","magi","cave","valentine"]
   }
 }
