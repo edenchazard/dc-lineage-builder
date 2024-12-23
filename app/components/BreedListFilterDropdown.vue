@@ -122,7 +122,7 @@ import { filtersByGroup, tagStore } from '../store/useTagStore';
 defineProps<{
   container: string;
   id: string;
-  placeholder?: string | undefined;
+  placeholder?: string;
 }>();
 
 const filtersTitle = useTemplateRef('filtersTitle');
