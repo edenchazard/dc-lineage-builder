@@ -1,29 +1,3 @@
-const filterTags = [
-  'CB',
-  'Valentine',
-  'Christmas',
-  'Halloween',
-  'Hybrid',
-  'Regular',
-] as const;
-const eggGroups = [
-  'Standard',
-  'Pygmy',
-  'Two-headed',
-  'Drake',
-  'Other',
-  '*',
-] as const;
-type FilterTag = (typeof filterTags)[number];
-type EggGroupTag = (typeof eggGroups)[number];
-
-interface TagListOption {
-  name: string;
-  active: boolean;
-}
-
-//= Record<never,never>
-
 interface DragonParents {
   m?: PartialLineage;
   f?: PartialLineage;
@@ -78,10 +52,9 @@ interface BreedEntry {
   genderOnly: GenderOnly;
   metaData: MetaData;
 }
-type GenderOnly = DragonGender | false;
+type GenderOnly = DragonGender | boolean;
 interface MetaData {
-  group: EggGroupTag;
-  tags: FilterTag[];
+  tags: NewTag[];
   src: Sources;
 }
 type Sources = 'local' | 'dc' | 'ghost';
@@ -98,6 +71,94 @@ interface LineageConfig {
   disabled: boolean;
 }
 
+const elements = [
+  'light',
+  'dark',
+  'magi',
+  'life',
+  'death',
+  'time',
+  'earth',
+  'lightning',
+  'air',
+  'water',
+  'fire',
+  'ice',
+  'neutral',
+] as const;
+
+const primaryElementTags = elements.map<`p:${(typeof elements)[number]}`>(
+  (tag) => `p:${tag}`,
+);
+
+const secondaryElementTags = elements.map<`s:${(typeof elements)[number]}`>(
+  (tag) => `s:${tag}`,
+);
+
+const bodyTypeTags = ['standard', 'drake', 'pygmy', 'two-head'] as const;
+
+const bodySubtypeTags = [
+  'amphiptere',
+  'wingless',
+  'western',
+  'eastern',
+  'leviathan',
+  'wyvern',
+  'lindwyrm',
+  'wyrm',
+] as const;
+
+const habitatTags = [
+  'hybrid',
+  'alpine',
+  'coast',
+  'desert',
+  'forest',
+  'jungle',
+  'volcano',
+  'cave',
+  'all',
+] as const;
+
+const miscTags = ['Has BSA', 'summonable', 'CB-only'] as const;
+
+const releaseTags = ['regular', 'valentine', 'halloween', 'christmas'] as const;
+
+type TagFilterCollection = {
+  primaryElement: (typeof primaryElementTags)[number][];
+  secondaryElement: (typeof secondaryElementTags)[number][];
+  bodyType: (typeof bodyTypeTags)[number][];
+  bodySubtype: (typeof bodySubtypeTags)[number][];
+  habitat: (typeof habitatTags)[number][];
+  release: (typeof releaseTags)[number][];
+  misc: (typeof miscTags)[number][];
+};
+
+const tags = [
+  ...bodyTypeTags,
+  ...bodySubtypeTags,
+  ...elements,
+  ...primaryElementTags,
+  ...secondaryElementTags,
+  ...habitatTags,
+  ...releaseTags,
+  ...miscTags,
+] as const;
+
+type NewTag = Readonly<(typeof tags)[number]>;
+
+export {
+  elements,
+  primaryElementTags,
+  secondaryElementTags,
+  bodyTypeTags,
+  bodySubtypeTags,
+  habitatTags,
+  releaseTags,
+  miscTags,
+  tags,
+};
+
 export type {
   GenderOnly,
   DragonMetadata,
@@ -111,13 +172,10 @@ export type {
   PartialLineageWithMetadata,
   MaybePartialLineageWithMetadata,
   //MaybeDragonTypeWithMetaData,
-  TagListOption,
   BreedEntry,
   MetaData,
   LineageConfig,
   PortraitData,
-  FilterTag,
-  EggGroupTag,
+  NewTag,
+  TagFilterCollection,
 };
-
-export { filterTags, eggGroups };

@@ -68,6 +68,37 @@ select {
   border-radius: 0.4rem;
 }
 
+input[type='checkbox'] {
+  margin: 0px;
+  padding: 0.1rem;
+  appearance: none;
+  border-radius: 0.2rem;
+  border: 1px solid black;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  aspect-ratio: 1;
+  min-height: 1.1rem;
+  box-sizing: content-box;
+
+  &:checked::after {
+    color: black;
+    content: '\2713';
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+
+  &.white {
+    border: 1px solid white;
+
+    &:checked::after {
+      color: #fff;
+    }
+  }
+}
+
 /**
 typography
 **/

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html We have control over the content. -->
 <template>
   <div
     v-if="compact && breedList.length > 0"
@@ -55,21 +56,27 @@
       <button
         type="button"
         class="breed-entry-button"
-        :aria-labelledby="strToId(breed.name)"
+        :aria-labelledby="slug(breed.name)"
       >
         <DragonPortrait :data="breed" />
-        <span
-          :id="strToId(breed.name)"
-          class="breed-entry-name"
-          >{{ breed.name }}</span
-        >
-        <span class="tag-group">{{ breed.metaData.group }}</span>
-        <span
-          v-for="filter in breed.metaData.tags"
-          :key="filter"
-          class="tag-filter"
-          >{{ filter }}</span
-        >
+        <div class="details">
+          <b
+            :id="slug(breed.name)"
+            class="name"
+            v-html="
+              search
+                ? breed.name.replaceAll(searchRegExp, `<mark>$1</mark>`)
+                : breed.name
+            "
+          />
+          <div class="tags">
+            <BreedTag
+              v-for="filter in breed.metaData.tags"
+              :key="filter"
+              :tag="filter"
+            />
+          </div>
+        </div>
       </button>
     </li>
   </ul>
@@ -82,29 +89,29 @@ import VirtualCollection from 'vue-virtual-collection/src/VirtualCollection.vue'
 import type { PortraitData } from '../shared/types';
 import DragonPortrait from './DragonPortrait.vue';
 import settings from '../shared/settings.js';
+import BreedTag from './BreedTag.vue';
+import { slug } from '../shared/utils';
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
 }>();
 
-const props = defineProps({
-  compact: {
-    type: Boolean,
-    default: true,
+const props = withDefaults(
+  defineProps<{
+    compact: boolean;
+    list: PortraitData[];
+    size?: number;
+    id: string;
+    search?: string;
+  }>(),
+  {
+    compact: true,
+    list: () => [],
+    size: 600,
+    search: '',
   },
-  list: {
-    type: Array<PortraitData>,
-    default: [],
-  },
-  size: {
-    type: Number,
-    default: 600,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-});
+);
+
 const portraitWidth = settings.tileSizes.fullSize.width;
 const portraitHeight = settings.tileSizes.fullSize.height;
 const margin = 4;
@@ -116,6 +123,9 @@ const parent = useParentElement(wrapper);
 const parentSize = useElementSize(parent);
 const focused = ref(false);
 const abs = Math.abs;
+
+const searchRegExp = computed(() => new RegExp(`(${props.search})`, 'gi'));
+
 // We want our grid to be fluid, which means we have to employ a somewhat
 // hacky solution to ensure it takes up the parent container's space even when
 // resized
@@ -229,10 +239,6 @@ function determineGridAction(currentIndex: number, e: KeyboardEvent) {
       return -1;
   }
 }
-
-function strToId(name: string) {
-  return name.replaceAll(' ', '-');
-}
 </script>
 
 <style scoped lang="postcss">
@@ -246,40 +252,43 @@ function strToId(name: string) {
 .mates-compact {
   overflow: hidden auto;
 }
+
 .breed-entry {
   display: flex;
   cursor: pointer;
-}
 
-.breed-entry + .breed-entry {
-  border-top: 1px solid var(--ui-breed-list-border);
+  & + .breed-entry {
+    border-top: 1px solid var(--ui-breed-list-border);
+  }
 }
 
 .breed-entry-button {
   flex: 1;
   border: 0;
   display: flex;
-  align-items: center;
+  grid-template-columns: auto 1fr;
+  align-items: start;
   text-overflow: ellipsis;
-  overflow: hidden;
   background: transparent;
   gap: 0.5rem;
   margin: 3px;
   color: inherit;
   cursor: inherit;
-}
-.breed-entry-name {
-  flex: 1;
-  text-align: left;
-}
+  padding: 0.5rem 0;
 
-.tag-group,
-.tag-filter {
-  display: inline-block;
-  padding: 0.3rem;
-  border-radius: 0.5rem;
-  border: 0 none;
-  font-size: 0.7rem;
+  & .details {
+    & .name {
+      text-align: left;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+  }
+
+  & .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }
 
 .grid {
@@ -294,6 +303,11 @@ function strToId(name: string) {
 </style>
 
 <style lang="postcss">
+.breed-entry-button {
+  & mark {
+    background: #ffff00;
+  }
+}
 .grid-cell {
   pointer-events: all;
 

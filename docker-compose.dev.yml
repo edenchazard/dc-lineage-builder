@@ -50,7 +50,8 @@ services:
     env_file:
       - .env.testing
     depends_on:
-      - testdb
+      testdb:
+        condition: service_healthy
     networks:
       - testing
 
@@ -61,6 +62,12 @@ services:
       - .env.testing
     networks:
       - testing
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 3
 
 volumes:
   dbdata:

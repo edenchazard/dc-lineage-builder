@@ -7,7 +7,6 @@ const placeholder: BreedEntry = {
   female: 'place',
   genderOnly: false,
   metaData: {
-    group: '*',
     src: 'local',
     tags: [],
   },

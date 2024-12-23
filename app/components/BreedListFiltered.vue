@@ -7,7 +7,8 @@
       :id="id"
       ref="container"
       :list="filteredBreeds"
-      :compact="search.length < 3 && filteredBreeds.length > 9"
+      :search="search"
+      :compact="search.length < 3 && filteredBreeds.length > 100"
       v-bind="$attrs"
       @breed-selected="(breed) => emit('breedSelected', breed)"
     />
@@ -22,38 +23,24 @@
 </template>
 <script setup lang="ts">
 import { nextTick, watch, computed, ref } from 'vue';
-import type { PropType } from 'vue';
-import type { FilterTag, EggGroupTag, PortraitData } from '../shared/types';
-import { filterEggGroups, filterTags } from '../shared/utils.js';
+import type { PortraitData, TagFilterCollection } from '../shared/types';
 import BreedList from './BreedList.vue';
 import { useAppStore } from '../store/useAppStore';
+import { filterBreedsByTagsWith } from '../store/useTagStore';
 
-const props = defineProps({
-  breeds: {
-    type: Array<PortraitData>,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    breeds: PortraitData[];
+    search?: string;
+    noResultsText?: string;
+    tags: TagFilterCollection;
+    id: string;
+  }>(),
+  {
+    search: '',
+    noResultsText: 'No results',
   },
-  search: {
-    type: String,
-    default: '',
-  },
-  noResultsText: {
-    type: String,
-    default: 'No results',
-  },
-  tags: {
-    type: Array as PropType<FilterTag[]>,
-    required: true,
-  },
-  groups: {
-    type: Array as PropType<EggGroupTag[]>,
-    required: true,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-});
+);
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
@@ -65,10 +52,8 @@ const appStore = useAppStore();
 
 const filteredBreeds = computed(() => {
   const search = props.search.toLowerCase().trim();
-  const breeds = props.breeds
-    // filter the group and tags
-    .filter(filterEggGroups(props.groups))
-    .filter(filterTags(props.tags));
+
+  const breeds = filterBreedsByTagsWith(props.breeds, props.tags);
 
   // if the search string is empty, return the whole
   // list, with already used breeds first
@@ -85,8 +70,8 @@ const filteredBreeds = computed(() => {
   // we make two arrays, one for primary results (the search matches
   // the beginning of the breed name, and secondary results, where
   // the breed name includes the search term somewhere.
-  const primary: PortraitData[] = [],
-    secondary: PortraitData[] = [];
+  const primary: PortraitData[] = [];
+  const secondary: PortraitData[] = [];
 
   for (let breed of breeds) {
     const position = breed.name.toLowerCase().trim().indexOf(search);

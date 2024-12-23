@@ -223,7 +223,6 @@ import type {
   PartialLineageWithMetadata,
   PortraitData,
 } from '../shared/types';
-import { filterEggGroups, filterTags } from '../shared/utils.js';
 import type { LineageHandler } from '../shared/lineageHandler';
 import { useAppStore } from '../store/useAppStore.js';
 import DialogExport from './DialogExport.vue';
@@ -233,13 +232,17 @@ import ToolbarButton from './ToolbarButton.vue';
 import ToolbarDropDownMenu from './ToolbarDropDownMenu.vue';
 import ToolbarDropDownMenuItem from './ToolbarDropDownMenuItem.vue';
 import ToolbarGroup from './ToolbarGroup.vue';
-import { useTagStore } from '../store/useTagStore.js';
 import {
   femalePortraits,
   listOfBreeds,
   malePortraits,
   placeholder,
 } from '../shared/breeds.js';
+import {
+  filterBreedsByTagsWith,
+  tagsFromModel,
+  tagStore,
+} from '../store/useTagStore';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {
@@ -253,7 +256,6 @@ const selectionToolsScrollArea = ref();
 const hideSelectionToolsNavButtons = ref(false);
 const isDragScrollingSelectionTools = ref(false);
 
-const tagStore = useTagStore();
 const appStore = useAppStore();
 
 // determine whether to show the scroll buttons for the selection
@@ -462,12 +464,10 @@ const availableBreeds = computed(() => {
 
   // should we list males, females or both
   const { male, female } = treeSelectedContains(appStore.activeLineage);
-
-  const breedTable = listOfBreeds
-    // filter the group
-    .filter(filterEggGroups(tagStore.enabledEggGroups))
-    // if we have tags, make sure to filter them
-    .filter(filterTags(tagStore.enabledTags));
+  const breedTable = filterBreedsByTagsWith(
+    listOfBreeds,
+    tagsFromModel(tagStore),
+  );
 
   const getNames = (breed: PortraitData) => breed.name;
   const maleBreeds = malePortraits.map(getNames);
@@ -717,8 +717,9 @@ function capitalise(string: string) {
     display: grid;
     align-items: center;
     grid-template-rows: repeat(auto-fit, minmax(0, 2rem));
-    grid-template-columns: 1.5rem 1fr;
+    grid-template-columns: 1.75rem 1fr;
     padding-left: var(--padding);
+    justify-items: start;
   }
 
   .functions {

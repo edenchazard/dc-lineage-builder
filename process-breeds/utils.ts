@@ -1,6 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { promises as fs } from 'fs';
+import { tags } from '../app/shared/types';
 
 // Node modules don't support __dirname and __filename
 // This will provide that functionality.
@@ -46,7 +47,10 @@ export async function prettyPrintJSONFile(
     const output = JSON.stringify(
       json,
       function (_, v) {
-        if (v instanceof Array) return JSON.stringify(v);
+        if (v instanceof Array)
+          return JSON.stringify(
+            v.toSorted((a, b) => tags.indexOf(a) - tags.indexOf(b)),
+          );
         return v;
       },
       indent,

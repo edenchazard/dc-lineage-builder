@@ -217,11 +217,6 @@
   --ui-builder-tile-label-warning: #991b1d;
   --ui-builder-tile-label-invalid: #991b1d3a;
 
-  --ui-header-bg: #2f2f2f;
-  --ui-header-fg: var(--dc-colour-7);
-  --ui-header-mobile-border: 1px solid var(--dc-colour-7);
-  --ui-content-fg: #000;
-
   --ui-header-bg: url(./portal2-light/darktile.png) repeat;
   --ui-header-fg: #fff;
   --ui-header-mobile-border: 1px solid var(--dc-colour-7);

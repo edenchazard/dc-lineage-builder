@@ -1,10 +1,9 @@
 import type {
   BreedEntry,
-  EggGroupTag,
-  FilterTag,
   MetaData,
   GenderOnly,
   DragonGender,
+  NewTag,
 } from '../app/shared/types';
 
 export interface FallbackBreedsJSON {
@@ -13,12 +12,11 @@ export interface FallbackBreedsJSON {
 
 interface FallbackBreedEntry {
   genderOnly: GenderOnly;
-  group: EggGroupTag;
   sprites:
     | FallbackNonDimorphicSprite
     | FallbackDimorphicSpritePair
     | FallbackBreedEntryAltList;
-  tags: FilterTag[];
+  tags: NewTag[];
 }
 
 interface FallbackBreedEntryAltList {
@@ -145,7 +143,6 @@ export function getBreedTable(json: FallbackBreedsJSON): BreedEntry[] {
   for (const breedName in json) {
     const breed = json[breedName];
     const metaData: MetaData = {
-      group: breed.group,
       tags: breed.tags,
       src: 'dc',
     };

@@ -23,10 +23,17 @@
           >
             Search
           </label>
-          <span class="sr-only">Groups</span>
-          <BreedTagListGroups name="filters-groups" />
-          <span class="sr-only">Showing</span>
-          <BreedTagListTags name="filters-tags" />
+          <label
+            for="applied-filters"
+            class="sr-only"
+          >
+            Filters
+          </label>
+          <BreedListFilterDropdown
+            id="applied-filters"
+            placeholder="Filters"
+            container="#breed-selector-wrapper"
+          />
         </div>
       </form>
 
@@ -39,8 +46,7 @@
           id="filtered-breeds"
           :search="searchString"
           :breeds="breeds"
-          :tags="tagStore.enabledTags"
-          :groups="tagStore.enabledEggGroups"
+          :tags="chosenTags"
           no-results-text="There are no breeds that match this criteria."
           @breed-selected="breedSelected"
         />
@@ -48,40 +54,34 @@
     </template>
   </DialogBreedSelectorWrapper>
 </template>
+
 <script setup lang="ts">
 import { nextTick, ref } from 'vue';
-import type { PropType } from 'vue';
 import { onStartTyping } from '@vueuse/core';
-import type { DragonGender, PortraitData } from '../shared/types';
-import { useTagStore } from '../store/useTagStore.js';
+import { type DragonGender, type PortraitData } from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
-import BreedTagListTags from './BreedTagListTags.vue';
-import BreedTagListGroups from './BreedTagListGroups.vue';
 import BreedSearch from './BreedSearch.vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
+import { chosenTags } from '../store/useTagStore.js';
+import BreedListFilterDropdown from './BreedListFilterDropdown.vue';
 
-const props = defineProps({
-  breeds: {
-    type: Array<PortraitData>,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    breeds: PortraitData[];
+    genderFilter: DragonGender;
+    autofocusSearch?: boolean;
+  }>(),
+  {
+    autofocusSearch: false,
   },
-  genderFilter: {
-    type: String as PropType<DragonGender>,
-    required: true,
-  },
-  autofocusSearch: {
-    type: Boolean,
-    default: false,
-  },
-});
+);
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
   (e: 'close'): void;
 }>();
 
-const tagStore = useTagStore();
 const searchString = ref('');
 const mateSearchEl = ref<HTMLInputElement>();
 const wrapper = ref();
@@ -130,6 +130,7 @@ async function jumpToFirstResult() {
   }
 }
 </script>
+
 <style scoped>
 section + section,
 section + form,
@@ -150,13 +151,8 @@ form + section {
 
 #filtering {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.25rem 0.5rem;
-}
-
-#results-search {
-  max-width: 8rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 #breeds {

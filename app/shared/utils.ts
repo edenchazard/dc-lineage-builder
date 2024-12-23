@@ -6,9 +6,7 @@ import {
 } from './breeds.js';
 import type {
   BreedEntry,
-  FilterTag,
   DragonGender,
-  EggGroupTag,
   PortraitData,
   MaybePartialLineageWithMetadata,
   PartialLineageWithMetadata,
@@ -131,34 +129,6 @@ export function deepClone<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj));
 }
 
-// These two functions return filter functions for the group and the tags when
-// provided a list of acceptable tags
-export function filterEggGroups(enabledGroups: EggGroupTag[]) {
-  return (breed: PortraitData | BreedEntry) => {
-    const group = breed.metaData.group;
-    // A group of "*" is a match all, it should be available
-    // no matter the group filter, e.g. placeholder
-    if (group === '*') return true;
-
-    // Check at least one tag matches
-    if (enabledGroups.indexOf(group) > -1) return true;
-    return false;
-  };
-}
-
-export function filterTags(enabledTags: FilterTag[]) {
-  return (breed: PortraitData | BreedEntry) => {
-    const tags = breed.metaData.tags;
-
-    // an empty tag array should return true by default.
-    if (tags.length === 0) return true;
-
-    // If the breed has tags, then check against our tag list
-    // for at least one tag and include it if so
-    return tags.some((t) => enabledTags.indexOf(t) >= 0);
-  };
-}
-
 export function debounce(
   callback: (...args: unknown[]) => unknown,
   timeout = 300,
@@ -177,4 +147,13 @@ export function createLineageLink(hash: string) {
   const origin = window.location.origin;
   const mountPath = import.meta.env.BASE_URL;
   return `${origin}${mountPath}/view/${hash}`;
+}
+
+const tagRegExp = /^(p:|s:)/g;
+export function resolveLabel<T>(tag: string): T {
+  return tag.replace(tagRegExp, '') as T;
+}
+
+export function slug(str: string) {
+  return str.replaceAll(' ', '-').toLowerCase();
 }
