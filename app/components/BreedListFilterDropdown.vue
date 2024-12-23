@@ -76,10 +76,7 @@
                     @change="toggle(tags)"
                   />
                   <legend>
-                    <label
-                      class="label"
-                      :for="slug(name)"
-                    >
+                    <label :for="slug(name)">
                       {{ name }}
                     </label>
                   </legend>
