@@ -55,6 +55,15 @@
             Preview
           </button>
         </form>
+        <Textbox
+          v-if="shareLink"
+          id="share-link"
+          :model-value="shareLink"
+          show-copy-button
+          show-share-button
+          readonly
+          select-all-on-focus
+        />
         <Feedback ref="status" />
       </section>
     </div>
@@ -71,13 +80,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, onMounted } from 'vue';
 import { getOnSitePreview } from '../app/api.js';
 import OnsitePreview from '../components/OnsitePreview.vue';
 import Feedback from '../components/Feedback.vue';
 import { validateCode } from '../shared/validation.js';
 import LineageWrapper from '../components/LineageWrapper.vue';
 import { FetchError } from 'ofetch';
+import { useRoute } from 'vue-router';
+import Textbox from '../components/Textbox.vue';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');
@@ -87,6 +98,17 @@ const generations = ref(0);
 const cutoff = 12;
 const fixRightmostColumn = ref(true);
 const status = ref<InstanceType<typeof Feedback>>();
+const shareLink = ref('');
+const route = useRoute();
+
+onMounted(async () => {
+  maleCode.value = (route.query?.male as string) ?? '';
+  femaleCode.value = (route.query?.female as string) ?? '';
+
+  if (maleCode.value && femaleCode.value) {
+    fetchLineage();
+  }
+});
 
 // specify how many columns down we need to go and then return the li nodes
 function getColumnsNDeep<T extends HTMLElement>(
@@ -158,6 +180,9 @@ async function fetchLineage() {
         ul?.parentNode?.removeChild(ul);
       });
     }
+    const origin = window.location.origin;
+    const mountPath = import.meta.env.BASE_URL;
+    shareLink.value = `${origin}${mountPath}/onsite-preview?male=${maleCode.value}&female=${femaleCode.value}`;
   } catch (ex) {
     if (ex instanceof FetchError && ex.response?.status === 404) {
       status.value.error((await ex.response.json()).errors[0].message);
@@ -175,6 +200,12 @@ async function fetchLineage() {
   flex-direction: column;
   overflow-x: auto;
   flex: 1;
+}
+
+#onsite-preview-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 #form {
