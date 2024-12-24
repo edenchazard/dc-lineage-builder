@@ -45,7 +45,7 @@
         <BreedListFiltered
           id="filtered-breeds"
           :search="searchString"
-          :breeds="breeds"
+          :breeds="availableMates"
           :tags="chosenTags"
           no-results-text="There are no breeds that match this criteria."
           @breed-selected="breedSelected"
@@ -56,19 +56,24 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import { onStartTyping } from '@vueuse/core';
-import { type DragonGender, type PortraitData } from '../shared/types';
+import {
+  type DragonGender,
+  type PartialLineageWithMetadata,
+  type PortraitData,
+} from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
 import { chosenTags } from '../store/useTagStore.js';
 import BreedListFilterDropdown from './BreedListFilterDropdown.vue';
+import { getTable } from '../shared/utils';
 
 const props = withDefaults(
   defineProps<{
-    breeds: PortraitData[];
+    forGender: PartialLineageWithMetadata['gender'];
     genderFilter: DragonGender;
     autofocusSearch?: boolean;
   }>(),
@@ -86,6 +91,7 @@ const searchString = ref('');
 const mateSearchEl = ref<HTMLInputElement>();
 const wrapper = ref();
 const resultsEl = ref<HTMLElement>();
+const availableMates = computed(() => getTable(props.forGender));
 
 const { deactivate } = useFocusTrap(wrapper, {
   immediate: true,

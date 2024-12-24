@@ -3,7 +3,7 @@
     <DialogBreedSelector
       v-if="showDialogBreedSelector"
       :autofocus-search="autofocusBreedSelector"
-      :breeds="availableMates"
+      :for-gender="data.gender"
       :gender-filter="data.gender"
       @breed-selected="changeBreed"
       @close="showDialogBreedSelector = false"
@@ -177,8 +177,6 @@ const appStore = useAppStore();
 const showDialogBreedSelector = ref(false);
 
 const hasAncestry = computed(() => hasParents(props.data));
-
-const availableMates = computed(() => getTable(props.data.gender));
 
 const getImage = computed(() => {
   // return the breed data for this breed name or if no match, the placeholder
