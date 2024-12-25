@@ -63,8 +63,6 @@ import { Lineage as LineageHandler } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 import { FetchError } from 'ofetch';
 import DialogBreedSelector from './DialogBreedSelector.vue';
-import useBreedSelector from '../composables/useBreedSelector';
-const breedSelectorDialog = useBreedSelector();
 
 const route = useRoute();
 const appStore = useAppStore();

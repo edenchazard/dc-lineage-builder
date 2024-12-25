@@ -12,8 +12,8 @@
     <template #default="{ show }">
       <div class="applied-filters">
         <input
-          ref="textEl"
           :id="id"
+          ref="textEl"
           readonly
           type="text"
           :value="tagStore.join(', ')"
@@ -89,8 +89,8 @@
                   />
                   <legend :aria-labelledby="'group-' + slug(name)">
                     <label
-                      :for="slug(name)"
                       :id="'group-' + slug(name)"
+                      :for="slug(name)"
                     >
                       {{ name }}
                     </label>

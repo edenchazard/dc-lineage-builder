@@ -14,8 +14,8 @@
   </div>
   <ul
     v-else
-    class="breeds-list"
     v-roving-tabindex-container.vertical
+    class="breeds-list"
   >
     <li
       v-for="breed in list"
