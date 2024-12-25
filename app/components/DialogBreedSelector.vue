@@ -1,12 +1,10 @@
 <template>
-  <DialogBreedSelectorWrapper
-    ref="wrapper"
-    @close="close"
-  >
+  <DialogBreedSelectorWrapper @close="breedSelectorDialog.hide()">
     <template #content>
       <form
         role="search"
-        @submit.prevent="jumpToFirstResult"
+        @submit.prevent="jumpToFirstResult()"
+        @keydown.enter.prevent="jumpToFirstResult()"
       >
         <h2 class="sr-only">Filtering</h2>
         <div id="filtering">
@@ -43,9 +41,19 @@
       >
         <h2 class="sr-only">Results</h2>
         <BreedListFiltered
+          v-show="breedSelectorDialog.forGender.value === 'm'"
           id="filtered-breeds"
           :search="searchString"
-          :breeds="availableMates"
+          :breeds="getTable('m')"
+          :tags="chosenTags"
+          no-results-text="There are no breeds that match this criteria."
+          @breed-selected="breedSelected"
+        />
+        <BreedListFiltered
+          v-show="breedSelectorDialog.forGender.value === 'f'"
+          id="filtered-breeds"
+          :search="searchString"
+          :breeds="getTable('f')"
           :tags="chosenTags"
           no-results-text="There are no breeds that match this criteria."
           @breed-selected="breedSelected"
@@ -56,57 +64,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
+import { nextTick, ref, useTemplateRef, watch } from 'vue';
 import { onStartTyping } from '@vueuse/core';
-import {
-  type DragonGender,
-  type PartialLineageWithMetadata,
-  type PortraitData,
-} from '../shared/types';
+import { type PortraitData } from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';
-import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
 import { chosenTags } from '../store/useTagStore.js';
 import BreedListFilterDropdown from './BreedListFilterDropdown.vue';
 import { getTable } from '../shared/utils';
-
-const props = withDefaults(
-  defineProps<{
-    forGender: PartialLineageWithMetadata['gender'];
-    genderFilter: DragonGender;
-    autofocusSearch?: boolean;
-  }>(),
-  {
-    autofocusSearch: false,
-  },
-);
+import useBreedSelector from '../composables/useBreedSelector';
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
-  (e: 'close'): void;
 }>();
 
 const searchString = ref('');
-const mateSearchEl = ref<HTMLInputElement>();
-const wrapper = ref();
-const resultsEl = ref<HTMLElement>();
-const availableMates = computed(() => getTable(props.forGender));
-
-const { deactivate } = useFocusTrap(wrapper, {
-  immediate: true,
-  escapeDeactivates: true,
-  clickOutsideDeactivates: true,
-  onDeactivate: close,
-  initialFocus() {
-    if (props.autofocusSearch) {
-      nextTick(() => mateSearchEl.value?.$el.focus());
-      return false;
-    }
-
-    return undefined;
-  },
-});
+const mateSearchEl = useTemplateRef('mateSearchEl');
+const resultsEl = useTemplateRef('resultsEl');
+const breedSelectorDialog = useBreedSelector();
 
 // focus search bar when begin typing
 onStartTyping(() => {
@@ -115,18 +91,20 @@ onStartTyping(() => {
     mateSearchEl.value.$el.focus();
 });
 
-function breedSelected(breed: PortraitData) {
-  emit('breedSelected', breed);
-  deactivate();
-}
+watch(breedSelectorDialog.autofocus, async (value) => {
+  await nextTick();
+  if (value && mateSearchEl.value) {
+    mateSearchEl.value.$el.focus();
+  }
+});
 
-function close() {
-  emit('close');
+function breedSelected(breed: PortraitData) {
+  breedSelectorDialog.handleBreedSelected(breed);
+  emit('breedSelected', breed);
 }
 
 async function jumpToFirstResult() {
   await nextTick();
-
   if (resultsEl.value) {
     resultsEl.value
       .querySelector<HTMLElement>(

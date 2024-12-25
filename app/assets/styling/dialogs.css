@@ -38,8 +38,6 @@
 
 .dialog-buttons {
   right: 5px;
-  position: absolute;
-  top: -1.5rem;
 
   > .button {
     height: 3rem;
@@ -70,6 +68,7 @@
 }
 
 .dialog-header {
+  display: flex;
   position: relative;
   justify-content: space-between;
   align-items: center;

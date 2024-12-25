@@ -1,13 +1,5 @@
 <template>
   <li class="tile-container">
-    <DialogBreedSelector
-      v-if="showDialogBreedSelector"
-      :autofocus-search="autofocusBreedSelector"
-      :for-gender="data.gender"
-      :gender-filter="data.gender"
-      @breed-selected="changeBreed"
-      @close="showDialogBreedSelector = false"
-    />
     <div class="tile">
       <LineageViewNodeButton
         v-if="nodesFromRoot === 0"
@@ -127,7 +119,7 @@
 
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import type { PropType } from 'vue';
 import type {
   BreedEntry,
@@ -136,14 +128,12 @@ import type {
 } from '../shared/types';
 import {
   getBreedData,
-  getTable,
   breedEntryToPortrait,
   expandGender,
   hasParents,
 } from '../shared/utils.js';
 import { useAppStore } from '../store/useAppStore.js';
 import LineageViewNodeLabel from './LineageViewNodeLabel.vue';
-import DialogBreedSelector from './DialogBreedSelector.vue';
 import DragonPortrait from './DragonPortrait.vue';
 import LineageViewNodeButton from './LineageViewNodeButton.vue';
 import { Lineage } from '../shared/lineageHandler';
@@ -151,6 +141,7 @@ import { DragonBuilder } from '../shared/dragonBuilder.js';
 import { validateCode, validateName } from '../shared/validation.js';
 import { placeholder } from '../shared/breeds.js';
 import vOnLongPress from '../directives/long-press/vue-3-long-press';
+import useBreedSelector from '../composables/useBreedSelector';
 
 const props = defineProps({
   // Dragon properties
@@ -171,10 +162,9 @@ const props = defineProps({
   },
 });
 
-let autofocusBreedSelector = false;
 const ls = localStorage;
 const appStore = useAppStore();
-const showDialogBreedSelector = ref(false);
+const breedSelectorDialog = useBreedSelector();
 
 const hasAncestry = computed(() => hasParents(props.data));
 
@@ -228,7 +218,7 @@ function switchGender() {
 
 // todo type this
 function changeBreed(e: PortraitData) {
-  showDialogBreedSelector.value = false;
+  breedSelectorDialog.hide();
 
   // update the breed
   props.data.breed = e.name;
@@ -315,16 +305,14 @@ function handleClick(e: Event) {
   if (appStore.selectionCount > 0) {
     props.data.selected = !props.data.selected;
   } else {
-    if (e instanceof KeyboardEvent && e.code === 'Space') {
+    breedSelectorDialog.show({
       // if the keyboard was used to open the dialog, it's relatively safe
       // to assume they'll want to immediately use the search
       // control too.
-      autofocusBreedSelector = true;
-    } else {
-      autofocusBreedSelector = false;
-    }
-
-    showDialogBreedSelector.value = true;
+      autofocus: e instanceof KeyboardEvent && e.code === 'Space',
+      forGender: props.data.gender,
+      breedSelectedCallback: (e: PortraitData) => changeBreed(e),
+    });
   }
 }
 </script>
