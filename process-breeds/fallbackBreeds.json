@@ -6,9 +6,13 @@
   },
   "Alcedine Wyvern": {
     "genderOnly": false,
-    "sprites": {
-      "Blue": ["2LTzD",-15,-1,48],
-      "Brown": ["CNsfX",-16,-1,48]
+    "subentries": {
+      "Blue": {
+        "sprites": ["2LTzD",-15,-1,48]
+      },
+      "Brown": {
+        "sprites": ["CNsfX",-16,-1,48]
+      }
     },
     "tags": ["standard","wyvern","air","all","regular"]
   },
@@ -64,9 +68,13 @@
   },
   "Black": {
     "genderOnly": false,
-    "sprites": {
-      "Alt.": ["bktN",-15,-1,48,"S1tr",-4,-1,48],
-      "regular": ["75LV",-20,-1,48,"5CMC",0,-1,48]
+    "subentries": {
+      "Alt.": {
+        "sprites": ["bktN",-15,-1,48,"S1tr",-4,-1,48]
+      },
+      "regular": {
+        "sprites": ["75LV",-20,-1,48,"5CMC",0,-1,48]
+      }
     },
     "tags": ["standard","western","dark","regular"]
   },
@@ -117,13 +125,25 @@
   },
   "Cantormaris": {
     "genderOnly": false,
-    "sprites": {
-      "Iratus": ["l8AyC",-14,-1,48],
-      "Itus": ["t3iNN",-14,-1,48],
-      "Motus": ["Trzoj",-14,-1,48],
-      "Mundus": ["TdVYK",-14,-1,48],
-      "Sophos": ["gVJON",-14,-1,48],
-      "Tutela": ["A1EtF",-14,-1,48]
+    "subentries": {
+      "Iratus": {
+        "sprites": ["l8AyC",-14,-1,48]
+      },
+      "Itus": {
+        "sprites": ["t3iNN",-14,-1,48]
+      },
+      "Motus": {
+        "sprites": ["Trzoj",-14,-1,48]
+      },
+      "Mundus": {
+        "sprites": ["TdVYK",-14,-1,48]
+      },
+      "Sophos": {
+        "sprites": ["gVJON",-14,-1,48]
+      },
+      "Tutela": {
+        "sprites": ["A1EtF",-14,-1,48]
+      }
     },
     "tags": ["standard","wyvern","p:water","s:magi","coast","jungle","volcano","regular"]
   },
@@ -160,11 +180,19 @@
   },
   "Copper": {
     "genderOnly": false,
-    "sprites": {
-      "Liver of Sulfur": ["veGbV",0,-1,47,"fiyl6",-2,-1,48],
-      "Pennybright": ["Rflp3",0,-1,47,"mg3a4",-2,-1,48],
-      "Rainbow": ["B9E5e",0,-1,47,"YvBle",-2,-1,48],
-      "Verdigris": ["vT4Zt",0,-1,47,"tRfe4",-2,-1,48]
+    "subentries": {
+      "Liver of Sulfur": {
+        "sprites": ["veGbV",0,-1,47,"fiyl6",-2,-1,48]
+      },
+      "Pennybright": {
+        "sprites": ["Rflp3",0,-1,47,"mg3a4",-2,-1,48]
+      },
+      "Rainbow": {
+        "sprites": ["B9E5e",0,-1,47,"YvBle",-2,-1,48]
+      },
+      "Verdigris": {
+        "sprites": ["vT4Zt",0,-1,47,"tRfe4",-2,-1,48]
+      }
     },
     "tags": ["standard","wyvern","earth","regular"]
   },
@@ -180,9 +208,13 @@
   },
   "Dark Green": {
     "genderOnly": false,
-    "sprites": {
-      "Alt.": ["F3EP",0,-1,48],
-      "regular": ["qdvf",-15,-1,48]
+    "subentries": {
+      "Alt.": {
+        "sprites": ["F3EP",0,-1,48]
+      },
+      "regular": {
+        "sprites": ["qdvf",-15,-1,48]
+      }
     },
     "tags": ["standard","wingless","p:dark","s:life","forest","jungle","regular"]
   },
@@ -203,9 +235,13 @@
   },
   "Dorsal": {
     "genderOnly": false,
-    "sprites": {
-      "Purple": ["mfnIj",-28,-1,48],
-      "Red": ["k6Pw",-28,-1,48]
+    "subentries": {
+      "Purple": {
+        "sprites": ["mfnIj",-28,-1,48]
+      },
+      "Red": {
+        "sprites": ["k6Pw",-28,-1,48]
+      }
     },
     "tags": ["standard","wingless","neutral","jungle","regular"]
   },
@@ -246,27 +282,43 @@
   },
   "Flint Drake": {
     "genderOnly": false,
-    "sprites": {
-      "Dark": ["RwrKY",0,-1,48,"w5PLH",-25,-1,48],
-      "Light": ["1MA0A",0,-1,48,"AomJY",-19,-1,48]
+    "subentries": {
+      "Dark": {
+        "sprites": ["RwrKY",0,-1,48,"w5PLH",-25,-1,48]
+      },
+      "Light": {
+        "sprites": ["1MA0A",0,-1,48,"AomJY",-19,-1,48]
+      }
     },
     "tags": ["drake","p:earth","s:fire","regular"]
   },
   "Floret Wyvern Alstroemeria": {
     "genderOnly": false,
-    "sprites": {
-      "Gold": ["VxHfL",-8,-1,48,"fCaGX",-6,-1,48],
-      "Pink": ["bwGPg",-8,-1,48,"jkyej",-6,-1,48],
-      "Purple": ["BjJp4",-8,-1,48,"4F7UH",-6,-1,48]
+    "subentries": {
+      "Gold": {
+        "sprites": ["VxHfL",-8,-1,48,"fCaGX",-6,-1,48]
+      },
+      "Pink": {
+        "sprites": ["bwGPg",-8,-1,48,"jkyej",-6,-1,48]
+      },
+      "Purple": {
+        "sprites": ["BjJp4",-8,-1,48,"4F7UH",-6,-1,48]
+      }
     },
     "tags": ["standard","wyvern","life","regular"]
   },
   "Floret Wyvern Iris": {
     "genderOnly": false,
-    "sprites": {
-      "Gold": ["E6uF3",0,-1,48,"B39nn",-7,-1,47.5],
-      "Pink": ["k7ye7",0,-1,48,"kubb7",-7,-1,47.5],
-      "Purple": ["ufqA1",0,-1,48,"M2Wu9",-7,-1,47.5]
+    "subentries": {
+      "Gold": {
+        "sprites": ["E6uF3",0,-1,48,"B39nn",-7,-1,47.5]
+      },
+      "Pink": {
+        "sprites": ["k7ye7",0,-1,48,"kubb7",-7,-1,47.5]
+      },
+      "Purple": {
+        "sprites": ["ufqA1",0,-1,48,"M2Wu9",-7,-1,47.5]
+      }
     },
     "tags": ["standard","wyvern","life","regular"]
   },
@@ -387,9 +439,13 @@
   },
   "Magnesium Amphiptere": {
     "genderOnly": false,
-    "sprites": {
-      "Desert": ["VPzbi",0,-1,48,"890sz",-24,-1,48],
-      "Volcano": ["Jaqrx",0,-1,48,"NDgdL",-24,-1,48]
+    "subentries": {
+      "Desert": {
+        "sprites": ["VPzbi",0,-1,48,"890sz",-24,-1,48]
+      },
+      "Volcano": {
+        "sprites": ["Jaqrx",0,-1,48,"NDgdL",-24,-1,48]
+      }
     },
     "tags": ["standard","amphiptere","fire","regular"]
   },
@@ -430,9 +486,13 @@
   },
   "Nebula": {
     "genderOnly": false,
-    "sprites": {
-      "Green-Red": ["6jlEA",0,-1,48,"LJVA",-12,-1,48],
-      "Purple-Blue": ["6lTN",-14,-1,48,"RWCrt",-1,-1,48]
+    "subentries": {
+      "Green-Red": {
+        "sprites": ["6jlEA",0,-1,48,"LJVA",-12,-1,48]
+      },
+      "Purple-Blue": {
+        "sprites": ["6lTN",-14,-1,48,"RWCrt",-1,-1,48]
+      }
     },
     "tags": ["standard","wyvern","light","alpine","desert","regular"]
   },
@@ -448,9 +508,13 @@
   },
   "Nilia Pygmy": {
     "genderOnly": false,
-    "sprites": {
-      "Blue": ["kn15d",0,-2,null,"m8jRE",-38,7,null],
-      "Green": ["oYD13",0,-1,47.5,"Az8rw",-5,-1,48]
+    "subentries": {
+      "Blue": {
+        "sprites": ["kn15d",0,-2,null,"m8jRE",-38,7,null]
+      },
+      "Green": {
+        "sprites": ["oYD13",0,-1,47.5,"Az8rw",-5,-1,48]
+      }
     },
     "tags": ["pygmy","western","neutral","alpine","regular"]
   },
@@ -476,10 +540,16 @@
   },
   "Pargulus Pygmy": {
     "genderOnly": false,
-    "sprites": {
-      "Blue": ["k7jXH",0,-1,48,"ZDaUc",-1,-1,48],
-      "Green": ["WPYpD",0,-1,48,"VsXXn",-1,-1,48],
-      "Red": ["qqpMo",0,-1,48,"Vyo2g",-1,-1,48]
+    "subentries": {
+      "Blue": {
+        "sprites": ["k7jXH",0,-1,48,"ZDaUc",-1,-1,48]
+      },
+      "Green": {
+        "sprites": ["WPYpD",0,-1,48,"VsXXn",-1,-1,48]
+      },
+      "Red": {
+        "sprites": ["qqpMo",0,-1,48,"Vyo2g",-1,-1,48]
+      }
     },
     "tags": ["pygmy","western","life","regular"]
   },
@@ -535,10 +605,16 @@
   },
   "Sapphire": {
     "genderOnly": false,
-    "sprites": {
-      "Blue": ["3Xr0f",0,-1,48],
-      "Pink": ["BWu29",-11,-1,48],
-      "Yellow": ["SvYIb",-12,-1,47.5]
+    "subentries": {
+      "Blue": {
+        "sprites": ["3Xr0f",0,-1,48]
+      },
+      "Pink": {
+        "sprites": ["BWu29",-11,-1,48]
+      },
+      "Yellow": {
+        "sprites": ["SvYIb",-12,-1,47.5]
+      }
     },
     "tags": ["standard","western","light","all","regular"]
   },
@@ -584,10 +660,16 @@
   },
   "Shimmer-Scale": {
     "genderOnly": false,
-    "sprites": {
-      "Bronze": ["KacWt",0,-1,48],
-      "Gold": ["wTAL8",0,-1,48],
-      "Silver": ["Adqkz",0,-1,48]
+    "subentries": {
+      "Bronze": {
+        "sprites": ["KacWt",0,-1,48]
+      },
+      "Gold": {
+        "sprites": ["wTAL8",0,-1,48]
+      },
+      "Silver": {
+        "sprites": ["Adqkz",0,-1,48]
+      }
     },
     "tags": ["standard","eastern","water","regular"]
   },
@@ -603,10 +685,16 @@
   },
   "Siyat": {
     "genderOnly": false,
-    "sprites": {
-      "Blue": ["h0bAy",-1,-1,48],
-      "Green": ["n1G53",-1,-1,48],
-      "Purple": ["sa6Zc",-1,-1,48]
+    "subentries": {
+      "Blue": {
+        "sprites": ["h0bAy",-1,-1,48]
+      },
+      "Green": {
+        "sprites": ["n1G53",-1,-1,48]
+      },
+      "Purple": {
+        "sprites": ["sa6Zc",-1,-1,48]
+      }
     },
     "tags": ["standard","western","air","alpine","coast","forest","regular"]
   },
@@ -622,10 +710,16 @@
   },
   "Snow Angel": {
     "genderOnly": "f",
-    "sprites": {
-      "Full Gold": ["z9nCG",0,-1,48],
-      "Tri-Colored": ["qiJ3",0,-1,48],
-      "White-Tipped": ["nnnvZ",0,-1,48]
+    "subentries": {
+      "Full Gold": {
+        "sprites": ["z9nCG",0,-1,48]
+      },
+      "Tri-Colored": {
+        "sprites": ["qiJ3",0,-1,48]
+      },
+      "White-Tipped": {
+        "sprites": ["nnnvZ",0,-1,48]
+      }
     },
     "tags": ["standard","western","ice","cave","christmas"]
   },
@@ -671,12 +765,22 @@
   },
   "Striped": {
     "genderOnly": false,
-    "sprites": {
-      "Black": ["M0NFO",-1,-1,48,"cbtRI",0,-1,48],
-      "Blue": ["VTYx",-1,-1,48,"YO0q",0,-1,48],
-      "Green": ["RZl8",-1,-1,48,"bUfZ",0,-1,48],
-      "Red": ["EE65C",-1,-1,48,"qTuvY",0,-1,48],
-      "White": ["h9aDK",-1,-1,48,"RJ8i",0,-1,48]
+    "subentries": {
+      "Black": {
+        "sprites": ["M0NFO",-1,-1,48,"cbtRI",0,-1,48]
+      },
+      "Blue": {
+        "sprites": ["VTYx",-1,-1,48,"YO0q",0,-1,48]
+      },
+      "Green": {
+        "sprites": ["RZl8",-1,-1,48,"bUfZ",0,-1,48]
+      },
+      "Red": {
+        "sprites": ["EE65C",-1,-1,48,"qTuvY",0,-1,48]
+      },
+      "White": {
+        "sprites": ["h9aDK",-1,-1,48,"RJ8i",0,-1,48]
+      }
     },
     "tags": ["standard","western","neutral","forest","jungle","regular"]
   },
@@ -697,9 +801,13 @@
   },
   "Sweetling": {
     "genderOnly": "m",
-    "sprites": {
-      "Black": ["qZgqQ",0,-1,48],
-      "Pink": ["voFHL",0,-1,48]
+    "subentries": {
+      "Black": {
+        "sprites": ["qZgqQ",0,-1,48]
+      },
+      "Pink": {
+        "sprites": ["voFHL",0,-1,48]
+      }
     },
     "tags": ["standard","wingless","neutral","cave","valentine"]
   },
@@ -761,17 +869,25 @@
   },
   "Undine": {
     "genderOnly": false,
-    "sprites": {
-      "Green": ["N73sL",-9,-1,48,"GP7mn",0,-1,48],
-      "Yellow": ["t4AY7",-9,-1,48,"c0Grh",0,-1,48]
+    "subentries": {
+      "Green": {
+        "sprites": ["N73sL",-9,-1,48,"GP7mn",0,-1,48]
+      },
+      "Yellow": {
+        "sprites": ["t4AY7",-9,-1,48,"c0Grh",0,-1,48]
+      }
     },
     "tags": ["standard","western","water","alpine","forest","regular"]
   },
   "Ushgorn": {
     "genderOnly": false,
-    "sprites": {
-      "Blue": ["pYEFv",0,-1,48],
-      "Red": ["a7H2S",-9,-1,48]
+    "subentries": {
+      "Blue": {
+        "sprites": ["pYEFv",0,-1,48]
+      },
+      "Red": {
+        "sprites": ["a7H2S",-9,-1,48]
+      }
     },
     "tags": ["standard","wingless","p:water","s:fire","hybrid","regular"]
   },
@@ -807,9 +923,13 @@
   },
   "Xol": {
     "genderOnly": false,
-    "sprites": {
-      "Blue": ["kmDB5",0,-1,48,"RRDqa",-4,-1,48],
-      "Red": ["g1g0x",0,-1,48,"jGaBm",-4,-1,48]
+    "subentries": {
+      "Blue": {
+        "sprites": ["kmDB5",0,-1,48,"RRDqa",-4,-1,48]
+      },
+      "Red": {
+        "sprites": ["g1g0x",0,-1,48,"jGaBm",-4,-1,48]
+      }
     },
     "tags": ["standard","wingless","p:fire","s:water","volcano","regular"]
   },

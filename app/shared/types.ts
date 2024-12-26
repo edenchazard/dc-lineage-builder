@@ -120,7 +120,7 @@ const habitatTags = [
   'all',
 ] as const;
 
-const miscTags = ['Has BSA', 'summonable', 'CB-only'] as const;
+const miscTags = ['Has BSA', 'summonable', 'CB-only', 'salt'] as const;
 
 const releaseTags = ['regular', 'valentine', 'halloween', 'christmas'] as const;
 
