@@ -106,7 +106,7 @@ async function main() {
 
   await saveResolutionStylesheet({
     locTiles: caches.cache36.settings.folder,
-    locCSSFile: './app/assets/tile-rendering/sprites-36x48.css',
+    locCSSFile: './app/assets/tile-rendering/sprites-36x48',
     sizing: { width: 36, height: 48 },
     injectFolder: caches.cache36.settings.inject,
   });
@@ -116,7 +116,7 @@ async function main() {
 
   await saveResolutionStylesheet({
     locTiles: caches.cache72.settings.folder,
-    locCSSFile: './app/assets/tile-rendering/sprites-72x96.css',
+    locCSSFile: './app/assets/tile-rendering/sprites-72x96',
     sizing: { width: 72, height: 96 },
     injectFolder: caches.cache72.settings.inject,
   });

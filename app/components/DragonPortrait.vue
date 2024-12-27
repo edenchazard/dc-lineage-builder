@@ -6,6 +6,7 @@
     <img
       v-if="data.metaData.src === 'dc'"
       :src="'https://dragcave.net/image/' + data.image"
+      loading="lazy"
       :class="'fallback d-' + data.image"
     />
     <span
@@ -15,12 +16,14 @@
     />
     <img
       v-else-if="data.metaData.src === 'ghost'"
+      loading="lazy"
       class="ghost"
       :src="data.image"
     />
     <img
       v-else
       src="../assets/images/placeholder.png"
+      loading="lazy"
     />
     <span class="sr-only label">{{ data.name }}</span>
   </span>
