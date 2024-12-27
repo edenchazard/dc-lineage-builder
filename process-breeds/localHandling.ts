@@ -4,74 +4,106 @@ import puppeteer from 'puppeteer';
 import { chromiumSettings } from './files';
 import type { IgnoreFile, IgnoreList, PortraitSizing } from './types';
 import type { PortraitCache } from './portraitCache';
-import type { BreedEntry, GenderOnly, NewTag } from '../app/shared/types';
+import {
+  tags,
+  type BreedEntry,
+  type GenderOnly,
+  type NewTag,
+} from '../app/shared/types';
+
+type EntryName = string;
 
 export interface LocalBreedsJSON {
-  [breedName: string]: LocalBreedEntry;
+  [breedName: EntryName]: Entry;
 }
 
-interface LocalBreedEntry {
+interface Base {
   dimorphism: boolean;
   genderOnly: GenderOnly;
   tags: NewTag[];
-  sprites:
-    | LocalNonDimorphicSprite
-    | LocalDimorphicSpritePair
-    | LocalBreedEntryAltList;
 }
 
-interface LocalBreedEntryAltList {
-  [altName: string]: LocalNonDimorphicSprite | LocalDimorphicSpritePair;
+interface Simple extends Base {
+  sprites: Sprites;
+  subentries?: never;
 }
 
-type LocalNonDimorphicSprite = string;
+interface Extended extends Base {
+  subentries: {
+    [name: EntryName]: {
+      sprites: Sprites;
+      tags?: NewTag[];
+    };
+  };
+  sprites?: never;
+}
 
-type LocalDimorphicSpritePair = [string, string];
+type Entry = Simple | Extended;
 
-export function getBreedTable(json: LocalBreedsJSON): BreedEntry[] {
+type Sprites = [string, string] | [string];
+
+export function getBreedTable(json: LocalBreedsJSON) {
   const entries: BreedEntry[] = [];
 
   const createEntry = function (
-    name: string,
-    breed: LocalBreedEntry,
-    spriteData: LocalDimorphicSpritePair | LocalNonDimorphicSprite,
+    name: EntryName,
+    overallBreed: Entry,
+    spriteData: Sprites,
   ) {
     const entry: BreedEntry = {
       name: name,
-      genderOnly: breed.genderOnly,
+      genderOnly: overallBreed.genderOnly,
       metaData: {
-        tags: breed.tags,
+        tags: overallBreed.tags,
         src: 'local',
       },
     };
 
-    if (breed.dimorphism) {
+    if (overallBreed.dimorphism) {
       entry.male = spriteData[0];
       entry.female = spriteData[1];
     } else {
-      if (!breed.genderOnly) {
-        entry.male = entry.female = spriteData as LocalNonDimorphicSprite;
+      if (!overallBreed.genderOnly) {
+        entry.male = entry.female = spriteData[0];
       } else {
-        const gender = breed.genderOnly == 'm' ? 'male' : 'female';
-        entry[gender] = spriteData as LocalNonDimorphicSprite;
+        const gender = overallBreed.genderOnly == 'm' ? 'male' : 'female';
+        entry[gender] = spriteData[0];
       }
     }
 
     return entry;
   };
 
-  for (const breedname in json) {
-    const breed = json[breedname];
+  for (const breedName in json) {
+    const overallBreed = { ...json[breedName] };
 
-    if (typeof breed.sprites === 'object' && !Array.isArray(breed.sprites)) {
-      for (const altname in breed.sprites) {
-        const altdata = breed.sprites[altname];
-        const fullName =
-          altname === '__regular__' ? breedname : breedname + ' ' + altname;
-        entries.push(createEntry(fullName, breed, altdata));
+    const subentries: Extended['subentries'] = overallBreed.subentries ?? {
+      __regular__: {
+        sprites: overallBreed.sprites,
+        tags: [],
+      },
+    };
+
+    for (const subentryName in subentries) {
+      const subentry = subentries[subentryName];
+      const entryName =
+        subentryName === '__regular__'
+          ? breedName
+          : `${breedName} ${subentryName}`;
+
+      const entry = createEntry(entryName, overallBreed, subentry.sprites);
+
+      // Append any subentry tags to the overall breed tags.
+      if ((subentry.tags ?? []).length > 0) {
+        entry.metaData.tags = [...overallBreed.tags, ...(subentry.tags ?? [])];
       }
-    } else {
-      entries.push(createEntry(breedname, breed, breed.sprites));
+
+      // Sort them by preferred order.
+      entry.metaData.tags = entry.metaData.tags.toSorted(
+        (a, b) => tags.indexOf(a) - tags.indexOf(b),
+      );
+
+      entries.push(entry);
     }
   }
 
