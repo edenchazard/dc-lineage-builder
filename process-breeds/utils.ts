@@ -1,7 +1,6 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { promises as fs } from 'fs';
-import { tags } from '../app/shared/types';
 
 // Node modules don't support __dirname and __filename
 // This will provide that functionality.

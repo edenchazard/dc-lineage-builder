@@ -20,7 +20,6 @@
     "coverage": "vitest --coverage",
     "process": "tsx ./process-breeds/process.ts",
     "download": "tsx ./process-breeds/download.ts",
-    "webp": "tsx ./process-breeds/sharp.ts",
     "prod": "node ./backend/server.js"
   },
   "dependencies": {
