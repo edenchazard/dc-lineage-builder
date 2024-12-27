@@ -165,7 +165,7 @@ export async function checkCache(
   let throttle = 0;
   await Promise.all(
     codes.map(async (code) => {
-      const path = `${cache.settings.folder}${code}.png`;
+      const path = `${cache.settings.folder}${code}.webp`;
 
       // check cache. if we don't have the image, we'll redownload it.
       try {
@@ -193,14 +193,14 @@ async function makeCSS(tilePaths: string[]) {
     tilePaths.map(async (tile) => {
       // we just want the code, so we have to parse it from the filepath
       // and exclude the extension
-      const code = tile.slice(tile.lastIndexOf('/') + 1, -4);
+      const code = tile.slice(tile.lastIndexOf('/') + 1, tile.lastIndexOf('.'));
       return { code, base64: await fs.readFile(tile, { encoding: 'base64' }) };
     }),
   );
 
   const stylesheet = base64
     .map((tile) => {
-      return `.d-${tile.code}{background:url('data:image/png;base64,${tile.base64}')}`;
+      return `.d-${tile.code}{background:url('data:image/webp;base64,${tile.base64}')}`;
     })
     .join('');
 

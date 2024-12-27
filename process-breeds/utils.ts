@@ -47,10 +47,7 @@ export async function prettyPrintJSONFile(
     const output = JSON.stringify(
       json,
       function (_, v) {
-        if (v instanceof Array)
-          return JSON.stringify(
-            v.toSorted((a, b) => tags.indexOf(a) - tags.indexOf(b)),
-          );
+        if (v instanceof Array) return JSON.stringify(v);
         return v;
       },
       indent,
