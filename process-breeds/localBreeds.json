@@ -279,6 +279,31 @@
     "sprites": ["fSAGq"],
     "tags": ["standard","western","light","coast","jungle","regular"]
   },
+  "Cantormaris": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "subentries": {
+      "Iratus": {
+        "sprites": ["l8AyC"]
+      },
+      "Itus": {
+        "sprites": ["t3iNN"]
+      },
+      "Motus": {
+        "sprites": ["Trzoj"]
+      },
+      "Mundus": {
+        "sprites": ["TdVYK"]
+      },
+      "Sophos": {
+        "sprites": ["gVJON"]
+      },
+      "Tutela": {
+        "sprites": ["A1EtF"]
+      }
+    },
+    "tags": ["standard","wyvern","p:water","s:magi","coast","jungle","volcano","regular"]
+  },
   "Carmine Wyvern": {
     "dimorphism": false,
     "genderOnly": false,
@@ -718,6 +743,12 @@
     "genderOnly": false,
     "sprites": ["srkhZ","QeUao"],
     "tags": ["drake","life","coast","forest","jungle","regular"]
+  },
+  "Hooded Murkling": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "sprites": ["TIOUK"],
+    "tags": ["standard","western","p:dark","s:death","coast","regular","Has BSA"]
   },
   "Hooktalon": {
     "dimorphism": true,
@@ -1266,6 +1297,12 @@
     "genderOnly": false,
     "sprites": ["jfKte","mOTLj"],
     "tags": ["standard","western","p:water","s:air","jungle","regular"]
+  },
+  "Scourgekeeper": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "sprites": ["ny65H"],
+    "tags": ["two-head","eastern","p:time","s:life","cave","regular","summonable"]
   },
   "Script": {
     "dimorphism": false,

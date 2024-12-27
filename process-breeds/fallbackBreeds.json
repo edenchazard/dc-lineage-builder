@@ -123,30 +123,6 @@
     "sprites": ["EQNPr",-26,-1,48,"WScX",0,7,null],
     "tags": ["standard","western","life","jungle","regular"]
   },
-  "Cantormaris": {
-    "genderOnly": false,
-    "subentries": {
-      "Iratus": {
-        "sprites": ["l8AyC",-14,-1,48]
-      },
-      "Itus": {
-        "sprites": ["t3iNN",-14,-1,48]
-      },
-      "Motus": {
-        "sprites": ["Trzoj",-14,-1,48]
-      },
-      "Mundus": {
-        "sprites": ["TdVYK",-14,-1,48]
-      },
-      "Sophos": {
-        "sprites": ["gVJON",-14,-1,48]
-      },
-      "Tutela": {
-        "sprites": ["A1EtF",-14,-1,48]
-      }
-    },
-    "tags": ["standard","wyvern","p:water","s:magi","coast","jungle","volcano","regular"]
-  },
   "Carina": {
     "genderOnly": false,
     "sprites": ["FVU6w",0,-1,48,"m4JIp",-17,-1,48],
@@ -381,11 +357,6 @@
     "genderOnly": false,
     "sprites": ["QklUl",-14,-1,48,"ZtlTu",-14,-1,48],
     "tags": ["standard","western","fire","hybrid","regular"]
-  },
-  "Hooded Murkling": {
-    "genderOnly": false,
-    "sprites": ["TIOUK",-20,-1,48],
-    "tags": ["standard","western","p:dark","s:death","coast","regular","Has BSA"]
   },
   "Ice": {
     "genderOnly": false,
@@ -622,11 +593,6 @@
     "genderOnly": false,
     "sprites": ["uo3jm",-8,-1,48,"vxNpR",-14,-1,48],
     "tags": ["standard","wyvern","neutral","desert","volcano","regular"]
-  },
-  "Scourgekeeper": {
-    "genderOnly": false,
-    "sprites": ["ny65H",-4,-1,48],
-    "tags": ["two-head","eastern","p:time","s:life","cave","regular","summonable"]
   },
   "Seasonal (Autumn)": {
     "genderOnly": false,
