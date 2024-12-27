@@ -165,7 +165,7 @@ export async function checkCache(
   let throttle = 0;
   await Promise.all(
     codes.map(async (code) => {
-      const path = `${cache.settings.folder}${code}.png`;
+      const path = `${cache.settings.folder}${code}.webp`;
 
       // check cache. if we don't have the image, we'll redownload it.
       try {
@@ -193,18 +193,35 @@ async function makeCSS(tilePaths: string[]) {
     tilePaths.map(async (tile) => {
       // we just want the code, so we have to parse it from the filepath
       // and exclude the extension
-      const code = tile.slice(tile.lastIndexOf('/') + 1, -4);
+      const code = tile.slice(tile.lastIndexOf('/') + 1, tile.lastIndexOf('.'));
       return { code, base64: await fs.readFile(tile, { encoding: 'base64' }) };
     }),
   );
 
-  const stylesheet = base64
-    .map((tile) => {
-      return `.d-${tile.code}{background:url('data:image/png;base64,${tile.base64}')}`;
-    })
-    .join('');
+  const split: Record<string, string[]> = {
+    '09': [],
+    AE: [],
+    FJ: [],
+    KO: [],
+    PT: [],
+    UZ: [],
+  };
 
-  return stylesheet;
+  base64.forEach((tile) => {
+    for (const key in split) {
+      const range = key.split('');
+      const code = tile.code[0].toUpperCase();
+
+      if (code >= range[0] && code <= range[1]) {
+        split[key].push(
+          `.d-${tile.code}{background:url('data:image/webp;base64,${tile.base64}')}`,
+        );
+        break;
+      }
+    }
+  });
+
+  return Object.values(split).map((tiles) => tiles.join(''));
 }
 
 // if we want to 'inject' additional tiles outside of the cache,
@@ -234,8 +251,12 @@ export async function saveResolutionStylesheet({
     );
   }
 
-  const stylesheet = await makeCSS([...tiles, ...injectedTiles]);
+  await Promise.all(
+    (await makeCSS([...tiles, ...injectedTiles])).map(async (stylesheet, i) => {
+      const file = `${locCSSFile}-${i}.css`;
+      await fs.writeFile(file, stylesheet, 'utf8');
+    }),
+  );
 
-  await fs.writeFile(locCSSFile, stylesheet, 'utf8');
-  console.log(`... Saved css stylesheet to ${locCSSFile}`);
+  console.log(`... Saved css stylesheets to ${locCSSFile}`);
 }

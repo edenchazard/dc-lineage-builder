@@ -2,8 +2,8 @@ node_modules
 coverage
 db
 **/fallbacks.css
-**/sprites-36x48.css
-**/sprites-72x96.css
+**/sprites-36x48-*.css
+**/sprites-72x96-*.css
 **/breed-definitions.ts
 process-breeds/*breeds.json
 package.json

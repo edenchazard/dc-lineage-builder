@@ -54,10 +54,20 @@ watch(
   pixelRatio,
   () => {
     if (pixelRatio.value > 1) {
-      import('./assets/tile-rendering/sprites-72x96.css');
+      import('./assets/tile-rendering/sprites-72x96-0.css');
+      import('./assets/tile-rendering/sprites-72x96-1.css');
+      import('./assets/tile-rendering/sprites-72x96-2.css');
+      import('./assets/tile-rendering/sprites-72x96-3.css');
+      import('./assets/tile-rendering/sprites-72x96-4.css');
+      import('./assets/tile-rendering/sprites-72x96-5.css');
       use72 = true;
     } else if (!use72) {
-      import('./assets/tile-rendering/sprites-36x48.css');
+      import('./assets/tile-rendering/sprites-36x48-0.css');
+      import('./assets/tile-rendering/sprites-36x48-1.css');
+      import('./assets/tile-rendering/sprites-36x48-2.css');
+      import('./assets/tile-rendering/sprites-36x48-3.css');
+      import('./assets/tile-rendering/sprites-36x48-4.css');
+      import('./assets/tile-rendering/sprites-36x48-5.css');
     }
   },
   { immediate: true },
