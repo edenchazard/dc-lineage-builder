@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import type { Browser } from 'puppeteer';
 import type { PortraitCacheSettings } from './types';
+import sharp from 'sharp';
 
 class Cache {
   private path: string;
@@ -88,7 +89,12 @@ class PortraitCache extends Cache {
       throw new Error(`Image failed to download: ${actualCode}`);
     }
 
-    await fs.writeFile(filePath, await image.buffer());
+    await sharp(await image.buffer())
+      .webp({
+        quality: 100,
+        lossless: true,
+      })
+      .toFile(filePath.substring(0, filePath.lastIndexOf('.')) + '.webp');
     page.close();
   }
 }

@@ -1,4 +1,4 @@
-FROM node:slim
+FROM node:lts-slim
 
 # We don't need the standalone Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true

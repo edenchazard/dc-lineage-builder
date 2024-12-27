@@ -1,6 +1,6 @@
 {
   "name": "dc-lineage-builder",
-  "version": "6.4.1",
+  "version": "6.4.2",
   "private": true,
   "author": "Charley Reeson (https://chazza.me)",
   "type": "module",
@@ -69,6 +69,7 @@
     "prettier": "^3.1.1",
     "puppeteer": "^23.2.1",
     "reset-css": "^5.0.2",
+    "sharp": "^0.33.5",
     "supertest": "^7.0.0",
     "tsx": "^4.19.0",
     "typescript": "^5.5.4",
