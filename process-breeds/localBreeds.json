@@ -4,10 +4,12 @@
     "genderOnly": false,
     "subentries": {
       "Salt MoonShark": {
-        "sprites": ["abqwu","RYMEj"]
+        "sprites": ["abqwu","RYMEj"],
+        "tags": ["salt"]
       },
       "Salt Schenanigans": {
-        "sprites": ["35HjT","FrN6z"]
+        "sprites": ["35HjT","FrN6z"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["crvng","pmpkn"]
@@ -84,7 +86,8 @@
     "genderOnly": "f",
     "subentries": {
       "Salt Dohaerys": {
-        "sprites": ["eraNS"]
+        "sprites": ["eraNS"],
+        "tags": ["salt"]
       }
     },
     "tags": ["standard","eastern","p:light","s:fire","cave","valentine"]
@@ -106,10 +109,12 @@
     "genderOnly": false,
     "subentries": {
       "Salt Nirami": {
-        "sprites": ["gjt5P","DPgK5"]
+        "sprites": ["gjt5P","DPgK5"],
+        "tags": ["salt"]
       },
       "Salt TCA": {
-        "sprites": ["84555","wHITK"]
+        "sprites": ["84555","wHITK"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["ck9p3","W63P1"]
@@ -265,7 +270,8 @@
     "genderOnly": false,
     "subentries": {
       "Salt Infinis": {
-        "sprites": ["SRP5l","2w8nP"]
+        "sprites": ["SRP5l","2w8nP"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["jQ06C","qhbIi"]
@@ -315,7 +321,8 @@
     "genderOnly": false,
     "subentries": {
       "Salt JOTB": {
-        "sprites": ["rFI9v","mqFhV"]
+        "sprites": ["rFI9v","mqFhV"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["EspR4","Wm1pn"]
@@ -366,10 +373,12 @@
     "genderOnly": false,
     "subentries": {
       "Salt Odeen": {
-        "sprites": ["GtvMN","iyKgt"]
+        "sprites": ["GtvMN","iyKgt"],
+        "tags": ["salt"]
       },
       "Salt Rwyvern": {
-        "sprites": ["1waIt","3jSzN"]
+        "sprites": ["1waIt","3jSzN"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["7kiVA","zag1a"]
@@ -394,10 +403,12 @@
     "genderOnly": false,
     "subentries": {
       "Salt Birdzgoboom": {
-        "sprites": ["uZ9hS","Es9FU"]
+        "sprites": ["uZ9hS","Es9FU"],
+        "tags": ["salt"]
       },
       "Salt Pixxelation": {
-        "sprites": ["s0n9m","VtdtJ"]
+        "sprites": ["s0n9m","VtdtJ"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["Qn1Pw","iYHtV"]
@@ -441,7 +452,8 @@
     "genderOnly": "m",
     "subentries": {
       "Salt Spatio": {
-        "sprites": ["v54W2"]
+        "sprites": ["v54W2"],
+        "tags": ["salt"]
       }
     },
     "tags": ["standard","lindwyrm","p:magi","s:life","cave","valentine"]
@@ -482,10 +494,12 @@
     "genderOnly": "m",
     "subentries": {
       "Salt Spatio": {
-        "sprites": ["IRls2"]
+        "sprites": ["IRls2"],
+        "tags": ["salt"]
       },
       "Salt Znowy": {
-        "sprites": ["PArAs"]
+        "sprites": ["PArAs"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["YearF"]
@@ -533,7 +547,8 @@
     "genderOnly": "m",
     "subentries": {
       "Salt JOTB": {
-        "sprites": ["QPPUG"]
+        "sprites": ["QPPUG"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["vdc7L"]
@@ -558,10 +573,12 @@
     "genderOnly": "f",
     "subentries": {
       "Salt Fiona": {
-        "sprites": ["tSKlj"]
+        "sprites": ["tSKlj"],
+        "tags": ["salt"]
       },
       "Salt Odeen": {
-        "sprites": ["4CMLL"]
+        "sprites": ["4CMLL"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["38Wem"]
@@ -626,13 +643,16 @@
         "sprites": ["6L2BZ"]
       },
       "Salt Haze": {
-        "sprites": ["CFUCk"]
+        "sprites": ["CFUCk"],
+        "tags": ["salt"]
       },
       "Salt Infinis": {
-        "sprites": ["hXdBd"]
+        "sprites": ["hXdBd"],
+        "tags": ["salt"]
       },
       "Salt Spatio": {
-        "sprites": ["m00OD"]
+        "sprites": ["m00OD"],
+        "tags": ["salt"]
       },
       "Yellow": {
         "sprites": ["42Flu"]
@@ -690,19 +710,23 @@
         "sprites": ["4youu"]
       },
       "Day Form Salt Haze": {
-        "sprites": ["BjNoO"]
+        "sprites": ["BjNoO"],
+        "tags": ["salt"]
       },
       "Day Form Salt Schenanigans": {
-        "sprites": ["CHHg4"]
+        "sprites": ["CHHg4"],
+        "tags": ["salt"]
       },
       "Night Form": {
         "sprites": ["sAuNa"]
       },
       "Night Form Salt Haze": {
-        "sprites": ["BjNoO_b"]
+        "sprites": ["BjNoO_b"],
+        "tags": ["salt"]
       },
       "Night Form Salt Schenanigans": {
-        "sprites": ["CHHg4_b"]
+        "sprites": ["CHHg4_b"],
+        "tags": ["salt"]
       }
     },
     "tags": ["standard","lindwyrm","p:air","s:ice","cave","christmas"]
@@ -718,7 +742,8 @@
     "genderOnly": "m",
     "subentries": {
       "Salt LadyLyzar": {
-        "sprites": ["hmSAC"]
+        "sprites": ["hmSAC"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["iPfaV"]
@@ -813,7 +838,8 @@
     "genderOnly": false,
     "subentries": {
       "Salt Schenanigans": {
-        "sprites": ["BU7YK","wigLa"]
+        "sprites": ["BU7YK","wigLa"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["f9I08","J7Wb8"]
@@ -856,10 +882,12 @@
     "genderOnly": false,
     "subentries": {
       "Salt Dohaerys": {
-        "sprites": ["pRJPR","Qgqgi"]
+        "sprites": ["pRJPR","Qgqgi"],
+        "tags": ["salt"]
       },
       "Salt Infinis": {
-        "sprites": ["y4dL5","sazrx"]
+        "sprites": ["y4dL5","sazrx"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["GKebv","pC2D8"]
@@ -890,7 +918,8 @@
     "genderOnly": "f",
     "subentries": {
       "Salt Pixxelation": {
-        "sprites": ["DabBz"]
+        "sprites": ["DabBz"],
+        "tags": ["salt"]
       }
     },
     "tags": ["standard","eastern","p:light","s:fire","cave","christmas"]
@@ -973,10 +1002,12 @@
     "genderOnly": false,
     "subentries": {
       "Salt Pixxelation": {
-        "sprites": ["e5OlA"]
+        "sprites": ["e5OlA"],
+        "tags": ["salt"]
       },
       "Salt Tikigurl91": {
-        "sprites": ["AOprF"]
+        "sprites": ["AOprF"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["YiKaz"]
@@ -1001,7 +1032,8 @@
     "genderOnly": "m",
     "subentries": {
       "Salt Infinis": {
-        "sprites": ["5ikD8"]
+        "sprites": ["5ikD8"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["pxCOk"]
@@ -1044,10 +1076,12 @@
     "genderOnly": false,
     "subentries": {
       "Salt Birdzgoboom": {
-        "sprites": ["40Fe4","v9OgZ"]
+        "sprites": ["40Fe4","v9OgZ"],
+        "tags": ["salt"]
       },
       "Salt Process": {
-        "sprites": ["Qfyao","1fPdz"]
+        "sprites": ["Qfyao","1fPdz"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["vortx","JwLvz"]
@@ -1100,16 +1134,20 @@
         "sprites": ["vvzJm","yqF6z"]
       },
       "Reborn Salt Schenanigans": {
-        "sprites": ["GOBKa","V6zbS"]
+        "sprites": ["GOBKa","V6zbS"],
+        "tags": ["salt"]
       },
       "Reborn Salt Spatio": {
-        "sprites": ["bQMAK","jKTHD"]
+        "sprites": ["bQMAK","jKTHD"],
+        "tags": ["salt"]
       },
       "Salt Schenanigans": {
-        "sprites": ["5IpCe","DFk2c"]
+        "sprites": ["5IpCe","DFk2c"],
+        "tags": ["salt"]
       },
       "Salt Spatio": {
-        "sprites": ["3pGCm","8jjcE"]
+        "sprites": ["3pGCm","8jjcE"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["cSGcX","819Ix"]
@@ -1128,10 +1166,12 @@
     "genderOnly": "f",
     "subentries": {
       "Salt Infinis": {
-        "sprites": ["1N3R6"]
+        "sprites": ["1N3R6"],
+        "tags": ["salt"]
       },
       "Salt MoonShark": {
-        "sprites": ["iZTHk"]
+        "sprites": ["iZTHk"],
+        "tags": ["salt"]
       }
     },
     "tags": ["standard","lindwyrm","p:fire","s:magi","cave","christmas"]
@@ -1141,7 +1181,8 @@
     "genderOnly": false,
     "subentries": {
       "Salt Marrionetta": {
-        "sprites": ["King"]
+        "sprites": ["King"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["hEqW"]
@@ -1213,10 +1254,12 @@
     "genderOnly": "m",
     "subentries": {
       "Salt Birdzgoboom": {
-        "sprites": ["lTI33"]
+        "sprites": ["lTI33"],
+        "tags": ["salt"]
       },
       "Salt Infinis": {
-        "sprites": ["pHVvj"]
+        "sprites": ["pHVvj"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["ykiII"]
@@ -1247,7 +1290,8 @@
     "genderOnly": "f",
     "subentries": {
       "Salt LadyLyzar": {
-        "sprites": ["Hg2k"]
+        "sprites": ["Hg2k"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["2PIc"]
@@ -1345,7 +1389,8 @@
     "genderOnly": false,
     "subentries": {
       "Salt Fiona": {
-        "sprites": ["p9ukA"]
+        "sprites": ["p9ukA"],
+        "tags": ["salt"]
       }
     },
     "tags": ["standard","western","magi","cave","halloween"]
@@ -1405,7 +1450,8 @@
     "genderOnly": "m",
     "subentries": {
       "Salt Infinis": {
-        "sprites": ["SPqh3"]
+        "sprites": ["SPqh3"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["ViiiL"]
@@ -1424,7 +1470,8 @@
         "sprites": ["O928E"]
       },
       "Salt Odeen": {
-        "sprites": ["UjTRs"]
+        "sprites": ["UjTRs"],
+        "tags": ["salt"]
       }
     },
     "tags": ["standard","western","time","cave","christmas"]
@@ -1475,10 +1522,12 @@
     "genderOnly": "f",
     "subentries": {
       "Salt Haze": {
-        "sprites": ["HomO0"]
+        "sprites": ["HomO0"],
+        "tags": ["salt"]
       },
       "Salt Nirami": {
-        "sprites": ["GudBJ"]
+        "sprites": ["GudBJ"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["0KKor"]
@@ -1582,7 +1631,8 @@
         "sprites": ["WNd7L"]
       },
       "Salt Marrionetta": {
-        "sprites": ["Penk"]
+        "sprites": ["Penk"],
+        "tags": ["salt"]
       },
       "Silver": {
         "sprites": ["30d5P"]
@@ -1728,13 +1778,16 @@
     "genderOnly": "m",
     "subentries": {
       "Salt Nirami": {
-        "sprites": ["NUCun"]
+        "sprites": ["NUCun"],
+        "tags": ["salt"]
       },
       "Salt Pixxelation": {
-        "sprites": ["CycLe"]
+        "sprites": ["CycLe"],
+        "tags": ["salt"]
       },
       "Salt TCA": {
-        "sprites": ["DN0Ir"]
+        "sprites": ["DN0Ir"],
+        "tags": ["salt"]
       },
       "__regular__": {
         "sprites": ["42TLi"]
