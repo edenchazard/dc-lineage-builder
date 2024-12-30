@@ -3,6 +3,7 @@
     class="breed-search interactive"
     type="search"
     autocomplete="off"
+    :value="modelValue"
     @input="search"
   />
 </template>
@@ -11,12 +12,17 @@
 import { debounce } from '../shared/utils.js';
 
 const emit = defineEmits<{
-  (e: 'update', value: string): void;
+  (e: 'update:model-value', value: string): void;
+}>();
+
+defineProps<{
+  modelValue: string;
 }>();
 
 // debounced to avoid it running every key press rapidly
 const search = debounce(
-  (e: Event) => emit('update', (e.target as HTMLInputElement).value),
+  (e: Event) =>
+    emit('update:model-value', (e.target as HTMLInputElement).value),
   250,
 );
 </script>
