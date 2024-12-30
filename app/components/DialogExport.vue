@@ -41,7 +41,6 @@
 </template>
 <script setup lang="ts">
 import { onUpdated, ref } from 'vue';
-import type { PropType } from 'vue';
 import type {
   MaybePartialLineageWithMetadata,
   PartialLineage,
@@ -52,20 +51,11 @@ import Textbox from './Textbox.vue';
 import DragonProblem from './DragonProblem.vue';
 import { Lineage } from '../shared/lineageHandler';
 
-const props = defineProps({
-  open: {
-    type: Boolean,
-    required: true,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-  tree: {
-    type: Object as PropType<MaybePartialLineageWithMetadata>,
-    required: true,
-  },
-});
+const props = defineProps<{
+  open: boolean;
+  id: string;
+  tree: MaybePartialLineageWithMetadata;
+}>();
 
 const emit = defineEmits<{
   (e: 'close'): void;
