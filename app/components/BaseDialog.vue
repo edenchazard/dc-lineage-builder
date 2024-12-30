@@ -184,11 +184,6 @@ function modalClosed() {
   }
 }
 
-.dialog-header,
-.dialog-main {
-  padding: 0.75rem;
-}
-
 .dialog-header {
   display: flex;
   justify-content: space-between;
@@ -197,7 +192,7 @@ function modalClosed() {
   background: var(--dialog-header-bg);
   color: var(--dialog-header-fg);
   font: var(--dialog-header-font);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
 }
 
 .dialog-header-title {
