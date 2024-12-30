@@ -29,14 +29,6 @@
       The problem dragon is:
       <DragonProblem :dragon="problemDragon" />
     </div>
-    <template #footer>
-      <button
-        class="dialog-footer-button"
-        @click="emit('close')"
-      >
-        Close
-      </button>
-    </template>
   </BaseDialog>
 </template>
 <script setup lang="ts">
