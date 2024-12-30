@@ -1,8 +1,8 @@
 <template>
   <dialog
-    class="dialog no-transition"
     id="breed-selector-wrapper"
     :ref="breedSelectorDialog.dialogRef"
+    class="dialog no-transition"
     aria-labelledby="dialog-breed-selector-wrapper"
     @click="
       (event) => {

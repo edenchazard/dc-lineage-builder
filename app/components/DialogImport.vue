@@ -17,8 +17,8 @@
       </p>
     </div>
     <Textbox
-      autofocus
       v-model="file"
+      autofocus
       placeholder="Paste your import text here"
       type="textarea"
     />

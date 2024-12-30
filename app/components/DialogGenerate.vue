@@ -21,8 +21,8 @@
         from the server.
       </p>
       <Textbox
-        autofocus
         v-model="viewLink"
+        autofocus
         readonly
         type="input"
         placeholder="link"
