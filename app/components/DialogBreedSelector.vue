@@ -64,8 +64,8 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, useTemplateRef, watch } from 'vue';
-import { onStartTyping } from '@vueuse/core';
+import { nextTick, useTemplateRef, watch } from 'vue';
+import { onStartTyping, useSessionStorage } from '@vueuse/core';
 import { type PortraitData } from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
@@ -79,7 +79,7 @@ const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
 }>();
 
-const searchString = ref('');
+const searchString = useSessionStorage('search', '');
 const mateSearchEl = useTemplateRef('mateSearchEl');
 const resultsEl = useTemplateRef('resultsEl');
 const breedSelectorDialog = useBreedSelector();
