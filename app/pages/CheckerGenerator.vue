@@ -82,7 +82,7 @@
             <label for="search">Search:</label>
             <BreedSearch
               id="search"
-              @update="(search: string) => (query = search)"
+              v-model="query"
             />
             <label for="applied-filters">Filters:</label>
             <BreedListFilterDropdown
