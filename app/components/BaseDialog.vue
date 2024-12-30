@@ -186,7 +186,6 @@ function modalClosed() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 1rem;
   background: var(--dialog-header-bg);
   color: var(--dialog-header-fg);
@@ -196,7 +195,6 @@ function modalClosed() {
 
 .dialog-header-title {
   font-size: 1.5em;
-  margin: 0px;
 }
 
 .dialog-main {
