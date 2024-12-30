@@ -3,8 +3,6 @@
     ref="builder"
     class="builder-container"
   >
-    <div id="dialogs"></div>
-
     <DialogBreedSelector />
 
     <Toolbar
