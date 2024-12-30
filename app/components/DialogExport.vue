@@ -17,6 +17,7 @@
         Copy and paste this text to a text file to import this lineage later.
       </p>
       <Textbox
+        autofocus
         v-model="file"
         placeholder="Export code"
         type="textarea"

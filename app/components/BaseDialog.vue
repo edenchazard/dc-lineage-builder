@@ -13,6 +13,13 @@
         }
       }
     "
+    @click="
+      (event) => {
+        if (dialog && (event.target as HTMLDialogElement)?.isSameNode(dialog)) {
+          close();
+        }
+      }
+    "
   >
     <div class="dialog-inner">
       <header class="dialog-header">
