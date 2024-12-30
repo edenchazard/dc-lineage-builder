@@ -1027,6 +1027,12 @@
     "sprites": ["wPwLI","GeK5M"],
     "tags": ["standard","western","p:neutral","s:fire","hybrid","regular"]
   },
+  "Noctivellus": {
+    "dimorphism": false,
+    "genderOnly": "m",
+    "sprites": ["Iceee"],
+    "tags": ["two-head","cave","christmas"]
+  },
   "Olive": {
     "dimorphism": true,
     "genderOnly": false,

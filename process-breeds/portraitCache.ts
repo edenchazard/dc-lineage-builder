@@ -91,8 +91,7 @@ class PortraitCache extends Cache {
 
     await sharp(await image.buffer())
       .webp({
-        quality: 100,
-        lossless: true,
+        nearLossless: true,
       })
       .toFile(filePath.substring(0, filePath.lastIndexOf('.')) + '.webp');
     page.close();
