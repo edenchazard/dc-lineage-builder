@@ -13,7 +13,7 @@
             ref="mateSearchEl"
             placeholder="Search"
             enterkeyhint="search"
-            @update="(search) => (searchString = search)"
+            v-model="searchString"
           />
           <label
             for="results-search"
