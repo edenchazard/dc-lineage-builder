@@ -1,102 +1,63 @@
 <template>
-  <div
+  <dialog
     id="breed-selector-wrapper"
-    ref="rootEl"
-    role="dialog"
-    aria-modal="true"
+    :ref="breedSelectorDialog.dialogRef"
+    class="dialog no-transition"
     aria-labelledby="dialog-breed-selector-wrapper"
-    tabindex="-1"
+    @click="
+      (event) => {
+        if (
+          breedSelectorDialog.dialogRef.value &&
+          (event.target as HTMLDialogElement)?.isSameNode(
+            breedSelectorDialog.dialogRef.value,
+          )
+        ) {
+          breedSelectorDialog.hide();
+        }
+      }
+    "
   >
-    <header class="dialog-header">
-      <h1
-        id="dialog-breed-selector-wrapper"
-        class="dialog-header-title"
-      >
-        <slot name="title">Choose a breed</slot>
-      </h1>
-
-      <div class="dialog-buttons">
-        <button
-          class="button close-button"
-          type="button"
-          title="Close"
-          @click="emit('close')"
+    <div class="dialog-inner">
+      <header class="dialog-header">
+        <h1
+          id="dialog-breed-selector-wrapper"
+          class="dialog-header-title"
         >
-          <FontAwesomeIcon
-            size="2x"
-            icon="times"
-          />
-        </button>
-      </div>
-    </header>
-    <main class="dialog-main">
-      <slot name="content"></slot>
-    </main>
-  </div>
+          <slot name="title">Choose a breed</slot>
+        </h1>
+
+        <div class="dialog-buttons">
+          <button
+            class="button close-button"
+            type="button"
+            title="Close"
+            @click="breedSelectorDialog.hide()"
+          >
+            <FontAwesomeIcon
+              size="2x"
+              icon="times"
+            />
+          </button>
+        </div>
+      </header>
+      <main class="dialog-main">
+        <slot name="content" />
+      </main>
+    </div>
+  </dialog>
 </template>
+
 <script setup lang="ts">
-import { onClickOutside, useScrollLock } from '@vueuse/core';
-import { ref } from 'vue';
-
-const emit = defineEmits<{
-  (e: 'close'): void;
-}>();
-
-const rootEl = ref<HTMLDivElement>();
-
-// we want to hide the scroll bar when the popup is open,
-// and, we'd also like to prevent overscroll happening.
-const scrollLockDoc = useScrollLock(document.documentElement, true);
-const scrollLockBody = useScrollLock(document.body, true);
-
-onClickOutside(rootEl, close);
-
-function close() {
-  scrollLockDoc.value = scrollLockBody.value = false;
-  emit('close');
-}
+import useBreedSelector from '../composables/useBreedSelector';
+const breedSelectorDialog = useBreedSelector();
 </script>
+
 <style scoped>
 #breed-selector-wrapper {
-  z-index: 1000;
-  position: fixed;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100vw;
-  height: 100%;
-  margin: 0;
-  max-height: 500px;
-  display: flex;
   flex-direction: column;
   overscroll-behavior: contain;
-  background: var(--dialog-body-bg);
-}
-
-.dialog-main {
-  flex: 1;
-  display: flex;
-  overflow: auto;
-  flex-direction: column;
-  padding: 0.5rem;
-}
-
-@media only screen and (min-width: 504px) {
-  #breed-selector-wrapper {
-    width: 503px;
-    box-shadow: 0px 0px 200px 0px #000;
-    margin-left: -250px;
-    left: 50%;
-  }
-}
-
-@media only screen and (min-height: 501px) {
-  #breed-selector-wrapper {
-    height: 500px;
-    margin-top: -250px;
-    top: 50%;
-    box-shadow: 2px 2px 20px 1px #000;
-  }
+  max-height: 500px;
+  height: 100%;
+  box-shadow: 2px 2px 20px 1px #000;
 }
 </style>

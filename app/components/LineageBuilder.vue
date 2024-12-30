@@ -3,7 +3,8 @@
     ref="builder"
     class="builder-container"
   >
-    <div id="dialogs"></div>
+    <DialogBreedSelector />
+
     <Toolbar
       v-if="appStore.activeTree !== null"
       :config="config"
@@ -59,6 +60,7 @@ import Feedback from './Feedback.vue';
 import { Lineage as LineageHandler } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 import { FetchError } from 'ofetch';
+import DialogBreedSelector from './DialogBreedSelector.vue';
 
 const route = useRoute();
 const appStore = useAppStore();

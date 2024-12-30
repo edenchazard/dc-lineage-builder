@@ -22,7 +22,7 @@
   </p>
 </template>
 <script setup lang="ts">
-import { nextTick, watch, computed, ref } from 'vue';
+import { computed, useTemplateRef } from 'vue';
 import type { PortraitData, TagFilterCollection } from '../shared/types';
 import BreedList from './BreedList.vue';
 import { useAppStore } from '../store/useAppStore';
@@ -46,13 +46,12 @@ const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
 }>();
 
-const container = ref<HTMLDivElement | null>(null);
+const container = useTemplateRef('container');
 
 const appStore = useAppStore();
 
 const filteredBreeds = computed(() => {
   const search = props.search.toLowerCase().trim();
-
   const breeds = filterBreedsByTagsWith(props.breeds, props.tags);
 
   // if the search string is empty, return the whole
@@ -79,13 +78,6 @@ const filteredBreeds = computed(() => {
     else if (position > -1) secondary.push(breed);
   }
   return [...primary, ...secondary];
-});
-
-watch(container, () => {
-  // scrolls the results back to the top to prevent
-  // the view port being stuck further down
-  if (container.value !== null)
-    nextTick(() => ((container.value as HTMLDivElement).scrollTop = 0));
 });
 </script>
 

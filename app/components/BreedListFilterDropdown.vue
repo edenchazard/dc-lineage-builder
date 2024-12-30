@@ -5,6 +5,7 @@
     auto-boundary-max-size
     :container="container"
     placement="bottom-start"
+    :overflow-padding="10"
     auto-hide
     @apply-show="focusFiltersTitle()"
   >
@@ -12,12 +13,14 @@
       <div class="applied-filters">
         <input
           :id="id"
+          ref="textEl"
           readonly
           type="text"
           :value="tagStore.join(', ')"
           class="tag-list pointer"
           :placeholder="placeholder"
           @keydown.space.enter="show()"
+          @keydown.space.prevent.stop
           @click="show()"
         />
         <span
@@ -32,7 +35,13 @@
     </template>
 
     <template #popper="{ hide }">
-      <div class="filters-container">
+      <div
+        class="filters-container"
+        @keydown.escape.prevent.stop="
+          hide();
+          textEl?.focus();
+        "
+      >
         <div class="header">
           <p
             ref="filtersTitle"
@@ -53,7 +62,10 @@
             type="button"
             aria-label="Close filters"
             title="Close filters"
-            @click="hide()"
+            @click="
+              hide();
+              textEl?.focus();
+            "
           >
             <FontAwesomeIcon
               size="2x"
@@ -75,8 +87,11 @@
                     type="checkbox"
                     @change="toggle(tags)"
                   />
-                  <legend>
-                    <label :for="slug(name)">
+                  <legend :aria-labelledby="'group-' + slug(name)">
+                    <label
+                      :id="'group-' + slug(name)"
+                      :for="slug(name)"
+                    >
                       {{ name }}
                     </label>
                   </legend>
@@ -125,6 +140,7 @@ defineProps<{
 }>();
 
 const filtersTitle = useTemplateRef('filtersTitle');
+const textEl = useTemplateRef('textEl');
 
 async function focusFiltersTitle() {
   await nextTick();

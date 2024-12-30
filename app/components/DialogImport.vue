@@ -18,6 +18,7 @@
     </div>
     <Textbox
       v-model="file"
+      autofocus
       placeholder="Paste your import text here"
       type="textarea"
     />
@@ -31,6 +32,7 @@
     </template>
   </DialogBase>
 </template>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { PartialLineage } from '../shared/types';
@@ -45,16 +47,10 @@ const emit = defineEmits<{
   (e: 'onImport', tree: PartialLineage): void;
 }>();
 
-defineProps({
-  open: {
-    type: Boolean,
-    required: true,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-});
+defineProps<{
+  open: boolean;
+  id: string;
+}>();
 
 const file = ref('');
 const status = ref<InstanceType<typeof Feedback>>();
