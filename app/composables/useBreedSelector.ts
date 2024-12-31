@@ -1,4 +1,4 @@
-import { nextTick, readonly, ref } from 'vue';
+import { readonly, ref } from 'vue';
 import type { PartialLineageWithMetadata, PortraitData } from '../shared/types';
 import { useScrollLock } from '@vueuse/core';
 
@@ -27,9 +27,12 @@ async function show(options: UseBreedSelectorOptions) {
   autofocus.value = _options.autofocus;
   forGender.value = _options.forGender;
   breedSelectedCallback = _options.breedSelectedCallback;
-  await nextTick();
   scrollLockDoc.value = scrollLockBody.value = true;
-  dialogRef.value?.showModal();
+
+  if (dialogRef.value) {
+    dialogRef.value.showModal();
+    dialogRef.value.dataset.openTime = Date.now().toString();
+  }
 }
 
 function hide() {
@@ -50,7 +53,10 @@ function hide() {
   tabIndexes?.[0]?.setAttribute('tabindex', '0');
 
   autofocus.value = false;
-  dialogRef.value?.close();
+  if (dialogRef.value) {
+    dialogRef.value.close();
+    dialogRef.value.dataset.openTime = '';
+  }
   breedSelectedCallback = null;
   scrollLockDoc.value = scrollLockBody.value = false;
 }
