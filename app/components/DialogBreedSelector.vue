@@ -99,6 +99,16 @@ watch(breedSelectorDialog.autofocus, async (value) => {
 });
 
 function breedSelected(breed: PortraitData) {
+  const openTime = parseInt(
+    breedSelectorDialog.dialogRef.value?.dataset.openTime ?? '0',
+  );
+
+  // In mobile desktop mode, the click on the lineage view node
+  // gets intercepted and the breedSelected event is emitted.
+  if (Date.now() - openTime < 250) {
+    return;
+  }
+
   breedSelectorDialog.handleBreedSelected(breed);
   emit('breedSelected', breed);
 }
