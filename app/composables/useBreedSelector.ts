@@ -1,4 +1,4 @@
-import { nextTick, readonly, ref } from 'vue';
+import { readonly, ref } from 'vue';
 import type { PartialLineageWithMetadata, PortraitData } from '../shared/types';
 import { useScrollLock } from '@vueuse/core';
 
