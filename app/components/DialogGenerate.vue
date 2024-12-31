@@ -46,9 +46,9 @@
     </div>
   </BaseDialog>
 </template>
+
 <script setup lang="ts">
-import { onUpdated, ref } from 'vue';
-import type { PropType } from 'vue';
+import { ref, useTemplateRef, watch } from 'vue';
 import { ValidationError } from 'yup';
 import type {
   MaybePartialLineageWithMetadata,
@@ -59,34 +59,23 @@ import BaseDialog from './BaseDialog.vue';
 import Feedback from './Feedback.vue';
 import Textbox from './Textbox.vue';
 import DragonProblem from './DragonProblem.vue';
-import { FetchError } from 'ofetch';
-
-const props = defineProps({
-  open: {
-    type: Boolean,
-    required: true,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-  tree: {
-    type: Object as PropType<MaybePartialLineageWithMetadata>,
-    required: true,
-  },
-});
 
 const emit = defineEmits<{
   (e: 'close'): void;
+}>();
+
+const props = defineProps<{
+  open: boolean;
+  id: string;
+  tree: MaybePartialLineageWithMetadata;
 }>();
 
 const field = ref();
 const error = ref();
 const isLoadedAndOk = ref(false);
 const problemDragon = ref<PartialLineage>();
-const status = ref<InstanceType<typeof Feedback>>();
-
 const viewLink = ref('');
+const status = useTemplateRef('status');
 
 function reset() {
   isLoadedAndOk.value = false;
@@ -94,47 +83,48 @@ function reset() {
   viewLink.value = '';
 }
 
-onUpdated(async () => {
-  if (!status.value) return;
+watch(
+  () => props.open,
+  async () => {
+    if (!status.value) return;
 
-  reset();
+    reset();
 
-  const incomingTree = Lineage(props.tree);
+    const incomingTree = Lineage(props.tree);
 
-  try {
-    status.value.info('Attempting to save lineage...');
+    try {
+      status.value.info('Attempting to save lineage...');
 
-    const link = await incomingTree.saveToServer();
+      const link = await incomingTree.saveToServer();
 
-    status.value.close(() => {
-      isLoadedAndOk.value = true;
-      viewLink.value = link;
-    });
-  } catch (ex) {
-    let message = '';
+      status.value.close(() => {
+        isLoadedAndOk.value = true;
+        viewLink.value = link;
+      });
+    } catch (ex) {
+      const message = (() => {
+        if (ex instanceof ValidationError) {
+          field.value = ex.type;
+          error.value = ex.message;
 
-    if (ex instanceof ValidationError) {
-      field.value = ex.type;
-      error.value = ex.message;
+          if (ex.type !== 'generation-count') {
+            problemDragon.value = incomingTree
+              .getAtPath(
+                (ex.path as string).substring(0, ex.path?.lastIndexOf('.')),
+              )
+              ?.raw();
+            return 'The problem dragon is displayed below.';
+          }
+          return ex.message;
+        }
+        return `You may want to try again or export it instead.`;
+      })();
 
-      if (ex.type !== 'generation-count') {
-        problemDragon.value = incomingTree
-          .getAtPath(
-            (ex.path as string).substring(0, ex.path?.lastIndexOf('.')),
-          )
-          ?.raw();
-        message = 'The problem dragon is displayed below.';
-      } else {
-        message = ex.message;
-      }
-    } else if (ex instanceof FetchError) {
-      message = `You may want to try again or export it instead.`;
-    }
-
-    status.value.error(
-      `Sorry, an error has occurred while
+      status.value.error(
+        `Sorry, an error has occurred while
             saving the lineage.<br /> ${message}`,
-    );
-  }
-});
+      );
+    }
+  },
+);
 </script>

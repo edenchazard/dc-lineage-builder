@@ -11,9 +11,9 @@
           <BreedSearch
             id="results-search"
             ref="mateSearchEl"
+            v-model="searchString"
             placeholder="Search"
             enterkeyhint="search"
-            v-model="searchString"
           />
           <label
             for="results-search"

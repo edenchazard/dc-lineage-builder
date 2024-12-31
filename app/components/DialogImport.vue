@@ -22,10 +22,13 @@
       placeholder="Paste your import text here"
       type="textarea"
     />
-    <template #footer>
+    <template #footer="{ dialog }">
       <button
         class="dialog-footer-button"
-        @click="importLineage"
+        @click="
+          importLineage();
+          dialog.close();
+        "
       >
         Import
       </button>
@@ -34,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 import type { PartialLineage } from '../shared/types';
 import DialogBase from './BaseDialog.vue';
 import Textbox from './Textbox.vue';
@@ -53,7 +56,7 @@ defineProps<{
 }>();
 
 const file = ref('');
-const status = ref<InstanceType<typeof Feedback>>();
+const status = useTemplateRef('status');
 
 function close() {
   file.value = '';

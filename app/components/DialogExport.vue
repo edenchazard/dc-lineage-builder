@@ -32,8 +32,9 @@
     </div>
   </BaseDialog>
 </template>
+
 <script setup lang="ts">
-import { onUpdated, ref } from 'vue';
+import { ref, useTemplateRef, watch } from 'vue';
 import type {
   MaybePartialLineageWithMetadata,
   PartialLineage,
@@ -57,22 +58,25 @@ const emit = defineEmits<{
 const file = ref('');
 const isError = ref(false);
 const problemDragon = ref<PartialLineage>();
-const status = ref<InstanceType<typeof Feedback>>();
+const status = useTemplateRef('status');
 
 function reset() {
   isError.value = false;
 }
 
-onUpdated(async () => {
-  if (!status.value) return;
-  reset();
+watch(
+  () => props.open,
+  async () => {
+    if (!status.value) return;
+    reset();
 
-  try {
-    file.value = JSON.stringify(Lineage(props.tree).withoutMetadata().raw());
-  } catch (e) {
-    status.value.error(
-      `Sorry, an error has occurred while trying to export this lineage.`,
-    );
-  }
-});
+    try {
+      file.value = JSON.stringify(Lineage(props.tree).withoutMetadata().raw());
+    } catch (e) {
+      status.value.error(
+        `Sorry, an error has occurred while trying to export this lineage.`,
+      );
+    }
+  },
+);
 </script>
