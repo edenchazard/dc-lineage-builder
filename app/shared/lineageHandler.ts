@@ -208,7 +208,7 @@ class LineageHandler<
     const legit = await dragonSchema
       .test(
         'generation-count',
-        () => `This lineage is ${gens}. To save on the server, lineages must
+        () => `The generation count is too short or too long. Lineages must
         be between ${settings.gens.min} and ${settings.gens.max}
         generations long inclusively.`,
         () => validateGenerationCount(gens),
