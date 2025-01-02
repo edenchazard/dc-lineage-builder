@@ -142,6 +142,7 @@ export function getBreedTable(json: FallbackBreedsJSON): BreedEntry[] {
 
   for (const breedName in json) {
     const overallBreed = { ...json[breedName] };
+
     const metaData: MetaData = {
       tags: overallBreed.tags,
       src: 'dc',
@@ -156,22 +157,26 @@ export function getBreedTable(json: FallbackBreedsJSON): BreedEntry[] {
           name: `${breedName} ${subentryName}`,
           ...getGenderProperties(subentry.sprites, overallBreed.genderOnly),
           genderOnly: overallBreed.genderOnly,
-          metaData,
+          metaData: JSON.parse(JSON.stringify(metaData)),
         };
 
         // Append any subentry tags to the overall breed tags.
-        if ((subentry.tags ?? []).length > 0) {
-          entry.metaData.tags = [
-            ...overallBreed.tags,
-            ...(subentry.tags ?? []),
-          ];
+        if (subentry.tags) {
+          entry.metaData.tags.push(...subentry.tags);
+        }
+
+        if (entry.name === 'Pargulus Pygmy Green') {
+          console.log('subentry', entry, subentry.tags);
         }
 
         // Sort them by preferred order.
         entry.metaData.tags = entry.metaData.tags.toSorted(
-          (a, b) => tags.indexOf(a) - tags.indexOf(b),
+          (a: NewTag, b: NewTag) => tags.indexOf(a) - tags.indexOf(b),
         );
 
+        if (entry.name === 'Pargulus Pygmy Green') {
+          console.log('subentry', entry);
+        }
         breeds.push(entry);
       }
     } else {
