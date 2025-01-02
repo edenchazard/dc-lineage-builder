@@ -191,10 +191,12 @@
     "genderOnly": false,
     "subentries": {
       "Blue": {
-        "sprites": ["zcr7c","R58nI"]
+        "sprites": ["zcr7c","R58nI"],
+        "tags": ["coast"]
       },
       "Green": {
-        "sprites": ["siClI","lZDRW"]
+        "sprites": ["siClI","lZDRW"],
+        "tags": ["forest","jungle"]
       }
     },
     "tags": ["two-head","leviathan","water","regular"]
@@ -354,10 +356,12 @@
     "genderOnly": false,
     "subentries": {
       "Blue": {
-        "sprites": ["Z1cNw","xP0Zn"]
+        "sprites": ["Z1cNw","xP0Zn"],
+        "tags": ["alpine"]
       },
       "Green": {
-        "sprites": ["1M7Je","Ay9Nc"]
+        "sprites": ["1M7Je","Ay9Nc"],
+        "tags": ["forest"]
       }
     },
     "tags": ["two-head","lindwyrm","dark","regular"]
@@ -463,22 +467,28 @@
     "genderOnly": false,
     "subentries": {
       "Alpine": {
-        "sprites": ["fmV9V","d5fEg"]
+        "sprites": ["fmV9V","d5fEg"],
+        "tags": ["alpine"]
       },
       "Coast": {
-        "sprites": ["TVRZx","bM4IJ"]
+        "sprites": ["TVRZx","bM4IJ"],
+        "tags": ["coast"]
       },
       "Desert": {
-        "sprites": ["GqRZg","09hSs"]
+        "sprites": ["GqRZg","09hSs"],
+        "tags": ["desert"]
       },
       "Forest": {
-        "sprites": ["hyIgz","9NijL"]
+        "sprites": ["hyIgz","9NijL"],
+        "tags": ["forest"]
       },
       "Jungle": {
-        "sprites": ["SR3RM","7zEdp"]
+        "sprites": ["SR3RM","7zEdp"],
+        "tags": ["jungle"]
       },
       "Volcano": {
-        "sprites": ["CdgGh","pb7Bo"]
+        "sprites": ["CdgGh","pb7Bo"],
+        "tags": ["volcano"]
       }
     },
     "tags": ["two-head","wyrm","neutral","regular"]
@@ -1195,13 +1205,16 @@
     "genderOnly": false,
     "subentries": {
       "Almandine": {
-        "sprites": ["AtPm1"]
+        "sprites": ["AtPm1"],
+        "tags": ["alpine"]
       },
       "Pyrope": {
-        "sprites": ["31Iya"]
+        "sprites": ["31Iya"],
+        "tags": ["volcano"]
       },
       "Spessartine": {
-        "sprites": ["xq4Yl"]
+        "sprites": ["xq4Yl"],
+        "tags": ["coast"]
       }
     },
     "tags": ["standard","western","earth","regular"]
@@ -1500,10 +1513,11 @@
         "sprites": ["qA36V","0gpYC"]
       },
       "Violet": {
-        "sprites": ["i3TBl","5wnHq"]
+        "sprites": ["i3TBl","5wnHq"],
+        "tags": ["desert","volcano"]
       }
     },
-    "tags": ["standard","wyvern","earth","desert","volcano","regular"]
+    "tags": ["standard","wyvern","earth","regular"]
   },
   "Spotted Greenwing": {
     "dimorphism": false,
@@ -1982,22 +1996,28 @@
     "genderOnly": false,
     "subentries": {
       "Black": {
-        "sprites": ["XQVBK"]
+        "sprites": ["XQVBK"],
+        "tags": ["alpine"]
       },
       "Blue": {
-        "sprites": ["XCLln"]
+        "sprites": ["XCLln"],
+        "tags": ["desert"]
       },
       "Pink": {
-        "sprites": ["PoUWp"]
+        "sprites": ["PoUWp"],
+        "tags": ["coast"]
       },
       "Red": {
-        "sprites": ["Vwp95"]
+        "sprites": ["Vwp95"],
+        "tags": ["volcano"]
       },
       "White": {
-        "sprites": ["YRSBw"]
+        "sprites": ["YRSBw"],
+        "tags": ["forest"]
       },
       "Yellow": {
-        "sprites": ["o2YNK"]
+        "sprites": ["o2YNK"],
+        "tags": ["jungle"]
       }
     },
     "tags": ["standard","neutral","regular","Has BSA"]
