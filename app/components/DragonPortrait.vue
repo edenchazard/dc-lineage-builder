@@ -6,7 +6,6 @@
     <img
       v-if="data.metaData.src === 'dc'"
       :src="'https://dragcave.net/image/' + data.image"
-      loading="lazy"
       :class="'fallback d-' + data.image"
     />
     <span
@@ -19,11 +18,6 @@
       loading="lazy"
       class="ghost"
       :src="data.image"
-    />
-    <img
-      v-else
-      src="../assets/images/placeholder.png"
-      loading="lazy"
     />
     <span class="sr-only label">{{ data.name }}</span>
   </span>
@@ -104,7 +98,7 @@ computed:{
   flex-shrink: 0;
 }
 .imgbox-fullsize {
-  /* this needs adjusting by 2px in either directon */
+  /* this needs adjusting by 2px in either direction */
   width: var(--size36x48-w-adjust);
   height: var(--size36x48-h-adjust);
   contain: layout size paint;
