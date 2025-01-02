@@ -73,7 +73,8 @@
         "sprites": ["bktN",-15,-1,48,"S1tr",-4,-1,48]
       },
       "regular": {
-        "sprites": ["75LV",-20,-1,48,"5CMC",0,-1,48]
+        "sprites": ["75LV",-20,-1,48,"5CMC",0,-1,48],
+        "tags": ["all"]
       }
     },
     "tags": ["standard","western","dark","regular"]
@@ -81,7 +82,7 @@
   "Black Capped Teimarr": {
     "genderOnly": false,
     "sprites": ["xRG9g",-24,-1,48,"Gtagr",0,-1,48],
-    "tags": ["standard","western","water","all","regular"]
+    "tags": ["standard","western","water","coast","regular"]
   },
   "Black Marrow": {
     "genderOnly": false,
@@ -158,16 +159,19 @@
     "genderOnly": false,
     "subentries": {
       "Liver of Sulfur": {
-        "sprites": ["veGbV",0,-1,47,"fiyl6",-2,-1,48]
+        "sprites": ["veGbV",0,-1,47,"fiyl6",-2,-1,48],
+        "tags": ["desert","volcano"]
       },
       "Pennybright": {
         "sprites": ["Rflp3",0,-1,47,"mg3a4",-2,-1,48]
       },
       "Rainbow": {
-        "sprites": ["B9E5e",0,-1,47,"YvBle",-2,-1,48]
+        "sprites": ["B9E5e",0,-1,47,"YvBle",-2,-1,48],
+        "tags": ["alpine","forest"]
       },
       "Verdigris": {
-        "sprites": ["vT4Zt",0,-1,47,"tRfe4",-2,-1,48]
+        "sprites": ["vT4Zt",0,-1,47,"tRfe4",-2,-1,48],
+        "tags": ["coast","jungle"]
       }
     },
     "tags": ["standard","wyvern","earth","regular"]
@@ -189,10 +193,11 @@
         "sprites": ["F3EP",0,-1,48]
       },
       "regular": {
-        "sprites": ["qdvf",-15,-1,48]
+        "sprites": ["qdvf",-15,-1,48],
+        "tags": ["forest","jungle"]
       }
     },
-    "tags": ["standard","wingless","p:dark","s:life","forest","jungle","regular"]
+    "tags": ["standard","wingless","p:dark","s:life","regular"]
   },
   "Dark Lumina": {
     "genderOnly": false,
@@ -260,10 +265,12 @@
     "genderOnly": false,
     "subentries": {
       "Dark": {
-        "sprites": ["RwrKY",0,-1,48,"w5PLH",-25,-1,48]
+        "sprites": ["RwrKY",0,-1,48,"w5PLH",-25,-1,48],
+        "tags": ["volcano"]
       },
       "Light": {
-        "sprites": ["1MA0A",0,-1,48,"AomJY",-19,-1,48]
+        "sprites": ["1MA0A",0,-1,48,"AomJY",-19,-1,48],
+        "tags": ["coast"]
       }
     },
     "tags": ["drake","p:earth","s:fire","regular"]
@@ -275,7 +282,8 @@
         "sprites": ["VxHfL",-8,-1,48,"fCaGX",-6,-1,48]
       },
       "Pink": {
-        "sprites": ["bwGPg",-8,-1,48,"jkyej",-6,-1,48]
+        "sprites": ["bwGPg",-8,-1,48,"jkyej",-6,-1,48],
+        "tags": ["jungle"]
       },
       "Purple": {
         "sprites": ["BjJp4",-8,-1,48,"4F7UH",-6,-1,48]
@@ -287,13 +295,15 @@
     "genderOnly": false,
     "subentries": {
       "Gold": {
-        "sprites": ["E6uF3",0,-1,48,"B39nn",-7,-1,47.5]
+        "sprites": ["E6uF3",0,-1,48,"B39nn",-7,-1,47.5],
+        "tags": ["alpine"]
       },
       "Pink": {
         "sprites": ["k7ye7",0,-1,48,"kubb7",-7,-1,47.5]
       },
       "Purple": {
-        "sprites": ["ufqA1",0,-1,48,"M2Wu9",-7,-1,47.5]
+        "sprites": ["ufqA1",0,-1,48,"M2Wu9",-7,-1,47.5],
+        "tags": ["forest"]
       }
     },
     "tags": ["standard","wyvern","life","regular"]
@@ -412,10 +422,12 @@
     "genderOnly": false,
     "subentries": {
       "Desert": {
-        "sprites": ["VPzbi",0,-1,48,"890sz",-24,-1,48]
+        "sprites": ["VPzbi",0,-1,48,"890sz",-24,-1,48],
+        "tags": ["desert"]
       },
       "Volcano": {
-        "sprites": ["Jaqrx",0,-1,48,"NDgdL",-24,-1,48]
+        "sprites": ["Jaqrx",0,-1,48,"NDgdL",-24,-1,48],
+        "tags": ["volcano"]
       }
     },
     "tags": ["standard","amphiptere","fire","regular"]
@@ -481,13 +493,14 @@
     "genderOnly": false,
     "subentries": {
       "Blue": {
-        "sprites": ["kn15d",0,-2,null,"m8jRE",-38,7,null]
+        "sprites": ["kn15d",0,-2,null,"m8jRE",-38,7,null],
+        "tags": ["alpine"]
       },
       "Green": {
         "sprites": ["oYD13",0,-1,47.5,"Az8rw",-5,-1,48]
       }
     },
-    "tags": ["pygmy","western","neutral","alpine","regular"]
+    "tags": ["pygmy","western","neutral","regular"]
   },
   "Nocturne": {
     "genderOnly": false,
@@ -513,13 +526,16 @@
     "genderOnly": false,
     "subentries": {
       "Blue": {
-        "sprites": ["k7jXH",0,-1,48,"ZDaUc",-1,-1,48]
+        "sprites": ["k7jXH",0,-1,48,"ZDaUc",-1,-1,48],
+        "tags": ["alpine","coast"]
       },
       "Green": {
-        "sprites": ["WPYpD",0,-1,48,"VsXXn",-1,-1,48]
+        "sprites": ["WPYpD",0,-1,48,"VsXXn",-1,-1,48],
+        "tags": ["desert","jungle"]
       },
       "Red": {
-        "sprites": ["qqpMo",0,-1,48,"Vyo2g",-1,-1,48]
+        "sprites": ["qqpMo",0,-1,48,"Vyo2g",-1,-1,48],
+        "tags": ["forest","volcano"]
       }
     },
     "tags": ["pygmy","western","life","regular"]
@@ -745,10 +761,11 @@
         "sprites": ["EE65C",-1,-1,48,"qTuvY",0,-1,48]
       },
       "White": {
-        "sprites": ["h9aDK",-1,-1,48,"RJ8i",0,-1,48]
+        "sprites": ["h9aDK",-1,-1,48,"RJ8i",0,-1,48],
+        "tags": ["forest","jungle"]
       }
     },
-    "tags": ["standard","western","neutral","forest","jungle","regular"]
+    "tags": ["standard","western","neutral","regular"]
   },
   "Sunbeam Drake": {
     "genderOnly": false,
@@ -837,13 +854,14 @@
     "genderOnly": false,
     "subentries": {
       "Green": {
-        "sprites": ["N73sL",-9,-1,48,"GP7mn",0,-1,48]
+        "sprites": ["N73sL",-9,-1,48,"GP7mn",0,-1,48],
+        "tags": ["alpine","forest"]
       },
       "Yellow": {
         "sprites": ["t4AY7",-9,-1,48,"c0Grh",0,-1,48]
       }
     },
-    "tags": ["standard","western","water","alpine","forest","regular"]
+    "tags": ["standard","western","water","regular"]
   },
   "Ushgorn": {
     "genderOnly": false,
