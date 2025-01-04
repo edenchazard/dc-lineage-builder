@@ -1997,27 +1997,27 @@
     "subentries": {
       "Black": {
         "sprites": ["XQVBK"],
-        "tags": ["alpine"]
+        "tags": ["alpine","wingless"]
       },
       "Blue": {
         "sprites": ["XCLln"],
-        "tags": ["desert"]
+        "tags": ["desert","eastern"]
       },
       "Pink": {
         "sprites": ["PoUWp"],
-        "tags": ["coast"]
+        "tags": ["coast","wyvern"]
       },
       "Red": {
         "sprites": ["Vwp95"],
-        "tags": ["volcano"]
+        "tags": ["volcano","western"]
       },
       "White": {
         "sprites": ["YRSBw"],
-        "tags": ["forest"]
+        "tags": ["forest","amphiptere"]
       },
       "Yellow": {
         "sprites": ["o2YNK"],
-        "tags": ["jungle"]
+        "tags": ["jungle","lindwyrm"]
       }
     },
     "tags": ["standard","neutral","regular","Has BSA"]
