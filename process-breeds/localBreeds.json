@@ -1073,7 +1073,7 @@
     "dimorphism": false,
     "genderOnly": "m",
     "sprites": ["Iceee"],
-    "tags": ["two-head","cave","christmas"]
+    "tags": ["two-head","western","p:time", "s:light","cave","christmas"]
   },
   "Olive": {
     "dimorphism": true,
