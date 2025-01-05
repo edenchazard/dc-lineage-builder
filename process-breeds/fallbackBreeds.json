@@ -775,6 +775,11 @@
     },
     "tags": ["standard","wingless","p:water","s:fire","hybrid","regular"]
   },
+  "Valentine": {
+    "genderOnly": "f",
+    "sprites": ["tpBD3",0,-1,48],
+    "tags": ["standard","western","magi","cave","valentine"]
+  },
   "Vampire": {
     "genderOnly": false,
     "sprites": ["Ivh5",0,-1,47,"MXv75",0,-1,47],
@@ -816,10 +821,5 @@
     "genderOnly": "m",
     "sprites": ["RSrR",-1,-1,48],
     "tags": ["standard","western","light","cave","christmas"]
-  },
-  "valentine": {
-    "genderOnly": "f",
-    "sprites": ["tpBD3",0,-1,48],
-    "tags": ["standard","western","magi","cave","valentine"]
   }
 }
