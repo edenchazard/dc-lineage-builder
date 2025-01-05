@@ -679,8 +679,16 @@
   "Grave": {
     "dimorphism": true,
     "genderOnly": false,
-    "sprites": ["tcA6d","D6hAp"],
-    "tags": ["standard","western","fire","cave","halloween"]
+    "tags": ["standard","western","fire","cave","halloween"],
+    "subentries":{
+      "__regular__": {
+        "sprites": ["tcA6d","D6hAp"]
+      },
+      "Salt Aangs-sister": {
+        "sprites": ["u5kKj","F9MyP"],
+        "tags": ["salt"]
+      }
+    }
   },
   "Greater Spotted Drake": {
     "dimorphism": false,
@@ -764,8 +772,16 @@
   "Heartstealing": {
     "dimorphism": false,
     "genderOnly": "f",
-    "sprites": ["Awrh4"],
-    "tags": ["eastern","neutral","cave","valentine"]
+    "tags": ["eastern","neutral","cave","valentine"],
+    "subentries": {
+      "__regular__": {
+        "sprites": ["Awrh4"]
+      },
+      "Salt Aangs-sister": {
+        "sprites": ["FaNDW" ],
+        "tags": ["salt"]
+      }
+    }
   },
   "Holly": {
     "dimorphism": false,
@@ -853,6 +869,10 @@
       },
       "__regular__": {
         "sprites": ["f9I08","J7Wb8"]
+      },
+      "Salt Wheeloftime13": {
+        "sprites": ["HUNS7","6DiqT"],
+        "tags": ["salt"]
       }
     },
     "tags": ["standard","amphiptere","p:death","s:magi","cave","halloween"]
@@ -1072,8 +1092,20 @@
   "Noctivellus": {
     "dimorphism": false,
     "genderOnly": "m",
-    "sprites": ["Iceee"],
-    "tags": ["two-head","western","p:time", "s:light","cave","christmas"]
+    "tags": ["two-head","western","p:time", "s:light","cave","christmas"],
+    "subentries": {
+      "__regular__": {
+        "sprites": ["Iceee"]
+      },
+      "Salt Kamatose": {
+        "sprites": ["BaLDw"],
+        "tags": ["salt"]
+      },
+      "Salt Schenanigans": {
+        "sprites": ["Gl4LY"],
+        "tags": ["salt"]
+      }
+    }
   },
   "Olive": {
     "dimorphism": true,
@@ -1873,8 +1905,16 @@
   "Wrapping-Wing": {
     "dimorphism": false,
     "genderOnly": "m",
-    "sprites": ["2pong"],
-    "tags": ["standard","western","light","cave","christmas"]
+    "tags": ["standard","western","light","cave","christmas"],
+    "subentries": {
+      "__regular__": {
+        "sprites": ["2pong"]
+      },
+      "Salt Aangs-sister": {
+        "sprites": ["pVdad"],
+        "tags": ["salt"]
+      }
+    }
   },
   "Xenowyrm (Aquilo)": {
     "dimorphism": false,
