@@ -165,18 +165,11 @@ export function getBreedTable(json: FallbackBreedsJSON): BreedEntry[] {
           entry.metaData.tags.push(...subentry.tags);
         }
 
-        if (entry.name === 'Pargulus Pygmy Green') {
-          console.log('subentry', entry, subentry.tags);
-        }
-
         // Sort them by preferred order.
         entry.metaData.tags = entry.metaData.tags.toSorted(
           (a: NewTag, b: NewTag) => tags.indexOf(a) - tags.indexOf(b),
         );
 
-        if (entry.name === 'Pargulus Pygmy Green') {
-          console.log('subentry', entry);
-        }
         breeds.push(entry);
       }
     } else {
