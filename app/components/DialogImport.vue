@@ -26,8 +26,11 @@
       <button
         class="dialog-footer-button"
         @click="
-          importLineage();
-          dialog.close();
+          async () => {
+            if (await importLineage()) {
+              dialog.close();
+            }
+          }
         "
       >
         Import
@@ -60,6 +63,7 @@ const status = useTemplateRef('status');
 
 function close() {
   file.value = '';
+  status.value?.close();
   emit('close');
 }
 
@@ -71,11 +75,13 @@ async function importLineage() {
       .json()
       .validate(file.value)) as PartialLineage;
     emit('onImport', Lineage(importedTree).tree);
-    close();
+    return true;
   } catch {
     status.value.error(
       `Error reading export code. JSON is possibly malformed.`,
     );
   }
+
+  return false;
 }
 </script>

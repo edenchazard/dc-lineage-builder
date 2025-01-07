@@ -7,10 +7,8 @@
       closing,
     }"
     @animationend="
-      () => {
-        if (closing) {
-          modalClosed();
-        }
+      if (closing) {
+        modalClosed();
       }
     "
     @click="
@@ -107,7 +105,12 @@ watch(
 );
 
 function close() {
-  closing.value = true;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    dialog.value?.close();
+    emit('close');
+  } else {
+    closing.value = true;
+  }
 }
 
 function modalClosed() {
