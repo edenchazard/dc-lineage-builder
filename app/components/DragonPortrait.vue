@@ -117,11 +117,4 @@ computed:{
 .label {
   user-select: text;
 }
-/* mods */
-/* nocturne */
-.d-OrTHo_day {
-  top: -1px;
-  left: 0px;
-  height: 48px;
-}
 </style>

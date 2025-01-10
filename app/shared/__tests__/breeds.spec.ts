@@ -1,12 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
 import {
-  adjustTiles,
   listOfBreeds,
   malePortraits,
   placeholder,
   injectBreedList,
 } from '../breeds.js';
-import { getDCTime } from '../utils.js';
 
 vi.mock('../utils.js', async () => {
   return {
@@ -30,20 +28,5 @@ describe('breeds', () => {
 
   it('exports a list of female portraits', () => {
     expect(Array.isArray(malePortraits)).to.be.true;
-  });
-
-  describe('adjustTiles()', () => {
-    it('adjusts nocturnes to day', () => {
-      adjustTiles();
-
-      const nocturne = listOfBreeds.find((breed) => breed.name === 'Nocturne');
-
-      expect(nocturne).to.contain({
-        male: 'OrTHo_day',
-        female: 'OrTHo_day',
-      });
-
-      expect(getDCTime).toBeCalled();
-    });
   });
 });

@@ -1,5 +1,5 @@
 import type { BreedEntry, PortraitData } from './types';
-import { getDCTime, filterBreedTableByGender } from './utils.js';
+import { filterBreedTableByGender } from './utils.js';
 
 const placeholder: BreedEntry = {
   name: 'Placeholder',
@@ -27,37 +27,11 @@ function syncPortraits() {
   Object.assign(femalePortraits, filterBreedTableByGender(listOfBreeds, 'f'));
 }
 
-function adjustTiles() {
-  // In the daytime, nocturnes
-  // have a different position.
-  const isNocturneActive = (() => {
-    const hours = parseInt(
-      getDCTime().find((part) => part.type === 'hour')?.value ?? '',
-    );
-    return hours >= 18 || hours < 6;
-  })();
-
-  // modify to daytime positioning
-  if (!isNocturneActive) {
-    const nocturne = listOfBreeds.findIndex(
-      (breed) => breed.name === 'Nocturne',
-    );
-
-    if (nocturne !== -1) {
-      listOfBreeds[nocturne].female = 'OrTHo_day';
-      listOfBreeds[nocturne].male = 'OrTHo_day';
-    }
-
-    syncPortraits();
-  }
-}
-
 export {
   placeholder,
   listOfBreeds,
   malePortraits,
   femalePortraits,
-  adjustTiles,
   syncPortraits,
   injectBreedList,
 };
