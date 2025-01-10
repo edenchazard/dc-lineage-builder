@@ -501,12 +501,6 @@
     "sprites": ["184Wv",0,-1,48,"WmmUO",-41,-1,48],
     "tags": ["standard","western","neutral","jungle","regular"]
   },
-  "Nocturne": {
-    "genderOnly": false,
-    "releaseDate": ["2010-01-15"],
-    "sprites": ["3rrhN",-1,-1,48,"OrTHo",-16,-1,48],
-    "tags": ["standard","western","time","alpine","forest","regular"]
-  },
   "Occulri Pygmy": {
     "genderOnly": false,
     "releaseDate": ["2023-04-30"],

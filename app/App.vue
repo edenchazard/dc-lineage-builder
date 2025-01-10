@@ -39,7 +39,7 @@ import './assets/layouts/theming.css';
 import { useAppStore } from './store/useAppStore.js';
 import Header from './components/TheHeader.vue';
 import SkinSwitcher from './components/SkinSwitcher.vue';
-import { adjustTiles, injectBreedList } from './shared/breeds.js';
+import { injectBreedList } from './shared/breeds.js';
 
 const route = useRoute();
 const appStore = useAppStore();
@@ -75,7 +75,6 @@ watch(
 
 onMounted(async () => {
   await injectBreedList();
-  adjustTiles();
 });
 </script>
 

@@ -1203,6 +1203,20 @@
     },
     "tags": ["two-head","western","p:time","s:light","cave","christmas"]
   },
+  "Nocturne": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "releaseDate": ["2010-01-15"],
+    "subentries": {
+      "Day": {
+        "sprites": ["g5o1","g5o1"]
+      },
+      "Night": {
+        "sprites": ["RMSu","V5Yf"]
+      }
+    },
+    "tags": ["standard","western","time","alpine","forest","regular"]
+  },
   "Olive": {
     "dimorphism": true,
     "genderOnly": false,
