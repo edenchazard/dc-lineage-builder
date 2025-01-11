@@ -58,7 +58,7 @@
     "@vueuse/integrations": "^12.4.0",
     "autoprefixer": "^10.4.20",
     "browserslist": "^4.24.4",
-    "concurrently": "^8.2.2",
+    "concurrently": "^9.1.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-vue": "^9.19.2",
