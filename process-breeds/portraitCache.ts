@@ -13,7 +13,7 @@ class Cache {
   async tryAccess() {
     try {
       await fs.access(this.path);
-    } catch (e) {
+    } catch (_) {
       throw new Error(`Cannot access cache: ${this.path}`);
     }
   }

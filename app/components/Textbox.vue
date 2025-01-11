@@ -153,7 +153,7 @@ async function copy() {
     await navigator.clipboard.writeText(props.modelValue);
     tooltipState.value = true;
     emit('copySuccess');
-  } catch (ex) {
+  } catch (_) {
     tooltipState.value = false;
     emit('copyFail');
   }

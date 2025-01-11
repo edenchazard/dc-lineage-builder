@@ -172,7 +172,7 @@ export async function checkCache(
         // If this doesn't throw an exception, it means the file exists
         // in this cache, so we won't download it.
         await fs.access(path, fs.constants.R_OK);
-      } catch (e) {
+      } catch (_) {
         // doesn't exist in cache, download it.
         // we don't want to ddos DC, so we'll throttle our requests to 1/second.
         throttle++;

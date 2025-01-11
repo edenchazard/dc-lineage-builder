@@ -72,7 +72,7 @@ watch(
 
     try {
       file.value = JSON.stringify(Lineage(props.tree).withoutMetadata().raw());
-    } catch (e) {
+    } catch (_) {
       status.value.error(
         `Sorry, an error has occurred while trying to export this lineage.`,
       );
