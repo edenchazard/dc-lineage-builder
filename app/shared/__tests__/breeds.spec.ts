@@ -1,17 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import {
   listOfBreeds,
   malePortraits,
   placeholder,
   injectBreedList,
 } from '../breeds.js';
-
-vi.mock('../utils.js', async () => {
-  return {
-    ...(await vi.importActual('../utils.js')),
-    getDCTime: vi.fn(() => [{ type: 'hour', value: '8' }]),
-  };
-});
 
 await injectBreedList();
 

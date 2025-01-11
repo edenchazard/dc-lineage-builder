@@ -4,22 +4,13 @@ import type {
   MaybePartialLineageWithMetadata,
   DragonGender,
 } from './types';
-import {
-  createLineageLink,
-  deepClone,
-  getBreedData,
-  hasParents,
-} from './utils.js';
+import { createLineageLink, getBreedData, hasParents } from './utils.js';
 import { DragonBuilder } from './dragonBuilder.js';
 import { dragonSchema, validateGenerationCount } from './validation.js';
 import settings from './settings.js';
 import { saveLineage } from '../app/api.js';
 import { placeholder } from './breeds.js';
-
-/**
- * Returns a handler tries to json parse the passed treeref
- */
-/* function Lineage(treeRef: string, addMissingMetadata: boolean): LineageHandler; */
+import { cloneFnJSON } from '@vueuse/core';
 
 /**
  * Returns a handler with a newly generated starter node
@@ -118,8 +109,8 @@ class LineageHandler<
   /**
    * Get raw lineage as a JSON object without getters or setters.
    */
-  raw(): T {
-    return deepClone<T>(this.tree);
+  raw() {
+    return cloneFnJSON<T>(this.tree);
   }
 
   /**

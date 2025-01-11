@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { debounce } from '../shared/utils.js';
+import { useDebounceFn } from '@vueuse/core';
 
 const emit = defineEmits<{
   (e: 'update:model-value', value: string): void;
@@ -19,8 +19,7 @@ defineProps<{
   modelValue: string;
 }>();
 
-// debounced to avoid it running every key press rapidly
-const search = debounce(
+const search = useDebounceFn(
   (e: Event) =>
     emit('update:model-value', (e.target as HTMLInputElement).value),
   250,
