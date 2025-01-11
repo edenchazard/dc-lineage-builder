@@ -72,7 +72,7 @@ const filteredBreeds = computed(() => {
   const primary: PortraitData[] = [];
   const secondary: PortraitData[] = [];
 
-  for (let breed of breeds) {
+  for (const breed of breeds) {
     const position = breed.name.toLowerCase().trim().indexOf(search);
     if (position === 0) primary.push(breed);
     else if (position > -1) secondary.push(breed);

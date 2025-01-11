@@ -17,7 +17,7 @@ interface UseBreedSelectorOptions {
   breedSelectedCallback?: (breed: PortraitData) => void;
 }
 
-async function show(options: UseBreedSelectorOptions) {
+function show(options: UseBreedSelectorOptions) {
   const _options = {
     autofocus: false,
     breedSelectedCallback: null,

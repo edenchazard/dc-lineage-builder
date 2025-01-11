@@ -13,7 +13,7 @@ class Cache {
   async tryAccess() {
     try {
       await fs.access(this.path);
-    } catch (e) {
+    } catch (_) {
       throw new Error(`Cannot access cache: ${this.path}`);
     }
   }
@@ -94,7 +94,7 @@ class PortraitCache extends Cache {
         nearLossless: true,
       })
       .toFile(filePath.substring(0, filePath.lastIndexOf('.')) + '.webp');
-    page.close();
+    await page.close();
   }
 }
 

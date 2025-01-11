@@ -5,7 +5,7 @@
   >
     <DialogBreedSelector />
 
-    <Toolbar
+    <LineageBuilderToolbar
       v-if="appStore.activeTree !== null"
       :config="config"
       :tree="appStore.activeTree"
@@ -28,7 +28,7 @@
       @redo="appStore.treeHistory.redo"
     />
     <div class="constrain-width">
-      <Feedback ref="status" />
+      <FeedbackPanel ref="status" />
     </div>
     <LineageView
       v-if="appStore.activeTree !== null"
@@ -41,8 +41,7 @@
 </template>
 
 <script setup lang="ts">
-/* eslint-disable no-redeclare */
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, useTemplateRef } from 'vue';
 import { onBeforeRouteLeave, useRoute } from 'vue-router';
 import { useFullscreen } from '@vueuse/core';
 import type {
@@ -54,9 +53,9 @@ import type {
 import { hasParents } from '../shared/utils.js';
 import { getLineage } from '../app/api.js';
 import { useAppStore } from '../store/useAppStore.js';
-import Toolbar from './Toolbar.vue';
+import LineageBuilderToolbar from './LineageBuilderToolbar.vue';
 import LineageView from './LineageView.vue';
-import Feedback from './Feedback.vue';
+import FeedbackPanel from './FeedbackPanel.vue';
 import { Lineage as LineageHandler } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 import { FetchError } from 'ofetch';
@@ -71,7 +70,7 @@ const config = reactive<LineageConfig>({
   showLabels: true,
   disabled: false,
 });
-const status = ref<InstanceType<typeof Feedback>>();
+const status = useTemplateRef('status');
 
 onMounted(async () => {
   if (!status.value) return;

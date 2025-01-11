@@ -3,7 +3,7 @@ import { setTimeout } from 'timers/promises';
 import puppeteer from 'puppeteer';
 import { caches, chromiumSettings } from './files';
 
-(async function main() {
+await (async function main() {
   // parse args for codes
   const codes = process.argv.slice(2);
 
@@ -36,5 +36,5 @@ import { caches, chromiumSettings } from './files';
     }),
   );
 
-  browser.close();
+  await browser.close();
 })();

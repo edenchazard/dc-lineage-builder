@@ -7,22 +7,22 @@ import { injectBreedList } from '../breeds.js';
 await injectBreedList();
 
 describe('lineageHandler', () => {
-  describe('#getAtPath()', async () => {
-    it('returns new lineage handler instance', async () => {
+  describe('#getAtPath()', () => {
+    it('returns new lineage handler instance', () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       const subTree = theLineage.getAtPath('m.m');
 
       expect(subTree).to.be.instanceOf(LineageHandler);
     });
 
-    it('returns the root dragon when empty path', async () => {
+    it('returns the root dragon when empty path', () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       const subTree = theLineage.getAtPath('');
 
       expect(subTree?.raw()).to.be.eql(dragonGen3);
     });
 
-    it('returns the dragon at a specified path', async () => {
+    it('returns the dragon at a specified path', () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       const subTree = theLineage.getAtPath('m.m');
 
@@ -36,7 +36,7 @@ describe('lineageHandler', () => {
       });
     });
 
-    it('returns undefined when specified path not exists', async () => {
+    it('returns undefined when specified path not exists', () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       const subTree = theLineage.getAtPath('m.m.f.f');
 
@@ -45,7 +45,7 @@ describe('lineageHandler', () => {
   });
 
   describe('#switchParents()', () => {
-    it('swaps the parents and uses placeholders if necessary', async () => {
+    it('swaps the parents and uses placeholders if necessary', () => {
       const theLineage = Lineage(dragonGen3 as PartialLineage);
       expect(theLineage.switchParents().raw()).to.be.eql(dragonGen3Swapped);
     });

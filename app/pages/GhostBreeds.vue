@@ -108,7 +108,7 @@
         Add breed
       </button>
     </form>
-    <Feedback ref="status" />
+    <FeedbackPanel ref="status" />
   </div>
 </template>
 
@@ -120,7 +120,8 @@ import { addBreed } from '../shared/utils.js';
 import { BREEDNAMEREGEXP } from '../shared/validation.js';
 import settings from '../shared/settings.js';
 import GhostBreedUpload from '../components/GhostBreedUpload.vue';
-import Feedback from '../components/Feedback.vue';
+import FeedbackPanel from '../components/FeedbackPanel.vue';
+import { useTemplateRef } from 'vue';
 
 type Availability = 'b' | DragonGender;
 
@@ -129,9 +130,9 @@ const name = ref('Ghost Breed');
 const genderAvailability = ref<Availability>('b');
 const femaleBase64 = ref('');
 const maleBase64 = ref('');
-const femaleTile = ref<InstanceType<typeof GhostBreedUpload>>();
-const maleTile = ref<InstanceType<typeof GhostBreedUpload>>();
-const status = ref<InstanceType<typeof Feedback>>();
+const femaleTile = useTemplateRef('femaleTile');
+const maleTile = useTemplateRef('maleTile');
+const status = useTemplateRef('status');
 
 function portraitSelected(gender: DragonGender, base64: string) {
   if (gender === 'm') maleBase64.value = base64;

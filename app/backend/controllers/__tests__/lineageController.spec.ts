@@ -4,13 +4,14 @@ import request from 'supertest';
 import { DragonBuilder } from '../../../shared/dragonBuilder.js';
 import pool from '../../pool';
 import crypto from 'crypto';
-import type { PoolConnection, RowDataPacket } from 'mysql2/promise';
+import type { RowDataPacket } from 'mysql2/promise';
 import config from '../../config';
 
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 const rq = request(app.callback());
-const con: PoolConnection = await pool.getConnection();
+const con = await pool.getConnection();
 
-describe('lineageController', async () => {
+describe('lineageController', () => {
   beforeEach(async () => await con.beginTransaction());
 
   afterEach(async () => {

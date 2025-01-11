@@ -153,14 +153,14 @@ async function copy() {
     await navigator.clipboard.writeText(props.modelValue);
     tooltipState.value = true;
     emit('copySuccess');
-  } catch (ex) {
+  } catch (_) {
     tooltipState.value = false;
     emit('copyFail');
   }
 }
 
 function startShare() {
-  share({
+  void share({
     title: shareSettings.value.title,
     text: shareSettings.value.text,
     url: props.modelValue,

@@ -78,7 +78,7 @@ describe('utils', () => {
   });
 
   describe('createLineageLink', () => {
-    it('returns a link to the view lineage with a given hash', async () => {
+    it('returns a link to the view lineage with a given hash', () => {
       const originalWindowLocation = window.location;
 
       Object.defineProperty(window, 'location', {

@@ -3,14 +3,13 @@ import app from '../../app';
 import request from 'supertest';
 import { OnsiteDragonNotFoundError } from '../../onsite';
 
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 const rq = request(app.callback());
 
-const mocks = vi.hoisted(() => {
-  return {
-    checkDragonsMatchGender: vi.fn(),
-    getDataForPair: vi.fn(),
-  };
-});
+const mocks = vi.hoisted(() => ({
+  checkDragonsMatchGender: vi.fn(),
+  getDataForPair: vi.fn(),
+}));
 
 vi.mock('../../onsite', async () => {
   return {
@@ -20,7 +19,7 @@ vi.mock('../../onsite', async () => {
   };
 });
 
-describe('onsiteController', async () => {
+describe('onsiteController', () => {
   describe('/', () => {
     afterEach(() => {
       vi.clearAllMocks();
@@ -36,7 +35,7 @@ describe('onsiteController', async () => {
         { code: 'BbOOB', correct: true },
       ]);
 
-      mocks.getDataForPair.mockImplementation(async () => {
+      mocks.getDataForPair.mockImplementation(() => {
         throw new OnsiteDragonNotFoundError('BbOOB');
       });
 

@@ -6,7 +6,7 @@ import { DragonBuilder } from '../dragonBuilder.js';
 import { dragonGen13, dragonGen2 } from '../../__tests__/testData';
 
 describe('lineage validations', () => {
-  it('fails if 13 generations or more', async () => {
+  it('fails if 13 generations or more', () => {
     const generationCount = Lineage(
       dragonGen13 as PartialLineage,
     ).generations();
@@ -15,14 +15,14 @@ describe('lineage validations', () => {
     expect(validateGenerationCount(generationCount)).to.be.false;
   });
 
-  it('fails if 1 generations or more', async () => {
+  it('fails if 1 generations or more', () => {
     const generationCount = Lineage().generations();
 
     expect(generationCount).to.be.eq(1);
     expect(validateGenerationCount(generationCount)).to.be.false;
   });
 
-  it('passes if good', async () => {
+  it('passes if good', () => {
     const generationCount = Lineage(dragonGen2 as PartialLineage).generations();
 
     expect(generationCount).to.be.eq(2);

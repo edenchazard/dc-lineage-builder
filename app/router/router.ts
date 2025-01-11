@@ -11,7 +11,7 @@ const router = createRouter({
   },
 });
 
-router.afterEach(async (route) => {
+router.afterEach((route) => {
   const pageName = route.name?.toString();
   document.title = (pageName ? `${pageName} | ` : '') + 'Lineage Builder';
 

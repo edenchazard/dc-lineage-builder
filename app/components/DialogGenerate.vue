@@ -5,7 +5,7 @@
     @close="emit('close')"
   >
     <template #title>Save lineage</template>
-    <Feedback
+    <FeedbackPanel
       ref="status"
       :global-settings="{ showDismiss: false }"
     />
@@ -20,7 +20,7 @@
         Please note if this link is not viewed in 2 months, it will be deleted
         from the server.
       </p>
-      <Textbox
+      <InputTextbox
         v-model="viewLink"
         autofocus
         readonly
@@ -56,8 +56,8 @@ import type {
 } from '../shared/types';
 import { Lineage } from '../shared/lineageHandler';
 import BaseDialog from './BaseDialog.vue';
-import Feedback from './Feedback.vue';
-import Textbox from './Textbox.vue';
+import FeedbackPanel from './FeedbackPanel.vue';
+import InputTextbox from './InputTextbox.vue';
 import DragonProblem from './DragonProblem.vue';
 
 const emit = defineEmits<{
