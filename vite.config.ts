@@ -1,6 +1,5 @@
-import vue from '@vitejs/plugin-vue';
 import { defineConfig, loadEnv } from 'vite';
-import { configDefaults } from 'vitest/config';
+import vue from '@vitejs/plugin-vue';
 
 export default ({ mode }: { mode: string }) => {
   const env = { ...process.env, ...loadEnv(mode, process.cwd()) };
@@ -22,13 +21,5 @@ export default ({ mode }: { mode: string }) => {
       },
     },
     plugins: [vue()],
-    test: {
-      setupFiles: ['./app/backend/commands/databaseFresh.ts'],
-      environment: 'jsdom',
-      exclude: [...configDefaults.exclude, 'e2e/*'],
-      coverage: {
-        reportsDirectory: '../coverage',
-      },
-    },
   });
 };

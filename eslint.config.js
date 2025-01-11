@@ -6,13 +6,16 @@ export default [
   {
     ignores: ['**/node_modules', '**/coverage'],
   },
-  ...pluginVue.configs['flat/recommended'],
   {
     rules: {
       '@typescript-eslint/consistent-type-imports': 'error',
     },
   },
-  ...vueTsEslintConfig({ extends: ['recommendedTypeChecked'] }),
+  ...pluginVue.configs['flat/recommended'],
+  ...vueTsEslintConfig({
+    extends: ['recommendedTypeChecked'],
+    rootDir: import.meta.dirname,
+  }),
   eslintConfigPrettier,
   {
     rules: {
