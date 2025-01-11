@@ -5,7 +5,7 @@
     @close="emit('close')"
   >
     <template #title> Export lineage </template>
-    <Feedback
+    <FeedbackPanel
       ref="status"
       :global-settings="{ showDismiss: false }"
     />
@@ -16,7 +16,7 @@
       <p>
         Copy and paste this text to a text file to import this lineage later.
       </p>
-      <Textbox
+      <InputTextbox
         v-model="file"
         autofocus
         placeholder="Export code"
@@ -40,8 +40,8 @@ import type {
   PartialLineage,
 } from '../shared/types';
 import BaseDialog from './BaseDialog.vue';
-import Feedback from './Feedback.vue';
-import Textbox from './Textbox.vue';
+import FeedbackPanel from './FeedbackPanel.vue';
+import InputTextbox from './InputTextbox.vue';
 import DragonProblem from './DragonProblem.vue';
 import { Lineage } from '../shared/lineageHandler';
 

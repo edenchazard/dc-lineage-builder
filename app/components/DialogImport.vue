@@ -5,7 +5,7 @@
     @close="close"
   >
     <template #title>Import lineage</template>
-    <Feedback
+    <FeedbackPanel
       ref="status"
       :global-settings="{ showDismiss: false }"
     />
@@ -16,7 +16,7 @@
         overwrite it.
       </p>
     </div>
-    <Textbox
+    <InputTextbox
       v-model="file"
       autofocus
       placeholder="Paste your import text here"
@@ -43,8 +43,8 @@
 import { ref, useTemplateRef } from 'vue';
 import type { PartialLineage } from '../shared/types';
 import DialogBase from './BaseDialog.vue';
-import Textbox from './Textbox.vue';
-import Feedback from './Feedback.vue';
+import InputTextbox from './InputTextbox.vue';
+import FeedbackPanel from './FeedbackPanel.vue';
 import { dragonSchema } from '../shared/validation.js';
 import { Lineage } from '../shared/lineageHandler';
 

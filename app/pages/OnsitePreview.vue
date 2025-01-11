@@ -55,7 +55,7 @@
             Preview
           </button>
         </form>
-        <Textbox
+        <InputTextbox
           v-if="shareLink"
           id="share-link"
           :model-value="shareLink"
@@ -64,7 +64,7 @@
           readonly
           select-all-on-focus
         />
-        <Feedback ref="status" />
+        <FeedbackPanel ref="status" />
       </section>
     </div>
   </div>
@@ -80,15 +80,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick, onMounted } from 'vue';
+import { ref, nextTick, onMounted, useTemplateRef } from 'vue';
 import { getOnSitePreview } from '../app/api.js';
 import OnsitePreview from '../components/OnsitePreview.vue';
-import Feedback from '../components/Feedback.vue';
+import FeedbackPanel from '../components/FeedbackPanel.vue';
 import { validateCode } from '../shared/validation.js';
 import LineageWrapper from '../components/LineageWrapper.vue';
 import { FetchError } from 'ofetch';
 import { useRoute } from 'vue-router';
-import Textbox from '../components/Textbox.vue';
+import InputTextbox from '../components/InputTextbox.vue';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');
@@ -97,7 +97,7 @@ const femaleCode = ref('');
 const generations = ref(0);
 const cutoff = 12;
 const fixRightmostColumn = ref(true);
-const status = ref<InstanceType<typeof Feedback>>();
+const status = useTemplateRef('status');
 const shareLink = ref('');
 const route = useRoute();
 

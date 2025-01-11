@@ -36,9 +36,9 @@ export default [
     },
   },
   {
-    files: ['**/*.vue'],
+    files: ['**/pages/**/*.vue'],
     rules: {
-      'vue/multi-word-component-names': 0,
+      'vue/multi-word-component-names': 'off',
     },
   },
 ];

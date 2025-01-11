@@ -4,7 +4,7 @@
     id="text"
     class="content-limit constrain-width"
   >
-    <Feedback
+    <FeedbackPanel
       ref="status"
       :global-settings="{ showDismiss: false }"
     />
@@ -12,7 +12,7 @@
       v-if="tree != null"
       id="options"
     >
-      <Textbox
+      <InputTextbox
         id="share-link"
         v-model="shareLink"
         type="input"
@@ -48,15 +48,16 @@ import { getLineage } from '../app/api.js';
 import { createLineageLink } from '../shared/utils.js';
 
 import LineageView from '../components/LineageView.vue';
-import Textbox from '../components/Textbox.vue';
-import Feedback from '../components/Feedback.vue';
+import InputTextbox from '../components/InputTextbox.vue';
+import FeedbackPanel from '../components/FeedbackPanel.vue';
 import { FetchError } from 'ofetch';
+import { useTemplateRef } from 'vue';
 
 const route = useRoute();
 const tree = ref<null | PartialLineage>(null);
 const hash = route.params.hash as string;
 const shareLink = createLineageLink(hash);
-const status = ref<InstanceType<typeof Feedback>>();
+const status = useTemplateRef('status');
 const config = reactive<LineageConfig>({
   showInterface: false,
   showLabels: true,
