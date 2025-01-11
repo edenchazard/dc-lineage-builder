@@ -66,7 +66,7 @@ function reset() {
 
 watch(
   () => props.open,
-  async () => {
+  () => {
     if (!status.value) return;
     reset();
 

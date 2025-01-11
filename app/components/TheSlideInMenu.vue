@@ -62,10 +62,9 @@ const { activate, deactivate, hasFocus } = useFocusTrap(mobileMenu, {
   },
 });
 
-watchEffect(async () => {
+watchEffect(() => {
   if (props.open) {
-    await nextTick();
-    activate();
+    void nextTick(activate);
   } else {
     deactivate();
   }

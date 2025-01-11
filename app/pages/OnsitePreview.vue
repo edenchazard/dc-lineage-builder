@@ -101,12 +101,12 @@ const status = ref<InstanceType<typeof Feedback>>();
 const shareLink = ref('');
 const route = useRoute();
 
-onMounted(async () => {
+onMounted(() => {
   maleCode.value = (route.query?.male as string) ?? '';
   femaleCode.value = (route.query?.female as string) ?? '';
 
   if (maleCode.value && femaleCode.value) {
-    fetchLineage();
+    void fetchLineage();
   }
 });
 

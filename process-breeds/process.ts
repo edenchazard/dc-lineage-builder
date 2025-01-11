@@ -142,4 +142,4 @@ async function main() {
   console.log('SCRIPT COMPLETE');
 }
 
-main();
+await main();

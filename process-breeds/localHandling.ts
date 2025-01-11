@@ -182,7 +182,7 @@ export async function checkCache(
     }),
   );
 
-  browser.close();
+  await browser.close();
   console.log(`... Cache ${cache.settings.folder} OK.`);
 }
 

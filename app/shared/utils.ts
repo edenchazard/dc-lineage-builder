@@ -38,7 +38,7 @@ export function breedEntryToPortrait(
   breed: BreedEntry,
   gender: 'male' | 'female',
 ): PortraitData {
-  if (!breed[gender])
+  if (gender in breed === false)
     throw new Error(`DragonGender isn't available for ${breed.name}`);
 
   const data: PortraitData = {

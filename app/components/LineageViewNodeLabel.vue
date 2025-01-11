@@ -67,14 +67,15 @@ function validate() {
   target.classList[invalid ? 'add' : 'remove']('bad');
 }
 
-function click() {
+async function click() {
   // don't act when disabled
   if (props.disabled) return;
 
   editing.value = true;
 
   // focus the input so users can type immediately
-  nextTick(() => inputEl.value && inputEl.value.focus());
+  await nextTick();
+  inputEl.value?.focus?.();
 }
 
 function finishedEditing(e: Event) {

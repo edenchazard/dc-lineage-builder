@@ -3,7 +3,7 @@ import { DragonBuilder } from '../dragonBuilder.js';
 
 describe('dragonBuilder', () => {
   describe('.create()', () => {
-    it('returns a new lineage with defaults and no metadata', async () => {
+    it('returns a new lineage with defaults and no metadata', () => {
       const instance = DragonBuilder.create();
 
       expect(instance).to.have.all.keys([
@@ -19,7 +19,7 @@ describe('dragonBuilder', () => {
   });
 
   describe('.createWithMetadata()', () => {
-    it('returns a new lineage with defaults and metadata', async () => {
+    it('returns a new lineage with defaults and metadata', () => {
       const instance = DragonBuilder.createWithMetadata();
 
       expect(instance).to.have.all.keys([

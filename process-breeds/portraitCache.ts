@@ -94,7 +94,7 @@ class PortraitCache extends Cache {
         nearLossless: true,
       })
       .toFile(filePath.substring(0, filePath.lastIndexOf('.')) + '.webp');
-    page.close();
+    await page.close();
   }
 }
 

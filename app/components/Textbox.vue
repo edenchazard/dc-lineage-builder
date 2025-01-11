@@ -160,7 +160,7 @@ async function copy() {
 }
 
 function startShare() {
-  share({
+  void share({
     title: shareSettings.value.title,
     text: shareSettings.value.text,
     url: props.modelValue,

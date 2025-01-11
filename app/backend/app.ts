@@ -12,7 +12,7 @@ import { ServerError, type ErrorArray } from './ServerError.js';
 import { injectBreedList } from '../shared/breeds.js';
 import config from './config.js';
 
-injectBreedList();
+void injectBreedList();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
