@@ -4,7 +4,6 @@ import {
   createLineageLink,
   expandGender,
   getBreedData,
-  getDCTime,
   validGenderForBreed,
 } from '../utils.js';
 import type { BreedEntry, PortraitData } from '../types.js';
@@ -97,14 +96,6 @@ describe('utils', () => {
         enumerable: true,
         value: originalWindowLocation,
       });
-    });
-  });
-
-  describe('getDCTime', () => {
-    it('returns time in EST or EDT', () => {
-      expect(
-        getDCTime().find((part) => part.type === 'timeZoneName')?.value,
-      ).to.be.oneOf(['EST', 'EDT']);
     });
   });
 });

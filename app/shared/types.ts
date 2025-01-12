@@ -9,15 +9,6 @@ interface DragonMetadata {
   selected: boolean;
 }
 
-/* interface DragonType {
-  code: string;
-  name: string;
-  parents: DragonParents;
-  gender: DragonGender;
-  breed: string;
-  display: DragonDisplay;
-} */
-
 type PartialLineageWithMetadata = PartialLineage &
   DragonMetadata & {
     parents: DragonParents & {
@@ -35,11 +26,7 @@ interface PartialLineage {
   display: DragonDisplay;
 }
 
-//interface PartialLineageWithMetadata extends PartialLineage {}
-
 type MaybePartialLineageWithMetadata = PartialLineage & Partial<DragonMetadata>;
-
-//type MaybeDragonTypeWithMetaData = DragonType & Partial<DragonTypeWithMetadata>;
 
 type DragonGender = 'm' | 'f';
 
@@ -52,11 +39,14 @@ interface BreedEntry {
   genderOnly: GenderOnly;
   metaData: MetaData;
 }
+
 type GenderOnly = DragonGender | boolean;
+
 interface MetaData {
   tags: NewTag[];
   src: Sources;
 }
+
 type Sources = 'local' | 'dc' | 'ghost';
 
 interface PortraitData {
@@ -166,12 +156,9 @@ export type {
   NoDragonParents,
   DragonGender,
   DragonDisplay,
-  //DragonType,
-  //DragonTypeWithMetadata,
   PartialLineage,
   PartialLineageWithMetadata,
   MaybePartialLineageWithMetadata,
-  //MaybeDragonTypeWithMetaData,
   BreedEntry,
   MetaData,
   LineageConfig,

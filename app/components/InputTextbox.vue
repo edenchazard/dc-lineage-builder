@@ -71,9 +71,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import type { PropType } from 'vue';
-import { useShare } from '@vueuse/core';
+import { useDebounceFn, useShare } from '@vueuse/core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { debounce } from '../shared/utils.js';
 
 defineOptions({ inheritAttrs: false });
 
@@ -141,14 +140,14 @@ function update(newValue: string) {
   emit('update:modelValue', newValue);
 }
 
-const resetTooltip = debounce(() => {
+const resetTooltip = useDebounceFn(() => {
   showTooltip.value = false;
   tooltipState.value = false;
 }, timeout.value);
 
 async function copy() {
   showTooltip.value = true;
-  resetTooltip();
+  await resetTooltip();
   try {
     await navigator.clipboard.writeText(props.modelValue);
     tooltipState.value = true;

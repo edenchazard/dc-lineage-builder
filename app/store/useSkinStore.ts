@@ -5,7 +5,6 @@ import { useLocalStorage } from '@vueuse/core';
 type Skin = {
   cssName: string;
   prettyName: string;
-  //file: () => Promise<typeof import('*.css')>;
 };
 
 export const useSkinStore = defineStore('skinStore', () => {
@@ -17,22 +16,18 @@ export const useSkinStore = defineStore('skinStore', () => {
     {
       cssName: defaultSkinName,
       prettyName: 'Default',
-      //file: () => import(`../../assets/layouts/default/index.css`),
     },
     {
       cssName: 'skin-portal2',
       prettyName: 'Portal 2',
-      //file:  () => import(`../../assets/layouts/portal2-light/index.css`),
     },
     {
       cssName: 'skin-portal2-light',
       prettyName: 'Portal 2 Light',
-      //file: () => import(`../../assets/layouts/portal2-light/index.css`),
     },
     {
       cssName: 'skin-mobile-dark',
       prettyName: 'Mobile/Tablet Dark',
-      //file: () => import(`../../assets/layouts/mobile-dark/index.css`),
     },
   ];
 
@@ -47,7 +42,6 @@ export const useSkinStore = defineStore('skinStore', () => {
       const name = !skinExists(_activeSkinName.value)
         ? defaultSkinName
         : _activeSkinName.value;
-      //availableSkins.find((skin) => skin.cssName === name)?.file();
       return name;
     },
     set: (skinName: Skin['cssName']) => {

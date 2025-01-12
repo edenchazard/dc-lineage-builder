@@ -23,10 +23,6 @@ export function validGenderForBreed(
   return breed.genderOnly === false || breed.genderOnly === gender;
 }
 
-export function throwBreedError(name: string): never {
-  throw new Error(`Breed ${name} doesn't exist.`);
-}
-
 // returns undefined if breed isn't in the global list
 export function getBreedData(breedName: string): BreedEntry | undefined {
   const entry = listOfBreeds.find((v) => v.name === breedName);
@@ -84,14 +80,7 @@ export function filterBreedTableByGender(
 }
 
 export function isBreedInList(list: BreedEntry[], breedName: string) {
-  //if(typeof breedName === 'string'){
   return list.findIndex((breed) => breed.name === breedName) > -1;
-  //}
-  /*else if (typeof breedName === 'object'){
-        placeholder.log('r');
-        return list.findIndex(breed => breed.name === breedName) > -1;
-    }*/
-  //throw new Error("not string or object of breeds, type "+typeof breedName);
 }
 
 export function addBreed(breedObj: BreedEntry, resort: boolean = true) {
@@ -115,32 +104,6 @@ export function addBreed(breedObj: BreedEntry, resort: boolean = true) {
   // update gender tables
   syncPortraits();
   return true;
-}
-
-export function getDCTime() {
-  return new Intl.DateTimeFormat('en-us', {
-    timeZone: 'America/New_York',
-    timeStyle: 'long',
-    hour12: false,
-  }).formatToParts();
-}
-
-export function deepClone<T>(obj: T): T {
-  return JSON.parse(JSON.stringify(obj));
-}
-
-export function debounce(
-  callback: (...args: unknown[]) => unknown,
-  timeout = 300,
-) {
-  let timer: ReturnType<typeof setTimeout>;
-
-  return (...args: unknown[]) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      callback.apply(window, args);
-    }, timeout);
-  };
 }
 
 export function createLineageLink(hash: string) {
