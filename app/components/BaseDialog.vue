@@ -127,7 +127,8 @@ function modalClosed() {
   border: 0;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
   max-width: 31.25rem;
-  max-height: 31rem;
+  max-height: 21rem;
+  height: 100%;
   background: var(--dialog-body-bg);
 
   &[open] {
