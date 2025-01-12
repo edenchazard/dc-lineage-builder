@@ -8,7 +8,7 @@
       ref="container"
       :list="filteredBreeds"
       :search="search"
-      :compact="search.length < 3 && filteredBreeds.length > 100"
+      :compact="filteredBreeds.length > userSettings.gridThreshold"
       v-bind="$attrs"
       @breed-selected="(breed) => emit('breedSelected', breed)"
     />
@@ -27,6 +27,7 @@ import type { PortraitData, TagFilterCollection } from '../shared/types';
 import BreedList from './BreedList.vue';
 import { useAppStore } from '../store/useAppStore';
 import { filterBreedsByTagsWith } from '../store/useTagStore';
+import { userSettings } from '../composables/useUserSettings';
 
 const props = withDefaults(
   defineProps<{

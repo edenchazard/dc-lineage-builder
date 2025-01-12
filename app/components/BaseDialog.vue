@@ -41,11 +41,12 @@
         </div>
       </header>
 
-      <main
-        class="dialog-main"
-        :dialog="{ close }"
-      >
-        <slot name="default">Default content</slot>
+      <main class="dialog-main">
+        <slot
+          name="default"
+          :dialog="{ close }"
+          >Default content</slot
+        >
       </main>
 
       <footer class="dialog-footer">
@@ -216,6 +217,9 @@ function modalClosed() {
   text-align: right;
   background: var(--dialog-body-bg);
   padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
 
   & .dialog-footer-button {
     padding: 0.5rem 1rem;

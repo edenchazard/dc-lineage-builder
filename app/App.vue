@@ -1,4 +1,8 @@
 <template>
+  <DialogSettings
+    :open="settingsDialogOpen"
+    @close="settingsDialogOpen = false"
+  />
   <Header />
   <main id="content">
     <router-view :key="route.fullPath" />
@@ -8,7 +12,7 @@
       id="footer"
       class="constrain-width"
     >
-      <div id="footer-external-links">
+      <div id="footer-links">
         <a href="https://ko-fi.com/dctools">
           <FontAwesomeIcon
             icon="fa-solid fa-mug-hot"
@@ -21,16 +25,28 @@
             size="2x"
           />Github
         </a>
+        <button
+          class="pointer"
+          type="button"
+          @click="settingsDialogOpen = true"
+        >
+          <font-awesome-icon
+            icon="fa-solid fa-cog"
+            size="2x"
+          />Settings
+        </button>
       </div>
-      v{{ appStore.appVersion }} &copy; eden chazard
-      <SkinSwitcher id="desktop-menu-skin-switcher" />
+      <div id="footer-version">
+        v{{ appStore.appVersion }}
+        <div>eden chazard</div>
+      </div>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
 import 'reset-css';
-import { onMounted, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useDevicePixelRatio } from '@vueuse/core';
 import { useRoute } from 'vue-router';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -38,11 +54,13 @@ import './assets/styling/style.css';
 import './assets/layouts/theming.css';
 import { useAppStore } from './store/useAppStore.js';
 import Header from './components/TheHeader.vue';
-import SkinSwitcher from './components/SkinSwitcher.vue';
 import { injectBreedList } from './shared/breeds.js';
+import DialogSettings from './components/DialogSettings.vue';
 
 const route = useRoute();
 const appStore = useAppStore();
+
+const settingsDialogOpen = ref(false);
 
 const { pixelRatio } = useDevicePixelRatio();
 let use72 = false;
@@ -110,24 +128,44 @@ onMounted(async () => {
   flex-wrap: wrap;
 }
 
-#footer-external-links {
+#footer-links {
   display: flex;
   gap: 0.5rem;
 }
 
-#footer-external-links a {
+#footer-links a,
+#footer-links button {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   flex: 1;
-  text-align: center;
   white-space: nowrap;
+  border: 0;
+  background: none;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  text-decoration: underline;
+  font-family: inherit;
+  color: var(--ui-footer-btn);
+
+  & svg {
+    margin: 0 auto;
+  }
+}
+
+#footer-version {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
 }
 
 @media (min-width: 38em) {
   #footer {
     flex-direction: row;
   }
+
+  #footer-version {
+    align-self: flex-end;
+    text-align: right;
+  }
 }
 </style>
-./directives

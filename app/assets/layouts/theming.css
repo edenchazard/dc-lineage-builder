@@ -63,6 +63,7 @@
   --ui-content-fg: #000;
   --ui-footer-bg: var(--dc-background);
   --ui-footer-fg: #000;
+  --ui-footer-btn: #7b5e28;
 
   --ui-modal-header: #000;
   --ui-modal-content: #fff;
@@ -223,6 +224,7 @@
   --ui-content-fg: #000;
   --ui-footer-bg: var(--dc-background);
   --ui-footer-fg: #000;
+  --ui-footer-btn: #ddd;
 
   --ui-modal-header: #000;
   --ui-modal-content: #fff;
@@ -424,7 +426,8 @@
     }
   }
 
-  & #footer a {
+  & #footer a,
+  & #footer button {
     color: var(--dc-colour-4);
   }
 
@@ -504,6 +507,7 @@
   --ui-content-fg: #fff;
   --ui-footer-bg: #13151a;
   --ui-footer-fg: #fff;
+  --ui-footer-btn: #5f9aff;
 
   --ui-modal-header: #000;
   --ui-modal-content: #fff;
@@ -819,7 +823,8 @@
       }
     }
   }
-  & #footer-external-links a {
+  & #footer-external-links a,
+  & #footer-external-links button {
     color: #fff;
   }
 

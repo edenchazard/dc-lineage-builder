@@ -1,49 +1,33 @@
 <template>
-  <div>
-    <FontAwesomeIcon
-      icon="palette"
-      class="margin"
-    />
-    <label
-      :for="id"
-      class="margin"
-      >Skin:</label
+  <select
+    :id="id"
+    v-model="model"
+    class="skin-switcher pointer interactive"
+    v-bind="$attrs"
+  >
+    <option
+      v-for="(readableName, skinId) in availableSkins"
+      :key="skinId"
+      :value="skinId"
     >
-    <select
-      :id="id"
-      v-model="skinStore.activeSkin"
-      class="skin-switcher pointer interactive"
-      v-bind="$attrs"
-    >
-      <option
-        v-for="skin in skinStore.availableSkins"
-        :key="skin.cssName"
-        :value="skin.cssName"
-      >
-        {{ skin.prettyName }}
-      </option>
-    </select>
-  </div>
+      {{ readableName }}
+    </option>
+  </select>
 </template>
 <script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { useSkinStore } from '../store/useSkinStore.js';
-const skinStore = useSkinStore();
+import { availableSkins, type SkinId } from '../composables/useUserSettings';
 
-defineProps({
-  id: {
-    type: String,
-    required: true,
+withDefaults(
+  defineProps<{
+    id: string;
+  }>(),
+  {
+    id: '',
   },
+);
+
+const model = defineModel<SkinId>({
+  type: String,
+  default: '',
 });
 </script>
-<style scoped>
-.margin {
-  margin-right: 0.5rem;
-}
-.skin-switcher {
-  background: var(--ui-footer-bg);
-  color: var(--ui-footer-fg);
-  border: 1px solid var(--ui-footer-fg);
-}
-</style>
