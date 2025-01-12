@@ -26,8 +26,7 @@
         />
         <p>
           Show results in a grid when there are more than
-          {{ userSettings.gridThreshold }} results. Specify 0 to never show
-          results in a grid.
+          {{ temporarySettings.gridThreshold }} results.
         </p>
         <label for="skin-switcher">Skin</label>
         <SkinSwitcher

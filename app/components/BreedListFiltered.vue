@@ -8,10 +8,7 @@
       ref="container"
       :list="filteredBreeds"
       :search="search"
-      :compact="
-        userSettings.gridThreshold > 0 &&
-        filteredBreeds.length > userSettings.gridThreshold
-      "
+      :compact="filteredBreeds.length > userSettings.gridThreshold"
       v-bind="$attrs"
       @breed-selected="(breed) => emit('breedSelected', breed)"
     />
