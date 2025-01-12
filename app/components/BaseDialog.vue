@@ -41,11 +41,12 @@
         </div>
       </header>
 
-      <main
-        class="dialog-main"
-        :dialog="{ close }"
-      >
-        <slot name="default">Default content</slot>
+      <main class="dialog-main">
+        <slot
+          name="default"
+          :dialog="{ close }"
+          >Default content</slot
+        >
       </main>
 
       <footer class="dialog-footer">
