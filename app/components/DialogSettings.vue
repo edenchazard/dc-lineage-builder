@@ -2,7 +2,10 @@
   <BaseDialog
     :id="settingsDialogId"
     :open="open"
-    @close="emit('close')"
+    @close="
+      resetTemporarySettings();
+      emit('close');
+    "
   >
     <template #title>Settings</template>
     <template #default>
@@ -10,13 +13,13 @@
         <label for="grid-threshold">Grid threshold</label>
         <input
           id="grid-threshold"
-          v-model="userSettings.gridThreshold"
+          v-model.number="temporarySettings.gridThreshold"
           class="interactive"
           type="number"
           name="grid-threshold"
           min="0"
           @change="
-            userSettings.gridThreshold = Math.abs(
+            temporarySettings.gridThreshold = Math.abs(
               ~~Number(($event.target as HTMLInputElement)?.value ?? '0'),
             )
           "
@@ -27,28 +30,66 @@
           results in a grid.
         </p>
         <label for="skin-switcher">Skin</label>
-        <SkinSwitcher id="skin-switcher" />
+        <SkinSwitcher
+          id="skin-switcher"
+          v-model="temporarySettings.skin"
+        />
         <p>Emulate a site skin.</p>
       </form>
+    </template>
+    <template #footer="{ dialog }">
+      <button
+        class="dialog-footer-button"
+        @click="dialog.close()"
+      >
+        Cancel
+      </button>
+      <button
+        class="dialog-footer-button"
+        @click="
+          saveSettings();
+          dialog.close();
+        "
+      >
+        Save
+      </button>
     </template>
   </BaseDialog>
 </template>
 
 <script setup lang="ts">
 import BaseDialog from './BaseDialog.vue';
-import userSettings from '../composables/useUserSettings';
+import { userSettings } from '../composables/useUserSettings';
 import SkinSwitcher from './SkinSwitcher.vue';
-import { useId } from 'vue';
+import { ref, useId, watch } from 'vue';
 
 const settingsDialogId = useId();
+const temporarySettings = ref({ ...userSettings.value });
 
 const emit = defineEmits<{
   (e: 'close'): void;
 }>();
 
-defineProps<{
+const props = defineProps<{
   open: boolean;
 }>();
+
+watch(
+  () => props.open,
+  (open) => {
+    if (open) {
+      temporarySettings.value = { ...userSettings.value };
+    }
+  },
+);
+
+function resetTemporarySettings() {
+  temporarySettings.value = { ...userSettings.value };
+}
+
+function saveSettings() {
+  userSettings.value = { ...userSettings.value, ...temporarySettings.value };
+}
 </script>
 
 <style scoped>

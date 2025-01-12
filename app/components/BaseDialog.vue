@@ -217,6 +217,9 @@ function modalClosed() {
   text-align: right;
   background: var(--dialog-body-bg);
   padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
 
   & .dialog-footer-button {
     padding: 0.5rem 1rem;
