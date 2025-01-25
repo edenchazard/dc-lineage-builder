@@ -1046,6 +1046,14 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["3NvWW","rphkc"],
+    "subentries": {
+      "Scaleless": {
+        "sprites": ["X0U70","IKZgN"]
+      },
+      "__regular__": {
+        "sprites": ["3NvWW","rphkc"]
+      }
+    },
     "tags": ["standard","western","light","all","regular"]
   },
   "Luminox Wyvern": {
