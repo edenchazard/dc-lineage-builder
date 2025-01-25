@@ -1005,7 +1005,7 @@
     "dimorphism": true,
     "genderOnly": false,
     "sprites": ["oNF4y","adV4j"],
-    "tags": ["eastern","p:dark","s:earth","all","regular"]
+    "tags": ["standard","eastern","p:dark","s:earth","all","regular"]
   },
   "Leodon": {
     "dimorphism": false,
@@ -1089,7 +1089,7 @@
     "dimorphism": false,
     "genderOnly": false,
     "sprites": ["Iac9u"],
-    "tags": ["eastern","p:life","s:water","coast","regular"]
+    "tags": ["standard","eastern","p:life","s:water","coast","regular"]
   },
   "Mimic Pygmy": {
     "dimorphism": true,

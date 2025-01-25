@@ -406,7 +406,7 @@
     "genderOnly": "f",
     "releaseDate": ["2022-12-25"],
     "sprites": ["Fstvl",0,-1,48],
-    "tags": ["eastern","p:light","s:fire","cave","christmas"]
+    "tags": ["standard","eastern","p:light","s:fire","cave","christmas"]
   },
   "Lightning Pygmy": {
     "genderOnly": false,
