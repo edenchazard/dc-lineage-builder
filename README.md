@@ -24,7 +24,7 @@ Written in TypeScript with a Vue.js ~~2~~ 3 frontend and a Node.js backend.
 
 ## Running the project
 
-The project is dockerized, so all you need is docker, docker-compose and a clone of the repository.
+The project is dockerised, so all you need is docker, docker-compose and a clone of the repository.
 
 ```sh
 # clone repo
