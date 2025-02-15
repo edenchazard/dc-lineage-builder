@@ -117,7 +117,7 @@ router.post('/inbred', async (ctx: RequestContext) => {
   ).reduce((acc, chunk) => {
     return { ...acc, ...chunk.dragons };
   }, {}) as Record<string, DragonData>;
-  console.log(resolvedDragons);
+
   const inbredChecks = checks.map((dragon) => {
     const problems = dragon.codesInAncestry
       .map((ancestorCode) => ({
@@ -189,8 +189,8 @@ router.post('/inbred', async (ctx: RequestContext) => {
         name: resolvedDragons?.[ancestor.code]?.name,
       })),
 
-      failed: dragon.codesInAncestry.filter(
-        (ancestor) => ancestor in resolvedDragons === false && ancestor !== '0',
+      failed: [dragon.code, ...dragon.codesInAncestry].filter(
+        (ancestor) => ancestor in resolvedDragons === false,
       ).length,
     };
   });
