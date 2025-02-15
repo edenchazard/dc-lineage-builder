@@ -1,5 +1,5 @@
 import { ofetch } from 'ofetch';
-import config from './config';
+import config from './config.js';
 
 export type DragonData = {
   id: string;
