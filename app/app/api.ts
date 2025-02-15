@@ -67,12 +67,20 @@ function getOnSitePreview(
   });
 }
 
-interface BulkCodesResponse extends APIResponse {
-  dragons: Record<string, string[]>;
+export interface InbredCheckResponse extends APIResponse {
+  checks: {
+    code: string;
+    problems: {
+      code: string;
+      observable: boolean;
+      name: string | null;
+      conflicts: string[];
+    }[];
+  }[];
 }
 
 function getInbred(codes: string[]) {
-  return callAPI<BulkCodesResponse>('/onsite/inbred', {
+  return callAPI<InbredCheckResponse>('/onsite/inbred', {
     method: 'POST',
     body: {
       codes,

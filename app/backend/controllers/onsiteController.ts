@@ -85,7 +85,7 @@ router.post('/inbred', async (ctx: RequestContext) => {
     })
     .validate(ctx.request.body);
 
-  const codesPresent = await Promise.all(
+  const checks = await Promise.all(
     codes.map(async (code) => {
       const onsite = await grabHTML(code);
       return {
@@ -95,14 +95,14 @@ router.post('/inbred', async (ctx: RequestContext) => {
     }),
   );
 
-  const completeCodes = Array.from(
-    new Set(codesPresent.map((dragon) => dragon.codesInAncestry).flat()),
+  const allAncestryCodes = Array.from(
+    new Set(checks.map((dragon) => dragon.codesInAncestry).flat()),
   );
 
   // Resolve dragons in mass view chunks of 400.
   const resolvedDragons = (
     await Promise.all(
-      chunkArray(completeCodes, 400).map(async (chunk) => {
+      chunkArray(allAncestryCodes, 400).map(async (chunk) => {
         return dcApiFetch<GetDragonsBulkResponse>(`/dragons`, {
           method: 'POST',
           body: new URLSearchParams({
@@ -118,28 +118,38 @@ router.post('/inbred', async (ctx: RequestContext) => {
     return { ...acc, ...chunk.dragons };
   }, {}) as Record<string, DragonData>;
 
-  const inbredChecks = codesPresent.map((dragon) => {
+  const inbredChecks = checks.map((dragon) => {
     return {
+      // The dragon we're checking.
       code: dragon.code,
-      codesInAncestry: dragon.codesInAncestry.map((code) => ({
-        code,
-        observable: code in resolvedDragons,
-        name: resolvedDragons?.[code]?.name,
-        conflictiveWith: (() => {
-          const conflictiveAgainst: string[] = [];
-          codesPresent.forEach((otherDragon) => {
-            if (otherDragon.code === dragon.code) return;
-            if (otherDragon.codesInAncestry.includes(code)) {
-              conflictiveAgainst.push(otherDragon.code);
-            }
-          });
-          return conflictiveAgainst;
-        })(),
-      })),
+
+      // The ancestry of this checked dragon.
+      problems: dragon.codesInAncestry
+        .map((ancestorCode) => ({
+          code: ancestorCode,
+          observable: ancestorCode in resolvedDragons,
+          name: resolvedDragons?.[ancestorCode]?.name,
+          conflicts: (() => {
+            const conflictiveAgainst: string[] = [];
+            checks.forEach((otherDragon) => {
+              if (otherDragon.code === dragon.code) return;
+
+              if (otherDragon.codesInAncestry.includes(ancestorCode)) {
+                conflictiveAgainst.push(otherDragon.code);
+              }
+            });
+            return conflictiveAgainst;
+          })(),
+        }))
+        .filter(
+          (ancestor) =>
+            (ancestor.conflicts.length > 0 || !ancestor.observable) &&
+            ancestor.code !== '0',
+        ),
     };
   });
 
-  ctx.body = { codesPresent, inbredChecks };
+  ctx.body = { checks: inbredChecks };
 });
 
 export default router;
