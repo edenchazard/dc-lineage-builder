@@ -87,10 +87,14 @@
             :key="result.code"
           >
             <div class="dragon">
-              <img
-                class="dragon-cell"
-                :src="`https://dragcave.net/image/${result.code}.png`"
-              />
+              <a
+                :href="`https://dragcave.net/lineage/${result.code}`"
+                target="_blank"
+              >
+                <img
+                  class="dragon-cell"
+                  :src="`https://dragcave.net/image/${result.code}.png`"
+              /></a>
               <span class="code">({{ result.code }})</span>
             </div>
 
@@ -142,10 +146,15 @@
                     )"
                     :key="ancestor.code ?? $index"
                   >
-                    <img
-                      class="dragon-cell"
-                      :src="`https://dragcave.net/image/${ancestor.code}.png`"
-                    />
+                    <a
+                      :href="`https://dragcave.net/lineage/${ancestor.code}`"
+                      target="_blank"
+                    >
+                      <img
+                        class="dragon-cell"
+                        :src="`https://dragcave.net/image/${ancestor.code}.png`"
+                      />
+                    </a>
                     <span>{{ ancestor.name }}</span>
                     <span class="code">({{ ancestor.code }})</span>
                     <span class="code"

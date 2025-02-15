@@ -119,33 +119,68 @@ router.post('/inbred', async (ctx: RequestContext) => {
   }, {}) as Record<string, DragonData>;
 
   const inbredChecks = checks.map((dragon) => {
+    const problems = dragon.codesInAncestry
+      .map((ancestorCode) => ({
+        code: ancestorCode,
+        name: resolvedDragons?.[ancestorCode]?.name,
+        conflicts: (() => {
+          const conflictiveAgainst: string[] = [];
+          checks.forEach((otherDragon) => {
+            if (ancestorCode === '0') return;
+
+            if (otherDragon.code === dragon.code) return;
+
+            if (otherDragon.codesInAncestry.includes(ancestorCode)) {
+              conflictiveAgainst.push(otherDragon.code);
+            }
+          });
+          return conflictiveAgainst;
+        })(),
+      }))
+      .filter((ancestor) => ancestor.conflicts.length > 0);
+
+    const selfProblems = (() => {
+      const conflictiveWithin: string[] = [];
+
+      // Check the dragon itself to check if a dragon appears multiple times in its ancestry.
+      const uniqueAncestry = new Set(dragon.codesInAncestry);
+
+      uniqueAncestry.forEach((ancestorCode) => {
+        console.log(ancestorCode, dragon.codesInAncestry);
+        if (ancestorCode === '0') return;
+
+        if (
+          dragon.codesInAncestry.filter((code) => code === ancestorCode)
+            .length > 1
+        ) {
+          conflictiveWithin.push(ancestorCode);
+        }
+      });
+
+      return conflictiveWithin.map((ancestorCode) => ({
+        code: ancestorCode,
+        name: resolvedDragons?.[ancestorCode]?.name,
+      }));
+    })();
+
     return {
       // The dragon we're checking.
       code: dragon.code,
 
       // The ancestry of this checked dragon.
-      problems: dragon.codesInAncestry
-        .map((ancestorCode) => ({
-          code: ancestorCode in resolvedDragons ? ancestorCode : null,
-          observable: ancestorCode in resolvedDragons,
-          name: resolvedDragons?.[ancestorCode]?.name,
-          conflicts: (() => {
-            const conflictiveAgainst: string[] = [];
-            checks.forEach((otherDragon) => {
-              if (otherDragon.code === dragon.code) return;
+      problems: problems.map((ancestor) => ({
+        code: ancestor.code in resolvedDragons ? ancestor.code : null,
+        name: resolvedDragons?.[ancestor.code]?.name,
+        conflicts: ancestor.conflicts,
+        observable: ancestor.code in resolvedDragons,
+      })),
 
-              if (otherDragon.codesInAncestry.includes(ancestorCode)) {
-                conflictiveAgainst.push(otherDragon.code);
-              }
-            });
-            return conflictiveAgainst;
-          })(),
-        }))
-        .filter(
-          (ancestor) =>
-            (ancestor.conflicts.length > 0 || !ancestor.observable) &&
-            [null, '0'].includes(ancestor.code),
-        ),
+      // Inbreed conflicts within dragon itself.
+      selfProblems: selfProblems.map((ancestor) => ({
+        code: ancestor.code in resolvedDragons ? ancestor.code : null,
+        name: resolvedDragons?.[ancestor.code]?.name,
+        observable: ancestor.code in resolvedDragons,
+      })),
     };
   });
 

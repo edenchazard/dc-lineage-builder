@@ -72,9 +72,14 @@ export interface InbredCheckResponse extends APIResponse {
     code: string;
     problems: {
       code: string | null;
-      observable: boolean;
       name: string | null;
       conflicts: string[];
+      observable: boolean;
+    }[];
+    selfProblems: {
+      code: string | null;
+      name: string | null;
+      observable: boolean;
     }[];
   }[];
 }
