@@ -126,7 +126,7 @@ router.post('/inbred', async (ctx: RequestContext) => {
       // The ancestry of this checked dragon.
       problems: dragon.codesInAncestry
         .map((ancestorCode) => ({
-          code: ancestorCode,
+          code: ancestorCode in resolvedDragons ? ancestorCode : null,
           observable: ancestorCode in resolvedDragons,
           name: resolvedDragons?.[ancestorCode]?.name,
           conflicts: (() => {
@@ -144,7 +144,7 @@ router.post('/inbred', async (ctx: RequestContext) => {
         .filter(
           (ancestor) =>
             (ancestor.conflicts.length > 0 || !ancestor.observable) &&
-            ancestor.code !== '0',
+            [null, '0'].includes(ancestor.code),
         ),
     };
   });

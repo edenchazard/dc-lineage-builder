@@ -137,10 +137,10 @@
                 </p>
                 <ul class="conflicts">
                   <li
-                    v-for="ancestor in result.problems.filter(
+                    v-for="(ancestor, $index) in result.problems.filter(
                       (ancestor) => ancestor.observable,
                     )"
-                    :key="ancestor.code"
+                    :key="ancestor.code ?? $index"
                   >
                     <img
                       class="dragon-cell"
