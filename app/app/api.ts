@@ -70,6 +70,7 @@ function getOnSitePreview(
 export interface InbredCheckResponse extends APIResponse {
   checks: {
     code: string;
+    name: string | null;
     failed: number;
     problems: {
       code: string;

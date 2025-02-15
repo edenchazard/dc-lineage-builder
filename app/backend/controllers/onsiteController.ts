@@ -174,6 +174,7 @@ router.post('/inbred', async (ctx: RequestContext) => {
     return {
       // The dragon we're checking.
       code: dragon.code,
+      name: resolvedDragons?.[dragon.code]?.name,
 
       // The ancestry of this checked dragon.
       problems: problems.map((ancestor) => ({

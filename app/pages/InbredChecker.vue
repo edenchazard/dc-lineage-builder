@@ -94,7 +94,9 @@
                 <img
                   class="dragon-cell"
                   :src="`https://dragcave.net/image/${result.code}.png`"
-              /></a>
+                />
+              </a>
+              <span>{{ result.name }}</span>
               <span class="code">({{ result.code }})</span>
             </div>
 
@@ -300,7 +302,8 @@ async function handleInbredCheck() {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: 4rem;
+    width: 6rem;
+    text-align: center;
     align-items: center;
   }
 
