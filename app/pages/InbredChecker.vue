@@ -34,8 +34,8 @@
             >Dragons to check</label
           >
           <InputTextbox
-            type="textarea"
             v-model="input"
+            type="textarea"
           />
 
           <button
@@ -58,8 +58,8 @@
           >
             <span class="preview">
               <img
-                class="dragon-cell"
                 v-if="validateCode(code) && !badDragons.includes(code)"
+                class="dragon-cell"
                 :src="`https://dragcave.net/image/${code}.png`"
                 @error="badDragons.push(code)"
               />
@@ -75,16 +75,16 @@
       </section>
 
       <section
-        id="results"
         v-if="results.length > 0"
+        id="results"
       >
         <h2>Results</h2>
         <ul class="checks">
           <li
-            class="check"
-            :id="`check-${result.code}`"
             v-for="result in results"
+            :id="`check-${result.code}`"
             :key="result.code"
+            class="check"
           >
             <div class="dragon">
               <a
