@@ -46,15 +46,6 @@
           </button>
         </form>
 
-        <InputTextbox
-          v-if="shareLink"
-          id="share-link"
-          :model-value="shareLink"
-          show-copy-button
-          show-share-button
-          readonly
-          select-all-on-focus
-        />
         <FeedbackPanel ref="status" />
       </section>
 
@@ -185,7 +176,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, useTemplateRef, computed } from 'vue';
+import { ref, useTemplateRef, computed } from 'vue';
 import { FetchError } from 'ofetch';
 import { getInbred, type InbredCheckResponse } from '../app/api.js';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
@@ -193,7 +184,6 @@ import InputTextbox from '../components/InputTextbox.vue';
 import { validateCode } from '../shared/validation.js';
 
 const status = useTemplateRef('status');
-const shareLink = ref('');
 const input = ref('FSz8O\nElkej\nhsM9q\nxjJ76\nqh2Z\nFsuG');
 const badDragons = ref<string[]>([]);
 const results = ref<InbredCheckResponse['checks']>([]);
@@ -208,8 +198,6 @@ const codesToCheck = computed(() => {
     return [];
   }
 });
-
-onMounted(async () => {});
 
 async function handleInbredCheck() {
   if (!status.value) return;
