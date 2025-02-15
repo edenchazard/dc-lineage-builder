@@ -1,14 +1,22 @@
 import path from 'path';
 import Router from '@koa/router';
-import { number, object } from 'yup';
+import { array, number, object } from 'yup';
 import { codeValidator } from '../../shared/validation.js';
 import {
   getDataForPair,
   checkDragonsMatchGender,
   OnsiteDragonNotFoundError,
+  getDragonCodesFromHTML,
+  grabHTML,
 } from '../onsite.js';
 import type { RequestContext } from '../types';
 import config from '../config.js';
+import {
+  dcApiFetch,
+  type DragonData,
+  type GetDragonsBulkResponse,
+} from '../dcApiFetch.js';
+import { chunkArray } from '../../shared/utils.js';
 
 const router = new Router({
   prefix: path.join(config.apiUrl, '/onsite'),
@@ -68,6 +76,70 @@ router.post('/', async (ctx: RequestContext) => {
       },
     ]);
   }
+});
+
+router.post('/inbred', async (ctx: RequestContext) => {
+  const { codes } = await object()
+    .shape({
+      codes: array().of(codeValidator).required(),
+    })
+    .validate(ctx.request.body);
+
+  const codesPresent = await Promise.all(
+    codes.map(async (code) => {
+      const onsite = await grabHTML(code);
+      return {
+        code,
+        codesInAncestry: getDragonCodesFromHTML(onsite.html).slice(1),
+      };
+    }),
+  );
+
+  const completeCodes = Array.from(
+    new Set(codesPresent.map((dragon) => dragon.codesInAncestry).flat()),
+  );
+
+  // Resolve dragons in mass view chunks of 400.
+  const resolvedDragons = (
+    await Promise.all(
+      chunkArray(completeCodes, 400).map(async (chunk) => {
+        return dcApiFetch<GetDragonsBulkResponse>(`/dragons`, {
+          method: 'POST',
+          body: new URLSearchParams({
+            ids: chunk.join(','),
+          }),
+          onResponseError() {
+            throw new Error('Error in response.');
+          },
+        });
+      }),
+    )
+  ).reduce((acc, chunk) => {
+    return { ...acc, ...chunk.dragons };
+  }, {}) as Record<string, DragonData>;
+
+  const inbredChecks = codesPresent.map((dragon) => {
+    return {
+      code: dragon.code,
+      codesInAncestry: dragon.codesInAncestry.map((code) => ({
+        code,
+        observable: code in resolvedDragons,
+        name: resolvedDragons?.[code]?.name,
+        conflictiveWith: (() => {
+          const conflictiveAgainst: string[] = [];
+          codesPresent.forEach((otherDragon) => {
+            if (otherDragon.code === dragon.code) return;
+            if (otherDragon.codesInAncestry.includes(code)) {
+              conflictiveAgainst.push(otherDragon.code);
+            }
+          });
+          return conflictiveAgainst;
+        })(),
+      })),
+    };
+  });
+
+  ctx.body = { codesPresent, inbredChecks };
 });
 
 export default router;

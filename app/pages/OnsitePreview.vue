@@ -81,7 +81,7 @@
 
 <script setup lang="ts">
 import { ref, nextTick, onMounted, useTemplateRef } from 'vue';
-import { getOnSitePreview } from '../app/api.js';
+import { getInbred, getOnSitePreview } from '../app/api.js';
 import OnsitePreview from '../components/OnsitePreview.vue';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
 import { validateCode } from '../shared/validation.js';
@@ -101,7 +101,11 @@ const status = useTemplateRef('status');
 const shareLink = ref('');
 const route = useRoute();
 
-onMounted(() => {
+onMounted(async () => {
+  console.log(
+    await getInbred(['FSz8O', 'Elkej', 'hsM9q', 'xjJ76', 'qh2Z', 'FsuG']),
+  );
+
   maleCode.value = (route.query?.male as string) ?? '';
   femaleCode.value = (route.query?.female as string) ?? '';
 

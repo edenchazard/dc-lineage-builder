@@ -67,4 +67,17 @@ function getOnSitePreview(
   });
 }
 
-export { callAPI, getLineage, saveLineage, getOnSitePreview };
+interface BulkCodesResponse extends APIResponse {
+  dragons: Record<string, string[]>;
+}
+
+function getInbred(codes: string[]) {
+  return callAPI<BulkCodesResponse>('/onsite/inbred', {
+    method: 'POST',
+    body: {
+      codes,
+    },
+  });
+}
+
+export { callAPI, getLineage, saveLineage, getOnSitePreview, getInbred };
