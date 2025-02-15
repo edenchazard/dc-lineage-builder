@@ -70,14 +70,15 @@ function getOnSitePreview(
 export interface InbredCheckResponse extends APIResponse {
   checks: {
     code: string;
+    failed: number;
     problems: {
-      code: string | null;
+      code: string;
       name: string | null;
       conflicts: string[];
       observable: boolean;
     }[];
     selfProblems: {
-      code: string | null;
+      code: string;
       name: string | null;
       observable: boolean;
     }[];

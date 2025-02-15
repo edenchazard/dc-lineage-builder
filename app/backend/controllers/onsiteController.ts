@@ -90,7 +90,7 @@ router.post('/inbred', async (ctx: RequestContext) => {
       const onsite = await grabHTML(code);
       return {
         code,
-        codesInAncestry: getDragonCodesFromHTML(onsite.html).slice(1),
+        codesInAncestry: getDragonCodesFromHTML(onsite.html),
       };
     }),
   );
@@ -117,7 +117,7 @@ router.post('/inbred', async (ctx: RequestContext) => {
   ).reduce((acc, chunk) => {
     return { ...acc, ...chunk.dragons };
   }, {}) as Record<string, DragonData>;
-
+  console.log(resolvedDragons);
   const inbredChecks = checks.map((dragon) => {
     const problems = dragon.codesInAncestry
       .map((ancestorCode) => ({
@@ -126,9 +126,13 @@ router.post('/inbred', async (ctx: RequestContext) => {
         conflicts: (() => {
           const conflictiveAgainst: string[] = [];
           checks.forEach((otherDragon) => {
-            if (ancestorCode === '0') return;
-
-            if (otherDragon.code === dragon.code) return;
+            if (
+              dragon.code === ancestorCode ||
+              ancestorCode === '0' ||
+              otherDragon.code === dragon.code ||
+              otherDragon.code in resolvedDragons === false
+            )
+              return;
 
             if (otherDragon.codesInAncestry.includes(ancestorCode)) {
               conflictiveAgainst.push(otherDragon.code);
@@ -146,8 +150,12 @@ router.post('/inbred', async (ctx: RequestContext) => {
       const uniqueAncestry = new Set(dragon.codesInAncestry);
 
       uniqueAncestry.forEach((ancestorCode) => {
-        console.log(ancestorCode, dragon.codesInAncestry);
-        if (ancestorCode === '0' || ancestorCode === dragon.code) return;
+        if (
+          ancestorCode === '0' ||
+          ancestorCode === dragon.code ||
+          ancestorCode in resolvedDragons === false
+        )
+          return;
 
         if (
           dragon.codesInAncestry.filter((code) => code === ancestorCode)
@@ -169,18 +177,20 @@ router.post('/inbred', async (ctx: RequestContext) => {
 
       // The ancestry of this checked dragon.
       problems: problems.map((ancestor) => ({
-        code: ancestor.code in resolvedDragons ? ancestor.code : null,
+        code: ancestor.code,
         name: resolvedDragons?.[ancestor.code]?.name,
         conflicts: ancestor.conflicts,
-        observable: ancestor.code in resolvedDragons,
       })),
 
       // Inbreed conflicts within dragon itself.
       selfProblems: selfProblems.map((ancestor) => ({
-        code: ancestor.code in resolvedDragons ? ancestor.code : null,
+        code: ancestor.code,
         name: resolvedDragons?.[ancestor.code]?.name,
-        observable: ancestor.code in resolvedDragons,
       })),
+
+      failed: dragon.codesInAncestry.filter(
+        (ancestor) => ancestor in resolvedDragons === false && ancestor !== '0',
+      ).length,
     };
   });
 

@@ -100,6 +100,19 @@
 
             <div class="result">
               <p
+                v-if="result.failed > 0"
+                class="warn"
+              >
+                <font-awesome-icon
+                  class="icon"
+                  icon="exclamation-triangle"
+                />
+                {{ result.failed }}
+                dragons couldn't be checked. This is usually because the owner
+                has blocked Lineage Builder. Inbreeding cannot be guaranteed.
+              </p>
+
+              <p
                 v-if="
                   result.problems.length === 0 &&
                   result.selfProblems.length === 0
@@ -114,30 +127,7 @@
                 itself.
               </p>
 
-              <p
-                v-if="
-                  result.selfProblems.filter((ancestor) => !ancestor.observable)
-                    .length > 0
-                "
-              >
-                <font-awesome-icon
-                  class="icon"
-                  icon="exclamation-triangle"
-                />
-                {{
-                  result.problems.filter((ancestor) => !ancestor.observable)
-                    .length
-                }}
-                dragons couldn't be checked. This is usually because the owner
-                has blocked Lineage Builder.
-              </p>
-
-              <template
-                v-if="
-                  result.selfProblems.filter((ancestor) => ancestor.observable)
-                    .length > 0
-                "
-              >
+              <template v-if="result.selfProblems.length > 0">
                 <p>
                   <font-awesome-icon
                     class="icon"
@@ -147,10 +137,8 @@
                 </p>
                 <ul class="conflicts">
                   <li
-                    v-for="(ancestor, $index) in result.selfProblems.filter(
-                      (ancestor) => ancestor.observable,
-                    )"
-                    :key="ancestor.code ?? $index"
+                    v-for="ancestor in result.selfProblems"
+                    :key="ancestor.code"
                   >
                     <a
                       :href="`https://dragcave.net/lineage/${ancestor.code}`"
@@ -167,30 +155,7 @@
                 </ul>
               </template>
 
-              <p
-                v-if="
-                  result.problems.filter((ancestor) => !ancestor.observable)
-                    .length > 0
-                "
-              >
-                <font-awesome-icon
-                  class="icon"
-                  icon="exclamation-triangle"
-                />
-                {{
-                  result.problems.filter((ancestor) => !ancestor.observable)
-                    .length
-                }}
-                dragons couldn't be checked. This is usually because the owner
-                has blocked Lineage Builder.
-              </p>
-
-              <template
-                v-if="
-                  result.problems.filter((ancestor) => ancestor.observable)
-                    .length > 0
-                "
-              >
+              <template v-if="result.problems.length > 0">
                 <p>
                   <font-awesome-icon
                     class="icon"
@@ -200,10 +165,8 @@
                 </p>
                 <ul class="conflicts">
                   <li
-                    v-for="(ancestor, $index) in result.problems.filter(
-                      (ancestor) => ancestor.observable,
-                    )"
-                    :key="ancestor.code ?? $index"
+                    v-for="ancestor in result.problems"
+                    :key="ancestor.code"
                   >
                     <a
                       :href="`https://dragcave.net/lineage/${ancestor.code}`"
@@ -354,6 +317,10 @@ async function handleInbredCheck() {
   & .result {
     align-self: center;
     flex: 1;
+  }
+
+  & .warn {
+    font-weight: bold;
   }
 
   & .conflicts {
