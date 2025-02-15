@@ -29,7 +29,6 @@ const links = [
   ['/checkers', 'Checker Generator'],
   ['/ghost-breeds', 'Ghost breeds'],
   ['/onsite-preview', 'Onsite Preview'],
-  ['/inbred-checker', 'Inbred Checker'],
   ['/tutorial', 'Tutorial'],
   ['/about', 'About'],
 ];
