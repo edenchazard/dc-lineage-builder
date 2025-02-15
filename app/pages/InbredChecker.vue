@@ -216,7 +216,7 @@ import InputTextbox from '../components/InputTextbox.vue';
 import { validateCode } from '../shared/validation.js';
 
 const status = useTemplateRef('status');
-const input = ref('FSz8O\nElkej\nhsM9q\nxjJ76\nqh2Z\nFsuG');
+const input = ref('');
 const badDragons = ref<string[]>([]);
 const results = ref<InbredCheckResponse['checks']>([]);
 
