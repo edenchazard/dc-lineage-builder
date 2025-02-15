@@ -79,8 +79,7 @@
         v-if="results.length > 0"
       >
         <h2>Results</h2>
-
-        <ul>
+        <ul class="checks">
           <li
             class="check"
             :id="`check-${result.code}`"
@@ -255,8 +254,16 @@ async function handleInbredCheck() {
 }
 
 .check {
+  border-top: 1px solid var(--dc-lineage-line-colour);
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
+  padding: 1rem 0;
+
+  &:first-child {
+    border-top: none;
+  }
 
   & .dragon {
     display: flex;
@@ -277,7 +284,6 @@ async function handleInbredCheck() {
   }
 
   & .result {
-    flex: 1;
     align-self: center;
   }
 
@@ -285,7 +291,6 @@ async function handleInbredCheck() {
     display: grid;
     gap: 0.5rem;
     grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-    margin-left: 1.5rem;
 
     & li {
       display: flex;
@@ -316,5 +321,12 @@ async function handleInbredCheck() {
 
 #form button[type='submit'] {
   width: 100%;
+}
+
+@media (min-width: 25rem) {
+  .check {
+    flex-direction: row;
+    align-items: stretch;
+  }
 }
 </style>
