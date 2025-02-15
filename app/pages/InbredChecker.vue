@@ -99,14 +99,73 @@
             </div>
 
             <div class="result">
-              <p v-if="result.problems.length === 0">
+              <p
+                v-if="
+                  result.problems.length === 0 &&
+                  result.selfProblems.length === 0
+                "
+              >
                 <font-awesome-icon
                   class="icon"
                   icon="check"
                 />
-                No problems detected. Breeding these dragons will not produce
-                inbred offspring.
+                No problems detected. Breeding this dragon to any of the other
+                dragons will not produce inbred offspring, and it isn't inbred
+                itself.
               </p>
+
+              <p
+                v-if="
+                  result.selfProblems.filter((ancestor) => !ancestor.observable)
+                    .length > 0
+                "
+              >
+                <font-awesome-icon
+                  class="icon"
+                  icon="exclamation-triangle"
+                />
+                {{
+                  result.problems.filter((ancestor) => !ancestor.observable)
+                    .length
+                }}
+                dragons couldn't be checked. This is usually because the owner
+                has blocked Lineage Builder.
+              </p>
+
+              <template
+                v-if="
+                  result.selfProblems.filter((ancestor) => ancestor.observable)
+                    .length > 0
+                "
+              >
+                <p>
+                  <font-awesome-icon
+                    class="icon"
+                    icon="times"
+                  />
+                  The following dragons directly appear multiple times.
+                </p>
+                <ul class="conflicts">
+                  <li
+                    v-for="(ancestor, $index) in result.selfProblems.filter(
+                      (ancestor) => ancestor.observable,
+                    )"
+                    :key="ancestor.code ?? $index"
+                  >
+                    <a
+                      :href="`https://dragcave.net/lineage/${ancestor.code}`"
+                      target="_blank"
+                    >
+                      <img
+                        class="dragon-cell"
+                        :src="`https://dragcave.net/image/${ancestor.code}.png`"
+                      />
+                    </a>
+                    <span>{{ ancestor.name }}</span>
+                    <span class="code">({{ ancestor.code }})</span>
+                  </li>
+                </ul>
+              </template>
 
               <p
                 v-if="
@@ -294,9 +353,11 @@ async function handleInbredCheck() {
 
   & .result {
     align-self: center;
+    flex: 1;
   }
 
   & .conflicts {
+    margin-top: 0.5rem;
     display: grid;
     gap: 0.5rem;
     grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));

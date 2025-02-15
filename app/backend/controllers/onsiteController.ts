@@ -147,7 +147,7 @@ router.post('/inbred', async (ctx: RequestContext) => {
 
       uniqueAncestry.forEach((ancestorCode) => {
         console.log(ancestorCode, dragon.codesInAncestry);
-        if (ancestorCode === '0') return;
+        if (ancestorCode === '0' || ancestorCode === dragon.code) return;
 
         if (
           dragon.codesInAncestry.filter((code) => code === ancestorCode)
