@@ -47,6 +47,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../pages/OnsitePreview.vue'),
   },
   {
+    path: '/inbred-checker',
+    name: 'Inbred Checker',
+    component: () => import('../pages/InbredChecker.vue'),
+  },
+  {
     path: '/tutorial',
     name: 'Tutorial',
     component: () => import('../pages/Tutorial.vue'),

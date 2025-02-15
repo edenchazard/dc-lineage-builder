@@ -1,7 +1,7 @@
 import nodeHTMLParser from 'node-html-parser';
-import config from './config.js';
-import type { DragonData, GetDragonsBulkResponse } from './types.js';
 import { ofetch } from 'ofetch';
+import type { DragonData, GetDragonsBulkResponse } from './dcApiFetch.js';
+import { dcApiFetch } from './dcApiFetch.js';
 
 export interface DragonOnsite {
   code: string;
@@ -54,23 +54,15 @@ class APIError extends Error {
 export async function checkDragonsMatchGender(
   codes: [string, string],
 ): Promise<{ code: string; correct: boolean | null }[]> {
-  const response = await ofetch<GetDragonsBulkResponse>(
-    `https://dragcave.net/api/v2/dragons`,
-    {
-      method: 'POST',
-      timeout: 10000,
-      headers: {
-        Authorization: `Bearer ${config.clientSecret}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        ids: codes.join(','),
-      }),
-      onResponseError() {
-        throw new APIError('Error in response.');
-      },
+  const response = await dcApiFetch<GetDragonsBulkResponse>(`/dragons`, {
+    method: 'POST',
+    body: new URLSearchParams({
+      ids: codes.join(','),
+    }),
+    onResponseError() {
+      throw new APIError('Error in response.');
     },
-  );
+  });
 
   if (response.errors.length > 0) throw new APIError('Error in response.');
 
@@ -88,8 +80,13 @@ export async function checkDragonsMatchGender(
 
 export async function grabHTML(
   code: string,
-  options: GetHTMLOptions,
+  options: GetHTMLOptions = {},
 ): Promise<DragonOnsite> {
+  const _options: Required<GetHTMLOptions> = {
+    dpr: 1,
+    filter: false,
+    ...options,
+  };
   const fetchDragon = async (code: string, dpr: GetHTMLOptions['dpr'] = 1) => {
     return ofetch(`https://dragcave.net/lineage/${code}`, {
       headers: {
@@ -180,7 +177,7 @@ export async function grabHTML(
     return parseInt(genNode.textContent ?? '1');
   };
 
-  const response = await fetchDragon(code, options.dpr ?? 1);
+  const response = await fetchDragon(code, _options.dpr ?? 1);
 
   const root = nodeHTMLParser.parse(response);
 
@@ -193,7 +190,7 @@ export async function grabHTML(
 
   return {
     code,
-    html: await getHTML(lineageRoot, options),
+    html: await getHTML(lineageRoot, _options),
     gen: getGen(lineageRoot),
   };
 }
@@ -220,4 +217,18 @@ export async function getDataForPair(
     male,
     female,
   };
+}
+
+/**
+ * Returns a list of dragon codes present in the lineage.
+ */
+export function getDragonCodesFromHTML(html: string): string[] {
+  const root = nodeHTMLParser.parse(html);
+
+  const codes = Array.from(
+    root.querySelectorAll('a[href^="/view/"]'),
+    (a) => a.getAttribute('href')?.split('/')[2] ?? '',
+  );
+
+  return codes;
 }

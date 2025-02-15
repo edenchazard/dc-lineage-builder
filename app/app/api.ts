@@ -67,4 +67,32 @@ function getOnSitePreview(
   });
 }
 
-export { callAPI, getLineage, saveLineage, getOnSitePreview };
+export interface InbredCheckResponse extends APIResponse {
+  checks: {
+    code: string;
+    name: string | null;
+    failed: number;
+    problems: {
+      code: string;
+      name: string | null;
+      conflicts: string[];
+      observable: boolean;
+    }[];
+    selfProblems: {
+      code: string;
+      name: string | null;
+      observable: boolean;
+    }[];
+  }[];
+}
+
+function getInbred(codes: string[]) {
+  return callAPI<InbredCheckResponse>('/onsite/inbred', {
+    method: 'POST',
+    body: {
+      codes,
+    },
+  });
+}
+
+export { callAPI, getLineage, saveLineage, getOnSitePreview, getInbred };
