@@ -34,6 +34,7 @@
             >Dragons to check</label
           >
           <InputTextbox
+            id="input"
             v-model="input"
             type="textarea"
           />
