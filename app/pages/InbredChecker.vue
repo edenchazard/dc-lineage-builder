@@ -73,7 +73,15 @@
                 icon="times"
               />
             </span>
-            <span>({{ code }})</span>
+            <span>
+              <button
+                type="button"
+                class="code-jump"
+                @click="scrollTo(code)"
+              >
+                ({{ code }})
+              </button>
+            </span>
           </li>
         </ul>
       </section>
@@ -86,7 +94,7 @@
         <ul class="checks">
           <li
             v-for="result in results"
-            :id="`check-${result.code}`"
+            :id="`dragon-${result.code}`"
             :key="result.code"
             class="check"
           >
@@ -186,19 +194,22 @@
                     <span>{{ ancestor.name }}</span>
                     <span class="code">({{ ancestor.code }})</span>
                     <span class="code"
-                      >(<abbr
+                      ><abbr
                         class="conflict"
                         title="conflicts with"
                         >c/w.
                       </abbr>
                       <span class="conflict-list">
-                        <a
+                        <button
                           v-for="conflict in ancestor.conflicts"
-                          :key="conflict"
-                          :href="`#check-${conflict}`"
-                          >{{ conflict }}</a
-                        > </span
-                      >)
+                          :key="`${ancestor.code}-${conflict}`"
+                          type="button"
+                          class="code-jump"
+                          @click="scrollTo(conflict)"
+                        >
+                          ({{ conflict }})
+                        </button></span
+                      >
                     </span>
                   </li>
                 </ul>
@@ -257,6 +268,11 @@ async function handleInbredCheck() {
     status.value.error('Sorry, an error has occurred.');
   }
 }
+
+function scrollTo(id: string) {
+  const element = document.getElementById(`dragon-${id}`);
+  if (element) element.scrollIntoView({ behavior: 'smooth' });
+}
 </script>
 
 <style scoped lang="postcss">
@@ -288,6 +304,17 @@ async function handleInbredCheck() {
 
 .dragon-cell {
   max-height: 3rem;
+}
+
+.code-jump {
+  font-style: italic;
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
 }
 
 .check {
