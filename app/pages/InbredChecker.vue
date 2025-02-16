@@ -22,7 +22,8 @@
           </p>
         </div>
       </section>
-      <section id="onsite-preview-form">
+
+      <section id="dragons-to-check-form">
         <form
           id="form"
           class="form"
@@ -34,13 +35,18 @@
             >Dragons to check</label
           >
           <InputTextbox
+            id="input"
             v-model="input"
             type="textarea"
+            autocomplete="off"
+            spellcheck="false"
+            rows="10"
           />
 
           <button
             type="submit"
             class="pointer btn"
+            :disabled="codesToCheck.filter(validateCode).length === 0"
           >
             Check
           </button>
@@ -49,7 +55,7 @@
         <FeedbackPanel ref="status" />
       </section>
 
-      <section id="dragons">
+      <section id="preview">
         <h2>Preview</h2>
         <ul>
           <li
@@ -57,19 +63,33 @@
             :key="code"
           >
             <span class="preview">
-              <img
+              <a
                 v-if="validateCode(code) && !badDragons.includes(code)"
-                class="dragon-cell"
-                :src="`https://dragcave.net/image/${code}.png`"
-                @error="badDragons.push(code)"
-              />
+                :href="`https://dragcave.net/lineage/${code}`"
+                target="_blank"
+                class="portrait"
+              >
+                <img
+                  class="picture"
+                  :src="`https://dragcave.net/image/${code}/1.png`"
+                  @error="badDragons.push(code)"
+                />
+              </a>
               <font-awesome-icon
                 v-else
                 class="icon"
                 icon="times"
               />
             </span>
-            <span>({{ code }})</span>
+            <span>
+              <button
+                type="button"
+                class="code-jump"
+                @click="scrollTo(code)"
+              >
+                ({{ code }})
+              </button>
+            </span>
           </li>
         </ul>
       </section>
@@ -82,7 +102,7 @@
         <ul class="checks">
           <li
             v-for="result in results"
-            :id="`check-${result.code}`"
+            :id="`dragon-${result.code}`"
             :key="result.code"
             class="check"
           >
@@ -90,10 +110,11 @@
               <a
                 :href="`https://dragcave.net/lineage/${result.code}`"
                 target="_blank"
+                class="portrait"
               >
                 <img
-                  class="dragon-cell"
-                  :src="`https://dragcave.net/image/${result.code}.png`"
+                  class="picture"
+                  :src="`https://dragcave.net/image/${result.code}/1.png`"
                 />
               </a>
               <span>{{ result.name }}</span>
@@ -111,7 +132,8 @@
                 />
                 {{ result.failed }}
                 dragons couldn't be checked. This is usually because the owner
-                has blocked Lineage Builder. Inbreeding cannot be guaranteed.
+                has blocked Lineage Builder. Checks will be unreliable and a
+                manual check should be performed.
               </p>
 
               <p
@@ -124,9 +146,9 @@
                   class="icon"
                   icon="check"
                 />
-                No problems detected. Breeding this dragon to any of the other
-                dragons will not produce inbred offspring, and it isn't inbred
-                itself.
+                No problems detected. It isn't inbred, and breeding this dragon
+                to any of the other dragons on your list will not produce inbred
+                offspring.
               </p>
 
               <template v-if="result.selfProblems.length > 0">
@@ -135,7 +157,8 @@
                     class="icon"
                     icon="times"
                   />
-                  The following dragons directly appear multiple times.
+                  The following dragons directly appear in the dragon's own
+                  lineage multiple times.
                 </p>
                 <ul class="conflicts">
                   <li
@@ -145,10 +168,11 @@
                     <a
                       :href="`https://dragcave.net/lineage/${ancestor.code}`"
                       target="_blank"
+                      class="portrait"
                     >
                       <img
-                        class="dragon-cell"
-                        :src="`https://dragcave.net/image/${ancestor.code}.png`"
+                        class="picture"
+                        :src="`https://dragcave.net/image/${ancestor.code}/1.png`"
                       />
                     </a>
                     <span>{{ ancestor.name }}</span>
@@ -163,7 +187,8 @@
                     class="icon"
                     icon="times"
                   />
-                  The following dragons would appear multiple times.
+                  When bred with certain dragons on your list, the following
+                  dragons would appear multiple times.
                 </p>
                 <ul class="conflicts">
                   <li
@@ -173,28 +198,32 @@
                     <a
                       :href="`https://dragcave.net/lineage/${ancestor.code}`"
                       target="_blank"
+                      class="portrait"
                     >
                       <img
-                        class="dragon-cell"
-                        :src="`https://dragcave.net/image/${ancestor.code}.png`"
+                        class="picture"
+                        :src="`https://dragcave.net/image/${ancestor.code}/1.png`"
                       />
                     </a>
                     <span>{{ ancestor.name }}</span>
                     <span class="code">({{ ancestor.code }})</span>
                     <span class="code"
-                      >(<abbr
+                      ><abbr
                         class="conflict"
                         title="conflicts with"
                         >c/w.
                       </abbr>
                       <span class="conflict-list">
-                        <a
+                        <button
                           v-for="conflict in ancestor.conflicts"
-                          :key="conflict"
-                          :href="`#check-${conflict}`"
-                          >{{ conflict }}</a
-                        > </span
-                      >)
+                          :key="`${ancestor.code}-${conflict}`"
+                          type="button"
+                          class="code-jump"
+                          @click="scrollTo(conflict)"
+                        >
+                          ({{ conflict }})
+                        </button></span
+                      >
                     </span>
                   </li>
                 </ul>
@@ -208,7 +237,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useTemplateRef, computed } from 'vue';
+import { ref, useTemplateRef, computed, watch } from 'vue';
 import { FetchError } from 'ofetch';
 import { getInbred, type InbredCheckResponse } from '../app/api.js';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
@@ -231,6 +260,10 @@ const codesToCheck = computed(() => {
   }
 });
 
+watch(codesToCheck, () => {
+  badDragons.value = [];
+});
+
 async function handleInbredCheck() {
   if (!status.value) return;
 
@@ -243,7 +276,14 @@ async function handleInbredCheck() {
       if (response.errors.some((e) => e.type === 'error')) return;
     } else status.value.close();
 
-    results.value = response.checks;
+    results.value = response.checks
+      .sort(
+        (a, b) =>
+          a.problems.length +
+          a.selfProblems.length -
+          (b.problems.length + b.selfProblems.length),
+      )
+      .reverse();
   } catch (ex) {
     if (ex instanceof FetchError && ex.response?.status === 404) {
       status.value.error((await ex.response.json()).errors[0].message);
@@ -253,14 +293,18 @@ async function handleInbredCheck() {
     status.value.error('Sorry, an error has occurred.');
   }
 }
+
+function scrollTo(id: string) {
+  const element = document.getElementById(`dragon-${id}`);
+  if (element) element.scrollIntoView({ behavior: 'smooth' });
+}
 </script>
 
 <style scoped lang="postcss">
-#dragons ul {
+#dragons-to-check-form {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
-  flex-wrap: wrap;
-  margin: 1rem 0;
 }
 
 #form {
@@ -268,22 +312,69 @@ async function handleInbredCheck() {
   flex-direction: column;
   max-width: 20rem;
   gap: 0.5rem;
+
+  & button[type='submit'] {
+    width: 100%;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
 }
 
-#dragons li {
-  display: flex;
-  gap: 0.5rem;
+#preview {
+  & ul {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+
+  & li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-direction: column;
+    font-style: italic;
+    width: 4rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  & .preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.portrait {
+  width: 3rem;
+  height: 4rem;
+  border: 1px solid var(--dc-lineage-line-colour);
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  font-style: italic;
-  width: 4rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
+
+  & .picture {
+    max-height: 100%;
+    max-width: 100%;
+  }
 }
 
-.dragon-cell {
-  max-height: 3rem;
+.code-jump {
+  font-style: italic;
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
 }
 
 .check {
@@ -301,14 +392,9 @@ async function handleInbredCheck() {
   & .dragon {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     width: 6rem;
     text-align: center;
     align-items: center;
-  }
-
-  & .dragon-cell {
-    justify-self: center;
   }
 
   & .code {
@@ -350,17 +436,6 @@ async function handleInbredCheck() {
       gap: 0.25rem;
     }
   }
-}
-
-#dragons .preview {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#form button[type='submit'] {
-  width: 100%;
 }
 
 @media (min-width: 25rem) {
