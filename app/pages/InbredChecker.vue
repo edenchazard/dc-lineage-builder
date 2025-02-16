@@ -61,8 +61,10 @@
             :key="code"
           >
             <span class="preview">
-              <span
+              <a
                 v-if="validateCode(code) && !badDragons.includes(code)"
+                :href="`https://dragcave.net/lineage/${code}`"
+                target="_blank"
                 class="portrait"
               >
                 <img
@@ -70,7 +72,7 @@
                   :src="`https://dragcave.net/image/${code}.png`"
                   @error="badDragons.push(code)"
                 />
-              </span>
+              </a>
               <font-awesome-icon
                 v-else
                 class="icon"
