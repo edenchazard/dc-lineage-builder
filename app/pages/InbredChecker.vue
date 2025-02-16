@@ -37,6 +37,8 @@
             id="input"
             v-model="input"
             type="textarea"
+            autocomplete="off"
+            spellcheck="false"
           />
 
           <button
