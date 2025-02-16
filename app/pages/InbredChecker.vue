@@ -39,6 +39,7 @@
             type="textarea"
             autocomplete="off"
             spellcheck="false"
+            rows="10"
           />
 
           <button
