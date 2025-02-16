@@ -46,6 +46,7 @@
           <button
             type="submit"
             class="pointer btn"
+            :disabled="codesToCheck.filter(validateCode).length === 0"
           >
             Check
           </button>
@@ -233,7 +234,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useTemplateRef, computed } from 'vue';
+import { ref, useTemplateRef, computed, watch } from 'vue';
 import { FetchError } from 'ofetch';
 import { getInbred, type InbredCheckResponse } from '../app/api.js';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
@@ -254,6 +255,10 @@ const codesToCheck = computed(() => {
   } catch {
     return [];
   }
+});
+
+watch(codesToCheck, () => {
+  badDragons.value = [];
 });
 
 async function handleInbredCheck() {
@@ -300,6 +305,10 @@ function scrollTo(id: string) {
 
   & button[type='submit'] {
     width: 100%;
+
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 }
 

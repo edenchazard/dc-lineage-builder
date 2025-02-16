@@ -81,7 +81,7 @@ router.post('/', async (ctx: RequestContext) => {
 router.post('/inbred', async (ctx: RequestContext) => {
   const { codes } = await object()
     .shape({
-      codes: array().of(codeValidator).required(),
+      codes: array().of(codeValidator).min(1).required(),
     })
     .validate(ctx.request.body);
 
