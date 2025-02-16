@@ -132,7 +132,8 @@
                 />
                 {{ result.failed }}
                 dragons couldn't be checked. This is usually because the owner
-                has blocked Lineage Builder. Inbreeding cannot be guaranteed.
+                has blocked Lineage Builder. Checks will be unreliable and a
+                manual check should be performed.
               </p>
 
               <p
@@ -145,9 +146,9 @@
                   class="icon"
                   icon="check"
                 />
-                No problems detected. Breeding this dragon to any of the other
-                dragons will not produce inbred offspring, and it isn't inbred
-                itself.
+                No problems detected. It isn't inbred, and breeding this dragon
+                to any of the other dragons on your list will not produce inbred
+                offspring.
               </p>
 
               <template v-if="result.selfProblems.length > 0">
@@ -156,7 +157,8 @@
                     class="icon"
                     icon="times"
                   />
-                  The following dragons directly appear multiple times.
+                  The following dragons directly appear in the dragon's own
+                  lineage multiple times.
                 </p>
                 <ul class="conflicts">
                   <li
@@ -185,7 +187,8 @@
                     class="icon"
                     icon="times"
                   />
-                  The following dragons would appear multiple times.
+                  When bred with certain dragons on your list, the following
+                  dragons would appear multiple times.
                 </p>
                 <ul class="conflicts">
                   <li
