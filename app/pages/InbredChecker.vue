@@ -22,7 +22,8 @@
           </p>
         </div>
       </section>
-      <section id="onsite-preview-form">
+
+      <section id="dragons-to-check-form">
         <form
           id="form"
           class="form"
@@ -53,7 +54,7 @@
         <FeedbackPanel ref="status" />
       </section>
 
-      <section id="dragons">
+      <section id="preview">
         <h2>Preview</h2>
         <ul>
           <li
@@ -285,11 +286,10 @@ function scrollTo(id: string) {
 </script>
 
 <style scoped lang="postcss">
-#dragons ul {
+#dragons-to-check-form {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
-  flex-wrap: wrap;
-  margin: 1rem 0;
 }
 
 #form {
@@ -297,18 +297,38 @@ function scrollTo(id: string) {
   flex-direction: column;
   max-width: 20rem;
   gap: 0.5rem;
+
+  & button[type='submit'] {
+    width: 100%;
+  }
 }
 
-#dragons li {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  flex-direction: column;
-  font-style: italic;
-  width: 4rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+#preview {
+  & ul {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+
+  & li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-direction: column;
+    font-style: italic;
+    width: 4rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  & .preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .portrait {
@@ -398,17 +418,6 @@ function scrollTo(id: string) {
       gap: 0.25rem;
     }
   }
-}
-
-#dragons .preview {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#form button[type='submit'] {
-  width: 100%;
 }
 
 @media (min-width: 25rem) {
