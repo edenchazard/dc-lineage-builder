@@ -71,7 +71,7 @@
               >
                 <img
                   class="picture"
-                  :src="`https://dragcave.net/image/${code}.png`"
+                  :src="`https://dragcave.net/image/${code}/1.png`"
                   @error="badDragons.push(code)"
                 />
               </a>
@@ -114,7 +114,7 @@
               >
                 <img
                   class="picture"
-                  :src="`https://dragcave.net/image/${result.code}.png`"
+                  :src="`https://dragcave.net/image/${result.code}/1.png`"
                 />
               </a>
               <span>{{ result.name }}</span>
@@ -170,7 +170,7 @@
                     >
                       <img
                         class="picture"
-                        :src="`https://dragcave.net/image/${ancestor.code}.png`"
+                        :src="`https://dragcave.net/image/${ancestor.code}/1.png`"
                       />
                     </a>
                     <span>{{ ancestor.name }}</span>
@@ -199,7 +199,7 @@
                     >
                       <img
                         class="picture"
-                        :src="`https://dragcave.net/image/${ancestor.code}.png`"
+                        :src="`https://dragcave.net/image/${ancestor.code}/1.png`"
                       />
                     </a>
                     <span>{{ ancestor.name }}</span>
