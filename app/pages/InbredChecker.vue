@@ -389,7 +389,6 @@ function scrollTo(id: string) {
   & .dragon {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     width: 6rem;
     text-align: center;
     align-items: center;
