@@ -273,7 +273,14 @@ async function handleInbredCheck() {
       if (response.errors.some((e) => e.type === 'error')) return;
     } else status.value.close();
 
-    results.value = response.checks;
+    results.value = response.checks
+      .sort(
+        (a, b) =>
+          a.problems.length +
+          a.selfProblems.length -
+          (b.problems.length + b.selfProblems.length),
+      )
+      .reverse();
   } catch (ex) {
     if (ex instanceof FetchError && ex.response?.status === 404) {
       status.value.error((await ex.response.json()).errors[0].message);
