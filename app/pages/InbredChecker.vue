@@ -61,12 +61,16 @@
             :key="code"
           >
             <span class="preview">
-              <img
+              <span
                 v-if="validateCode(code) && !badDragons.includes(code)"
-                class="dragon-cell"
-                :src="`https://dragcave.net/image/${code}.png`"
-                @error="badDragons.push(code)"
-              />
+                class="portrait"
+              >
+                <img
+                  class="picture"
+                  :src="`https://dragcave.net/image/${code}.png`"
+                  @error="badDragons.push(code)"
+                />
+              </span>
               <font-awesome-icon
                 v-else
                 class="icon"
@@ -102,9 +106,10 @@
               <a
                 :href="`https://dragcave.net/lineage/${result.code}`"
                 target="_blank"
+                class="portrait"
               >
                 <img
-                  class="dragon-cell"
+                  class="picture"
                   :src="`https://dragcave.net/image/${result.code}.png`"
                 />
               </a>
@@ -157,9 +162,10 @@
                     <a
                       :href="`https://dragcave.net/lineage/${ancestor.code}`"
                       target="_blank"
+                      class="portrait"
                     >
                       <img
-                        class="dragon-cell"
+                        class="picture"
                         :src="`https://dragcave.net/image/${ancestor.code}.png`"
                       />
                     </a>
@@ -185,9 +191,10 @@
                     <a
                       :href="`https://dragcave.net/lineage/${ancestor.code}`"
                       target="_blank"
+                      class="portrait"
                     >
                       <img
-                        class="dragon-cell"
+                        class="picture"
                         :src="`https://dragcave.net/image/${ancestor.code}.png`"
                       />
                     </a>
@@ -302,8 +309,20 @@ function scrollTo(id: string) {
   overflow: hidden;
 }
 
-.dragon-cell {
-  max-height: 3rem;
+.portrait {
+  width: 3rem;
+  height: 4rem;
+  border: 1px solid var(--dc-lineage-line-colour);
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  & .picture {
+    max-height: 100%;
+    max-width: 100%;
+  }
 }
 
 .code-jump {
@@ -336,10 +355,6 @@ function scrollTo(id: string) {
     width: 6rem;
     text-align: center;
     align-items: center;
-  }
-
-  & .dragon-cell {
-    justify-self: center;
   }
 
   & .code {
