@@ -1279,6 +1279,13 @@
     "sprites": ["AVEB4"],
     "tags": ["drake","light","jungle","regular"]
   },
+  "Mousai": {
+    "dimorphism": false,
+    "genderOnly": "f",
+    "releaseDate": ["2024-02-14"],
+    "sprites": ["bKind"],
+    "tags": ["standard","leviathan","water","valentine"]
+  },
   "Mutamore": {
     "dimorphism": false,
     "genderOnly": "m",
