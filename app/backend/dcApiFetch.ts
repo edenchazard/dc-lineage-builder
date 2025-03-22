@@ -1,5 +1,5 @@
 import { ofetch } from 'ofetch';
-import config from './config.js';
+import useConfig from './useConfig.js';
 
 export type DragonData = {
   id: string;
@@ -30,6 +30,8 @@ export interface DragCaveApiResponse<Data extends Record<string, unknown>> {
   errors: Array<[number, string]>;
   data: Data;
 }
+
+const config = useConfig();
 
 export const dcApiFetch = ofetch.create({
   baseURL: 'https://dragcave.net/api/v2',

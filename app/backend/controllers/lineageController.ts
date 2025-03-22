@@ -1,16 +1,12 @@
-import path from 'path';
 import Router from '@koa/router';
 import { string } from 'yup';
 import type { RowDataPacket } from 'mysql2';
 import crypto from 'crypto';
 import { dragonSchema, validateLineageHash } from '../../shared/validation.js';
-import config from '../config.js';
 import pool from '../pool.js';
 import type { RequestContext } from '../types';
 
-const router = new Router({
-  prefix: path.join(config.apiUrl, '/lineage'),
-});
+const router = new Router();
 
 router.post('/', async (ctx: RequestContext) => {
   if (!ctx.request.body.lineage) {
@@ -24,7 +20,7 @@ router.post('/', async (ctx: RequestContext) => {
   const jsonString = JSON.stringify(lineage);
   const hashCode = crypto
     .createHash('sha1')
-    .update(config.salt + jsonString)
+    .update(`salt${jsonString}`)
     .digest('hex');
 
   // insert if the hash isn't unique

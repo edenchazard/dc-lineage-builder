@@ -5,7 +5,7 @@ import { DragonBuilder } from '../../../shared/dragonBuilder.js';
 import pool from '../../pool';
 import crypto from 'crypto';
 import type { RowDataPacket } from 'mysql2/promise';
-import config from '../../config';
+import config from '../../useConfig';
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 const rq = request(app.callback());

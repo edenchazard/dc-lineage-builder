@@ -1,21 +1,23 @@
 import { fileURLToPath } from 'url';
-import path from 'path';
+import { dirname, join } from 'path';
 import { readFile } from 'fs/promises';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
 import mount from 'koa-mount';
+import Router from '@koa/router';
 import { ValidationError } from 'yup';
 import lineageController from './controllers/lineageController.js';
 import onsiteController from './controllers/onsiteController.js';
 import { ServerError, type ErrorArray } from './ServerError.js';
 import { injectBreedList } from '../shared/breeds.js';
-import config from './config.js';
+import useConfig from './useConfig.js';
+
+const config = useConfig();
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 void injectBreedList();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = new Koa();
 
@@ -24,8 +26,11 @@ app.context.abort = function (status: number, errors: ErrorArray) {
   throw new ServerError(errors);
 };
 
+function controller(controller: Router) {
+  return [controller.routes(), controller.allowedMethods()];
+}
+
 app
-  .use(mount(config.appUrl, serve(path.join(__dirname, '/static'))))
   .use(async (ctx, next) => {
     try {
       await next();
@@ -48,14 +53,18 @@ app
     }
   })
   .use(bodyParser())
-  .use(lineageController.routes())
-  .use(lineageController.allowedMethods())
-  .use(onsiteController.routes())
-  .use(onsiteController.allowedMethods())
+  .use(
+    new Router()
+      .prefix(config.apiUrl)
+      .use('/lineage', ...controller(lineageController))
+      .use('/onsite', ...controller(onsiteController))
+      .routes(),
+  )
+  .use(mount(config.appUrl, serve(join(__dirname, '/static'))))
   .use(async (ctx) => {
     if (ctx.body) return;
 
-    ctx.body = await readFile(path.join(__dirname, '/static/index.html'), {
+    ctx.body = await readFile(join(__dirname, '/static/index.html'), {
       encoding: 'utf8',
     });
   });

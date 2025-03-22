@@ -1,4 +1,3 @@
-import path from 'path';
 import Router from '@koa/router';
 import { array, number, object } from 'yup';
 import { codeValidator } from '../../shared/validation.js';
@@ -10,7 +9,6 @@ import {
   grabHTML,
 } from '../onsite.js';
 import type { RequestContext } from '../types';
-import config from '../config.js';
 import {
   dcApiFetch,
   type DragonData,
@@ -18,9 +16,7 @@ import {
 } from '../dcApiFetch.js';
 import { chunkArray } from '../../shared/utils.js';
 
-const router = new Router({
-  prefix: path.join(config.apiUrl, '/onsite'),
-});
+const router = new Router();
 
 router.post('/', async (ctx: RequestContext) => {
   const { male, female, options } = await object()
