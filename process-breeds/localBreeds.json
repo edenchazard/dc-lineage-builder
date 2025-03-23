@@ -1283,7 +1283,19 @@
     "dimorphism": false,
     "genderOnly": "f",
     "releaseDate": ["2024-02-14"],
-    "sprites": ["bKind"],
+    "subentries": {
+      "Salt Bambi": {
+        "sprites": ["Agaze"],
+        "tags": ["salt"]
+      },
+      "Salt Schenanigans": {
+        "sprites": ["Amusi"],
+        "tags": ["salt"]
+      },
+      "__regular__": {
+        "sprites": ["bKind"]
+      }
+    },
     "tags": ["standard","leviathan","water","valentine"]
   },
   "Mutamore": {
