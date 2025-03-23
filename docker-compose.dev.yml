@@ -14,6 +14,7 @@ services:
       - 3000:3000
     depends_on:
       - db
+      - puppeteer
     networks:
       - internal
 
@@ -38,6 +39,14 @@ services:
       - SYS_ADMIN
     volumes:
       - .:/app
+
+  puppeteer:
+    image: ghcr.io/puppeteer/puppeteer:latest
+    command: sleep infinity
+    cap_add:
+      - SYS_ADMIN
+    networks:
+      - internal
 
   testapp:
     build:
