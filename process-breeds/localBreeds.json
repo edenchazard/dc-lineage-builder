@@ -97,6 +97,13 @@
     "sprites": ["LVXzb"],
     "tags": ["eastern","light","alpine","forest","regular"]
   },
+  "Aluria": {
+    "dimorphism": true,
+    "genderOnly": false,
+    "releaseDate": ["2025-03-30"],
+    "sprites": ["fj9J8","wwgmZ"],
+    "tags": ["standard","hybrid","regular"]
+  },
   "Amalthean": {
     "dimorphism": true,
     "genderOnly": false,
@@ -2025,6 +2032,13 @@
     "releaseDate": ["2021-07-25"],
     "sprites": ["NFTkm"],
     "tags": ["two-head","wyrm","light","desert","jungle","regular"]
+  },
+  "Teris Wyvern": {
+    "dimorphism": false,
+    "genderOnly": false,
+    "releaseDate": ["2025-03-30"],
+    "sprites": ["DoWRT"],
+    "tags": ["standard","wyvern","regular"]
   },
   "Tetra": {
     "dimorphism": false,
