@@ -102,7 +102,7 @@
     "genderOnly": false,
     "releaseDate": ["2025-03-30"],
     "sprites": ["fj9J8","wwgmZ"],
-    "tags": ["standard","hybrid","regular"]
+    "tags": ["standard","hybrid","regular","air"]
   },
   "Amalthean": {
     "dimorphism": true,
@@ -2038,7 +2038,7 @@
     "genderOnly": false,
     "releaseDate": ["2025-03-30"],
     "sprites": ["DoWRT"],
-    "tags": ["standard","wyvern","regular"]
+    "tags": ["standard","wyvern","regular","p:air","s:water"]
   },
   "Tetra": {
     "dimorphism": false,

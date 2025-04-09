@@ -5,7 +5,6 @@
   >
     <BreedList
       :id="id"
-      ref="container"
       :list="filteredBreeds"
       :search="search"
       :compact="filteredBreeds.length > userSettings.gridThreshold"
@@ -22,7 +21,7 @@
   </p>
 </template>
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue';
+import { computed } from 'vue';
 import type { PortraitData, TagFilterCollection } from '../shared/types';
 import BreedList from './BreedList.vue';
 import { useAppStore } from '../store/useAppStore';
@@ -46,8 +45,6 @@ const props = withDefaults(
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;
 }>();
-
-const container = useTemplateRef('container');
 
 const appStore = useAppStore();
 
