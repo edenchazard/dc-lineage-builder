@@ -1982,7 +1982,7 @@
     "genderOnly": false,
     "releaseDate": ["2015-03-28"],
     "sprites": ["7sNC0"],
-    "tags": ["eastern","water","forest","regular"]
+    "tags": ["standard","eastern","water","forest","regular"]
   },
   "Sunrise": {
     "dimorphism": true,
@@ -2052,7 +2052,7 @@
     "genderOnly": false,
     "releaseDate": ["2022-05-21"],
     "sprites": ["3vp64"],
-    "tags": ["eastern","p:ice","s:lightning","alpine","regular","Has BSA"]
+    "tags": ["standard","eastern","p:ice","s:lightning","alpine","regular","Has BSA"]
   },
   "Tinsel": {
     "dimorphism": false,
