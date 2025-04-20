@@ -153,7 +153,7 @@
     background: var(--dc-background);
   }
 
-  @media (min-width: 62em) {
+  @media (min-width: 72em) {
     #mobile-menu-button {
       display: none;
     }
@@ -167,7 +167,7 @@
     }
   }
 
-  @media (min-width: 67em) {
+  @media (min-width: 77em) {
     #desktop-menu a::after {
       content: '\00B7';
       margin-left: 0.5rem;
@@ -443,7 +443,7 @@
     background: var(--dc-background);
   }
 
-  @media (min-width: 86.5em) {
+  @media (min-width: 95em) {
     #mobile-menu-button {
       display: none;
     }
@@ -599,7 +599,7 @@
     background: var(--dc-background);
   }
 
-  @media (min-width: 54em) {
+  @media (min-width: 58em) {
     #site-title {
       overflow: unset;
       text-overflow: unset;
@@ -877,7 +877,7 @@
     outline-offset: -1px;
   }
 
-  @media (min-width: 86.5em) {
+  @media (min-width: 95em) {
     #mobile-menu-button {
       display: none;
     }
