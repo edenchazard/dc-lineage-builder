@@ -4,7 +4,7 @@
     "genderOnly": false,
     "releaseDate": ["2025-04-27"],
     "sprites": ["Er1nd","CA3ox"],
-    "tags": ["drake","desert","regular"]
+    "tags": ["drake","earth","desert","regular"]
   },
   "Abyss Watcher": {
     "dimorphism": true,
@@ -2121,7 +2121,7 @@
     "genderOnly": false,
     "releaseDate": ["2025-04-27"],
     "sprites": ["m7hnP"],
-    "tags": ["pygmy","jungle","coast","regular"]
+    "tags": ["pygmy","leviathan","p:water","s:death","jungle","coast","regular"]
   },
   "Ultraviolet": {
     "dimorphism": true,
