@@ -1,7 +1,5 @@
 import { promises as fs } from 'fs';
 import { setTimeout } from 'timers/promises';
-import puppeteer from 'puppeteer';
-import { chromiumSettings } from './files';
 import type { IgnoreFile, IgnoreList, PortraitSizing } from './types';
 import type { PortraitCache } from './portraitCache';
 import {
@@ -152,8 +150,6 @@ export async function checkCache(
     return [...codes].filter((code) => !ignoreList.includes(code));
   };
 
-  const browser = await puppeteer.launch(chromiumSettings);
-
   console.log(`Checking cache for: ${cache.settings.folder}`);
 
   // remove ignored images
@@ -177,12 +173,11 @@ export async function checkCache(
         // we don't want to ddos DC, so we'll throttle our requests to 1/second.
         throttle++;
         await setTimeout(throttle * 1000);
-        await cache.downloadPortrait(code, browser);
+        await cache.downloadPortrait(code);
       }
     }),
   );
 
-  await browser.close();
   console.log(`... Cache ${cache.settings.folder} OK.`);
 }
 
