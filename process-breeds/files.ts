@@ -1,5 +1,3 @@
-import type { PuppeteerLaunchOptions } from 'puppeteer';
-import { KnownDevices } from 'puppeteer';
 import { getFileAndDirName } from './utils.js';
 import { PortraitCache } from './portraitCache.js';
 
@@ -15,7 +13,6 @@ export const caches = {
     inject: __dirname + '/inject/36/',
     device: {
       dpr: 1,
-      device: null,
     },
   }),
 
@@ -24,13 +21,6 @@ export const caches = {
     inject: __dirname + '/inject/72/',
     device: {
       dpr: 2.75,
-      device: KnownDevices['Pixel 5'],
     },
   }),
-};
-
-export const chromiumSettings: PuppeteerLaunchOptions = {
-  args: ['--no-sandbox'],
-  headless: 'shell',
-  executablePath: '/usr/bin/google-chrome',
 };

@@ -32,10 +32,8 @@ services:
   breeds:
     build:
       context: .
-      dockerfile: ./process-breeds/Dockerfile
+      dockerfile: ./Dockerfile.dev
     command: sleep infinity
-    cap_add:
-      - SYS_ADMIN
     volumes:
       - .:/app
 

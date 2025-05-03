@@ -1,7 +1,6 @@
 import { setTimeout } from 'timers/promises';
 
-import puppeteer from 'puppeteer';
-import { caches, chromiumSettings } from './files';
+import { caches } from './files';
 
 await (async function main() {
   // parse args for codes
@@ -18,8 +17,6 @@ await (async function main() {
   const cacheArray = Object.values(caches);
   await Promise.all(cacheArray.map((cache) => cache.tryAccess()));
 
-  const browser = await puppeteer.launch(chromiumSettings);
-
   let throttle = 0;
 
   // all ok, download the image for each cache
@@ -30,11 +27,9 @@ await (async function main() {
           // we don't want to ddos DC, so we'll throttle our requests to 1/second.
           throttle++;
           await setTimeout(throttle * 1000);
-          await cache.downloadPortrait(code, browser);
+          await cache.downloadPortrait(code);
         }),
       );
     }),
   );
-
-  await browser.close();
 })();
