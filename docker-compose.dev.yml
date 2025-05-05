@@ -29,14 +29,6 @@ services:
     networks:
       - internal
 
-  breeds:
-    build:
-      context: .
-      dockerfile: ./Dockerfile.dev
-    command: sleep infinity
-    volumes:
-      - .:/app
-
   testapp:
     build:
       context: .

@@ -7,10 +7,15 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+
+RUN npm run update-breeds
+
 WORKDIR /app/app/backend
 RUN npx tsc
+
 WORKDIR /app/app/
 RUN npm run vue:build
+
 WORKDIR /app
 
 FROM node:${NODE_VERSION} AS production
