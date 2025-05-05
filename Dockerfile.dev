@@ -5,4 +5,3 @@ ENV NODE_ENV=development
 WORKDIR /app
 COPY package*.json ./
 RUN npm i
-RUN npm run update-breeds
