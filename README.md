@@ -51,6 +51,8 @@ docker compose exec app sh -c "npm run dev"
 
 You can access the project at [http://localhost:5173/dc/lineage-builder/](http://localhost:5173/dc/lineage-builder/).
 
+Remember to run `npm run update-breeds` to fetch the latest breed artifacts.
+
 ### Testing
 
 #### Unit tests
