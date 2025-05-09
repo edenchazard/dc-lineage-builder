@@ -27,3 +27,6 @@ yarn-error.log*
 /app/coverage
 
 app/backend/static
+
+app/assets/tile-rendering
+app/shared/breed-definitions.ts
