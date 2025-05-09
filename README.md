@@ -24,20 +24,19 @@ Written in TypeScript with a Vue.js ~~2~~ 3 frontend and a Node.js backend.
 
 ## Running the project
 
-The project is dockerised, so all you need is docker, docker-compose and a clone of the repository.
+The project is dockerised, so all you need is `docker`, `docker compose` and a clone of the repository.
 
 ```sh
-# clone repo
+# Clone repo.
 git clone https://github.com/edenchazard/dc-lineage-builder.git
 
 cd dc-lineage-builder
 
-# set up development settings
+# Set up development settings.
 cp .env.example .env
 
-# edit with your favourite text editor
-# and change the settings. you will need to
-# insert your DragCave API key.
+# Edit with your favourite text editor. You will need to
+# add your DragCave API key (See https://dragcave.net/api/docs)
 nano .env
 ```
 
@@ -52,16 +51,22 @@ docker compose exec app sh -c "npm run dev"
 
 You can access the project at [http://localhost:5173/dc/lineage-builder/](http://localhost:5173/dc/lineage-builder/).
 
+Remember to run `npm run update-breeds` to fetch the latest breed artifacts.
+
 ### Testing
 
-To run the tests, you should be in the `testapp` container.
+#### Unit tests
+
+Unit tests are run via Vitest, and will automatically re-run whenever a file is changed.
 
 ```sh
 docker compose -f docker-compose.dev.yml up testapp -d
 docker compose exec testapp sh -c "npm run test:unit"
 ```
 
-Tests are run via Vitest, and will automatically re-run whenever a file is changed.
+#### Code quality
+
+`prettier` and `eslint` are used. They can be run from the test container.
 
 ### Production
 
@@ -74,9 +79,7 @@ docker compose up -d
 
 ## Migrations
 
-Lineage Builder doesn't use an ORM as it wouldn't be particularly useful.
-
-As tsx isn't used in production, the way to invoke database commands differs slightly. In dev, you'll need to use:
+`tsx` isn't used in production, the way to invoke database commands differs slightly. In dev, you'll need to use:
 
 ```sh
 tsx ./app/backend/commands/databaseFresh.ts # set up table
@@ -90,26 +93,8 @@ node ./backend/commands/databaseFresh.js # set up table
 node ./backend/commands/databaseSeed.js # seed data
 ```
 
-## Breed processing
+## Breed data
 
-These utilities are for automating our breed list, css and json files, as well as putting them in the correct locations. Under the hood, puppeteer is used for image downloading.
+Breed data is managed in another repository. [See here](https://github.com/edenchazard/dragcave-breed-data).
 
-Images are cached to avoid refetching them unnecessarily.
-
-The file "breed-ignore" is to be used for ignoring particular images. Codes in this list will not be handled by the process script and must be handled manually (mainly through the download script). This is mostly useful for time-based sprites, where the lineage portrait can change based on the time of day.
-
-### process breeds
-
-This script is to be run whenever breed data has been changed.
-
-```sh
-docker compose -f docker-compose.dev.yml run --rm breeds npm run process
-```
-
-### download
-
-This script will fetch the lineage portraits at the time of running it. If these images are already in the cache, they will be replaced. Specify multiple codes as a list:
-
-```sh
-docker compose -f docker-compose.dev.yml run --rm breeds npm run download code1 code2 code3
-```
+To fetch the latest data, you can run `npm run update-breeds` in your container.
