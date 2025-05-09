@@ -24,7 +24,7 @@ withDefaults(
 );
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .tag {
   display: inline-flex;
   align-items: center;

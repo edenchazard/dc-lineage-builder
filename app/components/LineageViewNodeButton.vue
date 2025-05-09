@@ -30,7 +30,7 @@ const emit = defineEmits<{
 }>();
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .tile-button {
   border: 0 none;
   color: var(--ui-builder-tile-action-color, inherit);
@@ -52,7 +52,7 @@ const emit = defineEmits<{
 }
 </style>
 
-<style lang="postcss">
+<style>
 .tile-button-group > .tile-button {
   margin: 5px;
 }

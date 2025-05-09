@@ -544,7 +544,7 @@ function capitalise(string: string) {
 }
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .invisible {
   display: none;
   grid-template-columns: 1fr;

@@ -219,7 +219,7 @@ function selectBy(condition: (dragon: PartialLineageWithMetadata) => boolean) {
 }
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .builder-container {
   align-items: stretch;
   flex-direction: column;
