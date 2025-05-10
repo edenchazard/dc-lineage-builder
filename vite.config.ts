@@ -8,9 +8,6 @@ export default ({ mode }: { mode: string }) => {
     // essential so that vite can figure out the env during build
     envDir: '..',
     root: 'app',
-    build: {
-      outDir: '../dist',
-    },
     base: env.VITE_APP_URL ?? '',
     server: {
       proxy: {
@@ -21,5 +18,12 @@ export default ({ mode }: { mode: string }) => {
       },
     },
     plugins: [vue()],
+    css: {
+      transformer: 'lightningcss',
+    },
+    build: {
+      outDir: '../dist',
+      cssMinify: 'lightningcss',
+    },
   });
 };

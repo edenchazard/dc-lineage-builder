@@ -317,7 +317,7 @@ function handleClick(e: Event) {
 }
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .tile-container,
 .tile-parents {
   padding: 0;

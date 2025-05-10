@@ -56,7 +56,7 @@ const generations = computed(() =>
 }
 </style>
 
-<style lang="postcss">
+<style>
 .lineage-view {
   &[data-show-editor-interface='false'] .tile-button {
     display: none;

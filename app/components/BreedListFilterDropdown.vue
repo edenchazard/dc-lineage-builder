@@ -160,7 +160,7 @@ function toggle(tags: NewTag[]) {
 }
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .filters-container {
   border-radius: 0.5rem;
   font: var(--dc-lineage-font);

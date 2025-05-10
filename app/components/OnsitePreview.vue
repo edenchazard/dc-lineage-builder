@@ -26,7 +26,7 @@ defineProps({
   },
 });
 </script>
-<style scoped lang="postcss">
+<style scoped>
 #lineage {
   margin: 0 auto;
   font: var(--dc-lineage-font);

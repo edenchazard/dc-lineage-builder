@@ -300,7 +300,7 @@ function scrollTo(id: string) {
 }
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 #dragons-to-check-form {
   display: flex;
   flex-direction: column;

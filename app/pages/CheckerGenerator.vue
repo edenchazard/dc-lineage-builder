@@ -229,7 +229,7 @@ function switchBreeds() {
   updateTree(tree.value.gender);
 }
 </script>
-<style scoped lang="postcss">
+<style scoped>
 .section + .section {
   margin-top: 1rem;
 }

@@ -84,7 +84,7 @@ const margin = 4;
 const searchRegExp = computed(() => new RegExp(`(${props.search})`, 'gi'));
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .grid > * {
   display: inline-block;
   margin: 2px;
@@ -140,7 +140,7 @@ const searchRegExp = computed(() => new RegExp(`(${props.search})`, 'gi'));
 }
 </style>
 
-<style lang="postcss">
+<style>
 .breed-entry-button {
   & mark {
     background: #ffff00;

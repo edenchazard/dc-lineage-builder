@@ -199,7 +199,7 @@ function addToEntries() {
 }
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .content {
   display: flex;
   flex-direction: column;
