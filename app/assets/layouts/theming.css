@@ -3,7 +3,7 @@
   font-display: swap;
   src:
     local('fq'),
-    url(default/fq.woff2) format('woff2');
+    url(/assets/layouts/default/fq.woff2) format('woff2');
   font-style: normal;
 }
 
@@ -12,7 +12,7 @@
   font-display: swap;
   src:
     local('din'),
-    url(portal2-light/din.woff2) format('woff2');
+    url(/assets/layouts/portal2/din.woff2) format('woff2');
   font-style: normal;
 }
 
@@ -26,7 +26,8 @@
   --dc-colour-7: #7b5e28;
   --dc-colour-8: #991b1e;
 
-  --dc-background: var(--dc-colour-1) url(/default/default-bg.png) repeat;
+  --dc-background: var(--dc-colour-1)
+    url(/assets/layouts/default/default-bg.png) repeat;
   --dc-lineage-line-width: 1px;
   --dc-lineage-line-style: solid;
   --dc-lineage-line-colour: var(--dc-colour-3);
@@ -195,7 +196,7 @@
   --dc-lineage-colour: var(--dc-colour-2);
 
   --dc-background: var(--dc-colour-1)
-    url('./portal2-light/portal2-light-wt.png') repeat;
+    url(/assets/layouts/portal2-light/portal2-light-wt.png) repeat;
 
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: #fff;
@@ -216,7 +217,7 @@
   --ui-builder-tile-label-warning: #991b1d;
   --ui-builder-tile-label-invalid: #991b1d3a;
 
-  --ui-header-bg: url(/portal2-light/darktile.png) repeat;
+  --ui-header-bg: url(/assets/layouts/portal2-light/darktile.png) repeat;
   --ui-header-fg: #fff;
   --ui-header-mobile-border: 1px solid var(--dc-colour-7);
   --ui-content-fg: #000;
