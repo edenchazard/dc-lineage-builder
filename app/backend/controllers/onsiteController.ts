@@ -19,7 +19,7 @@ import {
 import { chunkArray } from '../../shared/utils.js';
 
 const router = new Router({
-  prefix: path.join(config.apiUrl, '/onsite'),
+  prefix: path.join(config.api, '/onsite'),
 });
 
 router.post('/', async (ctx: RequestContext) => {
