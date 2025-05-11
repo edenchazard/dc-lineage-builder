@@ -6,7 +6,7 @@ export default () => {
     // essential so that vite can figure out the env during build
     envDir: '..',
     root: 'app',
-    base: '.',
+    base: './',
     server: {
       proxy: {
         './api': {
