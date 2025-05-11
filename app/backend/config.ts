@@ -1,8 +1,8 @@
 export default {
   clientSecret: process.env.CLIENT_SECRET ?? '',
   port: 3000,
-  appUrl: process.env.VITE_APP_URL ?? '/',
-  apiUrl: process.env.VITE_API_URL ?? '/api',
+  appUrl: '.',
+  apiUrl: './api',
   db: {
     port: 3306,
     host: process.env.MYSQL_HOST,

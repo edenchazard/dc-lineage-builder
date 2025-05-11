@@ -1,8 +1,9 @@
 services:
   app:
-    build:
-      context: .
+    image: ghcr.io/edenchazard/dc-lineage-builder:6.8.1
     command: npm run prod
+    ports:
+      - 3000:3000
     env_file:
       - .env
     depends_on:
@@ -19,7 +20,7 @@ services:
     env_file:
       - .env
     ports:
-      - 55554:3306
+      - 3306
     networks:
       - internal
 
@@ -29,4 +30,3 @@ volumes:
 networks:
   internal:
   dragcave:
-    external: true
