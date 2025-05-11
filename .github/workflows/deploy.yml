@@ -1,30 +1,17 @@
 #
-name: Demo Push
-
-# This workflow runs when any of the following occur:
-# - A push is made to a branch called `main` or `seed`
-# - A tag starting with "v" is created
-# - A pull request is created or updated
+name: Build and Push Docker Image
 on:
-  push:
-    branches:
-      - main
-      - seed
-    tags:
-      - v*
-  pull_request:
-  # This creates an environment variable called `IMAGE_NAME ` with the value `ghtoken_product_demo`.
+  release:
+    types: [published]
 env:
-  IMAGE_NAME: ghtoken_product_demo
+  IMAGE_NAME: dc-lineage-builder
 #
 jobs:
-  # This pushes the image to GitHub Packages.
   push:
     runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
-      #
     steps:
       - uses: actions/checkout@v4
 
@@ -37,7 +24,6 @@ jobs:
       - name: Push image
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
-
           # This changes all uppercase characters to lowercase.
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           # This strips the git ref prefix from the version.
