@@ -25,7 +25,7 @@ app.context.abort = function (status: number, errors: ErrorArray) {
 };
 
 app
-  .use(mount(config.appUrl, serve(path.join(__dirname, '/static'))))
+  .use(mount(config.base, serve(path.join(__dirname, '/static'))))
   .use(async (ctx, next) => {
     try {
       await next();

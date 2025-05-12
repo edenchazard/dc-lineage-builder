@@ -12,7 +12,7 @@ async function callAPI<T>(url: string, options: FetchOptions<'json'> = {}) {
   // url comes last to prevent it being overwritten via options
   return ofetch<T>(url, {
     ...options,
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: `${import.meta.env.BASE_URL}/api`,
   });
 }
 

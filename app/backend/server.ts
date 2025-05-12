@@ -6,8 +6,13 @@ process.on('unhandledRejection', (err) => {
   process.exit(1);
 });
 
-app.listen(config.port || 3000, () =>
-  console.info(`Listening to http://localhost:${config.port} 🚀`),
+app.listen(config.port, () =>
+  console.info(`
+    We're live! 🚀
+    Base URL: ${config.base}
+    API URL: ${config.api}
+    Port: ${config.port}
+  `),
 );
 
 export default app;

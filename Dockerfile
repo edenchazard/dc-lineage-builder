@@ -14,6 +14,8 @@ WORKDIR /app/app/backend
 RUN npx tsc
 
 WORKDIR /app/app/
+ARG VITE_BASE_URL="/dc/lineage-builder"
+ENV VITE_BASE_URL=$VITE_BASE_URL
 RUN npm run vue:build
 
 WORKDIR /app

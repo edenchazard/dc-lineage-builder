@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from 'vite';
+
 import vue from '@vitejs/plugin-vue';
 
 export default ({ mode }: { mode: string }) => {
@@ -8,10 +9,10 @@ export default ({ mode }: { mode: string }) => {
     // essential so that vite can figure out the env during build
     envDir: '..',
     root: 'app',
-    base: env.VITE_APP_URL ?? '',
+    base: env.VITE_BASE_URL ?? 'test',
     server: {
       proxy: {
-        [env.VITE_API_URL ?? '/api']: {
+        api: {
           target: 'http://app:3000',
           changeOrigin: true,
         },

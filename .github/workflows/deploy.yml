@@ -3,6 +3,7 @@ name: Build and Push Docker Image
 on:
   release:
     types: [published]
+
 env:
   IMAGE_NAME: dc-lineage-builder
 #
@@ -36,3 +37,4 @@ jobs:
           echo VERSION=$VERSION
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:latest
