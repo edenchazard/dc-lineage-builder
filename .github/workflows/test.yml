@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: create dummy env
-        run: echo "" > .env
+        run: echo "VITE_BASE_URL=/dc/lineage-builder" > .env
 
       - name: start test environment
         run: docker compose -f docker-compose.dev.yml up testapp -d

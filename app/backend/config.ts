@@ -3,8 +3,8 @@ import path from 'path';
 export default {
   clientSecret: process.env.CLIENT_SECRET ?? '',
   port: parseInt(process.env.PORT ?? '3000'),
-  base: process.env.VITE_BASE_URL ?? '',
-  api: path.join(process.env.VITE_BASE_URL ?? '', '/api'),
+  base: process.env.VITE_BASE_URL ?? '/',
+  api: path.join(process.env.VITE_BASE_URL ?? '/', '/api'),
   db: {
     port: parseInt(process.env.MYSQL_PORT ?? '3306'),
     host: process.env.MYSQL_HOST ?? '',
