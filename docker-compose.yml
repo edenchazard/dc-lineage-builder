@@ -1,16 +1,21 @@
 services:
   app:
-    image: ghcr.io/edenchazard/dc-lineage-builder:6.8.1
-    command: npm run prod
-    ports:
-      - 3000:3000
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    command: npm run dev
+    volumes:
+      - .:/app
+      - /app/node_modules
     env_file:
       - .env
+    ports:
+      - 5173:5173
+      - 3000:3000
     depends_on:
       - db
     networks:
       - internal
-      - dragcave
 
   db:
     image: mariadb:10
@@ -20,13 +25,43 @@ services:
     env_file:
       - .env
     ports:
-      - 3306
+      - 3306:3306
     networks:
       - internal
+
+  testapp:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    command: sleep infinity
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env.testing
+    depends_on:
+      testdb:
+        condition: service_healthy
+    networks:
+      - testing
+
+  testdb:
+    image: mariadb:10
+    tty: true
+    env_file:
+      - .env.testing
+    networks:
+      - testing
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      start_period: 10s
+      interval: 5s
+      timeout: 5s
+      retries: 4
 
 volumes:
   dbdata:
 
 networks:
   internal:
-  dragcave:
+  testing:
