@@ -38,14 +38,9 @@ cp .env.example .env
 # Edit with your favourite text editor. You will need to
 # add your DragCave API key (See https://dragcave.net/api/docs)
 nano .env
-```
 
-### Development
-
-From the project root directory, use the command:
-
-```sh
-docker compose -f docker-compose.dev.yml up app -d
+# Spin up containers
+docker compose up -d
 docker compose exec app sh -c "npm run dev"
 ```
 
@@ -60,18 +55,12 @@ Remember to run `npm run update-breeds` to fetch the latest breed artifacts.
 Unit tests are run via Vitest, and will automatically re-run whenever a file is changed.
 
 ```sh
-docker compose -f docker-compose.dev.yml up testapp -d
 docker compose exec testapp sh -c "npm run test:unit"
 ```
 
 #### Code quality
 
 `prettier` and `eslint` are used. They can be run from the test container.
-
-### Production
-
-1. Change MOUNT_PATH in `docker-compose.yml` to the deployment url. e.g. If you want it to be available at example.org/lineage-builder, you'd use "/lineage-builder".
-2. From the project root directory, use the command:
 
 ```sh
 docker compose up -d

@@ -13,7 +13,7 @@ jobs:
         run: echo "VITE_BASE_URL=/dc/lineage-builder" > .env
 
       - name: start test environment
-        run: docker compose -f docker-compose.dev.yml up testapp -d
+        run: docker compose up testapp -d
 
       - name: update breeds
         run: docker compose exec -T testapp sh -c "npm run update-breeds"
