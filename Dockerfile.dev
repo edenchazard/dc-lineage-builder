@@ -1,7 +1,5 @@
-ARG NODE_VERSION=lts-slim
-
-FROM node:${NODE_VERSION} AS build
+FROM node:24.0-bookworm-slim AS build
 ENV NODE_ENV=development
 WORKDIR /app
 COPY package*.json ./
-RUN npm i
+RUN npm ci
