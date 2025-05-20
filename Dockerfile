@@ -1,30 +1,27 @@
-ARG NODE_VERSION=lts-slim
-
-#####
-
-FROM node:${NODE_VERSION} AS build
+FROM node:24.0-bookworm-slim AS base
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
+
+FROM base AS build
+COPY --link package.json package-lock.json ./
+RUN npm i
+COPY --link . .
 
 RUN npm run update-breeds
 
 WORKDIR /app/app/backend
 RUN npx tsc
 
-WORKDIR /app/app/
+WORKDIR /app
 ARG VITE_BASE_URL="/dc/lineage-builder"
 ENV VITE_BASE_URL=$VITE_BASE_URL
 RUN npm run vue:build
 
-WORKDIR /app
-
-FROM node:${NODE_VERSION} AS production
-WORKDIR /app
+FROM base AS production
 ENV NODE_ENV=production
-COPY package*.json ./
+COPY package.json package-lock.json ./
 RUN npm ci
 COPY --from=build /prod/backend ./backend
 COPY --from=build /prod/shared ./shared
 COPY --from=build /app/dist ./backend/static
+
+CMD ["npm", "run", "prod"]

@@ -7,8 +7,14 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    env_file:
-      - .env
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - CLIENT_SECRET=${CLIENT_SECRET}
+      - VITE_BASE_URL=${VITE_BASE_URL}
+      - LINEAGE_HASH_SALT=${LINEAGE_HASH_SALT}
     ports:
       - 5173:5173
       - 3000:3000
@@ -22,8 +28,11 @@ services:
     tty: true
     volumes:
       - dbdata:/var/lib/mysql
-    env_file:
-      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - 3306:3306
     networks:
