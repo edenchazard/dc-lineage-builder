@@ -557,6 +557,10 @@ function capitalise(string: string) {
 }
 
 .toolbar {
+  opacity: 0.9;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
   user-select: none;
   box-sizing: border-box;
   align-self: center;
