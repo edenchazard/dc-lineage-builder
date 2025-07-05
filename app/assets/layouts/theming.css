@@ -37,7 +37,7 @@
 
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: rgba(123, 94, 40, 0.5);
-  --ui-builder-toolbar-bg: rgb(107 80 31 / 12%);
+  --ui-builder-toolbar-bg: rgb(213, 198, 168);
   --ui-builder-toolbar-selection-group-bg: #44300b;
   --ui-builder-toolbar-selection-group-fg: #fff;
   --ui-builder-toolbar-selection-group-border: 1px dashed #44300b59;
@@ -635,8 +635,8 @@
 
   --dc-background: transparent;
 
-  --ui-builder-toolbar-bg: var(--semi-black);
-  --ui-builder-toolbar-selection-group-bg: var(--semi-black);
+  --ui-builder-toolbar-bg: rgb(38, 38, 38);
+  --ui-builder-toolbar-selection-group-bg: rgb(10, 10, 10);
   --ui-builder-tile-selected-bg: var(--dc-colour-3);
   --ui-builder-tile-selected-outline: 1px solid var(--dc-colour-4);
   --ui-builder-toolbar-selection-scrolls: rgba(0, 0, 0, 0.5);
@@ -813,7 +813,6 @@
       repeat-x 0px -113px;
   }
   > #content {
-    background-color: #303030;
     color: var(--dc-colour-2);
     & a {
       color: var(--dc-colour-6);

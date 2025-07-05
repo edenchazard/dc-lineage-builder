@@ -4,7 +4,16 @@
     class="builder-container"
   >
     <DialogBreedSelector />
-
+    <div class="constrain-width">
+      <FeedbackPanel ref="status" />
+    </div>
+    <LineageView
+      v-if="appStore.activeTree !== null"
+      class="builder"
+      :root="appStore.activeTree"
+      :config="config"
+      @contextmenu="() => false"
+    />
     <LineageBuilderToolbar
       v-if="appStore.activeTree !== null"
       :config="config"
@@ -26,16 +35,6 @@
       @fullscreen="fullscreen.toggle"
       @undo="appStore.treeHistory.undo"
       @redo="appStore.treeHistory.redo"
-    />
-    <div class="constrain-width">
-      <FeedbackPanel ref="status" />
-    </div>
-    <LineageView
-      v-if="appStore.activeTree !== null"
-      class="builder"
-      :root="appStore.activeTree"
-      :config="config"
-      @contextmenu="() => false"
     />
   </div>
 </template>
@@ -224,7 +223,6 @@ function selectBy(condition: (dragon: PartialLineageWithMetadata) => boolean) {
   align-items: stretch;
   flex-direction: column;
   display: flex;
-  flex: 1;
 
   &:fullscreen {
     height: 100vh !important;
