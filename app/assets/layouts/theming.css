@@ -34,6 +34,7 @@
   --dc-lineage-gen-text-colour: var(--dc-colour-3);
   --dc-lineage-font: 400 14px/19.6px 'fq', 'Times New Roman', Times, serif;
   --dc-lineage-colour: var(--dc-colour-2);
+  --ui-builder-toolbar-selection-scrollbar-colour: rgba(123, 94, 40, 0.5);
 
   --ui-builder-colour-1: #000;
   --ui-builder-colour-2: rgba(123, 94, 40, 0.5);
@@ -216,6 +217,7 @@
   --ui-builder-tile-selected-bg: #ff921590;
   --ui-builder-tile-label-warning: #991b1d;
   --ui-builder-tile-label-invalid: #991b1d3a;
+  --ui-builder-toolbar-selection-scrollbar-colour: #959595;
 
   --ui-header-bg: url(/assets/layouts/portal2-light/darktile.png) repeat;
   --ui-header-fg: #fff;
@@ -492,6 +494,7 @@
   --ui-builder-toolbar-button-fg: #fff;
   --ui-builder-toolbar-menu-bg: #2b303a;
   --ui-builder-toolbar-menu-fg: #fff;
+  --ui-builder-toolbar-selection-scrollbar-colour: #444e5e;
 
   --ui-builder-tile-action-color: rgba(128, 171, 244, 0.5);
   --ui-builder-tile-action-hover-color: var(--dc-colour-9);
@@ -646,6 +649,7 @@
   --ui-builder-toolbar-menu-fg: #fff;
   --ui-builder-tile-label-warning: #cf2427;
   --ui-builder-tile-label-invalid: #bf20233a;
+  --ui-builder-toolbar-selection-scrollbar-colour: rgb(58, 58, 58);
 
   --ui-builder-tile-action-hover-color: #fff;
 
