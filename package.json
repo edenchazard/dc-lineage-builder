@@ -60,7 +60,7 @@
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-vue": "^9.32.0",
-    "focus-trap": "^7.5.4",
+    "focus-trap": "^7.6.5",
     "jsdom": "^26.0.0",
     "lightningcss": "^1.29.3",
     "pinia": "^2.3.0",
