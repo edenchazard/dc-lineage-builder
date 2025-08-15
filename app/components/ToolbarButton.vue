@@ -1,6 +1,5 @@
 <template>
   <button
-    data-dragscroll
     type="button"
     class="control interactive"
     :aria-disabled="disabled"
