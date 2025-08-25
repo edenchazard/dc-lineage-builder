@@ -109,9 +109,11 @@
       aria-label="Selection toolbar"
     >
       <button
+        :disabled="arrivedState.left"
         class="selection-nav left"
         :class="{
-          invisible: hideSelectionToolsNavButtons,
+          hidden: hideSelectionToolsNavButtons,
+          invisible: arrivedState.left,
         }"
         type="button"
         title="Scroll to start"
@@ -119,10 +121,7 @@
       />
       <div
         ref="selectionToolsScrollArea"
-        v-dragscroll.x
         class="selection-scrollable"
-        @dragscrollstart="isDragScrollingSelectionTools = true"
-        @dragscrollend="isDragScrollingSelectionTools = false"
       >
         <ToolbarGroup>
           <ToolbarButton
@@ -163,7 +162,6 @@
               v-model="selectedBreed"
               title="Apply selected breed"
               class="breed-dropdown interactive"
-              data-no-dragscroll
               :disabled="itemsSelected === 0"
               aria-labelledby="selection-apply-breed selection-apply-count "
               @change="emit('changeBreed', selectedBreed)"
@@ -201,10 +199,12 @@
       </div>
       <button
         class="selection-nav right"
+        :disabled="arrivedState.right"
         type="button"
         title="Scroll to end"
         :class="{
-          invisible: hideSelectionToolsNavButtons,
+          hidden: hideSelectionToolsNavButtons,
+          invisible: arrivedState.right,
         }"
         @click="handleScrollRight"
       />
@@ -213,9 +213,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue';
+import { computed, reactive, ref, useTemplateRef } from 'vue';
 import type { PropType } from 'vue';
-import { useResizeObserver } from '@vueuse/core';
+import { useResizeObserver, useScroll } from '@vueuse/core';
 import type {
   BreedEntry,
   LineageConfig,
@@ -252,24 +252,24 @@ type ToolbarButtonProps = Required<
 
 const toolbar = ref();
 const breedSelector = ref();
-const selectionToolsScrollArea = ref();
+const selectionToolsScrollArea = useTemplateRef('selectionToolsScrollArea');
 const hideSelectionToolsNavButtons = ref(false);
-const isDragScrollingSelectionTools = ref(false);
 
 const appStore = useAppStore();
+
+const { arrivedState } = useScroll(selectionToolsScrollArea);
 
 // determine whether to show the scroll buttons for the selection
 // tools section
 useResizeObserver(selectionToolsScrollArea, (entries) => {
+  if (!selectionToolsScrollArea.value) {
+    return;
+  }
+
   const entry = entries[0];
   hideSelectionToolsNavButtons.value =
     entry.target.clientWidth === selectionToolsScrollArea.value.scrollWidth;
 });
-
-// seems to cause slowness on touch so disabled for now
-/* watch(isDragScrollingSelectionTools, (cur) => {
-  document.body.style.cursor = cur ? 'w-resize' : '';
-}); */
 
 const generalFunctions = reactive<ToolbarButtonProps[]>(
   [
@@ -451,11 +451,6 @@ const treeSelectedContains = (
 // default to placeholder
 const selectedBreed = ref(placeholder.name);
 
-/*watch:{
-    selectedBreed(){
-        this.selectedBreed = null;
-    }
-},*/
 const itemsSelected = computed(() => appStore.selectionCount);
 
 const availableBreeds = computed(() => {
@@ -497,10 +492,16 @@ function importLineage(tree: PartialLineage) {
 }
 
 function handleScrollLeft() {
+  if (!selectionToolsScrollArea.value) {
+    return;
+  }
   selectionToolsScrollArea.value.scrollLeft = 0;
 }
 
 function handleScrollRight() {
+  if (!selectionToolsScrollArea.value) {
+    return;
+  }
   selectionToolsScrollArea.value.scrollLeft =
     selectionToolsScrollArea.value.scrollWidth;
 }
@@ -511,9 +512,6 @@ function updateConfig(
 ) {
   emit('updateConfig', configurationName, newValue);
 }
-/**
- * helpers
- */
 
 function convertToToolbarButtonProps(
   button: {
@@ -546,6 +544,10 @@ function capitalise(string: string) {
 
 <style scoped>
 .invisible {
+  visibility: hidden;
+}
+
+.hidden {
   display: none;
   grid-template-columns: 1fr;
 }
@@ -644,15 +646,33 @@ function capitalise(string: string) {
   }
 
   > .selection-scrollable {
+    --scrollbar-track-colour: transparent;
     display: flex;
     flex-direction: row;
     overflow-x: auto;
-    scrollbar-width: none;
     gap: 0.5rem;
-    cursor: w-resize;
 
+    /** Webkit's scrollbars have more styling options, but native scrollbar
+    properties override them. */
+    @supports not selector(::-webkit-scrollbar) {
+      scrollbar-width: thin;
+      scrollbar-color: var(--ui-builder-toolbar-selection-scrollbar-colour)
+        var(--scrollbar-track-colour);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--scrollbar-track-colour);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--ui-builder-toolbar-selection-scrollbar-colour);
+    }
     &::-webkit-scrollbar {
-      display: none;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 15px;
     }
 
     & :deep(.control) {
