@@ -19,6 +19,7 @@ declare global {
   const clearSession: typeof import('../../node_modules/h3')['clearSession']
   const createApp: typeof import('../../node_modules/h3')['createApp']
   const createAppEventHandler: typeof import('../../node_modules/h3')['createAppEventHandler']
+  const createDcApiFetch: typeof import('../../server/utils/dcApiFetch')['createDcApiFetch']
   const createError: typeof import('../../node_modules/h3')['createError']
   const createEvent: typeof import('../../node_modules/h3')['createEvent']
   const createEventStream: typeof import('../../node_modules/h3')['createEventStream']
@@ -166,5 +167,5 @@ export { buildAssetsURL as __buildAssetsURL, publicAssetsURL as __publicAssetsUR
 export { defineAppConfig } from '/home/runner/work/dc-lineage-builder/dc-lineage-builder/node_modules/nuxt/dist/core/runtime/nitro/utils/config';
 export { ServerError } from '/home/runner/work/dc-lineage-builder/dc-lineage-builder/server/utils/ServerError';
 export { default as db, pool } from '/home/runner/work/dc-lineage-builder/dc-lineage-builder/server/utils/db';
-export { dcApiFetch } from '/home/runner/work/dc-lineage-builder/dc-lineage-builder/server/utils/dcApiFetch';
+export { createDcApiFetch, dcApiFetch } from '/home/runner/work/dc-lineage-builder/dc-lineage-builder/server/utils/dcApiFetch';
 export { OnsiteError, OnsiteDragonNotFoundError, checkDragonsMatchGender, grabHTML, getDataForPair, getDragonCodesFromHTML } from '/home/runner/work/dc-lineage-builder/dc-lineage-builder/server/utils/onsite';

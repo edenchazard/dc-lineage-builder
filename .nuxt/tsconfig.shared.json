@@ -38,16 +38,16 @@
         "../node_modules/nuxt"
       ],
       "~": [
-        "../app"
+        ".."
       ],
       "~/*": [
-        "../app/*"
+        "../*"
       ],
       "@": [
-        "../app"
+        ".."
       ],
       "@/*": [
-        "../app/*"
+        "../*"
       ],
       "~~": [
         ".."
@@ -86,7 +86,7 @@
         "./imports"
       ],
       "#app-manifest": [
-        "./manifest/meta/08b8003d-d98f-4d20-b48d-983c0f9816e3"
+        "./manifest/meta/dev.json"
       ],
       "#build": [
         "."

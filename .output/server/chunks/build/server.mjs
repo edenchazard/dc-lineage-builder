@@ -2369,7 +2369,6 @@ function Lineage(treeRef) {
   return new LineageHandler(treeRef);
 }
 class LineageHandler {
-  tree;
   constructor(treeRef) {
     this.tree = treeRef;
   }

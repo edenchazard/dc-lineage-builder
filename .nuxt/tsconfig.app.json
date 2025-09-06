@@ -38,16 +38,16 @@
         "../node_modules/nuxt"
       ],
       "~": [
-        "../app"
+        ".."
       ],
       "~/*": [
-        "../app/*"
+        "../*"
       ],
       "@": [
-        "../app"
+        ".."
       ],
       "@/*": [
-        "../app/*"
+        "../*"
       ],
       "~~": [
         ".."
@@ -86,7 +86,7 @@
         "./imports"
       ],
       "#app-manifest": [
-        "./manifest/meta/08b8003d-d98f-4d20-b48d-983c0f9816e3"
+        "./manifest/meta/dev.json"
       ],
       "#components": [
         "./components"
@@ -128,7 +128,7 @@
   },
   "include": [
     "./nuxt.d.ts",
-    "../app/**/*",
+    "../**/*",
     "../modules/*/runtime/**/*",
     "../layers/*/app/**/*",
     "../layers/*/modules/*/runtime/**/*",
@@ -139,13 +139,6 @@
     "../layers/*/*.d.ts"
   ],
   "exclude": [
-    "../node_modules",
-    "../node_modules/nuxt/node_modules",
-    "../node_modules/@pinia/nuxt/node_modules",
-    "../node_modules/@vueuse/nuxt/node_modules",
-    "../node_modules/@nuxt/eslint/node_modules",
-    "../node_modules/@nuxt/devtools/node_modules",
-    "../node_modules/@nuxt/telemetry/node_modules",
     "../dist",
     "../.data",
     "../modules/*/runtime/server/**/*",
@@ -161,7 +154,7 @@
     "../node_modules/dist/runtime/server",
     "../node_modules/*.*",
     "../node_modules/dist/*.*",
-    "../.output",
+    "dev",
     "../server"
   ]
 }
