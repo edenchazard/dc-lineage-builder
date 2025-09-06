@@ -1,1 +1,0 @@
-import{_ as n,c as s,a as o,o as t}from"./index-CkVLQWri.js";const c={},r={class:"central-block"};function a(l,e){return t(),s("div",r,e[0]||(e[0]=[o("h2",null,"404 No dragons here!",-1),o("p",null,"The page could not be found.",-1)]))}const d=n(c,[["render",a]]);export{d as default};
