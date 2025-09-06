@@ -26,6 +26,7 @@ import type { PortraitData, TagFilterCollection } from '../shared/types';
 import BreedList from './BreedList.vue';
 import { useAppStore } from '../store/useAppStore';
 import { filterBreedsByTagsWith } from '../store/useTagStore';
+import { filterBreedsByDate, dateFilterStore } from '../store/useDateFilter';
 import { userSettings } from '../composables/useUserSettings';
 
 const props = withDefaults(
@@ -50,13 +51,18 @@ const appStore = useAppStore();
 
 const filteredBreeds = computed(() => {
   const search = props.search.toLowerCase().trim();
-  const breeds = filterBreedsByTagsWith(props.breeds, props.tags);
+  
+  // Apply tag filtering first
+  let breeds = filterBreedsByTagsWith(props.breeds, props.tags);
+  
+  // Apply date filtering
+  breeds = filterBreedsByDate(breeds, dateFilterStore.value);
 
   // if the search string is empty, return the whole
   // list, with already used breeds first
   if (search === '') {
     return [
-      ...props.breeds.filter(
+      ...breeds.filter(
         (breed) => appStore.usedBreeds.get(breed.name) !== undefined,
       ),
       ...breeds.filter(
