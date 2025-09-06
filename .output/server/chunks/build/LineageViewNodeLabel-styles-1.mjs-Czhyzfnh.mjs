@@ -1,0 +1,4 @@
+const LineageViewNodeLabel_vue_vue_type_style_index_0_scoped_95da1f63_lang = ".label-block[data-v-95da1f63]{display:block;height:auto;padding:0;position:relative;top:-4px;width:120px}.label[data-v-95da1f63]{word-wrap:break-word;white-space:break-spaces}.code[data-v-95da1f63]{font-style:italic!important}.input[data-v-95da1f63]{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:inherit;border:0;box-shadow:none;color:inherit;font:inherit;font-size:inherit!important;height:auto;margin:0;overflow:hidden;padding:0;resize:none;text-align:center}.input.bad[data-v-95da1f63]{background-color:var( --ui-builder-tile-label-invalid )}";
+
+export { LineageViewNodeLabel_vue_vue_type_style_index_0_scoped_95da1f63_lang as L };
+//# sourceMappingURL=LineageViewNodeLabel-styles-1.mjs-Czhyzfnh.mjs.map

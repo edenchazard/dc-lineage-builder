@@ -1,0 +1,4 @@
+const ToolbarDropDownMenu_vue_vue_type_style_index_0_scoped_7b6fe297_lang = ".selected[data-v-7b6fe297]{background:var(--ui-builder-toolbar-menu-bg);color:var(--ui-builder-toolbar-menu-fg)}.selected[data-v-7b6fe297]:hover{background:var(--ui-builder-toolbar-menu-bg)!important}.menu[data-v-7b6fe297]{background:var(--ui-builder-toolbar-menu-bg);border-radius:5px;box-shadow:0 0 4px #000;color:var(--ui-builder-toolbar-menu-fg);display:flex;flex-direction:column;min-width:11rem;overflow:hidden;z-index:50}.menu[data-v-7b6fe297] *{border-bottom:1px solid var(--builderControlFG)}.menu[data-v-7b6fe297] *:last-child{border-bottom:none}.fade-enter-active[data-v-7b6fe297],.fade-leave-active[data-v-7b6fe297]{transition:opacity .5s ease}.fade-enter-from[data-v-7b6fe297],.fade-leave-to[data-v-7b6fe297]{opacity:0}";
+
+export { ToolbarDropDownMenu_vue_vue_type_style_index_0_scoped_7b6fe297_lang as T };
+//# sourceMappingURL=ToolbarDropDownMenu-styles-1.mjs-D233I-U5.mjs.map

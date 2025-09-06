@@ -1,0 +1,1 @@
+import{_ as n,x as s,z as o,y as t}from"#entry";const r={},c={class:"central-block"};function a(l,e){return t(),s("div",c,[...e[0]||(e[0]=[o("h2",null,"404 No dragons here!",-1),o("p",null,"The page could not be found.",-1)])])}const d=n(r,[["render",a]]);export{d as default};

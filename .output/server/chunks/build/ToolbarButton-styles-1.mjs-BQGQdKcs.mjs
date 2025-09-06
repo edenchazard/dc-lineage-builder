@@ -1,0 +1,4 @@
+const ToolbarButton_vue_vue_type_style_index_0_scoped_672eb608_lang = ".control[data-v-672eb608]{align-items:center;background:transparent;border:none;color:var(--ui-builder-toolbar-button-fg);display:flex;flex-direction:column;text-align:center}.control[aria-disabled=false][data-v-672eb608]{cursor:pointer}.control[aria-disabled=false][data-v-672eb608]:hover{background:#ffffff4d}.control[aria-disabled=true][data-v-672eb608]{opacity:.3;pointer-events:none}.label[data-v-672eb608]{background:var(--builderControlBG);box-sizing:border-box;color:var(--builderControlFG);margin:.2rem;overflow:hidden;white-space:nowrap}.icon[data-v-672eb608]{display:block;padding:0}";
+
+export { ToolbarButton_vue_vue_type_style_index_0_scoped_672eb608_lang as T };
+//# sourceMappingURL=ToolbarButton-styles-1.mjs-BQGQdKcs.mjs.map
