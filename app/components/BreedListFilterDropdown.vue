@@ -116,7 +116,6 @@
                 </ul>
               </fieldset>
             </li>
-            <!-- Date Filter Section -->
             <li>
               <fieldset>
                 <div class="group">
@@ -132,7 +131,6 @@
                   </button>
                 </div>
                 <div class="date-filter-content">
-                  {{ dateFilterStore }}
                   <div class="date-inputs">
                     <div class="date-input-group">
                       <label for="filter-start-date">From</label>
@@ -155,13 +153,11 @@
                       />
                     </div>
                   </div>
-                  <div class="date-filter-help">
-                    <p>
-                      Leave start date empty to filter breeds released before
-                      the end date. Leave end date empty to filter breeds
-                      released after the start date.
-                    </p>
-                  </div>
+                  <p class="date-filter-help">
+                    (Leave start date empty to filter breeds released before the
+                    end date. Leave end date empty to filter breeds released
+                    after the start date.)
+                  </p>
                 </div>
               </fieldset>
             </li>
@@ -296,7 +292,7 @@ function toggle(tags: NewTag[]) {
 
 .date-inputs {
   display: flex;
-  gap: 0.5rem;
+  gap: 2rem;
   margin-bottom: 0.5rem;
 }
 
@@ -332,9 +328,6 @@ function toggle(tags: NewTag[]) {
   font-size: 0.75rem;
   color: var(--ui-text-muted, #666);
   line-height: 1.3;
-}
-
-.date-filter-help p {
   margin: 0;
 }
 
