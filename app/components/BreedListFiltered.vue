@@ -52,17 +52,13 @@ const appStore = useAppStore();
 const filteredBreeds = computed(() => {
   const search = props.search.toLowerCase().trim();
   
-  // Apply tag filtering first
-  let breeds = filterBreedsByTagsWith(props.breeds, props.tags);
-  
-  // Apply date filtering
-  breeds = filterBreedsByDate(breeds, dateFilterStore.value);
+  const breeds = filterBreedsByDate(filterBreedsByTagsWith(props.breeds, props.tags), dateFilterStore.value);
 
   // if the search string is empty, return the whole
   // list, with already used breeds first
   if (search === '') {
     return [
-      ...breeds.filter(
+      ...props.breeds.filter(
         (breed) => appStore.usedBreeds.get(breed.name) !== undefined,
       ),
       ...breeds.filter(

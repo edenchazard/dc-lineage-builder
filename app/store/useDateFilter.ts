@@ -2,8 +2,8 @@ import { useSessionStorage } from '@vueuse/core';
 import type { BreedEntry } from '../shared/types';
 
 export interface DateFilterConfig {
-  startDate: string;
-  endDate: string;
+  startDate: `${string}-${string}-${string}` | '';
+  endDate: `${string}-${string}-${string}` | '';
 }
 
 export const dateFilterStore = useSessionStorage<DateFilterConfig>('dateFilter', {

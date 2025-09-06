@@ -116,6 +116,53 @@
                 </ul>
               </fieldset>
             </li>
+            <!-- Date Filter Section -->
+            <li>
+              <fieldset>
+                <div class="group">
+                  <legend>Release Date Filter</legend>
+                  <button
+                    v-if="hasActiveDateFilter()"
+                    type="button"
+                    class="clear-dates"
+                    title="Clear date filter"
+                    @click="clearDateFilter"
+                  >
+                    Clear
+                  </button>
+                </div>
+                <div class="date-filter-content">
+                  <div class="date-inputs">
+                    <div class="date-input-group">
+                      <label for="filter-start-date">From</label>
+                      <input
+                        id="filter-start-date"
+                        v-model="dateFilterStore.startDate"
+                        type="date"
+                        class="date-input"
+                        placeholder="Start date"
+                      />
+                    </div>
+                    <div class="date-input-group">
+                      <label for="filter-end-date">To</label>
+                      <input
+                        id="filter-end-date"
+                        v-model="dateFilterStore.endDate"
+                        type="date"
+                        class="date-input"
+                        placeholder="End date"
+                      />
+                    </div>
+                  </div>
+                  <div class="date-filter-help">
+                    <p>
+                      Leave start date empty to filter breeds released before the end date.
+                      Leave end date empty to filter breeds released after the start date.
+                    </p>
+                  </div>
+                </div>
+              </fieldset>
+            </li>
           </ul>
         </form>
       </div>
@@ -132,6 +179,11 @@ import { resolveLabel, slug } from '../shared/utils';
 import BreedTag from './BreedTag.vue';
 import { filtersByGroup, tagStore } from '../store/useTagStore';
 import type { NewTag } from '../shared/types';
+import {
+  dateFilterStore,
+  clearDateFilter,
+  hasActiveDateFilter,
+} from '../store/useDateFilter';
 
 defineProps<{
   container: string;
@@ -234,6 +286,69 @@ function toggle(tags: NewTag[]) {
       }
     }
   }
+}
+
+.date-filter-content {
+  padding: 0 1rem;
+}
+
+.date-inputs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.date-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.date-input-group label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ui-text-colour, #333);
+}
+
+.date-input {
+  padding: 0.5rem;
+  border: 1px solid var(--ui-border-color, #ccc);
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  width: 100%;
+  background: var(--ui-modal-content, #fff);
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: var(--ui-accent-color, #007bff);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.date-filter-help {
+  font-size: 0.75rem;
+  color: var(--ui-text-muted, #666);
+  line-height: 1.3;
+}
+
+.date-filter-help p {
+  margin: 0;
+}
+
+.clear-dates {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.clear-dates:hover {
+  background: #c82333;
 }
 
 .applied-filters {

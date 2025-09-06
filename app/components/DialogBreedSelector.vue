@@ -32,7 +32,6 @@
             placeholder="Filters"
             container="#breed-selector-wrapper"
           />
-          <DateRangeFilter />
         </div>
       </form>
 
@@ -73,7 +72,6 @@ import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';
 import { chosenTags } from '../store/useTagStore.js';
 import BreedListFilterDropdown from './BreedListFilterDropdown.vue';
-import DateRangeFilter from './DateRangeFilter.vue';
 import { getTable } from '../shared/utils';
 import useBreedSelector from '../composables/useBreedSelector';
 

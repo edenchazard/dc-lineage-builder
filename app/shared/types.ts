@@ -38,7 +38,7 @@ interface BreedEntry {
   female?: string;
   genderOnly: GenderOnly;
   metaData: MetaData;
-  releaseDate?: string;
+  releaseDate?: `${string}-${string}-${string}`;
 }
 
 type GenderOnly = DragonGender | boolean;
