@@ -1,4 +1,0 @@
-const BreedSearch_vue_vue_type_style_index_0_scoped_57a27282_lang = `.breed-search[data-v-57a27282]{background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 512 512'%3E%3C!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--%3E%3Cpath d='M416 208c0 45.9-14.9 88.3-40 122.7l126.6 126.7c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208M208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288' opacity='.5'/%3E%3C/svg%3E") no-repeat .5rem;background-size:.8rem;padding-left:1.8rem}`;
-
-export { BreedSearch_vue_vue_type_style_index_0_scoped_57a27282_lang as B };
-//# sourceMappingURL=BreedSearch-styles-1.mjs-D4I2srcy.mjs.map

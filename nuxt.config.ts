@@ -1,19 +1,12 @@
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  modules: [
-    '@pinia/nuxt',
-    '@vueuse/nuxt',
-    '@nuxt/eslint'
-  ],
+  compatibilityDate: '2025-04-13',
+  devtools: { enabled: false },
+  modules: ['@pinia/nuxt', '@vueuse/nuxt', '@nuxt/eslint'],
   css: [
     'reset-css',
     '~/assets/styling/style.css',
-    '~/assets/layouts/theming.css'
+    '~/assets/layouts/theming.css',
   ],
-  // Use default TypeScript configuration
-  typescript: {
-    strict: true
-  },
   runtimeConfig: {
     // Private keys (only available on server-side)
     clientSecret: process.env.CLIENT_SECRET || '',
@@ -24,11 +17,11 @@ export default defineNuxtConfig({
     mysqlPassword: process.env.MYSQL_PASSWORD || '',
     // Public keys (exposed to client-side)
     public: {
-      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || '/'
-    }
+      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || '/',
+    },
   },
   nitro: {
-    ignore: ['app/**']
+    ignore: ['app/**'],
   },
-  ignore: ['app/**']
-})
+  ignore: ['app/**'],
+});

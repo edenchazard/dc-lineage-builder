@@ -1,15 +1,15 @@
 import { string } from 'yup';
 import type { RowDataPacket } from 'mysql2';
-import { validateLineageHash } from '~/utils/validation';
+import { validateLineageHash } from '~utils/validation';
 import { pool } from '~/server/utils/db';
 
 export default defineEventHandler(async (event) => {
   const hash = getRouterParam(event, 'hash');
-  
+
   if (!hash) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Hash parameter required'
+      statusMessage: 'Hash parameter required',
     });
   }
 
@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
   if (!row) {
     throw createError({
       statusCode: 404,
-      statusMessage: 'Lineage not found'
+      statusMessage: 'Lineage not found',
     });
   }
 
