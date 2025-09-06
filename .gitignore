@@ -34,23 +34,3 @@ app/shared/breed-definitions.ts
 # Nuxt dev/build outputs
 .nuxt
 .output
-.nuxt/components.d.ts
-.nuxt/eslint.config.mjs
-.nuxt/imports.d.ts
-.nuxt/nuxt.d.ts
-.nuxt/nuxt.node.d.ts
-.nuxt/tsconfig.app.json
-.nuxt/tsconfig.json
-.nuxt/tsconfig.node.json
-.nuxt/tsconfig.server.json
-.nuxt/tsconfig.shared.json
-.nuxt/manifest/meta/08b8003d-d98f-4d20-b48d-983c0f9816e3.json
-.nuxt/types/build.d.ts
-.nuxt/types/components.d.ts
-.nuxt/types/imports.d.ts
-.nuxt/types/layouts.d.ts
-.nuxt/types/middleware.d.ts
-.nuxt/types/nitro-imports.d.ts
-.nuxt/types/nitro-middleware.d.ts
-.nuxt/types/nitro-nuxt.d.ts
-.nuxt/types/plugins.d.ts
