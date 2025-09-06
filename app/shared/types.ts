@@ -50,10 +50,13 @@ interface MetaData {
 
 type Sources = 'local' | 'dc' | 'ghost';
 
+type DateString = `${string}-${string}-${string}`; // YYYY-MM-DD
+
 interface PortraitData {
   name: string;
   image: string;
   metaData: MetaData;
+  releaseDate?: DateString;
 }
 
 interface LineageConfig {
@@ -78,11 +81,10 @@ const elements = [
   'neutral',
 ] as const;
 
-const primaryElementTags = elements.map<`p:${(typeof elements)[number]}`>(
-  (tag) => `p:${tag}`,
-);
-
-const secondaryElementTags = elements.map<`s:${(typeof elements)[number]}`>(
+type PrimaryElementTag = `p:${(typeof elements)[number]}`;
+type SecondaryElementTag = `s:${(typeof elements)[number]}`;
+const primaryElementTags = elements.map<PrimaryElementTag>((tag) => `p:${tag}`);
+const secondaryElementTags = elements.map<SecondaryElementTag>(
   (tag) => `s:${tag}`,
 );
 
@@ -163,6 +165,7 @@ export type {
   BreedEntry,
   MetaData,
   LineageConfig,
+  DateString,
   PortraitData,
   NewTag,
   TagFilterCollection,

@@ -41,6 +41,7 @@ export function breedEntryToPortrait(
     name: breed.name,
     image: breed[gender] as string,
     metaData: breed.metaData,
+    releaseDate: breed.releaseDate,
   };
 
   return data;

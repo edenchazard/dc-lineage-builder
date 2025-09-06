@@ -122,7 +122,7 @@
                 <div class="group">
                   <legend>Release Date Filter</legend>
                   <button
-                    v-if="hasActiveDateFilter()"
+                    v-if="hasActiveDateFilter"
                     type="button"
                     class="clear-dates"
                     title="Clear date filter"
@@ -132,6 +132,7 @@
                   </button>
                 </div>
                 <div class="date-filter-content">
+                  {{ dateFilterStore }}
                   <div class="date-inputs">
                     <div class="date-input-group">
                       <label for="filter-start-date">From</label>
@@ -156,8 +157,9 @@
                   </div>
                   <div class="date-filter-help">
                     <p>
-                      Leave start date empty to filter breeds released before the end date.
-                      Leave end date empty to filter breeds released after the start date.
+                      Leave start date empty to filter breeds released before
+                      the end date. Leave end date empty to filter breeds
+                      released after the start date.
                     </p>
                   </div>
                 </div>

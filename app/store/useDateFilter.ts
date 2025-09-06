@@ -1,22 +1,28 @@
 import { useSessionStorage } from '@vueuse/core';
-import type { BreedEntry } from '../shared/types';
+import type { BreedEntry, DateString, PortraitData } from '../shared/types';
+import { computed } from 'vue';
 
 export interface DateFilterConfig {
-  startDate: `${string}-${string}-${string}` | '';
-  endDate: `${string}-${string}-${string}` | '';
+  startDate: DateString | null;
+  endDate: DateString | null;
 }
 
-export const dateFilterStore = useSessionStorage<DateFilterConfig>('dateFilter', {
-  startDate: '',
-  endDate: '',
-});
+const defaultDateFilter: DateFilterConfig = {
+  startDate: null,
+  endDate: null,
+};
 
-export function filterBreedsByDate<T extends Pick<BreedEntry, 'releaseDate'>>(
+export const dateFilterStore = useSessionStorage<DateFilterConfig>(
+  'dateFilter',
+  defaultDateFilter,
+);
+
+export function filterBreedsByDate<T extends PortraitData | BreedEntry>(
   breeds: T[],
-  config: DateFilterConfig,
-): T[] {
-  const { startDate, endDate } = config;
-  
+  range: DateFilterConfig,
+) {
+  const { startDate, endDate } = range;
+
   // If both dates are empty, return all breeds
   if (!startDate && !endDate) {
     return breeds;
@@ -25,28 +31,27 @@ export function filterBreedsByDate<T extends Pick<BreedEntry, 'releaseDate'>>(
   return breeds.filter((breed) => {
     // Skip breeds without a release date
     if (!breed.releaseDate) {
-      return true; // Include breeds without release date for backward compatibility
+      return true;
     }
 
-    const breedDate = new Date(breed.releaseDate + 'T00:00:00');
-    
+    const releaseDate = new Date(`${breed.releaseDate}T00:00:00`);
+
     // If only startDate is provided, filter breeds released after startDate
     if (startDate && !endDate) {
-      const start = new Date(startDate + 'T00:00:00');
-      return breedDate >= start;
+      return releaseDate >= new Date(`${startDate}T00:00:00`);
     }
 
     // If only endDate is provided, filter breeds released before endDate
     if (!startDate && endDate) {
-      const end = new Date(endDate + 'T00:00:00');
-      return breedDate <= end;
+      return releaseDate <= new Date(`${endDate}T00:00:00`);
     }
 
     // If both dates are provided, filter breeds released between them
     if (startDate && endDate) {
-      const start = new Date(startDate + 'T00:00:00');
-      const end = new Date(endDate + 'T00:00:00');
-      return breedDate >= start && breedDate <= end;
+      return (
+        releaseDate >= new Date(`${startDate}T00:00:00`) &&
+        releaseDate <= new Date(`${endDate}T00:00:00`)
+      );
     }
 
     return true;
@@ -54,12 +59,9 @@ export function filterBreedsByDate<T extends Pick<BreedEntry, 'releaseDate'>>(
 }
 
 export function clearDateFilter() {
-  dateFilterStore.value = {
-    startDate: '',
-    endDate: '',
-  };
+  dateFilterStore.value = { ...defaultDateFilter };
 }
 
-export function hasActiveDateFilter(): boolean {
-  return !!(dateFilterStore.value.startDate || dateFilterStore.value.endDate);
-}
+export const hasActiveDateFilter = computed(
+  () => !!(dateFilterStore.value.startDate || dateFilterStore.value.endDate),
+);

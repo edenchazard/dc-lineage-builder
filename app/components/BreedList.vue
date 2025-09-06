@@ -46,6 +46,9 @@
               :key="filter"
               :tag="filter"
             />
+            <BreedTag tag="release-date">
+              RD: {{ breed.releaseDate }}
+            </BreedTag>
           </div>
         </div>
       </button>
