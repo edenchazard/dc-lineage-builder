@@ -30,3 +30,7 @@ app/backend/static
 
 app/assets/tile-rendering
 app/shared/breed-definitions.ts
+
+# Nuxt dev/build outputs
+.nuxt
+.output
