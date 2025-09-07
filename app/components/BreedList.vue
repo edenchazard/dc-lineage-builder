@@ -46,6 +46,12 @@
               :key="filter"
               :tag="filter"
             />
+            <BreedTag
+              v-if="breed.releaseDate"
+              tag="release-date"
+            >
+              RD: {{ breed.releaseDate }}
+            </BreedTag>
           </div>
         </div>
       </button>

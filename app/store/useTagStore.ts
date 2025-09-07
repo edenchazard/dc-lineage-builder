@@ -5,11 +5,12 @@ import {
   habitatTags,
   miscTags,
   releaseTags,
-  type BreedEntry,
   type NewTag,
   type TagFilterCollection,
   secondaryElementTags,
   primaryElementTags,
+  type PortraitData,
+  type BreedEntry,
 } from '../shared/types';
 import { useSessionStorage } from '@vueuse/core';
 import { resolveLabel } from '../shared/utils';
@@ -82,9 +83,10 @@ export function tagsFromModel(tags: MaybeRef<NewTag[]>): TagFilterCollection {
   return ret as TagFilterCollection;
 }
 
-export function filterBreedsByTagsWith<
-  Metadatable extends Pick<BreedEntry, 'metaData'>,
->(breeds: Metadatable[], tags: TagFilterCollection) {
+export function filterBreedsByTagsWith<T extends PortraitData | BreedEntry>(
+  breeds: T[],
+  tags: TagFilterCollection,
+) {
   if (
     0 ===
     tags.bodyType.length +

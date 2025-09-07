@@ -451,11 +451,6 @@ const treeSelectedContains = (
 // default to placeholder
 const selectedBreed = ref(placeholder.name);
 
-/*watch:{
-    selectedBreed(){
-        this.selectedBreed = null;
-    }
-},*/
 const itemsSelected = computed(() => appStore.selectionCount);
 
 const availableBreeds = computed(() => {

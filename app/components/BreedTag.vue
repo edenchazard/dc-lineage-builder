@@ -136,5 +136,9 @@ withDefaults(
   &.standard {
     background: #1b6a0b;
   }
+
+  &.release-date {
+    background: #333;
+  }
 }
 </style>

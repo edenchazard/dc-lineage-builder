@@ -45,6 +45,7 @@ describe('utils', () => {
         'genderOnly',
         'metaData',
         'male',
+        'releaseDate',
       );
     });
 
