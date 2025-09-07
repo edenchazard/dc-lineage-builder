@@ -138,6 +138,7 @@
                         id="filter-start-date"
                         v-model="dateFilterStore.startDate"
                         type="date"
+                        v-bind="dateRange"
                         class="date-input"
                         placeholder="Start date"
                       />
@@ -149,6 +150,7 @@
                         v-model="dateFilterStore.endDate"
                         type="date"
                         class="date-input"
+                        v-bind="dateRange"
                         placeholder="End date"
                       />
                     </div>
@@ -191,6 +193,11 @@ defineProps<{
 
 const filtersTitle = useTemplateRef('filtersTitle');
 const textEl = useTemplateRef('textEl');
+
+const dateRange = {
+  min: '2005-01-01',
+  max: new Date().toISOString().split('T')[0],
+};
 
 async function focusFiltersTitle() {
   await nextTick();
@@ -287,7 +294,7 @@ function toggle(tags: NewTag[]) {
 }
 
 .date-filter-content {
-  padding: 0 1rem;
+  padding: 0 1rem 0.5rem 1rem;
 }
 
 .date-inputs {

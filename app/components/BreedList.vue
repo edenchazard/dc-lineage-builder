@@ -46,7 +46,10 @@
               :key="filter"
               :tag="filter"
             />
-            <BreedTag tag="release-date">
+            <BreedTag
+              v-if="breed.releaseDate"
+              tag="release-date"
+            >
               RD: {{ breed.releaseDate }}
             </BreedTag>
           </div>
