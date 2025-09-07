@@ -28,6 +28,9 @@ export function filterBreedsByDate<T extends PortraitData | BreedEntry>(
     return breeds;
   }
 
+  const start = startDate ? new Date(`${startDate}T00:00:00`) : null;
+  const end = endDate ? new Date(`${endDate}T00:00:00`) : null;
+
   return breeds.filter((breed) => {
     // Skip breeds without a release date
     if (!breed.releaseDate) {
@@ -37,21 +40,18 @@ export function filterBreedsByDate<T extends PortraitData | BreedEntry>(
     const releaseDate = new Date(`${breed.releaseDate}T00:00:00`);
 
     // If only startDate is provided, filter breeds released after startDate
-    if (startDate && !endDate) {
-      return releaseDate >= new Date(`${startDate}T00:00:00`);
+    if (start && !end) {
+      return releaseDate >= start;
     }
 
     // If only endDate is provided, filter breeds released before endDate
-    if (!startDate && endDate) {
-      return releaseDate <= new Date(`${endDate}T00:00:00`);
+    if (!start && end) {
+      return releaseDate <= end;
     }
 
     // If both dates are provided, filter breeds released between them
-    if (startDate && endDate) {
-      return (
-        releaseDate >= new Date(`${startDate}T00:00:00`) &&
-        releaseDate <= new Date(`${endDate}T00:00:00`)
-      );
+    if (start && end) {
+      return releaseDate >= start && releaseDate <= end;
     }
 
     return true;
