@@ -147,7 +147,6 @@ const resetTooltip = useDebounceFn(() => {
 
 async function copy() {
   showTooltip.value = true;
-  await resetTooltip();
   try {
     await navigator.clipboard.writeText(props.modelValue);
     tooltipState.value = true;
@@ -155,6 +154,9 @@ async function copy() {
   } catch (_) {
     tooltipState.value = false;
     emit('copyFail');
+  }
+  finally {
+    await resetTooltip();
   }
 }
 
