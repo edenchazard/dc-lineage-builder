@@ -13,12 +13,9 @@ import { useDebounceFn } from '@vueuse/core';
 
 const model = defineModel<string>();
 
-const search = useDebounceFn(
-  (e: Event) => {
-    model.value = (e.target as HTMLInputElement).value;
-  }
-  250,
-);
+const search = useDebounceFn((e: Event) => {
+  model.value = (e.target as HTMLInputElement).value;
+}, 250);
 </script>
 
 <style scoped>
