@@ -1,9 +1,9 @@
 <template>
   <input
+    v-model="model"
     class="breed-search interactive"
     type="search"
     autocomplete="off"
-    :value="modelValue"
     @input="search"
   />
 </template>
@@ -11,17 +11,10 @@
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core';
 
-const emit = defineEmits<{
-  (e: 'update:model-value', value: string): void;
-}>();
-
-defineProps<{
-  modelValue: string;
-}>();
+const model = defineModel<string>();
 
 const search = useDebounceFn(
-  (e: Event) =>
-    emit('update:model-value', (e.target as HTMLInputElement).value),
+  (e: Event) => (model.value = (e.target as HTMLInputElement).value),
   250,
 );
 </script>
