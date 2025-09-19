@@ -214,7 +214,6 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue';
-import type { PropType } from 'vue';
 import { useResizeObserver } from '@vueuse/core';
 import type {
   BreedEntry,
@@ -393,16 +392,10 @@ const dialogs = reactive({
   showGenerateDialog: false,
 });
 
-defineProps({
-  config: {
-    type: Object as PropType<LineageConfig>,
-    required: true,
-  },
-  tree: {
-    type: Object as PropType<PartialLineage>,
-    required: true,
-  },
-});
+defineProps<{
+  config: LineageConfig;
+  tree: PartialLineage;
+}>();
 
 const emit = defineEmits<{
   (e: 'addParents'): void;

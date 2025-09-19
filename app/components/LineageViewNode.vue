@@ -120,7 +120,6 @@
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
 import { computed } from 'vue';
-import type { PropType } from 'vue';
 import type {
   BreedEntry,
   PartialLineageWithMetadata,
@@ -143,24 +142,16 @@ import { placeholder } from '../shared/breeds.js';
 import vOnLongPress from '../directives/long-press/vue-3-long-press';
 import useBreedSelector from '../composables/useBreedSelector';
 
-const props = defineProps({
-  // Dragon properties
-  data: {
-    type: Object as PropType<PartialLineageWithMetadata>,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    data: PartialLineageWithMetadata;
+    disabled?: boolean;
+    nodesFromRoot: number;
+  }>(),
+  {
+    disabled: true,
   },
-  // Whether to disable the click
-  disabled: {
-    type: Boolean,
-    default: true,
-    required: false,
-  },
-  // How many gens is this?
-  nodesFromRoot: {
-    type: Number,
-    required: true,
-  },
-});
+);
 
 const ls = localStorage;
 const appStore = useAppStore();

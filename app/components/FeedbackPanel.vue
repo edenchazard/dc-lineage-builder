@@ -32,7 +32,6 @@
 </template>
 <script setup lang="ts">
 import { onBeforeUnmount, ref } from 'vue';
-import type { PropType } from 'vue';
 
 const Feedbacks = {
   none: 'none',
@@ -53,13 +52,14 @@ interface Properties {
 
 type Feedback = Partial<Properties>;
 
-const props = defineProps({
-  globalSettings: {
-    type: Object as PropType<Feedback>,
-    required: false,
-    default: () => {},
+const props = withDefaults(
+  defineProps<{
+    globalSettings?: Feedback;
+  }>(),
+  {
+    globalSettings: () => ({}),
   },
-});
+);
 
 defineEmits<{
   (e: 'closed'): void;

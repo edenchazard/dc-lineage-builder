@@ -15,16 +15,11 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  icon: {
-    type: String,
-    required: true,
-  },
-});
+defineProps<{
+  title: string;
+  icon: string;
+}>();
+
 const emit = defineEmits<{
   (e: 'click'): void;
 }>();

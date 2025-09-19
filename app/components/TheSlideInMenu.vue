@@ -39,12 +39,9 @@ const emit = defineEmits<{
   (e: 'change', open: boolean): void;
 }>();
 
-const props = defineProps({
-  open: {
-    type: Boolean,
-    required: true,
-  },
-});
+const props = defineProps<{
+  open: boolean;
+}>();
 
 const mobileMenu = ref<HTMLDivElement>();
 

@@ -70,7 +70,6 @@
 </template>
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import type { PropType } from 'vue';
 import { useDebounceFn, useShare } from '@vueuse/core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -81,40 +80,30 @@ const emit = defineEmits<{
   (e: 'copyFail'): void;
 }>();
 
-const props = defineProps({
-  type: {
-    type: String as PropType<'input' | 'textarea'>,
-    default: 'input',
-  },
-  tooltipTimeout: {
-    type: Number,
-    default: 2000,
-  },
-  showCopyButton: {
-    type: Boolean,
-    default: false,
-  },
-  showShareButton: {
-    type: Boolean,
-    default: false,
-  },
-  shareParams: {
-    type: Object as PropType<{
+const props = withDefaults(
+  defineProps<{
+    type?: 'input' | 'textarea';
+    tooltipTimeout?: number;
+    showCopyButton?: boolean;
+    showShareButton?: boolean;
+    shareParams?: {
       title?: string;
       text?: string;
       buttonTitle?: string;
-    }>,
-    default: () => ({}),
+    };
+    copyButtonTitle?: string;
+    selectAllOnFocus?: boolean;
+  }>(),
+  {
+    type: 'input',
+    tooltipTimeout: 2000,
+    showCopyButton: false,
+    showShareButton: false,
+    shareParams: () => ({}),
+    copyButtonTitle: 'Copy text',
+    selectAllOnFocus: false,
   },
-  copyButtonTitle: {
-    type: String,
-    default: 'Copy text',
-  },
-  selectAllOnFocus: {
-    type: Boolean,
-    default: false,
-  },
-});
+);
 
 const model = defineModel<string>({ required: true, default: '' });
 

@@ -16,17 +16,15 @@ import { ref } from 'vue';
 import { useScroll } from '@vueuse/core';
 import LineageViewGenerationCounter from './LineageViewGenerationCounter.vue';
 
-defineProps({
-  generations: {
-    type: Number,
-    required: true,
+withDefaults(
+  defineProps<{
+    generations: number;
+    generationCutOff?: number;
+  }>(),
+  {
+    generationCutOff: -1,
   },
-  generationCutOff: {
-    type: Number,
-    required: false,
-    default: -1,
-  },
-});
+);
 
 const lineageView = ref<HTMLElement>();
 const lineageVisible = ref(false);
