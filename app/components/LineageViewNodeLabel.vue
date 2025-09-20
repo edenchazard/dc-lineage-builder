@@ -30,21 +30,19 @@ import { nextTick, ref, computed } from 'vue';
 import { validateCode, validateName } from '../shared/validation.js';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 
-const props = defineProps({
-  value: {
-    type: String,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    value: string;
+    display: number;
+    /**
+     * Determines whether click to edit is enabled.
+     */
+    disabled?: boolean;
+  }>(),
+  {
+    disabled: true,
   },
-  display: {
-    type: Number,
-    required: true,
-  },
-  // determines whether click to edit is enabled
-  disabled: {
-    type: Boolean,
-    default: true,
-  },
-});
+);
 
 const emit = defineEmits<{
   (e: 'changed', value: string): void;

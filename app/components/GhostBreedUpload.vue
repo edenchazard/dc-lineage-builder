@@ -27,16 +27,15 @@ import settings from '../shared/settings.js';
 import DragonPortrait from './DragonPortrait.vue';
 import { placeholder } from '../shared/breeds.js';
 
-const props = defineProps({
-  label: {
-    type: String,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    label: string;
+    disabled?: boolean;
+  }>(),
+  {
+    disabled: false,
   },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-});
+);
 
 const emit = defineEmits<{
   (e: 'tileChosen', base64Data: string): void;

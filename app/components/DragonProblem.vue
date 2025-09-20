@@ -25,29 +25,21 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
 import type { MaybePartialLineageWithMetadata } from '../shared/types';
 import { hasParents } from '../shared/utils.js';
 import { Lineage } from '../shared/lineageHandler';
 
-defineProps({
-  dragon: {
-    type: Object as PropType<MaybePartialLineageWithMetadata>,
-    required: true,
+withDefaults(
+  defineProps<{
+    dragon: MaybePartialLineageWithMetadata;
+    highlight?: string;
+    error?: string;
+  }>(),
+  {
+    highlight: '',
+    error: '',
   },
-
-  highlight: {
-    type: String,
-    required: false,
-    default: '',
-  },
-
-  error: {
-    type: String,
-    required: false,
-    default: '',
-  },
-});
+);
 </script>
 <style scoped>
 .dragon-formatting-block {

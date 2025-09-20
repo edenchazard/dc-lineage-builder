@@ -19,12 +19,9 @@
   </ul>
 </template>
 <script setup lang="ts">
-defineProps({
-  htmlPreview: {
-    type: String,
-    required: true,
-  },
-});
+defineProps<{
+  htmlPreview?: string;
+}>();
 </script>
 <style scoped>
 #lineage {

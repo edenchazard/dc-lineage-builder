@@ -24,20 +24,17 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
 import type { PortraitData } from '../shared/types';
 
-defineProps({
-  data: {
-    type: Object as PropType<PortraitData>,
-    required: true,
+withDefaults(
+  defineProps<{
+    data: PortraitData;
+    gen?: number;
+  }>(),
+  {
+    gen: 1,
   },
-  gen: {
-    type: Number,
-    required: false,
-    default: 1,
-  },
-});
+);
 /*,
 computed:{
     // determines whether to provide a full size image or a small image

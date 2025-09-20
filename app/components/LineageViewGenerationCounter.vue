@@ -12,17 +12,19 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-const props = defineProps({
-  count: {
-    type: Number,
-    default: 1,
+const props = withDefaults(
+  defineProps<{
+    count?: number;
+    /**
+     * when set to -1, the lineage will not be cut off at any gen.
+     */
+    limit?: number;
+  }>(),
+  {
+    count: 1,
+    limit: -1,
   },
-  // when set to 1, the lineage will not be cut off at any gen
-  limit: {
-    type: Number,
-    default: -1,
-  },
-});
+);
 
 const gens = computed<number[]>(() => {
   let length: number;

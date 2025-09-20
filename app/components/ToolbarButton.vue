@@ -21,24 +21,19 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import type { FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
-import type { PropType } from 'vue';
 
-defineProps({
-  icon: {
-    type: Object as PropType<FontAwesomeIconProps>,
-    default: () => ({
-      icon: 'dragon',
-    }),
+withDefaults(
+  defineProps<{
+    icon?: FontAwesomeIconProps;
+    label?: string;
+    disabled?: boolean;
+  }>(),
+  {
+    icon: () => ({ icon: 'dragon' }),
+    label: '',
+    disabled: false,
   },
-  label: {
-    type: String,
-    default: '',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-});
+);
 </script>
 
 <style scoped>

@@ -9,7 +9,7 @@
       class="text interactive"
       type="text"
       :="$attrs"
-      :value="modelValue"
+      :value="model"
       @input="(e) => update((e.target as HTMLInputElement).value)"
       @focus="select"
     />
@@ -17,7 +17,7 @@
       v-else-if="type === 'textarea'"
       ref="input"
       class="text interactive"
-      :value="modelValue"
+      :value="model"
       :="$attrs"
       @input="(e) => update((e.target as HTMLTextAreaElement).value)"
       @focus="select"
@@ -70,57 +70,42 @@
 </template>
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import type { PropType } from 'vue';
 import { useDebounceFn, useShare } from '@vueuse/core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 defineOptions({ inheritAttrs: false });
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
   (e: 'copySuccess'): void;
   (e: 'copyFail'): void;
 }>();
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-    default: '',
-  },
-  type: {
-    type: String as PropType<'input' | 'textarea'>,
-    default: 'input',
-  },
-  tooltipTimeout: {
-    type: Number,
-    default: 2000,
-  },
-  showCopyButton: {
-    type: Boolean,
-    default: false,
-  },
-  showShareButton: {
-    type: Boolean,
-    default: false,
-  },
-  shareParams: {
-    type: Object as PropType<{
+const props = withDefaults(
+  defineProps<{
+    type?: 'input' | 'textarea';
+    tooltipTimeout?: number;
+    showCopyButton?: boolean;
+    showShareButton?: boolean;
+    shareParams?: {
       title?: string;
       text?: string;
       buttonTitle?: string;
-    }>,
-    default: () => ({}),
+    };
+    copyButtonTitle?: string;
+    selectAllOnFocus?: boolean;
+  }>(),
+  {
+    type: 'input',
+    tooltipTimeout: 2000,
+    showCopyButton: false,
+    showShareButton: false,
+    shareParams: () => ({}),
+    copyButtonTitle: 'Copy text',
+    selectAllOnFocus: false,
   },
-  copyButtonTitle: {
-    type: String,
-    default: 'Copy text',
-  },
-  selectAllOnFocus: {
-    type: Boolean,
-    default: false,
-  },
-});
+);
+
+const model = defineModel<string>({ required: true, default: '' });
 
 const { share, isSupported: shareIsSupported } = useShare();
 const tooltipState = ref<boolean>(false);
@@ -137,7 +122,7 @@ const shareSettings = computed(() => ({
 }));
 
 function update(newValue: string) {
-  emit('update:modelValue', newValue);
+  model.value = newValue;
 }
 
 const resetTooltip = useDebounceFn(() => {
@@ -148,14 +133,13 @@ const resetTooltip = useDebounceFn(() => {
 async function copy() {
   showTooltip.value = true;
   try {
-    await navigator.clipboard.writeText(props.modelValue);
+    await navigator.clipboard.writeText(model.value);
     tooltipState.value = true;
     emit('copySuccess');
   } catch (_) {
     tooltipState.value = false;
     emit('copyFail');
-  }
-  finally {
+  } finally {
     await resetTooltip();
   }
 }
@@ -164,7 +148,7 @@ function startShare() {
   void share({
     title: shareSettings.value.title,
     text: shareSettings.value.text,
-    url: props.modelValue,
+    url: model.value,
   });
 }
 
