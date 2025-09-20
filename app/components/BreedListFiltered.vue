@@ -52,8 +52,6 @@ const appStore = useAppStore();
 const filteredBreeds = computed(() => {
   const search = props.search.toLowerCase().trim();
 
-  console.log('Date filter store in BreedListFiltered:', dateFilterStore.value);
-  console.log('Props breeds:', props.breeds);
   const breeds = filterBreedsByTagsWith(
     filterBreedsByDate(props.breeds, dateFilterStore.value),
     props.tags,
