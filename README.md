@@ -48,6 +48,20 @@ You can access the project at [http://localhost:5173/dc/lineage-builder/](http:/
 
 Remember to run `npm run update-breeds` to fetch the latest breed artifacts.
 
+### Building for production with a version number
+
+When building a Docker image for production, you can specify a version number by creating a `VERSION` file in the build context before building:
+
+```sh
+# Create a VERSION file with your version tag (e.g., from a git tag)
+echo "6.10.7" > VERSION
+
+# Build the Docker image
+docker build -t dc-lineage-builder:6.10.7 .
+```
+
+The version number will be displayed in the footer of the application. If no VERSION file is provided, it defaults to `0.0.0`.
+
 ### Testing
 
 #### Unit tests

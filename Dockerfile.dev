@@ -3,3 +3,4 @@ ENV NODE_ENV=development
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
+# Note: VERSION file should be bind-mounted or created in docker-compose for dev

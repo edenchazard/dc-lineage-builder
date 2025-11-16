@@ -5,6 +5,8 @@ FROM base AS build
 COPY --link package.json package-lock.json ./
 RUN npm i
 COPY --link . .
+# Create default VERSION file if not provided in build context
+RUN test -f VERSION || echo "0.0.0" > VERSION
 
 RUN npm run update-breeds
 
