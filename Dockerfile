@@ -1,5 +1,6 @@
 FROM node:24.0-bookworm-slim AS base
 WORKDIR /app
+RUN echo "0.0.0" > VERSION
 
 FROM base AS build
 COPY --link package.json package-lock.json ./

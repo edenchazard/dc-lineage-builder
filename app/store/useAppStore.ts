@@ -4,7 +4,7 @@ import type { PartialLineageWithMetadata } from '../shared/types';
 import { useTreeAnalyser } from './useTreeAnalyser';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 import { LineageHandler } from '../shared/lineageHandler';
-import { version } from '../../package.json';
+import { version } from '../shared/version';
 
 export const useAppStore = defineStore('appStore', () => {
   const appVersion = version;
