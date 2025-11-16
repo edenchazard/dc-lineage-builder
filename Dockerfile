@@ -1,14 +1,12 @@
 FROM node:24.0-bookworm-slim AS base
 WORKDIR /app
-# Create default VERSION file if not provided during build
-# To set a version during build, create a VERSION file in the build context
-RUN echo "0.0.0" > VERSION
 
 FROM base AS build
 COPY --link package.json package-lock.json ./
 RUN npm i
-# Copy VERSION file from build context if it exists, otherwise use the default
 COPY --link . .
+# Create default VERSION file if not provided in build context
+RUN test -f VERSION || echo "0.0.0" > VERSION
 
 RUN npm run update-breeds
 

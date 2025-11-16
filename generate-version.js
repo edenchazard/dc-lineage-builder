@@ -13,7 +13,11 @@ export const version = '${version}';
   writeFileSync(join(__dirname, 'app/shared/version.ts'), content, 'utf8');
   console.log(`Generated version.ts with version: ${version}`);
 } catch (error) {
-  console.error('Failed to generate version.ts:', error);
+  if (error.code === 'ENOENT') {
+    console.warn('VERSION file not found, using fallback version 0.0.0');
+  } else {
+    console.error('Failed to generate version.ts:', error.message);
+  }
   // Create a fallback version file
   const content = `// This file is auto-generated during build
 export const version = '0.0.0';
