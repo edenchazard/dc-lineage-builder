@@ -56,7 +56,7 @@ When building a Docker image for production, you can specify a version number an
 # Build the Docker image with version and commit SHA
 docker build -t dc-lineage-builder:6.10.7 . \
   --build-arg VERSION=6.10.7 \
-  --build-arg COMMIT_SHA=$(git rev-parse --short HEAD)
+  --build-arg COMMIT_SHA=$(git rev-parse HEAD)
 ```
 
 The version number and commit SHA will be displayed in the footer of the application. If no build args are provided, version defaults to `0.0.0` and commit SHA to `unknown`.

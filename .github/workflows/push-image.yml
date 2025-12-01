@@ -20,8 +20,7 @@ jobs:
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           # Strip the "v" prefix from the tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-          # Extract first 6 characters of commit SHA
-          COMMIT_SHA=$(echo "${{ github.sha }}" | cut -c1-6)
+          COMMIT_SHA=$(echo "${{ github.sha }}")
           echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
           echo "COMMIT_SHA=${COMMIT_SHA}" >> $GITHUB_OUTPUT
 
