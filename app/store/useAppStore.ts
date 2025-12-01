@@ -4,10 +4,10 @@ import type { PartialLineageWithMetadata } from '../shared/types';
 import { useTreeAnalyser } from './useTreeAnalyser';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 import { LineageHandler } from '../shared/lineageHandler';
-import { version } from '../../package.json';
 
 export const useAppStore = defineStore('appStore', () => {
-  const appVersion = version;
+  const appVersion = import.meta.env.VITE_VERSION ?? 'dev';
+  const appCommitSha = import.meta.env.VITE_COMMIT_SHA ?? 'dev';
   const activeTree = ref(DragonBuilder.createWithMetadata());
   const activeLineage = computed(
     () => new LineageHandler<PartialLineageWithMetadata>(activeTree.value),
@@ -45,6 +45,7 @@ export const useAppStore = defineStore('appStore', () => {
 
   return {
     appVersion,
+    appCommitSha,
     activeTree,
     usedBreeds: analytics.usedBreeds,
     selectionCount: analytics.selectionCount,
