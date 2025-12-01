@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "server:start": "tsx watch ./app/backend/server.ts",
-    "vue:start": "node generate-version.js && vite --host",
+    "vue:start": "vite --host",
     "vue:preview": "vite preview",
-    "vue:build": "node generate-version.js && vite build",
+    "vue:build": "vite build",
     "dev": "npm run server:start & npm run vue:start",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",

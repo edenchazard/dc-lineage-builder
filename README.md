@@ -50,17 +50,16 @@ Remember to run `npm run update-breeds` to fetch the latest breed artifacts.
 
 ### Building for production with a version number
 
-When building a Docker image for production, you can specify a version number by creating a `VERSION` file in the build context before building:
+When building a Docker image for production, you can specify a version number and commit SHA using build arguments:
 
 ```sh
-# Create a VERSION file with your version tag (e.g., from a git tag)
-echo "6.10.7" > VERSION
-
-# Build the Docker image
-docker build -t dc-lineage-builder:6.10.7 .
+# Build the Docker image with version and commit SHA
+docker build -t dc-lineage-builder:6.10.7 . \
+  --build-arg VERSION=6.10.7 \
+  --build-arg COMMIT_SHA=$(git rev-parse --short HEAD)
 ```
 
-The version number will be displayed in the footer of the application. If no VERSION file is provided, it defaults to `0.0.0`.
+The version number and commit SHA will be displayed in the footer of the application. If no build args are provided, version defaults to `0.0.0` and commit SHA to `unknown`.
 
 ### Testing
 

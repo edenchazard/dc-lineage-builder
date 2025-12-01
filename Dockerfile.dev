@@ -1,6 +1,7 @@
 FROM node:24.0-bookworm-slim AS build
 ENV NODE_ENV=development
 WORKDIR /app
+RUN echo "dev" > VERSION
+RUN echo "dev" > COMMIT_SHA
 COPY package*.json ./
 RUN npm ci
-# Note: VERSION file should be bind-mounted or created in docker-compose for dev

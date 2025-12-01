@@ -38,6 +38,7 @@
       </div>
       <div id="footer-version">
         v{{ appStore.appVersion }}
+        <span v-if="appStore.appCommitSha !== 'unknown'">({{ appStore.appCommitSha.substring(0, 6) }})</span>
         <div>eden chazard</div>
       </div>
     </div>

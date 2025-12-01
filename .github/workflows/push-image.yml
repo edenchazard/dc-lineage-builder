@@ -13,8 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Extract version and commit SHA
+        id: extract
+        run: |
+          # Extract version from git ref
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip the "v" prefix from the tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Extract first 6 characters of commit SHA
+          COMMIT_SHA=$(echo "${{ github.sha }}" | cut -c1-6)
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+          echo "COMMIT_SHA=${COMMIT_SHA}" >> $GITHUB_OUTPUT
+
       - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
+        run: |
+          docker build . --file Dockerfile --tag $IMAGE_NAME \
+            --label "runnumber=${GITHUB_RUN_ID}" \
+            --build-arg VERSION=${{ steps.extract.outputs.VERSION }} \
+            --build-arg COMMIT_SHA=${{ steps.extract.outputs.COMMIT_SHA }}
 
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin

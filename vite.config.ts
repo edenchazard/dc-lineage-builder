@@ -10,6 +10,10 @@ export default ({ mode }: { mode: string }) => {
     envDir: '..',
     root: 'app',
     base: env.VITE_BASE_URL ?? 'test',
+    define: {
+      __APP_VERSION__: JSON.stringify(env.VITE_APP_VERSION || '0.0.0'),
+      __APP_COMMIT_SHA__: JSON.stringify(env.VITE_APP_COMMIT_SHA || 'unknown'),
+    },
     server: {
       proxy: {
         api: {
