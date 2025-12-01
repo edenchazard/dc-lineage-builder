@@ -1,4 +1,4 @@
-FROM node:24.0-bookworm-slim AS build
+FROM node:24.11-bookworm-slim AS build
 ENV NODE_ENV=development
 WORKDIR /app
 ARG VERSION=0.0.0-dev
