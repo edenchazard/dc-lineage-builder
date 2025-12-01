@@ -23,6 +23,7 @@ WORKDIR /app
 ARG VITE_BASE_URL="/dc/lineage-builder"
 ENV VITE_BASE_URL=$VITE_BASE_URL
 # Pass version and commit as environment variables for Vite to use
+# (VERSION and COMMIT_SHA ARGs are still available from earlier in this stage)
 ENV VITE_APP_VERSION=${VERSION}
 ENV VITE_APP_COMMIT_SHA=${COMMIT_SHA}
 RUN npm run vue:build
