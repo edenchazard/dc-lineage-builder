@@ -41,16 +41,14 @@
           :href="`https://github.com/edenchazard/dc-lineage-builder/releases/tag/v${appStore.appVersion}`"
           target="_blank"
           rel="noopener noreferrer"
+          >v{{ appStore.appVersion }}</a
         >
-          v{{ appStore.appVersion }}
-        </a>
         <span v-if="appStore.appCommitSha !== 'unknown'">
           (<a
             :href="`https://github.com/edenchazard/dc-lineage-builder/commit/${appStore.appCommitSha}`"
             target="_blank"
             rel="noopener noreferrer"
-          >
-            #{{ appStore.appCommitSha.substring(0, 6) }} </a
+            >#{{ appStore.appCommitSha.substring(0, 6) }}</a
           >)
         </span>
         <div>eden chazard</div>
