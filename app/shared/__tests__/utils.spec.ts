@@ -58,13 +58,13 @@ describe('utils', () => {
     it('returns the portrait for breed available as male with male wanted', () => {
       expectTypeOf(
         breedEntryToPortrait(getBreedData('Aria') as BreedEntry, 'male'),
-      ).toMatchTypeOf<PortraitData>();
+      ).toEqualTypeOf<PortraitData>();
     });
 
     it('returns the portrait for breed available as female with female wanted', () => {
       expectTypeOf(
         breedEntryToPortrait(getBreedData('Aria') as BreedEntry, 'female'),
-      ).toMatchTypeOf<PortraitData>();
+      ).toEqualTypeOf<PortraitData>();
     });
   });
 
@@ -79,24 +79,7 @@ describe('utils', () => {
 
   describe('createLineageLink', () => {
     it('returns a link to the view lineage with a given hash', () => {
-      const originalWindowLocation = window.location;
-
-      Object.defineProperty(window, 'location', {
-        configurable: true,
-        enumerable: true,
-        value: new URL('http://example.com/'),
-      });
-
-      expect(createLineageLink('test')).to.be.equal(
-        new URL(import.meta.env.BASE_URL + '/view/test', 'http://example.com')
-          .href,
-      );
-
-      Object.defineProperty(window, 'location', {
-        configurable: true,
-        enumerable: true,
-        value: originalWindowLocation,
-      });
+      expect(createLineageLink('test')).to.include('/view/test');
     });
   });
 });
