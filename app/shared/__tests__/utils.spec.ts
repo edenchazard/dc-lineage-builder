@@ -84,9 +84,10 @@ describe('utils', () => {
       Object.defineProperty(window, 'location', {
         configurable: true,
         enumerable: true,
-        value: new URL('http://example.com/'),
+        value: {
+          origin: 'http://example.com',
+        },
       });
-
       expect(createLineageLink('test')).to.be.equal(
         new URL(import.meta.env.BASE_URL + '/view/test', 'http://example.com')
           .href,
