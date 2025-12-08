@@ -74,7 +74,7 @@ export function validateName(name: string) {
 }
 
 export function validateCode(code: string) {
-  return NAMEREGEXP.test(code) && code.length >= 4 && code.length <= 5;
+  return CODEREGEXP.test(code) && code.length >= 4 && code.length <= 5;
 }
 
 export function validateGenerationCount(count: number): boolean {
