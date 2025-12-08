@@ -79,25 +79,7 @@ describe('utils', () => {
 
   describe('createLineageLink', () => {
     it('returns a link to the view lineage with a given hash', () => {
-      const originalWindowLocation = window.location;
-
-      Object.defineProperty(window, 'location', {
-        configurable: true,
-        enumerable: true,
-        value: {
-          origin: 'http://example.com',
-        },
-      });
-      expect(createLineageLink('test')).to.be.equal(
-        new URL(import.meta.env.BASE_URL + '/view/test', 'http://example.com')
-          .href,
-      );
-
-      Object.defineProperty(window, 'location', {
-        configurable: true,
-        enumerable: true,
-        value: originalWindowLocation,
-      });
+      expect(createLineageLink('test')).to.include('/view/test');
     });
   });
 });

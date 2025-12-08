@@ -29,7 +29,7 @@ export default ({ mode }: { mode: string }) => {
     },
     test: {
       setupFiles: ['./app/backend/commands/databaseFresh.ts'],
-      environment: 'jsdom',
+      environment: 'happy-dom',
       exclude: [...configDefaults.exclude, 'e2e/*'],
       coverage: {
         reportsDirectory: '../coverage',
