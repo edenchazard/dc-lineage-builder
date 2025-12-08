@@ -12,6 +12,11 @@
 src/frontend/build
 src/frontend/dist
 dist
+.output
+
+# Nuxt
+.nuxt
+.nitro
 
 # misc
 .DS_Store
@@ -29,5 +34,5 @@ yarn-error.log*
 
 app/backend/static
 
-app/assets/tile-rendering
-app/shared/breed-definitions.ts
+assets/tile-rendering
+utils/shared/breed-definitions.ts

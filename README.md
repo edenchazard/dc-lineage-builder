@@ -2,7 +2,7 @@
 
 DragCave lineage builder is an open-source third-party utility for the online game [dragcave.net](https://dragcave.net/). It enables users to preview dragon lineages, a core function of the game.
 
-Written in TypeScript with a Vue.js ~~2~~ 3 frontend and a Node.js backend.
+Written in TypeScript with a Vue.js 3 frontend and a Nuxt 4 server.
 
 ![screenshot](https://i.imgur.com/b1JP8C0.png)
 
@@ -44,7 +44,7 @@ docker compose up -d
 docker compose exec app sh -c "npm run dev"
 ```
 
-You can access the project at [http://localhost:5173/dc/lineage-builder/](http://localhost:5173/dc/lineage-builder/).
+You can access the project at [http://localhost:3000/dc/lineage-builder/](http://localhost:3000/dc/lineage-builder/).
 
 Remember to run `npm run update-breeds` to fetch the latest breed artifacts.
 
@@ -79,21 +79,16 @@ docker compose exec testapp sh -c "npm run test:unit"
 docker compose up -d
 ```
 
-## Migrations
+## Database Migrations
 
-`tsx` isn't used in production, the way to invoke database commands differs slightly. In dev, you'll need to use:
-
-```sh
-tsx ./app/backend/commands/databaseFresh.ts # set up table
-tsx ./app/backend/commands/databaseSeed.ts # seed data
-```
-
-In production:
+Database commands can be run using `tsx` in development:
 
 ```sh
-node ./backend/commands/databaseFresh.js # set up table
-node ./backend/commands/databaseSeed.js # seed data
+tsx ./server/commands/databaseFresh.ts # set up table
+tsx ./server/commands/databaseSeed.ts # seed data
 ```
+
+In production, the compiled JavaScript should be used instead.
 
 ## Breed data
 
