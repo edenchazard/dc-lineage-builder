@@ -1,0 +1,189 @@
+/**
+layout
+**/
+:root {
+  --desktop: 1024px;
+  --mobile: 768px;
+  --input-guttering: 0.5rem;
+}
+
+html {
+  overflow: hidden auto;
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.constrain-width {
+  max-width: 110rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.content-limit {
+  max-width: 100ch;
+  width: 100%;
+}
+
+.form {
+  & .label {
+    font-weight: bold;
+    white-space: nowrap;
+
+    &::after {
+      content: ':';
+    }
+  }
+
+  & .btn {
+    padding: 1rem;
+    background-color: var(--form-button-bg);
+    color: var(--form-button-fg);
+    border: 0;
+    border-radius: 0.25rem;
+  }
+}
+.w-max {
+  max-width: 100%;
+}
+
+/**
+interactive elements
+**/
+.interactive,
+input[type='text'],
+select {
+  border: none;
+  padding: var(--input-guttering);
+  background: #fff;
+  border-radius: 0.4rem;
+}
+
+input[type='checkbox'] {
+  margin: 0px;
+  padding: 0.1rem;
+  appearance: none;
+  border-radius: 0.2rem;
+  border: 1px solid black;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  aspect-ratio: 1;
+  min-height: 1.1rem;
+  box-sizing: content-box;
+
+  &:checked::after {
+    color: black;
+    content: '\2713';
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+
+  &.white {
+    border: 1px solid white;
+
+    &:checked::after {
+      color: #fff;
+    }
+  }
+}
+
+/**
+typography
+**/
+p + p {
+  margin-top: 0.4em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0.1em;
+  line-height: 1.5em;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2.5rem;
+}
+h4 {
+  font-size: 2rem;
+}
+h5 {
+  font-size: 1.5rem;
+}
+h6 {
+  font-size: 1.25rem;
+}
+strong {
+  font-weight: bold;
+}
+
+/**
+utilities
+**/
+.list {
+  list-style-type: disc;
+  padding-left: 1rem;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+
+/**
+accessibility
+**/
+:focus-visible {
+  outline: 3px solid var(--ui-focus-colour, blue);
+  border-radius: 0.25em;
+}
+
+button.pointer {
+  &[disabled],
+  &[aria-disabled] {
+    cursor: unset;
+  }
+}
+
+/**
+overwrites
+**/
+.svg-inline--fa {
+  margin: 0 0.5rem;
+}
+
+/* need a way of referencing these to the ones in the settings file */
+:root {
+  --size36x48W: 36px;
+  --size36x48H: 48px;
+  --size24x32W: 24px;
+  --size24x32H: 32px;
+  --size36x48-w-adjust: calc(var(--size36x48W) - 2px);
+  --size36x48-h-adjust: calc(var(--size36x48H) - 2px);
+}
