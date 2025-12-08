@@ -58,13 +58,13 @@ describe('utils', () => {
     it('returns the portrait for breed available as male with male wanted', () => {
       expectTypeOf(
         breedEntryToPortrait(getBreedData('Aria') as BreedEntry, 'male'),
-      ).toMatchTypeOf<PortraitData>();
+      ).toEqualTypeOf<PortraitData>();
     });
 
     it('returns the portrait for breed available as female with female wanted', () => {
       expectTypeOf(
         breedEntryToPortrait(getBreedData('Aria') as BreedEntry, 'female'),
-      ).toMatchTypeOf<PortraitData>();
+      ).toEqualTypeOf<PortraitData>();
     });
   });
 
