@@ -91,8 +91,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { onKeyDown, useLocalStorage } from '@vueuse/core';
 import TheHeaderMenuLinks from './TheHeaderMenuLinks.vue';
 import TheSlideInMenu from './TheSlideInMenu.vue';
-import router from '../router/router';
 
+const router = useRouter();
 const menuOpen = ref(false);
 const invitationOpen = ref(false);
 const inviteDismissed = useLocalStorage('inviteDismissed', false);

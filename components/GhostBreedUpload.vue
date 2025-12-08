@@ -22,10 +22,10 @@
 </template>
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import type { PortraitData } from '../shared/types';
-import settings from '../shared/settings.js';
+import type { PortraitData } from '~/utils/shared/types';
+import settings from '~/utils/shared/settings.js';
 import DragonPortrait from './DragonPortrait.vue';
-import { placeholder } from '../shared/breeds.js';
+import { placeholder } from '~/utils/shared/breeds.js';
 
 const props = withDefaults(
   defineProps<{

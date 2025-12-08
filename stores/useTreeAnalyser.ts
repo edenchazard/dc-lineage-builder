@@ -1,9 +1,9 @@
 import { ref, unref, watchEffect } from 'vue';
 import type { Ref } from 'vue';
-import type { PartialLineageWithMetadata } from '../shared/types';
+import type { PartialLineageWithMetadata } from '~/utils/shared/types';
 import { useTreeHistory } from './useTreeHistory';
-import type { LineageHandler } from '../shared/lineageHandler';
-import { placeholder } from '../shared/breeds.js';
+import type { LineageHandler } from '~/utils/shared/lineageHandler';
+import { placeholder } from '~/utils/shared/breeds.js';
 
 /*
     basically a way we can:

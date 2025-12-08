@@ -81,14 +81,14 @@
 
 <script setup lang="ts">
 import { ref, nextTick, onMounted, useTemplateRef } from 'vue';
-import { getOnSitePreview } from '../app/api.js';
-import OnsitePreview from '../components/OnsitePreview.vue';
-import FeedbackPanel from '../components/FeedbackPanel.vue';
-import { validateCode } from '../shared/validation.js';
-import LineageWrapper from '../components/LineageWrapper.vue';
+import { getOnSitePreview } from '~/composables/useAPI';
+import OnsitePreview from '~/components/OnsitePreview.vue';
+import FeedbackPanel from '~/components/FeedbackPanel.vue';
+import { validateCode } from '~/utils/shared/validation.js';
+import LineageWrapper from '~/components/LineageWrapper.vue';
 import { FetchError } from 'ofetch';
 import { useRoute } from 'vue-router';
-import InputTextbox from '../components/InputTextbox.vue';
+import InputTextbox from '~/components/InputTextbox.vue';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');

@@ -47,16 +47,16 @@ import type {
   PartialLineageWithMetadata,
   DragonDisplay,
   LineageConfig,
-} from '../shared/types';
+} from '~/utils/shared/types';
 
-import { hasParents } from '../shared/utils.js';
-import { getLineage } from '../app/api.js';
-import { useAppStore } from '../store/useAppStore.js';
+import { hasParents } from '~/utils/shared/utils.js';
+import { getLineage } from '~/composables/useAPI';
+import { useAppStore } from '~/stores/useAppStore.js';
 import LineageBuilderToolbar from './LineageBuilderToolbar.vue';
 import LineageView from './LineageView.vue';
 import FeedbackPanel from './FeedbackPanel.vue';
-import { Lineage as LineageHandler } from '../shared/lineageHandler';
-import { DragonBuilder } from '../shared/dragonBuilder.js';
+import { Lineage as LineageHandler } from '~/utils/shared/lineageHandler';
+import { DragonBuilder } from '~/utils/shared/dragonBuilder.js';
 import { FetchError } from 'ofetch';
 import DialogBreedSelector from './DialogBreedSelector.vue';
 

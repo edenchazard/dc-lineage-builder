@@ -1,5 +1,5 @@
 import { useSessionStorage } from '@vueuse/core';
-import type { BreedEntry, DateString, PortraitData } from '../shared/types';
+import type { BreedEntry, DateString, PortraitData } from '~/utils/shared/types';
 import { computed } from 'vue';
 
 export interface DateFilterConfig {

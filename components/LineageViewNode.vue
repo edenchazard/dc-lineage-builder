@@ -124,23 +124,23 @@ import type {
   BreedEntry,
   PartialLineageWithMetadata,
   PortraitData,
-} from '../shared/types';
+} from '~/utils/shared/types';
 import {
   getBreedData,
   breedEntryToPortrait,
   expandGender,
   hasParents,
-} from '../shared/utils.js';
-import { useAppStore } from '../store/useAppStore.js';
+} from '~/utils/shared/utils.js';
+import { useAppStore } from '~/stores/useAppStore.js';
 import LineageViewNodeLabel from './LineageViewNodeLabel.vue';
 import DragonPortrait from './DragonPortrait.vue';
 import LineageViewNodeButton from './LineageViewNodeButton.vue';
-import { Lineage } from '../shared/lineageHandler';
-import { DragonBuilder } from '../shared/dragonBuilder.js';
-import { validateCode, validateName } from '../shared/validation.js';
-import { placeholder } from '../shared/breeds.js';
-import vOnLongPress from '../directives/long-press/vue-3-long-press';
-import useBreedSelector from '../composables/useBreedSelector';
+import { Lineage } from '~/utils/shared/lineageHandler';
+import { DragonBuilder } from '~/utils/shared/dragonBuilder.js';
+import { validateCode, validateName } from '~/utils/shared/validation.js';
+import { placeholder } from '~/utils/shared/breeds.js';
+import vOnLongPress from '~/directives/long-press/vue-3-long-press';
+import useBreedSelector from '~/composables/useBreedSelector';
 
 const props = withDefaults(
   defineProps<{

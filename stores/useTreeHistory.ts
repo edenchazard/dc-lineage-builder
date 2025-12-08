@@ -1,7 +1,7 @@
 import { computed } from 'vue';
 import type { Ref } from 'vue';
 import { useDebouncedRefHistory } from '@vueuse/core';
-import type { PartialLineageWithMetadata } from '../shared/types';
+import type { PartialLineageWithMetadata } from '~/utils/shared/types';
 
 function useTreeHistory(
   activeTree: Ref<PartialLineageWithMetadata>,

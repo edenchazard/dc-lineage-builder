@@ -22,12 +22,12 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { PortraitData, TagFilterCollection } from '../shared/types';
+import type { PortraitData, TagFilterCollection } from '~/utils/shared/types';
 import BreedList from './BreedList.vue';
-import { useAppStore } from '../store/useAppStore';
-import { filterBreedsByTagsWith } from '../store/useTagStore';
-import { filterBreedsByDate, dateFilterStore } from '../store/useDateFilter';
-import { userSettings } from '../composables/useUserSettings';
+import { useAppStore } from '~/stores/useAppStore';
+import { filterBreedsByTagsWith } from '~/stores/useTagStore';
+import { filterBreedsByDate, dateFilterStore } from '~/stores/useDateFilter';
+import { userSettings } from '~/composables/useUserSettings';
 
 const props = withDefaults(
   defineProps<{

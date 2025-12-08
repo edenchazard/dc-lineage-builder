@@ -38,12 +38,12 @@ import { ref, useTemplateRef, watch } from 'vue';
 import type {
   MaybePartialLineageWithMetadata,
   PartialLineage,
-} from '../shared/types';
+} from '~/utils/shared/types';
 import BaseDialog from './BaseDialog.vue';
 import FeedbackPanel from './FeedbackPanel.vue';
 import InputTextbox from './InputTextbox.vue';
 import DragonProblem from './DragonProblem.vue';
-import { Lineage } from '../shared/lineageHandler';
+import { Lineage } from '~/utils/shared/lineageHandler';
 
 const props = defineProps<{
   open: boolean;

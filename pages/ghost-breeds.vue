@@ -115,12 +115,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import type { BreedEntry, DragonGender } from '../shared/types';
-import { addBreed } from '../shared/utils.js';
-import { BREEDNAMEREGEXP } from '../shared/validation.js';
-import settings from '../shared/settings.js';
-import GhostBreedUpload from '../components/GhostBreedUpload.vue';
-import FeedbackPanel from '../components/FeedbackPanel.vue';
+import type { BreedEntry, DragonGender } from '~/utils/shared/types';
+import { addBreed } from '~/utils/shared/utils.js';
+import { BREEDNAMEREGEXP } from '~/utils/shared/validation.js';
+import settings from '~/utils/shared/settings.js';
+import GhostBreedUpload from '~/components/GhostBreedUpload.vue';
+import FeedbackPanel from '~/components/FeedbackPanel.vue';
 import { useTemplateRef } from 'vue';
 
 type Availability = 'b' | DragonGender;

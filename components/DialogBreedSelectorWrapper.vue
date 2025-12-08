@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import useBreedSelector from '../composables/useBreedSelector';
+import useBreedSelector from '~/composables/useBreedSelector';
 const breedSelectorDialog = useBreedSelector();
 </script>
 

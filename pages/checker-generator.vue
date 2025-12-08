@@ -143,23 +143,23 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import type { PortraitData, DragonGender } from '../shared/types';
-import { getBreedData } from '../shared/utils.js';
+import type { PortraitData, DragonGender } from '~/utils/shared/types';
+import { getBreedData } from '~/utils/shared/utils.js';
 
-import LineageView from '../components/LineageView.vue';
-import BreedListFiltered from '../components/BreedListFiltered.vue';
-import DialogExport from '../components/DialogExport.vue';
-import DialogGenerate from '../components/DialogGenerate.vue';
-import ToolbarButton from '../components/ToolbarButton.vue';
-import BreedSearch from '../components/BreedSearch.vue';
-import { DragonBuilder } from '../shared/dragonBuilder.js';
+import LineageView from '~/components/LineageView.vue';
+import BreedListFiltered from '~/components/BreedListFiltered.vue';
+import DialogExport from '~/components/DialogExport.vue';
+import DialogGenerate from '~/components/DialogGenerate.vue';
+import ToolbarButton from '~/components/ToolbarButton.vue';
+import BreedSearch from '~/components/BreedSearch.vue';
+import { DragonBuilder } from '~/utils/shared/dragonBuilder.js';
 import {
   femalePortraits,
   malePortraits,
   placeholder,
-} from '../shared/breeds.js';
-import { chosenTags } from '../store/useTagStore';
-import BreedListFilterDropdown from '../components/BreedListFilterDropdown.vue';
+} from '~/utils/shared/breeds.js';
+import { chosenTags } from '~/stores/useTagStore';
+import BreedListFilterDropdown from '~/components/BreedListFilterDropdown.vue';
 
 const tree = ref(DragonBuilder.createWithMetadata());
 const maleBreed = ref(placeholder.name);

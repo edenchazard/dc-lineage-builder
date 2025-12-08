@@ -15,7 +15,7 @@
   </select>
 </template>
 <script setup lang="ts">
-import { availableSkins, type SkinId } from '../composables/useUserSettings';
+import { availableSkins, type SkinId } from '~/composables/useUserSettings';
 
 withDefaults(
   defineProps<{

@@ -8,7 +8,7 @@ import { createLineageLink, getBreedData, hasParents } from './utils.js';
 import { DragonBuilder } from './dragonBuilder.js';
 import { dragonSchema, validateGenerationCount } from './validation.js';
 import settings from './settings.js';
-import { saveLineage } from '../app/api.js';
+import { saveLineage } from '~/composables/useAPI';
 import { placeholder } from './breeds.js';
 import { cloneFnJSON } from '@vueuse/core';
 

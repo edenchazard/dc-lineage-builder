@@ -61,10 +61,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { PortraitData } from '../shared/types';
+import type { PortraitData } from '~/utils/shared/types';
 import DragonPortrait from './DragonPortrait.vue';
 import BreedTag from './BreedTag.vue';
-import { slug } from '../shared/utils';
+import { slug } from '~/utils/shared/utils';
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;

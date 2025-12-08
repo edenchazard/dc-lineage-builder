@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import BaseDialog from './BaseDialog.vue';
-import { userSettings } from '../composables/useUserSettings';
+import { userSettings } from '~/composables/useUserSettings';
 import SkinSwitcher from './SkinSwitcher.vue';
 import { ref, useId, watch } from 'vue';
 

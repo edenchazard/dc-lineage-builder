@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import type { PortraitData } from '../shared/types';
+import type { PortraitData } from '~/utils/shared/types';
 
 withDefaults(
   defineProps<{

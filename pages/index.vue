@@ -4,5 +4,5 @@
 </template>
 
 <script setup lang="ts">
-import LineageBuilder from '../components/LineageBuilder.vue';
+import LineageBuilder from '~/components/LineageBuilder.vue';
 </script>

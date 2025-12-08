@@ -53,8 +53,8 @@ import { ValidationError } from 'yup';
 import type {
   MaybePartialLineageWithMetadata,
   PartialLineage,
-} from '../shared/types';
-import { Lineage } from '../shared/lineageHandler';
+} from '~/utils/shared/types';
+import { Lineage } from '~/utils/shared/lineageHandler';
 import BaseDialog from './BaseDialog.vue';
 import FeedbackPanel from './FeedbackPanel.vue';
 import InputTextbox from './InputTextbox.vue';

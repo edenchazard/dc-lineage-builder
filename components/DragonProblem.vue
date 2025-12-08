@@ -25,9 +25,9 @@
 </template>
 
 <script setup lang="ts">
-import type { MaybePartialLineageWithMetadata } from '../shared/types';
-import { hasParents } from '../shared/utils.js';
-import { Lineage } from '../shared/lineageHandler';
+import type { MaybePartialLineageWithMetadata } from '~/utils/shared/types';
+import { hasParents } from '~/utils/shared/utils.js';
+import { Lineage } from '~/utils/shared/lineageHandler';
 
 withDefaults(
   defineProps<{

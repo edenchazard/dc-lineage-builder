@@ -21,10 +21,10 @@
 import type {
   LineageConfig,
   PartialLineageWithMetadata,
-} from '../shared/types';
+} from '~/utils/shared/types';
 import { computed } from 'vue';
 import LineageViewNode from './LineageViewNode.vue';
-import { Lineage } from '../shared/lineageHandler';
+import { Lineage } from '~/utils/shared/lineageHandler';
 import LineageWrapper from './LineageWrapper.vue';
 
 const props = withDefaults(

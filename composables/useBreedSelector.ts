@@ -1,5 +1,5 @@
 import { readonly, ref } from 'vue';
-import type { PartialLineageWithMetadata, PortraitData } from '../shared/types';
+import type { PartialLineageWithMetadata, PortraitData } from '~/utils/shared/types';
 import { useScrollLock } from '@vueuse/core';
 
 // we want to hide the scroll bar when the popup is open,

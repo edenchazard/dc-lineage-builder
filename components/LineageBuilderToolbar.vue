@@ -221,9 +221,9 @@ import type {
   PartialLineage,
   PartialLineageWithMetadata,
   PortraitData,
-} from '../shared/types';
-import type { LineageHandler } from '../shared/lineageHandler';
-import { useAppStore } from '../store/useAppStore.js';
+} from '~/utils/shared/types';
+import type { LineageHandler } from '~/utils/shared/lineageHandler';
+import { useAppStore } from '~/stores/useAppStore.js';
 import DialogExport from './DialogExport.vue';
 import DialogImport from './DialogImport.vue';
 import DialogGenerate from './DialogGenerate.vue';
@@ -236,12 +236,12 @@ import {
   listOfBreeds,
   malePortraits,
   placeholder,
-} from '../shared/breeds.js';
+} from '~/utils/shared/breeds.js';
 import {
   filterBreedsByTagsWith,
   tagsFromModel,
   tagStore,
-} from '../store/useTagStore';
+} from '~/stores/useTagStore';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {

@@ -175,15 +175,15 @@ import { nextTick, useTemplateRef } from 'vue';
 import { Dropdown } from 'floating-vue';
 import 'floating-vue/dist/style.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { resolveLabel, slug } from '../shared/utils';
+import { resolveLabel, slug } from '~/utils/shared/utils';
 import BreedTag from './BreedTag.vue';
-import { filtersByGroup, tagStore } from '../store/useTagStore';
-import type { NewTag } from '../shared/types';
+import { filtersByGroup, tagStore } from '~/stores/useTagStore';
+import type { NewTag } from '~/utils/shared/types';
 import {
   dateFilterStore,
   clearDateFilter,
   hasActiveDateFilter,
-} from '../store/useDateFilter';
+} from '~/stores/useDateFilter';
 
 defineProps<{
   container: string;

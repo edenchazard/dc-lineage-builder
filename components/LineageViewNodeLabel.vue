@@ -27,8 +27,8 @@
 </template>
 <script setup lang="ts">
 import { nextTick, ref, computed } from 'vue';
-import { validateCode, validateName } from '../shared/validation.js';
-import { DragonBuilder } from '../shared/dragonBuilder.js';
+import { validateCode, validateName } from '~/utils/shared/validation.js';
+import { DragonBuilder } from '~/utils/shared/dragonBuilder.js';
 
 const props = withDefaults(
   defineProps<{

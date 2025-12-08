@@ -43,13 +43,13 @@
 import { reactive, ref, onBeforeUnmount, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
-import type { LineageConfig, PartialLineage } from '../shared/types';
-import { getLineage } from '../app/api.js';
-import { createLineageLink } from '../shared/utils.js';
+import type { LineageConfig, PartialLineage } from '~/utils/shared/types';
+import { getLineage } from '~/composables/useAPI';
+import { createLineageLink } from '~/utils/shared/utils.js';
 
-import LineageView from '../components/LineageView.vue';
-import InputTextbox from '../components/InputTextbox.vue';
-import FeedbackPanel from '../components/FeedbackPanel.vue';
+import LineageView from '~/components/LineageView.vue';
+import InputTextbox from '~/components/InputTextbox.vue';
+import FeedbackPanel from '~/components/FeedbackPanel.vue';
 import { FetchError } from 'ofetch';
 import { useTemplateRef } from 'vue';
 

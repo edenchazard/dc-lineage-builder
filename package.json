@@ -18,7 +18,7 @@
     "ts:check": "nuxt typecheck",
     "test:unit": "vitest",
     "coverage": "vitest --coverage",
-    "update-breeds": "tsx ./app/backend/commands/updateBreeds.ts"
+    "update-breeds": "tsx ./server/commands/updateBreeds.ts"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.11.3",

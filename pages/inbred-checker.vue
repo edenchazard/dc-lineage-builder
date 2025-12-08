@@ -239,10 +239,10 @@
 <script setup lang="ts">
 import { ref, useTemplateRef, computed, watch } from 'vue';
 import { FetchError } from 'ofetch';
-import { getInbred, type InbredCheckResponse } from '../app/api.js';
-import FeedbackPanel from '../components/FeedbackPanel.vue';
-import InputTextbox from '../components/InputTextbox.vue';
-import { validateCode } from '../shared/validation.js';
+import { getInbred, type InbredCheckResponse } from '~/composables/useAPI';
+import FeedbackPanel from '~/components/FeedbackPanel.vue';
+import InputTextbox from '~/components/InputTextbox.vue';
+import { validateCode } from '~/utils/shared/validation.js';
 
 const status = useTemplateRef('status');
 const input = ref('');
