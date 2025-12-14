@@ -137,10 +137,10 @@ import DragonPortrait from './DragonPortrait.vue';
 import LineageViewNodeButton from './LineageViewNodeButton.vue';
 import { Lineage } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
-import { validateCode, validateName } from '../shared/validation.js';
 import { placeholder } from '../shared/breeds.js';
 import vOnLongPress from '../directives/long-press/vue-3-long-press';
 import useBreedSelector from '../composables/useBreedSelector';
+import { codeValidator, nameValidator } from '../shared/validation';
 
 const props = withDefaults(
   defineProps<{
@@ -170,11 +170,11 @@ const getImage = computed(() => {
 const problems = computed(() => {
   const errs = [];
 
-  if (!validateName(props.data.name)) {
+  if (!nameValidator.isValidSync(props.data.name)) {
     errs.push('Name is invalid.');
   }
 
-  if (!validateCode(props.data.code)) {
+  if (!codeValidator.isValidSync(props.data.code)) {
     errs.push('Code is invalid.');
   }
 
