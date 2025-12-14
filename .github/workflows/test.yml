@@ -16,7 +16,7 @@ jobs:
         run: docker compose up testapp -d
 
       - name: try building the app
-        run: docker compose exec -T testapp sh -c "npm run build"
+        run: docker compose exec -T testapp sh -c "npm run vue:build"
 
       - name: update breeds
         run: docker compose exec -T testapp sh -c "npm run update-breeds"
