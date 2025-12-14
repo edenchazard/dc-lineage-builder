@@ -13,7 +13,7 @@ jobs:
         run: touch .env && cat .env.testing >> .env
 
       - name: start test environment
-        run: docker compose up testapp -d
+        run: docker compose up testapp -d --build
 
       - name: update breeds
         run: docker compose exec -T testapp sh -c "npm run update-breeds"
