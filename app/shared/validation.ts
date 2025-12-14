@@ -12,7 +12,7 @@ import { listOfBreeds, placeholder } from './breeds.js';
 import { DragonBuilder } from './dragonBuilder.js';
 
 export const NAMEREGEXP = /^[a-zA-Z0-9]([a-zA-Z0-9― —’–'-]+)[a-zA-Z0-9]$/;
-export const CODEREGEXP = /[a-zA-Z0-9]+/;
+export const CODEREGEXP = /^[a-zA-Z0-9]+$/;
 export const BREEDNAMEREGEXP = /[a-zA-Z0-9 ]{1,32}/;
 
 export const codeValidator = string()
@@ -22,7 +22,7 @@ export const codeValidator = string()
     ({ value }) =>
       `Codes must be 4 to 5 characters and alphanumeric.
   ${value} was given.`,
-    validateCode,
+    (code) => CODEREGEXP.test(code) && code.length >= 4 && code.length <= 5,
   );
 
 export const nameValidator = string()
@@ -34,7 +34,7 @@ export const nameValidator = string()
     alphanumeric characters, spaces apostrophes and dashes.
     Additionally non-alphanumeric characters must not be
     present at the start and end of name. ${value} was given.`,
-    validateName,
+    (name) => NAMEREGEXP.test(name) && name.length >= 1 && name.length <= 32,
   );
 
 export const dragonSchema: ObjectSchema<PartialLineage> = object()
@@ -68,14 +68,6 @@ export const dragonSchema: ObjectSchema<PartialLineage> = object()
       .shape({} as NoDragonParents),
   })
   .noUnknown();
-
-export function validateName(name: string) {
-  return NAMEREGEXP.test(name) && name.length >= 1 && name.length <= 32;
-}
-
-export function validateCode(code: string) {
-  return NAMEREGEXP.test(code) && code.length >= 4 && code.length <= 5;
-}
 
 export function validateGenerationCount(count: number): boolean {
   return count >= settings.gens.min && count <= settings.gens.max;

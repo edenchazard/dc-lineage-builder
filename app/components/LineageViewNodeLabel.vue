@@ -27,7 +27,7 @@
 </template>
 <script setup lang="ts">
 import { nextTick, ref, computed } from 'vue';
-import { validateCode, validateName } from '../shared/validation.js';
+import { codeValidator, nameValidator } from '../shared/validation.js';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
 
 const props = withDefaults(
@@ -56,8 +56,8 @@ function validate() {
   const target = inputEl.value;
   if (!(target instanceof HTMLTextAreaElement)) return;
 
-  const validator = props.display === 1 ? validateCode : validateName;
-  const invalid = !validator(target.value);
+  const validator = props.display === 1 ? codeValidator : nameValidator;
+  const invalid = !validator.isValidSync(target.value);
 
   target.style.height = 'auto';
   target.style.height = target.scrollHeight + 'px';
