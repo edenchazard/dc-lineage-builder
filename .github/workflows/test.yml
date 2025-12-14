@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: create dummy env
-        run: echo "VITE_BASE_URL=/dc/lineage-builder" > .env
+        run: touch .env && cat .env.testing >> .env
 
       - name: start test environment
         run: docker compose up testapp -d
