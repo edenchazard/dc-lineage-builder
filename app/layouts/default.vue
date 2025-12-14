@@ -3,7 +3,7 @@
     :open="settingsDialogOpen"
     @close="settingsDialogOpen = false"
   />
-  <Header />
+  <TheHeader />
   <main id="content">
     <slot />
   </main>
@@ -63,8 +63,6 @@ import { ref, watch } from 'vue';
 import { useDevicePixelRatio } from '@vueuse/core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { useAppStore } from '~/stores/useAppStore';
-import Header from '~/components/TheHeader.vue';
-import DialogSettings from '~/components/DialogSettings.vue';
 
 const appStore = useAppStore();
 
@@ -76,7 +74,7 @@ let use72 = false;
 /* dynamically load and apply the correct spritesheet depending on
  pixel ratio. If we've requested the 72x set, we should prioritise it
  over the 36x res. */
-watch(
+/* watch(
   pixelRatio,
   async () => {
     if (pixelRatio.value > 1) {
@@ -101,7 +99,7 @@ watch(
     }
   },
   { immediate: true },
-);
+); */
 </script>
 
 <style>

@@ -5,7 +5,7 @@ import {
   expandGender,
   getBreedData,
   validGenderForBreed,
-} from '../utils.js';
+} from '../utils/utils.js';
 import type { BreedEntry, PortraitData } from '../types.js';
 import { injectBreedList } from '../breeds.js';
 

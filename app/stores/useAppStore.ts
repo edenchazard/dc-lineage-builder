@@ -1,9 +1,9 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
-import type { PartialLineageWithMetadata } from '~/utils/shared/types';
 import { useTreeAnalyser } from './useTreeAnalyser';
-import { DragonBuilder } from '~/utils/shared/dragonBuilder.js';
-import { LineageHandler } from '~/utils/shared/lineageHandler';
+import { LineageHandler } from '~~/shared/lineageHandler';
+import { DragonBuilder } from '~~/shared/dragonBuilder';
+import type { PartialLineageWithMetadata } from '~~/shared/types';
 
 export const useAppStore = defineStore('appStore', () => {
   const appVersion = import.meta.env.VITE_VERSION ?? 'dev';

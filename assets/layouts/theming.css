@@ -1,18 +1,18 @@
 @font-face {
   font-family: 'fq';
   font-display: swap;
-  src:
+  /* src:
     local('fq'),
-    url(/assets/layouts/default/fq.woff2) format('woff2');
+    url(/assets/layouts/default/fq.woff2) format('woff2'); */
   font-style: normal;
 }
 
 @font-face {
   font-family: 'din';
   font-display: swap;
-  src:
+  /*  src:
     local('din'),
-    url(/assets/layouts/portal2/din.woff2) format('woff2');
+    url(/assets/layouts/portal2/din.woff2) format('woff2'); */
   font-style: normal;
 }
 

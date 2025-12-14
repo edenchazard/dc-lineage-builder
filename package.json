@@ -5,8 +5,8 @@
   "author": "Charley Reeson (https://chazza.me)",
   "type": "module",
   "scripts": {
-    "dev": "nuxt dev",
     "build": "nuxt build",
+    "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -15,18 +15,21 @@
     "fmt:check": "prettier . --check",
     "fmt": "prettier --write .",
     "fix": "npm run lint:fix && npm run format",
-    "ts:check": "nuxt typecheck",
+    "ts:check": "nuxt prepare && vue-tsc -b --noEmit",
     "test:unit": "vitest",
     "coverage": "vitest --coverage",
-    "update-breeds": "tsx ./server/commands/updateBreeds.ts"
+    "prod": "node ./backend/server.js",
+    "update-breeds": "tsx ./app/backend/commands/updateBreeds.ts"
   },
   "dependencies": {
+    "@koa/router": "^13.1.0",
     "@pinia/nuxt": "^0.11.3",
     "floating-vue": "^5.2.2",
     "mysql2": "^3.12.0",
     "node-html-parser": "^7.0.1",
-    "nuxt": "^4.2.1",
+    "nuxt": "^4.2.2",
     "ofetch": "^1.4.1",
+    "pinia": "^3.0.4",
     "unique-names-generator": "^4.7.1",
     "yup": "^1.4.0"
   },
@@ -42,6 +45,7 @@
     "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.32.0",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@vitest/coverage-v8": "^4.0.15",
     "@vue/eslint-config-typescript": "^14.2.0",
     "@vue/test-utils": "^2.4.6",
@@ -54,16 +58,14 @@
     "focus-trap": "^7.5.4",
     "happy-dom": "^20.0.11",
     "lightningcss": "^1.29.3",
-    "pinia": "^2.3.0",
     "prettier": "^3.1.1",
     "reset-css": "^5.0.2",
     "supertest": "^7.1.4",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.19.1",
     "vitest": "^4.0.15",
     "vue": "^3.5.13",
     "vue-dragscroll": "^4.0.6",
+    "vue-router": "^4.5.0",
     "vue-tsc": "^2.2.0"
   }
 }

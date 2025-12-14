@@ -215,15 +215,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue';
 import { useResizeObserver } from '@vueuse/core';
-import type {
-  BreedEntry,
-  LineageConfig,
-  PartialLineage,
-  PartialLineageWithMetadata,
-  PortraitData,
-} from '~/utils/shared/types';
-import type { LineageHandler } from '~/utils/shared/lineageHandler';
-import { useAppStore } from '~/stores/useAppStore.js';
 import DialogExport from './DialogExport.vue';
 import DialogImport from './DialogImport.vue';
 import DialogGenerate from './DialogGenerate.vue';
@@ -231,17 +222,20 @@ import ToolbarButton from './ToolbarButton.vue';
 import ToolbarDropDownMenu from './ToolbarDropDownMenu.vue';
 import ToolbarDropDownMenuItem from './ToolbarDropDownMenuItem.vue';
 import ToolbarGroup from './ToolbarGroup.vue';
+import type {
+  BreedEntry,
+  LineageConfig,
+  PartialLineage,
+  PartialLineageWithMetadata,
+  PortraitData,
+} from '~~/shared/types';
 import {
   femalePortraits,
   listOfBreeds,
   malePortraits,
   placeholder,
-} from '~/utils/shared/breeds.js';
-import {
-  filterBreedsByTagsWith,
-  tagsFromModel,
-  tagStore,
-} from '~/stores/useTagStore';
+} from '~~/shared/breeds';
+import type { LineageHandler } from '~~/shared/lineageHandler';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {

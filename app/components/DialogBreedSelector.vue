@@ -66,14 +66,14 @@
 <script setup lang="ts">
 import { nextTick, useTemplateRef, watch } from 'vue';
 import { onStartTyping, useSessionStorage } from '@vueuse/core';
-import { type PortraitData } from '~/utils/shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';
 import { chosenTags } from '~/stores/useTagStore.js';
 import BreedListFilterDropdown from './BreedListFilterDropdown.vue';
-import { getTable } from '~/utils/shared/utils';
 import useBreedSelector from '~/composables/useBreedSelector';
+import type { PortraitData } from '~~/shared/types';
+import { getTable } from '~~/shared/utils';
 
 const emit = defineEmits<{
   (e: 'breedSelected', breed: PortraitData): void;

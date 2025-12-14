@@ -1,7 +1,5 @@
 import crypto from 'crypto';
-import type { RowDataPacket } from 'mysql2';
-import { dragonSchema } from '~/utils/shared/validation';
-import pool from '~/server/utils/pool';
+import { dragonSchema } from '~~/shared/validation';
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
@@ -14,9 +12,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const lineage = await dragonSchema
-    .required()
-    .validate(body.lineage);
+  const lineage = await dragonSchema.required().validate(body.lineage);
 
   const jsonString = JSON.stringify(lineage);
   const hashCode = crypto

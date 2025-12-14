@@ -1,5 +1,5 @@
 import type { BreedEntry, PortraitData } from './types';
-import { filterBreedTableByGender } from './utils.js';
+import { filterBreedTableByGender } from './utils';
 
 const placeholder: BreedEntry = {
   name: 'Placeholder',

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import type { PartialLineage } from '../types';
-import { dragonSchema, validateGenerationCount } from '../validation.js';
+import { dragonSchema, validateGenerationCount } from '../shared/validation.js';
 import { Lineage } from '../lineageHandler';
 import { DragonBuilder } from '../dragonBuilder.js';
 import { dragonGen13, dragonGen2 } from '../../__tests__/testData';

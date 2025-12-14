@@ -50,15 +50,15 @@
 <script setup lang="ts">
 import { ref, useTemplateRef, watch } from 'vue';
 import { ValidationError } from 'yup';
-import type {
-  MaybePartialLineageWithMetadata,
-  PartialLineage,
-} from '~/utils/shared/types';
-import { Lineage } from '~/utils/shared/lineageHandler';
 import BaseDialog from './BaseDialog.vue';
 import FeedbackPanel from './FeedbackPanel.vue';
 import InputTextbox from './InputTextbox.vue';
 import DragonProblem from './DragonProblem.vue';
+import type {
+  MaybePartialLineageWithMetadata,
+  PartialLineage,
+} from '~~/shared/types';
+import { Lineage } from '~~/shared/lineageHandler';
 
 const emit = defineEmits<{
   (e: 'close'): void;

@@ -5,9 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import { injectBreedList } from '~/utils/shared/breeds';
+import { onMounted } from 'vue';
+import { injectBreedList } from '~~/shared/breeds';
 
-// Initialize breed list on mount
+// Initialise breed list on mount
 onMounted(async () => {
   await injectBreedList();
 });

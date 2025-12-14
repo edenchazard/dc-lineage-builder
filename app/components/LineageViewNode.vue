@@ -124,23 +124,22 @@ import type {
   BreedEntry,
   PartialLineageWithMetadata,
   PortraitData,
-} from '~/utils/shared/types';
+} from '~~/shared/types';
 import {
   getBreedData,
   breedEntryToPortrait,
   expandGender,
   hasParents,
-} from '~/utils/shared/utils.js';
+} from '~~/shared/utils';
 import { useAppStore } from '~/stores/useAppStore.js';
 import LineageViewNodeLabel from './LineageViewNodeLabel.vue';
 import DragonPortrait from './DragonPortrait.vue';
 import LineageViewNodeButton from './LineageViewNodeButton.vue';
-import { Lineage } from '~/utils/shared/lineageHandler';
-import { DragonBuilder } from '~/utils/shared/dragonBuilder.js';
-import { validateCode, validateName } from '~/utils/shared/validation.js';
-import { placeholder } from '~/utils/shared/breeds.js';
-import vOnLongPress from '~/directives/long-press/vue-3-long-press';
 import useBreedSelector from '~/composables/useBreedSelector';
+import { validateCode, validateName } from '~~/shared/validation';
+import { placeholder } from '~~/shared/breeds';
+import { Lineage } from '~~/shared/lineageHandler';
+import { DragonBuilder } from '~~/shared/dragonBuilder';
 
 const props = withDefaults(
   defineProps<{

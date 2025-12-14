@@ -11,9 +11,9 @@ import {
   primaryElementTags,
   type PortraitData,
   type BreedEntry,
-} from '~/utils/shared/types';
+} from '~~/shared/types';
 import { useSessionStorage } from '@vueuse/core';
-import { resolveLabel } from '~/utils/shared/utils';
+import { resolveLabel } from '~~/shared/utils';
 
 // Set.prototype.isDisjointFrom() doesn't quite have widespread support yet,
 // so we'll have to implement a polyfill for it.

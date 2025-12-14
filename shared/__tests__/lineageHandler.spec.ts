@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { PartialLineage } from '../../shared/types';
+import type { PartialLineage } from '../types';
 import { Lineage, LineageHandler } from '../lineageHandler';
 import { dragonGen3, dragonGen3Swapped } from '../../__tests__/testData';
 import { injectBreedList } from '../breeds.js';

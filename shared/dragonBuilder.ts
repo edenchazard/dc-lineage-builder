@@ -5,7 +5,7 @@ import {
   animals,
 } from 'unique-names-generator';
 import { placeholder } from './breeds.js';
-import type { PartialLineageWithMetadata, PartialLineage } from './types';
+import type { PartialLineageWithMetadata, PartialLineage } from './types.js';
 
 export class DragonBuilder {
   public static createWithMetadata(

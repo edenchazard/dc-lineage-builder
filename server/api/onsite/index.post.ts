@@ -1,10 +1,5 @@
-import { array, number, object } from 'yup';
-import { codeValidator } from '~/utils/shared/validation';
-import {
-  getDataForPair,
-  checkDragonsMatchGender,
-  OnsiteDragonNotFoundError,
-} from '~/server/utils/onsite';
+import { number, object } from 'yup';
+import { codeValidator } from '~~/shared/validation';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);

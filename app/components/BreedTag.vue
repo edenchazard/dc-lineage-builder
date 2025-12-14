@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { resolveLabel, slug } from '~/utils/shared/utils';
+import { resolveLabel, slug } from '~~/shared/utils';
 
 withDefaults(
   defineProps<{

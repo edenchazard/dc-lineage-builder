@@ -43,22 +43,19 @@
 import { onMounted, reactive, ref, useTemplateRef } from 'vue';
 import { onBeforeRouteLeave, useRoute } from 'vue-router';
 import { useFullscreen } from '@vueuse/core';
-import type {
-  PartialLineageWithMetadata,
-  DragonDisplay,
-  LineageConfig,
-} from '~/utils/shared/types';
-
-import { hasParents } from '~/utils/shared/utils.js';
 import { getLineage } from '~/composables/useAPI';
-import { useAppStore } from '~/stores/useAppStore.js';
 import LineageBuilderToolbar from './LineageBuilderToolbar.vue';
 import LineageView from './LineageView.vue';
 import FeedbackPanel from './FeedbackPanel.vue';
-import { Lineage as LineageHandler } from '~/utils/shared/lineageHandler';
-import { DragonBuilder } from '~/utils/shared/dragonBuilder.js';
 import { FetchError } from 'ofetch';
-import DialogBreedSelector from './DialogBreedSelector.vue';
+import type {
+  DragonDisplay,
+  LineageConfig,
+  PartialLineageWithMetadata,
+} from '~~/shared/types';
+import { LineageHandler } from '~~/shared/lineageHandler';
+import { DragonBuilder } from '~~/shared/dragonBuilder';
+import { hasParents } from '~~/shared/utils';
 
 const route = useRoute();
 const appStore = useAppStore();

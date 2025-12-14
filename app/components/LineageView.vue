@@ -18,14 +18,14 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+import LineageViewNode from './LineageViewNode.vue';
+import LineageWrapper from './LineageWrapper.vue';
 import type {
   LineageConfig,
   PartialLineageWithMetadata,
-} from '~/utils/shared/types';
-import { computed } from 'vue';
-import LineageViewNode from './LineageViewNode.vue';
-import { Lineage } from '~/utils/shared/lineageHandler';
-import LineageWrapper from './LineageWrapper.vue';
+} from '~~/shared/types';
+import { Lineage } from '~~/shared/lineageHandler';
 
 const props = withDefaults(
   defineProps<{

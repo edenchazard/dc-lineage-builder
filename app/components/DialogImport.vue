@@ -41,12 +41,12 @@
 
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue';
-import type { PartialLineage } from '~/utils/shared/types';
 import DialogBase from './BaseDialog.vue';
 import InputTextbox from './InputTextbox.vue';
 import FeedbackPanel from './FeedbackPanel.vue';
-import { dragonSchema } from '~/utils/shared/validation.js';
-import { Lineage } from '~/utils/shared/lineageHandler';
+import { dragonSchema } from '~~/shared/validation';
+import type { PartialLineage } from '~~/shared/types';
+import { Lineage } from '~~/shared/lineageHandler';
 
 const emit = defineEmits<{
   (e: 'close'): void;

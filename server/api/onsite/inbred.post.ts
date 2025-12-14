@@ -1,15 +1,6 @@
 import { array, object } from 'yup';
-import { codeValidator } from '~/utils/shared/validation';
-import {
-  getDragonCodesFromHTML,
-  grabHTML,
-} from '~/server/utils/onsite';
-import {
-  dcApiFetch,
-  type DragonData,
-  type GetDragonsBulkResponse,
-} from '~/server/utils/dcApiFetch';
-import { chunkArray } from '~/utils/shared/utils';
+import { chunkArray } from '~~/shared/utils';
+import { codeValidator } from '~~/shared/validation';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);

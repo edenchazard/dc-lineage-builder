@@ -1,7 +1,6 @@
 import { string } from 'yup';
 import type { RowDataPacket } from 'mysql2';
-import { validateLineageHash } from '~/utils/shared/validation';
-import pool from '~/server/utils/pool';
+import { validateLineageHash } from '~~/shared/validation';
 
 export default defineEventHandler(async (event) => {
   const hash = getRouterParam(event, 'hash');

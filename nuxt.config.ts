@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-12-08',
-  
-  devtools: { enabled: false },
+  ssr: false,
+  devtools: { enabled: true },
 
   app: {
     baseURL: process.env.VITE_BASE_URL || '/',
@@ -11,22 +11,22 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'A tool for working with Dragon Cave lineages.' }
+        {
+          name: 'description',
+          content: 'A tool for working with Dragon Cave lineages.',
+        },
       ],
       link: [
         { rel: 'icon', href: '/favicon.ico' },
-        { 
-          rel: 'stylesheet', 
-          href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap' 
-        }
-      ]
-    }
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap',
+        },
+      ],
+    },
   },
 
-  css: [
-    '~/assets/styling/style.css',
-    '~/assets/layouts/theming.css'
-  ],
+  css: ['~/assets/css/main.css' /*  './assets/layouts/theming.css' */],
 
   runtimeConfig: {
     // Server-side only
@@ -43,7 +43,7 @@ export default defineNuxtConfig({
     // Public (exposed to client)
     public: {
       baseURL: process.env.VITE_BASE_URL || '/',
-    }
+    },
   },
 
   vite: {
@@ -54,10 +54,5 @@ export default defineNuxtConfig({
       cssMinify: 'lightningcss',
     },
   },
-
   modules: ['@pinia/nuxt'],
-
-  future: {
-    compatibilityVersion: 4,
-  },
-})
+});
