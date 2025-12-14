@@ -15,11 +15,11 @@ jobs:
       - name: start test environment
         run: docker compose up testapp -d
 
-      - name: try building the app
-        run: docker compose exec -T testapp sh -c "npm run vue:build"
-
       - name: update breeds
         run: docker compose exec -T testapp sh -c "npm run update-breeds"
+
+      - name: try building the app
+        run: docker compose exec -T testapp sh -c "npm run vue:build"
 
       - name: run prettier checks
         run: docker compose exec -T testapp sh -c "npm run fmt:check"
