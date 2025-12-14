@@ -84,11 +84,11 @@ import { ref, nextTick, onMounted, useTemplateRef } from 'vue';
 import { getOnSitePreview } from '../app/api.js';
 import OnsitePreview from '../components/OnsitePreview.vue';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
-import { validateCode } from '../shared/validation.js';
 import LineageWrapper from '../components/LineageWrapper.vue';
 import { FetchError } from 'ofetch';
 import { useRoute } from 'vue-router';
 import InputTextbox from '../components/InputTextbox.vue';
+import { codeValidator } from '../shared/validation.js';
 
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');
@@ -138,7 +138,7 @@ async function fetchLineage() {
   const mCode = maleCode.value;
   const fCode = femaleCode.value;
 
-  if (!validateCode(mCode) || !validateCode(fCode)) {
+  if (!codeValidator.isValidSync(mCode) || !codeValidator.isValidSync(fCode)) {
     status.value.warn(
       'Invalid code. Codes must be 4-5 characters in length and alphanumeric.',
     );

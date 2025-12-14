@@ -46,7 +46,10 @@
           <button
             type="submit"
             class="pointer btn"
-            :disabled="codesToCheck.filter(validateCode).length === 0"
+            :disabled="
+              codesToCheck.filter((code) => codeValidator.isValidSync(code))
+                .length === 0
+            "
           >
             Check
           </button>
@@ -64,7 +67,9 @@
           >
             <span class="preview">
               <a
-                v-if="validateCode(code) && !badDragons.includes(code)"
+                v-if="
+                  codeValidator.isValidSync(code) && !badDragons.includes(code)
+                "
                 :href="`https://dragcave.net/lineage/${code}`"
                 target="_blank"
                 class="portrait"
@@ -242,7 +247,7 @@ import { FetchError } from 'ofetch';
 import { getInbred, type InbredCheckResponse } from '../app/api.js';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
 import InputTextbox from '../components/InputTextbox.vue';
-import { validateCode } from '../shared/validation.js';
+import { codeValidator } from '../shared/validation.js';
 
 const status = useTemplateRef('status');
 const input = ref('');
@@ -268,7 +273,9 @@ async function handleInbredCheck() {
   if (!status.value) return;
 
   try {
-    const response = await getInbred(codesToCheck.value.filter(validateCode));
+    const response = await getInbred(
+      codesToCheck.value.filter((code) => codeValidator.isValidSync(code)),
+    );
 
     // Deal with problems
     if (response.errors) {
