@@ -12,6 +12,13 @@ jobs:
       - name: create dummy env
         run: touch .env && cat .env.testing >> .env
 
+      - name: try building the app
+        run: |
+          docker build . --file Dockerfile --tag test \
+            --label "runnumber=11111" \
+            --build-arg VERSION=0.0.0 \
+            --build-arg COMMIT_SHA=aaaaaaaaaa
+
       - name: start test environment
         run: docker compose up testapp -d
 
