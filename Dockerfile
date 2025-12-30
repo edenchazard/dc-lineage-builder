@@ -28,7 +28,7 @@ RUN npm ci
 COPY --chown=node:node --from=build /prod/backend ./backend
 COPY --chown=node:node --from=build /prod/shared ./shared
 COPY --chown=node:node --from=build /app/dist ./backend/static
-RUN rm -rf /usr/local/lib/node_modules/npm/ /usr/local/bin/npm && \
+RUN rm -rf /usr/local/lib/node_modules/npm/ /usr/local/bin/npm ./node_modules/npm && \
   chown -R node:node node_modules
 
 USER node
