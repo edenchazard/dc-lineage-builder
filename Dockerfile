@@ -23,10 +23,14 @@ RUN npm run vue:build
 
 FROM base AS production
 ENV NODE_ENV=production
-COPY package.json package-lock.json ./
+COPY --chown=node:node package.json package-lock.json ./
 RUN npm ci
-COPY --from=build /prod/backend ./backend
-COPY --from=build /prod/shared ./shared
-COPY --from=build /app/dist ./backend/static
+COPY --chown=node:node --from=build /prod/backend ./backend
+COPY --chown=node:node --from=build /prod/shared ./shared
+COPY --chown=node:node --from=build /app/dist ./backend/static
+RUN rm -rf /usr/local/lib/node_modules/npm/ /usr/local/bin/npm && \
+  chown -R node:node node_modules
 
-CMD ["npm", "run", "prod"]
+USER node
+
+CMD ["node", "./backend/server.js"]
