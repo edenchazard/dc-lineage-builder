@@ -1,10 +1,10 @@
-name: import_and_commit_breed_data
+name: Import and Commit Breed Data
 
 on:
   workflow_dispatch:
     inputs:
       sha:
-        description: 'dragcave-breed-data commit SHA to audit'
+        description: 'dragcave-breed-data commit SHA to use'
         required: true
         type: string
 
@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
 
     steps:
       - name: Checkout repository
@@ -30,15 +31,21 @@ jobs:
       - name: Update breeds
         run: docker compose exec -T app sh -c "npm run update-breeds -- ${{ inputs.sha }}"
 
-      - name: Commit breed data changes
-        uses: stefanzweifel/git-auto-commit-action@v7
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
         with:
-          branch: ${{ github.ref_name }}
-          commit_message: |-
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: ${{ github.ref_name }}
+          branch: import-breed-data-${{ inputs.sha }}
+          commit-message: |-
             (chore) import and commit breed data
 
             Source: https://github.com/edenchazard/dragcave-breed-data/commit/${{ inputs.sha }}
-          file_pattern: |
+          title: |-
+            (chore) import and commit breed data
+          body: |-
+            Source: https://github.com/edenchazard/dragcave-breed-data/commit/${{ inputs.sha }}
+          add-paths: |
             app/shared/breed-definitions.ts
             app/assets/tile-rendering/*.css
-          disable_globbing: true
+          delete-branch: true
