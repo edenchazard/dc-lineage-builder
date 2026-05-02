@@ -3,26 +3,27 @@ import { writeFile, mkdir } from 'fs/promises';
 await mkdir('./app/assets/tile-rendering/', { recursive: true });
 
 try {
-  const definitions =
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/breed-definitions.ts';
+  const ref = process.argv[2] ?? 'main';
+  const sourceRoot = `https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/${ref}/output`;
+  const definitions = `${sourceRoot}/breed-definitions.ts`;
 
   const response = await fetch(definitions);
   await writeFile('./app/shared/breed-definitions.ts', await response.text());
 
   const sprites = [
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/fallbacks.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-36x48-0.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-36x48-1.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-36x48-2.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-36x48-3.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-36x48-4.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-36x48-5.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-72x96-0.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-72x96-1.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-72x96-2.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-72x96-3.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-72x96-4.css',
-    'https://raw.githubusercontent.com/edenchazard/dragcave-breed-data/refs/heads/main/output/tile-rendering/sprites-72x96-5.css',
+    `${sourceRoot}/tile-rendering/fallbacks.css`,
+    `${sourceRoot}/tile-rendering/sprites-36x48-0.css`,
+    `${sourceRoot}/tile-rendering/sprites-36x48-1.css`,
+    `${sourceRoot}/tile-rendering/sprites-36x48-2.css`,
+    `${sourceRoot}/tile-rendering/sprites-36x48-3.css`,
+    `${sourceRoot}/tile-rendering/sprites-36x48-4.css`,
+    `${sourceRoot}/tile-rendering/sprites-36x48-5.css`,
+    `${sourceRoot}/tile-rendering/sprites-72x96-0.css`,
+    `${sourceRoot}/tile-rendering/sprites-72x96-1.css`,
+    `${sourceRoot}/tile-rendering/sprites-72x96-2.css`,
+    `${sourceRoot}/tile-rendering/sprites-72x96-3.css`,
+    `${sourceRoot}/tile-rendering/sprites-72x96-4.css`,
+    `${sourceRoot}/tile-rendering/sprites-72x96-5.css`,
   ].map(async (sprite) => {
     const filename = sprite.split('/').pop();
     const response = await fetch(sprite);

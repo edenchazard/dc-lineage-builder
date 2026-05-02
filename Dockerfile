@@ -7,8 +7,6 @@ COPY --link package.json package-lock.json ./
 RUN npm i
 COPY --link . .
 
-RUN npm run update-breeds
-
 WORKDIR /app/app/backend
 RUN npx tsc
 
