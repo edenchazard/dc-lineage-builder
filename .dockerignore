@@ -8,6 +8,7 @@ node_modules
 .env.*
 .prettierignore
 .prettierrc
+.oxfmtrc.json
 CHANGELOG.md
 docker-compose.yml
 Dockerfile
