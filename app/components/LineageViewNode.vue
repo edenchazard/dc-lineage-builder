@@ -5,14 +5,14 @@
         v-if="nodesFromRoot === 0"
         class="tile-button-left tile-button-add-desc"
         title="Add descendant"
-        icon="arrow-left"
+        :icon="faArrowLeft"
         @click="addDescendant"
       />
       <LineageViewNodeButton
         v-if="nodesFromRoot > 0"
         class="tile-button-left tile-button-remove-desc"
         title="Remove descendants"
-        icon="cut"
+        :icon="faCut"
         @click="removeDescendants"
       />
       <button
@@ -44,20 +44,20 @@
           v-if="hasAncestry"
           class="switch"
           title="Switch parents"
-          icon="sync-alt"
+          :icon="faSyncAlt"
           @click="switchParents"
         />
         <LineageViewNodeButton
           v-if="hasAncestry"
           title="Remove ancestors"
-          icon="minus"
+          :icon="faMinus"
           @click="deleteAncestors"
         />
         <LineageViewNodeButton
           v-else
           class="tile-button-right"
           title="Add ancestors"
-          icon="arrow-right"
+          :icon="faArrowRight"
           @click="addAncestors"
         />
       </div>
@@ -71,30 +71,30 @@
         <LineageViewNodeButton
           v-if="nodesFromRoot === 0 && data.gender === 'm'"
           title="Switch gender to female"
-          icon="mars"
+          :icon="faMars"
           @click="switchGender"
         />
         <LineageViewNodeButton
           v-else-if="nodesFromRoot === 0 && data.gender === 'f'"
           title="Switch gender to male"
-          icon="venus"
+          :icon="faVenus"
           @click="switchGender"
         />
         <LineageViewNodeButton
           class="switchLabel"
           title="Switch label"
-          icon="font"
+          :icon="faFont"
           @click="switchLabel"
         />
         <LineageViewNodeButton
           v-if="hasAncestry"
           title="Copy ancestors"
-          icon="clone"
+          :icon="faClone"
           @click="copyBranch"
         />
         <LineageViewNodeButton
           title="Paste ancestors"
-          icon="paste"
+          :icon="faPaste"
           @click="pasteBranch"
         />
       </div>
@@ -141,7 +141,19 @@ import { placeholder } from '../shared/breeds.js';
 import vOnLongPress from '../directives/long-press/vue-3-long-press';
 import useBreedSelector from '../composables/useBreedSelector';
 import { codeValidator, nameValidator } from '../shared/validation';
-import { faWarning } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowLeft,
+  faArrowRight,
+  faClone,
+  faCut,
+  faFont,
+  faMars,
+  faMinus,
+  faPaste,
+  faSyncAlt,
+  faVenus,
+  faWarning,
+} from '@fortawesome/free-solid-svg-icons';
 
 const props = withDefaults(
   defineProps<{
