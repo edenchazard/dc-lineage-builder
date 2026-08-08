@@ -24,7 +24,7 @@ services:
       - internal
 
   db:
-    image: mariadb:10
+    image: mariadb:12
     tty: true
     volumes:
       - dbdata:/var/lib/mysql
@@ -55,7 +55,7 @@ services:
       - testing
 
   testdb:
-    image: mariadb:10
+    image: mariadb:12
     tty: true
     env_file:
       - .env.testing
