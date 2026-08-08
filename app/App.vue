@@ -15,13 +15,13 @@
       <div id="footer-links">
         <a href="https://ko-fi.com/dctools">
           <FontAwesomeIcon
-            icon="fa-solid fa-mug-hot"
+            :icon="faMugHot"
             size="2x"
           />Donation link
         </a>
         <a href="https://github.com/edenchazard/dc-lineage-builder">
           <FontAwesomeIcon
-            icon="fa-brands fa-github"
+            :icon="faGithub"
             size="2x"
           />Github
         </a>
@@ -30,8 +30,8 @@
           type="button"
           @click="settingsDialogOpen = true"
         >
-          <font-awesome-icon
-            icon="fa-solid fa-cog"
+          <FontAwesomeIcon
+            :icon="faCog"
             size="2x"
           />Settings
         </button>
@@ -69,6 +69,8 @@ import { useAppStore } from './store/useAppStore.js';
 import Header from './components/TheHeader.vue';
 import { injectBreedList } from './shared/breeds.js';
 import DialogSettings from './components/DialogSettings.vue';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faCog, faMugHot } from '@fortawesome/free-solid-svg-icons';
 
 const route = useRoute();
 const appStore = useAppStore();

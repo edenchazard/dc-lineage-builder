@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from './app/fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueDragscroll from 'vue-dragscroll';
 // @ts-expect-error No types available.
 import VueRovingTabindex from '@4rk/vue-roving-tabindex';

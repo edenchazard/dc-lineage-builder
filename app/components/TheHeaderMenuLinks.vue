@@ -15,13 +15,14 @@
     <a href="https://dragcave.net/">
       <span class="link-text">
         Dragcave.net
-        <FontAwesomeIcon icon="external-link" />
+        <FontAwesomeIcon :icon="faExternalLink" />
       </span>
     </a>
   </nav>
 </template>
 
 <script setup lang="ts">
+import { faExternalLink } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const links = [

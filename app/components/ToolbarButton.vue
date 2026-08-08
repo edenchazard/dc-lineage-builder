@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import { faDragon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import type { FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
 
@@ -29,7 +30,7 @@ withDefaults(
     disabled?: boolean;
   }>(),
   {
-    icon: () => ({ icon: 'dragon' }),
+    icon: () => ({ icon: faDragon }),
     label: '',
     disabled: false,
   },

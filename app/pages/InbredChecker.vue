@@ -14,9 +14,9 @@
           </p>
           <p>
             Put each code on a new line. Dragons with a
-            <font-awesome-icon
+            <FontAwesomeIcon
               class="icon"
-              icon="times"
+              :icon="faTimes"
             />
             above their code are invalid.
           </p>
@@ -80,10 +80,10 @@
                   @error="badDragons.push(code)"
                 />
               </a>
-              <font-awesome-icon
+              <FontAwesomeIcon
                 v-else
                 class="icon"
-                icon="times"
+                :icon="faTimes"
               />
             </span>
             <span>
@@ -131,9 +131,9 @@
                 v-if="result.failed > 0"
                 class="warn"
               >
-                <font-awesome-icon
+                <FontAwesomeIcon
                   class="icon"
-                  icon="exclamation-triangle"
+                  :icon="faExclamationTriangle"
                 />
                 {{ result.failed }}
                 dragons couldn't be checked. This is usually because the owner
@@ -147,9 +147,9 @@
                   result.selfProblems.length === 0
                 "
               >
-                <font-awesome-icon
+                <FontAwesomeIcon
                   class="icon"
-                  icon="check"
+                  :icon="faCheck"
                 />
                 No problems detected. It isn't inbred, and breeding this dragon
                 to any of the other dragons on your list will not produce inbred
@@ -158,9 +158,9 @@
 
               <template v-if="result.selfProblems.length > 0">
                 <p>
-                  <font-awesome-icon
+                  <FontAwesomeIcon
                     class="icon"
-                    icon="times"
+                    :icon="faTimes"
                   />
                   The following dragons directly appear in the dragon's own
                   lineage multiple times.
@@ -188,9 +188,9 @@
 
               <template v-if="result.problems.length > 0">
                 <p>
-                  <font-awesome-icon
+                  <FontAwesomeIcon
                     class="icon"
-                    icon="times"
+                    :icon="faTimes"
                   />
                   When bred with certain dragons on your list, the following
                   dragons would appear multiple times.
@@ -248,6 +248,12 @@ import { getInbred, type InbredCheckResponse } from '../app/api.js';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
 import InputTextbox from '../components/InputTextbox.vue';
 import { codeValidator } from '../shared/validation.js';
+import {
+  faCheck,
+  faExclamationTriangle,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const status = useTemplateRef('status');
 const input = ref('');
