@@ -4,7 +4,6 @@ import type {
   BreedEntry,
   DragonDisplay,
   DragonGender,
-  NoDragonParents,
   PartialLineage,
 } from './types';
 import settings from './settings.js';
@@ -65,7 +64,7 @@ export const dragonSchema: ObjectSchema<PartialLineage> = object()
         m: lazy(() => dragonSchema.default(undefined)),
         f: lazy(() => dragonSchema.default(undefined)),
       })
-      .shape({} as NoDragonParents),
+      .shape({}),
   })
   .noUnknown();
 

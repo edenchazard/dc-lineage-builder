@@ -80,8 +80,8 @@ const emit = defineEmits<{
 
 const props = withDefaults(
   defineProps<{
-    open: boolean;
-    id: string;
+    open?: boolean;
+    id?: string;
   }>(),
   {
     open: false,

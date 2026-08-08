@@ -71,9 +71,7 @@ async function importLineage() {
   if (!status.value) return;
 
   try {
-    const importedTree = (await dragonSchema
-      .json()
-      .validate(file.value)) as PartialLineage;
+    const importedTree = await dragonSchema.json().validate(file.value);
     emit('onImport', Lineage(importedTree).tree);
     return true;
   } catch {
