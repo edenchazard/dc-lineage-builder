@@ -28,7 +28,7 @@ export default ({ mode }: { mode: string }) => {
       cssMinify: 'lightningcss',
     },
     test: {
-      setupFiles: ['./app/backend/commands/databaseFresh.ts'],
+      setupFiles: ['./backend/commands/databaseFresh.ts'],
       environment: 'happy-dom',
       exclude: [...configDefaults.exclude, 'e2e/*'],
       coverage: {
