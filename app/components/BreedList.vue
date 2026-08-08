@@ -72,8 +72,8 @@ const emit = defineEmits<{
 
 const props = withDefaults(
   defineProps<{
-    compact: boolean;
-    list: PortraitData[];
+    compact?: boolean;
+    list?: PortraitData[];
     size?: number;
     id: string;
     search?: string;

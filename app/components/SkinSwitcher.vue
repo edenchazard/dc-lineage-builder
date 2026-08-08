@@ -19,7 +19,7 @@ import { availableSkins, type SkinId } from '../composables/useUserSettings';
 
 withDefaults(
   defineProps<{
-    id: string;
+    id?: string;
   }>(),
   {
     id: '',
