@@ -7,7 +7,6 @@ import crypto from 'crypto';
 import type { RowDataPacket } from 'mysql2/promise';
 import config from '../../config';
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
 const rq = request(app.callback());
 const con = await pool.getConnection();
 

@@ -3,7 +3,6 @@ import app from '../../app';
 import request from 'supertest';
 import { OnsiteDragonNotFoundError } from '../../onsite';
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
 const rq = request(app.callback());
 
 const mocks = vi.hoisted(() => ({

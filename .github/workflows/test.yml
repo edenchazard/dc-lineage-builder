@@ -22,7 +22,7 @@ jobs:
       - name: start test environment
         run: docker compose up testapp -d
 
-      - name: run prettier checks
+      - name: run formatting checks
         run: docker compose exec -T testapp sh -c "npm run fmt:check"
 
       - name: run linting

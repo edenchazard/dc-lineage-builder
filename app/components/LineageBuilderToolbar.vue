@@ -695,7 +695,8 @@ function capitalise(string: string) {
   }
 
   .full-width {
-    box-shadow: inset 0 7px 14px -15px var(--ui-builder-toolbar-selection-shadows);
+    box-shadow: inset 0 7px 14px -15px
+      var(--ui-builder-toolbar-selection-shadows);
 
     & :deep(.group) {
       justify-content: space-between;
