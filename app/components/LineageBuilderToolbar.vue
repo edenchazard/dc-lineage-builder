@@ -65,7 +65,7 @@
         @click="button.click"
       />
       <ToolbarDropDownMenu
-        :icon="{ icon: 'cog', size: '2x' }"
+        :icon="{ icon: faCog, size: '2x' }"
         title="Settings"
         label="Settings"
       >
@@ -127,17 +127,17 @@
         <ToolbarGroup>
           <ToolbarButton
             title="Select all males"
-            :icon="{ icon: 'mars' }"
+            :icon="{ icon: faMars }"
             @click="emit('selectCriteria', 'gender', 'm')"
           />
           <ToolbarButton
-            :icon="{ icon: 'venus' }"
+            :icon="{ icon: faVenus }"
             title="Select all females"
             @click="emit('selectCriteria', 'gender', 'f')"
           />
           <ToolbarDropDownMenu
             title="More options"
-            :icon="{ icon: 'caret-down' }"
+            :icon="{ icon: faCaretDown }"
           >
             <ToolbarDropDownMenuItem
               v-for="option in selectionOptions"
@@ -149,7 +149,7 @@
           </ToolbarDropDownMenu>
           <ToolbarButton
             title="Unselect all"
-            :icon="{ icon: 'times' }"
+            :icon="{ icon: faTimes }"
             :disabled="itemsSelected === 0"
             @click="emit('unselectAll')"
           />
@@ -242,6 +242,25 @@ import {
   tagsFromModel,
   tagStore,
 } from '../store/useTagStore';
+import {
+  faArrowRight,
+  faCaretDown,
+  faCode,
+  faCog,
+  faFont,
+  faItalic,
+  faLink,
+  faMars,
+  faMaximize,
+  faMinus,
+  faRandom,
+  faRedo,
+  faSave,
+  faSyncAlt,
+  faTimes,
+  faUndo,
+  faVenus,
+} from '@fortawesome/free-solid-svg-icons';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {
@@ -274,38 +293,38 @@ const generalFunctions = reactive<ToolbarButtonProps[]>(
   [
     {
       title: 'Export dragon',
-      icon: 'save',
+      icon: faSave,
       label: 'Export',
       click: () => (dialogs.showExportDialog = true),
     },
     {
       title: 'Import dragon',
-      icon: 'file-code',
+      icon: faCode,
       label: 'Import',
       click: () => (dialogs.showImportDialog = true),
     },
     {
       title: 'Get Link',
-      icon: 'link',
+      icon: faLink,
       label: 'Get Link',
       click: () => (dialogs.showGenerateDialog = true),
     },
     {
       title: 'Toggle fullscreen',
-      icon: 'maximize',
+      icon: faMaximize,
       label: 'Fullscreen',
       click: () => emit('fullscreen'),
     },
     {
       title: 'Undo',
-      icon: 'undo',
+      icon: faUndo,
       label: 'Undo',
       click: () => emit('undo'),
       disabled: computed(() => !appStore.treeHistory.canUndo),
     },
     {
       title: 'Redo',
-      icon: 'redo',
+      icon: faRedo,
       label: 'Redo',
       click: () => emit('redo'),
       disabled: computed(() => !appStore.treeHistory.canRedo),
@@ -326,19 +345,19 @@ const selectionActions = reactive<
       buttons: [
         {
           title: 'Show names',
-          icon: 'font',
+          icon: faFont,
           label: 'Names',
           click: () => emit('displayNames'),
         },
         {
           title: 'Display codes',
-          icon: 'italic',
+          icon: faItalic,
           label: 'Codes',
           click: () => emit('displayCodes'),
         },
         {
           title: 'Randomise visible label',
-          icon: 'random',
+          icon: faRandom,
           label: 'Randomise label',
           click: () => emit('randomizeLabels'),
         },
@@ -349,19 +368,19 @@ const selectionActions = reactive<
       buttons: [
         {
           title: 'Delete Parents and Ancestors',
-          icon: 'minus',
+          icon: faMinus,
           label: 'Delete Parents',
           click: () => emit('deleteAncestors'),
         },
         {
           title: 'Add parents',
-          icon: 'arrow-right',
+          icon: faArrowRight,
           label: 'Add parents',
           click: () => emit('addParents'),
         },
         {
           title: 'Switch parents',
-          icon: 'sync-alt',
+          icon: faSyncAlt,
           label: 'switch parents',
           click: () => emit('switchParents'),
         },

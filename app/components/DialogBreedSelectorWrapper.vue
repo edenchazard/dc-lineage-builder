@@ -35,7 +35,7 @@
           >
             <FontAwesomeIcon
               size="2x"
-              icon="times"
+              :icon="faTimes"
             />
           </button>
         </div>
@@ -48,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import useBreedSelector from '../composables/useBreedSelector';
 const breedSelectorDialog = useBreedSelector();
 </script>

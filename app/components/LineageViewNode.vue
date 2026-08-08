@@ -33,7 +33,7 @@
         />
       </button>
       <FontAwesomeIcon
-        icon="warning"
+        :icon="faWarning"
         :class="{ visible: problems.length > 0 }"
         class="label-warning"
         :title="problems"
@@ -141,6 +141,7 @@ import { placeholder } from '../shared/breeds.js';
 import vOnLongPress from '../directives/long-press/vue-3-long-press';
 import useBreedSelector from '../composables/useBreedSelector';
 import { codeValidator, nameValidator } from '../shared/validation';
+import { faWarning } from '@fortawesome/free-solid-svg-icons';
 
 const props = withDefaults(
   defineProps<{

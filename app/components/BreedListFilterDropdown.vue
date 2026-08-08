@@ -69,7 +69,7 @@
           >
             <FontAwesomeIcon
               size="2x"
-              icon="times"
+              :icon="faTimes"
             />
           </button>
         </div>
@@ -184,6 +184,7 @@ import {
   clearDateFilter,
   hasActiveDateFilter,
 } from '../store/useDateFilter';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 defineProps<{
   container: string;

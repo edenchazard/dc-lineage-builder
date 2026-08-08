@@ -13,11 +13,12 @@
 </template>
 
 <script setup lang="ts">
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 defineProps<{
   title: string;
-  icon: string;
+  icon: IconDefinition;
 }>();
 
 const emit = defineEmits<{

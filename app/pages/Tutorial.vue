@@ -30,14 +30,16 @@
             src="../assets/tutorial/controls.png"
           />
           <ul class="buttons-list">
-            <li><FontAwesomeIcon icon="arrow-right" /> Add parents.</li>
-            <li><FontAwesomeIcon icon="arrow-left" /> Add a child.</li>
+            <li><FontAwesomeIcon :icon="faArrowRight" /> Add parents.</li>
+            <li><FontAwesomeIcon :icon="faArrowLeft" /> Add a child.</li>
             <li>
-              <FontAwesomeIcon icon="minus" /> Remove the parents (and any
+              <FontAwesomeIcon :icon="faMinus" /> Remove the parents (and any
               ancestors of those).
             </li>
             <li>
-              <FontAwesomeIcon icon="mars" />/<FontAwesomeIcon icon="venus" />
+              <FontAwesomeIcon :icon="faMars" />/<FontAwesomeIcon
+                :icon="faVenus"
+              />
               Swap the gender, which by default is always male. This button only
               appears on the leftmost node. If this breed is available in both
               genders, it will swap the gender directly and update the sprite.
@@ -45,32 +47,33 @@
               dragons, the breed will be reset to the placeholder.
             </li>
             <li>
-              <FontAwesomeIcon icon="sync-alt" /> Switch the parent's genders.
+              <FontAwesomeIcon :icon="faSyncAlt" /> Switch the parent's genders.
               If one of the breeds is only available in one gender, the breed
               will be reset to the placeholder.
             </li>
             <li>
-              <FontAwesomeIcon icon="clone" /> Clone the parent nodes and any
+              <FontAwesomeIcon :icon="faClone" /> Clone the parent nodes and any
               further ancestors. This button can even be used to clone parts of
               unrelated lineages such as from a different tab.
             </li>
             <li>
-              <FontAwesomeIcon icon="paste" /> Paste the most recently cloned
+              <FontAwesomeIcon :icon="faPaste" /> Paste the most recently cloned
               item. If this node already has parents, it will replace them.
             </li>
             <li>
-              <FontAwesomeIcon icon="cut" /> Remove all descendants and make
+              <FontAwesomeIcon :icon="faCut" /> Remove all descendants and make
               this dragon the new root.
             </li>
             <li>
-              <FontAwesomeIcon icon="font" /> Switch between the code or name.
+              <FontAwesomeIcon :icon="faFont" /> Switch between the code or
+              name.
             </li>
           </ul>
         </div>
         <h4>Other icons</h4>
         <ul class="buttons-list">
           <li>
-            <FontAwesomeIcon icon="exclamation-triangle" />
+            <FontAwesomeIcon :icon="faExclamationTriangle" />
             <strong>Names and codes: </strong> The builder will validate names
             and codes for to confirm if they could be used on DC. However,
             they're not checked for availability.
@@ -100,7 +103,7 @@
           Selection mode will end when no dragons are selected. If you want to
           unselect everything, you can press the
           <FontAwesomeIcon
-            icon="times"
+            :icon="faTimes"
             aria-label="Unselect all"
           />
           button.
@@ -180,6 +183,20 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import settings from '../shared/settings.js';
+import {
+  faArrowLeft,
+  faArrowRight,
+  faClone,
+  faCut,
+  faExclamationTriangle,
+  faFont,
+  faMars,
+  faMinus,
+  faPaste,
+  faSyncAlt,
+  faTimes,
+  faVenus,
+} from '@fortawesome/free-solid-svg-icons';
 </script>
 
 <style scoped>

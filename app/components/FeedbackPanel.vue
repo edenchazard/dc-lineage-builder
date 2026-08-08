@@ -12,7 +12,7 @@
       :class="getFeedbackClass(feedback.type)"
     >
       <span class="symbol">
-        <font-awesome-icon
+        <FontAwesomeIcon
           class="icon"
           :icon="Feedbacks[feedback.type]"
         />
@@ -25,20 +25,27 @@
         title="Dismiss"
         @click="dismiss(index)"
       >
-        <font-awesome-icon icon="times" />
+        <FontAwesomeIcon :icon="faTimes" />
       </button>
     </li>
   </TransitionGroup>
 </template>
 <script setup lang="ts">
+import {
+  faCheck,
+  faExclamationTriangle,
+  faInfoCircle,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { onBeforeUnmount, ref } from 'vue';
 
 const Feedbacks = {
   none: 'none',
-  warning: 'exclamation-triangle',
-  success: 'check',
-  information: 'info-circle',
-  error: 'times',
+  warning: faExclamationTriangle,
+  success: faCheck,
+  information: faInfoCircle,
+  error: faTimes,
 };
 
 type FeedbackTypes = keyof typeof Feedbacks;
