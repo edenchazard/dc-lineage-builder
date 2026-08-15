@@ -52,7 +52,7 @@
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/coverage-v8": "^4.0.15",
     "@vue/eslint-config-typescript": "^14.9.0",
-    "@vue/test-utils": "^2.4.6",
+    "@vue/test-utils": "^2.4.11",
     "@vueuse/core": "^13.1.0",
     "@vueuse/integrations": "^13.1.0",
     "browserslist": "^4.28.7",
