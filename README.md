@@ -2,9 +2,9 @@
 
 DragCave lineage builder is an open-source third-party utility for the online game [dragcave.net](https://dragcave.net/). It enables users to preview dragon lineages, a core function of the game.
 
-Written in TypeScript with a Vue.js ~~2~~ 3 frontend and a Node.js backend.
+Written in TypeScript with a Vue.js 3 frontend and a Node.js backend.
 
-![screenshot](https://i.imgur.com/b1JP8C0.png)
+![screenshot](./docs/cover.png)
 
 ## Features
 
@@ -73,7 +73,7 @@ docker compose exec testapp sh -c "npm run test:unit"
 
 #### Code quality
 
-`prettier` and `eslint` are used. They can be run from the test container.
+`oxfmt` and `eslint` are used. They can be run from the test container.
 
 ```sh
 docker compose up -d
