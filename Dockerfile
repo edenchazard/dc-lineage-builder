@@ -1,4 +1,4 @@
-FROM node:26.8-bookworm-slim AS base
+FROM node:26.12.1-bookworm-slim AS base
 WORKDIR /app
 
 FROM base AS build
