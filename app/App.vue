@@ -59,7 +59,7 @@
 
 <script setup lang="ts">
 import 'reset-css';
-import { onMounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useDevicePixelRatio } from '@vueuse/core';
 import { useRoute } from 'vue-router';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -67,7 +67,6 @@ import './assets/styling/style.css';
 import './assets/layouts/theming.css';
 import { useAppStore } from './store/useAppStore.js';
 import Header from './components/TheHeader.vue';
-import { injectBreedList } from './shared/breeds.js';
 import DialogSettings from './components/DialogSettings.vue';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCog, faMugHot } from '@fortawesome/free-solid-svg-icons';
@@ -109,10 +108,6 @@ watch(
   },
   { immediate: true },
 );
-
-onMounted(async () => {
-  await injectBreedList();
-});
 </script>
 
 <style>

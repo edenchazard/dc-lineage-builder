@@ -8,13 +8,22 @@ import router from './router/router';
 
 import { createPinia } from 'pinia';
 import Application from './App.vue';
+import { injectBreedList } from './shared/breeds.js';
 
-const app = createApp(Application);
+async function start() {
+  try {
+    await injectBreedList();
+  } catch (error) {
+    console.error('Failed to load breed definitions:', error);
+  }
 
-app
-  .use(createPinia())
-  .use(router)
-  .use(VueDragscroll)
-  .use(VueRovingTabindex)
-  .component('FontAwesomeIcon', FontAwesomeIcon)
-  .mount('body');
+  createApp(Application)
+    .use(createPinia())
+    .use(router)
+    .use(VueDragscroll)
+    .use(VueRovingTabindex)
+    .component('FontAwesomeIcon', FontAwesomeIcon)
+    .mount('body');
+}
+
+void start();
