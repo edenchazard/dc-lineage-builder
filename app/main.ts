@@ -8,10 +8,15 @@ import router from './router/router';
 
 import { createPinia } from 'pinia';
 import Application from './App.vue';
+import { injectBreedList } from './shared/breeds.js';
 
-const app = createApp(Application);
+try {
+  await injectBreedList();
+} catch (error) {
+  console.error('Failed to load breed definitions:', error);
+}
 
-app
+createApp(Application)
   .use(createPinia())
   .use(router)
   .use(VueDragscroll)
