@@ -10,20 +10,16 @@ import { createPinia } from 'pinia';
 import Application from './App.vue';
 import { injectBreedList } from './shared/breeds.js';
 
-async function start() {
-  try {
-    await injectBreedList();
-  } catch (error) {
-    console.error('Failed to load breed definitions:', error);
-  }
-
-  createApp(Application)
-    .use(createPinia())
-    .use(router)
-    .use(VueDragscroll)
-    .use(VueRovingTabindex)
-    .component('FontAwesomeIcon', FontAwesomeIcon)
-    .mount('body');
+try {
+  await injectBreedList();
+} catch (error) {
+  console.error('Failed to load breed definitions:', error);
 }
 
-void start();
+createApp(Application)
+  .use(createPinia())
+  .use(router)
+  .use(VueDragscroll)
+  .use(VueRovingTabindex)
+  .component('FontAwesomeIcon', FontAwesomeIcon)
+  .mount('body');
