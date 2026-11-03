@@ -5,6 +5,8 @@ import { configDefaults } from 'vitest/config';
 
 export default ({ mode }: { mode: string }) => {
   const env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+  // Proxy keys are matched against the full URL, before Vite strips the base.
+  const base = (env.VITE_BASE_URL ?? '').replace(/\/$/, '');
 
   return defineConfig({
     // essential so that vite can figure out the env during build
@@ -13,7 +15,7 @@ export default ({ mode }: { mode: string }) => {
     base: env.VITE_BASE_URL ?? 'test',
     server: {
       proxy: {
-        api: {
+        [`${base}/api`]: {
           target: 'http://app:3000',
           changeOrigin: true,
         },
