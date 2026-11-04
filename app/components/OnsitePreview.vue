@@ -34,8 +34,8 @@ defineProps<{
   box-sizing: border-box;
   flex: 1;
 }
-:deep(li::before),
-:deep(li::after) {
+:deep(li)::before,
+:deep(li)::after {
   content: '';
   display: block;
   width: 24px;
@@ -45,7 +45,7 @@ defineProps<{
   border-left: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
     var(--dc-lineage-line-colour);
 }
-:deep(li:only-child::after) {
+:deep(li:only-child)::after {
   display: none;
 }
 :deep(li) {
@@ -59,8 +59,8 @@ defineProps<{
   padding: 0;
   margin: 0;
 }
-:deep(li:first-child::before),
-:deep(li:last-child::after) {
+:deep(li:first-child)::before,
+:deep(li:last-child)::after {
   display: none;
 }
 :deep(li:last-child > *) {
@@ -90,19 +90,19 @@ defineProps<{
 :deep(label > i) {
   font-style: italic;
 }
-:deep(li::before) {
+:deep(li)::before {
   bottom: calc(50% + 12px);
   border-bottom: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
     var(--dc-lineage-line-colour);
 }
-:deep(li::after) {
+:deep(li)::after {
   top: calc(50% - 14px);
   bottom: auto;
   border-bottom: 0 none;
   border-top: var(--dc-lineage-line-width) var(--dc-lineage-line-style)
     var(--dc-lineage-line-colour);
 }
-:deep(div::after) {
+:deep(div)::after {
   content: '';
   position: absolute;
   top: calc(50% - 12px);
@@ -136,7 +136,7 @@ defineProps<{
   height: var(--size24x32H) !important;
 }
 /* fix for the bar showing up on the rightmost gen */
-:deep(li div:last-child::after) {
+:deep(li div:last-child)::after {
   display: none;
 }
 </style>
