@@ -24,6 +24,7 @@ updates:
 
   - package-ecosystem: npm
     directory: '/'
+    open-pull-requests-limit: 10
     schedule:
       interval: weekly
       day: saturday
@@ -32,6 +33,26 @@ updates:
     labels:
       - dependencies
       - npm
+    groups:
+      fontawesome:
+        patterns:
+          - '@fortawesome/*'
+      formatting-and-linting:
+        patterns:
+          - '*eslint*'
+          - 'oxfmt'
+      koa:
+        patterns:
+          - 'koa*'
+          - '@types/koa*'
+      vueuse:
+        patterns:
+          - 'vueuse*'
+          - '@vueuse/*'
+      supertest:
+        patterns:
+          - 'supertest'
+          - '@types/supertest'
 
   - package-ecosystem: github-actions
     directory: '/'
