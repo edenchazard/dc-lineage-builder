@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --fix",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "ts:check": "tsc -b --noEmit",
+    "ts:check": "vue-tsc -b --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:unit": "vitest --project unit",

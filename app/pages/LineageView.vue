@@ -43,9 +43,13 @@
 import { reactive, ref, onBeforeUnmount, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
-import type { LineageConfig, PartialLineage } from '../shared/types';
+import type {
+  LineageConfig,
+  PartialLineageWithMetadata,
+} from '../shared/types';
 import { getLineage } from '../app/api.js';
 import { createLineageLink } from '../shared/utils.js';
+import { Lineage } from '../shared/lineageHandler';
 
 import LineageView from '../components/LineageView.vue';
 import InputTextbox from '../components/InputTextbox.vue';
@@ -54,7 +58,7 @@ import { FetchError } from 'ofetch';
 import { useTemplateRef } from 'vue';
 
 const route = useRoute();
-const tree = ref<null | PartialLineage>(null);
+const tree = ref<null | PartialLineageWithMetadata>(null);
 const hash = route.params.hash as string;
 const shareLink = createLineageLink(hash);
 const status = useTemplateRef('status');
@@ -76,7 +80,9 @@ onMounted(async () => {
 
     const response = await getLineage(hash);
 
-    status.value.close(() => (tree.value = response.lineage));
+    status.value.close(
+      () => (tree.value = Lineage(response.lineage).withMetadata().raw()),
+    );
   } catch (ex) {
     if (ex instanceof FetchError && ex.response?.status === 404) {
       status.value.error("The lineage couldn't be found.");

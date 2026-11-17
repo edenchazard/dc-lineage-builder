@@ -205,7 +205,7 @@ async function focusFiltersTitle() {
   setTimeout(() => filtersTitle.value?.focus(), 40);
 }
 
-function toggle(tags: NewTag[]) {
+function toggle(tags: readonly NewTag[]) {
   const group = new Set(tags);
   const model = new Set(tagStore.value);
 

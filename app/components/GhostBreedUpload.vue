@@ -55,8 +55,7 @@ const dragon = reactive<PortraitData>({
   image: new URL('../assets/images/placeholder.png', import.meta.url).href,
   metaData: {
     src: 'ghost',
-    group: 'Standard',
-    tags: ['Regular'],
+    tags: ['regular'],
   },
 });
 

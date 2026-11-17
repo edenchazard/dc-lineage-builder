@@ -1,3 +1,5 @@
+declare module 'reset-css';
+
 declare module '*.vue' {
   import type { DefineComponent } from 'vue';
   const component: DefineComponent<

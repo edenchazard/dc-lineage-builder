@@ -120,50 +120,35 @@ function updateTree(
 // Accepts a callback
 // Or a key and the value to change it to
 function applyToSelected(
-  callback: (dragon: PartialLineageWithMetadata) => void,
-): void;
-function applyToSelected(
-  key: keyof PartialLineageWithMetadata,
-  value: unknown,
-): void;
-function applyToSelected(
   keyOrCallback:
     | keyof PartialLineageWithMetadata
     | ((dragon: PartialLineageWithMetadata) => void),
-  value?: unknown,
+  value?: PartialLineageWithMetadata[keyof PartialLineageWithMetadata],
 ) {
   if (typeof keyOrCallback === 'string') {
-    const key = keyOrCallback.toString();
+    const key = keyOrCallback;
     appStore.activeTree = appStore.activeLineage.every((dragon) => {
-      if (dragon.selected && key in dragon) dragon[key] = value;
+      if (dragon.selected && key in dragon) {
+        Object.assign(dragon, { [key]: value });
+      }
     });
-  } else if (typeof keyOrCallback === 'function') {
-    const callback = keyOrCallback;
+  } else {
     appStore.activeTree = appStore.activeLineage.every((dragon) => {
-      if (dragon.selected) callback(dragon);
+      if (dragon.selected) keyOrCallback(dragon);
     });
   }
 }
 
 function selectionCriteria(
-  callback: (dragon: PartialLineageWithMetadata) => boolean,
-): void;
-function selectionCriteria(
-  key: keyof PartialLineageWithMetadata,
-  value: unknown,
-): void;
-function selectionCriteria(
   keyOrCallback:
     | keyof PartialLineageWithMetadata
     | ((dragon: PartialLineageWithMetadata) => boolean),
-  value?: unknown,
+  value?: PartialLineageWithMetadata[keyof PartialLineageWithMetadata],
 ) {
   if (typeof keyOrCallback === 'string') {
-    const key = keyOrCallback.toString();
-    selectBy((dragon) => dragon[key] === value);
-  } else if (typeof keyOrCallback === 'function') {
-    const condition = keyOrCallback;
-    selectBy(condition);
+    selectBy((dragon) => dragon[keyOrCallback] === value);
+  } else {
+    selectBy(keyOrCallback);
   }
 }
 

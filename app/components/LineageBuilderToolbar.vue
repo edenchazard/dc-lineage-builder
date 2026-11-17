@@ -268,6 +268,8 @@ type ToolbarButtonProps = Required<
   } //todo why! & Partial<ButtonHTMLAttributes>
 >;
 
+type ToolbarIcon = NonNullable<ToolbarButtonProps['icon']>['icon'];
+
 const toolbar = ref();
 const breedSelector = ref();
 const selectionToolsScrollArea = ref();
@@ -524,7 +526,7 @@ function updateConfig(
 
 function convertToToolbarButtonProps(
   button: {
-    icon: string;
+    icon: ToolbarIcon;
     label: string;
     click: () => void;
     title: string;
