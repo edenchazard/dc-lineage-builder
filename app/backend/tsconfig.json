@@ -1,12 +1,11 @@
 {
-  "extends": "../tsconfig.json",
-  "exclude": [
-    "../components",
-    "../pages",
-    "../store",
-    "../router",
-    "../directives",
-    "../app",
-    "../main.ts"
-  ]
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "noEmitOnError": true,
+    "outDir": "/prod",
+    "rootDir": "..",
+    "types": ["node", "vite/client"]
+  },
+  "include": ["./**/*.ts"]
 }

@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --fix",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "ts:check": "tsc --noEmit",
+    "ts:check": "tsc -b --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:unit": "vitest --project unit",
@@ -70,13 +70,13 @@
     "reset-css": "^5.0.2",
     "supertest": "^7.1.4",
     "tsx": "^4.23.12",
-    "typescript": "^5.7.3",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.2",
     "vite": "^8.2.2",
     "vitest": "^4.1.10",
     "vue": "^3.5.41",
     "vue-dragscroll": "^4.0.6",
     "vue-router": "^4.5.0",
-    "vue-tsc": "^2.2.0"
+    "vue-tsc": "^3.3.14"
   }
 }

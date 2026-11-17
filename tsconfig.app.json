@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "types": ["vite/client"],
+    "tsBuildInfoFile": "./node_modules/.cache/tsbuild/tsconfig.app.tsbuildinfo"
+  },
+  "include": ["app/**/*.ts", "app/**/*.vue"],
+  "exclude": [
+    "app/backend/**",
+    "app/node_modules",
+    "node_modules",
+    "coverage",
+    "dist"
+  ]
+}
