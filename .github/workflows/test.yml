@@ -32,4 +32,4 @@ jobs:
         run: docker compose exec -T testapp sh -c "npm run ts:check"
 
       - name: run those tests babyyyyyy
-        run: docker compose exec -T testapp sh -c "npm run test:unit -- --run"
+        run: docker compose exec -T testapp sh -c "npm test"

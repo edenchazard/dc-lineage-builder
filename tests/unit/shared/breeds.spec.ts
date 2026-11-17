@@ -4,7 +4,7 @@ import {
   malePortraits,
   placeholder,
   injectBreedList,
-} from '../breeds.js';
+} from '@/shared/breeds.js';
 
 await injectBreedList();
 

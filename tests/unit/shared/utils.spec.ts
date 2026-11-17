@@ -5,9 +5,9 @@ import {
   expandGender,
   getBreedData,
   validGenderForBreed,
-} from '../utils.js';
-import type { BreedEntry, PortraitData } from '../types.js';
-import { injectBreedList } from '../breeds.js';
+} from '@/shared/utils.js';
+import type { BreedEntry, PortraitData } from '@/shared/types.js';
+import { injectBreedList } from '@/shared/breeds.js';
 
 await injectBreedList();
 

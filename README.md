@@ -63,12 +63,19 @@ The version number and commit SHA will be displayed in the footer of the applica
 
 ### Testing
 
-#### Unit tests
+Tests live in `tests/`, split into `unit/` (no external services) and `integration/` (Koa + MySQL). `tests/e2e/` is reserved for end-to-end tests.
 
-Unit tests are run via Vitest, and will automatically re-run whenever a file is changed.
+Run the full suite once:
+
+```sh
+docker compose exec testapp sh -c "npm test"
+```
+
+Individual suites can be run interactively; Vitest will re-run whenever a file is changed:
 
 ```sh
 docker compose exec testapp sh -c "npm run test:unit"
+docker compose exec testapp sh -c "npm run test:integration"
 ```
 
 #### Code quality

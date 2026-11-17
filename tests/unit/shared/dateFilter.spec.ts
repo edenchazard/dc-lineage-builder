@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import type { BreedEntry, DateString } from '../types';
+import type { BreedEntry, DateString } from '@/shared/types';
 import {
   filterBreedsByDate,
   type DateFilterConfig,
-} from '../../store/useDateFilter.js';
+} from '@/store/useDateFilter.js';
 
 function createMockedBreed(name: string, releaseDate?: DateString): BreedEntry {
   return {
