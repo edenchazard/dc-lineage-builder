@@ -1,9 +1,13 @@
 FROM node:26.13.1-trixie-slim AS build
 ENV NODE_ENV=development
+ARG TESTING=false
+ENV TESTING=$TESTING
+
 WORKDIR /app
 ARG VERSION=0.0.0-dev
 ARG COMMIT_SHA=unknown
 ENV VITE_VERSION=$VERSION
 ENV VITE_COMMIT_SHA=$COMMIT_SHA
-COPY package*.json ./
+COPY --link package.json package-lock.json ./
 RUN npm ci
+RUN if [ "$TESTING" = "true" ]; then npx playwright install --with-deps; fi

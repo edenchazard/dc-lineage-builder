@@ -7,6 +7,9 @@
 
 # testing
 /coverage
+/playwright-report
+/blob-report
+/tests/e2e/results
 
 # production
 src/frontend/build

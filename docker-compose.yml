@@ -42,6 +42,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.dev
+      args:
+        TESTING: 'true'
     command: sleep infinity
     volumes:
       - .:/app

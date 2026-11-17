@@ -5,5 +5,5 @@
     "tsBuildInfoFile": "./node_modules/.cache/tsbuild/tsconfig.test.tsbuildinfo"
   },
   "include": ["tests/**/*.ts"],
-  "exclude": ["tests/e2e", "node_modules", "coverage", "dist"]
+  "exclude": ["node_modules", "coverage", "dist", "tests/e2e/results"]
 }

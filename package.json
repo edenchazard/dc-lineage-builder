@@ -19,7 +19,8 @@
     "test:watch": "vitest",
     "test:unit": "vitest --project unit",
     "test:integration": "vitest --project integration",
-    "coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:coverage": "vitest run --coverage",
     "prod": "node ./backend/server.js",
     "update-breeds": "tsx ./app/backend/commands/updateBreeds.ts"
   },
@@ -43,6 +44,7 @@
     "@fortawesome/free-brands-svg-icons": "^7.3.1",
     "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "@fortawesome/vue-fontawesome": "^3.3.3",
+    "@playwright/test": "^1.65.1",
     "@types/jsdom": "^21.1.6",
     "@types/koa__router": "^12.0.4",
     "@types/koa-bodyparser": "^4.3.13",

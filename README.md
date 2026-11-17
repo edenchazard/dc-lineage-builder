@@ -78,6 +78,18 @@ docker compose exec testapp sh -c "npm run test:unit"
 docker compose exec testapp sh -c "npm run test:integration"
 ```
 
+#### End-to-end tests
+
+End-to-end tests use [Playwright](https://playwright.dev/) and live in `tests/e2e/`. They run against the running dev stack (frontend, backend and database), so start it first. Install the Chromium browser once:
+
+```sh
+docker compose up -d
+npx playwright install --with-deps chromium
+npm run test:e2e
+```
+
+Use `npm run test:e2e:ui` to run them in interactive UI mode, and `npm run test:e2e:report` to open the last HTML report. Set `E2E_BASE_URL` if the app is served somewhere other than `http://localhost:5173/dc/lineage-builder/`.
+
 #### Code quality
 
 `oxfmt` and `eslint` are used. They can be run from the test container.
