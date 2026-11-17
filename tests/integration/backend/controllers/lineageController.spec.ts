@@ -1,11 +1,11 @@
 import { describe, it, beforeEach, afterEach, expect } from 'vitest';
-import app from '../../app';
+import app from '@/backend/app';
 import request from 'supertest';
-import { DragonBuilder } from '../../../shared/dragonBuilder.js';
-import pool from '../../pool';
+import { DragonBuilder } from '@/shared/dragonBuilder.js';
+import pool from '@/backend/pool';
 import crypto from 'crypto';
 import type { RowDataPacket } from 'mysql2/promise';
-import config from '../../config';
+import config from '@/backend/config';
 
 const rq = request(app.callback());
 const con = await pool.getConnection();

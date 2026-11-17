@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DragonBuilder } from '../dragonBuilder.js';
+import { DragonBuilder } from '@/shared/dragonBuilder.js';
 
 describe('dragonBuilder', () => {
   describe('.create()', () => {

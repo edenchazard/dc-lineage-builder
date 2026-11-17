@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import app from '../../app';
+import app from '@/backend/app';
 import request from 'supertest';
-import { OnsiteDragonNotFoundError } from '../../onsite';
+import { OnsiteDragonNotFoundError } from '@/backend/onsite';
 
 const rq = request(app.callback());
 
@@ -10,9 +10,9 @@ const mocks = vi.hoisted(() => ({
   getDataForPair: vi.fn(),
 }));
 
-vi.mock('../../onsite', async () => {
+vi.mock('@/backend/onsite', async () => {
   return {
-    ...(await vi.importActual('../../onsite')),
+    ...(await vi.importActual('@/backend/onsite')),
     checkDragonsMatchGender: mocks.checkDragonsMatchGender,
     getDataForPair: mocks.getDataForPair,
   };

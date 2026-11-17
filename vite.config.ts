@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'node:url';
+
 import { defineConfig, loadEnv } from 'vite';
 
 import vue from '@vitejs/plugin-vue';
@@ -22,6 +24,12 @@ export default ({ mode }: { mode: string }) => {
       },
     },
     plugins: [vue()],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./app', import.meta.url)),
+        '@tests': fileURLToPath(new URL('./tests', import.meta.url)),
+      },
+    },
     css: {
       transformer: 'lightningcss',
     },
@@ -30,12 +38,29 @@ export default ({ mode }: { mode: string }) => {
       cssMinify: 'lightningcss',
     },
     test: {
-      setupFiles: ['./backend/commands/databaseFresh.ts'],
+      dir: fileURLToPath(new URL('./tests', import.meta.url)),
       environment: 'happy-dom',
-      exclude: [...configDefaults.exclude, 'e2e/*'],
+      exclude: [...configDefaults.exclude, '**/e2e/**'],
       coverage: {
         reportsDirectory: '../coverage',
       },
+      projects: [
+        {
+          extends: true,
+          test: {
+            name: 'unit',
+            include: ['unit/**/*.spec.ts'],
+          },
+        },
+        {
+          extends: true,
+          test: {
+            name: 'integration',
+            include: ['integration/**/*.spec.ts'],
+            setupFiles: ['./backend/commands/databaseFresh.ts'],
+          },
+        },
+      ],
     },
   });
 };

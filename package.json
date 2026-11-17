@@ -15,8 +15,11 @@
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "ts:check": "tsc --noEmit",
-    "test:unit": "vitest",
-    "coverage": "vitest --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:unit": "vitest --project unit",
+    "test:integration": "vitest --project integration",
+    "coverage": "vitest run --coverage",
     "prod": "node ./backend/server.js",
     "update-breeds": "tsx ./app/backend/commands/updateBreeds.ts"
   },
