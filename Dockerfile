@@ -4,7 +4,7 @@ WORKDIR /app
 FROM base AS build
 
 COPY --link package.json package-lock.json ./
-RUN npm i
+RUN npm ci
 COPY --link . .
 
 WORKDIR /app/app/backend
