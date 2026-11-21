@@ -34,7 +34,7 @@
     "node-html-parser": "^7.0.1",
     "ofetch": "^1.5.1",
     "unique-names-generator": "^4.7.1",
-    "yup": "^1.4.0"
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@4rk/vue-roving-tabindex": "^2.0.0",
