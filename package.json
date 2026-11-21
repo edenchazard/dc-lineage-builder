@@ -78,5 +78,9 @@
     "vue-dragscroll": "^4.0.6",
     "vue-router": "^5.5.1",
     "vue-tsc": "^3.3.14"
+  },
+  "allowScripts": {
+    "vue-demi": true,
+    "esbuild": true
   }
 }
