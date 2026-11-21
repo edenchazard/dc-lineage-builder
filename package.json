@@ -77,6 +77,6 @@
     "vue": "^3.5.45",
     "vue-dragscroll": "^4.0.6",
     "vue-router": "^5.5.1",
-    "vue-tsc": "^2.2.0"
+    "vue-tsc": "^3.3.14"
   }
 }
