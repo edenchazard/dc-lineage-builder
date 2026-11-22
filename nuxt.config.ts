@@ -11,7 +11,14 @@ export default defineNuxtConfig({
 
   ssr: true,
 
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxt/eslint'],
+
+  eslint: {
+    config: {
+      // Formatting is handled by oxfmt, not ESLint.
+      stylistic: false,
+    },
+  },
 
   app: {
     baseURL,

@@ -119,8 +119,7 @@ export async function grabHTML(
     if (baseULTag === null)
       throw new OnsiteError(`Could not find ul tag. Dragon: ${code}`);
 
-    // This works so stfu.
-    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    // node-html-parser's toString() produces the markup we need here.
     let html = baseULTag.toString();
 
     if (options.filter) {

@@ -25,15 +25,14 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  inheritAttrs: false,
-};
-</script>
 <script setup lang="ts">
 import { nextTick, ref, watchEffect } from 'vue';
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
 import { useScrollLock } from '@vueuse/core';
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const emit = defineEmits<{
   (e: 'change', open: boolean): void;

@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import { nextTick, useTemplateRef, watch } from 'vue';
 import { onStartTyping, useSessionStorage } from '@vueuse/core';
-import { type PortraitData } from '../shared/types';
+import type { PortraitData } from '../shared/types';
 import BreedListFiltered from './BreedListFiltered.vue';
 import DialogBreedSelectorWrapper from './DialogBreedSelectorWrapper.vue';
 import BreedSearch from './BreedSearch.vue';

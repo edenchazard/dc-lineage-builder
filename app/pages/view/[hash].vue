@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, onBeforeUnmount, onMounted } from 'vue';
+import { onBeforeUnmount, onMounted, reactive, ref, useTemplateRef } from 'vue';
 
 import type {
   LineageConfig,
@@ -53,7 +53,6 @@ import { createLineageLink } from '../../shared/utils.js';
 import LineageView from '../../components/LineageView.vue';
 import InputTextbox from '../../components/InputTextbox.vue';
 import FeedbackPanel from '../../components/FeedbackPanel.vue';
-import { useTemplateRef } from 'vue';
 
 const route = useRoute();
 const configRuntime = useRuntimeConfig();
