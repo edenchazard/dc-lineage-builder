@@ -21,13 +21,13 @@
         readonly
         select-all-on-focus
       />
-      <router-link
+      <NuxtLink
         rel="nofollow"
         :to="{
           path: '/',
           query: { template: hash },
         }"
-        >Import into editor</router-link
+        >Import into editor</NuxtLink
       >
     </div>
   </div>
@@ -41,22 +41,25 @@
 
 <script setup lang="ts">
 import { reactive, ref, onBeforeUnmount, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
 
-import type { LineageConfig, PartialLineage } from '../shared/types';
-import { getLineage } from '../app/api.js';
-import { createLineageLink } from '../shared/utils.js';
+import type {
+  LineageConfig,
+  PartialLineageWithMetadata,
+} from '../../shared/types';
+import { Lineage } from '../../shared/lineageHandler.js';
+import { getLineage, isApiFetchError } from '../../app/api.js';
+import { createLineageLink } from '../../shared/utils.js';
 
-import LineageView from '../components/LineageView.vue';
-import InputTextbox from '../components/InputTextbox.vue';
-import FeedbackPanel from '../components/FeedbackPanel.vue';
-import { FetchError } from 'ofetch';
+import LineageView from '../../components/LineageView.vue';
+import InputTextbox from '../../components/InputTextbox.vue';
+import FeedbackPanel from '../../components/FeedbackPanel.vue';
 import { useTemplateRef } from 'vue';
 
 const route = useRoute();
-const tree = ref<null | PartialLineage>(null);
+const configRuntime = useRuntimeConfig();
+const tree = ref<null | PartialLineageWithMetadata>(null);
 const hash = route.params.hash as string;
-const shareLink = createLineageLink(hash);
+const shareLink = createLineageLink(hash, configRuntime.app.baseURL);
 const status = useTemplateRef('status');
 const config = reactive<LineageConfig>({
   showInterface: false,
@@ -76,9 +79,11 @@ onMounted(async () => {
 
     const response = await getLineage(hash);
 
-    status.value.close(() => (tree.value = response.lineage));
+    status.value.close(
+      () => (tree.value = Lineage(response.lineage).withMetadata().raw()),
+    );
   } catch (ex) {
-    if (ex instanceof FetchError && ex.response?.status === 404) {
+    if (isApiFetchError(ex) && ex.response.status === 404) {
       status.value.error("The lineage couldn't be found.");
       return;
     }

@@ -45,8 +45,12 @@ const props = defineProps<{
 
 const mobileMenu = ref<HTMLDivElement>();
 
-const scrollLockDoc = useScrollLock(document.documentElement, false);
-const scrollLockBody = useScrollLock(document.body, false);
+const scrollLockDoc = import.meta.client
+  ? useScrollLock(document.documentElement, false)
+  : ref(false);
+const scrollLockBody = import.meta.client
+  ? useScrollLock(document.body, false)
+  : ref(false);
 
 const { activate, deactivate, hasFocus } = useFocusTrap(mobileMenu, {
   onActivate() {

@@ -29,12 +29,14 @@ withDefaults(
 const lineageView = ref<HTMLElement>();
 const lineageVisible = ref(false);
 
-useScroll(window, {
-  onScroll() {
-    const containerTop = lineageView.value?.getBoundingClientRect().top ?? 0;
-    lineageVisible.value = containerTop <= 113;
-  },
-});
+if (import.meta.client) {
+  useScroll(window, {
+    onScroll() {
+      const containerTop = lineageView.value?.getBoundingClientRect().top ?? 0;
+      lineageVisible.value = containerTop <= 113;
+    },
+  });
+}
 </script>
 
 <style scoped>

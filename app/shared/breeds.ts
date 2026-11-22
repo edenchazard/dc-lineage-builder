@@ -16,10 +16,15 @@ const malePortraits: PortraitData[] = [];
 const femalePortraits: PortraitData[] = [];
 const listOfBreeds: BreedEntry[] = [placeholder];
 
-async function injectBreedList() {
-  listOfBreeds.push(...(await import('./breed-definitions.js')).default);
+let injectPromise: Promise<void> | null = null;
 
-  syncPortraits();
+function injectBreedList(): Promise<void> {
+  injectPromise ??= (async () => {
+    listOfBreeds.push(...(await import('./breed-definitions.js')).default);
+    syncPortraits();
+  })();
+
+  return injectPromise;
 }
 
 function syncPortraits() {

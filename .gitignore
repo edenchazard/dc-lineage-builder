@@ -12,6 +12,10 @@
 src/frontend/build
 src/frontend/dist
 dist
+.nuxt
+.output
+.data
+*.tsbuildinfo
 
 # misc
 .DS_Store

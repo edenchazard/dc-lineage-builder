@@ -4,8 +4,12 @@ import { useScrollLock } from '@vueuse/core';
 
 // we want to hide the scroll bar when the popup is open,
 // and, we'd also like to prevent overscroll happening.
-const scrollLockDoc = useScrollLock(document.documentElement, false);
-const scrollLockBody = useScrollLock(document.body, false);
+const scrollLockDoc = import.meta.client
+  ? useScrollLock(document.documentElement, false)
+  : ref(false);
+const scrollLockBody = import.meta.client
+  ? useScrollLock(document.body, false)
+  : ref(false);
 const dialogRef = ref<HTMLDialogElement>();
 const autofocus = ref(false);
 const forGender = ref<PartialLineageWithMetadata['gender']>();

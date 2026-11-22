@@ -5,9 +5,6 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   resolve: {
     alias: {
-      '#app': fileURLToPath(
-        new URL('./tests/stubs/nuxt-app.ts', import.meta.url),
-      ),
       '@': fileURLToPath(new URL('./app', import.meta.url)),
       '~': fileURLToPath(new URL('./app', import.meta.url)),
       '@tests': fileURLToPath(new URL('./tests', import.meta.url)),
@@ -33,7 +30,6 @@ export default defineConfig({
         test: {
           name: 'integration',
           include: ['tests/integration/**/*.spec.ts'],
-          setupFiles: ['./scripts/databaseFresh.ts'],
         },
       },
     ],

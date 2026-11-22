@@ -81,12 +81,14 @@
 
 <script setup lang="ts">
 import { ref, nextTick, onMounted, useTemplateRef } from 'vue';
-import { getOnSitePreview } from '../app/api.js';
+import {
+  getOnSitePreview,
+  isApiFetchError,
+  type APIResponse,
+} from '../app/api.js';
 import OnsitePreview from '../components/OnsitePreview.vue';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
 import LineageWrapper from '../components/LineageWrapper.vue';
-import { FetchError } from 'ofetch';
-import { useRoute } from 'vue-router';
 import InputTextbox from '../components/InputTextbox.vue';
 import { codeValidator } from '../shared/validation.js';
 
@@ -100,6 +102,7 @@ const fixRightmostColumn = ref(true);
 const status = useTemplateRef('status');
 const shareLink = ref('');
 const route = useRoute();
+const config = useRuntimeConfig();
 
 onMounted(() => {
   maleCode.value = (route.query?.male as string) ?? '';
@@ -181,11 +184,13 @@ async function fetchLineage() {
       });
     }
     const origin = window.location.origin;
-    const mountPath = import.meta.env.BASE_URL;
-    shareLink.value = `${origin}${mountPath}/onsite-preview?male=${maleCode.value}&female=${femaleCode.value}`;
+    const mountPath = config.app.baseURL;
+    shareLink.value = `${origin}${mountPath}onsite-preview?male=${maleCode.value}&female=${femaleCode.value}`;
   } catch (ex) {
-    if (ex instanceof FetchError && ex.response?.status === 404) {
-      status.value.error((await ex.response.json()).errors[0].message);
+    if (isApiFetchError(ex) && ex.response.status === 404) {
+      status.value.error(
+        (await ex.response.json<APIResponse>()).errors[0].message,
+      );
       return;
     }
 

@@ -1,28 +1,39 @@
-import { describe, it, beforeEach, afterEach, expect } from 'vitest';
-import app from '@/backend/app';
-import request from 'supertest';
-import { DragonBuilder } from '@/shared/dragonBuilder.js';
-import pool from '@/backend/pool';
-import crypto from 'crypto';
-import type { RowDataPacket } from 'mysql2/promise';
-import config from '@/backend/config';
+import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import crypto from 'node:crypto';
+import type { RowDataPacket } from 'mysql2';
+import { ValidationError } from 'yup';
 
-const rq = request(app.callback());
-const con = await pool.getConnection();
+import { injectBreedList } from '../../../app/shared/breeds.js';
+import { DragonBuilder } from '../../../app/shared/dragonBuilder.js';
+import { loadLineage } from '../../../server/api/lineage/[hash].get.js';
+import { saveLineage } from '../../../server/api/lineage/index.post.js';
+import { pool } from '../../../server/db.js';
+import { freshDatabase } from '../../../server/utils/dbSetup.js';
 
-describe('lineageController', () => {
-  beforeEach(async () => await con.beginTransaction());
+const salt = process.env.NUXT_LINEAGE_HASH_SALT ?? 'salt';
+let con: Awaited<ReturnType<typeof pool.getConnection>>;
+
+beforeAll(async () => {
+  await freshDatabase();
+  await injectBreedList();
+});
+
+describe('lineage service', () => {
+  beforeEach(async () => {
+    con = await pool.getConnection();
+    await con.beginTransaction();
+  });
 
   afterEach(async () => {
     await con.rollback();
     con.release();
   });
 
-  describe('/lineage/{hash}', () => {
-    it("404 when a lineage hash isn't found", async () => {
-      await rq
-        .get('/lineage/a1c6b9e0fa6157dd694525fcdb0be99e14110174')
-        .expect(404);
+  describe('loadLineage', () => {
+    it("throws a 404 when a lineage hash isn't found", async () => {
+      await expect(
+        loadLineage(con, 'a1c6b9e0fa6157dd694525fcdb0be99e14110174'),
+      ).rejects.toMatchObject({ statusCode: 404 });
     });
 
     it('returns a lineage json', async () => {
@@ -35,56 +46,44 @@ describe('lineageController', () => {
         [hashCode, json],
       );
 
-      const res = await rq
-        .get(`/dc/lineage-builder/api/lineage/${hashCode}`)
-        .expect(200);
-
-      expect(res.body).to.eql({
+      await expect(loadLineage(con, hashCode)).resolves.toEqual({
         lineage: dragon,
       });
     });
-
-    describe.todo('sets the last_view to now');
   });
 
-  describe('/lineage/create', () => {
-    it("404 when json isn't present", async () => {
-      await rq.post('/dc/lineage-builder/api/lineage').expect(404);
+  describe('saveLineage', () => {
+    it("throws a 404 when lineage data isn't present", async () => {
+      await expect(saveLineage(con, salt, null)).rejects.toMatchObject({
+        statusCode: 404,
+      });
     });
-
-    describe.todo('sets the last_view to now if already exists');
 
     it('fails validation when given a bad dragon', async () => {
       const lineage = DragonBuilder.create({ code: 'nanawo akari MY QUEEN' });
 
-      const res = await rq
-        .post(`/dc/lineage-builder/api/lineage`)
-        .send({ lineage })
-        .expect(422);
-
-      expect(res.body).to.have.key('errors');
+      await expect(saveLineage(con, salt, lineage)).rejects.toBeInstanceOf(
+        ValidationError,
+      );
     });
 
     it('stores a new lineage and returns unique hash', async () => {
       const lineage = DragonBuilder.create();
       const hashCode = crypto
         .createHash('sha1')
-        .update(config.salt + JSON.stringify(lineage))
+        .update(salt + JSON.stringify(lineage))
         .digest('hex');
 
-      const res = await rq
-        .post(`/dc/lineage-builder/api/lineage`)
-        .send({ lineage })
-        .expect(201);
-
-      expect(res.body.hash).to.eql(hashCode);
+      await expect(saveLineage(con, salt, lineage)).resolves.toEqual({
+        hash: hashCode,
+      });
 
       const [[row]] = await con.query<RowDataPacket[]>(
         'SELECT * FROM saved_lineages WHERE hash = ?',
-        [res.body.hash],
+        [hashCode],
       );
 
-      expect(JSON.parse(row.content)).to.eql(lineage);
+      expect(JSON.parse(row.content)).toEqual(lineage);
     });
   });
 });

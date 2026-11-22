@@ -2,7 +2,7 @@
 
 DragCave lineage builder is an open-source third-party utility for the online game [dragcave.net](https://dragcave.net/). It enables users to preview dragon lineages, a core function of the game.
 
-Written in TypeScript with a Vue.js 3 frontend and a Node.js backend.
+Written in TypeScript with Nuxt 4 (server-rendered Vue 3 frontend and Nitro API routes) and MySQL/MariaDB.
 
 ![screenshot](./docs/cover.png)
 
@@ -44,9 +44,9 @@ docker compose up -d
 docker compose exec app sh -c "npm run dev"
 ```
 
-You can access the project at [http://localhost:5173/dc/lineage-builder/](http://localhost:5173/dc/lineage-builder/).
+You can access the project at [http://localhost:3000/dc/lineage-builder/](http://localhost:3000/dc/lineage-builder/).
 
-Remember to run `npm run update-breeds` to fetch the latest breed artifacts.
+Remember to run `npx nuxt task run breeds:update` to fetch the latest breed artifacts.
 
 ### Building for production with a version number
 
@@ -63,7 +63,7 @@ The version number and commit SHA will be displayed in the footer of the applica
 
 ### Testing
 
-Tests live in `tests/`, split into `unit/` (no external services) and `integration/` (Koa + MySQL). `tests/e2e/` is reserved for end-to-end tests.
+Tests live in `tests/`, split into `unit/` (no external services) and `integration/` (server services + MySQL). `tests/e2e/` is reserved for end-to-end tests.
 
 Run the full suite once:
 
@@ -88,22 +88,24 @@ docker compose up -d
 
 ## Migrations
 
-`tsx` isn't used in production, the way to invoke database commands differs slightly. In dev, you'll need to use:
+Database setup is exposed as Nitro tasks. These are experimental and require a running development server:
 
 ```sh
-tsx ./app/backend/commands/databaseFresh.ts # set up table
-tsx ./app/backend/commands/databaseSeed.ts # seed data
+docker compose up -d app
+docker compose exec app npx nuxt task run db:fresh # set up table
+docker compose exec app npx nuxt task run db:seed # seed data
 ```
 
-In production:
-
-```sh
-node ./backend/commands/databaseFresh.js # set up table
-node ./backend/commands/databaseSeed.js # seed data
-```
+The production image contains only Nuxt's built output, so the task endpoints are not available there. Run these from a development container (or another machine with the source and database access) when preparing a production database.
 
 ## Breed data
 
 Breed data is managed in another repository. [See here](https://github.com/edenchazard/dragcave-breed-data).
 
-To fetch the latest data, you can run `npm run update-breeds` in your container.
+To fetch the latest data, run the breed update task in your container:
+
+```sh
+docker compose exec app npx nuxt task run breeds:update
+```
+
+Pass a different git ref with `--payload.ref=<ref>`.

@@ -243,8 +243,12 @@
 
 <script setup lang="ts">
 import { ref, useTemplateRef, computed, watch } from 'vue';
-import { FetchError } from 'ofetch';
-import { getInbred, type InbredCheckResponse } from '../app/api.js';
+import {
+  getInbred,
+  isApiFetchError,
+  type APIResponse,
+  type InbredCheckResponse,
+} from '../app/api.js';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
 import InputTextbox from '../components/InputTextbox.vue';
 import { codeValidator } from '../shared/validation.js';
@@ -298,8 +302,10 @@ async function handleInbredCheck() {
       )
       .reverse();
   } catch (ex) {
-    if (ex instanceof FetchError && ex.response?.status === 404) {
-      status.value.error((await ex.response.json()).errors[0].message);
+    if (isApiFetchError(ex) && ex.response.status === 404) {
+      status.value.error(
+        (await ex.response.json<APIResponse>()).errors[0].message,
+      );
       return;
     }
 

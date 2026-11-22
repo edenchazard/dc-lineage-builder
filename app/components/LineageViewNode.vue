@@ -166,7 +166,7 @@ const props = withDefaults(
   },
 );
 
-const ls = localStorage;
+const ls = import.meta.client ? localStorage : null;
 const appStore = useAppStore();
 const breedSelectorDialog = useBreedSelector();
 
@@ -229,7 +229,7 @@ function changeBreed(e: PortraitData) {
 }
 
 function pasteBranch() {
-  const clipboard = ls.getItem('clipboard');
+  const clipboard = ls?.getItem('clipboard') ?? null;
 
   // check there's data available
   // todo add an integrity check
@@ -249,7 +249,7 @@ function copyBranch() {
   // Do nothing if no parents
   if (!hasAncestry.value || !hasParents(props.data)) return;
 
-  ls.setItem(
+  ls?.setItem(
     'clipboard',
     JSON.stringify({
       m: Lineage(props.data.parents.m).withoutMetadata().raw(),

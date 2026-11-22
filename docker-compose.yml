@@ -7,6 +7,9 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      # Keep the dev server's lock file inside the container so a stopped
+      # container can't leave a stale lock on the host bind mount.
+      - /app/.nuxt
     environment:
       - NUXT_APP_BASE_URL=${NUXT_APP_BASE_URL:-/dc/lineage-builder}
       - NUXT_CLIENT_SECRET=${NUXT_CLIENT_SECRET:-}

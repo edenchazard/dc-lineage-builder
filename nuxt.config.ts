@@ -41,34 +41,55 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: {
-    preset: 'node-server',
+  // Keep the strictness level of the original project. Customise the generated
+  // configs here rather than maintaining a separate root tsconfig file.
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        noUncheckedIndexedAccess: false,
+      },
+    },
+    sharedTsConfig: {
+      compilerOptions: {
+        noUncheckedIndexedAccess: false,
+      },
+    },
+    nodeTsConfig: {
+      compilerOptions: {
+        noUncheckedIndexedAccess: false,
+        types: ['node'],
+        paths: {
+          // Needed so the `$api` augmentation in app/types/api.d.ts merges with
+          // Nuxt's real NuxtApp type instead of declaring an ambient module.
+          '#app': ['../node_modules/nuxt/dist/app'],
+          '@/*': ['../app/*'],
+          '@tests/*': ['../tests/*'],
+        },
+      },
+      // Tests import source files that call Nuxt auto-imports (`useNuxtApp`,
+      // `useRuntimeConfig`). They only need the generated global types — not
+      // runtime stubs — because those calls happen inside API handlers that
+      // the tests never invoke. `files` avoids the generated app exclude.
+      files: [
+        './types/imports.d.ts',
+        './types/nitro-imports.d.ts',
+        '../app/types/api.d.ts',
+      ],
+      include: ['../tests/**/*', '../vitest.config.ts'],
+    },
   },
 
-  hooks: {
-    'prepare:types': ({
-      tsConfig,
-      serverTsConfig,
-      nodeTsConfig,
-      sharedTsConfig,
-    }) => {
-      // Keep the strictness level of the original project while still using
-      // Nuxt's generated project references.
-      for (const config of [
-        tsConfig,
-        serverTsConfig,
-        nodeTsConfig,
-        sharedTsConfig,
-      ]) {
-        config.compilerOptions ??= {};
-        config.compilerOptions.noUncheckedIndexedAccess = false;
-      }
+  nitro: {
+    preset: 'node-server',
+    experimental: {
+      tasks: true,
     },
-    'nitro:config': (nitroConfig) => {
-      nitroConfig.typescript ??= {};
-      nitroConfig.typescript.tsConfig ??= {};
-      nitroConfig.typescript.tsConfig.compilerOptions ??= {};
-      nitroConfig.typescript.tsConfig.compilerOptions.noUncheckedIndexedAccess = false;
+    typescript: {
+      tsConfig: {
+        compilerOptions: {
+          noUncheckedIndexedAccess: false,
+        },
+      },
     },
   },
 

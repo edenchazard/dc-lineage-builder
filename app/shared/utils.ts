@@ -107,10 +107,10 @@ export function addBreed(breedObj: BreedEntry, resort: boolean = true) {
   return true;
 }
 
-export function createLineageLink(hash: string) {
-  const origin = window.location.origin;
-  const mountPath = import.meta.env.BASE_URL;
-  return `${origin}${mountPath}/view/${hash}`;
+export function createLineageLink(hash: string, mountPath = '/') {
+  const origin = typeof window === 'undefined' ? '' : window.location.origin;
+  const base = mountPath.endsWith('/') ? mountPath : `${mountPath}/`;
+  return `${origin}${base}view/${hash}`;
 }
 
 const tagRegExp = /^(p:|s:)/g;

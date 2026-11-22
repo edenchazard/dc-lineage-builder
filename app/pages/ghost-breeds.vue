@@ -182,8 +182,7 @@ function addToEntries() {
     name: name.value,
     ...genderProps,
     metaData: {
-      group: '*',
-      tags: ['Regular'],
+      tags: ['regular'],
       src: 'ghost',
     },
   };

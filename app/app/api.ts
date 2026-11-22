@@ -1,18 +1,35 @@
-import { ofetch, type FetchOptions } from 'ofetch';
 import type { PartialLineage } from '../shared/types';
+import type { APIFetchOptions } from '../types/api.js';
 
-interface APIResponse {
+export interface APIResponse {
   errors: Array<{ type: 'warning' | 'error'; message: string }>;
 }
 
-async function callAPI<T>(url: string, options: FetchOptions<'json'> = {}) {
+/** Shape of the error `$fetch` throws for a non-2xx response. */
+export interface ApiFetchError {
+  response: {
+    status: number;
+    json<T = unknown>(): Promise<T>;
+  };
+}
+
+/** Narrows an unknown thrown value to a failed-fetch response error. */
+export function isApiFetchError(error: unknown): error is ApiFetchError {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    'response' in error &&
+    typeof (error as ApiFetchError).response?.status === 'number'
+  );
+}
+
+async function callAPI<T>(url: string, options: APIFetchOptions = {}) {
   if ('url' in options)
     throw new Error('options parameter should not contain url');
 
   // url comes last to prevent it being overwritten via options
-  return ofetch<T>(url, {
+  return useNuxtApp().$api<T>(url, {
     ...options,
-    baseURL: `${import.meta.env.BASE_URL}/api`,
   });
 }
 

@@ -41,7 +41,6 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref, useTemplateRef } from 'vue';
-import { onBeforeRouteLeave, useRoute } from 'vue-router';
 import { useFullscreen } from '@vueuse/core';
 import type {
   PartialLineageWithMetadata,
@@ -50,14 +49,13 @@ import type {
 } from '../shared/types';
 
 import { hasParents } from '../shared/utils.js';
-import { getLineage } from '../app/api.js';
+import { getLineage, isApiFetchError } from '../app/api.js';
 import { useAppStore } from '../store/useAppStore.js';
 import LineageBuilderToolbar from './LineageBuilderToolbar.vue';
 import LineageView from './LineageView.vue';
 import FeedbackPanel from './FeedbackPanel.vue';
 import { Lineage as LineageHandler } from '../shared/lineageHandler';
 import { DragonBuilder } from '../shared/dragonBuilder.js';
-import { FetchError } from 'ofetch';
 import DialogBreedSelector from './DialogBreedSelector.vue';
 
 const route = useRoute();
@@ -91,7 +89,7 @@ onMounted(async () => {
           .raw();
       });
     } catch (ex) {
-      if (ex instanceof FetchError && ex.response?.status === 404) {
+      if (isApiFetchError(ex) && ex.response.status === 404) {
         status.value.error("The lineage couldn't be found.");
         return;
       }
@@ -124,18 +122,20 @@ function applyToSelected(
 ): void;
 function applyToSelected(
   key: keyof PartialLineageWithMetadata,
-  value: unknown,
+  value: PartialLineageWithMetadata[keyof PartialLineageWithMetadata],
 ): void;
 function applyToSelected(
   keyOrCallback:
     | keyof PartialLineageWithMetadata
     | ((dragon: PartialLineageWithMetadata) => void),
-  value?: unknown,
+  value?: PartialLineageWithMetadata[keyof PartialLineageWithMetadata],
 ) {
   if (typeof keyOrCallback === 'string') {
-    const key = keyOrCallback.toString();
+    const key = keyOrCallback;
     appStore.activeTree = appStore.activeLineage.every((dragon) => {
-      if (dragon.selected && key in dragon) dragon[key] = value;
+      if (dragon.selected && key in dragon) {
+        (dragon as unknown as Record<string, unknown>)[key] = value;
+      }
     });
   } else if (typeof keyOrCallback === 'function') {
     const callback = keyOrCallback;
@@ -146,20 +146,13 @@ function applyToSelected(
 }
 
 function selectionCriteria(
-  callback: (dragon: PartialLineageWithMetadata) => boolean,
-): void;
-function selectionCriteria(
-  key: keyof PartialLineageWithMetadata,
-  value: unknown,
-): void;
-function selectionCriteria(
   keyOrCallback:
     | keyof PartialLineageWithMetadata
     | ((dragon: PartialLineageWithMetadata) => boolean),
-  value?: unknown,
+  value?: PartialLineageWithMetadata[keyof PartialLineageWithMetadata],
 ) {
   if (typeof keyOrCallback === 'string') {
-    const key = keyOrCallback.toString();
+    const key = keyOrCallback;
     selectBy((dragon) => dragon[key] === value);
   } else if (typeof keyOrCallback === 'function') {
     const condition = keyOrCallback;

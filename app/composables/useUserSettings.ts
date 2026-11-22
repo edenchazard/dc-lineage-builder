@@ -27,7 +27,7 @@ watch(
       userSettings.value.skin = defaultSkinId;
     }
 
-    document.body.className = newSkin;
+    if (import.meta.client) document.body.className = newSkin;
   },
   { immediate: true },
 );

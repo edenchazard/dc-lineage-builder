@@ -1,6 +1,3 @@
-import { ofetch } from 'ofetch';
-import config from './config.js';
-
 export type DragonData = {
   id: string;
   name: string;
@@ -31,10 +28,15 @@ export interface DragCaveApiResponse<Data extends Record<string, unknown>> {
   data: Data;
 }
 
-export const dcApiFetch = ofetch.create({
-  baseURL: 'https://dragcave.net/api/v2',
-  timeout: 10000,
-  headers: {
-    Authorization: `Bearer ${config.clientSecret}`,
-  },
-});
+/** Creates a DragCave API client. */
+export function dragCaveFetch() {
+  return $fetch.create({
+    baseURL: 'https://dragcave.net/api/v2',
+    timeout: 10000,
+    headers: {
+      Authorization: `Bearer ${useRuntimeConfig().clientSecret}`,
+    },
+  });
+}
+
+export type DcApiFetch = ReturnType<typeof dragCaveFetch>;

@@ -6,8 +6,9 @@ import { DragonBuilder } from '../shared/dragonBuilder.js';
 import { LineageHandler } from '../shared/lineageHandler';
 
 export const useAppStore = defineStore('appStore', () => {
-  const appVersion = import.meta.env.VITE_VERSION ?? 'dev';
-  const appCommitSha = import.meta.env.VITE_COMMIT_SHA ?? 'dev';
+  const config = useRuntimeConfig();
+  const appVersion = config.public.appVersion;
+  const appCommitSha = config.public.appCommitSha;
   const activeTree = ref(DragonBuilder.createWithMetadata());
   const activeLineage = computed(
     () => new LineageHandler<PartialLineageWithMetadata>(activeTree.value),

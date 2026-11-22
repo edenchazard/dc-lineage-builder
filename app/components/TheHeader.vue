@@ -74,11 +74,11 @@
         Menu
       </button>
       <span id="site-title">
-        <router-link
+        <NuxtLink
           id="site-title-link"
           to="/"
           >Lineage Builder
-        </router-link>
+        </NuxtLink>
       </span>
       <TheHeaderMenuLinks id="desktop-menu" />
     </div>
@@ -86,21 +86,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { onKeyDown, useLocalStorage } from '@vueuse/core';
 import TheHeaderMenuLinks from './TheHeaderMenuLinks.vue';
 import TheSlideInMenu from './TheSlideInMenu.vue';
-import router from '../router/router';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+const route = useRoute();
 const menuOpen = ref(false);
 const invitationOpen = ref(false);
 const inviteDismissed = useLocalStorage('inviteDismissed', false);
 
 onKeyDown('Escape', () => (menuOpen.value = false));
-
-router.afterEach(() => (menuOpen.value = false));
+watch(
+  () => route.fullPath,
+  () => (menuOpen.value = false),
+);
 
 function showInvite() {
   invitationOpen.value = true;

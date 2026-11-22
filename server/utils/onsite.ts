@@ -1,7 +1,9 @@
 import nodeHTMLParser from 'node-html-parser';
-import { ofetch } from 'ofetch';
-import type { DragonData, GetDragonsBulkResponse } from './dcApiFetch.js';
-import { dcApiFetch } from './dcApiFetch.js';
+import type {
+  DcApiFetch,
+  DragonData,
+  GetDragonsBulkResponse,
+} from './dcApiFetch.js';
 
 export interface DragonOnsite {
   code: string;
@@ -53,8 +55,9 @@ class APIError extends Error {
  */
 export async function checkDragonsMatchGender(
   codes: [string, string],
+  api: DcApiFetch,
 ): Promise<{ code: string; correct: boolean | null }[]> {
-  const response = await dcApiFetch<GetDragonsBulkResponse>(`/dragons`, {
+  const response = await api<GetDragonsBulkResponse>(`/dragons`, {
     method: 'POST',
     body: new URLSearchParams({
       ids: codes.join(','),
@@ -88,7 +91,7 @@ export async function grabHTML(
     ...options,
   };
   const fetchDragon = async (code: string, dpr: GetHTMLOptions['dpr'] = 1) => {
-    return ofetch(`https://dragcave.net/lineage/${code}`, {
+    return $fetch<string>(`https://dragcave.net/lineage/${code}`, {
       headers: {
         Cookie: `dpr=${dpr};`,
       },
@@ -132,7 +135,7 @@ export async function grabHTML(
 
       const base64Images = await Promise.all(
         images.map(async (url) => {
-          const response = await ofetch(
+          const response = await $fetch<Response>(
             new URL(url, 'https://dragcave.net').href,
             {
               onResponseError() {

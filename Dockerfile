@@ -7,28 +7,22 @@ COPY --link package.json package-lock.json ./
 RUN npm ci
 COPY --link . .
 
-WORKDIR /app/app/backend
-RUN npx tsc
-
-WORKDIR /app
-ARG VITE_BASE_URL="/dc/lineage-builder"
+ARG NUXT_APP_BASE_URL="/dc/lineage-builder"
 ARG VERSION=0.0.0
 ARG COMMIT_SHA=unknown
-ENV VITE_BASE_URL=$VITE_BASE_URL
-ENV VITE_VERSION=$VERSION
-ENV VITE_COMMIT_SHA=$COMMIT_SHA
-RUN npm run vue:build
+ENV NUXT_APP_BASE_URL=$NUXT_APP_BASE_URL
+ENV NUXT_PUBLIC_APP_VERSION=$VERSION
+ENV NUXT_PUBLIC_APP_COMMIT_SHA=$COMMIT_SHA
+RUN npm run build
 
 FROM base AS production
 ENV NODE_ENV=production
-COPY --chown=node:node package.json package-lock.json ./
-RUN npm ci
-COPY --chown=node:node --from=build /prod/backend ./backend
-COPY --chown=node:node --from=build /prod/shared ./shared
-COPY --chown=node:node --from=build /app/dist ./backend/static
-RUN rm -rf /usr/local/lib/node_modules/npm/ /usr/local/bin/npm ./node_modules/npm && \
-  chown -R node:node node_modules
+ENV NUXT_APP_BASE_URL="/dc/lineage-builder"
+COPY --chown=node:node --from=build /app/.output ./.output
+RUN rm -rf /usr/local/lib/node_modules/npm/ /usr/local/bin/npm && \
+  chown -R node:node .output
 
 USER node
+EXPOSE 3000
 
-CMD ["node", "./backend/server.js"]
+CMD ["node", ".output/server/index.mjs"]

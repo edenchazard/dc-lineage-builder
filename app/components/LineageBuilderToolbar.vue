@@ -215,6 +215,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue';
 import { useResizeObserver } from '@vueuse/core';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import type {
   BreedEntry,
   LineageConfig,
@@ -524,7 +525,7 @@ function updateConfig(
 
 function convertToToolbarButtonProps(
   button: {
-    icon: string;
+    icon: IconDefinition | string;
     label: string;
     click: () => void;
     title: string;
