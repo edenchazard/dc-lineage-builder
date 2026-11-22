@@ -1,25 +1,9 @@
 {
-  "compilerOptions": {
-    "noEmitOnError": true,
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["app/*"],
-      "@tests/*": ["tests/*"]
-    },
-    "sourceMap": false,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strict": true,
-    "outDir": "/prod",
-    "verbatimModuleSyntax": true
-  },
-  "exclude": ["node_modules/**", "coverage/**"]
+  "files": [],
+  "references": [
+    { "path": "./.nuxt/tsconfig.app.json" },
+    { "path": "./.nuxt/tsconfig.server.json" },
+    { "path": "./.nuxt/tsconfig.shared.json" },
+    { "path": "./.nuxt/tsconfig.node.json" }
+  ]
 }

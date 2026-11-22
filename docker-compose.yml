@@ -8,15 +8,15 @@ services:
       - .:/app
       - /app/node_modules
     environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_HOST=${MYSQL_HOST}
-      - CLIENT_SECRET=${CLIENT_SECRET}
-      - VITE_BASE_URL=${VITE_BASE_URL}
-      - LINEAGE_HASH_SALT=${LINEAGE_HASH_SALT}
+      - NUXT_APP_BASE_URL=${NUXT_APP_BASE_URL:-/dc/lineage-builder}
+      - NUXT_CLIENT_SECRET=${NUXT_CLIENT_SECRET:-}
+      - NUXT_LINEAGE_HASH_SALT=${NUXT_LINEAGE_HASH_SALT:-salt}
+      - NUXT_DB_HOST=${NUXT_DB_HOST:-db}
+      - NUXT_DB_PORT=${NUXT_DB_PORT:-3306}
+      - NUXT_DB_DATABASE=${NUXT_DB_DATABASE:-lineage_builder}
+      - NUXT_DB_USER=${NUXT_DB_USER:-builder}
+      - NUXT_DB_PASSWORD=${NUXT_DB_PASSWORD:-}
     ports:
-      - 5173:5173
       - 3000:3000
     depends_on:
       - db

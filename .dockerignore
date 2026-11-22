@@ -1,6 +1,8 @@
 .github
 coverage
 dist
+.nuxt
+.output
 node_modules
 **/__tests__
 tests

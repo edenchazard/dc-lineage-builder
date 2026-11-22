@@ -41,18 +41,10 @@ updates:
         patterns:
           - '*eslint*'
           - 'oxfmt'
-      koa:
-        patterns:
-          - 'koa*'
-          - '@types/koa*'
       vueuse:
         patterns:
           - 'vueuse*'
           - '@vueuse/*'
-      supertest:
-        patterns:
-          - 'supertest'
-          - '@types/supertest'
 
   - package-ecosystem: github-actions
     directory: '/'
