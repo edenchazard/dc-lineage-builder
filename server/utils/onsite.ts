@@ -70,8 +70,10 @@ export async function checkDragonsMatchGender(
   if (response.errors.length > 0) throw new APIError('Error in response.');
 
   const checkGender = (code: string, shouldBe: DragonData['gender']) => {
-    if (!(code in response.dragons)) throw new OnsiteDragonNotFoundError(code);
-    if ([shouldBe, ''].includes(response.dragons[code].gender)) return true;
+    const dragon = response.dragons[code];
+
+    if (!dragon) throw new OnsiteDragonNotFoundError(code);
+    if ([shouldBe, ''].includes(dragon.gender)) return true;
     return false;
   };
 
@@ -204,20 +206,19 @@ export async function getDataForPair(
   codes: [string, string],
   options: GetHTMLOptions = {},
 ): Promise<DragonPair> {
-  const dragons = await Promise.all(
-    codes.map((code) => grabHTML(code, { filter: true, ...options })),
-  );
+  const [male, female] = await Promise.all([
+    grabHTML(codes[0], { filter: true, ...options }),
+    grabHTML(codes[1], { filter: true, ...options }),
+  ]);
 
-  const [male, female] = dragons.map((dragon) => {
-    // return with error for this dragon
-    if (dragon instanceof OnsiteError) return dragon;
-    // surround with li tags
-    else return { ...dragon, html: `<li>${dragon.html}</li>` };
+  const withListItem = (dragon: DragonOnsite): DragonOnsite => ({
+    ...dragon,
+    html: `<li>${dragon.html}</li>`,
   });
 
   return {
-    male,
-    female,
+    male: withListItem(male),
+    female: withListItem(female),
   };
 }
 

@@ -33,5 +33,5 @@ const links = [
   ['/inbred-checker', 'Inbred Checker'],
   ['/tutorial', 'Tutorial'],
   ['/about', 'About'],
-];
+] as const;
 </script>

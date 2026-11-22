@@ -188,9 +188,9 @@ async function fetchLineage() {
     shareLink.value = `${origin}${mountPath}onsite-preview?male=${maleCode.value}&female=${femaleCode.value}`;
   } catch (ex) {
     if (isApiFetchError(ex) && ex.response.status === 404) {
-      status.value.error(
-        (await ex.response.json<APIResponse>()).errors[0].message,
-      );
+      const { errors } = await ex.response.json<APIResponse>();
+
+      status.value.error(errors[0]?.message ?? 'Sorry, an error has occurred.');
       return;
     }
 

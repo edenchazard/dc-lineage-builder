@@ -87,8 +87,8 @@ describe('Date Filter Functionality', () => {
       const result = filterBreedsByDate(mockBreeds, config);
 
       expect(result).toHaveLength(1); // Only Breed E (no date)
-      expect(result[0].name).toBe('Breed E');
-      expect(result[0].releaseDate).toBeUndefined();
+      expect(result[0]?.name).toBe('Breed E');
+      expect(result[0]?.releaseDate).toBeUndefined();
     });
 
     it('handles exact date matches correctly', () => {
@@ -110,7 +110,7 @@ describe('Date Filter Functionality', () => {
       const result = filterBreedsByDate(mockBreeds, config);
 
       expect(result).toHaveLength(1); // Only Breed E (no date)
-      expect(result[0].name).toBe('Breed E');
+      expect(result[0]?.name).toBe('Breed E');
     });
 
     it('handles edge case: end date before start date', () => {
@@ -122,7 +122,7 @@ describe('Date Filter Functionality', () => {
 
       // Should return only breeds without dates since no breed can be both after 2024-01-01 and before 2023-01-01
       expect(result).toHaveLength(1);
-      expect(result[0].name).toBe('Breed E');
+      expect(result[0]?.name).toBe('Breed E');
     });
 
     it('handles date parsing correctly with time normalisation', () => {

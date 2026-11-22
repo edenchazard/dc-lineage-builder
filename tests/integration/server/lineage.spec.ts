@@ -83,6 +83,8 @@ describe('lineage service', () => {
         [hashCode],
       );
 
+      if (!row) throw new Error('Saved lineage row not found');
+
       expect(JSON.parse(row.content)).toEqual(lineage);
     });
   });

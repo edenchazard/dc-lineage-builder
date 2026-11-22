@@ -9,16 +9,7 @@ const baseURL = withTrailingSlash(
 export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
 
-  ssr: true,
-
   modules: ['@pinia/nuxt', '@nuxt/eslint'],
-
-  eslint: {
-    config: {
-      // Formatting is handled by oxfmt, not ESLint.
-      stylistic: false,
-    },
-  },
 
   app: {
     baseURL,
@@ -43,27 +34,11 @@ export default defineNuxtConfig({
     css: {
       transformer: 'lightningcss',
     },
-    build: {
-      cssMinify: 'lightningcss',
-    },
   },
 
-  // Keep the strictness level of the original project. Customise the generated
-  // configs here rather than maintaining a separate root tsconfig file.
   typescript: {
-    tsConfig: {
-      compilerOptions: {
-        noUncheckedIndexedAccess: false,
-      },
-    },
-    sharedTsConfig: {
-      compilerOptions: {
-        noUncheckedIndexedAccess: false,
-      },
-    },
     nodeTsConfig: {
       compilerOptions: {
-        noUncheckedIndexedAccess: false,
         types: ['node'],
         paths: {
           // Needed so the `$api` augmentation in app/types/api.d.ts merges with
@@ -73,10 +48,7 @@ export default defineNuxtConfig({
           '@tests/*': ['../tests/*'],
         },
       },
-      // Tests import source files that call Nuxt auto-imports (`useNuxtApp`,
-      // `useRuntimeConfig`). They only need the generated global types — not
-      // runtime stubs — because those calls happen inside API handlers that
-      // the tests never invoke. `files` avoids the generated app exclude.
+      // `files` bypasses the generated node config's app exclude.
       files: [
         './types/imports.d.ts',
         './types/nitro-imports.d.ts',
@@ -87,33 +59,24 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'node-server',
     experimental: {
       tasks: true,
-    },
-    typescript: {
-      tsConfig: {
-        compilerOptions: {
-          noUncheckedIndexedAccess: false,
-        },
-      },
     },
   },
 
   runtimeConfig: {
-    // Private (server-only) values. Override at runtime with NUXT_ prefixed env vars.
-    clientSecret: env.NUXT_CLIENT_SECRET ?? env.CLIENT_SECRET ?? '',
-    lineageHashSalt:
-      env.NUXT_LINEAGE_HASH_SALT ?? env.LINEAGE_HASH_SALT ?? 'salt',
+    // Matching NUXT_* env vars override these at runtime.
+    clientSecret: '',
+    lineageHashSalt: 'salt',
     db: {
-      host: env.NUXT_DB_HOST ?? env.MYSQL_HOST ?? '',
-      port: Number(env.NUXT_DB_PORT ?? env.MYSQL_PORT ?? 3306),
-      user: env.NUXT_DB_USER ?? env.MYSQL_USER ?? '',
-      password: env.NUXT_DB_PASSWORD ?? env.MYSQL_PASSWORD ?? '',
-      database: env.NUXT_DB_DATABASE ?? env.MYSQL_DATABASE ?? '',
+      host: '',
+      port: 3306,
+      user: '',
+      password: '',
+      database: '',
     },
-
     public: {
+      // Docker injects these at build time, so keep the build-time fallback.
       appVersion: env.NUXT_PUBLIC_APP_VERSION ?? env.VITE_VERSION ?? 'dev',
       appCommitSha:
         env.NUXT_PUBLIC_APP_COMMIT_SHA ?? env.VITE_COMMIT_SHA ?? 'unknown',

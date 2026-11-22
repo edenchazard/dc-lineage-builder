@@ -281,6 +281,8 @@ const appStore = useAppStore();
 // tools section
 useResizeObserver(selectionToolsScrollArea, (entries) => {
   const entry = entries[0];
+  if (!entry) return;
+
   hideSelectionToolsNavButtons.value =
     entry.target.clientWidth === selectionToolsScrollArea.value.scrollWidth;
 });
@@ -547,7 +549,7 @@ function convertToToolbarButtonProps(
 function capitalise(string: string) {
   return string
     .split(' ')
-    .map((substr) => substr[0].toUpperCase() + substr.slice(1))
+    .map((substr) => substr.charAt(0).toUpperCase() + substr.slice(1))
     .join(' ');
 }
 </script>

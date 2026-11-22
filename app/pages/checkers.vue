@@ -225,9 +225,12 @@ function updateTree(finalGenGender?: DragonGender) {
 function switchBreeds() {
   // Check that the breed can be gender flipped
   // or should be replaced with the placeholder
-  const [newFemale, newMale] = [maleBreed, femaleBreed].map((breed) =>
-    getBreedData(breed.value)?.genderOnly ? placeholder.name : breed.value,
-  );
+  const newMale = getBreedData(maleBreed.value)?.genderOnly
+    ? placeholder.name
+    : maleBreed.value;
+  const newFemale = getBreedData(femaleBreed.value)?.genderOnly
+    ? placeholder.name
+    : femaleBreed.value;
 
   maleBreed.value = newMale;
   femaleBreed.value = newFemale;
