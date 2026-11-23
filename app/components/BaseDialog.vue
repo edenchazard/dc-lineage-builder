@@ -34,7 +34,7 @@
             @click="close()"
           >
             <FontAwesomeIcon
-              :icon="faTimes"
+              icon="xmark"
               size="2x"
             />
           </button>
@@ -67,8 +67,6 @@
 </template>
 
 <script setup lang="ts">
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { nextTick, ref, useTemplateRef, watch } from 'vue';
 
 const emit = defineEmits<{

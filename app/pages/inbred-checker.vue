@@ -16,7 +16,7 @@
             Put each code on a new line. Dragons with a
             <FontAwesomeIcon
               class="icon"
-              :icon="faTimes"
+              icon="xmark"
             />
             above their code are invalid.
           </p>
@@ -83,7 +83,7 @@
               <FontAwesomeIcon
                 v-else
                 class="icon"
-                :icon="faTimes"
+                icon="xmark"
               />
             </span>
             <span>
@@ -133,7 +133,7 @@
               >
                 <FontAwesomeIcon
                   class="icon"
-                  :icon="faExclamationTriangle"
+                  icon="triangle-exclamation"
                 />
                 {{ result.failed }}
                 dragons couldn't be checked. This is usually because the owner
@@ -149,7 +149,7 @@
               >
                 <FontAwesomeIcon
                   class="icon"
-                  :icon="faCheck"
+                  icon="check"
                 />
                 No problems detected. It isn't inbred, and breeding this dragon
                 to any of the other dragons on your list will not produce inbred
@@ -160,7 +160,7 @@
                 <p>
                   <FontAwesomeIcon
                     class="icon"
-                    :icon="faTimes"
+                    icon="xmark"
                   />
                   The following dragons directly appear in the dragon's own
                   lineage multiple times.
@@ -190,7 +190,7 @@
                 <p>
                   <FontAwesomeIcon
                     class="icon"
-                    :icon="faTimes"
+                    icon="xmark"
                   />
                   When bred with certain dragons on your list, the following
                   dragons would appear multiple times.
@@ -252,12 +252,6 @@ import {
 import FeedbackPanel from '../components/FeedbackPanel.vue';
 import InputTextbox from '../components/InputTextbox.vue';
 import { codeValidator } from '../shared/validation.js';
-import {
-  faCheck,
-  faExclamationTriangle,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const status = useTemplateRef('status');
 const input = ref('');

@@ -49,7 +49,7 @@
         >
           Close
           <FontAwesomeIcon
-            :icon="faTimes"
+            icon="xmark"
             class="icon"
           />
         </button>
@@ -69,7 +69,7 @@
       >
         <FontAwesomeIcon
           id="burger"
-          :icon="faBars"
+          icon="bars"
         />
         Menu
       </button>
@@ -87,11 +87,9 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { onKeyDown, useLocalStorage } from '@vueuse/core';
 import TheHeaderMenuLinks from './TheHeaderMenuLinks.vue';
 import TheSlideInMenu from './TheSlideInMenu.vue';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const route = useRoute();
 const menuOpen = ref(false);

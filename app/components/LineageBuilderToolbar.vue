@@ -65,7 +65,7 @@
         @click="button.click"
       />
       <ToolbarDropDownMenu
-        :icon="{ icon: faCog, size: '2x' }"
+        :icon="{ icon: 'gear', size: '2x' }"
         title="Settings"
         label="Settings"
       >
@@ -127,17 +127,17 @@
         <ToolbarGroup>
           <ToolbarButton
             title="Select all males"
-            :icon="{ icon: faMars }"
+            :icon="{ icon: 'mars' }"
             @click="emit('selectCriteria', 'gender', 'm')"
           />
           <ToolbarButton
-            :icon="{ icon: faVenus }"
+            :icon="{ icon: 'venus' }"
             title="Select all females"
             @click="emit('selectCriteria', 'gender', 'f')"
           />
           <ToolbarDropDownMenu
             title="More options"
-            :icon="{ icon: faCaretDown }"
+            :icon="{ icon: 'caret-down' }"
           >
             <ToolbarDropDownMenuItem
               v-for="option in selectionOptions"
@@ -149,7 +149,7 @@
           </ToolbarDropDownMenu>
           <ToolbarButton
             title="Unselect all"
-            :icon="{ icon: faTimes }"
+            :icon="{ icon: 'xmark' }"
             :disabled="itemsSelected === 0"
             @click="emit('unselectAll')"
           />
@@ -215,7 +215,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue';
 import { useResizeObserver } from '@vueuse/core';
-import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import type {
   BreedEntry,
   LineageConfig,
@@ -243,25 +242,6 @@ import {
   tagsFromModel,
   tagStore,
 } from '../store/useTagStore';
-import {
-  faArrowRight,
-  faCaretDown,
-  faCode,
-  faCog,
-  faFont,
-  faItalic,
-  faLink,
-  faMars,
-  faMaximize,
-  faMinus,
-  faRandom,
-  faRedo,
-  faSave,
-  faSyncAlt,
-  faTimes,
-  faUndo,
-  faVenus,
-} from '@fortawesome/free-solid-svg-icons';
 
 type ToolbarButtonProps = Required<
   Pick<InstanceType<typeof ToolbarButton>['$props'], 'icon' | 'label'> & {
@@ -296,38 +276,38 @@ const generalFunctions = reactive<ToolbarButtonProps[]>(
   [
     {
       title: 'Export dragon',
-      icon: faSave,
+      icon: 'floppy-disk',
       label: 'Export',
       click: () => (dialogs.showExportDialog = true),
     },
     {
       title: 'Import dragon',
-      icon: faCode,
+      icon: 'code',
       label: 'Import',
       click: () => (dialogs.showImportDialog = true),
     },
     {
       title: 'Get Link',
-      icon: faLink,
+      icon: 'link',
       label: 'Get Link',
       click: () => (dialogs.showGenerateDialog = true),
     },
     {
       title: 'Toggle fullscreen',
-      icon: faMaximize,
+      icon: 'maximize',
       label: 'Fullscreen',
       click: () => emit('fullscreen'),
     },
     {
       title: 'Undo',
-      icon: faUndo,
+      icon: 'arrow-rotate-left',
       label: 'Undo',
       click: () => emit('undo'),
       disabled: computed(() => !appStore.treeHistory.canUndo),
     },
     {
       title: 'Redo',
-      icon: faRedo,
+      icon: 'arrow-rotate-right',
       label: 'Redo',
       click: () => emit('redo'),
       disabled: computed(() => !appStore.treeHistory.canRedo),
@@ -348,19 +328,19 @@ const selectionActions = reactive<
       buttons: [
         {
           title: 'Show names',
-          icon: faFont,
+          icon: 'font',
           label: 'Names',
           click: () => emit('displayNames'),
         },
         {
           title: 'Display codes',
-          icon: faItalic,
+          icon: 'italic',
           label: 'Codes',
           click: () => emit('displayCodes'),
         },
         {
           title: 'Randomise visible label',
-          icon: faRandom,
+          icon: 'shuffle',
           label: 'Randomise label',
           click: () => emit('randomizeLabels'),
         },
@@ -371,19 +351,19 @@ const selectionActions = reactive<
       buttons: [
         {
           title: 'Delete Parents and Ancestors',
-          icon: faMinus,
+          icon: 'minus',
           label: 'Delete Parents',
           click: () => emit('deleteAncestors'),
         },
         {
           title: 'Add parents',
-          icon: faArrowRight,
+          icon: 'arrow-right',
           label: 'Add parents',
           click: () => emit('addParents'),
         },
         {
           title: 'Switch parents',
-          icon: faSyncAlt,
+          icon: 'rotate',
           label: 'switch parents',
           click: () => emit('switchParents'),
         },
@@ -527,7 +507,7 @@ function updateConfig(
 
 function convertToToolbarButtonProps(
   button: {
-    icon: IconDefinition | string;
+    icon: string;
     label: string;
     click: () => void;
     title: string;

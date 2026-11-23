@@ -15,16 +15,13 @@
     <a href="https://dragcave.net/">
       <span class="link-text">
         Dragcave.net
-        <FontAwesomeIcon :icon="faExternalLink" />
+        <FontAwesomeIcon icon="arrow-up-right-from-square" />
       </span>
     </a>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { faExternalLink } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
 const links = [
   ['/', 'Build'],
   ['/checkers', 'Checker Generator'],

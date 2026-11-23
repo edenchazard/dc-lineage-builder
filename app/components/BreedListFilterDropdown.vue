@@ -69,7 +69,7 @@
           >
             <FontAwesomeIcon
               size="2x"
-              :icon="faTimes"
+              icon="xmark"
             />
           </button>
         </div>
@@ -174,7 +174,6 @@
 import { nextTick, useTemplateRef } from 'vue';
 import { Dropdown } from 'floating-vue';
 import 'floating-vue/dist/style.css';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { resolveLabel, slug } from '../shared/utils';
 import BreedTag from './BreedTag.vue';
 import { filtersByGroup, tagStore } from '../store/useTagStore';
@@ -184,7 +183,6 @@ import {
   clearDateFilter,
   hasActiveDateFilter,
 } from '../store/useDateFilter';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 defineProps<{
   container: string;

@@ -5,14 +5,14 @@
         v-if="nodesFromRoot === 0"
         class="tile-button-left tile-button-add-desc"
         title="Add descendant"
-        :icon="faArrowLeft"
+        icon="arrow-left"
         @click="addDescendant"
       />
       <LineageViewNodeButton
         v-if="nodesFromRoot > 0"
         class="tile-button-left tile-button-remove-desc"
         title="Remove descendants"
-        :icon="faCut"
+        icon="scissors"
         @click="removeDescendants"
       />
       <button
@@ -33,7 +33,7 @@
         />
       </button>
       <FontAwesomeIcon
-        :icon="faWarning"
+        icon="triangle-exclamation"
         :class="{ visible: problems.length > 0 }"
         class="label-warning"
         :title="problems"
@@ -44,20 +44,20 @@
           v-if="hasAncestry"
           class="switch"
           title="Switch parents"
-          :icon="faSyncAlt"
+          icon="rotate"
           @click="switchParents"
         />
         <LineageViewNodeButton
           v-if="hasAncestry"
           title="Remove ancestors"
-          :icon="faMinus"
+          icon="minus"
           @click="deleteAncestors"
         />
         <LineageViewNodeButton
           v-else
           class="tile-button-right"
           title="Add ancestors"
-          :icon="faArrowRight"
+          icon="arrow-right"
           @click="addAncestors"
         />
       </div>
@@ -71,30 +71,30 @@
         <LineageViewNodeButton
           v-if="nodesFromRoot === 0 && data.gender === 'm'"
           title="Switch gender to female"
-          :icon="faMars"
+          icon="mars"
           @click="switchGender"
         />
         <LineageViewNodeButton
           v-else-if="nodesFromRoot === 0 && data.gender === 'f'"
           title="Switch gender to male"
-          :icon="faVenus"
+          icon="venus"
           @click="switchGender"
         />
         <LineageViewNodeButton
           class="switchLabel"
           title="Switch label"
-          :icon="faFont"
+          icon="font"
           @click="switchLabel"
         />
         <LineageViewNodeButton
           v-if="hasAncestry"
           title="Copy ancestors"
-          :icon="faClone"
+          icon="clone"
           @click="copyBranch"
         />
         <LineageViewNodeButton
           title="Paste ancestors"
-          :icon="faPaste"
+          icon="paste"
           @click="pasteBranch"
         />
       </div>
@@ -141,19 +141,6 @@ import { placeholder } from '../shared/breeds.js';
 import vOnLongPress from '../directives/long-press/vue-3-long-press';
 import useBreedSelector from '../composables/useBreedSelector';
 import { codeValidator, nameValidator } from '../shared/validation';
-import {
-  faArrowLeft,
-  faArrowRight,
-  faClone,
-  faCut,
-  faFont,
-  faMars,
-  faMinus,
-  faPaste,
-  faSyncAlt,
-  faVenus,
-  faWarning,
-} from '@fortawesome/free-solid-svg-icons';
 
 const props = withDefaults(
   defineProps<{

@@ -32,7 +32,7 @@
         @click="startShare"
       >
         <FontAwesomeIcon
-          :icon="faShare"
+          icon="share"
           class="icon"
         />
       </button>
@@ -49,7 +49,7 @@
           @click="copy"
         >
           <FontAwesomeIcon
-            :icon="faCopy"
+            icon="copy"
             class="icon"
           />
         </button>
@@ -71,8 +71,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useDebounceFn, useShare } from '@vueuse/core';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faCopy, faShare } from '@fortawesome/free-solid-svg-icons';
 
 defineOptions({ inheritAttrs: false });
 

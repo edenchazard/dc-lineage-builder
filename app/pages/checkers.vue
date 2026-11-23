@@ -38,19 +38,19 @@
           <div id="section-2">
             <ToolbarButton
               title="Get Link"
-              :icon="{ icon: faLink, size: '2x' }"
+              :icon="{ icon: 'link', size: '2x' }"
               label="Get Link"
               @click="showGenerateDialog = true"
             />
             <ToolbarButton
               title="Export dragon"
-              :icon="{ icon: faSave, size: '2x' }"
+              :icon="{ icon: 'floppy-disk', size: '2x' }"
               label="Export"
               @click="showExportDialog = true"
             />
             <ToolbarButton
               title="Switch breeds"
-              :icon="{ icon: faExchangeAlt, size: '2x' }"
+              :icon="{ icon: 'right-left', size: '2x' }"
               label="Switch breeds"
               @click="switchBreeds"
             />
@@ -160,11 +160,6 @@ import {
 } from '../shared/breeds.js';
 import { chosenTags } from '../store/useTagStore';
 import BreedListFilterDropdown from '../components/BreedListFilterDropdown.vue';
-import {
-  faExchangeAlt,
-  faLink,
-  faSave,
-} from '@fortawesome/free-solid-svg-icons';
 
 const tree = ref(DragonBuilder.createWithMetadata());
 const maleBreed = ref(placeholder.name);

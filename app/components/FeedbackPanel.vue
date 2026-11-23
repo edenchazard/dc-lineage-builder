@@ -25,27 +25,20 @@
         title="Dismiss"
         @click="dismiss(index)"
       >
-        <FontAwesomeIcon :icon="faTimes" />
+        <FontAwesomeIcon icon="xmark" />
       </button>
     </li>
   </TransitionGroup>
 </template>
 <script setup lang="ts">
-import {
-  faCheck,
-  faExclamationTriangle,
-  faInfoCircle,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { onBeforeUnmount, ref } from 'vue';
 
 const Feedbacks = {
   none: 'none',
-  warning: faExclamationTriangle,
-  success: faCheck,
-  information: faInfoCircle,
-  error: faTimes,
+  warning: 'triangle-exclamation',
+  success: 'check',
+  information: 'circle-info',
+  error: 'xmark',
 };
 
 type FeedbackTypes = keyof typeof Feedbacks;

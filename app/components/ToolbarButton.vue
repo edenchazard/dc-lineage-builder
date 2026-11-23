@@ -19,18 +19,19 @@
 </template>
 
 <script setup lang="ts">
-import { faDragon } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import type { FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
+interface ToolbarIconProps {
+  icon: string;
+  size?: string;
+}
 
 withDefaults(
   defineProps<{
-    icon?: FontAwesomeIconProps;
+    icon?: ToolbarIconProps;
     label?: string;
     disabled?: boolean;
   }>(),
   {
-    icon: () => ({ icon: faDragon }),
+    icon: () => ({ icon: 'dragon' }),
     label: '',
     disabled: false,
   },
