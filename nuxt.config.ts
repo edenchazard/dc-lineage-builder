@@ -78,7 +78,7 @@ export default defineNuxtConfig({
           // Nuxt's real NuxtApp type instead of declaring an ambient module.
           '#app': ['../node_modules/nuxt/dist/app'],
           '@/*': ['../app/*'],
-          '@tests/*': ['../tests/*'],
+          '@tests/*': ['../test/*'],
         },
       },
       // `files` bypasses the generated node config's app exclude.
@@ -87,7 +87,7 @@ export default defineNuxtConfig({
         './types/nitro-imports.d.ts',
         '../app/types/api.d.ts',
       ],
-      include: ['../tests/**/*', '../vitest.config.ts'],
+      include: ['../test/**/*', '../vitest.config.ts'],
     },
   },
   nitro: {

@@ -63,7 +63,14 @@ The version number and commit SHA will be displayed in the footer of the applica
 
 ### Testing
 
-Tests live in `tests/`, split into `unit/` (no external services) and `integration/` (server services + MySQL). `tests/e2e/` is reserved for end-to-end tests.
+Tests live in `test/`, split by the environment they run in (matching Nuxt's testing conventions):
+
+- `test/unit/` — plain Node tests for shared logic, no Nuxt runtime or external services
+- `test/integration/` — plain Node tests for server services and MySQL
+- `test/nuxt/` — components/composables/plugins using the Nuxt runtime (`@nuxt/test-utils`)
+- `test/e2e/` — end-to-end tests against a running app (reserved; currently empty)
+
+Vitest projects in `vitest.config.ts` give each directory the right environment. A test file must match exactly one project: don't mix `@nuxt/test-utils/runtime` and `@nuxt/test-utils/e2e` helpers in the same file.
 
 Run the full suite once:
 
@@ -76,7 +83,11 @@ Individual suites can be run interactively; Vitest will re-run whenever a file i
 ```sh
 docker compose exec testapp sh -c "npm run test:unit"
 docker compose exec testapp sh -c "npm run test:integration"
+docker compose exec testapp sh -c "npm run test:nuxt"
+docker compose exec testapp sh -c "npm run test:e2e"
 ```
+
+`.env.testing` remains the source of test configuration (it also configures the `testdb` container). Inside Docker Compose those values are already present as environment variables, so Nuxt runtime tests pick them up without a separate `.env.test`.
 
 #### Code quality
 
