@@ -2,15 +2,11 @@ const withTrailingSlash = (value: string) =>
   value.endsWith('/') ? value : `${value}/`;
 
 const env = process.env;
-const baseURL = withTrailingSlash(
-  env.NUXT_APP_BASE_URL ?? env.VITE_BASE_URL ?? '/',
-);
+const baseURL = withTrailingSlash(env.NUXT_APP_BASE_URL ?? '/');
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
-
   modules: ['@pinia/nuxt', '@nuxt/eslint', '@vesp/nuxt-fontawesome'],
-
   fontawesome: {
     component: 'FontAwesome',
     suffix: true,
@@ -53,32 +49,26 @@ export default defineNuxtConfig({
       brands: ['github'],
     },
   },
-
   app: {
     baseURL,
     head: {
       htmlAttrs: { lang: 'en' },
-      title: 'Lineage Builder',
     },
   },
-
   routeRules: {
     '/how-to': { redirect: { to: `${baseURL}tutorial`, statusCode: 302 } },
     '/disclaimer': { redirect: { to: `${baseURL}about`, statusCode: 302 } },
   },
-
   css: [
     'reset-css',
     '~/assets/styling/style.css',
     '~/assets/layouts/theming.css',
   ],
-
   vite: {
     css: {
       transformer: 'lightningcss',
     },
   },
-
   typescript: {
     nodeTsConfig: {
       compilerOptions: {
@@ -100,15 +90,12 @@ export default defineNuxtConfig({
       include: ['../tests/**/*', '../vitest.config.ts'],
     },
   },
-
   nitro: {
     experimental: {
       tasks: true,
     },
   },
-
   runtimeConfig: {
-    // Matching NUXT_* env vars override these at runtime.
     clientSecret: '',
     lineageHashSalt: 'salt',
     db: {
@@ -119,10 +106,8 @@ export default defineNuxtConfig({
       database: '',
     },
     public: {
-      // Docker injects these at build time, so keep the build-time fallback.
-      appVersion: env.NUXT_PUBLIC_APP_VERSION ?? env.VITE_VERSION ?? 'dev',
-      appCommitSha:
-        env.NUXT_PUBLIC_APP_COMMIT_SHA ?? env.VITE_COMMIT_SHA ?? 'unknown',
+      appVersion: env.NUXT_PUBLIC_APP_VERSION ?? 'dev',
+      appCommitSha: env.NUXT_PUBLIC_APP_COMMIT_SHA ?? 'unknown',
     },
   },
 });
