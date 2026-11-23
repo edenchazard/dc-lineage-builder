@@ -54,6 +54,10 @@ import LineageView from '../../components/LineageView.vue';
 import InputTextbox from '../../components/InputTextbox.vue';
 import FeedbackPanel from '../../components/FeedbackPanel.vue';
 
+useSeoMeta({
+  title: 'Viewing Lineage',
+});
+
 const route = useRoute();
 const configRuntime = useRuntimeConfig();
 const tree = ref<null | PartialLineageWithMetadata>(null);

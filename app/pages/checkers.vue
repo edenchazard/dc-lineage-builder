@@ -161,6 +161,10 @@ import {
 import { chosenTags } from '../store/useTagStore';
 import BreedListFilterDropdown from '../components/BreedListFilterDropdown.vue';
 
+useSeoMeta({
+  title: 'Checker Generator',
+});
+
 const tree = ref(DragonBuilder.createWithMetadata());
 const maleBreed = ref(placeholder.name);
 const femaleBreed = ref(placeholder.name);

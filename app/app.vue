@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useDevicePixelRatio } from '@vueuse/core';
 import { useAppStore } from './store/useAppStore.js';
 import Header from './components/TheHeader.vue';
@@ -69,23 +69,7 @@ const appStore = useAppStore();
 
 const settingsDialogOpen = ref(false);
 
-const pageTitles: Record<string, string> = {
-  index: 'Build',
-  'view-hash': 'Viewing Lineage',
-  about: 'About',
-  checkers: 'Checker Generator',
-  'ghost-breeds': 'Ghost Breeds',
-  'onsite-preview': 'Onsite Preview',
-  'inbred-checker': 'Inbred Checker',
-  tutorial: 'Tutorial',
-};
-
-const pageTitle = computed(
-  () => pageTitles[String(route.name ?? '')] ?? 'Error',
-);
-
 useHead({
-  title: pageTitle,
   titleTemplate: (title) => `${title} | Lineage Builder`,
 });
 

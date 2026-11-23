@@ -253,6 +253,10 @@ import FeedbackPanel from '../components/FeedbackPanel.vue';
 import InputTextbox from '../components/InputTextbox.vue';
 import { codeValidator } from '../shared/validation.js';
 
+useSeoMeta({
+  title: 'Inbred Checker',
+});
+
 const status = useTemplateRef('status');
 const input = ref('');
 const badDragons = ref<string[]>([]);

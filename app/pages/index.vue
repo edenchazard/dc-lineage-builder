@@ -5,4 +5,8 @@
 
 <script setup lang="ts">
 import LineageBuilder from '../components/LineageBuilder.vue';
+
+useSeoMeta({
+  title: 'Build',
+});
 </script>

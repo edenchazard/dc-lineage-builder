@@ -25,4 +25,8 @@ defineProps<{
     statusMessage?: string;
   };
 }>();
+
+useSeoMeta({
+  title: 'Error',
+});
 </script>

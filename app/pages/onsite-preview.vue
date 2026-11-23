@@ -92,6 +92,10 @@ import LineageWrapper from '../components/LineageWrapper.vue';
 import InputTextbox from '../components/InputTextbox.vue';
 import { codeValidator } from '../shared/validation.js';
 
+useSeoMeta({
+  title: 'Onsite Preview',
+});
+
 const containerID = 'onsite-preview-container';
 const htmlPreview = ref('');
 const maleCode = ref('');

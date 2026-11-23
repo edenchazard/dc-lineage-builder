@@ -102,6 +102,12 @@
   </div>
 </template>
 
+<script setup lang="ts">
+useSeoMeta({
+  title: 'About',
+});
+</script>
+
 <style scoped>
 .special-thanks {
   font-weight: bold;

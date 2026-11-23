@@ -122,6 +122,10 @@ import settings from '../shared/settings.js';
 import GhostBreedUpload from '../components/GhostBreedUpload.vue';
 import FeedbackPanel from '../components/FeedbackPanel.vue';
 
+useSeoMeta({
+  title: 'Ghost Breeds',
+});
+
 type Availability = 'b' | DragonGender;
 
 const name = ref('Ghost Breed');

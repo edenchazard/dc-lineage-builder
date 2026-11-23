@@ -179,6 +179,10 @@
 
 <script setup lang="ts">
 import settings from '../shared/settings.js';
+
+useSeoMeta({
+  title: 'Tutorial',
+});
 </script>
 
 <style scoped>
